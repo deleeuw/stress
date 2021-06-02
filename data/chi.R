@@ -1,0 +1,5 @@
+chi <- matrix (0, 10, 10)
+for (i in 2:10) for (j in 1:(i-1))
+  chi[i,j] <- chi[j,i] <- rchisq(1, 2)
+w <- matrix(1, 10, 10)- diag(10)
+chi <- 2 * chi / sqrt (sum (w * chi * chi))

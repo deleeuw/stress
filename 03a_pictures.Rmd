@@ -1,0 +1,780 @@
+
+# Pictures of Stress {#picsstress}
+
+Even for $n$ as small as four and $p$ as small as two the dimension of
+the space of centered configurations is six, and there is no natural way
+to visualize a function of six variables. What we can do is plot stress
+on two-dimensional subspaces, either as a contour plot or as a perspective plot. Our two-dimensional subspaces are of the form $\alpha X+\beta Y$, where $X$ and $Y$ are fixed configurations. Much of
+this chapter is a modified, and in some places expanded, version of @deleeuw_E_16l.
+
+```{r example, echo = FALSE}
+delta <- as.matrix (dist (diag (4)))
+delta <- delta * sqrt (2 / sum (delta ^ 2))
+w <- 1 - diag(4)
+x <- matrix (c(0,0,1,0,0,1,1,1), 4, 2, byrow = TRUE)
+y <- matrix (c(0,0,1,0,.5,.5*sqrt(3)), 3, 2, byrow = TRUE)
+y <- rbind(y, colSums(y) / 3)
+x <- apply (x, 2, function (z) z - mean (z))
+y <- apply (y, 2, function (z) z - mean (z))
+d1 <- as.matrix (dist (x))
+d2 <- as.matrix (dist (y))
+lbd1 <- sum (delta * d1) / sum (d1 ^ 2)
+x <- x * lbd1
+d1 <- d1 * lbd1
+lbd2 <- sum (delta * d2) / sum (d2 ^ 2)
+y <- y * lbd2
+d2 <- d2 * lbd2
+sx<-sum((delta-d1)^2)/2
+sy<-sum((delta-d2)^2)/2
+```
+
+Throughout we use a small example of order $n=4$ which all
+dissimilarities equal. The same example has been analyzed by
+@deleeuw_A_88b, @deleeuw_R_93c, @trosset_mathar_97, and
+@zilinskas_podlipskyte_03. For this example a global minimum in two
+dimensions has its four points in the corners of a square. That is our
+$X$, which has stress `r sx`. Our $Y$ is another stationary point, which
+has three points in the corners of an equilateral triangle and the
+fourth point in the center of the triangle. Its stress is `r sy`. We
+column-center the configurations and scale them so that they are
+actually stationary points, i.e. so that $\eta^2(X)=\rho(X)$ and
+$\eta^2(Y)=\rho(Y)$. The example is chosen in such a way that there are non-zero $\alpha$ and $\beta$ such that $d_{12}(\alpha X+\beta Y)=0$. In fact $d_{12}$ is the only distance that can be made zero by a non-trivial linear combination.
+
+Another way of looking at the two configurations is that $X$ are four
+points equally spaced on a circle, and $Y$ are three points equally
+spaced on a circle with the fourth point in the center of the circle.
+@deleeuw_A_88b erroneously claims that $Y$ is a non-isolated local
+minimum of stress, but @trosset_mathar_97 have shown there exists a
+descent direction at $Y$, and thus $Y$ is actually a saddle point. Of
+course the stationary points defined by $X$ and $Y$ are far from unique,
+because we can permute the four points over the corners of the square
+and the triangle in many ways.
+
+## Coefficient Space
+
+Configurations as a linear combination of a number of given
+configurations have already been discussed in general in chapter
+\@ref(propchapter), section \@ref(propspaces) as the transformation from
+configuration space to coefficient space. Since we are dealing here with
+the special case of linear combinations of only two configurations we
+specialize some of these general results.
+
+We start with $d_{ij}^(\theta)=\theta'T_{ij}\theta$, where $\theta$ has
+elements $\alpha$ and $\beta$, and where $T$ is the $2\times 2$ matrix
+with elements \begin{equation}
+t_{ij}:=\begin{bmatrix}
+\text{tr}\ X'A_{ij}X&\text{tr}\ X'A_{ij}Y\\
+\text{tr}\ Y'A_{ij}X&\text{tr}\ Y'A_{ij}Y
+\end{bmatrix}
+(\#eq:pictbform)
+\end{equation}
+
+Then
+
+\begin{equation}
+\tilde\sigma(\theta):=1-2\ \theta'C(\theta)\theta+\theta'U\theta,
+(\#eq:picstress2)
+\end{equation}
+
+where, using $Z(\theta)=\alpha X+\beta Y$,
+
+\begin{equation}
+C(\theta):=
+\begin{bmatrix}
+\text{tr}\ X'B(Z(\theta))X&\text{tr}\ X'B(Z(\theta))Y\\
+\text{tr}\ Y'B(Z(\theta))X&\text{tr}\ Y'B(Z(\theta))Y
+\end{bmatrix},
+(\#eq:pictbformc)
+\end{equation}
+
+and
+
+\begin{equation}
+U:=\begin{bmatrix}
+\text{tr}\ X'VX&\text{tr}\ X'VY\\
+\text{tr}\ Y'VX&\text{tr}\ Y'VY
+\end{bmatrix}.
+(\#eq:pictbformu)
+\end{equation}
+
+We have used $\tilde\sigma$ in equation \@ref(eq:picstress2) to
+distinguish stress on the two-dimensional space of coefficients from
+stress on the eight-dimensional space of $4\times 2$ configurations.
+Thus $\tilde\sigma(\alpha,\beta)=\sigma(\alpha X + \beta Z)$.
+
+The gradient at $\theta$ is
+
+\begin{equation}
+\nabla\tilde\sigma(\theta)=U\theta-C(\theta)\theta,
+(\#eq:picgrad2)
+\end{equation}
+
+and the Hessian is
+
+\begin{equation}
+\nabla^2\tilde\sigma(\theta)=U-\mathop{\sum\sum}_{1\leq i<j\leq n}
+w_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\left\{T_{ij}-\frac{T_{ij}\theta\theta'T_{ij}}{\theta'T_{ij}\theta}\right\}.
+(\#eq:pichess2)
+\end{equation}
+
+------------------------------------------------------------------------
+
+```{theorem, label = "pictpreserve"}
+If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then  $C(\theta)\theta=U\theta$.
+```
+
+------------------------------------------------------------------------
+
+```{proof}
+If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then, by equations \@ref(eq:pictbformc) and \@ref(eq:pictbformu),
+
+\begin{equation}
+U-C(\theta)=\begin{bmatrix}0&0\\0&\text{tr}\ Y'(V-B(X))Y\end{bmatrix}.
+(\#eq:picuminc)
+\end{equation}
+
+Thus $(U-C(\theta))\theta=0$.
+```
+
+------------------------------------------------------------------------
+
+Thus each stationary point of $\sigma$ gives a stationary point of
+$\tilde\sigma$. The other way around, however, we are not so lucky.
+
+------------------------------------------------------------------------
+
+```{theorem, label = "pictaround"}
+If $C(\theta)\theta=U\theta$ and if the $n\times 2p$ matrix
+$\begin{bmatrix}X&Y\end{bmatrix}$ has rank $n-1$ then  $B(Z)Z=VZ$.
+```
+
+------------------------------------------------------------------------
+
+```{proof}
+If  $C(\theta)\theta=U\theta$ then both $\text{tr}\ X'(V-B(Z)Z)=0$
+and $\text{tr}\ Y'(V-B(Z))Z=0$. If the $n\times 2p$ matrix
+$\begin{bmatrix}X&Y\end{bmatrix}$ has rank $n-1$ then this implies
+$(V-B(Z))Z=0$.
+```
+
+------------------------------------------------------------------------
+
+In our example the singular values of $\begin{bmatrix}X&Y\end{bmatrix}$
+are `r svd(cbind(x,y))$d` and thus there is a one-one correspondence
+between stationary points of $\sigma$ and $\tilde\sigma$.
+
+------------------------------------------------------------------------
+
+```{theorem, label = "picsecder"}
+If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then 
+
+1. If $\text{tr}\ Y'(V-B(X))Y > 0$ then $\sigma$ has a local minimum at theta.
+2. If $\sigma$ has a saddle point at $\theta$ then $\text{tr}\ Y'(V-B(X))Y < 0$.
+
+```
+
+------------------------------------------------------------------------
+
+```{proof}
+Suppose $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$. Then,
+from \@ref(eq:pichess2)  and \@ref(eq:picuminc),
+$$
+\nabla^2\sigma(\theta)=\begin{bmatrix}0&0\\0&\text{tr}\ Y'(V-B(X))Y\end{bmatrix}+\mathop{\sum\sum}_{1\leq i<j\leq n}
+w_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\frac{T_{ij}\theta\theta'T_{ij}}{\theta'T_{ij}\theta}.
+$$
+```
+
+------------------------------------------------------------------------
+
+In our example $\text{tr}\ X'(V-B(Y))X$ is
+`r 4 * sum (x ^ 2) - sum(x * (smacofBmatR(d2, w, delta) %*% x))` and
+$\text{tr}\ Y'(V-B(X))Y$ is
+`r 4 * sum (y ^ 2) - sum(y * (smacofBmatR(d1, w, delta) %*% y))`.
+
+## Global Perspective
+
+```{r pictmores, echo = FALSE}
+by <- - delta/(d2+diag(4))
+diag(by)<--rowSums(by)
+z <- matrix (0, 2, 2)
+z[, 1] <- x[1, ] - x[2, ]
+z[, 2] <- y[1, ] - y[2, ]
+gm0<-eigen(crossprod(z))$vectors[,2]
+xint<-gm0[1]*x+gm0[2]*y
+asum <- 2 * 4 * matrix (c (sum(x ^ 2), sum (x * y), sum (x * y), sum (y ^ 2)), 2, 2)
+bsum <- chol (asum)
+csum <- solve (bsum)
+th0 <- bsum %*% gm0
+sth1 <- smacof2 (1.0406404, 0.8849253, x, y, delta, eps=1e-15,verbose=FALSE)
+sth2 <- smacof2 (1, 0, x, y, delta, eps=1e-15,verbose=FALSE)
+sth3 <- smacof2 (0, 1, x, y, delta, eps=1e-15,verbose=FALSE)
+th1 <- csum %*% sth1$theta
+xso1 <- th1[1] * x + th1[2] * y
+th2 <- csum %*% sth2$theta
+xso2 <- th2[1] * x + th2[2] * y
+th3 <- csum %*% sth3$theta
+xso3 <- th3[1] * x + th3[2] * y
+sth4 <- newton2(0, 1, x, y, delta, eps=1e-15,verbose = FALSE)
+th4 <- csum %*% sth4$theta
+xso4 <- th4[1] * x + th4[2] * y
+sth5<-newton2(1.12383710,0.77620456,x,y,delta,eps=1e-15,verbose=FALSE)
+th5 <- csum %*% sth5$theta
+xso5 <- th5[1] * x + th5[2] * y
+```
+
+We first make a global perspective plot, over the range $(-2.5,+2.5)$.
+
+```{r first_array, echo = FALSE, cache = TRUE}
+aa <- bb <- seq (-2.5, 2.5, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r globalperspective, fig.align= "center", fig.cap = "Global Perspective", fig.width = 10, fig.height = 10, echo = FALSE, cache = TRUE}
+par(pty="s")
+persp(aa, bb, z, col = "RED", xlab = "theta_1", ylab = "theta_2", zlab = "stress")
+```
+
+We see the symmetry, following from the fact that stress is even. We
+also see the local maximum at the origin, where stress is not
+differentiable. Also note the ridge, where $d_{12}(\theta)=0$ and where
+stress is not differentiable either. The ridge shows nicely that on rays
+emanating from the origin stress is a convex quadratic. Also, far away
+from the origin, stress globally behaves very much like a convex
+quadratic (except for the ridge). Clearly local minima must be found in
+the valleys surrounding the small mountain at the origin, all within the
+sphere with radius $\sqrt{2}$.
+
+## Global Contour
+
+Figure \@ref(fig:globalperspective) is a contour plot of stress over
+$(-2,+2)\otimes(-2,+2)$. The red line is
+$\{\theta\mid d_{12}(\theta) = 0\}$. The blue line has the minimum of
+the convex quadratic on each of the rays through the origin. Thus all
+local minima, and in fact all stationary points, are on the blue line.
+Note that the plot uses $\theta$ to define the coordinate axes, not
+$\gamma=(\alpha,\beta)$. Thus there are no stationary points at $(0,1)$
+and $(1,0)$, but at the corresponding points (`r bsum[,1]`) and
+(`r bsum[,2]`) in the $\theta$ coordinates (and, of course, at their
+mirror images).
+
+Besides the single local maximum at the origin, it turns out that in
+this example there are five pairs of stationary points. Or, more
+precisely, I have not been able to find more than five. Each stationary
+point $\theta$ has a mirror image $-\theta$. Three of the five are local
+minima, two are saddle points. Local minima are plotted as blue points,
+saddle points as red points.
+
+```{r globalcontour, fig.align= "center", fig.cap = "Global Contour", fig.width = 10, fig.height = 10, echo = FALSE, cache = TRUE}
+contour(aa, bb, z, levels = seq(0,.30,length=50))
+aa <- seq (-2 * pi,  2 * pi, length = 100)
+bb <- sin (aa)
+cc <- cos (aa)
+xxx <- matrix (0, 100, 2)
+for (k in 1:100) {
+  z <- c (bb[k], cc[k])
+  dd <- matrix (0, 4, 4)
+  for (i in 1:4)
+    for (j in 1:4) {
+      dd[i, j] <- sqrt (sum (uu (i, j, x, y) * outer (z, z)))
+    }
+  lbd <- sum (dd * delta) / sum (dd ^ 2)
+  xxx[k, ] <- lbd * z
+}
+lines (xxx[ ,1], xxx[, 2], lwd = 2, col = "BLUE")
+abline (0, th0[2] /th0[1], col = "RED", lwd = 2)
+th <-sth1$theta
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <- -th
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <-sth2$theta
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <- -th
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <-sth3$theta
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <- -th
+points (th[1], th[2], pch = 19, cex = 1.0, col = "BLUE")
+th <-sth4$theta
+points (th[1], th[2], pch = 19, cex = 1.0, col = "RED")
+th <- -th
+points (th[1], th[2], pch = 19, cex = 1.0, col = "RED")
+th <-sth5$theta
+points (th[1], th[2], pch = 19, cex = 1.0, col = "RED")
+th <- -th
+points (th[1], th[2], pch = 19, cex = 1.0, col = "RED")
+```
+
+## Stationary Points
+
+### First Minimum
+
+We zoom in on the first local minimum at (`r sth1$theta`). Its stress is
+`r sth1$stress`, and the corresponding configuration has three points in
+the corners of an equilateral triangle and the fourth point in its
+centroid. Note that this local minimum is a saddle point in
+configuration space $\mathbb{R}^{4\times 2}$ (@trosset_mathar_97). The
+eigenvalues of $B(\theta)$ are (`r zapsmall(eigen(sth1$b)$values)`) and
+those of the Hessian $I-H(\theta)$ are
+(`r zapsmall(eigen(sth1$h)$values)`). The area of the contour plot
+around the stationary value is in figure \@ref(fig:contfirstmin).
+
+```{r valfirstmin, echo = FALSE, cache = TRUE}
+aa <- bb <- seq (.7, 1.2, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r contfirstmin, fig.align= "center", fig.cap = "Contour Plot First Minimum", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+par(pty="s")
+contour(aa, bb, z, levels = seq(0.065,.08,length=100))
+th <- sth1$theta
+points (th[1], th[2], pch = 19, cex = 1.5, col = "BLUE")
+```
+
+### Second Minimum
+
+The second local minimum (which is the global minimum) at
+(`r zapsmall(sth2$theta)`) has stress `r sth2$stress`. The configuration
+are the four points at the corners of a square. The eigenvalues of
+$B(\theta)$ are (`r zapsmall(eigen(sth2$b)$values)`) and those of the
+Hessian $I-H(\theta)$ are (`r zapsmall(eigen(sth2$h)$values)`). The area
+of the contour plot around the stationary value is in figure
+\@ref(fig:contsecmin).
+
+```{r values_second_minimum, echo = FALSE, cache = TRUE}
+aa <- seq (1, 2, length = 100)
+bb <- seq (-.5,.5, length=100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r contsecmin, fig.align= "center", fig.cap = "Contour Plot Second Minimum", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+par(pty="s")
+contour(aa, bb, z, levels = seq(0.02,.10,length=100))
+th <- sth2$theta
+points (th[1], th[2], pch = 19, cex = 1.5, col = "BLUE")
+```
+
+### Third Minimum
+
+The third local minimum at (`r sth3$theta`) has stress `r sth3$stress`,
+and the corresponding configuration is in figure
+\@ref(fig:confthirdmin).
+
+<hr>
+
+```{r confthirdmin, fig.align= "center", fig.cap = "Configuration Third Minimum",echo = FALSE, cache = FALSE}
+par(pty="s")
+plot(xso3, type = "n", xlab = "dim 1", ylab = "dim 2")
+text (xso3, as.character(1:4),col = "RED")
+```
+
+The eigenvalues of $B(\theta)$ are (`r zapsmall(eigen(sth3$b)$values)`)
+and those of the Hessian $I-H(\theta)$ are
+(`r zapsmall(eigen(sth3$h)$values)`). The area of the contour plot
+around the stationary value is in figure \@ref(fig:contthirdmin)
+
+```{r values_third_minimum, echo = FALSE, cache = TRUE}
+aa <- seq (-.5, .5, length = 100)
+bb <- seq (1, 2, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+<hr>
+
+```{r contthirdmin, fig.cap = "Contour Plot Third Minimum",fig.align= "center", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+par(pty="s")
+contour(aa, bb, z, levels = seq(.11,.20,length=100))
+th <- sth3$theta
+points (th[1], th[2], pch = 19, cex = 1.5, col = "BLUE")
+```
+
+### First Saddle Point
+
+The saddle point at (`r sth4$theta`) has stress `r sth4$stress`, and the
+corresponding configuration is in figure \@ref(fig:conffirstsad).
+
+<hr>
+
+```{r conffirstsad, fig.cap = "Configuration First Saddlepoint", fig.align= "center", echo = FALSE, cache = FALSE}
+par(pty="s")
+plot(xso4, type = "n", xlab = "dim 1", ylab = "dim 2")
+text (xso4, as.character(1:4),col = "RED")
+```
+
+The eigenvalues of $B(\theta)$ are (`r zapsmall(eigen(sth4$b)$values)`)
+and those of the Hessian $I-H(\theta)$ are
+(`r zapsmall(eigen(sth4$h)$values)`). The area of the contour plot
+around the stationary value is in figure \@ref(fig:contfirstsad)
+
+```{r values_first_saddlepoint, echo = FALSE, cache = TRUE}
+aa <- seq (.30, .34, length = 100)
+bb <- seq (1.25, 1.30, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r contfirstsad, fig.cap = "Contour First Saddlepoint", fig.align= "center", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+par(pty="s")
+contour(aa, bb, z, levels = seq (.112, .113, length=100))
+th <- sth4$theta
+points (th[1], th[2], pch = 19, cex = 1.5, col = "RED")
+```
+
+### Second Saddle Point
+
+The saddle point at (`r sth5$theta`) has stress `r sth5$stress` and the
+corresponding configuration is in figure \@ref(fig:confsecsad)
+
+```{r confsecsad, fig.cap = "Configuration Second Saddlepoint", fig.align= "center", echo = FALSE, cache = FALSE}
+par(pty="s")
+plot(xso5, type = "n", xlab = "dim 1", ylab = "dim 2")
+text (xso5, as.character(1:4),col = "RED")
+```
+
+The eigenvalues of $B(\theta)$ are (`r zapsmall(eigen(sth5$b)$values)`)
+and those of the Hessian $I-H(\theta)$ are
+(`r zapsmall(eigen(sth5$h)$values)`). The area of the contour plot
+around the stationary value is in figure \@ref(fig:contsecsad)
+
+```{r values_second_saddlepoint, echo = FALSE, cache = TRUE}
+aa <- seq (1.11, 1.14, length = 100)
+bb <- seq (.76, .79, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- stress2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r contsecsad, fig.cap = "Contour Plot Second Saddlepoint", fig.align= "center", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+par(pty="s")
+contour(aa, bb, z, levels = seq (.0672, .0678, length=100))
+th <- sth5$theta
+points (th[1], th[2], pch = 19, cex = 1.5, col = "RED")
+```
+
+## Another Look {#picsphere}
+
+Remember that $\rho(\theta)=\theta'B(\theta)\theta$. Thus
+$\sigma(\lambda\theta)=1-\lambda\rho(\theta)+\frac12\lambda^2\theta'\theta$,
+and $$
+\min_\lambda\sigma(\lambda\theta)=1-\frac12\frac{\rho^2(\theta)}{\theta'\theta}.
+$$ Thus we can minimize $\sigma$ over $\theta$ by maximizing $\rho$ over
+the unit circle $\mathcal{S}:=\{\theta\mid\theta'\theta=1\}$. This is a
+nice formulation, because $\rho$ is norm, i.e. a homogeneous convex
+function of $\theta$. Consequently we have transformed the problem from
+unconstrained minimization of the DC function (i.e. difference of convex
+functions) stress to that of maximization of a ratio of norms. In turn
+this is equivalent to maximization of the convex function $\rho$ over
+the unit circle, or, again equivalently, over the unit ball, a compact
+convex set. This transform was first used in MDS by @deleeuw_C_77,
+partly because it made the theory developed by @robert_67 available.
+
+The levels sets $\{\theta\mid\rho(\theta)=\kappa\}$ are the
+$\rho$-circles defined by the norm $\rho$. The corresponding
+$\rho$-balls $\{\theta\mid\rho(\theta)\leq\kappa\}$ are closed and
+nested convex sets containing the origin. Thus we want to find the
+largest $\rho$-circle that still intersects $\mathcal{S}$. The
+similarity with the geometry of eigenvalue problems is obvious.
+
+```{r ropt, echo = FALSE}
+ph<-sth2$theta / sqrt (sum (sth2$theta ^ 2))
+ropt <- rho2 (ph[1], ph[2], x, y, delta)
+```
+
+In our example we know that the global optimum of stress is at
+(`r zapsmall(sth2$theta)`), and if we project that point on the circle
+it becomes (`r zapsmall(ph)`). The corresponding optimal $\rho$ is
+`r ropt`. Figure \@ref(fig:rhocontour) gives the contourplot for $\rho$,
+with the outer $\rho$-circle corresponding with the optimal value. The
+fact that the optimal value contour is disjoint from the interior of
+$\mathcal{S}$ is necessary and sufficient for global optimality
+(@dur_horst_locatelli_98). Notice the sharp corners in the contour plot,
+showing the non-diffentiability of $\rho$ at the points where
+$d_{12}(\theta)=0$. We could also look for the minimum of $\rho$ on the
+unit circle, which means finding the largest $\rho$-circle that touches
+$\mathcal{S}$ on the inside. Inspecting figure \@ref(fig:rhocontour)
+shows that this will be a point where $\rho$ is not differentiable, i.e.
+a point with $d_{12}(\theta)=0$. This minimum $\rho$ problem does not
+make much sense in the context of multidimensional scaling, however, and
+it not related directly to the minimization of stress.
+
+```{r rho_values, echo = FALSE, cache = TRUE}
+aa <- bb <- seq (-1.2, 1.2, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i, j]<- rho2 (aa[i], bb[j], x, y, delta)
+```
+
+```{r rhocontour, fig.cap = "Contour Plot for Rho",fig.align= "center", fig.width = 10, fig.height = 10, echo = FALSE, cache = TRUE}
+par(pty="s")
+contour(aa, bb, z, levels = c(seq(0,1.3,length = 14), ropt), lwd = 2, col = "BLUE")
+av <- seq (0,  2 * pi, length = 100)
+bv <- sin (av)
+cv <- cos (av)
+lines(bv,cv,col="RED",lwd=3)
+```
+
+## A Final Look {#picline}
+
+Now that we know that the MDS problem is equivalent to maximizing $\rho$
+on the unit circle, we can use nonlinear coordinates
+$(\theta_1,\theta_2)=(\sin\xi,\cos\xi)$ to reduce the problem to a
+one-dimensional unconstrained one in, say, \`\`circle space''. Thus,
+with the same abuse of notation as for stress,
+$\rho(\xi):=\rho(\sin\xi,\cos\xi)$, and we have to maximize $\rho$ over
+$0\leq\xi\leq\pi$.
+
+In figure \@ref(fig:rhononlinearplot) we have plotted $\rho$ as a
+function of $\eta$. There are blue vertical lines at the three local
+minima in coefficient space, red vertical lines at the stationary
+points, and a green vertical line where $d_{12}(\xi)=0$. Note that in
+circle space stress has both multiple local minima and multiple local
+maxima.
+
+<hr>
+
+```{r rho_nonlinear_values, echo = FALSE, cache = TRUE}
+par(pty="s")
+av <- seq (0,  pi, length = 10000)
+bv <- rep(0, 10000)
+sav <- sin (av)
+cav <- cos (av)
+for (i in 1:10000)
+  bv[i] <- rho2 (sav[i], cav[i], x, y, delta)
+```
+
+```{r rhononlinearplot, fig.cap = "One-dimensional Rho",fig.align= "center", fig.width = 10, fig.height = 10, echo = FALSE, cache = FALSE}
+plot (av, bv, type = "l", col = "RED", lwd = 2, xlab = "xi", ylab = "rho")
+th1 <- sth1$theta
+th1 <- th1 / sqrt (sum (th1 ^ 2))
+xi1 <- asin (th1[1])
+abline (v = xi1, col = "BLUE")
+th2 <- sth2$theta
+th2 <- th2 / sqrt (sum (th2 ^ 2))
+xi2 <- asin (th2[1])
+abline (v = xi2, col = "BLUE")
+th3 <- sth3$theta
+th3 <- th3 / sqrt (sum (th3 ^ 2))
+xi3 <- asin (th3[1])
+abline (v = xi3, col = "BLUE")
+th4 <- sth4$theta
+th4 <- th4 / sqrt (sum (th4 ^ 2))
+xi4 <- asin (th4[1])
+abline (v = xi4, col = "RED")
+th5 <- sth5$theta
+th5 <- th5 / sqrt (sum (th5 ^ 2))
+xi5 <- asin (th5[1])
+abline (v = xi5, col = "RED")
+th0 <- th0 / sqrt (sum (th0 ^ 2))
+xi0 <- asin (th0[1])
+abline (v = pi+xi0, col = "GREEN")
+```
+
+```{r second_derivatives, echo = FALSE, eval = FALSE}
+th <- sth1$theta
+th <- th / sqrt (sum (th ^ 2))
+bh <- bmat2 (th[1], th[2], x, y, delta)
+eh <- max (eigen (bh$h)$values)
+rh <- rho2 (th[1], th[2], x, y, delta)
+hes1 <- eh - rh
+th <- sth2$theta
+th <- th / sqrt (sum (th ^ 2))
+bh <- bmat2 (th[1], th[2], x, y, delta)
+eh <- max (eigen (bh$h)$values)
+rh <- rho2 (th[1], th[2], x, y, delta)
+hes2 <- eh - rh
+th <- sth3$theta
+th <- th / sqrt (sum (th ^ 2))
+bh <- bmat2 (th[1], th[2], x, y, delta)
+eh <- max (eigen (bh$h)$values)
+rh <- rho2 (th[1], th[2], x, y, delta)
+hes3 <- eh - rh
+th <- sth4$theta
+th <- th / sqrt (sum (th ^ 2))
+bh <- 2 (th[1], th[2], x, y, delta)
+eh <- max (eigen (bh$h)$values)
+rh <- rho2 (th[1], th[2], x, y, delta)
+hes4 <- eh - rh
+th <- sth5$theta
+th <- th / sqrt (sum (th ^ 2))
+bh <- bmat2 (th[1], th[2], x, y, delta)
+eh <- max (eigen (bh$h)$values)
+rh <- rho2 (th[1], th[2], x, y, delta)
+hes5 <- eh - rh
+```
+
+From lemma xxx we see that the
+second derivative $\mathcal{D}^2\rho(\xi)$ is equal to
+$\mathbf{tr}\ H(\xi)-\rho(\xi)$. For the three local minima in
+coordinate space we find second derivatives
+`r c(hes1=0, hes2=0, hes3=0)` in circle space, i.e. they are properly
+converted to local maxima. The two stationary points in coordinate space
+have second derivatives `r c(hes4=0, hes5=0)`, and are turned into local
+minima.
+
+For more general cases, with a basis of $n$ configurations, we know from
+@lyusternik-schnirelmann_34 that a continuously differentiable even
+function on the unit sphere in $\mathbb{R}^n$ has at least $n$ distinct
+pairs of stationary points.
+
+## Discuss
+
+Note that we have used $\sigma$ for three different functions. The first
+one with argument $Z$ is defined on *configuration space*, the second
+one with argument $\gamma$ on *coefficient space*, and the third one
+with argument $\theta$ also on *coefficient space*. This is a slight
+abuse of notation, rather innocuous, but we have to keep it in mind.
+
+From lemma xxx we see that
+$\mathcal{D}\sigma(X)=\mathcal{D}\sigma(Y)=0$ then
+$\mathcal{D}\sigma(1,0)=\mathcal{D}\sigma(0,1)=0$. Thus stationary
+points in configuration space are preserved as stationary points in
+coefficient space, but the reverse implication may not be true. If
+$\mathcal{D}^2\sigma(X)$ and $\mathcal{D}^2\sigma(Y)$ are positive
+semi-definite, then so are $\mathcal{D}^2\sigma(1,0)$ and
+$\mathcal{D}^2\sigma(0,1)$. Thus local minima are preserved. But it is
+entirely possible that $\mathcal{D}^2\sigma(X)$ and/or
+$\mathcal{D}^2\sigma(Y)$ are indefinite, and that
+$\mathcal{D}^2\sigma(1,0)$ and/or $\mathcal{D}^2\sigma(0,1)$ are
+positive semi-definite. Thus saddle points in configuration space can be
+mapped into local minima in coefficient space. As we will see this
+actually happens with $Y$, the equilateral triangle with center, in our
+example.
+
+## Coordinates
+
+```{r coordinates1, echo = FALSE, cache = TRUE}
+set.seed(12345)
+x <- matrix(rnorm(10), 5, 2)
+delta <- dist(x)
+eps <- (-500:500) / 100
+sy <- rep (0, 1001)
+plot (0,
+      0,
+      xlim = c(-5, 5),
+      ylim = c(0, 20),
+      xlab = "epsilon",
+      ylab = "stress",
+      type = "n")
+for (i in 1:5) {
+  for (j in 1:2) {
+    for (k in 1:1001) {
+      y <- x
+      y[i, j] <- x[i, j] + eps[k]
+      dy <- dist (y)
+      sy[k] <- sum ((delta - dy) ^ 2)
+    }
+    lines (eps, sy, lwd = 2, col = "RED")
+  }
+}
+```
+
+```{r coordinates2, echo = FALSE, cache = TRUE}
+set.seed(12345)
+x <- matrix(rnorm(10), 5, 2)
+delta <- dist(matrix(rnorm(10),5,2))
+eps <- (-500:500) / 100
+sy <- rep (0, 1001)
+plot (0,
+      0,
+      xlim = c(-5, 5),
+      ylim = c(0, 20),
+      xlab = "epsilon",
+      ylab = "stress",
+      type = "n")
+for (i in 1:5) {
+  for (j in 1:2) {
+    for (k in 1:1001) {
+      y <- x
+      y[i, j] <- x[i, j] + eps[k]
+      dy <- dist (y)
+      sy[k] <- sum ((delta - dy) ^ 2)
+    }
+    lines (eps, sy, lwd = 2, col = "RED")
+  }
+}
+```
+
+```{r sq4, echo = FALSE}
+a <- (2 + sqrt (2)) / 8
+xtr <- matrix (c(a,a,-a,-a,a,-a,a,-a), 4, 2)
+d <- dist(xtr)
+delta <- dist(diag(4))
+delta <- delta/sqrt(sum(delta^2))
+lbd <- sum (delta * d) / sum (d ^ 2)
+xtr <- xtr * lbd
+d <- d * lbd
+str <- sum((delta-d)^2)
+b <- -as.matrix (delta / d)
+diag(b) <- -rowSums(b)
+g<-4 * xtr - b%*% xtr
+ev<-eigen (b / 4)$values
+```
+
+```{r tr4, echo = FALSE, cache = TRUE}
+a <- (1 + sqrt (3)) / 4
+b <- (3 + sqrt (3)) / 8
+xsq <- matrix (c(a,-a/2,-a/2,0,0,-b,b,0), 4, 2)
+d <- dist (xsq)
+delta <- dist(diag(4))
+delta <- delta/sqrt(sum(delta^2))
+lbd <- sum (delta * d) / sum (d ^ 2)
+xsq <- xsq * lbd
+d <- d * lbd
+ssq <-sum((delta-d)^2)
+b <- -as.matrix (delta / d)
+diag(b) <- -rowSums(b)
+g<-4 * xsq - b%*% xsq
+e<-eigen (b / 4)$values
+```
+
+Let's look at a small example with four points, all dissimilarities
+equal, and all weights equal to one. There is a local minimum with four
+points in the corners of a square, with stress equal to `r str`. And
+there is another local minimum with three points forming an equilateral
+triangle, and the fourth point in the center. This has stress `r ssq`.
+We can compute stress for all points of the form $\alpha X+\beta Y$,
+where $X$ and $Y$ are the two local minima. Figure
+\@ref(fig:equalcontourplot) has a contour plot of
+$\sigma(\alpha,\beta)$, showing the local minima at $(1,0)$ and $(0,1)$,
+and the local maximum at $(0,0)$.
+
+```{r qcont, echo = FALSE, cache = TRUE}
+stresser <- function (a, b) {
+  u <- a * xsq + b * xtr
+  d <- dist (u)
+  return (sum((delta - d) ^ 2))
+}
+xl <- yl <- seq (-.5, 1.5, length = 100)
+z <- matrix (0, 100, 100)
+for (i in 1:100) for (j in 1:100)
+  z[i,j] <- stresser (xl[i], yl[j])
+za <- rep(0, 1000)
+xa <- seq (-.5, 1.5, length = 1000)
+for (i in 1:1000)
+  za[i] <- stresser(xa[i], 1 - xa[i])
+```
+
+```{r equalcontourplot, fig.align = "center", echo = FALSE, fig.cap = "Plane spanned by two local minima, equal dissimilarities"}
+contour (xl, yl, z, levels = seq(0, 1, length = 100), col = "RED")
+points (rbind (diag (2), c(0,0)), pch = 19)
+```
+
+Alternatively, we can plot stress on the line connecting $X$ and $Y$.
+Note that although stress only has a local maximum at the origin in
+configuration space, it can very well have local maxima if restricted to
+lines. In fact on a line connecting two local minima there has to be at
+least one local maximum.
+
+```{r equallineplot, fig.align = "center", echo = FALSE, fig.cap="Line connecting two local minima, equal dissimilarities"}
+plot (xa, za, type = "l", col = "RED", ylab = "stress", xlab = "alpha", lwd =2)
+abline(v=0)
+abline(v=1)
+```

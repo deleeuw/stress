@@ -1,0 +1,357 @@
+
+# Interval MDS {#intinterval}
+
+intro: additive vs interval
+basic vs ratio
+
+## The Additive Constant {#intadditive}
+
+In the early history of MDS dissimilarities were computed from comparative judgments in the 
+Thurstonian tradition. 
+
+triads paired comparisons etc positive orthant
+
+These early techniques only gave numbers on an interval scale, i.e. dissimilarities known only up to a linear transformation. In order to get positive dissimilarities a rational origin needed to be found in some way. This is the *additive constant problem*. It can be seen as the first example of nonmetric MDS, in which we have only partially known dissimilarities. 
+
+\begin{align}
+\begin{split}
+(\delta_{ij}+\alpha)&\approx d_{ij}(X),\\
+\delta_{ij}&\approx d_{ij}(X)+\alpha.
+\end{split}
+(\#eq:twoadd)
+\end{align}
+
+The additive constant techniques were more important in the fifties and sixties than they are these days, because they have largely been replaced by iterative nonmetric MDS techniques.
+
+An early algorithm to fit the additive constant based on Schoenberg's
+theorem was given by @messick_abelson_56. Torgerson based, i.e. the eigenvalues of $\tau(\Delta^{(2)})$. It was a somewhat hopeful iterative technique, without a convergence proof, designed to make the sum of the $n-p$ smallest eigenvalues equal to zero. This is of course only a necessary condition for best approximation, not a sufficient one.
+
+In addition, the Messick-Abelson algorithm sometimes yielded solutions
+in which the Torgerson transform of the squared dissimilarities had
+negative eigenvalues, which could even be quite large. That is also
+somewhat of a problem. Consequently @cooper_72 proposed an
+alternative additive constant algorithm, taking his clue from the work
+of Kruskal.
+
+The solution was to redefine stress as a function of both the
+configuration and the additive constant. Thus 
+
+\begin{equation}
+\sigma(X,\alpha):=\mathop{\sum\sum}_{1\leq j<i\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2,
+(\#eq:nmcooper1)
+\end{equation}
+
+and we minimize this stress over both $X$ and $\alpha$.
+
+Double phase (ALS)
+
+$\delta_{ij}+\alpha\geq 0$
+
+Single Phase
+
+\begin{equation}
+\sigma(X):=\min_\alpha\mathop{\sum\sum}_{1\leq j<i\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2,
+(\#eq:nmcooper2)
+\end{equation}
+
+
+
+### Algebra {#exactad}
+
+The additive constant problem is to find
+$X\in\mathbb{R}^{n\times p}$ and $\alpha$ such that
+$\Delta+\alpha(E-I)\approx D(X)$. In this section we look for 
+all $\alpha$ such that $\Delta+\alpha(E-I)$ is Euclidean, i.e.
+such that there is a configuration $X$ with $\Delta+\alpha(E-I)=D(X)$.
+This is a one-parameter generalization of Schoenberg's theorem.
+
+It makes sense to require $\alpha\geq 0$, because a negative
+$\alpha$ would more appropriately be called a subtractive constant.
+Also, we may want to make sure that the off-diagonal elements of $\Delta+\alpha(E-I)$ are non-negative, i.e. that $\alpha\geq-\delta_{ij}$ for all $i>j$. Note that if we allow a negative $\alpha$ then if all off-diagonal $\delta_{ij}$ are equal, say to $\delta>0$, we have the trivial solution $\alpha=-\delta$ and $X=0$.
+
+We start with a simple construction.
+
+```{theorem, label = "nmn1"}
+For all $\Delta$ there is an $\alpha_0\geq 0$ such that for all $\alpha\geq\alpha_0$ we have $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-1$.
+```
+
+```{proof}
+We have, using $\Delta\times(E-I)=\Delta$ and $(E-I)\times(E-I)=E-I$,
+
+\begin{equation}
+  \tau((\Delta+\alpha(E-I))\times(\Delta+\alpha(E-I)))=
+  \tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J.
+(\#eq:tau1)
+\end{equation}
+
+Thus each off-diagonal element is a concave quadratic in $\alpha$, which
+is negative for $\alpha$ big enough. Choose $\alpha_0\geq 0$ to make all
+off-diagonal elements negative (and all dissimilarities non-negative). A doubly-centered matrix with all off-diagonal elements negative is positive semi-definite of rank $n-1$ (@taussky_49).
+```
+
+Note that by the same argument we can also find a negative $\alpha_0$ that makes all off-diagonal elements negative and thus $\Delta+\alpha(E-I))$ is again Euclidean of dimension $r\leq n-1$. But this $\alpha_0$ will usually result in negative dissimilarities.
+
+Theorem \@ref(thm:nmn1) can be sharpened for non-Euclidean $\Delta$.
+Define the following function of $\alpha$: 
+
+\begin{equation}
+\lambda_\star(\alpha):=\min_{x'x=1, x'e=0}x'\{\tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J\}x.
+(\#eq:lambdas)
+\end{equation}
+
+This is the smallest non-trivial eigenvalue of the Torgerson transform in
+\@ref(eq:tau1). The matrix $\Delta+\alpha(E-I)$ is Euclidean if and only if $\lambda_\star(\alpha)\geq 0$. Note that $\lambda_\star$ is continuous, by a simple special case of the Maximum Theorem (@berge_63, Chapter VI, section 3), and coercive, i.e. $\lambda_\star(\alpha)\rightarrow +\infty$ if $|\alpha|\rightarrow +\infty$.
+
+```{theorem, label = "nmn2"}
+For all non-Euclidean $\Delta$ there is an $\alpha_1>0$ such that for all $\alpha\geq\alpha_1$ we have that $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-2$.
+```
+
+```{proof}
+Because $\Delta$ is non-Euclidean we have $\lambda_\star(0)<0$. By the construction in theorem \@ref(thm:nmn1) there is an $\alpha_0$ such that
+$\lambda_\star(\alpha)>0$ for all $\alpha>\alpha_0$. By the Maximum Theorem
+the function $\lambda_\star$ is continuous, and thus, by Bolzano's theorem, there is an $\alpha_1$ between $0$ and $\alpha_0$ such that $\lambda_\star(\alpha_1)=0$. If there is more than one zero between
+$0$ and $\alpha_0$ we take the largest one as $\alpha_1$.
+```
+
+
+The problem with extending theorem \@ref(thm:nmn2) to Euclidean $\Delta$ is that the equation $\lambda_\star(\alpha)=0$ may have only negative roots, or, even more seriously, no roots at all. This may not be too important from the practical point of view, because observed dissimilarities will usually not be exactly Euclidean. Nevertheless I feel compelled to address it.
+
+```{theorem, label = "nmn3"}
+If $\Delta$ is Euclidean then $\lambda_\star(\alpha)$ is non-negative and non-decreasing on $[0,+\infty)$.
+```
+
+```{proof}
+If $\Delta$ is Euclidean, then $\sqrt{\Delta}$, which is short for the matrix with the square roots of the dissimilarities, is Euclidean as well. This follows because the square root is a Schoenberg transform (@schoenberg_37, @bavaud_11), and it implies that $\tau(\Delta)=\tau(\sqrt{\Delta}\times\sqrt{\Delta})$ is positive semi-definite. Thus the matrix \@ref(eq:tau1) is positive semi-definite for all $\alpha\geq 0$. By Danskin's Theorem the one-sided directional derivative of $\lambda_\star$ at $\alpha$ is $2x(\alpha)'\tau(\Delta)x(\alpha)+\alpha$, where $x(\alpha)$ is one of the minimizing eigenvectors. Because the one-sided derivative is non-negative, the function is non-decreasing (in fact increasing if $\alpha>0$).
+```
+
+Of course $\lambda_\star(\alpha)=0$ can still have negative solutions, and in particular it will have at least one negative solution if $\lambda_\star(\alpha)\leq 0$ for any $\alpha$. There can even be negative solutions with $\Delta+\alpha(E-I)$ non-negative. 
+
+The solutions of $\lambda_\star(\alpha)=0$ can be computed and studied in more detail, using results first presented in the psychometric literature by @cailliez_83. We reproduce his analysis here, with a somewhat different discussion that relies more on existing mathematical results.
+
+In order to find the smallest $\alpha$ we solve the quadratic eigenvalue problem (@tisseur_meerbergen_01)
+
+\begin{equation}
+\{\tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J\}y=0.
+(\#eq:qep1)
+\end{equation}
+
+
+A solution $(y,\alpha)$ of \#ref(eq:qep1) is an eigen pair, in which $y$ is an eigenvector, and $\alpha$ the corresponding eigenvalue. The trivial solution $y=e$ satisfies \#ref(eq:qep1) for any $\alpha$. We are not really interested in the non-trivial eigenvectors here, but we will look at the relationship between the eigenvalues and the solutions of $\lambda_\star(\alpha)=0$.
+
+The eigenvalues can be complex, in which case they do not interest us. 
+If $\alpha$ is a non-trivial real eigenvalue, then the rank of the Torgerson transform of the matrix in \#ref(eq:qep1) is $n-2$, but 
+
+To get rid of the annoying trivial solution $y=e$ we use a square
+orthonormal matrix whose first column is proportional to $e$. Suppose
+$L$ contains the remaining $n-1$ columns. Now solve
+
+\begin{equation}
+\{L'\tau(\Delta\times\Delta)L+2\alpha L'\tau(\Delta)L+\frac12\alpha^2I\}y=0.
+(\#eq:qep2)
+\end{equation}
+
+Note that the determinant of the polynomial matrix in \@ref(eq:qep2) is
+a polynomial of degree $2(n-1)$ in $\alpha$, which has $2(n-1)$ real or
+complex roots.
+
+The next step is linearization (@gohberg_lancaster_rodman_09, chapter
+1), which means finding a linear or generalized linear eigen problem with the 
+same roots as \@ref(eq:qep2). In our case this is the eigenvalue problem for the matrix 
+
+\begin{equation}
+\begin{bmatrix}
+\hfill 0&\hfill I\\
+-2L'\tau(\Delta\times\Delta)L&-4L'\tau(\Delta)L
+\end{bmatrix}
+(\#eq:qep3)
+\end{equation}
+
+
+### Examples
+
+#### Small Example
+
+Here is a small artificial dissimilarity matrix.
+
+```{r smallex, echo = FALSE}
+matrixPrint(d<-as.matrix(dsmall), digits = 0, width = 2)
+```
+
+It is constructed such that $\delta_{14}>\delta_{12}+\delta_{24}$ and
+that $\delta_{23}>\delta_{21}+\delta_{13}$. Because the triangle
+inequality is violated the dissimilarities are not distances in any
+metric space, and certainly not in a Euclidean one. Because the minimum
+dissimilarity is $+1$, we require that the additive constant $\alpha$ is
+at least $-1$.
+
+The R function treq() in appendix \@ref(apcodeclass) finds the smallest
+additive constant such that all triangle inequalities are satisfied. For
+this example it is $\alpha=`r treq (d)`$.
+
+The Torgerson transform of $\Delta\times\Delta$ is
+
+```{r tsmall, echo = FALSE}
+matrixPrint(s<- tau(d * d), digits = 3, width = 5, flag = "+")
+```
+
+with eigenvalues
+
+```{r esmall, echo = FALSE}
+matrixPrint(e<-eigen(s)$values, digits = 3, width = 5, flag = "+")
+```
+
+The smallest eigenvalue `r min(e)` is appropriately negative, and
+theorem \@ref(thm:nmn2) shows that $\Delta\times\Delta+`r -min(e)`(E-I)$
+are squared distances between four points in the plane.
+
+The upper bound for the smallest $\alpha$ from theorem \@ref(thm:nmn1),
+computed by the R function acbound(), is `r acbound(d)$ma`.
+
+It is useful to look at a graphical representation of the minimum
+non-trivial eigenvalue of
+$\tau((\Delta+\alpha(E-I))\times(\Delta+\alpha(E-I)))$ as a function of
+$\alpha$. The R function aceval() generates the data for the plot.
+
+```{r acplot, echo = FALSE, cache = TRUE}
+g <- aceval (d)
+plot(g$a,g$b,xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+```
+
+We see that the minimum non-trivial eigenvalue is a continuous function of $\alpha$,but one which certainly is not convex or concave or differentiable. The graph crosses the horizontal axes near -8, -3, and +6.
+
+To make this precise we apply the theory of section xxx. The R function
+acqep() finds the six non-trivial eigenvalues
+
+```{r aceqp, echo = FALSE}
+ace<-acqep(d)$me
+ace
+```
+
+Two of the eigenvalues are complex conjugates, four are real. Of the
+real eigenvalues three are negative, and only one is positive, equal to
+`r formatC(Re(ace[2]), digits = 3, width = 7, format = "f", flag = "+")`.
+The table above gives the eigenvalues of the Torgerson transform, using
+all four real eigenvalues for $\alpha$. The three negative ones do result in a positive semi-definite matrix with rank equal to $n-2$, but they also
+create negative dissimilarities.
+
+```{r szero, echo = FALSE, cache = TRUE}
+for (i in c(1, 2, 5, 6)) {
+a <- Re(ace[i])
+t <- d+a*(1-diag(4))
+b <- eigen(tau(t * t))$values
+cat(formatC(a, digits = 3, width = 7, format = "f", flag = "+")," ****** ",
+    formatC(b, digits = 3, width = 7, format = "f", flag = "+"), "\n")
+}
+```
+
+#### De Gruijter Example
+
+```{r gruadd, echo = FALSE, cache = TRUE}
+g <- as.matrix(gruijter)
+h <- aceval (g, c(-25,5))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+#### Ekman Example
+
+```{r ekkadd, echo = FALSE, cache = TRUE}
+g <- as.matrix(1 - ekman)
+h <- aceval (g, c(-1,1))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+```{r ekk3add, echo = FALSE, cache = TRUE}
+g <- as.matrix((1 - ekman)^3)
+h <- aceval (g, c(-1,1))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+### A Variation {#variation}
+
+Alternatively, we could define our approximation problem as finding
+$X\in\mathbb{R}^{n\times p}$ and $\alpha$ such that
+$\sqrt{\delta_{ij}^2+\alpha}\approx d_{ij}(X)$, or, equivalently,
+$\Delta\times\Delta+\alpha(E-I)\approx D(X)\times D(X)$.
+
+```{theorem, label = "nmn4"}
+For any $X\in\mathbb{R}^{n\times p}$ with $p=n-2$ there is an $\alpha$
+such that $\sqrt{\delta_{ij}^2+\alpha}= d_{ij}(X)$.
+```
+
+```{proof}
+Now we have 
+
+\begin{equation}
+\tau(\Delta\times\Delta+\alpha(E-I)))=
+  \tau(\Delta\times\Delta)+\frac12\alpha J.
+(\#eq:tau2)
+\end{equation} 
+  
+The eigenvalues of
+$\tau(\Delta\times\Delta)+\frac12\alpha J$ are zero and
+$\lambda_s+\frac12\alpha$, where the $\lambda_s$ are the $n-1$
+non-trivial eigenvalues of $\tau(\Delta\times\Delta)$. If
+$\underline{\lambda}$ is smallest eigenvalue we choose
+$\alpha=-2\underline{\lambda}$, and
+$\tau(\Delta\times\Delta)+\frac12\alpha J$ is positive semi-definite of
+rank $r\leq n-2$.
+```
+
+Note that theorem \@ref(thm:nmn2) implies that for any $\Delta$ there is
+a strictly increasing differentiable transformation to the space of
+Euclidean distance matrices in $n-2$ dimensions. This is a version of
+what is sometimes described as *Guttman's n-2 theorem* (@lingoes_71).
+The proof we have given is that from @deleeuw_R_70b, Appendix B.
+
+ALS Negative delta
+
+
+
+
+
+Euclidean
+$$
+\sqrt{2-2\ \cos |i-j|\theta}
+$$
+Circular
+$$
+|i-j|\frac{2\pi}{n}
+$$
+Linear 
+$$
+|i-j|
+$$
+```{r breakcircle1, echo = FALSE, fig.align = "center"}
+par(pty="s")
+xx <- 0:9 * ((2 * pi) / 10)
+xs <- sin(xx)
+xc <- cos(xx)
+delta <- as.vector(dist(cbind(xs, xc)))
+d <- as.vector(dist(xx))
+m <- matrix(as.double(unique(format(cbind(delta, d)))), 9, 2)
+plot(m, col= "RED", cex = 1.5, xlab = "delta", ylab = "dist")
+for (i in 1:8) {
+  lines(list(x = c(m[i, 1],m[i + 1, 1]),
+             y = c(m[i, 2],m[i + 1, 2])), col = "RED", lwd = 2)
+}
+```
+
+```{r breakcircle2, echo = FALSE, fig.align = "center"}
+par(pty="s")
+ind <- order(d)
+plot(d, delta, col= "RED", cex = 1.5, ylab = "delta", xlab = "dist")
+for (i in 1:8) {
+  lines(list(x = c(m[i, 2],m[i + 1, 2]),
+             y = c(m[i, 1],m[i + 1, 1])), col = "RED", lwd = 2)
+}
+```

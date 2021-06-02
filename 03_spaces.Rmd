@@ -1,0 +1,147 @@
+# Stress Spaces {#propspaces}
+
+intro 
+
+Much of this chapter is a modified, and in some places expanded, version of @deleeuw_E_16l.
+
+## Configuration Space {#propconfspace}
+
+So far we have defined stress on $\mathbb{R}^{n\times p}$, the space of all matrices with $n$ rows and $p$ columns. We call this *configuration space*.
+
+Even for $n$ as small as four and $p$ as small as two the dimension of
+the space of centered configurations is six, and there is no natural way
+to visualize a function of six variables. 
+
+coordinates
+
+## Coefficient Space {#propcoefspace}
+
+### On the Planes
+
+What we can do is plot stress
+on two-dimensional subspaces, either as a contour plot or as a perspective plot. Our two-dimensional subspaces are of the form $\alpha X+\beta Y$, where $X$ and $Y$ are fixed configurations. 
+
+### General
+
+Now let $Y_1,Y_2,\cdots,Y_r$ be linearly independent configurations in $\mathbb{R}^{n\times p}$, and consider minimizing stress over all linear combinations $X$ of the form $X=\sum_{s=1}^r \theta_sY_s$.
+
+Each linear combination can be identified with a unique vector $\theta\in\mathbb{R}^r$, the coefficients of the linear combination. Thus we can also formulate our problem as minimizing stress over *coefficient space*, which is simply $\mathbb{R}^r$. We write $d_{ij}(\theta)$ for $d_{ij}(X)$ and 
+$\sigma(\theta)$ for $\sigma(X)$. Note that 
+$d_{ij}(\theta)=\sqrt{\theta'C_{ij}\theta}$, where
+$C_{ij}$ has elements $\{C_{ij}\}_{st}:=\text{tr}\ Y_s'A_{ij}Y_t$.
+
+If the $Y_t$ are actually a basis for configuration space (i.e. if $r=np$) then minimizing over configuration space and coordinate space is the same thing. For the $Y_t$ we could choose all rank one matrices, for example, of the form $a_i^{\ }b_s'$ where the $a_i$ are a basis for $\mathbb{R}^n$ and the $b_s$ are a basis for $\mathbb{R}^p$. And, in particular, the $a_i$ and $b_s$ can be chosen as unit vectors of length $n$ and $p$, respectively. That case we have $C_{ij}=I_p\otimes A_{ij}$, i.e. the direct sum of $p$ copies of $A_{ij}$. Also if $\theta=\text{vec}(X)$ then $d_{ij}(X)=\sqrt{\theta'(I_p\otimes A_{ij})\theta}$
+
+If $r<np$ then coefficient space defines a proper subspace of configuration space. If it happens to be the $(n -1)p$ dimensional subspace of all column-centered matrices, then the two approaches still define the same minimization problem. But in general $r<(n-1)p$ with the $Y_s$ column-centered defines a *constrained MDS problem*, which we analyze in more detail in chapter \@ref(cmds).
+
+Coefficient space is also a convenient place to deal with rotational indeterminacy in basic MDS. It follows from QR decomposition that any configuration matrix can be rotated in such a way that it upper diagonal elements (the $x_{ij}$ with $i<j$) are zero (define $X_p$ to be the first $p$ rows of $X$, compute $X_p'=QR$ with $Q$ square orthonormal and $R$ upper triangular, thus $X_p=R'Q'$ and $X_pQ=R'$, which is
+lower triangular). The column-centered upper triangular configurations are a subspace of dimension $p(n-1)-p(p-1)/2$, and we can choose the $Y_s$ as a basis for this subspace. In this way we eliminate rotational indeterminacy in a relatively inexpensive way.
+
+If $X=\sum_{s=1}^r \theta_sY_s$ then we define the symmetric positive definite matrix $B(\theta)$ of order $r$ with elements
+
+\begin{equation}
+b_{st}(\theta):=\text{tr}\ Y_s'B(X)Y_t,
+(\#eq:propcoefb)
+\end{equation}
+
+where $B(X)$ is the usual B-matrix of order $n$ in configuration space, defined in equation \@ref(eq:bdef). Also define $V$ of order $r$ by
+
+\begin{equation}
+v_{st}:=\text{tr}\ Y_s'VY_t,
+(\#eq:propcoefv)
+\end{equation}
+
+where the second $V$, of order $n$, is given by equation \@ref(eq:vdef). Then
+
+\begin{equation}
+\sigma(\theta)=1-2\ \theta'B(\theta)\theta+\theta'V\theta.
+(\#eq:propcoefs)
+\end{equation}
+
+The relationship between the stationary points in configuration
+space and coefficient space is fairly straightforward.
+
+```{theorem, label = "confcoef"}
+
+Suppose $\theta$ is in coefficient space and $X=\sum_{s=1}^r\theta_s Y_s$ is the corresponding point in configuration space.
+
+1. If $X$ is a stationary point in configuration space then $\theta$ is a stationary point in coefficient space.
+2. If $\theta$ is a stationary point in coefficient space then $X$ is a stationary point in configuration space
+if and only if $\text{rank}(Y_1\mid\cdots\mid Y_r)\geq n-1$. (THIS IS WRONG)
+
+```
+
+```{proof}
+We have $B(X)X=VX$, i.e. 
+\begin{equation}
+\sum_{s=1}^r \theta_s B(X)Y_s=\sum_{s=1}^r \theta_s VY_s.
+(\#eq:propfitoff)
+\end{equation}
+Premultiplying both sides by $Y_t^T$ and taking the trace gives $B(\theta)\theta=V\theta$. This proves the first part.
+
+For the second part, suppose $B(\theta)\theta=V\theta$ and define
+$X=\sum_{s=1}^r\theta_s Y_s$. Then
+
+\begin{equation}
+\sum_{t=1}^r\text{tr}\ Y_s^T(B(X)-V)X=0.
+(\#eq:propfftofi)
+\end{equation}
+  
+Thus $B(X)X=VX$ if and only if $Y_s^T(B(X)-V)X=0$ for all $s$, which translates to the rank condition in the theorem (this is WRONG, correct).
+```
+  
+The advantage of working in coefficient space is that formulas tend to become more simple. Functions are defined on $\mathbb{R}^r$, and not a space of matrices, in which some coordinates belong to the same point (row) and others to other points (rows), and some are on the same dimension (column), while others are on different dimensions (columns).
+
+Note that expressions such as \@ref(eq:propfitoff)
+and \@ref(eq:propfitoff)
+simplify if the $Y_s$ are $V$-orthonormal, i.e. if $\text{tr}\ Y_s'VY_t=\delta^{st}$ and thus $V=I$. It is easy to generate such an orthonormal set from the original $Y_s$ by using the Gram-Schmidt process. The R function gramy() in utilities.R does exactly that. Coefficient space, which is the span of the $Y_s$, is not changed by the orthogonalization process. 
+
+For a $V$-orthonormal set $Y$ we have the stationary equations $B(\theta)\theta=\theta$, which says that $\theta$ is an eigenvector of $B(\theta)$ with eigenvalue 1.
+
+The Hessian is
+
+\begin{equation}
+\mathcal{D}^2\sigma(\theta)=I-H(\theta),
+(\#eq:hessmat)
+\end{equation}
+
+with 
+
+\begin{equation}
+H(\theta):=\mathcal{D}^2\rho(\theta)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\left\{C_{ij}-\frac{C_{ij}\theta\theta'C_{ij}}{\theta'C_{ij}\theta}\right\}.
+(\#eq:rhohessdef)
+\end{equation}
+
+We have $0\lesssim H(\theta)\lesssim B(\theta)$ and thus $I-B(\theta)\lesssim\mathcal{D}^2\sigma(\theta)\lesssim I$.
+
+Hessian in coef and conf space
+
+## Sphere Space {#propspherespace}
+
+\begin{equation}
+\min_X\sigma(X)=\min_{\lambda\geq 0}\min_{\eta^2(X)=1}\sigma(\lambda X)=\min_{\eta^2(X)=1}\min_{\lambda\geq 0}\sigma(\lambda X)=
+\min_{\eta^2(X)=1}1-\rho^2(X).
+(\#eq:homequ)
+\end{equation}
+
+We see that basic MDS can also be formulated as maximization of $\rho$ over the ellipsoid $\{X\mid \eta^2(X)=1\}$ or, equivalently, over the convex ellipsoidal disk $\{X\mid \eta^2(X)\leq 1\}$. A similar formulation is available in coefficient space.
+
+This shows that the MDS problem can be seen as a rather special nonlinear eigenvalue problem. @guttman_68 also discussed the similarities of MDS and eigenvalue problems, in particular as they related to the power method. In linear eigenvalue problems we maximize a convex quadratic form, in the MDS problem we maximize the homogeneous convex function $\rho$, in both cases over an ellipsoidal disk. The sublevel sets of $\rho$ defined as $\mathcal{L}_r:=\{X\mid \rho(X)\leq r\}$ are nested convex sets containing the origin. The largest of these sublevel sets that still intersects the ellipsoid $\eta^2(X)=1$ corresponds to the global minimum of stress (see section \@ref(picsphere)).
+
+$\alpha X+\beta Y$ in sphere space one-dimensional \@ref(picline)
+
+## Cross-Product Space
+
+We can write
+
+$$
+d_{ij}^2(X)=\text{tr}\ X'A_{ij}X = \text{tr}\ A_{ij}C,
+$$
+with $C=XX'$. This shows minimizing stress can also be formulated as minimizing
+
+\begin{equation}
+\sigma(C)=1+\text{tr}\ VC-2\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\sqrt{\text{tr}\ A_{ij}C}
+(\#eq:stresspsd)
+\end{equation}
+
+over all positive semi-definite $C$ of rank $r\leq p$. A fundamental result, which forms the basis of chapter \@ref(fullchapter) in this book, is that $\sigma$ is convex on *Cross-Product Space*, i.e. the closed convex cone of all $C\gtrsim 0$.

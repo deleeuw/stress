@@ -1,0 +1,27 @@
+# Individual Differences {#chindif}
+
+This chapter deals with the situation in which we observe more than one set of 
+dissimilarities. We need an extra index $k=1,\cdots,m$ for $\Delta_k, W_k$,  
+and for $X_k$. The definition of stress becomes
+
+$$
+\sigma(X_1,\cdots,X_m):=\sum_{k=1}^m\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ijk}(\delta_{ijk}-d_{ij}(X_k))^2
+$$
+
+For this particular definition of stress the minimization over $X_1,\cdots,X_m$ simply means trrrrrrrrsolving $m$ separate MDS problems, one for each $k$. Thus it does not bring anything new. In order make it interesting we have to
+constrain the $X_k$ in some way or other, preferable one in which the different $X_k$ are linked, so they have 
+something in common and something in which they differ.
+
+MDS with linking constraints on the configurations is known in the psychometric literature as MDS with individual differences. This does not imply that index $k$ necessarily refers to individuals, it can refer to replications,
+points in time, points of view, experimental conditions, and so on. The essential component is that we have
+$m$ sets of dissimilarities between the same $n$ objects. In order not to prejudge where the $m$ different sets of dissimilarities come from, we shall refer to them with the neutral term *slices*, just as the dissimilarities are defined on pairs of neutral *objects*. 
+
+## Replications {#indifrepl}
+
+The first constraint that comes to mind is $X_k=X$ for all $k=1,\cdots,m$. Thus the configuration is the same for all slices.
+
+
+## INDSCAL/PARAFAC {#indifindscal}
+
+## IDIOSCAL/TUCKALS {#indifidioscal}
+

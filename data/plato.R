@@ -1,0 +1,5 @@
+data(Plato7, package = "smacof")
+plato <- as.matrix (dist (sqrt (t (Plato7))))
+w <- matrix (1, 7, 7) - diag (7)
+plato <- 2 * plato / ssqrt (sum (w * plato * plato))
+hPlato <-runPenalty (w, plato, p = 1)

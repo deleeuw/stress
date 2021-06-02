@@ -1,0 +1,376 @@
+# Introduction {#intro}
+
+In this book we study the smacof family of *Multidimensional Scaling* (*MDS* from now on) techniques. In MDS the data consist of some type of
+information about the *dissimilarities* between a number of *objects*.
+The information we have about these dissimilarities can be numerical,
+ordinal, or categorical. Thus we may have the actual values of some or
+all of the dissimilarities, we may know their rank order, or we may have
+a classification of them into a small number of qualitative bins.
+
+MDS techniques map the objects into *points* in a metric space in such a
+way that the relation between the distances between the points mirrors
+or approximates the relation between dissimilarities of the objects. For
+numerical dissimilarities it is clear what "approximation" means,
+although it can be measured in many different ways. For ordinal and
+categorical dissimilarities the notion of approximation is less clear,
+and we have to develop more specialized techniques to measure fit.
+
+## Brief History {#introhist}
+
+@deleeuw_heiser_C_80
+
+This is reviewed ably in the presidential address of @torgerson_65. 
+
+As I mentioned in the preface, a complete overview of the state of the art until 2005 is @borg_groenen_05. 
+
+A more recent review paper, emphasizing smacof, is @groenen_vandevelden_16.
+
+This section has a different emphasis. We limit ourselves to developments in Euclidean MDS, to contributions with direct computational consequences with a direct or indirect link to psychometrics, and to work before 1960.
+
+Our history review takes the form of brief summaries of what we consider to be milestone papers or books.
+
+### Milestones
+
+
+@torgerson_52
+@torgerson_65
+
+@shepard_62a
+@shepard_62b
+
+@kruskal_64a
+@kruskal_64b
+
+@guttman_68
+
+@deleeuw_C_77
+@deleeuw_heiser_C_77
+
+There was some early work by Richardson, Messick,
+Abelson and Torgerson who combined Thurstonian scaling of similarities
+with the mathematical results of @schoenberg_35 and
+@young_householder_38.  Despite these early contributions it makes sense,
+certainly from the point of view of my personal history, but probably
+more generally, to think of MDS as starting as a widely discussed, used,
+and accepted technique since the book by @torgerson_58. This was despite
+the fact that in the fifties and sixties computing eigenvalues and
+eigenvectors of a matrix of size 20 or 30 was still a challenge.
+
+A few years later the popularity of MDS got a large boost by
+developments centered at Bell Telephone Laboratories in Murray Hill, New
+Jersey, the magnificent precursor of Silicon Valley. First there was
+nonmetric MDS by @shepard_62a, @shepard_62b and @kruskal_64a,
+@kruskal_64b, And later another major development was the introduction
+of individual difference scaling by @carroll_chang_70 and @harshman_70.
+Perhaps even more important was the development of computer
+implementations of these new techniques. Some of the early history of
+nonmetric MDS is in @deleeuw_E_17e.
+
+Around the same time there were interesting theoretical contributions in
+@coombs_64, which however did not really influence the practice of MDS.
+And several relatively minor variations of the Bell Laboratories
+approach were proposed by @guttman_68, but Guttman's influence on
+further MDS implementations turned out to be marginal.
+
+The main development after the Bell Laboratories surge was probably
+smacof. Initially, in @deleeuw_C_77, this stood for 
+*Scaling by Maximizing a Convex Function*. 
+Later it was also used to mean 
+*Scaling by Majorizing a Complicated Function*. Whatever. In this book smacof just stands for smacof. No capitals.
+
+The first smacof programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (@heiser_deleeuw_R_77). Eventually they migrated to SPSS (for example, @meulman_heiser_12) and to R (@deleeuw_mair_A_09c). The SPSS branch and the R branch have diverged somewhat, and continue to be developed independently.
+
+## Basic MDS {#introbasic}
+
+Following Kruskal and Shepard we measure the fit of distances to
+dissimilarities using an explicit real-valued *loss function* (a.k.a.
+*badness-of-fit measure*), which is minimized over the possible maps of
+the objects into the metric space. This is a very general definition of MDS,
+covering all kinds of variations in the target metric space and in the
+way fit is measured. Obviously we can not discuss all possible forms and implementations, which also includes various techniques more properly discussed as cluster analysis, classification, or discrimination.
+
+To outline our scope we define *basic MDS*, which is short for
+*Least Squares Euclidean Metric MDS* (LSEM-MDS). It is defined as MDS
+with the following characteristics.
+
+1.  The space is a finite dimensional linear space.
+2.  The metric is Euclidean.
+3.  The dissimilarities are numerical, symmetric, and non-negative.
+4.  The loss function is a weighted sum of squares of the *residuals*,
+    which are the differences between dissimilarities and distances.
+5.  Weights are numerical, symmetric, and non-negative.
+6.  Self-dissimilarities are zero and the corresponding terms in the
+    loss function have weight zero.
+
+The *loss function* we use is called *stress*. It was first explicitly introduced in MDS by @kruskal_64a and @kruskal_64b. We define stress in a slightly different way, because we want to be consistent over the whole range of the smacof versions and implementations. In smacof stress is the real-valued function $\sigma$, defined on the space $\mathbb{R}^{n\times p}$ of configurations, as
+
+\begin{equation}
+\sigma(X):=\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}(\delta_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}\delta_{ij}^2}.
+(\#eq:stressall)
+\end{equation}
+
+We use the notation $\mathop{\sum\sum}_{1\leq i<j\leq n}$ for summation over the upper-diagonal elements of a matrix. Note also that we use $:=$ for definitions, i.e. for concepts and symbols that are not standard mathematical usage, when they occur for the first time in this book. 
+
+In definition \@ref(eq:stressall) we use the following objects and symbols.
+
+1.  $W=\{w_{ij}\}$ is a symmetric, non-negative, and hollow matrix of
+    *weights*, where 'hollow' means zero diagonal.
+2.  $\Delta=\{\delta_{ij}\}$ is a symmetric, non-negative, and hollow
+    matrix of *dissimilarities*.
+3.  $X$ is an $n\times p$ *configuration*, containing coordinates of $n$
+    *points* in $p$ dimensions.
+4.  $D(X)=\{d_{ij}(X)\}$ is a symmetric, non-negative, and hollow matrix
+    of *Euclidean distances* between the $n$ points in $X$. Thus
+    $d_{ij}(X):=\sqrt{\sum_{s=1}^p(x_{is}-x_{js})^2}$.
+    
+Observe that we distinguish the linear space $\mathbb{R}^{n\times p}$ of $n\times p$ matrices from the linear space $\mathbb{R}^{np}$ of $np$ element vectors. The two spaces are isomorphic, and connected by the vec operator and its inverse. Some formulas in MDS are more easily expressed in $\mathbb{R}^{np}$, but we prefer to work in the more natural space $\mathbb{R}^{n\times p}$ of configurations.
+
+The function $D$, which computes the distance matrix $D(X)$ from a configuration $X$, is matrix-valued. It maps the $n\times p$-dimensional
+linear space $\mathbb{R}^{n\times p}$ of configuration matrices into the
+set $D(\mathbb{R}^{n\times p})$ of Euclidean distance matrices between $n$ points in $\mathbb{R}^p$, which is a subset of the convex cone of hollow, symmetric, non-negative matrices in the linear space $\mathbb{R}^{n\times n}$. 
+
+In basic MDS the weights and dissimilarities are given
+numbers, and we minimize stress over all $n\times p$ configurations $X$.
+Note that the *dimensionality* $p$ is also supposed to be known
+beforehand, and that MDS in $p$ dimensions is different from MDS in
+$q\not= p$ dimensions. We sometimes emphasize this by writing $pMDS$,
+which shows that we will map the points into $p$-dimensional space.
+
+Two boundary cases that will interest us are *Unidimensional Scaling* or
+*UDS*, where $p=1$, and *Full-dimensional Scaling* or *FDS*, where
+$p=n$. Thus UDS is 1MDS and FDS is nMDS. Most actual MDS applications in the sciences use 1MDS, 2MDS or 3MDS, because configurations in one, two, or three dimensions can easily be plotted with standard graphics tools. Thus MDS is not primarily a tool to tests hypotheses about dimensionality and the find meaningful dimensions. It is a mostly a mapping tool for data reduction, to graphically find interesting aspects of dissimilarity matrices. The projections on the dimensions are very much ignored, it is the configuration of points that is the interesting outcome. This distinguishes MDS from, for example, factor analysis. Exceptions are applications of MDS in the conformation of molecules, in genetic mapping along the chromosome, in archeological seriation, and in geographic applications. There the dimensionality and general structure of the configuration are given by prior knowledge, we just do not the precise location and distances of the points. For more discussion of the different uses of MDS we refer to @deleeuw_heiser_C_82.
+
+### Kruskal's stress
+
+Definition \@ref(eq:stressall) differs from Kruskal's original stress in at least three ways: in Kruskal's use of the square root, in our use of weights, and in our different approach to normalization.
+
+Remember that Kruskal's definition was intended for ordinal multidimensional scaling only. He first defined *raw stress* as
+\begin{equation}
+\sigma^\star(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
+(\#eq:rawstress1)
+\end{equation}
+where the $\hat d_{ij}$ is a set of numbers monotone with the dissimilarities. 
+
+> To simplify the discussion, we delay the precise definition of 
+> $\hat d$, for a little while. (@kruskal_64a, p. 8)
+
+Kruskal then mentions that raw stress satisfies $\sigma^\star(\alpha X)=\alpha^2\sigma^\star(X)$, which is clearly undesirable because 
+the size of the configuration should not influence the quality of 
+the fit. 
+
+> An obvious way to cure this defect in the raw stress is to divide it by a > scaling factor, that is, a quantity which has the same quadratic
+> dependence on the scale of the configuration that raw stress does.
+> (@kruskal_64a, p. 8).
+
+By the way, although the precise definition of $\hat D$
+has been delayed, the uniform stretching result already assumes that
+if we multiply $D$ by $\alpha$ then $\hat D$ also gets multiplied
+by $\alpha$. Thus it sort of gives away that $\hat D$ is also a
+function of $X$, at least of the scale of $X$. 
+
+$$
+\sigma^\star(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
+$$
+
+For the normalization of raw stress Kruskal chooses
+
+\begin{equation}
+\tau^\star(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X),
+(\#eq:rawtau)
+\end{equation}
+
+> Finally, it is desirable to use the square root of this expression, which
+> is analogous to choosing the standard deviation in place of the variance. 
+> (@kruskal_64a, p. 9)
+
+Thus Kruskal's normalized loss function for ordinal MDS becomes
+
+\begin{equation}
+\sigma(X):=\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstress)
+\end{equation}
+
+At this point in @kruskal_64a the definition of $\hat D$ still hangs in the
+air, although we know that the $\hat D$ are monotone with $\Delta$, and that multiplying $X$ by a constant will multiply
+both $D(X)$ and $\hat D$ by the same constant. Matters are clarified 
+right after the definition of stress.
+
+> Now it is easy to define the $\hat d_{ij}$. They are the numbers which 
+> minimize $\sigma$ (or equivalently, $\sigma^\star$ subject to the 
+> monotonicity constraints. (@kruskal_64a, p. 9)
+
+Thus, actually, raw stress is the minimum over the pseudo-distance matrices
+$\Omega$ in $\mathfrak{D}$, the set of all monotone transformations of the dissimilarities. 
+
+\begin{equation}
+\sigma^\star(X):=\min_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2,
+(\#eq:rawstressfinal)
+\end{equation}
+
+and $\hat D$ is the minimizer, which is now clearly a function of $X$,
+
+\begin{equation}
+\hat D(X):=\mathop{\text{argmin}}_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2.
+(\#eq:dhatdef)
+\end{equation}
+
+So, finally,
+
+\begin{equation}
+\sigma(X):=\min_{\Omega\in\mathfrak{D}}\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstressfinal)
+\end{equation}
+
+We have paid so much attention to Kruskal's original definition, because 
+the choices made there will play a role in the normalization discussion
+in the ordinal scaling chapter (section \@ref(nmdsnorm)), in the 
+comparison of Kruskal's and Guttman's approach to OMDS (sections \@ref(nmdskruskal) and \@ref(nmdsguttman)), and in our discussions about the
+differences between Kruskal's stress \@ref(eq:kruskalstressfinal) and
+smacof's stress \@ref(eq:stressall) in the next three sections of this chapter.
+
+#### Square root
+
+Let's discuss the square root first. Using it or not using it
+does not make a difference for the minimization. Using the square root  does give a more sensible root-mean-square scale, in which stress is homogeneous of degree one, insteda of two. But I do not want to compute
+all those unnecessary square roots in my algorithms, and I do not want to drag them along through my derivations. Moreover it potentially causes problems with differentiability at those $X$ where $\sigma(X)$ is zero. Thus, througout the book, we do not use the square root in our formulas and derivations. In fact, we do not even use it in our computer programs, except at the very last moment when we return the final stress after the algorithm has completed.
+
+
+#### Weights {#bweights}
+
+There were no weights $W=\{w_{ij}\}$ in the original definition of stress by @kruskal_64a, and neither are they there in most of the basic later contributions to MDS by Guttman, Lingoes, Roskam, Ramsay, or Young. We will use weights throughout the book, because they have various interesting applications within basic MDS, without unduly complicating the derivations and computations. In @groenen_vandevelden_16, section 6, the various uses of weights in the stress loss function are enumerated. They generously, but correctly, attribute the consistent use of weights in MDS to me. My turn. I quote from their paper:
+
+> 1. Handling missing data is done by specifying $w_{ij} = 0$ for missings and 1  otherwise thereby ignoring the error corresponding to the missing dissimilarities.
+> 2. Correcting for nonuniform distributions of the dissimilarities to avoid dominance of the most frequently occurring dissimilarities.
+> 3. Mimicking alternative fit functions for MDS by minimizing Stress with $w_{ij}$ being a function of the dissimilarities.
+> 4. Using a power of the dissimilarities to emphasize the ﬁtting of either large or small dissimilarities.
+> 5. Special patterns of weights for speciﬁc models.
+> 6. Using a speciﬁc choice of weights to avoid nonuniqueness.
+
+In some situations, for example for huge data sets, it is computationally convenient, or even necessary, to minimize the influence of the weights on the computations. We can use *majorization* to turn the problem from a weighted least squares problem to an iterative unweighted least squares problem. The technique is discussed in detail in chapter \@ref(mathadd), section \@ref(minunweight).
+
+#### Normalization {#intronorm}
+
+This section deals with a rather trivial problem, which has however caused problems in various stages of smacof's 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.
+
+Multiplying all weights by a constant does not change the value of stress, and consequently the minimization problem remains exactly the same. No matter how we scale $W$ the numerator of stress is the weighted mean square of the *residuals* $\delta_{ij}-d_{ij}(X)$ and the denominator is the weighted mean square of the dissimilarities.  So there is no need to normalize the weights, and we leave them just as the user inputs them (or as they are chosen by default). 
+
+We do scale the dissimilarities, however. It is clear that if we multiply the dissimilarities by a constant, then the optimal approximating distances $D(X)$ and the optimal configuration $X$ will be multiplied by the same constant. Consequently we always scale dissimilarities by $\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=1$. This simplifies our formulas and makes them look better. It presupposes, of course, that $w_{ij}\delta_{ij}\not=0$ for at least one $i\not= j$, which we will happily assume in the sequel. Using normalized dissimilarities amounts to the same as minimizing stress defined as
+
+\begin{equation}
+\sigma(X)=\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}^2}.
+(\#eq:stressrat)
+\end{equation} 
+
+This is useful to remember when we discuss the various normalizatons of non-metric MDS in chapter \@ref(nonmtrmds), section \@ref(nmdsnorm).
+
+In *output* using the scaling $\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=1$ has some disadvantages. There are $\binom{n}{2}$ weights, and, say, $M$ non-zero weights. The summation in the numerator and denominator of \#ref(eq:stressall) is really over $M$ terms only. If $n$ is at all large the scaled dissimilarities, and consequently the distances and configuration, will become very small. Thus, in actual computation, we scale our dissimilarties as $\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=\binom{n}{2}$. So, we scale our dissimilarities to one in formulas and to $\binom{n}{2}$ in computations. Thus the computed stress will be
+
+\begin{align}
+\begin{split}
+\sigma(X)&=\frac{1}{\binom{n}{2}}\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2=\\
+&=1-2\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}d_{ij}(X)+\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}d_{ij}^2(X).
+\end{split}
+(\#eq:stressnrm)
+\end{align} 
+
+
+
+... we shall find ourselves doing arithmetic with dissimilarities. This we must not do, because we are committed to using only the rank ordering of the dissimilarities. (a, p 6-7)
+
+
+### Data Asymmetry {#datasym}
+
+The non-basic situation in which there are asymmetric weights and/or
+dissimilarities in basic MDS is analyzed in @deleeuw_C_77,
+although it is just standard linear least squares projection theory.
+
+For all $i\not= j$ let $\underline{w}_{ij}=\frac12(w_{ij}+w_{ji})$ and
+$\underline{\delta}_{ij}=(w_{ij}\delta_{ij}+w_{ji}\delta_{ji})/(w_{ij}+w_{ji}).$
+Then
+
+\begin{equation}
+\frac12\sum_{i=1}^n\sum_{j=1}^nw_{ij}d_{ij}^2(X)=\mathop{\sum\sum}_{1\leq i<j\leq n}\underline{w}_{ij}d_{ij}^2(X),
+(\#eq:emadsym)
+\end{equation}
+
+and
+
+\begin{equation}
+\sum_{i=1}^n\sum_{j=1}^nw_{ij}\delta_{ij}d_{ij}(X)=2\mathop{\sum\sum}_{1\leq i<j\leq n}\underline{w}_{ij}\underline{\delta}_{ij}d_{ij}(X).
+(\#eq:rmadsym)
+\end{equation}
+
+Thus
+
+\begin{align}
+\begin{split}
+\sigma(X)&=1-2\mathop{\sum\sum}_{1\leq j<i\leq n}\underline{w}_{ij}\underline{\delta}_{ij}d_{ij}(X)+\mathop{\sum\sum}_{1\leq j<i\leq n}\underline{w}_{ij}d_{ij}^2(X)\\&=(1-\mathop{\sum\sum}_{1\leq j<i\leq n}\underline{w}_{ij}\underline{\delta}_{ij}^2)+
+\mathop{\sum\sum}_{1\leq j<i\leq n}\underline{w}_{ij}(\underline{\delta}_{ij}-d_{ij}(X))^2
+\end{split}
+(\#eq:smadsym)
+\end{align}
+
+### Local and Global 
+
+In this book will study both the properties of the stress loss function
+and a some of its generalizations, and the various ways to minimize these 
+loss functions over configurations (and sometimes over transformations of the
+dissimilarities as well).
+
+Emphasis local minima
+
+
+## Generalizations {#introgeneralize}
+
+In basic MDS our goal is to compute both $\min_X\sigma(X)$ and $\mathop{\text{Argmin}}_X\sigma(X)$, where $\sigma(X)$ is defined as 
+\@ref(eq:stressall), and where we minimize over all configurations in
+$\mathbb{R}^{n\times p}$. Note we use the notation $\mathop{\text{Argmin}}_{x\in X}f(x)$ for the set of minimizers of $f$ over $X$. Thus $z\in\mathop{\text{Argmin}}_{x\in X}f(x)$ means $z$ minimizes $f$ over $X$. If it is clear from theory that the minimimum is necessarily unique, we use $\text{argmin}$ instead of $\text{Argmin}$.
+
+The most important generalizations of basic MDS 
+we will study in later chapters of this book are discussed briefly in the following sections.
+
+### Non-metric {#gennonmetric}
+
+Basic MDS studies *Metric Multidimensional Scaling* or
+*MMDS*, in which dissimilarities are either known or missing. In chapter \@ref(nonmtrmds) we relax this assumption. Dissimilarities may be partly known, for example we may know they are in some interval, we may only know their order, or we may know them up to some smooth transformation. MDS with partly known dissimilarities is *Non-metric Multidimensional Scaling* or *NMDS*. Completely unknown (missing) is an exception, because we can just handle this in basic MDS by setting the corresponding weights equal to zero.
+
+In NMDS we minimize stress over all configurations, but also over the unknown dissimilarities. What we know about them (the interval they are in, the transformations that are allowed, the order they are in) defines a subset of the space of non-negative, hollow, and symmetric matrices. Any matrix in that subset is a matrix of what @takane_young_deleeuw_A_77 call *disparities*, i.e. imputed dissimilarities. The imputation provides the missing information and transforms the non-numerical information we have about the dissimilarities into a numerical matrix of disparities. Clearly this is an *optimistic imputation*, in the sense that it chooses from the set of admissible disparities to minimize stress (for a given configuration). 
+
+One more terminological point. Often *non-metric* is reserved for ordinal MDS, in which only know the (partial or complete) order of the dissimilarities. Allowing linear or polynomial transformations of the dissimilarities, or estimating an additive constant, is not supposed to be non-metric. There is something to be said for that. Maybe it makes sense to distinguish non-metric *in the wide sense* (in which stress must be minimized over both $X$ and $\Delta$) and *non-metric in the narrow sense* in which the set of admissible disparities is defined by linear inequalities. Nonmetric in the narrow sense will also be called *ordinal MDS* or
+*OMDS*.
+
+It is perhaps useful to remember that @kruskal_64a introduced explicit loss functions in MDS to put the somewhat heuristic NMDS techniques of @shepard_62a onto a firm mathematical and computational foundation. Thus, more or less from the beginning of iterative least squares MDS, there was a focus on non-metric rather than metric MDS, and this actually contributed a great deal to the magic and success of the technique. In this book most of the results are derived for basic MDS, which is metric MDS, with non-metric MDS a relatively straightforward extension not discussed until chapter \@ref(nonmtrmds). So, at least
+initially, we take the numerical values of the dissimilarities seriously, as do @torgerson_58 and @shepard_62a, @shepard_62b.
+It may be the case that in the social and behavioural sciences 
+only the ordinal information in the dissimilarities is reliable and
+useful. But, since 1964, MDS has also been applied in moleculkar conformation, chemometrics, genetic sequencing, archelogical seriation, and in network design and location analysis. In these areas the numerical information in the dissimilarities is usually meaningful and should not be thrown out right away. Also, the use of the Shepard plot,
+with dissimilarities on the horizontal axis and fitted distances on the
+vertical axis, suggests there is more to dissimilarities than just their
+rank order.
+
+### fstress {#genfstress}
+
+Instead of defining the residuals in the least squares loss function as $\delta_{ij}-d_{ij}(X)$ chapter \@ref(chrstress) discusses the more general cases where the residuals are $f(\delta_{ij})-f(d_{ij}(X))$ for some known non-negative increasing function $f$. This defines the *fstress* loss function.
+
+If $f(x)=x^r$ with $r>0$ then fstress is called *rstress*. Thus stress is rstress with $r=1$, also written as *1stress* or $\sigma_1$. In more detail we
+    
+### Constraints {#gencons}
+
+Instead of minimizing stress over all $X$ in
+$\mathbb{R}^{n\times p}$ we will look in chapter \@ref(cmds) at various generalizations where minimization is over a subset $\mathcal{\Omega}$ of
+$\mathbb{R}^{n\times p}$. This is often called *Constrained Multidimensional Scaling* or *CMDS*.
+
+exp vs conf FA
+
+### Replications {#inreplic}
+
+ind diff {#chindif}
+
+### Distance Asymmetry {#genasym}
+
+We have seen in section \@ref(datasym) of this chapter that in basic MDS the assumption that $W$ and $\Delta$ are symmetric and hollow can be made without loss of generality. The simple partitioning which proved this was based on the fact that $D(X)$ is symmetric and hollow. By the way, the assumption that $W$ and $D$ are non-negative cannot be made without loss of generality, as we will see below.
+
+In \@ref(asymmds) we relax the assumption that $D(X)$ is symmetric (still requiring it to be non-negative and hollow). This could be called *Asymmetric MDS*, or *AMDS*. I was reluctant at first to include this chapter, because asymmetric distances do not exist. And certainly are not Euclidean distances, so they are not covered by the title of this book. But as long as we stay close to Euclidean distances, least squares, and the smacof approach, I now feel reasonably confident the chapter is not too much of a foreign body.
+
+When Kruskal introduced gradient based methods to minimize stress he also discussed the possibility to use Minkovski metrics other than the Euclidean metric. This certainly was part of the appeal of the new methods, in fact it seemed as if the gradient methods made it possible to use any distance function at all. This initial feeling of empowerment was somewhat naive, because it ignored the seriousness of the local minimum problem, the combinatorial nature of one-dimensional scaling, the problems with nonmetric unfolding, and the problematic nature of gradient methods if the distances are not everywhere differentiable. All these complications will be discussed later in this book. But it made me decide to ignore Minkovski distances (and hyperbolic and elliptic non-Euclidean distances), because life with stress is complicated and challenging enough as it is.
+
