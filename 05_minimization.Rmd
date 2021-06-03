@@ -3,7 +3,7 @@
 
 ## Gradient Methods
 
-The initial algorithms for MDS, specifically for non-metric MDS, by
+The initial algorithms for nonmetric MDS
 @kruskal_64b and @guttman_68 were gradient methods. Thus the gradient,
 or vector of partial derivatives, was computed in each iteration step,
 and a step was taken in the direction of the negative gradient (which is
