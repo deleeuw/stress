@@ -679,7 +679,7 @@ ozo
 ```
 If $X$ is stationary we have $VX=B(X)X$ and thus $\rho(X)=\eta^2(X)$. Consequently $\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)$ and because $\sigma(X)\geq 0$ we see that $X$ must be in the ellipse $\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}$.
 
-Theorem \@ref(thm:statpoints) is important, because it means that we can require without loss of generality that $X$ is in the ellipsoidal disk $\eta(X)\leq 1$, which is a compact convex set.
+Theorem \@ref(thm:statpointsbound) is important, because it means that we can require without loss of generality that $X$ is in the ellipsoidal disk $\eta(X)\leq 1$, which is a compact convex set.
 
 ### Local Maxima
 
