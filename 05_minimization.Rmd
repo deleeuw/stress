@@ -10,14 +10,14 @@ and a step was taken in the direction of the negative gradient (which is
 also known as the direction of steepest descent).
 
 Informally, if $f$ is differentiable at $x$ then
-$f(x+\epsilon h)\approx f(x)+\epsilon h'\mathcal{D}f(x)$ and the
-direction $h$ that minimizes the second term is
+$f(x+h)\approx f(x)+h'\mathcal{D}f(x)$ and the
+direction $h$ that minimizes the diferential (the second term) is
 $-\mathcal{D}f(x)/\|\mathcal{D}f(x)\|$, the normalized negative
 gradient. Although psychometricians had been in the business of
 minimizing least squares loss functions in the linear and bilinear case,
 this result for general nonlinear functions was new to them. And I, and
 probably many others, hungrily devoured the main optimization reference
-in @kruskal_64b, which was the excellent review by @spang_62.
+in @kruskal_64b, which was the excellent early review by @spang_62.
 
 Kruskal's paper also presents an elaborate step-size procedure, to
 determine how far we go in the negative gradient direction. In the

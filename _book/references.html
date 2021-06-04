@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Least Squares Euclidean Multidimensional Scaling</title>
+  <meta name="description" content="null" />
+  <meta name="generator" content="bookdown 0.22.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Least Squares Euclidean Multidimensional Scaling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="null" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Least Squares Euclidean Multidimensional Scaling" />
+  
+  <meta name="twitter:description" content="null" />
+  
+
+<meta name="author" content="Jan de Leeuw" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="apunlicense.html"/>
+
+<script src="libs/header-attrs-2.8.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introhist"><i class="fa fa-check"></i><b>1.1</b> Brief History</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#milestones"><i class="fa fa-check"></i><b>1.1.1</b> Milestones</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#introbasic"><i class="fa fa-check"></i><b>1.2</b> Basic MDS</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#kruskals-stress"><i class="fa fa-check"></i><b>1.2.1</b> Kruskal’s stress</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#datasym"><i class="fa fa-check"></i><b>1.2.2</b> Data Asymmetry</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#local-and-global"><i class="fa fa-check"></i><b>1.2.3</b> Local and Global</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#introgeneralize"><i class="fa fa-check"></i><b>1.3</b> Generalizations</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#gennonmetric"><i class="fa fa-check"></i><b>1.3.1</b> Non-metric</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#genfstress"><i class="fa fa-check"></i><b>1.3.2</b> fstress</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#gencons"><i class="fa fa-check"></i><b>1.3.3</b> Constraints</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#inreplic"><i class="fa fa-check"></i><b>1.3.4</b> Replications</a></li>
+<li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#genasym"><i class="fa fa-check"></i><b>1.3.5</b> Distance Asymmetry</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="propchapter.html"><a href="propchapter.html"><i class="fa fa-check"></i><b>2</b> Properties of Stress</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propchapter.html"><a href="propchapter.html#propnotation"><i class="fa fa-check"></i><b>2.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="propchapter.html"><a href="propchapter.html#propexpand"><i class="fa fa-check"></i><b>2.1.1</b> Expanding</a></li>
+<li class="chapter" data-level="2.1.2" data-path="propchapter.html"><a href="propchapter.html#propmatrix"><i class="fa fa-check"></i><b>2.1.2</b> Matrix Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="propchapter.html"><a href="propchapter.html#propglobal"><i class="fa fa-check"></i><b>2.2</b> Global Properties</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="propchapter.html"><a href="propchapter.html#propbounded"><i class="fa fa-check"></i><b>2.2.1</b> Boundedness</a></li>
+<li class="chapter" data-level="2.2.2" data-path="propchapter.html"><a href="propchapter.html#propinvariance"><i class="fa fa-check"></i><b>2.2.2</b> Invariance</a></li>
+<li class="chapter" data-level="2.2.3" data-path="propchapter.html"><a href="propchapter.html#propcontinuity"><i class="fa fa-check"></i><b>2.2.3</b> Continuity</a></li>
+<li class="chapter" data-level="2.2.4" data-path="propchapter.html"><a href="propchapter.html#propcoercive"><i class="fa fa-check"></i><b>2.2.4</b> Coercivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="propchapter.html"><a href="propchapter.html#propconvex"><i class="fa fa-check"></i><b>2.3</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="propchapter.html"><a href="propchapter.html#distances"><i class="fa fa-check"></i><b>2.3.1</b> Distances</a></li>
+<li class="chapter" data-level="2.3.2" data-path="propchapter.html"><a href="propchapter.html#propdc"><i class="fa fa-check"></i><b>2.3.2</b> DC Functions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="propchapter.html"><a href="propchapter.html#subdifferentials"><i class="fa fa-check"></i><b>2.3.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="2.3.4" data-path="propchapter.html"><a href="propchapter.html#propnegdis"><i class="fa fa-check"></i><b>2.3.4</b> Negative Dissimilarities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="propchapter.html"><a href="propchapter.html#propguttman"><i class="fa fa-check"></i><b>2.4</b> Guttman Transform</a></li>
+<li class="chapter" data-level="2.5" data-path="propchapter.html"><a href="propchapter.html#propdiff"><i class="fa fa-check"></i><b>2.5</b> Differentiability</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="propchapter.html"><a href="propchapter.html#regularity"><i class="fa fa-check"></i><b>2.5.1</b> Regularity</a></li>
+<li class="chapter" data-level="2.5.2" data-path="propchapter.html"><a href="propchapter.html#expansions"><i class="fa fa-check"></i><b>2.5.2</b> Expansions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="propchapter.html"><a href="propchapter.html#propdirderivs"><i class="fa fa-check"></i><b>2.5.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="2.5.4" data-path="propchapter.html"><a href="propchapter.html#propspecexp"><i class="fa fa-check"></i><b>2.5.4</b> Special Expansions</a></li>
+<li class="chapter" data-level="2.5.5" data-path="propchapter.html"><a href="propchapter.html#propzerodist"><i class="fa fa-check"></i><b>2.5.5</b> Zero Distance Subspaces</a></li>
+<li class="chapter" data-level="2.5.6" data-path="propchapter.html"><a href="propchapter.html#propdistsmo"><i class="fa fa-check"></i><b>2.5.6</b> Distance Smoothing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="propchapter.html"><a href="propchapter.html#propstationary"><i class="fa fa-check"></i><b>2.6</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="propchapter.html"><a href="propchapter.html#local-maxima"><i class="fa fa-check"></i><b>2.6.1</b> Local Maxima</a></li>
+<li class="chapter" data-level="2.6.2" data-path="propchapter.html"><a href="propchapter.html#proplocmin"><i class="fa fa-check"></i><b>2.6.2</b> Local Minima</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="propchapter.html"><a href="propchapter.html#propenvelopes"><i class="fa fa-check"></i><b>2.7</b> Stress Envelopes</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="propchapter.html"><a href="propchapter.html#propcsmaj"><i class="fa fa-check"></i><b>2.7.1</b> CS Majorization</a></li>
+<li class="chapter" data-level="2.7.2" data-path="propchapter.html"><a href="propchapter.html#propamgmmin"><i class="fa fa-check"></i><b>2.7.2</b> AM/GM Minorization</a></li>
+<li class="chapter" data-level="2.7.3" data-path="propchapter.html"><a href="propchapter.html#dualities"><i class="fa fa-check"></i><b>2.7.3</b> Dualities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="propchapter.html"><a href="propchapter.html#how-large-is-my-stress"><i class="fa fa-check"></i><b>2.8</b> How Large is My Stress ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="propspaces.html"><a href="propspaces.html"><i class="fa fa-check"></i><b>3</b> Stress Spaces</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="propspaces.html"><a href="propspaces.html#propconfspace"><i class="fa fa-check"></i><b>3.1</b> Configuration Space</a></li>
+<li class="chapter" data-level="3.2" data-path="propspaces.html"><a href="propspaces.html#propcoefspace"><i class="fa fa-check"></i><b>3.2</b> Coefficient Space</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="propspaces.html"><a href="propspaces.html#on-the-planes"><i class="fa fa-check"></i><b>3.2.1</b> On the Planes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="propspaces.html"><a href="propspaces.html#general"><i class="fa fa-check"></i><b>3.2.2</b> General</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="propspaces.html"><a href="propspaces.html#propspherespace"><i class="fa fa-check"></i><b>3.3</b> Sphere Space</a></li>
+<li class="chapter" data-level="3.4" data-path="propspaces.html"><a href="propspaces.html#cross-product-space"><i class="fa fa-check"></i><b>3.4</b> Cross-Product Space</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="picsstress.html"><a href="picsstress.html"><i class="fa fa-check"></i><b>4</b> Pictures of Stress</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="picsstress.html"><a href="picsstress.html#coefficient-space"><i class="fa fa-check"></i><b>4.1</b> Coefficient Space</a></li>
+<li class="chapter" data-level="4.2" data-path="picsstress.html"><a href="picsstress.html#global-perspective"><i class="fa fa-check"></i><b>4.2</b> Global Perspective</a></li>
+<li class="chapter" data-level="4.3" data-path="picsstress.html"><a href="picsstress.html#global-contour"><i class="fa fa-check"></i><b>4.3</b> Global Contour</a></li>
+<li class="chapter" data-level="4.4" data-path="picsstress.html"><a href="picsstress.html#stationary-points"><i class="fa fa-check"></i><b>4.4</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="picsstress.html"><a href="picsstress.html#first-minimum"><i class="fa fa-check"></i><b>4.4.1</b> First Minimum</a></li>
+<li class="chapter" data-level="4.4.2" data-path="picsstress.html"><a href="picsstress.html#second-minimum"><i class="fa fa-check"></i><b>4.4.2</b> Second Minimum</a></li>
+<li class="chapter" data-level="4.4.3" data-path="picsstress.html"><a href="picsstress.html#third-minimum"><i class="fa fa-check"></i><b>4.4.3</b> Third Minimum</a></li>
+<li class="chapter" data-level="4.4.4" data-path="picsstress.html"><a href="picsstress.html#first-saddle-point"><i class="fa fa-check"></i><b>4.4.4</b> First Saddle Point</a></li>
+<li class="chapter" data-level="4.4.5" data-path="picsstress.html"><a href="picsstress.html#second-saddle-point"><i class="fa fa-check"></i><b>4.4.5</b> Second Saddle Point</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="picsstress.html"><a href="picsstress.html#picsphere"><i class="fa fa-check"></i><b>4.5</b> Another Look</a></li>
+<li class="chapter" data-level="4.6" data-path="picsstress.html"><a href="picsstress.html#picline"><i class="fa fa-check"></i><b>4.6</b> A Final Look</a></li>
+<li class="chapter" data-level="4.7" data-path="picsstress.html"><a href="picsstress.html#discuss"><i class="fa fa-check"></i><b>4.7</b> Discuss</a></li>
+<li class="chapter" data-level="4.8" data-path="picsstress.html"><a href="picsstress.html#coordinates"><i class="fa fa-check"></i><b>4.8</b> Coordinates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html"><i class="fa fa-check"></i><b>5</b> Classical Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#algebra"><i class="fa fa-check"></i><b>5.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#torgerson-transform"><i class="fa fa-check"></i><b>5.1.1</b> Torgerson Transform</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#schoenbergs-theorem"><i class="fa fa-check"></i><b>5.1.2</b> Schoenberg’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation"><i class="fa fa-check"></i><b>5.2</b> Approximation</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#low-rank-approximation-of-the-torgersen-transform"><i class="fa fa-check"></i><b>5.2.1</b> Low Rank Approximation of the Torgersen Transform</a></li>
+<li class="chapter" data-level="5.2.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#minimization-of-strain"><i class="fa fa-check"></i><b>5.2.2</b> Minimization of Strain</a></li>
+<li class="chapter" data-level="5.2.3" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation-from-below"><i class="fa fa-check"></i><b>5.2.3</b> Approximation from Below</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="minstr.html"><a href="minstr.html"><i class="fa fa-check"></i><b>6</b> Minimization of Stress</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="minstr.html"><a href="minstr.html#gradient-methods"><i class="fa fa-check"></i><b>6.1</b> Gradient Methods</a></li>
+<li class="chapter" data-level="6.2" data-path="minstr.html"><a href="minstr.html#initial-configurations"><i class="fa fa-check"></i><b>6.2</b> Initial Configurations</a></li>
+<li class="chapter" data-level="6.3" data-path="minstr.html"><a href="minstr.html#apmajmin"><i class="fa fa-check"></i><b>6.3</b> On MM Algorithms</a></li>
+<li class="chapter" data-level="6.4" data-path="minstr.html"><a href="minstr.html#smacof-algorithm"><i class="fa fa-check"></i><b>6.4</b> Smacof Algorithm</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="minstr.html"><a href="minstr.html#global-convergence"><i class="fa fa-check"></i><b>6.4.1</b> Global Convergence</a></li>
+<li class="chapter" data-level="6.4.2" data-path="minstr.html"><a href="minstr.html#from-the-cs-inequality"><i class="fa fa-check"></i><b>6.4.2</b> From the CS Inequality</a></li>
+<li class="chapter" data-level="6.4.3" data-path="minstr.html"><a href="minstr.html#from-majorization"><i class="fa fa-check"></i><b>6.4.3</b> From Majorization</a></li>
+<li class="chapter" data-level="6.4.4" data-path="minstr.html"><a href="minstr.html#mincomprot"><i class="fa fa-check"></i><b>6.4.4</b> Component Rotated Smacof</a></li>
+<li class="chapter" data-level="6.4.5" data-path="minstr.html"><a href="minstr.html#minlocconv"><i class="fa fa-check"></i><b>6.4.5</b> Local Convergence</a></li>
+<li class="chapter" data-level="6.4.6" data-path="minstr.html"><a href="minstr.html#negative-dissimilarities"><i class="fa fa-check"></i><b>6.4.6</b> Negative Dissimilarities</a></li>
+<li class="chapter" data-level="6.4.7" data-path="minstr.html"><a href="minstr.html#minunweight"><i class="fa fa-check"></i><b>6.4.7</b> Unweighting</a></li>
+<li class="chapter" data-level="6.4.8" data-path="minstr.html"><a href="minstr.html#smacof-in-coefficient-space"><i class="fa fa-check"></i><b>6.4.8</b> Smacof in Coefficient Space</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="minstr.html"><a href="minstr.html#regions-of-attraction"><i class="fa fa-check"></i><b>6.5</b> Regions of Attraction</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="minstr.html"><a href="minstr.html#smacof"><i class="fa fa-check"></i><b>6.5.1</b> Smacof</a></li>
+<li class="chapter" data-level="6.5.2" data-path="minstr.html"><a href="minstr.html#newton"><i class="fa fa-check"></i><b>6.5.2</b> Newton</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chacceleration.html"><a href="chacceleration.html"><i class="fa fa-check"></i><b>7</b> Acceleration of Convergence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chacceleration.html"><a href="chacceleration.html#accelsimple"><i class="fa fa-check"></i><b>7.1</b> Simple Acceleration</a></li>
+<li class="chapter" data-level="7.2" data-path="chacceleration.html"><a href="chacceleration.html#one-parameter-methods"><i class="fa fa-check"></i><b>7.2</b> One-Parameter Methods</a></li>
+<li class="chapter" data-level="7.3" data-path="chacceleration.html"><a href="chacceleration.html#squarem"><i class="fa fa-check"></i><b>7.3</b> SQUAREM</a></li>
+<li class="chapter" data-level="7.4" data-path="chacceleration.html"><a href="chacceleration.html#vector-extrapolation-methods"><i class="fa fa-check"></i><b>7.4</b> Vector extrapolation methods</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonmtrmds.html"><a href="nonmtrmds.html"><i class="fa fa-check"></i><b>8</b> Nonmetric MDS</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#generalities"><i class="fa fa-check"></i><b>8.1</b> Generalities</a></li>
+<li class="chapter" data-level="8.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssingledouble"><i class="fa fa-check"></i><b>8.2</b> Single and Double Phase</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#double-phase"><i class="fa fa-check"></i><b>8.2.1</b> Double Phase</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssinglephase"><i class="fa fa-check"></i><b>8.2.2</b> Single Phase</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#affine-nmds"><i class="fa fa-check"></i><b>8.3</b> Affine NMDS</a></li>
+<li class="chapter" data-level="8.4" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsconic"><i class="fa fa-check"></i><b>8.4</b> Conic MDS</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsnorm"><i class="fa fa-check"></i><b>8.4.1</b> Normalization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#inner-iterations"><i class="fa fa-check"></i><b>8.4.2</b> Inner Iterations</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#stress-1-and-stress-2"><i class="fa fa-check"></i><b>8.4.3</b> Stress-1 and Stress-2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="intinterval.html"><a href="intinterval.html"><i class="fa fa-check"></i><b>9</b> Interval MDS</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="intinterval.html"><a href="intinterval.html#intadditive"><i class="fa fa-check"></i><b>9.1</b> The Additive Constant</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="intinterval.html"><a href="intinterval.html#exactad"><i class="fa fa-check"></i><b>9.1.1</b> Algebra</a></li>
+<li class="chapter" data-level="9.1.2" data-path="intinterval.html"><a href="intinterval.html#examples"><i class="fa fa-check"></i><b>9.1.2</b> Examples</a></li>
+<li class="chapter" data-level="9.1.3" data-path="intinterval.html"><a href="intinterval.html#variation"><i class="fa fa-check"></i><b>9.1.3</b> A Variation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html"><i class="fa fa-check"></i><b>10</b> Polynomial and Splinical MDS</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#polynomial-mds"><i class="fa fa-check"></i><b>10.1</b> Polynomial MDS</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Monotone Polynomials</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#splinical-mds"><i class="fa fa-check"></i><b>10.2</b> Splinical MDS</a></li>
+<li class="chapter" data-level="10.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathsplines"><i class="fa fa-check"></i><b>10.3</b> Splines</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathbsplines"><i class="fa fa-check"></i><b>10.3.1</b> B-splines</a></li>
+<li class="chapter" data-level="10.3.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathisplines"><i class="fa fa-check"></i><b>10.3.2</b> I-splines</a></li>
+<li class="chapter" data-level="10.3.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#time-series-example"><i class="fa fa-check"></i><b>10.3.3</b> Time Series Example</a></li>
+<li class="chapter" data-level="10.3.4" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-splines"><i class="fa fa-check"></i><b>10.3.4</b> Monotone Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chapordinal.html"><a href="chapordinal.html"><i class="fa fa-check"></i><b>11</b> Ordinal MDS</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chapordinal.html"><a href="chapordinal.html#mathmonreg"><i class="fa fa-check"></i><b>11.1</b> Monotone Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="chapordinal.html"><a href="chapordinal.html#mathsimpiso"><i class="fa fa-check"></i><b>11.1.1</b> Simple Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chapordinal.html"><a href="chapordinal.html#mathweigmr"><i class="fa fa-check"></i><b>11.1.2</b> Weighted Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.3" data-path="chapordinal.html"><a href="chapordinal.html#mathnorcone"><i class="fa fa-check"></i><b>11.1.3</b> Normalized Cone Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chapordinal.html"><a href="chapordinal.html#nmdsals"><i class="fa fa-check"></i><b>11.2</b> Alternating Least Squares</a></li>
+<li class="chapter" data-level="11.3" data-path="chapordinal.html"><a href="chapordinal.html#nmdskruskal"><i class="fa fa-check"></i><b>11.3</b> Kruskal’s Approach</a></li>
+<li class="chapter" data-level="11.4" data-path="chapordinal.html"><a href="chapordinal.html#nmdsguttman"><i class="fa fa-check"></i><b>11.4</b> Guttman’s Approach</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="chapordinal.html"><a href="chapordinal.html#smoothness-of-ordinal-loss-functions"><i class="fa fa-check"></i><b>11.4.1</b> Smoothness of Ordinal Loss Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chapordinal.html"><a href="chapordinal.html#scaling-with-distance-bounds"><i class="fa fa-check"></i><b>11.5</b> Scaling with Distance Bounds</a></li>
+<li class="chapter" data-level="11.6" data-path="chapordinal.html"><a href="chapordinal.html#bounds-on-stress"><i class="fa fa-check"></i><b>11.6</b> Bounds on Stress</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="unidimensional.html"><a href="unidimensional.html"><i class="fa fa-check"></i><b>12</b> Unidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unidimensional.html"><a href="unidimensional.html#an-example"><i class="fa fa-check"></i><b>12.1</b> An example</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="unidimensional.html"><a href="unidimensional.html#perspective"><i class="fa fa-check"></i><b>12.1.1</b> Perspective</a></li>
+<li class="chapter" data-level="12.1.2" data-path="unidimensional.html"><a href="unidimensional.html#contour"><i class="fa fa-check"></i><b>12.1.2</b> Contour</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="unidimensional.html"><a href="unidimensional.html#order-formulation"><i class="fa fa-check"></i><b>12.2</b> Order Formulation</a></li>
+<li class="chapter" data-level="12.3" data-path="unidimensional.html"><a href="unidimensional.html#permutation-formulation"><i class="fa fa-check"></i><b>12.3</b> Permutation Formulation</a></li>
+<li class="chapter" data-level="12.4" data-path="unidimensional.html"><a href="unidimensional.html#sign-matrix-formulation"><i class="fa fa-check"></i><b>12.4</b> Sign Matrix Formulation</a></li>
+<li class="chapter" data-level="12.5" data-path="unidimensional.html"><a href="unidimensional.html#unialgorithms"><i class="fa fa-check"></i><b>12.5</b> Algorithms for UMDS</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="unidimensional.html"><a href="unidimensional.html#unismacof"><i class="fa fa-check"></i><b>12.5.1</b> SMACOF</a></li>
+<li class="chapter" data-level="12.5.2" data-path="unidimensional.html"><a href="unidimensional.html#unismoothed"><i class="fa fa-check"></i><b>12.5.2</b> SMACOF (smoothed)</a></li>
+<li class="chapter" data-level="12.5.3" data-path="unidimensional.html"><a href="unidimensional.html#unibranchbound"><i class="fa fa-check"></i><b>12.5.3</b> Branch-and-Bound</a></li>
+<li class="chapter" data-level="12.5.4" data-path="unidimensional.html"><a href="unidimensional.html#unidynamic"><i class="fa fa-check"></i><b>12.5.4</b> Dynamic Programming</a></li>
+<li class="chapter" data-level="12.5.5" data-path="unidimensional.html"><a href="unidimensional.html#uniannealing"><i class="fa fa-check"></i><b>12.5.5</b> Simulated Annealing</a></li>
+<li class="chapter" data-level="12.5.6" data-path="unidimensional.html"><a href="unidimensional.html#unipenalty"><i class="fa fa-check"></i><b>12.5.6</b> Penalty Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fullchapter.html"><a href="fullchapter.html"><i class="fa fa-check"></i><b>13</b> Full-dimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fullchapter.html"><a href="fullchapter.html#fullconvex"><i class="fa fa-check"></i><b>13.1</b> Convexity</a></li>
+<li class="chapter" data-level="13.2" data-path="fullchapter.html"><a href="fullchapter.html#fulloptimal"><i class="fa fa-check"></i><b>13.2</b> Optimality</a></li>
+<li class="chapter" data-level="13.3" data-path="fullchapter.html"><a href="fullchapter.html#fulliteration"><i class="fa fa-check"></i><b>13.3</b> Iteration</a></li>
+<li class="chapter" data-level="13.4" data-path="fullchapter.html"><a href="fullchapter.html#fullcpspace"><i class="fa fa-check"></i><b>13.4</b> Cross Product Space</a></li>
+<li class="chapter" data-level="13.5" data-path="fullchapter.html"><a href="fullchapter.html#full-dimensional-scaling"><i class="fa fa-check"></i><b>13.5</b> Full-dimensional Scaling</a></li>
+<li class="chapter" data-level="13.6" data-path="fullchapter.html"><a href="fullchapter.html#ekman-example-1"><i class="fa fa-check"></i><b>13.6</b> Ekman example</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="chunfolding.html"><a href="chunfolding.html"><i class="fa fa-check"></i><b>14</b> Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="chunfolding.html"><a href="chunfolding.html#algebra-1"><i class="fa fa-check"></i><b>14.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="chunfolding.html"><a href="chunfolding.html#one-dimensional"><i class="fa fa-check"></i><b>14.1.1</b> One-dimensional</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="chunfolding.html"><a href="chunfolding.html#classical-unfolding"><i class="fa fa-check"></i><b>14.2</b> Classical Unfolding</a></li>
+<li class="chapter" data-level="14.3" data-path="chunfolding.html"><a href="chunfolding.html#nonmetric-unfolding"><i class="fa fa-check"></i><b>14.3</b> Nonmetric Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="chunfolding.html"><a href="chunfolding.html#unfdegenerate"><i class="fa fa-check"></i><b>14.3.1</b> Degenerate Solutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cmds.html"><a href="cmds.html"><i class="fa fa-check"></i><b>15</b> Constrained Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="cmds.html"><a href="cmds.html#baspar"><i class="fa fa-check"></i><b>15.1</b> Basic Partitioning</a></li>
+<li class="chapter" data-level="15.2" data-path="cmds.html"><a href="cmds.html#majawa"><i class="fa fa-check"></i><b>15.2</b> Unweigthing</a></li>
+<li class="chapter" data-level="15.3" data-path="cmds.html"><a href="cmds.html#constraints-on-the-distances"><i class="fa fa-check"></i><b>15.3</b> Constraints on the Distances</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="cmds.html"><a href="cmds.html#rectangles"><i class="fa fa-check"></i><b>15.3.1</b> Rectangles</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="cmds.html"><a href="cmds.html#lincons"><i class="fa fa-check"></i><b>15.4</b> Linear Constraints</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="cmds.html"><a href="cmds.html#uniqueness"><i class="fa fa-check"></i><b>15.4.1</b> Uniqueness</a></li>
+<li class="chapter" data-level="15.4.2" data-path="cmds.html"><a href="cmds.html#combinations"><i class="fa fa-check"></i><b>15.4.2</b> Combinations</a></li>
+<li class="chapter" data-level="15.4.3" data-path="cmds.html"><a href="cmds.html#stepsize"><i class="fa fa-check"></i><b>15.4.3</b> Step Size</a></li>
+<li class="chapter" data-level="15.4.4" data-path="cmds.html"><a href="cmds.html#singdesign"><i class="fa fa-check"></i><b>15.4.4</b> Single Design Matrix</a></li>
+<li class="chapter" data-level="15.4.5" data-path="cmds.html"><a href="cmds.html#multdesign"><i class="fa fa-check"></i><b>15.4.5</b> Multiple Design Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="cmds.html"><a href="cmds.html#circmds"><i class="fa fa-check"></i><b>15.5</b> Circular MDS</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="cmds.html"><a href="cmds.html#circhist"><i class="fa fa-check"></i><b>15.5.1</b> Some History</a></li>
+<li class="chapter" data-level="15.5.2" data-path="cmds.html"><a href="cmds.html#circprimal"><i class="fa fa-check"></i><b>15.5.2</b> Primal Methods</a></li>
+<li class="chapter" data-level="15.5.3" data-path="cmds.html"><a href="cmds.html#circdual"><i class="fa fa-check"></i><b>15.5.3</b> Dual Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="cmds.html"><a href="cmds.html#ellimcds"><i class="fa fa-check"></i><b>15.6</b> Elliptical MDS</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="cmds.html"><a href="cmds.html#elliprimal"><i class="fa fa-check"></i><b>15.6.1</b> Primal</a></li>
+<li class="chapter" data-level="15.6.2" data-path="cmds.html"><a href="cmds.html#ellidual"><i class="fa fa-check"></i><b>15.6.2</b> Dual</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="cmds.html"><a href="cmds.html#distance-bounds"><i class="fa fa-check"></i><b>15.7</b> Distance Bounds</a></li>
+<li class="chapter" data-level="15.8" data-path="cmds.html"><a href="cmds.html#localized-mds"><i class="fa fa-check"></i><b>15.8</b> Localized MDS</a></li>
+<li class="chapter" data-level="15.9" data-path="cmds.html"><a href="cmds.html#mds-as-mva"><i class="fa fa-check"></i><b>15.9</b> MDS as MVA</a></li>
+<li class="chapter" data-level="15.10" data-path="cmds.html"><a href="cmds.html#conshorseshoes"><i class="fa fa-check"></i><b>15.10</b> Horseshoes</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="asymmds.html"><a href="asymmds.html"><i class="fa fa-check"></i><b>16</b> Asymmetry in MDS</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="asymmds.html"><a href="asymmds.html#conditional-rankings"><i class="fa fa-check"></i><b>16.1</b> Conditional Rankings</a></li>
+<li class="chapter" data-level="16.2" data-path="asymmds.html"><a href="asymmds.html#confusion-matrices"><i class="fa fa-check"></i><b>16.2</b> Confusion Matrices</a></li>
+<li class="chapter" data-level="16.3" data-path="asymmds.html"><a href="asymmds.html#the-slide-vector"><i class="fa fa-check"></i><b>16.3</b> The Slide Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chindif.html"><a href="chindif.html"><i class="fa fa-check"></i><b>17</b> Individual Differences</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="chindif.html"><a href="chindif.html#indifrepl"><i class="fa fa-check"></i><b>17.1</b> Replications</a></li>
+<li class="chapter" data-level="17.2" data-path="chindif.html"><a href="chindif.html#indifindscal"><i class="fa fa-check"></i><b>17.2</b> INDSCAL/PARAFAC</a></li>
+<li class="chapter" data-level="17.3" data-path="chindif.html"><a href="chindif.html#indifidioscal"><i class="fa fa-check"></i><b>17.3</b> IDIOSCAL/TUCKALS</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="chnominal.html"><a href="chnominal.html"><i class="fa fa-check"></i><b>18</b> Nominal MDS</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="chnominal.html"><a href="chnominal.html#binary-dissimilarities"><i class="fa fa-check"></i><b>18.1</b> Binary Dissimilarities</a></li>
+<li class="chapter" data-level="18.2" data-path="chnominal.html"><a href="chnominal.html#indicator-matrix"><i class="fa fa-check"></i><b>18.2</b> Indicator matrix</a></li>
+<li class="chapter" data-level="18.3" data-path="chnominal.html"><a href="chnominal.html#unfolding-indicator-matrices"><i class="fa fa-check"></i><b>18.3</b> Unfolding Indicator Matrices</a></li>
+<li class="chapter" data-level="18.4" data-path="chnominal.html"><a href="chnominal.html#linear-separation"><i class="fa fa-check"></i><b>18.4</b> Linear Separation</a></li>
+<li class="chapter" data-level="18.5" data-path="chnominal.html"><a href="chnominal.html#circular-separation"><i class="fa fa-check"></i><b>18.5</b> Circular Separation</a></li>
+<li class="chapter" data-level="18.6" data-path="chnominal.html"><a href="chnominal.html#multidimensional-scalogram-analysis"><i class="fa fa-check"></i><b>18.6</b> Multidimensional Scalogram Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ssstr.html"><a href="ssstr.html"><i class="fa fa-check"></i><b>19</b> Sstress and strain</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ssstr.html"><a href="ssstr.html#sstress"><i class="fa fa-check"></i><b>19.1</b> sstress</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="ssstr.html"><a href="ssstr.html#sstress-and-stress"><i class="fa fa-check"></i><b>19.1.1</b> sstress and stress</a></li>
+<li class="chapter" data-level="19.1.2" data-path="ssstr.html"><a href="ssstr.html#decomposition"><i class="fa fa-check"></i><b>19.1.2</b> Decomposition</a></li>
+<li class="chapter" data-level="19.1.3" data-path="ssstr.html"><a href="ssstr.html#full-dimensional-sstress"><i class="fa fa-check"></i><b>19.1.3</b> Full-dimensional sstress</a></li>
+<li class="chapter" data-level="19.1.4" data-path="ssstr.html"><a href="ssstr.html#minimizing-sstress"><i class="fa fa-check"></i><b>19.1.4</b> Minimizing sstress</a></li>
+<li class="chapter" data-level="19.1.5" data-path="ssstr.html"><a href="ssstr.html#bounds-for-sstress"><i class="fa fa-check"></i><b>19.1.5</b> Bounds for sstress</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ssstr.html"><a href="ssstr.html#strain"><i class="fa fa-check"></i><b>19.2</b> strain</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ssstr.html"><a href="ssstr.html#unweighted"><i class="fa fa-check"></i><b>19.2.1</b> Unweighted</a></li>
+<li class="chapter" data-level="19.2.2" data-path="ssstr.html"><a href="ssstr.html#using-additivity"><i class="fa fa-check"></i><b>19.2.2</b> Using Additivity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="chrstress.html"><a href="chrstress.html"><i class="fa fa-check"></i><b>20</b> fstress and rstress</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="chrstress.html"><a href="chrstress.html#fstress"><i class="fa fa-check"></i><b>20.1</b> fstress</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="chrstress.html"><a href="chrstress.html#use-of-weights"><i class="fa fa-check"></i><b>20.1.1</b> Use of Weights</a></li>
+<li class="chapter" data-level="20.1.2" data-path="chrstress.html"><a href="chrstress.html#convexity"><i class="fa fa-check"></i><b>20.1.2</b> Convexity</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="chrstress.html"><a href="chrstress.html#rstress"><i class="fa fa-check"></i><b>20.2</b> rStress</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="chrstress.html"><a href="chrstress.html#using-weights"><i class="fa fa-check"></i><b>20.2.1</b> Using Weights</a></li>
+<li class="chapter" data-level="20.2.2" data-path="chrstress.html"><a href="chrstress.html#minimizing-rstress"><i class="fa fa-check"></i><b>20.2.2</b> Minimizing rstress</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="chrstress.html"><a href="chrstress.html#mstress"><i class="fa fa-check"></i><b>20.3</b> mstress</a></li>
+<li class="chapter" data-level="20.4" data-path="chrstress.html"><a href="chrstress.html#astress"><i class="fa fa-check"></i><b>20.4</b> astress</a></li>
+<li class="chapter" data-level="20.5" data-path="chrstress.html"><a href="chrstress.html#pstress"><i class="fa fa-check"></i><b>20.5</b> pstress</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html"><i class="fa fa-check"></i><b>21</b> Alternative Least Squares Loss</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#sammons-mds"><i class="fa fa-check"></i><b>21.1</b> Sammon’s MDS</a></li>
+<li class="chapter" data-level="21.2" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#mcgees-work"><i class="fa fa-check"></i><b>21.2</b> McGee’s Work</a></li>
+<li class="chapter" data-level="21.3" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#shepards-nonmetric-mds"><i class="fa fa-check"></i><b>21.3</b> Shepard’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.4" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#guttmans-nonmetric-mds"><i class="fa fa-check"></i><b>21.4</b> Guttman’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.5" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#positive-orthant-nonmetric-mds"><i class="fa fa-check"></i><b>21.5</b> Positive Orthant Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.6" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#interrole"><i class="fa fa-check"></i><b>21.6</b> Role Reversal</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html"><i class="fa fa-check"></i><b>22</b> Inverse Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#basic-imds"><i class="fa fa-check"></i><b>22.1</b> Basic IMDS</a></li>
+<li class="chapter" data-level="22.2" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#non-negative-dissimilarities"><i class="fa fa-check"></i><b>22.2</b> Non-negative Dissimilarities</a></li>
+<li class="chapter" data-level="22.3" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#zero-weights-andor-distances"><i class="fa fa-check"></i><b>22.3</b> Zero Weights and/or Distances</a></li>
+<li class="chapter" data-level="22.4" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#examples-1"><i class="fa fa-check"></i><b>22.4</b> Examples</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#first-example"><i class="fa fa-check"></i><b>22.4.1</b> First Example</a></li>
+<li class="chapter" data-level="22.4.2" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#second-example"><i class="fa fa-check"></i><b>22.4.2</b> Second Example</a></li>
+<li class="chapter" data-level="22.4.3" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#third-example"><i class="fa fa-check"></i><b>22.4.3</b> Third Example</a></li>
+<li class="chapter" data-level="22.4.4" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#fourth-example"><i class="fa fa-check"></i><b>22.4.4</b> Fourth Example</a></li>
+</ul></li>
+<li class="chapter" data-level="22.5" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#mds-sensitivity"><i class="fa fa-check"></i><b>22.5</b> MDS Sensitivity</a></li>
+<li class="chapter" data-level="22.6" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#second-order-inverse-mds"><i class="fa fa-check"></i><b>22.6</b> Second Order Inverse MDS</a></li>
+<li class="chapter" data-level="22.7" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#inverse-fds"><i class="fa fa-check"></i><b>22.7</b> Inverse FDS</a></li>
+<li class="chapter" data-level="22.8" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#multiple-solutions"><i class="fa fa-check"></i><b>22.8</b> Multiple Solutions</a></li>
+<li class="chapter" data-level="22.9" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#minimizing-istress"><i class="fa fa-check"></i><b>22.9</b> Minimizing iStress</a></li>
+<li class="chapter" data-level="22.10" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-three"><i class="fa fa-check"></i><b>22.10</b> Order three</a></li>
+<li class="chapter" data-level="22.11" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-four"><i class="fa fa-check"></i><b>22.11</b> Order Four</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="stability.html"><a href="stability.html"><i class="fa fa-check"></i><b>23</b> Stability of MDS Solutions</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="stability.html"><a href="stability.html#null-distribution"><i class="fa fa-check"></i><b>23.1</b> Null Distribution</a></li>
+<li class="chapter" data-level="23.2" data-path="stability.html"><a href="stability.html#pseudo-confidence-ellipsoids"><i class="fa fa-check"></i><b>23.2</b> Pseudo-confidence Ellipsoids</a></li>
+<li class="chapter" data-level="23.3" data-path="stability.html"><a href="stability.html#a-pseudo-bootstrap"><i class="fa fa-check"></i><b>23.3</b> A Pseudo-Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="global.html"><a href="global.html"><i class="fa fa-check"></i><b>24</b> In Search of Global Minima</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="global.html"><a href="global.html#random-starts"><i class="fa fa-check"></i><b>24.1</b> Random Starts</a>
+<ul>
+<li class="chapter" data-level="24.1.1" data-path="global.html"><a href="global.html#examples-2"><i class="fa fa-check"></i><b>24.1.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="global.html"><a href="global.html#tunneling-filling-annealing-etc."><i class="fa fa-check"></i><b>24.2</b> Tunneling, Filling, Annealing, etc.</a></li>
+<li class="chapter" data-level="24.3" data-path="global.html"><a href="global.html#globcutplanes"><i class="fa fa-check"></i><b>24.3</b> Cutting Planes</a>
+<ul>
+<li class="chapter" data-level="24.3.1" data-path="global.html"><a href="global.html#globalcircle"><i class="fa fa-check"></i><b>24.3.1</b> On the Circle</a></li>
+<li class="chapter" data-level="24.3.2" data-path="global.html"><a href="global.html#cauchy-step-size"><i class="fa fa-check"></i><b>24.3.2</b> Cauchy Step Size</a></li>
+<li class="chapter" data-level="24.3.3" data-path="global.html"><a href="global.html#balls"><i class="fa fa-check"></i><b>24.3.3</b> Balls</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="global.html"><a href="global.html#distance-smoothing"><i class="fa fa-check"></i><b>24.4</b> Distance Smoothing</a></li>
+<li class="chapter" data-level="24.5" data-path="global.html"><a href="global.html#penalizing-dimensions"><i class="fa fa-check"></i><b>24.5</b> Penalizing Dimensions</a>
+<ul>
+<li class="chapter" data-level="24.5.1" data-path="global.html"><a href="global.html#local-minima"><i class="fa fa-check"></i><b>24.5.1</b> Local Minima</a></li>
+<li class="chapter" data-level="24.5.2" data-path="global.html"><a href="global.html#algorithm"><i class="fa fa-check"></i><b>24.5.2</b> Algorithm</a></li>
+<li class="chapter" data-level="24.5.3" data-path="global.html"><a href="global.html#examples-3"><i class="fa fa-check"></i><b>24.5.3</b> Examples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="mathadd.html"><a href="mathadd.html"><i class="fa fa-check"></i><b>25</b> Mathematical Addenda</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="mathadd.html"><a href="mathadd.html#apnotation"><i class="fa fa-check"></i><b>25.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="mathadd.html"><a href="mathadd.html#symbols"><i class="fa fa-check"></i><b>25.1.1</b> Symbols</a></li>
+<li class="chapter" data-level="25.1.2" data-path="mathadd.html"><a href="mathadd.html#summation"><i class="fa fa-check"></i><b>25.1.2</b> Summation</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="mathadd.html"><a href="mathadd.html#apmatrices"><i class="fa fa-check"></i><b>25.2</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="mathadd.html"><a href="mathadd.html#apmspaces"><i class="fa fa-check"></i><b>25.2.1</b> Matrix Spaces</a></li>
+<li class="chapter" data-level="25.2.2" data-path="mathadd.html"><a href="mathadd.html#apconstants"><i class="fa fa-check"></i><b>25.2.2</b> Constants</a></li>
+<li class="chapter" data-level="25.2.3" data-path="mathadd.html"><a href="mathadd.html#difmat"><i class="fa fa-check"></i><b>25.2.3</b> Diff Matrices</a></li>
+<li class="chapter" data-level="25.2.4" data-path="mathadd.html"><a href="mathadd.html#apsign"><i class="fa fa-check"></i><b>25.2.4</b> Sign Matrices</a></li>
+<li class="chapter" data-level="25.2.5" data-path="mathadd.html"><a href="mathadd.html#apcombo"><i class="fa fa-check"></i><b>25.2.5</b> Sums and Products</a></li>
+<li class="chapter" data-level="25.2.6" data-path="mathadd.html"><a href="mathadd.html#apinverse"><i class="fa fa-check"></i><b>25.2.6</b> Inverse</a></li>
+<li class="chapter" data-level="25.2.7" data-path="mathadd.html"><a href="mathadd.html#aploewner"><i class="fa fa-check"></i><b>25.2.7</b> The Loewner order</a></li>
+<li class="chapter" data-level="25.2.8" data-path="mathadd.html"><a href="mathadd.html#apeigen"><i class="fa fa-check"></i><b>25.2.8</b> Eigen Decomposition</a></li>
+<li class="chapter" data-level="25.2.9" data-path="mathadd.html"><a href="mathadd.html#apsvd"><i class="fa fa-check"></i><b>25.2.9</b> Singular Value Decomposition</a></li>
+<li class="chapter" data-level="25.2.10" data-path="mathadd.html"><a href="mathadd.html#apmpi"><i class="fa fa-check"></i><b>25.2.10</b> Moore-Penrose Inverse</a></li>
+<li class="chapter" data-level="25.2.11" data-path="mathadd.html"><a href="mathadd.html#apfullrank"><i class="fa fa-check"></i><b>25.2.11</b> Full-rank Decomposition</a></li>
+<li class="chapter" data-level="25.2.12" data-path="mathadd.html"><a href="mathadd.html#apsdc"><i class="fa fa-check"></i><b>25.2.12</b> SDC matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="mathadd.html"><a href="mathadd.html#apineq"><i class="fa fa-check"></i><b>25.3</b> Inequalities</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="mathadd.html"><a href="mathadd.html#apcs"><i class="fa fa-check"></i><b>25.3.1</b> Cauchy-Schwartz</a></li>
+<li class="chapter" data-level="25.3.2" data-path="mathadd.html"><a href="mathadd.html#apamgm"><i class="fa fa-check"></i><b>25.3.2</b> Arithmetic/Geometric Mean</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="mathadd.html"><a href="mathadd.html#apanal"><i class="fa fa-check"></i><b>25.4</b> Calculus/Analysis</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="mathadd.html"><a href="mathadd.html#appfunctions"><i class="fa fa-check"></i><b>25.4.1</b> Functions</a></li>
+<li class="chapter" data-level="25.4.2" data-path="mathadd.html"><a href="mathadd.html#appdiffer"><i class="fa fa-check"></i><b>25.4.2</b> Differentiation</a></li>
+<li class="chapter" data-level="25.4.3" data-path="mathadd.html"><a href="mathadd.html#apdirder"><i class="fa fa-check"></i><b>25.4.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="25.4.4" data-path="mathadd.html"><a href="mathadd.html#local-minima-critical-points"><i class="fa fa-check"></i><b>25.4.4</b> Local Minima, Critical Points</a></li>
+<li class="chapter" data-level="25.4.5" data-path="mathadd.html"><a href="mathadd.html#necessary"><i class="fa fa-check"></i><b>25.4.5</b> Necessary Conditions</a></li>
+<li class="chapter" data-level="25.4.6" data-path="mathadd.html"><a href="mathadd.html#hopital"><i class="fa fa-check"></i><b>25.4.6</b> l’Hôpital’s Rule</a></li>
+<li class="chapter" data-level="25.4.7" data-path="mathadd.html"><a href="mathadd.html#mathimplcit"><i class="fa fa-check"></i><b>25.4.7</b> Implicit Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="mathadd.html"><a href="mathadd.html#mathconvexfuncs"><i class="fa fa-check"></i><b>25.5</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="mathadd.html"><a href="mathadd.html#mathextminima"><i class="fa fa-check"></i><b>25.5.1</b> Existence of Minima</a></li>
+<li class="chapter" data-level="25.5.2" data-path="mathadd.html"><a href="mathadd.html#mathduality"><i class="fa fa-check"></i><b>25.5.2</b> Duality</a></li>
+<li class="chapter" data-level="25.5.3" data-path="mathadd.html"><a href="mathadd.html#mathsubdif"><i class="fa fa-check"></i><b>25.5.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="25.5.4" data-path="mathadd.html"><a href="mathadd.html#mathextdcfunc"><i class="fa fa-check"></i><b>25.5.4</b> DC Functions</a></li>
+<li class="chapter" data-level="25.5.5" data-path="mathadd.html"><a href="mathadd.html#mathdanskin"><i class="fa fa-check"></i><b>25.5.5</b> Danskin-Berge Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="mathadd.html"><a href="mathadd.html#apiterate"><i class="fa fa-check"></i><b>25.6</b> Fixed-Point Iterations</a>
+<ul>
+<li class="chapter" data-level="25.6.1" data-path="mathadd.html"><a href="mathadd.html#point-to-set-maps"><i class="fa fa-check"></i><b>25.6.1</b> Point-to-set Maps</a></li>
+<li class="chapter" data-level="25.6.2" data-path="mathadd.html"><a href="mathadd.html#zangwill"><i class="fa fa-check"></i><b>25.6.2</b> Zangwill’s Theorem</a></li>
+<li class="chapter" data-level="25.6.3" data-path="mathadd.html"><a href="mathadd.html#ostrowski"><i class="fa fa-check"></i><b>25.6.3</b> Ostrowski’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.7" data-path="mathadd.html"><a href="mathadd.html#mathls"><i class="fa fa-check"></i><b>25.7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="25.7.1" data-path="mathadd.html"><a href="mathadd.html#mathquprog"><i class="fa fa-check"></i><b>25.7.1</b> Quadratic Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="25.8" data-path="mathadd.html"><a href="mathadd.html#mathpenal"><i class="fa fa-check"></i><b>25.8</b> Quadratic penalties</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="apcode.html"><a href="apcode.html"><i class="fa fa-check"></i><b>A</b> Code</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="apcode.html"><a href="apcode.html#rapcode"><i class="fa fa-check"></i><b>A.1</b> R Code</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="apcode.html"><a href="apcode.html#aputilitiescode"><i class="fa fa-check"></i><b>A.1.1</b> utilities.R</a></li>
+<li class="chapter" data-level="A.1.2" data-path="apcode.html"><a href="apcode.html#apindexingcode"><i class="fa fa-check"></i><b>A.1.2</b> commom/indexing.r</a></li>
+<li class="chapter" data-level="A.1.3" data-path="apcode.html"><a href="apcode.html#apiocode"><i class="fa fa-check"></i><b>A.1.3</b> commom/io.r</a></li>
+<li class="chapter" data-level="A.1.4" data-path="apcode.html"><a href="apcode.html#aplinearcode"><i class="fa fa-check"></i><b>A.1.4</b> commom/linear.r</a></li>
+<li class="chapter" data-level="A.1.5" data-path="apcode.html"><a href="apcode.html#appermcode"><i class="fa fa-check"></i><b>A.1.5</b> commom/nextPC.r</a></li>
+<li class="chapter" data-level="A.1.6" data-path="apcode.html"><a href="apcode.html#apsmacofcode"><i class="fa fa-check"></i><b>A.1.6</b> commom/smacof.r</a></li>
+<li class="chapter" data-level="A.1.7" data-path="apcode.html"><a href="apcode.html#apcodeprop"><i class="fa fa-check"></i><b>A.1.7</b> properties.R</a></li>
+<li class="chapter" data-level="A.1.8" data-path="apcode.html"><a href="apcode.html#apcodepic"><i class="fa fa-check"></i><b>A.1.8</b> pictures.R</a></li>
+<li class="chapter" data-level="A.1.9" data-path="apcode.html"><a href="apcode.html#apcodeclass"><i class="fa fa-check"></i><b>A.1.9</b> classical.R</a></li>
+<li class="chapter" data-level="A.1.10" data-path="apcode.html"><a href="apcode.html#apcodeminim"><i class="fa fa-check"></i><b>A.1.10</b> minimization.R</a></li>
+<li class="chapter" data-level="A.1.11" data-path="apcode.html"><a href="apcode.html#apcodefull"><i class="fa fa-check"></i><b>A.1.11</b> full.R</a></li>
+<li class="chapter" data-level="A.1.12" data-path="apcode.html"><a href="apcode.html#apcodeunfold"><i class="fa fa-check"></i><b>A.1.12</b> unfolding.R</a></li>
+<li class="chapter" data-level="A.1.13" data-path="apcode.html"><a href="apcode.html#apcodencons"><i class="fa fa-check"></i><b>A.1.13</b> constrained.R</a></li>
+<li class="chapter" data-level="A.1.14" data-path="apcode.html"><a href="apcode.html#apcodenominal"><i class="fa fa-check"></i><b>A.1.14</b> nominal.R</a></li>
+<li class="chapter" data-level="A.1.15" data-path="apcode.html"><a href="apcode.html#apcodesstress"><i class="fa fa-check"></i><b>A.1.15</b> sstress.R</a></li>
+<li class="chapter" data-level="A.1.16" data-path="apcode.html"><a href="apcode.html#apcodeinverse"><i class="fa fa-check"></i><b>A.1.16</b> inverse.R</a></li>
+<li class="chapter" data-level="A.1.17" data-path="apcode.html"><a href="apcode.html#apcodeglobal"><i class="fa fa-check"></i><b>A.1.17</b> global.R</a></li>
+<li class="chapter" data-level="A.1.18" data-path="apcode.html"><a href="apcode.html#apcodemathadd"><i class="fa fa-check"></i><b>A.1.18</b> mathadd.R</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="apcode.html"><a href="apcode.html#c-code"><i class="fa fa-check"></i><b>A.2</b> C code</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="apcode.html"><a href="apcode.html#deboor.c"><i class="fa fa-check"></i><b>A.2.1</b> deboor.c</a></li>
+<li class="chapter" data-level="A.2.2" data-path="apcode.html"><a href="apcode.html#cleanup.c"><i class="fa fa-check"></i><b>A.2.2</b> cleanup.c</a></li>
+<li class="chapter" data-level="A.2.3" data-path="apcode.html"><a href="apcode.html#jacobi.c"><i class="fa fa-check"></i><b>A.2.3</b> jacobi.c</a></li>
+<li class="chapter" data-level="A.2.4" data-path="apcode.html"><a href="apcode.html#jbkties.c"><i class="fa fa-check"></i><b>A.2.4</b> jbkTies.c</a></li>
+<li class="chapter" data-level="A.2.5" data-path="apcode.html"><a href="apcode.html#matrix.c"><i class="fa fa-check"></i><b>A.2.5</b> matrix.c</a></li>
+<li class="chapter" data-level="A.2.6" data-path="apcode.html"><a href="apcode.html#jeffrey.c"><i class="fa fa-check"></i><b>A.2.6</b> jeffrey.c</a></li>
+<li class="chapter" data-level="A.2.7" data-path="apcode.html"><a href="apcode.html#mysort.c"><i class="fa fa-check"></i><b>A.2.7</b> mySort.c</a></li>
+<li class="chapter" data-level="A.2.8" data-path="apcode.html"><a href="apcode.html#nextpc.c"><i class="fa fa-check"></i><b>A.2.8</b> nextPC.c</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="apdatasets.html"><a href="apdatasets.html"><i class="fa fa-check"></i><b>B</b> Data</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="apdatasets.html"><a href="apdatasets.html#apdatadsmall"><i class="fa fa-check"></i><b>B.1</b> Small</a></li>
+<li class="chapter" data-level="B.2" data-path="apdatasets.html"><a href="apdatasets.html#apdatagruijter"><i class="fa fa-check"></i><b>B.2</b> De Gruijter</a></li>
+<li class="chapter" data-level="B.3" data-path="apdatasets.html"><a href="apdatasets.html#apdataekman"><i class="fa fa-check"></i><b>B.3</b> Ekman</a></li>
+<li class="chapter" data-level="B.4" data-path="apdatasets.html"><a href="apdatasets.html#apdataveg"><i class="fa fa-check"></i><b>B.4</b> Vegetables</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="apunlicense.html"><a href="apunlicense.html"><i class="fa fa-check"></i><b>C</b> Unlicense</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Least Squares Euclidean Multidimensional Scaling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Avis, D. 2015. <em><span class="nocase">User’s Guide for lrs - Version 6.1</span></em>. <span>The Computational Geometry Lab at McGill</span>. <a href="http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html">http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html</a>.
+</div>
+<div class="csl-entry">
+Bacak, M., and J. M. Borwein. 2011. <span>“<span class="nocase">On Difference Convexity of Locally Lipschitz Functions</span>.”</span> <em>Optimization</em> 60 (8-9): 961–78.
+</div>
+<div class="csl-entry">
+Bailey, R. A., and J. C. Gower. 1990. <span>“<span class="nocase">Approximating a Symmetric Matrix</span>.”</span> <em>Psychometrika</em> 55 (4): 665–75.
+</div>
+<div class="csl-entry">
+Bauschke, H. H., M. N. Bui, and X. Wang. 2018. <span>“<span class="nocase">Projecting onto the Intersection of a Cone and a Sphere</span>.”</span> <em>SIAM Journal on Optimization</em> 28: 2158–88.
+</div>
+<div class="csl-entry">
+Bavaud, F. 2011. <span>“<span class="nocase">On the Schoenberg Transformations in Data Analysis: Theory and Illustrations</span>.”</span> <em>Journal of Classification</em> 28: 297–314.
+</div>
+<div class="csl-entry">
+Berge, C. 1963. <em>Topological Spaces</em>. Oliver &amp; Boyd.
+</div>
+<div class="csl-entry">
+Berkelaar, M. and others. 2015. <em><span class="nocase">lpSolve: Interface to ’Lp_solve’ v. 5.5 to Solve Linear/Integer Programs</span></em>. <a href="{https://CRAN.R-project.org/package=lpSolve}">{https://CRAN.R-project.org/package=lpSolve}</a>.
+</div>
+<div class="csl-entry">
+Best, M. J. 2017. <em>Quadratic Programming with Computer Programs</em>. Advances in Applied Mathematics. CRC Press.
+</div>
+<div class="csl-entry">
+Blumenthal, L. M. 1953. <em>Theory and Applications of Distance Geometry</em>. Oxford University Press.
+</div>
+<div class="csl-entry">
+Borg, I., and P. J. F. Groenen. 2005. <em><span class="nocase">Modern Multidimensional Scaling: Theory and Applications</span></em>. Second Edition. Springer.
+</div>
+<div class="csl-entry">
+Borg, I., and J. C. Lingoes. 1980. <span>“<span class="nocase">A Model and Algorithm for Multidimensional Scaling with External Constraints on the Distances</span>.”</span> <em>Psychometrika</em> 45 (1): 25–38.
+</div>
+<div class="csl-entry">
+Browne, M. W. 1987. <span>“<span class="nocase">The Young-Householder Algorithm and the Least Squares Multdimensional Scaling of Squared Distances</span>.”</span> <em>Journal of Classification</em> 4: 175–90.
+</div>
+<div class="csl-entry">
+Busing, F. M. T. A. 2021. <span>“<span class="nocase">Monotone Regression: A Simple and Fast O(n) PAVA Implementation</span>.”</span> <em>Journal of Statiistical Software</em> Submitted.
+</div>
+<div class="csl-entry">
+Cailliez, F. 1983. <span>“<span class="nocase">The Analytical Solutyion to the Additive Constant Problem</span>.”</span> <em>Psychometrika</em> 48 (2): 305–8.
+</div>
+<div class="csl-entry">
+Carroll, J. D., and J. J. Chang. 1970. <span>“<span class="nocase">Analysis of Individual Differences in Multidimensional scaling via an N-way generalization of "Eckart-Young" Decomposition.</span>”</span> <em>Psychometrika</em> 35: 283–319.
+</div>
+<div class="csl-entry">
+Ciomek, K. 2017. <em><span class="nocase">hasseDiagram: Drawing Hasse Diagram</span></em>. <a href="{https://CRAN.R-project.org/package=hasseDiagram}">{https://CRAN.R-project.org/package=hasseDiagram}</a>.
+</div>
+<div class="csl-entry">
+Coombs, C. H. 1964. <em><span class="nocase">A Theory of Data</span></em>. Wiley.
+</div>
+<div class="csl-entry">
+Cooper, L. G. 1972. <span>“<span class="nocase">A New Solution to the Additive Constant Problem in Metric Multidimensional Scaling</span>.”</span> <em>Psychometrika</em> 37 (3): 311–22.
+</div>
+<div class="csl-entry">
+Cox, D. R., and L. Brandwood. 1959. <span>“<span class="nocase">On a Discriminatory Problem Connected with the Works of Plato</span>.”</span> <em>Journal of the Royal Statistical Society, Series B</em> 21: 195–200.
+</div>
+<div class="csl-entry">
+Cox, M. G. 1972. <span>“<span class="nocase">The Numerical Evaluation of B-splines</span>.”</span> <em>Journal of the Institute of Mathematics and Its Applications</em> 10: 134–49.
+</div>
+<div class="csl-entry">
+Cox, T. F., and M. A. A. Cox. 1991. <span>“<span class="nocase">Multidimensional Scaling on a Sphere</span>.”</span> <em>Communications in Statistics</em> 20: 2943–53.
+</div>
+<div class="csl-entry">
+———. 2001. <em>Miltidimensional Scaling</em>. Second Edition. Monographs on Statistics and Applied Probability 88. Chapman &amp; Hall.
+</div>
+<div class="csl-entry">
+Critchley, F. 1988. <span>“<span class="nocase">On Certain Linear Mappings Between Inner Product and Squared Distance Matrices</span>.”</span> <em>Linear Algebra and Its Applications</em> 105: 91–107.
+</div>
+<div class="csl-entry">
+Danskin, J. M. 1966. <span>“<span class="nocase">The Theory of Max-Min, with Applications</span>.”</span> <em><span>SIAM</span> Journal on Applied Mathematics</em> 14: 641–64.
+</div>
+<div class="csl-entry">
+———. 1967. <em>The Theory of Max-Min and Its Application to Weapons Allocation Problems</em>. Springer.
+</div>
+<div class="csl-entry">
+Datorro, J. 2015. <em>Convex Optimization and Distance Geometry</em>. Second Edition. Palo Alto, CA: Meebo Publishing. <a href="https://ccrma.stanford.edu/~dattorro/0976401304_v2015.04.11.pdf">https://ccrma.stanford.edu/~dattorro/0976401304_v2015.04.11.pdf</a>.
+</div>
+<div class="csl-entry">
+De Boor, C. 1972. <span>“<span class="nocase">On Calculating with B-splines. II. Integration</span>.”</span> <em>Journal of Approximation Theory</em> 6: 50–62.
+</div>
+<div class="csl-entry">
+———. 1976. <span>“<span class="nocase">Splines as Linear Combination of B-splines. A Survey.</span>”</span> In <em><span>Approximation Theory II</span></em>, edited by G. G. Lorentz, C. K. Chui, and L. L. Schumaker, 1–47. Academic Press.
+</div>
+<div class="csl-entry">
+———. 2001. <em>A Practical Guide to Splines</em>. Revised Edition. New York: Springer-Verlag.
+</div>
+<div class="csl-entry">
+De Boor, C., and K. Höllig. 1985. <span>“<span class="nocase">B-splines without Divided Differences</span>.”</span> Technical Report 622. Department of Computer Science, University of Wisconsin-Madison.
+</div>
+<div class="csl-entry">
+De Boor, C., T. Lyche, and L. L. Schumaker. 1976. <span>“<span class="nocase">On Calculating with B-splines. II. Integration</span>.”</span> In <em><span class="nocase">Numerische Methoden der Approximationstheorie</span></em>, edited by L. Collatz, G. Meinardus, and H. Werner, 123–46. Basel: Birkhauser.
+</div>
+<div class="csl-entry">
+De Gruijter, D. N. M. 1967. <span>“<span class="nocase">The Cognitive Structure of Dutch Political Parties in 1966</span>.”</span> Report E019-67. Psychological Institute, University of Leiden.
+</div>
+<div class="csl-entry">
+De Leeuw, J. 1968a. <span>“Canonical Discriminant Analysis of Relational Data.”</span> Research Note 007-68. Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68e.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68e.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1968b. <span>“Nonmetric Discriminant Analysis.”</span> Research Note 06-68. Department of Data Theory, University of Leiden. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1968c. <span>“Nonmetric Multidimensional Scaling.”</span> Research Note 010-68. Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68g.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68g.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1969. <span>“<span class="nocase">Some Contributions to the Analysis of Categorical Data</span>.”</span> Research Note 004-69. Leiden, The Netherlands: Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1969/reports/deleeuw_R_69d.pdf">http://deleeuwpdx.net/janspubs/1969/reports/deleeuw_R_69d.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1970. <span>“<span>The Euclidean Distance Model</span>.”</span> Research Note 002-70. Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1970/reports/deleeuw_R_70b.pdf">http://deleeuwpdx.net/janspubs/1970/reports/deleeuw_R_70b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1973a. <span>“Canonical Analysis of Categorical Data.”</span> PhD thesis, University of Leiden, The Netherlands.
+</div>
+<div class="csl-entry">
+———. 1973b. <span>“<span class="nocase">Smoothness Properties of Nonmetric Loss Functions</span>.”</span> Technical Memorandum. Murray Hill, N.J.: Bell Telephone Laboratories. <a href="http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf">http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1974. <span>“Approximation of a Real Symmetric Matrix by a Positive Semidefinite Matrix of Rank r.”</span> Technical Memorandum TM-74-1229-10. Murray Hill, N.J.: Bell Telephone Laboratories. <a href="http://deleeuwpdx.net/janspubs/1974/reports/deleeuw_R_74c.pdf">http://deleeuwpdx.net/janspubs/1974/reports/deleeuw_R_74c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1975a. <span>“<span class="nocase">A Normalized Cone Regression Approach to Alternating Least Squares Algorithms</span>.”</span> Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf">http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1975b. <span>“<span class="nocase">An Alternating Least Squares Approach to Squared Distance Scaling</span>.”</span> Department of Data Theory FSW/RUL.
+</div>
+<div class="csl-entry">
+———. 1977a. <span>“Applications of Convex Analysis to Multidimensional Scaling.”</span> In <em>Recent Developments in Statistics</em>, edited by J. R. Barra, F. Brodeau, G. Romier, and B. Van Cutsem, 133–45. Amsterdam, The Netherlands: North Holland Publishing Company. <a href="http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_C_77.pdf">http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_C_77.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1977b. <span>“Correctness of Kruskal’s Algorithms for Monotone Regression with Ties.”</span> <em>Psychometrika</em> 42: 141–44. <a href="http://deleeuwpdx.net/janspubs/1977/articles/deleeuw_A_77.pdf">http://deleeuwpdx.net/janspubs/1977/articles/deleeuw_A_77.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1984a. <em>Canonical Analysis of Categorical Data</em>. Leiden, The Netherlands: DSWO Press. <a href="http://deleeuwpdx.net/janspubs/1984/books/deleeuw_B_84.pdf">http://deleeuwpdx.net/janspubs/1984/books/deleeuw_B_84.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1984b. <span>“Convergence of Majorization Algorithms for Multidimensional Scaling.”</span> Research Note RR-84-07. Leiden, The Netherlands: Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1984/reports/deleeuw_R_84c.pdf">http://deleeuwpdx.net/janspubs/1984/reports/deleeuw_R_84c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1984c. <span>“Differentiability of Kruskals Stress at a Local Minimum.”</span> <em>Psychometrika</em> 49: 111–13. <a href="http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84f.pdf">http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84f.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1984d. <span>“Fixed-Rank Approximation with Singular Weight Matrices.”</span> <em>Computational Statistics Quarterly</em> 1: 3–12. <a href="http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84b.pdf">http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1988. <span>“Convergence of the Majorization Method for Multidimensional Scaling.”</span> <em>Journal of Classification</em> 5: 163–80. <a href="http://deleeuwpdx.net/janspubs/1988/articles/deleeuw_A_88b.pdf">http://deleeuwpdx.net/janspubs/1988/articles/deleeuw_A_88b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1993. <span>“Fitting Distances by Least Squares.”</span> Preprint Series 130. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/1993/reports/deleeuw_R_93c.pdf">http://deleeuwpdx.net/janspubs/1993/reports/deleeuw_R_93c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1994. <span>“<span class="nocase">Block Relaxation Algorithms in Statistics</span>.”</span> In <em>Information Systems and Data Analysis</em>, edited by H. H. Bock, W. Lenski, and M. M. Richter, 308–24. Berlin: Springer Verlag. <a href="http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf">http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2005a. <span>“<span class="nocase">Applications of Convex Analysis to Multidimensional Scaling</span>.”</span> Preprint Series 448. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2005/reports/deleeuw_R_05b.pdf">http://deleeuwpdx.net/janspubs/2005/reports/deleeuw_R_05b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2005b. <span>“<span class="nocase">Fitting Ellipsoids by Least Squares</span>.”</span> UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2005/notes/deleeuw_U_05j.pdf">http://deleeuwpdx.net/janspubs/2005/notes/deleeuw_U_05j.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2005c. <span>“<span>Unidimensional Scaling</span>.”</span> In <em>The Encyclopedia of Statistics in Behavioral Science</em>, edited by B. S. Everitt and D. C, 4:2095–97. New York, N.Y.: Wiley. <a href="http://deleeuwpdx.net/janspubs/2005/chapters/deleeuw_C_05h.pdf">http://deleeuwpdx.net/janspubs/2005/chapters/deleeuw_C_05h.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2006. <span>“<span>Accelerated Least Squares Multidimensional Scaling</span>.”</span> Preprint Series 493. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2006/reports/deleeuw_R_06b.pdf">http://deleeuwpdx.net/janspubs/2006/reports/deleeuw_R_06b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2007a. <span>“<span class="nocase">A Horseshoe for Multidimensional Scaling</span>.”</span> Preprint Series 530. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2007/reports/deleeuw_R_07a.pdf">http://deleeuwpdx.net/janspubs/2007/reports/deleeuw_R_07a.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2007b. <span>“Derivatives of Generalized Eigen Systems with Applications.”</span> Preprint Series 528. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2007/reports/deleeuw_R_07c.pdf">http://deleeuwpdx.net/janspubs/2007/reports/deleeuw_R_07c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2007c. <span>“<span>Quadratic Surface Embedding</span>.”</span> UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2007/notes/deleeuw_U_07h.pdf">http://deleeuwpdx.net/janspubs/2007/notes/deleeuw_U_07h.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2008a. <span>“Accelerating Majorization Algorithms.”</span> Preprint Series 543. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08h.pdf">http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08h.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2008b. <span>“<span class="nocase">Derivatives of Fixed-Rank Approximations</span>.”</span> Preprint Series 547. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08b.pdf">http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2008c. <span>“Polynomial Extrapolation to Accelerate Fixed Point Algorithms.”</span> Preprint Series 542. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08i.pdf">http://deleeuwpdx.net/janspubs/2008/reports/deleeuw_R_08i.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2012. <span>“<span>Inverse Multidimensional Scaling</span>.”</span> UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2012/notes/deleeuw_U_12b.pdf">http://deleeuwpdx.net/janspubs/2012/notes/deleeuw_U_12b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2014a. <span>“<span class="nocase">Bounding, and Sometimes Finding, the Global Minimum in Multidimensional Scaling</span>.”</span> UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2014/notes/deleeuw_U_14b.pdf">http://deleeuwpdx.net/janspubs/2014/notes/deleeuw_U_14b.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2014b. <span>“<span class="nocase">Minimizing rStress Using Nested Majorization</span>.”</span> UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/2014/notes/deleeuw_U_14c.pdf">http://deleeuwpdx.net/janspubs/2014/notes/deleeuw_U_14c.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2015. <span>“Regression with Linear Inequality Restrictions on Predicted Values.”</span> <a href="http://rpubs.com/deleeuw/78897">http://rpubs.com/deleeuw/78897</a>.
+</div>
+<div class="csl-entry">
+———. 2016a. <em>Block Relaxation Methods in Statistics</em>. Bookdown. <a href="http://deleeuwpdx.net/bookdown/bras/_book">http://deleeuwpdx.net/bookdown/bras/_book</a>.
+</div>
+<div class="csl-entry">
+———. 2016b. <span>“<span class="nocase">Derivatives of Low Rank PSD Approximation</span>.”</span> 2016. <a href="http://deleeuwpdx.net/pubfolders/rank/rank.pdf">http://deleeuwpdx.net/pubfolders/rank/rank.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2016c. <span>“Gower Rank.”</span> 2016. <a href="http://deleeuwpdx.net/pubfolders/gower/gower.pdf">http://deleeuwpdx.net/pubfolders/gower/gower.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2016d. <em>Multivariate Analysis with Optimal Scaling</em>. Bookdown. <a href="http://deleeuwpdx.net/bookdown/gifi/_book">http://deleeuwpdx.net/bookdown/gifi/_book</a>.
+</div>
+<div class="csl-entry">
+———. 2016e. <span>“Pictures of Stress.”</span> 2016. <a href="http://deleeuwpdx.net/pubfolders/twoPoints/twoPoints.pdf">http://deleeuwpdx.net/pubfolders/twoPoints/twoPoints.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017a. <span>“<span class="nocase">Computing and Fitting Monotone Splines</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/splines/splines.pdf">http://deleeuwpdx.net/pubfolders/splines/splines.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017b. <span>“<span class="nocase">Multidimensional Scaling with Distance Bounds</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/updown/updown.pdf">http://deleeuwpdx.net/pubfolders/updown/updown.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017c. <span>“<span class="nocase">Multidimensional Scaling with Lower Bounds</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/above/above.pdf">http://deleeuwpdx.net/pubfolders/above/above.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017d. <span>“<span class="nocase">Multidimensional Scaling with Upper Bounds</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/below/below.pdf">http://deleeuwpdx.net/pubfolders/below/below.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017e. <span>“<span class="nocase">Pseudo Confidence Regions for MDS</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/confidence/confidence.pdf">http://deleeuwpdx.net/pubfolders/confidence/confidence.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2017f. <span>“<span class="nocase">Shepard Non-metric Multidimensional Scaling</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/shepard/shepard.pdf">http://deleeuwpdx.net/pubfolders/shepard/shepard.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2018a. <span>“<span class="nocase">Differentiability of Stress at Local Minima</span>.”</span> 2018. <a href="http://deleeuwpdx.net/pubfolders/zero/zero.pdf">http://deleeuwpdx.net/pubfolders/zero/zero.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2018b. <span>“<span class="nocase">MM Algorithms for Smoothed Absolute Values</span>.”</span> 2018. <a href="http://deleeuwpdx.net/pubfolders/absapp/absapp.pdf">http://deleeuwpdx.net/pubfolders/absapp/absapp.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2019. <span>“Normalized Cone Regression.”</span> 2019. <a href="http://deleeuwpdx.net/pubfolders/dcone/dcone.pdf">http://deleeuwpdx.net/pubfolders/dcone/dcone.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2020. <em><span class="nocase">Gifi Analysis of Multivariate Data</span></em>. <a href="http://deleeuwpdx.net/bookdown/gifi/_book/_main.pdf">http://deleeuwpdx.net/bookdown/gifi/_book/_main.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and P. J. F. Groenen. 1997. <span>“Inverse Multidimensional Scaling.”</span> <em>Journal of Classification</em> 14 (3–21). <a href="http://deleeuwpdx.net/janspubs/1997/articles/deleeuw_groenen_A_97.pdf">http://deleeuwpdx.net/janspubs/1997/articles/deleeuw_groenen_A_97.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., P. Groenen, and P. Mair. 2016a. <span>“Full-Dimensional Scaling.”</span> 2016. <a href="http://deleeuwpdx.net/pubfolders/full/full.pdf">http://deleeuwpdx.net/pubfolders/full/full.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2016b. <span>“Minimizing qStress for Small q.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.1.4843.1764">https://doi.org/10.13140/RG.2.1.4843.1764</a>.
+</div>
+<div class="csl-entry">
+———. 2016c. <span>“<span class="nocase">Minimizing rStress Using Majorization</span>.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.1.3871.3366">https://doi.org/10.13140/RG.2.1.3871.3366</a>.
+</div>
+<div class="csl-entry">
+———. 2016d. <span>“More on Inverse Multidimensional Scaling.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.1.1454.5684">https://doi.org/10.13140/RG.2.1.1454.5684</a>.
+</div>
+<div class="csl-entry">
+———. 2016e. <span>“<span class="nocase">Second Derivatives of rStress, with Applications</span>.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.1.1058.4081">https://doi.org/10.13140/RG.2.1.1058.4081</a>.
+</div>
+<div class="csl-entry">
+———. 2016f. <span>“Singularities and Zero Distances in Multidimensional Scaling.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.1.3339.2403">https://doi.org/10.13140/RG.2.1.3339.2403</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., P. Groenen, and R. Pietersz. 2016. <span>“An Alternating Least Squares Approach to Squared Distance Scaling.”</span> 2016. <a href="https://doi.org/10.13140/RG.2.2.15357.97766">https://doi.org/10.13140/RG.2.2.15357.97766</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and W. J. Heiser. 1977. <span>“Convergence of Correction Matrix Algorithms for Multidimensional Scaling.”</span> In <em>Geometric Representations of Relational Data</em>, edited by J. C. Lingoes, 735–53. Ann Arbor, Michigan: Mathesis Press. <a href="http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_heiser_C_77.pdf">http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_heiser_C_77.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1980. <span>“Multidimensional Scaling with Restrictions on the Configuration.”</span> In <em>Multivariate Analysis, Volume v</em>, edited by P. R. Krishnaiah, 501–22. Amsterdam, The Netherlands: North Holland Publishing Company. <a href="http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf">http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1982. <span>“Theory of Multidimensional Scaling.”</span> In <em>Handbook of Statistics, Volume II</em>, edited by P. R. Krishnaiah and L. Kanal. Amsterdam, The Netherlands: North Holland Publishing Company. <a href="http://deleeuwpdx.net/janspubs/1982/chapters/deleeuw_heiser_C_82.pdf">http://deleeuwpdx.net/janspubs/1982/chapters/deleeuw_heiser_C_82.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., K. Hornik, and P. Mair. 2009. <span>“<span class="nocase">Isotone Optimization in R: Pool-Adjacent-Violators Algorithm (PAVA) and Active Set Methods</span>.”</span> <em>Journal of Statistical Software</em> 32 (5): 1–24. <a href="http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_hornik_mair_A_09.pdf">http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_hornik_mair_A_09.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and P. Mair. 2009. <span>“<span class="nocase">Multidimensional Scaling Using Majorization: SMACOF in R</span>.”</span> <em>Journal of Statistical Software</em> 31 (3): 1–30. <a href="http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf">http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and J. J. Meulman. 1986. <span>“Principal Component Analysis and Restricted Multidimensional Scaling.”</span> In <em>Classification as a Tool of Research</em>, edited by W. Gaul and M. Schader, 83–96. Amsterdam, London, New York, Tokyo: North-Holland. <a href="http://deleeuwpdx.net/janspubs/1986/chapters/deleeuw_meulman_C_86.pdf">http://deleeuwpdx.net/janspubs/1986/chapters/deleeuw_meulman_C_86.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and K. Sorenson. 2012. <span>“<span class="nocase">Derivatives of the Procrustus Transformation with Applications</span>.”</span> <a href="http://deleeuwpdx.net/janspubs/2012/notes/deleeuw_sorenson_U_12b.pdf">http://deleeuwpdx.net/janspubs/2012/notes/deleeuw_sorenson_U_12b.pdf</a>.
+</div>
+<div class="csl-entry">
+De Leeuw, J., and I. Stoop. 1984. <span>“Upper Bounds for Kruskal’s Stress.”</span> <em>Psychometrika</em> 49: 391–402. <a href="http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_stoop_A_84.pdf">http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_stoop_A_84.pdf</a>.
+</div>
+<div class="csl-entry">
+Defays, D. 1978. <span>“<span class="nocase">A Short Note on a Method of Seriation</span>.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 31: 49–53.
+</div>
+<div class="csl-entry">
+Dempster, A. P., N. M. Laird, and D. B. Rubin. 1977. <span>“<span class="nocase">Maximum Likelihood for Incomplete Data via the EM Algorithm</span>.”</span> <em>Journal of the Royal Statistical Society</em> B39: 1–38.
+</div>
+<div class="csl-entry">
+Demyanov, V. F., and V. N. Malozemov. 1990. <em>Introduction to Minimax</em>. Dover.
+</div>
+<div class="csl-entry">
+Dinkelbach, W. 1967. <span>“<span>On Nonlinear Fractional Programming</span>.”</span> <em>Management Science</em> 13: 492–98.
+</div>
+<div class="csl-entry">
+Dür, M., R. Horst, and M. Locatelli. 1998. <span>“<span class="nocase">Necessary and Sufficient Global Optimality Conditions for Convex Maximization Revisited</span>.”</span> <em>Journal of Mathematical Analysis and Applications</em> 217: 637–49.
+</div>
+<div class="csl-entry">
+Eckart, C., and G. Young. 1936. <span>“<span class="nocase">The Approximation of One Matrix by Another of Lower Rank</span>.”</span> <em>Psychometrika</em> 1 (3): 211–18.
+</div>
+<div class="csl-entry">
+Ekman, G. 1954. <span>“<span class="nocase">Dimensions of Color Vision</span>.”</span> <em>Journal of Psychology</em> 38: 467–74.
+</div>
+<div class="csl-entry">
+Flett, T. M. 1980. <em><span>Differential Analysis</span></em>. Cambridge University Press.
+</div>
+<div class="csl-entry">
+Fukuda, K. 2015. <em><span class="nocase">cdd and cddplus Homepage</span></em>. <a href="https://www.inf.ethz.ch/personal/fukudak/cdd_home/">https://www.inf.ethz.ch/personal/fukudak/cdd_home/</a>.
+</div>
+<div class="csl-entry">
+Gaffney, P. W. 1976. <span>“<span class="nocase">The Calculation of Indefinite Integrals of B-splines</span>.”</span> <em>Journal of the Institute of Mathematics and Its Applications</em> 17: 37–41.
+</div>
+<div class="csl-entry">
+Geyer, C. J., and G. D. Meeden. 2015. <span>“<span class="nocase">rcdd: Computational Geometry</span>.”</span> 2015. <a href="https://CRAN.R-project.org/package=rcdd">https://CRAN.R-project.org/package=rcdd</a>.
+</div>
+<div class="csl-entry">
+Gifi, A. 1990. <em>Nonlinear Multivariate Analysis</em>. New York, N.Y.: Wiley.
+</div>
+<div class="csl-entry">
+Gohberg, I., P. Lancaster, and L. Rodman. 2009. <em>Matrix Polynomials</em>. Classic in Applied Mathematics. SIAM.
+</div>
+<div class="csl-entry">
+Gold, E. Mark. 1973. <span>“<span class="nocase">Metric Unfolding: Data Requirement for Unique Solution &amp; Clarification of Sch<span class="nocase">ö</span>nemann’s Algorithm</span>.”</span> <em>Psychometrika</em> 38 (4): 555–69.
+</div>
+<div class="csl-entry">
+Goldman, A. J. 1956. <span>“<span class="nocase">Resolution and Separation Theorems for Polyhedral Convex Sets</span>.”</span> In <em>Linear Inequalities and Related Systems</em>, edited by Kuhn H. W. and A. W. Tucker, 41–51. Annals of Mathematics Studies 38. Princeton University Press.
+</div>
+<div class="csl-entry">
+Gower, J. C. 1966. <span>“<span class="nocase">Some Distance Properties of Latent Root and Vector Methods Used in Multivariate Analysis</span>.”</span> <em>Biometrika</em> 53: 325–38.
+</div>
+<div class="csl-entry">
+Greenacre, M. J., and M. W. Browne. 1986. <span>“<span class="nocase">An Efficient Alternating Least Squares Algorithm to Perform Multidimensional Unfolding</span>.”</span> <em>Psychometrika</em> 51 (2): 241–50.
+</div>
+<div class="csl-entry">
+Groenen, P. J. F., and J. De Leeuw. 2010. <span>“<span class="nocase">Power-Stress for Multidimensional Scaling</span>.”</span> <a href="http://deleeuwpdx.net/janspubs/2010/notes/groenen_deleeuw_U_10.pdf">http://deleeuwpdx.net/janspubs/2010/notes/groenen_deleeuw_U_10.pdf</a>.
+</div>
+<div class="csl-entry">
+Groenen, P. J. F., P. Giaquinto, and H. A. L. Kiers. 2003. <span>“<span class="nocase">Weighted Majorization Algorithms for Weighted Least Squares Decomposition Models</span>.”</span> EI 2003-09. Rotterdam, Netherlands: Econometric Institute, Erasmus University.
+</div>
+<div class="csl-entry">
+Groenen, P. J. F., W. J. Heiser, and J. J. Meulman. 1998. <span>“<span class="nocase">City-Block Scaling: Smoothing Strategies for Avoiding Local Minima</span>.”</span> In <em>Classification, Data Analysis, and Data Highways</em>, edited by I. Balderjahn, R. Mathar, and M. Schader. Springer.
+</div>
+<div class="csl-entry">
+———. 1999. <span>“<span class="nocase">Global Optimization in Least-Squares Multidimensional Scaling by Distance Smoothing</span>.”</span> <em>Journal of Classification</em> 16: 225–54.
+</div>
+<div class="csl-entry">
+Groenen, P. J. F., and M. Van de Velden. 2016. <span>“<span class="nocase">Multidimensional Scaling by Majorization: A Review</span>.”</span> <em>Journal of Statistical Software</em> 73 (8): 1–26. <a href="https://doi.org/10.18637/jss.v073.i08">https://doi.org/10.18637/jss.v073.i08</a>.
+</div>
+<div class="csl-entry">
+Guilford, J. P. 1954. <em>Psychometric Methods</em>. McGraw-Hill.
+</div>
+<div class="csl-entry">
+Guttman, L. 1941. <span>“<span class="nocase">The Quantification of a Class of Attributes: A Theory and Method of Scale Construction</span>.”</span> In <em>The Prediction of Personal Adjustment</em>, edited by P. Horst, 321–48. New York: Social Science Research Council.
+</div>
+<div class="csl-entry">
+———. 1967. <span>“<span class="nocase">The Development of Nonmetric Space Analysis: A Letter to Professor John Ross</span>.”</span> <em>Multivariate Behavioral Research</em> 2 (1): 71–82.
+</div>
+<div class="csl-entry">
+———. 1968. <span>“<span class="nocase">A General Nonmetric Technique for Fitting the Smallest Coordinate Space for a Configuration of Points</span>.”</span> <em>Psychometrika</em> 33: 469–506.
+</div>
+<div class="csl-entry">
+Harman, R., and V. Lacko. 2010. <span>“<span class="nocase">On Decompositional aAgorithms for Uniform Sampling from n-Spheres and n-Balls</span>.”</span> <em>Journal of Multivariate Analysis</em> 101: 2297–2304.
+</div>
+<div class="csl-entry">
+Harshman, R. A. 1970. <span>“<span class="nocase">Foundations of the PARAFAC Procedure</span>.”</span> Working Papers in Phonetics 16. UCLA. <a href="https://www.psychology.uwo.ca/faculty/harshman/wpppfac0.pdf">https://www.psychology.uwo.ca/faculty/harshman/wpppfac0.pdf</a>.
+</div>
+<div class="csl-entry">
+Heiser, W. J. 1988. <span>“<span class="nocase">Multidimensional Scaling with Least Absolute Residuals</span>.”</span> In <em>Classification and Related Methods of Data Analysis</em>, edited by H. H. Bock, 455–62. North-Holland Publishing Co.
+</div>
+<div class="csl-entry">
+———. 1991. <span>“A Generalized Majorization Method for Least Squares Multidimensional Scaling of Pseudodistances That May Be Negative.”</span> <em>Psychometrika</em> 56 (1): 7–27.
+</div>
+<div class="csl-entry">
+———. 1995. <span>“<span class="nocase">Convergent Computing by Iterative Majorization: Theory and Applications in Multidimensional Data Analysis</span>.”</span> In <em>Recent Advances in Descriptive Multivariate Analysis</em>, edited by W. J. Krzasnowski. Oxford, England: Clarendon Press.
+</div>
+<div class="csl-entry">
+Heiser, W. J., and J. De Leeuw. 1977. <span>“How to Use SMACOF-i.”</span> Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1977/reports/heiser_deleeuw_R_77.pdf">http://deleeuwpdx.net/janspubs/1977/reports/heiser_deleeuw_R_77.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 1979. <span>“Metric Multidimensional Unfolding.”</span> <em>Methoden En Data Nieuwsbrief SWS/VVS</em> 4: 26–50. <a href="http://deleeuwpdx.net/janspubs/1979/articles/heiser_deleeuw_A_79.pdf">http://deleeuwpdx.net/janspubs/1979/articles/heiser_deleeuw_A_79.pdf</a>.
+</div>
+<div class="csl-entry">
+Hiriart-Urruty, J.-B. 1988. <span>“Generalized Differentiability / Duality and Optimization for Problems Dealing with Differences of Convex Functions.”</span> In <em>Convexity and Duality in Optimization</em>, edited by Ponstein. J., 37–70. Lecture Notes in Economics and Mathematical Systems 256. Springer.
+</div>
+<div class="csl-entry">
+Hiriart-Urruty, J.-B., and C. Lemaréchal. 1993. <em>Convex Analysiis and Minimization Algorithms i: Fundamentals</em>. Springer.
+</div>
+<div class="csl-entry">
+Keller, J. B. 1962. <span>“<span class="nocase">Factorization of Matrices by Least Squares</span>.”</span> <em>Biometrika</em> 49: 239–42.
+</div>
+<div class="csl-entry">
+Kiers, H. A. L. 1997. <span>“<span>Weighted Least Squares Fitting Using Iterative Ordinary Least Squares Algorithms</span>.”</span> <em>Psychometrika</em> 62: 251–66.
+</div>
+<div class="csl-entry">
+Kruskal, J. B. 1964a. <span>“<span class="nocase">Multidimensional Scaling by Optimizing Goodness of Fit to a Nonmetric Hypothesis</span>.”</span> <em>Psychometrika</em> 29: 1–27.
+</div>
+<div class="csl-entry">
+———. 1964b. <span>“<span class="nocase">Nonmetric Multidimensional Scaling: a Numerical Method</span>.”</span> <em>Psychometrika</em> 29: 115–29.
+</div>
+<div class="csl-entry">
+———. 1971. <span>“<span class="nocase">Monotone Regression: Continuity and Differentiability Properties</span>.”</span> <em>Psychometrika</em> 36 (1): 57–62.
+</div>
+<div class="csl-entry">
+Kruskal, J. B., and J. D. Carroll. 1969. <span>“<span class="nocase">Geometrical Models and Badness of Fit Functions</span>.”</span> In <em>Multivariate Analysis, Volume II</em>, edited by P. R. Krishnaiah, 639–71. North Holland Publishing Company.
+</div>
+<div class="csl-entry">
+Lange, K. 2016. <em>MM Optimization Algorithms</em>. SIAM.
+</div>
+<div class="csl-entry">
+Lawlor, G. R. 2020. <span>“<span class="nocase">l’H<span class="nocase">ô</span>pital’s Rule for Multivariable Functions</span>.”</span> <em>American Mathematical Monthly</em> 127 (8): 717–25.
+</div>
+<div class="csl-entry">
+Levelt, W. J. M., J. P. Van De Geer, and R. Plomp. 1966. <span>“<span class="nocase">Triadic Comparions of Musical Intervals</span>.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 19: 163–79.
+</div>
+<div class="csl-entry">
+Lingoes, J. C. 1968a. <span>“<span>The Multivariate Analysis Of Qualitative Data</span>.”</span> <em>Multivariate Behavioral Research</em> 3 (1): 61–94.
+</div>
+<div class="csl-entry">
+———. 1968b. <span>“<span class="nocase">The Rationale of the Guttman-Lingoes Nonmetric Series: A Letter to Doctor Philip Runkel</span>.”</span> <em>Multivariate Behavioral Research</em> 3 (4): 495–507.
+</div>
+<div class="csl-entry">
+———. 1971. <span>“<span class="nocase">Some Boundary Conditions for a Monotone Analysis of Symmetric Matrices</span>.”</span> <em>Psychometrika</em> 36 (2): 195–203.
+</div>
+<div class="csl-entry">
+Lingoes, J. C., and E. E. Roskam. 1973. <span>“<span class="nocase">A Mathematical and Empirical Analysis of Two Multidimensional Scaling Algorithms</span>.”</span> <em>Psychometrika</em> 38: Monograph Supplement.
+</div>
+<div class="csl-entry">
+Lyusternik, L., and L. Schnirelmann. 1934. <em>M<span>é</span>thodes Topologiues Dans Les Probl<span>è</span>mes Variationelle</em>. Hermann.
+</div>
+<div class="csl-entry">
+Maehara, H. 1986. <span>“<span class="nocase">Metric Transforms of Finite Spaces and Connected Graphs</span>.”</span> <em>Discrete Mathematics</em> 61: 235–46.
+</div>
+<div class="csl-entry">
+Magnus, J. R., and H. Neudecker. 1999. <em><span class="nocase">Matrix Differential Calculus with Applcations in Statistics and Econometrics</span></em>. Revised Edition. Wiley.
+</div>
+<div class="csl-entry">
+Mair, P., P. J. F. Groenen, and J. De Leeuw. 2019. <span>“<span class="nocase">More on Multidimensional Scaling in R: smacof Version 2</span>.”</span> <em>Journal of Statistical Software</em>. <a href="http://deleeuwpdx.net/janspubs/2019/articles/mair_groenen_deleeuw_A_19.pdf">http://deleeuwpdx.net/janspubs/2019/articles/mair_groenen_deleeuw_A_19.pdf</a>.
+</div>
+<div class="csl-entry">
+Messick, S. J., and R. P. Abelson. 1956. <span>“<span class="nocase">The Additive Constant Problem in Multidimensional Scaling</span>.”</span> <em>Psychometrika</em> 21 (1–17).
+</div>
+<div class="csl-entry">
+Meulman, J. J. 1986. <span>“<span class="nocase">A Distance Approach to Nonlinear Multivariate Analysis</span>.”</span> PhD thesis, Leiden University.
+</div>
+<div class="csl-entry">
+———. 1992. <span>“<span class="nocase">The Integration of Multidimensional Scaling and Multivariate Analysis with Optimal Transformations</span>.”</span> <em>Psychometrika</em> 57 (4): 539–65.
+</div>
+<div class="csl-entry">
+Meulman, J. M., and W. J. Heiser. 2012. <em>IBM SPSS Categories 21</em>. IBM Corporation.
+</div>
+<div class="csl-entry">
+Ortega, J. M., and W. C. Rheinboldt. 1970. <em><span class="nocase">Iterative Solution of Nonlinear Equations in Several Variables</span></em>. New York, N.Y.: Academic Press.
+</div>
+<div class="csl-entry">
+Palubeckis, G. 2013. <span>“<span class="nocase">An Improved Exact Algorithm for Least-Squares Unidimensional Scaling</span>.”</span> <em>Journal of Applied Mathematics</em>, 1–15.
+</div>
+<div class="csl-entry">
+Papazoglou, S., and K. Mylonas. 2017. <span>“<span class="nocase">An Examination of Alternative Multidimensional Scaling Techniques</span>.”</span> <em>Educational and Psychological Measurement</em> 77 (3): 429–48.
+</div>
+<div class="csl-entry">
+Pliner, V. 1984. <span>“<span class="nocase">A Class of Metric Scaling Models</span>.”</span> <em>Automation and Remote Control</em> 45: 789–94.
+</div>
+<div class="csl-entry">
+———. 1986. <span>“<span class="nocase">The Problem of Multidimensional Metric Scaling</span>.”</span> <em>Automation and Remote Control</em> 47: 560–67.
+</div>
+<div class="csl-entry">
+———. 1996. <span>“<span class="nocase">Metric Unidimensional Scaling and Global Optimization</span>.”</span> <em>Journal of Classification</em> 13: 3–18.
+</div>
+<div class="csl-entry">
+Ramirez, C., R. Sanchez, V. Kreinovich, and M. Argaez. 2014. <span>“<span class="nocase"><span class="math inline">\(\sqrt{x^2+\mu}\)</span> is the Most Computationally Efficient Smooth Approximation to |x|</span>.”</span> <em>Journal of Uncertain Systems</em> 8: 205–10.
+</div>
+<div class="csl-entry">
+Ramsay, J. O. 1977. <span>“<span class="nocase">Maximum Likelihood Estimation in Multidimensional Scaling</span>.”</span> <em>Psychometrika</em> 42: 241–66.
+</div>
+<div class="csl-entry">
+———. 1988. <span>“<span class="nocase">Monotone Regression Splines in Action</span>.”</span> <em>Statistical Science</em> 3: 425–61.
+</div>
+<div class="csl-entry">
+Robere, R. 2015. <em><span class="nocase">vertexenum: Vertex Enumeration of Polytopes</span></em>. <a href="https://CRAN.R-project.org/package=vertexenum">https://CRAN.R-project.org/package=vertexenum</a>.
+</div>
+<div class="csl-entry">
+Robert, F. 1967. <span>“<span class="nocase">Calcul du Rapport Maximal de Deux Normes sur <span class="math inline">\(\mathbb{R}^n\)</span></span>.”</span> <em>Revue Francaise d’Automatique, d’Informatique Et De Recherche Operationelle</em> 1: 97–118.
+</div>
+<div class="csl-entry">
+Rockafellar, R. T. 1970. <em>Convex Analysis</em>. Princeton University Press.
+</div>
+<div class="csl-entry">
+Roskam, E. E. 1968. <span>“<span class="nocase">Metric Analysis of Ordinal Data in Psychology</span>.”</span> PhD thesis, University of Leiden.
+</div>
+<div class="csl-entry">
+Ross, J., and N. Cliff. 1964. <span>“<span class="nocase">A Generalization of the Interpoint Distance Model</span>.”</span> <em>Psychometrika</em> 29 (167-176).
+</div>
+<div class="csl-entry">
+Rothkopf, E. Z. 1957. <span>“<span class="nocase">A Measure of Stimulus Similarity and Errors in some Paired-associate Learning</span>.”</span> <em>Journal of Experimental Psychology</em> 53: 94–101.
+</div>
+<div class="csl-entry">
+Schoenberg, I. J. 1935. <span>“<span class="nocase">Remarks to Maurice Frechet’s article: Sur la Definition Axiomatique d’une Classe d’Espaces Vectoriels Distancies Applicables Vectoriellement sur l’Espace de Hllbert</span>.”</span> <em>Annals of Mathematics</em> 36: 724–32.
+</div>
+<div class="csl-entry">
+———. 1937. <span>“<span class="nocase">On Certain Metric Spaces Arising From Euclidean Spaces by a Change of Metric and Their Imbedding in Hilbert Space</span>.”</span> <em>Annals of Mathematics</em> 38 (4): 787–93.
+</div>
+<div class="csl-entry">
+Schönemann, P. H. 1970. <span>“<span>On Metric Multidimensional Unfolding</span>.”</span> <em>Psychometrika</em> 35 (3): 349–66.
+</div>
+<div class="csl-entry">
+Schumaker, L. 2007. <em><span>Spline Functions: Basic Theory</span></em>. Third Edition. Cambridge University Press.
+</div>
+<div class="csl-entry">
+Shepard, R. N. 1962a. <span>“<span class="nocase">The Analysis of Proximities: Multidimensional Scaling with an Unknown Distance Function. I</span>.”</span> <em>Psychometrika</em> 27: 125–40.
+</div>
+<div class="csl-entry">
+———. 1962b. <span>“<span class="nocase">The Analysis of Proximities: Multidimensional Scaling with an Unknown Distance Function. II</span>.”</span> <em>Psychometrika</em> 27: 219–46.
+</div>
+<div class="csl-entry">
+Spang, H. A. 1962. <span>“<span class="nocase">A Review of Minimization Techniques for Nonlinear Functions</span>.”</span> <em>SIAM Review</em> 4 (4): 343–65.
+</div>
+<div class="csl-entry">
+Stephenson, W. 1953. <em><span class="nocase">The Study of Behavior: Q-technique and its Methodology</span></em>. University of Chicago Press.
+</div>
+<div class="csl-entry">
+Takane, Y., F. W. Young, and J. De Leeuw. 1977. <span>“Nonmetric Individual Differences in Multidimensional Scaling: An Alternating Least Squares Method with Optimal Scaling Features.”</span> <em>Psychometrika</em> 42: 7–67. <a href="http://deleeuwpdx.net/janspubs/1977/articles/takane_young_deleeuw_A_77.pdf">http://deleeuwpdx.net/janspubs/1977/articles/takane_young_deleeuw_A_77.pdf</a>.
+</div>
+<div class="csl-entry">
+Taussky, O. 1949. <span>“<span class="nocase">A Recurring Theorem on Determinants</span>.”</span> <em>American Mathematical Monthly</em> 56: 672–76.
+</div>
+<div class="csl-entry">
+Tisseur, F., and K. Meerbergen. 2001. <span>“<span>The Quadratic Eigenvalue Problem</span>.”</span> <em><span>SIAM</span> Review</em> 43 (2): 235–86.
+</div>
+<div class="csl-entry">
+Torgerson, W. S. 1952. <span>“<span class="nocase">Multidimensional Scaling: I. Theory and Method</span>.”</span> <em>Psychometrika</em> 17 (4): 401–19.
+</div>
+<div class="csl-entry">
+———. 1958. <em><span class="nocase">Theory and Methods of Scaling</span></em>. New York: Wiley.
+</div>
+<div class="csl-entry">
+———. 1965. <span>“<span class="nocase">Multidimensional Scaling of Similarity</span>.”</span> <em>Psychometrika</em> 30 (4): 379–93.
+</div>
+<div class="csl-entry">
+Trosset, M. W., and R. Mathar. 1997. <span>“<span class="nocase">On the Existence on Nonglobal Minimizers of the STRESS Criterion for Metric Multidimensional Scaling</span>.”</span> In <em>Proceedings of the Statistical Computing Section</em>, 158–62. Alexandria, VA: American Statistical Association.
+</div>
+<div class="csl-entry">
+Turlach, B. A., and A. Weingessel. 2013. <em><span class="nocase">quadprog: Functions to solve Quadratic Programming Problems.</span></em> <a href="https://CRAN.R-project.org/package=quadprog">https://CRAN.R-project.org/package=quadprog</a>.
+</div>
+<div class="csl-entry">
+Tuy, H. 1998. <em>Convex Analysis and Global Optimization</em>. Kluwer Academic Publishers.
+</div>
+<div class="csl-entry">
+Van de Geer, J. P. 1967. <em><span class="nocase">Inleiding in de Multivariate Analyse</span></em>. Van Loghum Slaterus.
+</div>
+<div class="csl-entry">
+———. 1971. <em><span class="nocase">Introduction to Multivariate Analysis for the Social Sciences</span></em>. San Francisco, CA: Freeman.
+</div>
+<div class="csl-entry">
+Van de Geer, J. P., W. J. M. Levelt, and R. Plomp. 1962. <span>“<span class="nocase">The Connotation of Musical Consonance</span>.”</span> <em>Acta Psychologica</em> 20: 308–19.
+</div>
+<div class="csl-entry">
+Vesely, L., and L. Zajicek. 1989. <span>“<span class="nocase">Delta-convex Mappings between Banach Spaces and Applications</span>.”</span> <em>Dissertationes Mathematicae</em> 289: 1–48.
+</div>
+<div class="csl-entry">
+Wang, Y., C. L. Lawson, and R. J. Hanson. 2015. <em><span class="nocase">lsei: Solving Least Squares Problems under Equality/Inequality Constraints</span></em>. <a href="http://CRAN.R-project.org/package=lsei">http://CRAN.R-project.org/package=lsei</a>.
+</div>
+<div class="csl-entry">
+Young, F. W. 1981. <span>“<span class="nocase">Quantitative Analysis of Qualitative Data</span>.”</span> <em>Psychometrika</em> 46: 357–88.
+</div>
+<div class="csl-entry">
+Young, F. W., Y. Takane, and R. Lewyckyj. 1978a. <span>“<span class="nocase">ALSCAL: A Nonmetric Multidimensional Scaling Program with Several Individual-Differences Options</span>.”</span> <em>Behavior Research Methods &amp; Instrumentation</em> 10 (3): 451–53.
+</div>
+<div class="csl-entry">
+———. 1978b. <span>“<span class="nocase">Three Notes on ALSCAL</span>.”</span> <em>Psychometrika</em> 43 (3): 433–35.
+</div>
+<div class="csl-entry">
+Young, G., and A. S. Householder. 1938. <span>“<span class="nocase">Discussion of a Set of Points in Terms of Their Mutual Distances</span>.”</span> <em>Psychometrika</em> 3 (19-22).
+</div>
+<div class="csl-entry">
+Zangwill, W. I. 1969. <em><span class="nocase">Nonlinear Programming: a Unified Approach</span></em>. Englewood-Cliffs, N.J.: Prentice-Hall.
+</div>
+<div class="csl-entry">
+Zilinskas, A., and A. Poslipskyte. 2003. <span>“<span class="nocase">On Multimodality of the SSTRESS Criterion for Metric Multidimensional Scaling</span>.”</span> <em>Informatica</em> 14 (1): 121–30.
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="apunlicense.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+},
+"keep_md": true,
+"toolbar": {
+"position": "fixed"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

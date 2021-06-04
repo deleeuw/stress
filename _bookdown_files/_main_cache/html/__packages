@@ -1,0 +1,17 @@
+base
+MASS
+knitr
+kableExtra
+microbenchmark
+polynom
+BiocGenerics
+graph
+Rgraphviz
+hasseDiagram
+rlist
+lsei
+rcdd
+numDeriv
+vertexenum
+lpSolve
+quadprog

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Nonmetric MDS | Least Squares Euclidean Multidimensional Scaling</title>
+  <meta name="description" content="null" />
+  <meta name="generator" content="bookdown 0.22.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Nonmetric MDS | Least Squares Euclidean Multidimensional Scaling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="null" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Nonmetric MDS | Least Squares Euclidean Multidimensional Scaling" />
+  
+  <meta name="twitter:description" content="null" />
+  
+
+<meta name="author" content="Jan de Leeuw" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chacceleration.html"/>
+<link rel="next" href="intinterval.html"/>
+<script src="libs/header-attrs-2.8.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introhist"><i class="fa fa-check"></i><b>1.1</b> Brief History</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#milestones"><i class="fa fa-check"></i><b>1.1.1</b> Milestones</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#introbasic"><i class="fa fa-check"></i><b>1.2</b> Basic MDS</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#kruskals-stress"><i class="fa fa-check"></i><b>1.2.1</b> Kruskal’s stress</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#datasym"><i class="fa fa-check"></i><b>1.2.2</b> Data Asymmetry</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#local-and-global"><i class="fa fa-check"></i><b>1.2.3</b> Local and Global</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#introgeneralize"><i class="fa fa-check"></i><b>1.3</b> Generalizations</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#gennonmetric"><i class="fa fa-check"></i><b>1.3.1</b> Non-metric</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#genfstress"><i class="fa fa-check"></i><b>1.3.2</b> fstress</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#gencons"><i class="fa fa-check"></i><b>1.3.3</b> Constraints</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#inreplic"><i class="fa fa-check"></i><b>1.3.4</b> Replications</a></li>
+<li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#genasym"><i class="fa fa-check"></i><b>1.3.5</b> Distance Asymmetry</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="propchapter.html"><a href="propchapter.html"><i class="fa fa-check"></i><b>2</b> Properties of Stress</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propchapter.html"><a href="propchapter.html#propnotation"><i class="fa fa-check"></i><b>2.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="propchapter.html"><a href="propchapter.html#propexpand"><i class="fa fa-check"></i><b>2.1.1</b> Expanding</a></li>
+<li class="chapter" data-level="2.1.2" data-path="propchapter.html"><a href="propchapter.html#propmatrix"><i class="fa fa-check"></i><b>2.1.2</b> Matrix Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="propchapter.html"><a href="propchapter.html#propglobal"><i class="fa fa-check"></i><b>2.2</b> Global Properties</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="propchapter.html"><a href="propchapter.html#propbounded"><i class="fa fa-check"></i><b>2.2.1</b> Boundedness</a></li>
+<li class="chapter" data-level="2.2.2" data-path="propchapter.html"><a href="propchapter.html#propinvariance"><i class="fa fa-check"></i><b>2.2.2</b> Invariance</a></li>
+<li class="chapter" data-level="2.2.3" data-path="propchapter.html"><a href="propchapter.html#propcontinuity"><i class="fa fa-check"></i><b>2.2.3</b> Continuity</a></li>
+<li class="chapter" data-level="2.2.4" data-path="propchapter.html"><a href="propchapter.html#propcoercive"><i class="fa fa-check"></i><b>2.2.4</b> Coercivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="propchapter.html"><a href="propchapter.html#propconvex"><i class="fa fa-check"></i><b>2.3</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="propchapter.html"><a href="propchapter.html#distances"><i class="fa fa-check"></i><b>2.3.1</b> Distances</a></li>
+<li class="chapter" data-level="2.3.2" data-path="propchapter.html"><a href="propchapter.html#propdc"><i class="fa fa-check"></i><b>2.3.2</b> DC Functions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="propchapter.html"><a href="propchapter.html#subdifferentials"><i class="fa fa-check"></i><b>2.3.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="2.3.4" data-path="propchapter.html"><a href="propchapter.html#propnegdis"><i class="fa fa-check"></i><b>2.3.4</b> Negative Dissimilarities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="propchapter.html"><a href="propchapter.html#propguttman"><i class="fa fa-check"></i><b>2.4</b> Guttman Transform</a></li>
+<li class="chapter" data-level="2.5" data-path="propchapter.html"><a href="propchapter.html#propdiff"><i class="fa fa-check"></i><b>2.5</b> Differentiability</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="propchapter.html"><a href="propchapter.html#regularity"><i class="fa fa-check"></i><b>2.5.1</b> Regularity</a></li>
+<li class="chapter" data-level="2.5.2" data-path="propchapter.html"><a href="propchapter.html#expansions"><i class="fa fa-check"></i><b>2.5.2</b> Expansions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="propchapter.html"><a href="propchapter.html#propdirderivs"><i class="fa fa-check"></i><b>2.5.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="2.5.4" data-path="propchapter.html"><a href="propchapter.html#propspecexp"><i class="fa fa-check"></i><b>2.5.4</b> Special Expansions</a></li>
+<li class="chapter" data-level="2.5.5" data-path="propchapter.html"><a href="propchapter.html#propzerodist"><i class="fa fa-check"></i><b>2.5.5</b> Zero Distance Subspaces</a></li>
+<li class="chapter" data-level="2.5.6" data-path="propchapter.html"><a href="propchapter.html#propdistsmo"><i class="fa fa-check"></i><b>2.5.6</b> Distance Smoothing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="propchapter.html"><a href="propchapter.html#propstationary"><i class="fa fa-check"></i><b>2.6</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="propchapter.html"><a href="propchapter.html#local-maxima"><i class="fa fa-check"></i><b>2.6.1</b> Local Maxima</a></li>
+<li class="chapter" data-level="2.6.2" data-path="propchapter.html"><a href="propchapter.html#proplocmin"><i class="fa fa-check"></i><b>2.6.2</b> Local Minima</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="propchapter.html"><a href="propchapter.html#propenvelopes"><i class="fa fa-check"></i><b>2.7</b> Stress Envelopes</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="propchapter.html"><a href="propchapter.html#propcsmaj"><i class="fa fa-check"></i><b>2.7.1</b> CS Majorization</a></li>
+<li class="chapter" data-level="2.7.2" data-path="propchapter.html"><a href="propchapter.html#propamgmmin"><i class="fa fa-check"></i><b>2.7.2</b> AM/GM Minorization</a></li>
+<li class="chapter" data-level="2.7.3" data-path="propchapter.html"><a href="propchapter.html#dualities"><i class="fa fa-check"></i><b>2.7.3</b> Dualities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="propchapter.html"><a href="propchapter.html#how-large-is-my-stress"><i class="fa fa-check"></i><b>2.8</b> How Large is My Stress ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="propspaces.html"><a href="propspaces.html"><i class="fa fa-check"></i><b>3</b> Stress Spaces</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="propspaces.html"><a href="propspaces.html#propconfspace"><i class="fa fa-check"></i><b>3.1</b> Configuration Space</a></li>
+<li class="chapter" data-level="3.2" data-path="propspaces.html"><a href="propspaces.html#propcoefspace"><i class="fa fa-check"></i><b>3.2</b> Coefficient Space</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="propspaces.html"><a href="propspaces.html#on-the-planes"><i class="fa fa-check"></i><b>3.2.1</b> On the Planes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="propspaces.html"><a href="propspaces.html#general"><i class="fa fa-check"></i><b>3.2.2</b> General</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="propspaces.html"><a href="propspaces.html#propspherespace"><i class="fa fa-check"></i><b>3.3</b> Sphere Space</a></li>
+<li class="chapter" data-level="3.4" data-path="propspaces.html"><a href="propspaces.html#cross-product-space"><i class="fa fa-check"></i><b>3.4</b> Cross-Product Space</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="picsstress.html"><a href="picsstress.html"><i class="fa fa-check"></i><b>4</b> Pictures of Stress</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="picsstress.html"><a href="picsstress.html#coefficient-space"><i class="fa fa-check"></i><b>4.1</b> Coefficient Space</a></li>
+<li class="chapter" data-level="4.2" data-path="picsstress.html"><a href="picsstress.html#global-perspective"><i class="fa fa-check"></i><b>4.2</b> Global Perspective</a></li>
+<li class="chapter" data-level="4.3" data-path="picsstress.html"><a href="picsstress.html#global-contour"><i class="fa fa-check"></i><b>4.3</b> Global Contour</a></li>
+<li class="chapter" data-level="4.4" data-path="picsstress.html"><a href="picsstress.html#stationary-points"><i class="fa fa-check"></i><b>4.4</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="picsstress.html"><a href="picsstress.html#first-minimum"><i class="fa fa-check"></i><b>4.4.1</b> First Minimum</a></li>
+<li class="chapter" data-level="4.4.2" data-path="picsstress.html"><a href="picsstress.html#second-minimum"><i class="fa fa-check"></i><b>4.4.2</b> Second Minimum</a></li>
+<li class="chapter" data-level="4.4.3" data-path="picsstress.html"><a href="picsstress.html#third-minimum"><i class="fa fa-check"></i><b>4.4.3</b> Third Minimum</a></li>
+<li class="chapter" data-level="4.4.4" data-path="picsstress.html"><a href="picsstress.html#first-saddle-point"><i class="fa fa-check"></i><b>4.4.4</b> First Saddle Point</a></li>
+<li class="chapter" data-level="4.4.5" data-path="picsstress.html"><a href="picsstress.html#second-saddle-point"><i class="fa fa-check"></i><b>4.4.5</b> Second Saddle Point</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="picsstress.html"><a href="picsstress.html#picsphere"><i class="fa fa-check"></i><b>4.5</b> Another Look</a></li>
+<li class="chapter" data-level="4.6" data-path="picsstress.html"><a href="picsstress.html#picline"><i class="fa fa-check"></i><b>4.6</b> A Final Look</a></li>
+<li class="chapter" data-level="4.7" data-path="picsstress.html"><a href="picsstress.html#discuss"><i class="fa fa-check"></i><b>4.7</b> Discuss</a></li>
+<li class="chapter" data-level="4.8" data-path="picsstress.html"><a href="picsstress.html#coordinates"><i class="fa fa-check"></i><b>4.8</b> Coordinates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html"><i class="fa fa-check"></i><b>5</b> Classical Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#algebra"><i class="fa fa-check"></i><b>5.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#torgerson-transform"><i class="fa fa-check"></i><b>5.1.1</b> Torgerson Transform</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#schoenbergs-theorem"><i class="fa fa-check"></i><b>5.1.2</b> Schoenberg’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation"><i class="fa fa-check"></i><b>5.2</b> Approximation</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#low-rank-approximation-of-the-torgersen-transform"><i class="fa fa-check"></i><b>5.2.1</b> Low Rank Approximation of the Torgersen Transform</a></li>
+<li class="chapter" data-level="5.2.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#minimization-of-strain"><i class="fa fa-check"></i><b>5.2.2</b> Minimization of Strain</a></li>
+<li class="chapter" data-level="5.2.3" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation-from-below"><i class="fa fa-check"></i><b>5.2.3</b> Approximation from Below</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="minstr.html"><a href="minstr.html"><i class="fa fa-check"></i><b>6</b> Minimization of Stress</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="minstr.html"><a href="minstr.html#gradient-methods"><i class="fa fa-check"></i><b>6.1</b> Gradient Methods</a></li>
+<li class="chapter" data-level="6.2" data-path="minstr.html"><a href="minstr.html#initial-configurations"><i class="fa fa-check"></i><b>6.2</b> Initial Configurations</a></li>
+<li class="chapter" data-level="6.3" data-path="minstr.html"><a href="minstr.html#apmajmin"><i class="fa fa-check"></i><b>6.3</b> On MM Algorithms</a></li>
+<li class="chapter" data-level="6.4" data-path="minstr.html"><a href="minstr.html#smacof-algorithm"><i class="fa fa-check"></i><b>6.4</b> Smacof Algorithm</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="minstr.html"><a href="minstr.html#global-convergence"><i class="fa fa-check"></i><b>6.4.1</b> Global Convergence</a></li>
+<li class="chapter" data-level="6.4.2" data-path="minstr.html"><a href="minstr.html#from-the-cs-inequality"><i class="fa fa-check"></i><b>6.4.2</b> From the CS Inequality</a></li>
+<li class="chapter" data-level="6.4.3" data-path="minstr.html"><a href="minstr.html#from-majorization"><i class="fa fa-check"></i><b>6.4.3</b> From Majorization</a></li>
+<li class="chapter" data-level="6.4.4" data-path="minstr.html"><a href="minstr.html#mincomprot"><i class="fa fa-check"></i><b>6.4.4</b> Component Rotated Smacof</a></li>
+<li class="chapter" data-level="6.4.5" data-path="minstr.html"><a href="minstr.html#minlocconv"><i class="fa fa-check"></i><b>6.4.5</b> Local Convergence</a></li>
+<li class="chapter" data-level="6.4.6" data-path="minstr.html"><a href="minstr.html#negative-dissimilarities"><i class="fa fa-check"></i><b>6.4.6</b> Negative Dissimilarities</a></li>
+<li class="chapter" data-level="6.4.7" data-path="minstr.html"><a href="minstr.html#minunweight"><i class="fa fa-check"></i><b>6.4.7</b> Unweighting</a></li>
+<li class="chapter" data-level="6.4.8" data-path="minstr.html"><a href="minstr.html#smacof-in-coefficient-space"><i class="fa fa-check"></i><b>6.4.8</b> Smacof in Coefficient Space</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="minstr.html"><a href="minstr.html#regions-of-attraction"><i class="fa fa-check"></i><b>6.5</b> Regions of Attraction</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="minstr.html"><a href="minstr.html#smacof"><i class="fa fa-check"></i><b>6.5.1</b> Smacof</a></li>
+<li class="chapter" data-level="6.5.2" data-path="minstr.html"><a href="minstr.html#newton"><i class="fa fa-check"></i><b>6.5.2</b> Newton</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chacceleration.html"><a href="chacceleration.html"><i class="fa fa-check"></i><b>7</b> Acceleration of Convergence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chacceleration.html"><a href="chacceleration.html#accelsimple"><i class="fa fa-check"></i><b>7.1</b> Simple Acceleration</a></li>
+<li class="chapter" data-level="7.2" data-path="chacceleration.html"><a href="chacceleration.html#one-parameter-methods"><i class="fa fa-check"></i><b>7.2</b> One-Parameter Methods</a></li>
+<li class="chapter" data-level="7.3" data-path="chacceleration.html"><a href="chacceleration.html#squarem"><i class="fa fa-check"></i><b>7.3</b> SQUAREM</a></li>
+<li class="chapter" data-level="7.4" data-path="chacceleration.html"><a href="chacceleration.html#vector-extrapolation-methods"><i class="fa fa-check"></i><b>7.4</b> Vector extrapolation methods</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonmtrmds.html"><a href="nonmtrmds.html"><i class="fa fa-check"></i><b>8</b> Nonmetric MDS</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#generalities"><i class="fa fa-check"></i><b>8.1</b> Generalities</a></li>
+<li class="chapter" data-level="8.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssingledouble"><i class="fa fa-check"></i><b>8.2</b> Single and Double Phase</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#double-phase"><i class="fa fa-check"></i><b>8.2.1</b> Double Phase</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssinglephase"><i class="fa fa-check"></i><b>8.2.2</b> Single Phase</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#affine-nmds"><i class="fa fa-check"></i><b>8.3</b> Affine NMDS</a></li>
+<li class="chapter" data-level="8.4" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsconic"><i class="fa fa-check"></i><b>8.4</b> Conic MDS</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsnorm"><i class="fa fa-check"></i><b>8.4.1</b> Normalization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#inner-iterations"><i class="fa fa-check"></i><b>8.4.2</b> Inner Iterations</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#stress-1-and-stress-2"><i class="fa fa-check"></i><b>8.4.3</b> Stress-1 and Stress-2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="intinterval.html"><a href="intinterval.html"><i class="fa fa-check"></i><b>9</b> Interval MDS</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="intinterval.html"><a href="intinterval.html#intadditive"><i class="fa fa-check"></i><b>9.1</b> The Additive Constant</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="intinterval.html"><a href="intinterval.html#exactad"><i class="fa fa-check"></i><b>9.1.1</b> Algebra</a></li>
+<li class="chapter" data-level="9.1.2" data-path="intinterval.html"><a href="intinterval.html#examples"><i class="fa fa-check"></i><b>9.1.2</b> Examples</a></li>
+<li class="chapter" data-level="9.1.3" data-path="intinterval.html"><a href="intinterval.html#variation"><i class="fa fa-check"></i><b>9.1.3</b> A Variation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html"><i class="fa fa-check"></i><b>10</b> Polynomial and Splinical MDS</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#polynomial-mds"><i class="fa fa-check"></i><b>10.1</b> Polynomial MDS</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Monotone Polynomials</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#splinical-mds"><i class="fa fa-check"></i><b>10.2</b> Splinical MDS</a></li>
+<li class="chapter" data-level="10.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathsplines"><i class="fa fa-check"></i><b>10.3</b> Splines</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathbsplines"><i class="fa fa-check"></i><b>10.3.1</b> B-splines</a></li>
+<li class="chapter" data-level="10.3.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathisplines"><i class="fa fa-check"></i><b>10.3.2</b> I-splines</a></li>
+<li class="chapter" data-level="10.3.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#time-series-example"><i class="fa fa-check"></i><b>10.3.3</b> Time Series Example</a></li>
+<li class="chapter" data-level="10.3.4" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-splines"><i class="fa fa-check"></i><b>10.3.4</b> Monotone Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chapordinal.html"><a href="chapordinal.html"><i class="fa fa-check"></i><b>11</b> Ordinal MDS</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chapordinal.html"><a href="chapordinal.html#mathmonreg"><i class="fa fa-check"></i><b>11.1</b> Monotone Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="chapordinal.html"><a href="chapordinal.html#mathsimpiso"><i class="fa fa-check"></i><b>11.1.1</b> Simple Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chapordinal.html"><a href="chapordinal.html#mathweigmr"><i class="fa fa-check"></i><b>11.1.2</b> Weighted Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.3" data-path="chapordinal.html"><a href="chapordinal.html#mathnorcone"><i class="fa fa-check"></i><b>11.1.3</b> Normalized Cone Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chapordinal.html"><a href="chapordinal.html#nmdsals"><i class="fa fa-check"></i><b>11.2</b> Alternating Least Squares</a></li>
+<li class="chapter" data-level="11.3" data-path="chapordinal.html"><a href="chapordinal.html#nmdskruskal"><i class="fa fa-check"></i><b>11.3</b> Kruskal’s Approach</a></li>
+<li class="chapter" data-level="11.4" data-path="chapordinal.html"><a href="chapordinal.html#nmdsguttman"><i class="fa fa-check"></i><b>11.4</b> Guttman’s Approach</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="chapordinal.html"><a href="chapordinal.html#smoothness-of-ordinal-loss-functions"><i class="fa fa-check"></i><b>11.4.1</b> Smoothness of Ordinal Loss Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chapordinal.html"><a href="chapordinal.html#scaling-with-distance-bounds"><i class="fa fa-check"></i><b>11.5</b> Scaling with Distance Bounds</a></li>
+<li class="chapter" data-level="11.6" data-path="chapordinal.html"><a href="chapordinal.html#bounds-on-stress"><i class="fa fa-check"></i><b>11.6</b> Bounds on Stress</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="unidimensional.html"><a href="unidimensional.html"><i class="fa fa-check"></i><b>12</b> Unidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unidimensional.html"><a href="unidimensional.html#an-example"><i class="fa fa-check"></i><b>12.1</b> An example</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="unidimensional.html"><a href="unidimensional.html#perspective"><i class="fa fa-check"></i><b>12.1.1</b> Perspective</a></li>
+<li class="chapter" data-level="12.1.2" data-path="unidimensional.html"><a href="unidimensional.html#contour"><i class="fa fa-check"></i><b>12.1.2</b> Contour</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="unidimensional.html"><a href="unidimensional.html#order-formulation"><i class="fa fa-check"></i><b>12.2</b> Order Formulation</a></li>
+<li class="chapter" data-level="12.3" data-path="unidimensional.html"><a href="unidimensional.html#permutation-formulation"><i class="fa fa-check"></i><b>12.3</b> Permutation Formulation</a></li>
+<li class="chapter" data-level="12.4" data-path="unidimensional.html"><a href="unidimensional.html#sign-matrix-formulation"><i class="fa fa-check"></i><b>12.4</b> Sign Matrix Formulation</a></li>
+<li class="chapter" data-level="12.5" data-path="unidimensional.html"><a href="unidimensional.html#unialgorithms"><i class="fa fa-check"></i><b>12.5</b> Algorithms for UMDS</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="unidimensional.html"><a href="unidimensional.html#unismacof"><i class="fa fa-check"></i><b>12.5.1</b> SMACOF</a></li>
+<li class="chapter" data-level="12.5.2" data-path="unidimensional.html"><a href="unidimensional.html#unismoothed"><i class="fa fa-check"></i><b>12.5.2</b> SMACOF (smoothed)</a></li>
+<li class="chapter" data-level="12.5.3" data-path="unidimensional.html"><a href="unidimensional.html#unibranchbound"><i class="fa fa-check"></i><b>12.5.3</b> Branch-and-Bound</a></li>
+<li class="chapter" data-level="12.5.4" data-path="unidimensional.html"><a href="unidimensional.html#unidynamic"><i class="fa fa-check"></i><b>12.5.4</b> Dynamic Programming</a></li>
+<li class="chapter" data-level="12.5.5" data-path="unidimensional.html"><a href="unidimensional.html#uniannealing"><i class="fa fa-check"></i><b>12.5.5</b> Simulated Annealing</a></li>
+<li class="chapter" data-level="12.5.6" data-path="unidimensional.html"><a href="unidimensional.html#unipenalty"><i class="fa fa-check"></i><b>12.5.6</b> Penalty Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fullchapter.html"><a href="fullchapter.html"><i class="fa fa-check"></i><b>13</b> Full-dimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fullchapter.html"><a href="fullchapter.html#fullconvex"><i class="fa fa-check"></i><b>13.1</b> Convexity</a></li>
+<li class="chapter" data-level="13.2" data-path="fullchapter.html"><a href="fullchapter.html#fulloptimal"><i class="fa fa-check"></i><b>13.2</b> Optimality</a></li>
+<li class="chapter" data-level="13.3" data-path="fullchapter.html"><a href="fullchapter.html#fulliteration"><i class="fa fa-check"></i><b>13.3</b> Iteration</a></li>
+<li class="chapter" data-level="13.4" data-path="fullchapter.html"><a href="fullchapter.html#fullcpspace"><i class="fa fa-check"></i><b>13.4</b> Cross Product Space</a></li>
+<li class="chapter" data-level="13.5" data-path="fullchapter.html"><a href="fullchapter.html#full-dimensional-scaling"><i class="fa fa-check"></i><b>13.5</b> Full-dimensional Scaling</a></li>
+<li class="chapter" data-level="13.6" data-path="fullchapter.html"><a href="fullchapter.html#ekman-example-1"><i class="fa fa-check"></i><b>13.6</b> Ekman example</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="chunfolding.html"><a href="chunfolding.html"><i class="fa fa-check"></i><b>14</b> Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="chunfolding.html"><a href="chunfolding.html#algebra-1"><i class="fa fa-check"></i><b>14.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="chunfolding.html"><a href="chunfolding.html#one-dimensional"><i class="fa fa-check"></i><b>14.1.1</b> One-dimensional</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="chunfolding.html"><a href="chunfolding.html#classical-unfolding"><i class="fa fa-check"></i><b>14.2</b> Classical Unfolding</a></li>
+<li class="chapter" data-level="14.3" data-path="chunfolding.html"><a href="chunfolding.html#nonmetric-unfolding"><i class="fa fa-check"></i><b>14.3</b> Nonmetric Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="chunfolding.html"><a href="chunfolding.html#unfdegenerate"><i class="fa fa-check"></i><b>14.3.1</b> Degenerate Solutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cmds.html"><a href="cmds.html"><i class="fa fa-check"></i><b>15</b> Constrained Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="cmds.html"><a href="cmds.html#baspar"><i class="fa fa-check"></i><b>15.1</b> Basic Partitioning</a></li>
+<li class="chapter" data-level="15.2" data-path="cmds.html"><a href="cmds.html#majawa"><i class="fa fa-check"></i><b>15.2</b> Unweigthing</a></li>
+<li class="chapter" data-level="15.3" data-path="cmds.html"><a href="cmds.html#constraints-on-the-distances"><i class="fa fa-check"></i><b>15.3</b> Constraints on the Distances</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="cmds.html"><a href="cmds.html#rectangles"><i class="fa fa-check"></i><b>15.3.1</b> Rectangles</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="cmds.html"><a href="cmds.html#lincons"><i class="fa fa-check"></i><b>15.4</b> Linear Constraints</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="cmds.html"><a href="cmds.html#uniqueness"><i class="fa fa-check"></i><b>15.4.1</b> Uniqueness</a></li>
+<li class="chapter" data-level="15.4.2" data-path="cmds.html"><a href="cmds.html#combinations"><i class="fa fa-check"></i><b>15.4.2</b> Combinations</a></li>
+<li class="chapter" data-level="15.4.3" data-path="cmds.html"><a href="cmds.html#stepsize"><i class="fa fa-check"></i><b>15.4.3</b> Step Size</a></li>
+<li class="chapter" data-level="15.4.4" data-path="cmds.html"><a href="cmds.html#singdesign"><i class="fa fa-check"></i><b>15.4.4</b> Single Design Matrix</a></li>
+<li class="chapter" data-level="15.4.5" data-path="cmds.html"><a href="cmds.html#multdesign"><i class="fa fa-check"></i><b>15.4.5</b> Multiple Design Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="cmds.html"><a href="cmds.html#circmds"><i class="fa fa-check"></i><b>15.5</b> Circular MDS</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="cmds.html"><a href="cmds.html#circhist"><i class="fa fa-check"></i><b>15.5.1</b> Some History</a></li>
+<li class="chapter" data-level="15.5.2" data-path="cmds.html"><a href="cmds.html#circprimal"><i class="fa fa-check"></i><b>15.5.2</b> Primal Methods</a></li>
+<li class="chapter" data-level="15.5.3" data-path="cmds.html"><a href="cmds.html#circdual"><i class="fa fa-check"></i><b>15.5.3</b> Dual Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="cmds.html"><a href="cmds.html#ellimcds"><i class="fa fa-check"></i><b>15.6</b> Elliptical MDS</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="cmds.html"><a href="cmds.html#elliprimal"><i class="fa fa-check"></i><b>15.6.1</b> Primal</a></li>
+<li class="chapter" data-level="15.6.2" data-path="cmds.html"><a href="cmds.html#ellidual"><i class="fa fa-check"></i><b>15.6.2</b> Dual</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="cmds.html"><a href="cmds.html#distance-bounds"><i class="fa fa-check"></i><b>15.7</b> Distance Bounds</a></li>
+<li class="chapter" data-level="15.8" data-path="cmds.html"><a href="cmds.html#localized-mds"><i class="fa fa-check"></i><b>15.8</b> Localized MDS</a></li>
+<li class="chapter" data-level="15.9" data-path="cmds.html"><a href="cmds.html#mds-as-mva"><i class="fa fa-check"></i><b>15.9</b> MDS as MVA</a></li>
+<li class="chapter" data-level="15.10" data-path="cmds.html"><a href="cmds.html#conshorseshoes"><i class="fa fa-check"></i><b>15.10</b> Horseshoes</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="asymmds.html"><a href="asymmds.html"><i class="fa fa-check"></i><b>16</b> Asymmetry in MDS</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="asymmds.html"><a href="asymmds.html#conditional-rankings"><i class="fa fa-check"></i><b>16.1</b> Conditional Rankings</a></li>
+<li class="chapter" data-level="16.2" data-path="asymmds.html"><a href="asymmds.html#confusion-matrices"><i class="fa fa-check"></i><b>16.2</b> Confusion Matrices</a></li>
+<li class="chapter" data-level="16.3" data-path="asymmds.html"><a href="asymmds.html#the-slide-vector"><i class="fa fa-check"></i><b>16.3</b> The Slide Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chindif.html"><a href="chindif.html"><i class="fa fa-check"></i><b>17</b> Individual Differences</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="chindif.html"><a href="chindif.html#indifrepl"><i class="fa fa-check"></i><b>17.1</b> Replications</a></li>
+<li class="chapter" data-level="17.2" data-path="chindif.html"><a href="chindif.html#indifindscal"><i class="fa fa-check"></i><b>17.2</b> INDSCAL/PARAFAC</a></li>
+<li class="chapter" data-level="17.3" data-path="chindif.html"><a href="chindif.html#indifidioscal"><i class="fa fa-check"></i><b>17.3</b> IDIOSCAL/TUCKALS</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="chnominal.html"><a href="chnominal.html"><i class="fa fa-check"></i><b>18</b> Nominal MDS</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="chnominal.html"><a href="chnominal.html#binary-dissimilarities"><i class="fa fa-check"></i><b>18.1</b> Binary Dissimilarities</a></li>
+<li class="chapter" data-level="18.2" data-path="chnominal.html"><a href="chnominal.html#indicator-matrix"><i class="fa fa-check"></i><b>18.2</b> Indicator matrix</a></li>
+<li class="chapter" data-level="18.3" data-path="chnominal.html"><a href="chnominal.html#unfolding-indicator-matrices"><i class="fa fa-check"></i><b>18.3</b> Unfolding Indicator Matrices</a></li>
+<li class="chapter" data-level="18.4" data-path="chnominal.html"><a href="chnominal.html#linear-separation"><i class="fa fa-check"></i><b>18.4</b> Linear Separation</a></li>
+<li class="chapter" data-level="18.5" data-path="chnominal.html"><a href="chnominal.html#circular-separation"><i class="fa fa-check"></i><b>18.5</b> Circular Separation</a></li>
+<li class="chapter" data-level="18.6" data-path="chnominal.html"><a href="chnominal.html#multidimensional-scalogram-analysis"><i class="fa fa-check"></i><b>18.6</b> Multidimensional Scalogram Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ssstr.html"><a href="ssstr.html"><i class="fa fa-check"></i><b>19</b> Sstress and strain</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ssstr.html"><a href="ssstr.html#sstress"><i class="fa fa-check"></i><b>19.1</b> sstress</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="ssstr.html"><a href="ssstr.html#sstress-and-stress"><i class="fa fa-check"></i><b>19.1.1</b> sstress and stress</a></li>
+<li class="chapter" data-level="19.1.2" data-path="ssstr.html"><a href="ssstr.html#decomposition"><i class="fa fa-check"></i><b>19.1.2</b> Decomposition</a></li>
+<li class="chapter" data-level="19.1.3" data-path="ssstr.html"><a href="ssstr.html#full-dimensional-sstress"><i class="fa fa-check"></i><b>19.1.3</b> Full-dimensional sstress</a></li>
+<li class="chapter" data-level="19.1.4" data-path="ssstr.html"><a href="ssstr.html#minimizing-sstress"><i class="fa fa-check"></i><b>19.1.4</b> Minimizing sstress</a></li>
+<li class="chapter" data-level="19.1.5" data-path="ssstr.html"><a href="ssstr.html#bounds-for-sstress"><i class="fa fa-check"></i><b>19.1.5</b> Bounds for sstress</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ssstr.html"><a href="ssstr.html#strain"><i class="fa fa-check"></i><b>19.2</b> strain</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ssstr.html"><a href="ssstr.html#unweighted"><i class="fa fa-check"></i><b>19.2.1</b> Unweighted</a></li>
+<li class="chapter" data-level="19.2.2" data-path="ssstr.html"><a href="ssstr.html#using-additivity"><i class="fa fa-check"></i><b>19.2.2</b> Using Additivity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="chrstress.html"><a href="chrstress.html"><i class="fa fa-check"></i><b>20</b> fstress and rstress</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="chrstress.html"><a href="chrstress.html#fstress"><i class="fa fa-check"></i><b>20.1</b> fstress</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="chrstress.html"><a href="chrstress.html#use-of-weights"><i class="fa fa-check"></i><b>20.1.1</b> Use of Weights</a></li>
+<li class="chapter" data-level="20.1.2" data-path="chrstress.html"><a href="chrstress.html#convexity"><i class="fa fa-check"></i><b>20.1.2</b> Convexity</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="chrstress.html"><a href="chrstress.html#rstress"><i class="fa fa-check"></i><b>20.2</b> rStress</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="chrstress.html"><a href="chrstress.html#using-weights"><i class="fa fa-check"></i><b>20.2.1</b> Using Weights</a></li>
+<li class="chapter" data-level="20.2.2" data-path="chrstress.html"><a href="chrstress.html#minimizing-rstress"><i class="fa fa-check"></i><b>20.2.2</b> Minimizing rstress</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="chrstress.html"><a href="chrstress.html#mstress"><i class="fa fa-check"></i><b>20.3</b> mstress</a></li>
+<li class="chapter" data-level="20.4" data-path="chrstress.html"><a href="chrstress.html#astress"><i class="fa fa-check"></i><b>20.4</b> astress</a></li>
+<li class="chapter" data-level="20.5" data-path="chrstress.html"><a href="chrstress.html#pstress"><i class="fa fa-check"></i><b>20.5</b> pstress</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html"><i class="fa fa-check"></i><b>21</b> Alternative Least Squares Loss</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#sammons-mds"><i class="fa fa-check"></i><b>21.1</b> Sammon’s MDS</a></li>
+<li class="chapter" data-level="21.2" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#mcgees-work"><i class="fa fa-check"></i><b>21.2</b> McGee’s Work</a></li>
+<li class="chapter" data-level="21.3" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#shepards-nonmetric-mds"><i class="fa fa-check"></i><b>21.3</b> Shepard’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.4" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#guttmans-nonmetric-mds"><i class="fa fa-check"></i><b>21.4</b> Guttman’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.5" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#positive-orthant-nonmetric-mds"><i class="fa fa-check"></i><b>21.5</b> Positive Orthant Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.6" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#interrole"><i class="fa fa-check"></i><b>21.6</b> Role Reversal</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html"><i class="fa fa-check"></i><b>22</b> Inverse Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#basic-imds"><i class="fa fa-check"></i><b>22.1</b> Basic IMDS</a></li>
+<li class="chapter" data-level="22.2" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#non-negative-dissimilarities"><i class="fa fa-check"></i><b>22.2</b> Non-negative Dissimilarities</a></li>
+<li class="chapter" data-level="22.3" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#zero-weights-andor-distances"><i class="fa fa-check"></i><b>22.3</b> Zero Weights and/or Distances</a></li>
+<li class="chapter" data-level="22.4" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#examples-1"><i class="fa fa-check"></i><b>22.4</b> Examples</a>
+<ul>
+<li class="chapter" data-level="22.4.1" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#first-example"><i class="fa fa-check"></i><b>22.4.1</b> First Example</a></li>
+<li class="chapter" data-level="22.4.2" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#second-example"><i class="fa fa-check"></i><b>22.4.2</b> Second Example</a></li>
+<li class="chapter" data-level="22.4.3" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#third-example"><i class="fa fa-check"></i><b>22.4.3</b> Third Example</a></li>
+<li class="chapter" data-level="22.4.4" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#fourth-example"><i class="fa fa-check"></i><b>22.4.4</b> Fourth Example</a></li>
+</ul></li>
+<li class="chapter" data-level="22.5" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#mds-sensitivity"><i class="fa fa-check"></i><b>22.5</b> MDS Sensitivity</a></li>
+<li class="chapter" data-level="22.6" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#second-order-inverse-mds"><i class="fa fa-check"></i><b>22.6</b> Second Order Inverse MDS</a></li>
+<li class="chapter" data-level="22.7" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#inverse-fds"><i class="fa fa-check"></i><b>22.7</b> Inverse FDS</a></li>
+<li class="chapter" data-level="22.8" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#multiple-solutions"><i class="fa fa-check"></i><b>22.8</b> Multiple Solutions</a></li>
+<li class="chapter" data-level="22.9" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#minimizing-istress"><i class="fa fa-check"></i><b>22.9</b> Minimizing iStress</a></li>
+<li class="chapter" data-level="22.10" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-three"><i class="fa fa-check"></i><b>22.10</b> Order three</a></li>
+<li class="chapter" data-level="22.11" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-four"><i class="fa fa-check"></i><b>22.11</b> Order Four</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="stability.html"><a href="stability.html"><i class="fa fa-check"></i><b>23</b> Stability of MDS Solutions</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="stability.html"><a href="stability.html#null-distribution"><i class="fa fa-check"></i><b>23.1</b> Null Distribution</a></li>
+<li class="chapter" data-level="23.2" data-path="stability.html"><a href="stability.html#pseudo-confidence-ellipsoids"><i class="fa fa-check"></i><b>23.2</b> Pseudo-confidence Ellipsoids</a></li>
+<li class="chapter" data-level="23.3" data-path="stability.html"><a href="stability.html#a-pseudo-bootstrap"><i class="fa fa-check"></i><b>23.3</b> A Pseudo-Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="global.html"><a href="global.html"><i class="fa fa-check"></i><b>24</b> In Search of Global Minima</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="global.html"><a href="global.html#random-starts"><i class="fa fa-check"></i><b>24.1</b> Random Starts</a>
+<ul>
+<li class="chapter" data-level="24.1.1" data-path="global.html"><a href="global.html#examples-2"><i class="fa fa-check"></i><b>24.1.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="global.html"><a href="global.html#tunneling-filling-annealing-etc."><i class="fa fa-check"></i><b>24.2</b> Tunneling, Filling, Annealing, etc.</a></li>
+<li class="chapter" data-level="24.3" data-path="global.html"><a href="global.html#globcutplanes"><i class="fa fa-check"></i><b>24.3</b> Cutting Planes</a>
+<ul>
+<li class="chapter" data-level="24.3.1" data-path="global.html"><a href="global.html#globalcircle"><i class="fa fa-check"></i><b>24.3.1</b> On the Circle</a></li>
+<li class="chapter" data-level="24.3.2" data-path="global.html"><a href="global.html#cauchy-step-size"><i class="fa fa-check"></i><b>24.3.2</b> Cauchy Step Size</a></li>
+<li class="chapter" data-level="24.3.3" data-path="global.html"><a href="global.html#balls"><i class="fa fa-check"></i><b>24.3.3</b> Balls</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="global.html"><a href="global.html#distance-smoothing"><i class="fa fa-check"></i><b>24.4</b> Distance Smoothing</a></li>
+<li class="chapter" data-level="24.5" data-path="global.html"><a href="global.html#penalizing-dimensions"><i class="fa fa-check"></i><b>24.5</b> Penalizing Dimensions</a>
+<ul>
+<li class="chapter" data-level="24.5.1" data-path="global.html"><a href="global.html#local-minima"><i class="fa fa-check"></i><b>24.5.1</b> Local Minima</a></li>
+<li class="chapter" data-level="24.5.2" data-path="global.html"><a href="global.html#algorithm"><i class="fa fa-check"></i><b>24.5.2</b> Algorithm</a></li>
+<li class="chapter" data-level="24.5.3" data-path="global.html"><a href="global.html#examples-3"><i class="fa fa-check"></i><b>24.5.3</b> Examples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="mathadd.html"><a href="mathadd.html"><i class="fa fa-check"></i><b>25</b> Mathematical Addenda</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="mathadd.html"><a href="mathadd.html#apnotation"><i class="fa fa-check"></i><b>25.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="mathadd.html"><a href="mathadd.html#symbols"><i class="fa fa-check"></i><b>25.1.1</b> Symbols</a></li>
+<li class="chapter" data-level="25.1.2" data-path="mathadd.html"><a href="mathadd.html#summation"><i class="fa fa-check"></i><b>25.1.2</b> Summation</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="mathadd.html"><a href="mathadd.html#apmatrices"><i class="fa fa-check"></i><b>25.2</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="mathadd.html"><a href="mathadd.html#apmspaces"><i class="fa fa-check"></i><b>25.2.1</b> Matrix Spaces</a></li>
+<li class="chapter" data-level="25.2.2" data-path="mathadd.html"><a href="mathadd.html#apconstants"><i class="fa fa-check"></i><b>25.2.2</b> Constants</a></li>
+<li class="chapter" data-level="25.2.3" data-path="mathadd.html"><a href="mathadd.html#difmat"><i class="fa fa-check"></i><b>25.2.3</b> Diff Matrices</a></li>
+<li class="chapter" data-level="25.2.4" data-path="mathadd.html"><a href="mathadd.html#apsign"><i class="fa fa-check"></i><b>25.2.4</b> Sign Matrices</a></li>
+<li class="chapter" data-level="25.2.5" data-path="mathadd.html"><a href="mathadd.html#apcombo"><i class="fa fa-check"></i><b>25.2.5</b> Sums and Products</a></li>
+<li class="chapter" data-level="25.2.6" data-path="mathadd.html"><a href="mathadd.html#apinverse"><i class="fa fa-check"></i><b>25.2.6</b> Inverse</a></li>
+<li class="chapter" data-level="25.2.7" data-path="mathadd.html"><a href="mathadd.html#aploewner"><i class="fa fa-check"></i><b>25.2.7</b> The Loewner order</a></li>
+<li class="chapter" data-level="25.2.8" data-path="mathadd.html"><a href="mathadd.html#apeigen"><i class="fa fa-check"></i><b>25.2.8</b> Eigen Decomposition</a></li>
+<li class="chapter" data-level="25.2.9" data-path="mathadd.html"><a href="mathadd.html#apsvd"><i class="fa fa-check"></i><b>25.2.9</b> Singular Value Decomposition</a></li>
+<li class="chapter" data-level="25.2.10" data-path="mathadd.html"><a href="mathadd.html#apmpi"><i class="fa fa-check"></i><b>25.2.10</b> Moore-Penrose Inverse</a></li>
+<li class="chapter" data-level="25.2.11" data-path="mathadd.html"><a href="mathadd.html#apfullrank"><i class="fa fa-check"></i><b>25.2.11</b> Full-rank Decomposition</a></li>
+<li class="chapter" data-level="25.2.12" data-path="mathadd.html"><a href="mathadd.html#apsdc"><i class="fa fa-check"></i><b>25.2.12</b> SDC matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="mathadd.html"><a href="mathadd.html#apineq"><i class="fa fa-check"></i><b>25.3</b> Inequalities</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="mathadd.html"><a href="mathadd.html#apcs"><i class="fa fa-check"></i><b>25.3.1</b> Cauchy-Schwartz</a></li>
+<li class="chapter" data-level="25.3.2" data-path="mathadd.html"><a href="mathadd.html#apamgm"><i class="fa fa-check"></i><b>25.3.2</b> Arithmetic/Geometric Mean</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="mathadd.html"><a href="mathadd.html#apanal"><i class="fa fa-check"></i><b>25.4</b> Calculus/Analysis</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="mathadd.html"><a href="mathadd.html#appfunctions"><i class="fa fa-check"></i><b>25.4.1</b> Functions</a></li>
+<li class="chapter" data-level="25.4.2" data-path="mathadd.html"><a href="mathadd.html#appdiffer"><i class="fa fa-check"></i><b>25.4.2</b> Differentiation</a></li>
+<li class="chapter" data-level="25.4.3" data-path="mathadd.html"><a href="mathadd.html#apdirder"><i class="fa fa-check"></i><b>25.4.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="25.4.4" data-path="mathadd.html"><a href="mathadd.html#local-minima-critical-points"><i class="fa fa-check"></i><b>25.4.4</b> Local Minima, Critical Points</a></li>
+<li class="chapter" data-level="25.4.5" data-path="mathadd.html"><a href="mathadd.html#necessary"><i class="fa fa-check"></i><b>25.4.5</b> Necessary Conditions</a></li>
+<li class="chapter" data-level="25.4.6" data-path="mathadd.html"><a href="mathadd.html#hopital"><i class="fa fa-check"></i><b>25.4.6</b> l’Hôpital’s Rule</a></li>
+<li class="chapter" data-level="25.4.7" data-path="mathadd.html"><a href="mathadd.html#mathimplcit"><i class="fa fa-check"></i><b>25.4.7</b> Implicit Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="mathadd.html"><a href="mathadd.html#mathconvexfuncs"><i class="fa fa-check"></i><b>25.5</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="mathadd.html"><a href="mathadd.html#mathextminima"><i class="fa fa-check"></i><b>25.5.1</b> Existence of Minima</a></li>
+<li class="chapter" data-level="25.5.2" data-path="mathadd.html"><a href="mathadd.html#mathduality"><i class="fa fa-check"></i><b>25.5.2</b> Duality</a></li>
+<li class="chapter" data-level="25.5.3" data-path="mathadd.html"><a href="mathadd.html#mathsubdif"><i class="fa fa-check"></i><b>25.5.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="25.5.4" data-path="mathadd.html"><a href="mathadd.html#mathextdcfunc"><i class="fa fa-check"></i><b>25.5.4</b> DC Functions</a></li>
+<li class="chapter" data-level="25.5.5" data-path="mathadd.html"><a href="mathadd.html#mathdanskin"><i class="fa fa-check"></i><b>25.5.5</b> Danskin-Berge Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="mathadd.html"><a href="mathadd.html#apiterate"><i class="fa fa-check"></i><b>25.6</b> Fixed-Point Iterations</a>
+<ul>
+<li class="chapter" data-level="25.6.1" data-path="mathadd.html"><a href="mathadd.html#point-to-set-maps"><i class="fa fa-check"></i><b>25.6.1</b> Point-to-set Maps</a></li>
+<li class="chapter" data-level="25.6.2" data-path="mathadd.html"><a href="mathadd.html#zangwill"><i class="fa fa-check"></i><b>25.6.2</b> Zangwill’s Theorem</a></li>
+<li class="chapter" data-level="25.6.3" data-path="mathadd.html"><a href="mathadd.html#ostrowski"><i class="fa fa-check"></i><b>25.6.3</b> Ostrowski’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.7" data-path="mathadd.html"><a href="mathadd.html#mathls"><i class="fa fa-check"></i><b>25.7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="25.7.1" data-path="mathadd.html"><a href="mathadd.html#mathquprog"><i class="fa fa-check"></i><b>25.7.1</b> Quadratic Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="25.8" data-path="mathadd.html"><a href="mathadd.html#mathpenal"><i class="fa fa-check"></i><b>25.8</b> Quadratic penalties</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="apcode.html"><a href="apcode.html"><i class="fa fa-check"></i><b>A</b> Code</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="apcode.html"><a href="apcode.html#rapcode"><i class="fa fa-check"></i><b>A.1</b> R Code</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="apcode.html"><a href="apcode.html#aputilitiescode"><i class="fa fa-check"></i><b>A.1.1</b> utilities.R</a></li>
+<li class="chapter" data-level="A.1.2" data-path="apcode.html"><a href="apcode.html#apindexingcode"><i class="fa fa-check"></i><b>A.1.2</b> commom/indexing.r</a></li>
+<li class="chapter" data-level="A.1.3" data-path="apcode.html"><a href="apcode.html#apiocode"><i class="fa fa-check"></i><b>A.1.3</b> commom/io.r</a></li>
+<li class="chapter" data-level="A.1.4" data-path="apcode.html"><a href="apcode.html#aplinearcode"><i class="fa fa-check"></i><b>A.1.4</b> commom/linear.r</a></li>
+<li class="chapter" data-level="A.1.5" data-path="apcode.html"><a href="apcode.html#appermcode"><i class="fa fa-check"></i><b>A.1.5</b> commom/nextPC.r</a></li>
+<li class="chapter" data-level="A.1.6" data-path="apcode.html"><a href="apcode.html#apsmacofcode"><i class="fa fa-check"></i><b>A.1.6</b> commom/smacof.r</a></li>
+<li class="chapter" data-level="A.1.7" data-path="apcode.html"><a href="apcode.html#apcodeprop"><i class="fa fa-check"></i><b>A.1.7</b> properties.R</a></li>
+<li class="chapter" data-level="A.1.8" data-path="apcode.html"><a href="apcode.html#apcodepic"><i class="fa fa-check"></i><b>A.1.8</b> pictures.R</a></li>
+<li class="chapter" data-level="A.1.9" data-path="apcode.html"><a href="apcode.html#apcodeclass"><i class="fa fa-check"></i><b>A.1.9</b> classical.R</a></li>
+<li class="chapter" data-level="A.1.10" data-path="apcode.html"><a href="apcode.html#apcodeminim"><i class="fa fa-check"></i><b>A.1.10</b> minimization.R</a></li>
+<li class="chapter" data-level="A.1.11" data-path="apcode.html"><a href="apcode.html#apcodefull"><i class="fa fa-check"></i><b>A.1.11</b> full.R</a></li>
+<li class="chapter" data-level="A.1.12" data-path="apcode.html"><a href="apcode.html#apcodeunfold"><i class="fa fa-check"></i><b>A.1.12</b> unfolding.R</a></li>
+<li class="chapter" data-level="A.1.13" data-path="apcode.html"><a href="apcode.html#apcodencons"><i class="fa fa-check"></i><b>A.1.13</b> constrained.R</a></li>
+<li class="chapter" data-level="A.1.14" data-path="apcode.html"><a href="apcode.html#apcodenominal"><i class="fa fa-check"></i><b>A.1.14</b> nominal.R</a></li>
+<li class="chapter" data-level="A.1.15" data-path="apcode.html"><a href="apcode.html#apcodesstress"><i class="fa fa-check"></i><b>A.1.15</b> sstress.R</a></li>
+<li class="chapter" data-level="A.1.16" data-path="apcode.html"><a href="apcode.html#apcodeinverse"><i class="fa fa-check"></i><b>A.1.16</b> inverse.R</a></li>
+<li class="chapter" data-level="A.1.17" data-path="apcode.html"><a href="apcode.html#apcodeglobal"><i class="fa fa-check"></i><b>A.1.17</b> global.R</a></li>
+<li class="chapter" data-level="A.1.18" data-path="apcode.html"><a href="apcode.html#apcodemathadd"><i class="fa fa-check"></i><b>A.1.18</b> mathadd.R</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="apcode.html"><a href="apcode.html#c-code"><i class="fa fa-check"></i><b>A.2</b> C code</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="apcode.html"><a href="apcode.html#deboor.c"><i class="fa fa-check"></i><b>A.2.1</b> deboor.c</a></li>
+<li class="chapter" data-level="A.2.2" data-path="apcode.html"><a href="apcode.html#cleanup.c"><i class="fa fa-check"></i><b>A.2.2</b> cleanup.c</a></li>
+<li class="chapter" data-level="A.2.3" data-path="apcode.html"><a href="apcode.html#jacobi.c"><i class="fa fa-check"></i><b>A.2.3</b> jacobi.c</a></li>
+<li class="chapter" data-level="A.2.4" data-path="apcode.html"><a href="apcode.html#jbkties.c"><i class="fa fa-check"></i><b>A.2.4</b> jbkTies.c</a></li>
+<li class="chapter" data-level="A.2.5" data-path="apcode.html"><a href="apcode.html#matrix.c"><i class="fa fa-check"></i><b>A.2.5</b> matrix.c</a></li>
+<li class="chapter" data-level="A.2.6" data-path="apcode.html"><a href="apcode.html#jeffrey.c"><i class="fa fa-check"></i><b>A.2.6</b> jeffrey.c</a></li>
+<li class="chapter" data-level="A.2.7" data-path="apcode.html"><a href="apcode.html#mysort.c"><i class="fa fa-check"></i><b>A.2.7</b> mySort.c</a></li>
+<li class="chapter" data-level="A.2.8" data-path="apcode.html"><a href="apcode.html#nextpc.c"><i class="fa fa-check"></i><b>A.2.8</b> nextPC.c</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="apdatasets.html"><a href="apdatasets.html"><i class="fa fa-check"></i><b>B</b> Data</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="apdatasets.html"><a href="apdatasets.html#apdatadsmall"><i class="fa fa-check"></i><b>B.1</b> Small</a></li>
+<li class="chapter" data-level="B.2" data-path="apdatasets.html"><a href="apdatasets.html#apdatagruijter"><i class="fa fa-check"></i><b>B.2</b> De Gruijter</a></li>
+<li class="chapter" data-level="B.3" data-path="apdatasets.html"><a href="apdatasets.html#apdataekman"><i class="fa fa-check"></i><b>B.3</b> Ekman</a></li>
+<li class="chapter" data-level="B.4" data-path="apdatasets.html"><a href="apdatasets.html#apdataveg"><i class="fa fa-check"></i><b>B.4</b> Vegetables</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="apunlicense.html"><a href="apunlicense.html"><i class="fa fa-check"></i><b>C</b> Unlicense</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Least Squares Euclidean Multidimensional Scaling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nonmtrmds" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Nonmetric MDS</h1>
+<div id="generalities" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Generalities</h2>
+<p>In non-metric MDS the dissimilarities are not a vector of known non-negative numbers,
+but they are only known up to a transformation or quantification. Ever since <span class="citation"><a href="#ref-kruskal_64a" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64a" role="doc-biblioref">1964a</a>)</span>
+the approach for dealing with this aspect of the MDS problem is to define stress as a function of both <span class="math inline">\(X\)</span> and <span class="math inline">\(\Delta\)</span>, and to minimize</p>
+<p><span class="math display" id="eq:nmstress">\[\begin{equation}
+\sigma(X,\Delta):=\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2
+\tag{8.1}
+\end{equation}\]</span></p>
+<p>over both configurations <span class="math inline">\(X\)</span> and feasible <em>disparities</em> (i.e. transformed
+dissimilarities). The name <em>disparities</em> was coined, as
+far as I know, by Forrest Young and used in our joint ALS work from the seventies
+(<span class="citation"><a href="#ref-takane_young_deleeuw_A_77" role="doc-biblioref">Takane, Young, and De Leeuw</a> (<a href="#ref-takane_young_deleeuw_A_77" role="doc-biblioref">1977</a>)</span>). Kruskal’s name for the transformed or
+quantified dissimilarities is <em>pseudo-distances</em>.</p>
+<p>To define a general notion of feasability of disparities we use the
+notation <span class="math inline">\(\Delta\in\mathfrak{D}\)</span>. Typically, although not necessarily,
+<span class="math inline">\(\mathfrak{D}\)</span> is a convex set in disparity space. In interval, polynomial,
+splinical, and ordinal MDS it usually is a convex cone with apex at the origin. This implies that <span class="math inline">\(0\in\mathfrak{D}\)</span>, and consequently that</p>
+<p><span class="math display" id="eq:nmtrivial">\[\begin{equation}
+\min_{X\in\mathbb{R}^{n\times p}}\min_{\Delta\in\mathfrak{D}}=0,
+\tag{8.2}
+\end{equation}\]</span></p>
+<p>with the minimum attained at <span class="math inline">\(X=0\)</span> and <span class="math inline">\(\Delta=0\)</span>. This is a trivial solution, independent of the data. Thus we cannot formulate the
+NMDS problem as the minimization of stress from equation <a href="nonmtrmds.html#eq:nmstress">(8.1)</a> over
+unconstrained <span class="math inline">\(X\)</span> and over <span class="math inline">\(\Delta\)</span> in its cone. We need some way to exclude
+either <span class="math inline">\(X=0\)</span> or <span class="math inline">\(\Delta=0\)</span>, or both, from the feasible solutions. This we can do either by normalization of the loss function, or by using constraints that explicitly
+exclude one or both zero solutions. The commonly used options will be discussed in section <a href="nonmtrmds.html#nmdsnorm">8.4.1</a> of this chapter.</p>
+</div>
+<div id="nmssingledouble" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Single and Double Phase</h2>
+<p>The distinction between <em>single phase</em> and <em>double phase</em> NMDS algorithms, names we borrow from <span class="citation"><a href="#ref-guttman_68" role="doc-biblioref">Guttman</a> (<a href="#ref-guttman_68" role="doc-biblioref">1968</a>)</span> (see also <span class="citation"><a href="#ref-lingoes_roskam_73" role="doc-biblioref">Lingoes and Roskam</a> (<a href="#ref-lingoes_roskam_73" role="doc-biblioref">1973</a>)</span>), has caused a great deal of confusion in the
+early stages of non-metric MDS (say between 1960 and 1970). Because I have been an
+active participant (with Carroll, Kruskal, Guttman, Young, and Lingoes) in discussing and perhaps perpetuating this confusion (<span class="citation"><a href="#ref-deleeuw_R_73g" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_73g" role="doc-biblioref">1973b</a>)</span>) I will pay some extra attention to it.</p>
+<p>By the very definition of the minimum of a function we have the mathematical truism</p>
+<p><span class="math display" id="eq:nmsminmin">\[\begin{equation}
+\min_{(X,\Delta)\in\mathfrak{X}\otimes\mathfrak{D}}\sigma(X,\Delta)=
+\min_{X\in\mathfrak{X}}\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=\min_{X\in\mathfrak{X}}\left\{\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)\right\}=\min_{\Delta\in\mathfrak{D}}\left\{\min_{X\in\mathfrak{X}}\sigma(X,\Delta)\right\},
+\tag{8.3}
+\end{equation}\]</span></p>
+<p>no matter what the subsets <span class="math inline">\(\mathfrak{X}\)</span> of configuration space and <span class="math inline">\(\mathfrak{D}\)</span> of
+disparity space are.</p>
+<div id="double-phase" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Double Phase</h3>
+<p>In a <em>double phase algorithm</em> we alternate the minimization of stress over <span class="math inline">\(X\)</span> and <span class="math inline">\(\Delta\)</span>. Thus</p>
+<p><span class="math display" id="eq:nmsals2" id="eq:nmsals1">\[\begin{align}
+X^{(k+1)}&amp;=\mathop{\text{argmin}}_{X\in\mathfrak{X}}\sigma(X,\Delta^{(k)}),\tag{8.4}\\
+\Delta^{(k+1)}&amp;=\mathop{\text{argmin}}_{\Delta\in\mathfrak{D}}\sigma(X^{(k+1)},\Delta).\tag{8.5}.
+\end{align}\]</span></p>
+<p>Thus double phase algorithms are <em>alternating least squares</em> or ALS algorithms.
+The designation “alternating least squares” was first used, AFAIK, by <span class="citation"><a href="#ref-deleeuw_R_68d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_68d" role="doc-biblioref">1968b</a>)</span>, and of course it was widely disseminated by the series of ALS algorithms of Young, Takane, and De Leeuw in the seventies (see <span class="citation"><a href="#ref-young_81" role="doc-biblioref">F. W. Young</a> (<a href="#ref-young_81" role="doc-biblioref">1981</a>)</span> for a retrospective summary).</p>
+<p>There are some possible variations in the ALS scheme. In equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a>
+we update <span class="math inline">\(X\)</span> first, and then in equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> we update <span class="math inline">\(\Delta\)</span>. That order can be reversed without any essential changes. More importantly, we have to realizethat minimizing over <span class="math inline">\(X\)</span> in equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> is a basic metric MDS problem, which will generally take an infinite number of iterations for an exact solution. This means we have to truncate the minimization, and stop at some point. And, in addition, equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> implies we have to find the global minimum over <span class="math inline">\(X\)</span>, which is generally infeasible as well.Thus the ALS scheme as defined cannot really be implemented.</p>
+<p>We remedy this situations by switching from minimization in each substep to
+a decrease, or, notationwise, from <span class="math inline">\(\text{argmin}\)</span> to <span class="math inline">\(\text{arglower}\)</span>. The resulting
+update sequence</p>
+<p><span class="math display" id="eq:nmslte2" id="eq:nmslte1">\[\begin{align}
+X^{(k+1)}&amp;=\mathop{\text{arglower}}_{X\in\mathfrak{X}}\sigma(X,\Delta^{(k)}),\tag{8.6}\\
+\Delta^{(k+1)}&amp;=\mathop{\text{arglower}}_{\Delta\in\mathfrak{D}}\sigma(X^{(k+1)},\Delta).\tag{8.7}.
+\end{align}\]</span></p>
+<p>is much more loosely defined as the previous one, because arglower can be implemented in many different ways. More abouyt that later. But at least the new scheme can actually be implmented.</p>
+<p>Algorithm #ref(eq:nmslte1), #ref(eq:nmslte1) is still considered to be ALS, but it is also firmly in the class of <em>block relaxation</em> algorithms. General block relaxation, which has alternating least squares, coordinate relaxation, augmentation, EM, and majorization as special cases, was used to describe many data analysis algorithms in <span class="citation"><a href="#ref-deleeuw_C_94c" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_94c" role="doc-biblioref">1994</a>)</span>. As with ALS, special cases of block relaxation have been around for a long time.</p>
+</div>
+<div id="nmssinglephase" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Single Phase</h3>
+<p>From equation <a href="nonmtrmds.html#eq:nmsminmin">(8.3)</a></p>
+<p><span class="math display" id="eq:nmsminsin">\[\begin{equation}
+\min_{X\in\mathfrak{X}}\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=\min_{X\in\mathfrak{X}}\left\{\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)\right\}.
+\tag{8.8}
+\end{equation}\]</span></p>
+<p>So if we define</p>
+<p><span class="math display" id="eq:nmssingle">\[\begin{equation}
+\sigma_\star(X):=\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta),
+\tag{8.9}
+\end{equation}\]</span></p>
+<p>the NMDS problem is to minimize <span class="math inline">\(\sigma_\star\)</span> from <a href="nonmtrmds.html#eq:nmssingle">(8.9)</a> over <span class="math inline">\(X\)</span>.
+Note there is a <span class="math inline">\(\sigma\)</span> defined by
+equation <a href="nonmtrmds.html#eq:nmstress">(8.1)</a>
+on <span class="math inline">\(\mathfrak{X}\otimes\mathfrak{D}\)</span>, and a <span class="math inline">\(\sigma_\star\)</span>, defined by equation <a href="nonmtrmds.html#eq:nmssingle">(8.9)</a>, which is a function only of <span class="math inline">\(X\)</span>. It is sometimes said that that <span class="math inline">\(\Delta\)</span> is <em>projected</em> when going from <a href="nonmtrmds.html#eq:nmstress">(8.1)</a> to <a href="nonmtrmds.html#eq:nmssingle">(8.9)</a>, or that <span class="math inline">\(\sigma_\star\)</span> is a <em>marginal</em> function.</p>
+<p>Once more with feeling. The two-phase <span class="math inline">\(\sigma\)</span> is a function of two matrix variables
+<span class="math inline">\(X\)</span> and <span class="math inline">\(\Delta\)</span>, the one-phase <span class="math inline">\(\sigma_\star\)</span>is a function of the single matrix variable <span class="math inline">\(X\)</span>. To make this even more clear we can write <span class="math inline">\(\sigma_\star(X)=\sigma(X,\Delta(X))\)</span>, where</p>
+<p><span class="math display" id="eq:nmsdeltasingle">\[\begin{equation}
+\Delta(X):=\mathop{\text{argmin}}_{\Delta\in\mathfrak{D}}\sigma(X,\Delta).
+\tag{8.10}
+\end{equation}\]</span></p>
+<p>Of course by projecting out <span class="math inline">\(X\)</span> instead of <span class="math inline">\(\Delta\)</span> we could also have defined a loss function which is a function of <span class="math inline">\(\Delta\)</span> only, but typically we do not use that alternative projection because it is complicated and heavily nonlinear. Projecting out <span class="math inline">\(X\)</span> is, in fact, solving a standard basic MDS problem.
+Projecting out <span class="math inline">\(\Delta\)</span> is usually much simpler. In most applications <span class="math inline">\(\mathfrak{D}\)</span> is convex, so computing <span class="math inline">\(\Delta(X)\)</span> is computing the projection on a convex set, and projections on convex sets always exist and are unique.</p>
+<p>As an aside, projection creates a function of one variable out of a function of
+two variables. The inverse of projection is called <em>augmentation</em>, which starts with a function <span class="math inline">\(f\)</span> of one variable on <span class="math inline">\(\mathfrak{X}\)</span> and tries to find a function of two variables <span class="math inline">\(g\)</span> on <span class="math inline">\(\mathfrak{X}\otimes\mathfrak{Y}\)</span> such that
+<span class="math inline">\(f(x)=\min_{y\in\mathfrak{Y}} g(x,y)\)</span>. If we have found such a <span class="math inline">\(g\)</span> then we can
+minimize <span class="math inline">\(f\)</span> over <span class="math inline">\(\mathfrak{X}\)</span> by minimizing <span class="math inline">\(g\)</span> over <span class="math inline">\(\mathfrak{X}\otimes\mathfrak{Y}\)</span>, for example by block relaxation (<span class="citation"><a href="#ref-deleeuw_C_94c" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_94c" role="doc-biblioref">1994</a>)</span>).</p>
+<p>One reason there was some confusion, and some disagreement between Kruskal and Guttman,
+was a result on differentiation of the minimum function, which was not known in the
+psychometric community at the time. Guttman thought that <span class="math inline">\(\sigma_\star\)</span> was not differentiable at <span class="math inline">\(X\)</span>, because <span class="math inline">\(\Delta\)</span> from <a href="nonmtrmds.html#eq:nmsdeltasingle">(8.10)</a> is a step function. Kruskal proved in <span class="citation"><a href="#ref-kruskal_71" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_71" role="doc-biblioref">1971</a>)</span> that <span class="math inline">\(\sigma_\star\)</span> is differentiable, and saw that the result is basically one in convex analysis, not in classical linear analysis.
+The result follows easily from directional differentiability in Danskin’s theorem (<span class="citation"><a href="#ref-danskin_67" role="doc-biblioref">Danskin</a> (<a href="#ref-danskin_67" role="doc-biblioref">1967</a>)</span>) or from the minimax theorems of, for example, <span class="citation"><a href="#ref-demyanov_malozemov_90" role="doc-biblioref">Demyanov and Malozemov</a> (<a href="#ref-demyanov_malozemov_90" role="doc-biblioref">1990</a>)</span>, using the fact that the projection is unique. More directly, deleeuw_R_73g refers to discussion on page 255 of <span class="citation"><a href="#ref-rockafellar_70" role="doc-biblioref">Rockafellar</a> (<a href="#ref-rockafellar_70" role="doc-biblioref">1970</a>)</span>, following his corollary 26.3.2.
+We will go into more detail about differentiability, and the differences between Kruskal’s and Guttman’s loss functions, in the next chapter <a href="chapordinal.html#chapordinal">11</a>.
+For now it suffices to note that</p>
+<p><span class="math display" id="eq:nmsdanskin">\[\begin{equation}
+\mathcal{D}\sigma_\star(X)=\mathcal{D}_1\sigma(X,\Delta(X)),
+\tag{8.11}
+\end{equation}\]</span></p>
+<p>or, in words, that the derivative of <span class="math inline">\(\sigma_\star\)</span> at <span class="math inline">\(X\)</span> is the partial derivative of <span class="math inline">\(\sigma\)</span> at <span class="math inline">\((X,\Delta(X))\)</span>.</p>
+</div>
+</div>
+<div id="affine-nmds" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Affine NMDS</h2>
+<p>Basic MDS can now be interpreted as the special case of NMDS in which
+<span class="math inline">\(\mathfrak{D}=\{\Delta\}\)</span> is a singleton, a set with only one element. Thus <span class="math inline">\(0\not\in\mathfrak{D}\)</span> and we do not have to worry about trivial zero solutions for <span class="math inline">\(X\)</span>.</p>
+<p>This extends to missing data basic MDS. We have so far dealt with missing data by setting the corresponding <span class="math inline">\(w_{ij}\)</span> equal to zero. But for the non-missing part we still have fixed numbers in <span class="math inline">\(\Delta\)</span>, and thus again <span class="math inline">\(0\not\in\mathfrak{D}\)</span> (unless all dissimilarities are missing). In a sense missing data are our first example of non-metric MDS, because <span class="math inline">\(\mathfrak{D}\)</span> can also be defined as the set</p>
+<p><span class="math display" id="eq:nmsmissing">\[\begin{equation}
+\mathfrak{D}=
+\left\{\Delta\mid\Delta_0+\mathop{\sum\sum}_{1\leq i&lt;j\leq n}\{\alpha_{ij}(E_{ij}+E_{ji})\mid \delta_{ij}\text{ is missing}\}\right\},
+\tag{8.12}
+\end{equation}\]</span></p>
+<p>where the <span class="math inline">\(E_{ij}\)</span> are the unit matrices defined in section <a href="mathadd.html#difmat">25.2.3</a> and <span class="math inline">\(\Delta_0\)</span> is the non-missing part (which has zeroes for the )</p>
+<p>Another example in which <span class="math inline">\(0\not\in\mathfrak{D}\)</span> is the additive constant problem, which we will discuss in detail in section <a href="intinterval.html#intadditive">9.1</a>. Here <span class="math inline">\(\mathfrak{D}\)</span> is
+the set of all hollow and symmetric matrices of the form
+<span class="math inline">\(\Delta+\alpha(E-I)\)</span>, where the dissimilarities in <span class="math inline">\(\Delta_0\)</span> are known real numbers and where <span class="math inline">\(\alpha\)</span> is the unknown additive constant.</p>
+<p>The affine MDS problems also have single phase and double phase algorithms.
+For missing data single phase stress is</p>
+<p><span class="math display" id="eq:nmssinglemis">\[\begin{equation}
+\sigma_\star(X)=\min_{\Delta\in\mathfrak{D}}\ \mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2=\mathop{\sum\sum}_{1\leq i&lt;j\leq n}\tilde w_{ij}(\delta_{ij}-d_{ij}(X))^2,
+\tag{8.13}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\tilde w_{ij}=0\)</span> if <span class="math inline">\(\delta_{ij}\)</span> is missing, and <span class="math inline">\(\tilde w_{ij}=w_{ij}\)</span>
+otherwise. In this case <span class="math inline">\(\sigma_\star(X)=\sigma(X)\)</span>, the sigma of basic MDS
+with zero weights for missing data.</p>
+<p>For the additive constant problem single phase stress is</p>
+<p><span class="math display" id="eq:nmssingleadd">\[\begin{equation}
+\sigma_\star(X)=\min_{\alpha}\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2=\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}(\delta_{ij}-d_{ij}(X))^2-(\overline\delta-\overline d(X))^2\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij},
+\tag{8.14}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\overline\delta\)</span> and <span class="math inline">\(\overline d(X)\)</span> are the weighted means of the
+dissimilarities and distances.</p>
+</div>
+<div id="nmdsconic" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Conic MDS</h2>
+<div id="nmdsnorm" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Normalization</h3>
+<p>In “wide-sense” non-metric MDS <span class="math inline">\(\mathfrak{D}\)</span> can be any set of hollow,
+non-negative and symmetric matrices. In “narrow-sense” non-metric MDS
+<span class="math inline">\(\mathfrak{D}\)</span> is defined by homogeneous linear inequality constraints
+of the form <span class="math inline">\(\delta_{ij}\leq\delta_{kl}\)</span> (in addition to hollow,
+non-negative, and symmetric). These constraints, taken together, define
+a polyhedral convex cone in disparity space. This just means that if
+<span class="math inline">\(\Delta_1\)</span> and <span class="math inline">\(\Delta_2\)</span> are in <span class="math inline">\(\mathfrak{D}\)</span> then so is
+<span class="math inline">\(\alpha\Delta_1+\beta\Delta_2\)</span> for all non-negative <span class="math inline">\(\alpha\)</span> and
+<span class="math inline">\(\beta\)</span>.</p>
+<p>The disparitieas are a cone, and thus <span class="math inline">\(0\in\mathfrak{D}\)</span>. This implies
+that always <span class="math inline">\(\min_X\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=0,\)</span>
+independently of the data. This is our first example of a <strong>trivial
+solution</strong>, which have plagued non-metric scaling from the start. Note
+that <span class="math inline">\(\mathfrak{D}\)</span> for missing data and for the additive constant are
+not convex cones, and do not contain the zero matrix.</p>
+<p>In our versions of <em>non-metric</em> MDS we actually require that the
+transformed dissimilarities satisfy <span class="math inline">\(\eta_\delta=1\)</span>, so that formula
+<a href="propchapter.html#eq:expand">(2.6)</a> is still valid. We call this <strong>explicit normalization of
+the dissimilarities</strong>.</p>
+<p>To explain the different forms of normalization of stress that are
+needed whenever <span class="math inline">\(\mathfrak{D}\)</span> is a cone we look at some general
+properties of least squares loss functions. More details are in
+<span class="citation"><a href="#ref-kruskal_carroll_69" role="doc-biblioref">Kruskal and Carroll</a> (<a href="#ref-kruskal_carroll_69" role="doc-biblioref">1969</a>)</span> and in <span class="citation"><a href="#ref-deleeuw_U_75a" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_U_75a" role="doc-biblioref">1975a</a>)</span>, <span class="citation"><a href="#ref-deleeuw_E_19d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_E_19d" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Suppose <span class="math inline">\(K\)</span> and <span class="math inline">\(L\)</span> are cones in <span class="math inline">\(\mathbb{R}^n\)</span>, nor necessarily convex.
+Our problem is to minimize <span class="math inline">\(\|x-y\|^2\)</span> over both <span class="math inline">\(x\in K\)</span> and
+<span class="math inline">\(y\in L\)</span>. Here <span class="math inline">\(\|x\|^2=x&#39;Wx\)</span> for some positive definite <span class="math inline">\(W\)</span>. In the MDS context, for <span class="math inline">\(x\)</span> think disparities, for <span class="math inline">\(y\)</span> think distances.</p>
+<p>Of course minimizing <span class="math inline">\(\|x-y\|^2\)</span> is too easy, because <span class="math inline">\(x=y=0\)</span> is the
+(trivial, and useless) solution. So we need some form of normalization.
+We distinguish six different ones.</p>
+<ol style="list-style-type: decimal">
+<li><p>implicit x-normalization
+<span class="math display">\[
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|x\|^2}
+\]</span></p></li>
+<li><p>implicit y-normalization
+<span class="math display">\[
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|y\|^2}
+\]</span></p></li>
+<li><p>implicit xy-normalization
+<span class="math display">\[
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|x\|^2\|y\|^2}
+\]</span></p></li>
+<li><p>explicit x-normalization
+<span class="math display">\[
+\min_{x\in K\cap S}\min_{y\in L}\|x-y\|^2
+\]</span></p></li>
+<li><p>explicit y-normalization
+<span class="math display">\[
+\min_{x\in K}\min_{y\in L\cap S}\|x-y\|^2
+\]</span></p></li>
+<li><p>explicit xy-normalization
+<span class="math display">\[
+\min_{x\in K\cap S}\min_{y\in L\cap S}\|x-y\|^2
+\]</span></p></li>
+</ol>
+<p>If we use a positive definite <span class="math inline">\(W\)</span> to define our inner products and norms, then
+implicit normalization of <span class="math inline">\(x\)</span> means</p>
+<p><span class="math display">\[
+\min_{x\in X}\min_{y\in Y}\frac{(x-y)&#39;W(x-y)}{x&#39;Wx}.
+\]</span>
+Let <span class="math inline">\(\mathcal{S}_x\)</span> and <span class="math inline">\(\mathcal{S}_y\)</span> be the ellipsoids of all <span class="math inline">\(x\)</span>
+with <span class="math inline">\(x&#39;Wx=1\)</span> and of all <span class="math inline">\(y\)</span> with <span class="math inline">\(y&#39;Wy=1\)</span>. Then our implicit
+normalization problem is equivalent to</p>
+<p><span class="math display">\[
+\min_{\alpha\geq 0}\min_{\beta\geq 0}\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\frac{(\alpha x-\beta y)&#39;W(\alpha x-\beta y)}{\alpha^2 x&#39;Wx}=\\\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\min_{\alpha\geq 0}\min_{\beta\geq 0}\frac{\alpha^2+\beta^2-2\alpha\beta x&#39;Wy}{\alpha^2}=\\
+\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\ \{1-(x&#39;Wy)^2\}.
+\]</span></p>
+<p>Thus implicit normalization of <span class="math inline">\(x\)</span> means maximizing <span class="math inline">\((x&#39;Wy)^2\)</span> over
+<span class="math inline">\(x\in X\cap\mathcal{S}_x\)</span> and <span class="math inline">\(y\in Y\cap\mathcal{S}_y.\)</span></p>
+<p>In the same way implicit normalization of <span class="math inline">\(y\)</span> minimizes <span class="math display">\[
+\min_{x\in X}\min_{y\in Y}\frac{(x-y)&#39;W(x-y)}{y&#39;Wy},
+\]</span> and in the same way it also leads to maximization of <span class="math inline">\((x&#39;Wy)^2\)</span> over
+<span class="math inline">\(x\in X\cap\mathcal{S}_x\)</span> and <span class="math inline">\(y\in Y\cap\mathcal{S}_y.\)</span> In terms of
+normalized stress it does not matter if we use the distances or the
+dissimilarities in the denominator for implicit normalization.</p>
+<p>In explicit normalization of <span class="math inline">\(x\)</span> we solve</p>
+<p><span class="math display">\[
+\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y}\ \{1+y&#39;Wy-2y&#39;Wx\}=\\
+\min_{\beta\geq 0}\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\{1+\beta^2-2\beta x&#39;Wy\}
+=\\\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\ \{1-(x&#39;Wy)^2\},
+\]</span></p>
+<p>and the same thing is true for explicit normalization of <span class="math inline">\(y\)</span>, which
+is</p>
+<p><span class="math display">\[
+\min_{x\in X}\min_{y\in Y\cap\mathcal{S}_y}\ \{1+x&#39;Wx-2y&#39;Wx\}
+\]</span>
+So, again, it does not matter which one of the four normalizations we
+use, explicit/implicit on disparities/distances, the solutions will all
+be proportional, i.e. the same except for scale factors.</p>
+</div>
+<div id="inner-iterations" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Inner Iterations</h3>
+</div>
+<div id="stress-1-and-stress-2" class="section level3" number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Stress-1 and Stress-2</h3>
+<p>In his original papers <span class="citation"><a href="#ref-kruskal_64a" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64a" role="doc-biblioref">1964a</a>)</span> and <span class="citation"><a href="#ref-kruskal_64b" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64b" role="doc-biblioref">1964b</a>)</span> defined two
+versions of normalized stress for nonmetric MDS. The first was
+<span class="math display">\[
+\sigma_{JBK1}(X):=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}(\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}d_{ij}^2(X)}}
+\]</span>
+<span class="math display">\[
+\sigma_{JBK2}(X):=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}(\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}(d_{ij}(X)-\overline{d}(X))^2}}
+\]</span>
+where the <span class="math inline">\(hat d_{ij}\)</span> (the d-hats) are the pseudo-distances obtaned
+by projecting the <span class="math inline">\(d_{ij}(X)\)</span> on the isocone defined by the order of the
+dissimilarities, i.e. by monotone regression (see section
+<a href="chapordinal.html#mathsimpiso">11.1.1</a>). The <span class="math inline">\(\overline{d}(X)\)</span> in the denominator of
+<span class="math inline">\(\sigma_{JBK2}\)</span> is the average of the distances.</p>
+<p>There are some differences with the definition of stress in this book.</p>
+<ol style="list-style-type: decimal">
+<li>We do not use the square root.</li>
+<li>We use explicit and not implicit normalization.</li>
+<li>In NMDS we think of stress as a function of both <span class="math inline">\(X\)</span> and <span class="math inline">\(\Delta\)</span>,
+not of <span class="math inline">\(X\)</span> only (see section <a href="chapordinal.html#nmdskruskal">11.3</a>).</li>
+</ol>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-danskin_67" class="csl-entry">
+———. 1967. <em>The Theory of Max-Min and Its Application to Weapons Allocation Problems</em>. Springer.
+</div>
+<div id="ref-deleeuw_R_68d" class="csl-entry">
+———. 1968b. <span>“Nonmetric Discriminant Analysis.”</span> Research Note 06-68. Department of Data Theory, University of Leiden. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf</a>.
+</div>
+<div id="ref-deleeuw_R_73g" class="csl-entry">
+———. 1973b. <span>“<span class="nocase">Smoothness Properties of Nonmetric Loss Functions</span>.”</span> Technical Memorandum. Murray Hill, N.J.: Bell Telephone Laboratories. <a href="http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf">http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf</a>.
+</div>
+<div id="ref-deleeuw_U_75a" class="csl-entry">
+———. 1975a. <span>“<span class="nocase">A Normalized Cone Regression Approach to Alternating Least Squares Algorithms</span>.”</span> Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf">http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf</a>.
+</div>
+<div id="ref-deleeuw_C_94c" class="csl-entry">
+———. 1994. <span>“<span class="nocase">Block Relaxation Algorithms in Statistics</span>.”</span> In <em>Information Systems and Data Analysis</em>, edited by H. H. Bock, W. Lenski, and M. M. Richter, 308–24. Berlin: Springer Verlag. <a href="http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf">http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf</a>.
+</div>
+<div id="ref-deleeuw_E_19d" class="csl-entry">
+———. 2019. <span>“Normalized Cone Regression.”</span> 2019. <a href="http://deleeuwpdx.net/pubfolders/dcone/dcone.pdf">http://deleeuwpdx.net/pubfolders/dcone/dcone.pdf</a>.
+</div>
+<div id="ref-demyanov_malozemov_90" class="csl-entry">
+Demyanov, V. F., and V. N. Malozemov. 1990. <em>Introduction to Minimax</em>. Dover.
+</div>
+<div id="ref-guttman_68" class="csl-entry">
+———. 1968. <span>“<span class="nocase">A General Nonmetric Technique for Fitting the Smallest Coordinate Space for a Configuration of Points</span>.”</span> <em>Psychometrika</em> 33: 469–506.
+</div>
+<div id="ref-kruskal_64a" class="csl-entry">
+Kruskal, J. B. 1964a. <span>“<span class="nocase">Multidimensional Scaling by Optimizing Goodness of Fit to a Nonmetric Hypothesis</span>.”</span> <em>Psychometrika</em> 29: 1–27.
+</div>
+<div id="ref-kruskal_64b" class="csl-entry">
+———. 1964b. <span>“<span class="nocase">Nonmetric Multidimensional Scaling: a Numerical Method</span>.”</span> <em>Psychometrika</em> 29: 115–29.
+</div>
+<div id="ref-kruskal_71" class="csl-entry">
+———. 1971. <span>“<span class="nocase">Monotone Regression: Continuity and Differentiability Properties</span>.”</span> <em>Psychometrika</em> 36 (1): 57–62.
+</div>
+<div id="ref-kruskal_carroll_69" class="csl-entry">
+Kruskal, J. B., and J. D. Carroll. 1969. <span>“<span class="nocase">Geometrical Models and Badness of Fit Functions</span>.”</span> In <em>Multivariate Analysis, Volume II</em>, edited by P. R. Krishnaiah, 639–71. North Holland Publishing Company.
+</div>
+<div id="ref-lingoes_roskam_73" class="csl-entry">
+Lingoes, J. C., and E. E. Roskam. 1973. <span>“<span class="nocase">A Mathematical and Empirical Analysis of Two Multidimensional Scaling Algorithms</span>.”</span> <em>Psychometrika</em> 38: Monograph Supplement.
+</div>
+<div id="ref-rockafellar_70" class="csl-entry">
+Rockafellar, R. T. 1970. <em>Convex Analysis</em>. Princeton University Press.
+</div>
+<div id="ref-takane_young_deleeuw_A_77" class="csl-entry">
+Takane, Y., F. W. Young, and J. De Leeuw. 1977. <span>“Nonmetric Individual Differences in Multidimensional Scaling: An Alternating Least Squares Method with Optimal Scaling Features.”</span> <em>Psychometrika</em> 42: 7–67. <a href="http://deleeuwpdx.net/janspubs/1977/articles/takane_young_deleeuw_A_77.pdf">http://deleeuwpdx.net/janspubs/1977/articles/takane_young_deleeuw_A_77.pdf</a>.
+</div>
+<div id="ref-young_81" class="csl-entry">
+Young, F. W. 1981. <span>“<span class="nocase">Quantitative Analysis of Qualitative Data</span>.”</span> <em>Psychometrika</em> 46: 357–88.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chacceleration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intinterval.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+},
+"keep_md": true,
+"toolbar": {
+"position": "fixed"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

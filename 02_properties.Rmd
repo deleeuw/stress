@@ -38,8 +38,8 @@ The CS inequality implies that for all $X$
 and thus, from \@ref(eq:expand),
 
 \begin{align}
-\sigma(X)&\geq(1-\eta(X))^2,(#eq:propcssigeta1)\\
-\sigma(X)&\geq(1-\rho(X))^2.(#eq:propcssigeta2)
+\sigma(X)&\geq(1-\eta(X))^2,(\#eq:propcssigeta1)\\
+\sigma(X)&\geq(1-\rho(X))^2.(\#eq:propcssigeta2)
 \end{align}
 
 
@@ -214,27 +214,25 @@ ae twice differentiable
 all twice differentiable are DC
 
 
-```{theorem, label = "rholipschitz"}
+```{theorem}
 $\rho$ is Lipschitz, with Lipschitz constant $\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}$.
 ```
 
-```{proof}
-First
+In the first place 
 
 $$
 |\rho(X)-\rho(Y)|=
-|\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}(d_{ij}(X)-d_{ij}(Y))|\leq
-\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}|\delta_{ij}(d_{ij}(X)-d_{ij}(Y))|,
+\mid\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}(d_{ij}(X)-d_{ij}(Y))\mid\leq
+\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}|(d_{ij}(X)-d_{ij}(Y))|,
 $$
 
 and, using the reverse triangle inequality,
 
 $$
-|d_{ij}(X)-d_{ij}(Y)|=|\|X'(e_i-e_j)\|-\|Y'(e_i-e_j))\||\leq\|(X-Y)'(e_i-e_j)\|\leq\|X-Y\|.
+|d_{ij}(X)-d_{ij}(Y)|=|\|X^T(e_i-e_j)\|-\|Y^T(e_i-e_j))\||\leq\|(X-Y)^T(e_i-e_j)\|\leq\|X-Y\|.
 $$
-```
 
-***
+
 
 On the other hand $\eta^2$ is only locally Lipschitz.
 
@@ -359,7 +357,7 @@ $$
 In fact
 
 $$
-B(X)X-B(Y)Y=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\left\{\frac{x_i-x_j}{d_{ij}(X)}-\frac{y_i-y_j}{d_{ij}(Y)}\right\`yhhhhhht}(e_i-e_j),
+B(X)X-B(Y)Y=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\left\{\frac{x_i-x_j}{d_{ij}(X)}-\frac{y_i-y_j}{d_{ij}(Y)}\right\}(e_i-e_j),
 $$
 and thus
 
@@ -672,13 +670,14 @@ For a fixed $\epsilon>0$ now $d_{ij}(X_\epsilon)$, and thus stress, is (infinite
 
 ## Stationary Points {#propstationary}
 
-```{theorem, label = "statpoints"}
+```{theorem, label = "statpointsbound"}
 At a stationary point of stress we have $\eta(X)\leq 1$.
 ```
 
 ```{proof}
-If $X$ is stationary we have $VX=B(X)X$ and thus $\rho(X)=\eta^2(X)$. Consequently $\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)$ and because $\sigma(X)\geq 0$ we see that $X$ must be in the ellipse $\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}$.
+ozo
 ```
+If $X$ is stationary we have $VX=B(X)X$ and thus $\rho(X)=\eta^2(X)$. Consequently $\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)$ and because $\sigma(X)\geq 0$ we see that $X$ must be in the ellipse $\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}$.
 
 Theorem \@ref(thm:statpoints) is important, because it means that we can require without loss of generality that $X$ is in the ellipsoidal disk $\eta(X)\leq 1$, which is a compact convex set.
 
@@ -766,14 +765,14 @@ $\sigma$ is the lower envelop of an infinite number of convex quadratics.
 By the CS inequality
 
 \begin{equation}
-d_{ij}(X)=\max_Y \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(Y)},
+d_{ij}(X)=\max_Y \frac{\text{tr}\ X^TA_{ij}Y}{d_{ij}(Y)},
 (\#eq:dasmax)
 \end{equation}
 
 which implies
 
 \begin{equation}
-\sigma(X)=\min_Y\left(1-\text{tr}\ X'B(Y)Y+\frac12\text{tr}\ X'VX\right),
+\sigma(X)=\min_Y\left(1-\text{tr}\ X^TB(Y)Y+\frac12\text{tr}\ X^TVX\right),
 (\#eq:sigasmin)
 \end{equation}
 
