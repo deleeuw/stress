@@ -1172,7 +1172,7 @@ Figure 2.2: Derivative for Various Epsilon
 \iffalse{} <span class="proof"><em>Proof. </em></span> ozo
 </div>
 <p>If <span class="math inline">\(X\)</span> is stationary we have <span class="math inline">\(VX=B(X)X\)</span> and thus <span class="math inline">\(\rho(X)=\eta^2(X)\)</span>. Consequently <span class="math inline">\(\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)\)</span> and because <span class="math inline">\(\sigma(X)\geq 0\)</span> we see that <span class="math inline">\(X\)</span> must be in the ellipse <span class="math inline">\(\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}\)</span>.</p>
-<p>Theorem <a href="#thm:statpoints"><strong>??</strong></a> is important, because it means that we can require without loss of generality that <span class="math inline">\(X\)</span> is in the ellipsoidal disk <span class="math inline">\(\eta(X)\leq 1\)</span>, which is a compact convex set.</p>
+<p>Theorem <a href="propchapter.html#thm:statpointsbound">2.2</a> is important, because it means that we can require without loss of generality that <span class="math inline">\(X\)</span> is in the ellipsoidal disk <span class="math inline">\(\eta(X)\leq 1\)</span>, which is a compact convex set.</p>
 <div id="local-maxima" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Local Maxima</h3>
 
@@ -1181,15 +1181,18 @@ Figure 2.2: Derivative for Various Epsilon
 </div>
 
 <div class="proof">
-<p>\iffalse{} <span class="proof"><em>Proof. </em></span> By contradiction: suppose that there is a local maximum at <span class="math inline">\(X\not= 0\)</span>. Then on the line through zero and <span class="math inline">\(X\)</span> there should be a local maximum at <span class="math inline">\(X\)</span> as well. But we have <span class="math display">\[
-\sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
-\]</span> a convex quadratic, which consequently cannot have a local maximum at <span class="math inline">\(X\)</span>.</p>
-<p>At zero we have for the one-sided directional derivative</p>
+<p>\iffalse{} <span class="proof"><em>Proof. </em></span> At <span class="math inline">\(X=0\)</span> we have for the one-sided directional derivative</p>
 <p><span class="math display" id="eq:datzero">\[\begin{equation}
 \mathbb{D}_+\sigma(0,Y)=\lim_{\alpha\downarrow 0}\frac{\sigma(0+\alpha Y)-\sigma(0)}{\alpha}=-2\rho(Y)\leq 0,
 \tag{2.51}
 \end{equation}\]</span></p>
-which implies that the function is not Gateaux differentiable at zero and has a local maximum there.
+<p>which implies that the stress has a local maximum at zero.</p>
+<p>By contradiction: suppose that there is a local maximum at <span class="math inline">\(X\not= 0\)</span>. Then on the line through zero and <span class="math inline">\(X\)</span> there should be a local maximum at <span class="math inline">\(X\)</span> as well. But</p>
+<p><span class="math display" id="eq:propnomax">\[\begin{equation}
+\sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
+\tag{2.52}
+\end{equation}\]</span></p>
+<p>is a convex quadratic, which consequently cannot have a local maximum at <span class="math inline">\(X\)</span>.</p>
 </div>
 </div>
 <div id="proplocmin" class="section level3" number="2.6.2">
@@ -1241,12 +1244,12 @@ If in addition <span class="math inline">\(w_{12}=0\)</span> then
 <p>\iffalse{} <span class="proof"><em>Proof. </em></span> By the CS inequality</p>
 <p><span class="math display" id="eq:dasmax">\[\begin{equation}
 d_{ij}(X)=\max_Y \frac{\text{tr}\ X^TA_{ij}Y}{d_{ij}(Y)},
-\tag{2.52}
+\tag{2.53}
 \end{equation}\]</span></p>
 <p>which implies</p>
 <p><span class="math display" id="eq:sigasmin">\[\begin{equation}
 \sigma(X)=\min_Y\left(1-\text{tr}\ X^TB(Y)Y+\frac12\text{tr}\ X^TVX\right),
-\tag{2.53}
+\tag{2.54}
 \end{equation}\]</span></p>
 which is what we set out to prove.
 </div>
@@ -1272,12 +1275,12 @@ ffalse{-91-85-112-112-101-114-32-69-110-118-101-108-111-112-93-}
 <p><span class="math display" id="eq:dasmin">\[\begin{equation}
 d_{ij}(X)\leq\min
 \frac12\frac{1}{d_{ij}(Y)}\{d_{ij}^2(X)+d_{ij}^2(Y)\}
-\tag{2.54}
+\tag{2.55}
 \end{equation}\]</span></p>
 <p>Thus</p>
 <span class="math display" id="eq:sigmax">\[\begin{equation}
 \sigma(X)=\max_Y \left(1-\frac12\rho(Y)+\frac12\text{tr}\ X&#39;(V-B(Y))X\right)
-\tag{2.55}
+\tag{2.56}
 \end{equation}\]</span>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:lowerfig"></span>

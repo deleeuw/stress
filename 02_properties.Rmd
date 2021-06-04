@@ -565,15 +565,14 @@ Suppose $Y=XT$, with $T$ antisymmetric, so that $X+\epsilon Y=X(I+\epsilon T)$. 
 
 \begin{equation}
 \sigma(X+\epsilon
-Y)=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
-+\frac12\epsilon^2\text{tr}\ Y'(V-B(X))Y+o(\epsilon^2)
+Y)=\sigma(X)+\frac12\epsilon^2\text{tr}\ Y'(V-B(X))Y+o(\epsilon^2)
 (\#eq:antisym)
 \end{equation}
 
 ```
 
 ```{example, label = "exzeroes"}
-Suppose $\underline{X}=[X\mid 0]$ and $\underline{X}=[0\mid Y]$ so that $\underline{X}+\epsilon\underline{Y}=[X\mid\epsilon Y]$. Here $\underline{X}$ and $\underline{Y}$ are $n\times p$, $X$ is $n\times r$, with $r<p$, and $Y$ is $n\times(p-r)$. Then
+Suppose $\underline{X}=[X\mid 0]$ and $\underline{Y}=[0\mid Y]$ so that $\underline{X}+\epsilon\underline{Y}=[X\mid\epsilon Y]$. Here $\underline{X}$ and $\underline{Y}$ are $n\times p$, $X$ is $n\times r$, with $r<p$, and $Y$ is $n\times(p-r)$. Then
 
 \begin{equation}
 \sigma(\underline{X}+\epsilon
@@ -585,7 +584,7 @@ Suppose $\underline{X}=[X\mid 0]$ and $\underline{X}=[0\mid Y]$ so that $\underl
 ```
 
 ```{example label = "exsingular"}
-Suppose $\underline{X}=[X\mid 0]$ and $\underline{X}=[Z\mid Y]$ so that $\underline{X}+\epsilon\underline{Y}=[X+\epsilon Z\mid\epsilon Y]$. Here $\underline{X}$ and $\underline{Y}$ are $n\times p$, $X$ is $n\times r$, with $r<p$, and $Y$ is $n\times(p-r)$. Then
+Suppose $\underline{X}=[X\mid 0]$ and $\underline{Y}=[Z\mid Y]$ so that $\underline{X}+\epsilon\underline{Y}=[X+\epsilon Z\mid\epsilon Y]$. Here $\underline{X}$ and $\underline{Y}$ are $n\times p$, $X$ is $n\times r$, with $r<p$, and $Y$ is $n\times(p-r)$. Then
 
 \begin{equation}
 \sigma(\underline{X}+\epsilon
@@ -683,24 +682,29 @@ Theorem \@ref(thm:statpointsbound) is important, because it means that we can re
 
 ### Local Maxima
 
-
 ```{theorem, label = "locmax"}
 stress has a single local maximum at $X=0$ with value 1.
 ```
 
 ```{proof}
-By contradiction: suppose that there is a local maximum at $X\not= 0$. Then on the line through zero and $X$ there should be a local maximum at $X$ as well. But we have $$
-\sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
-$$ a convex quadratic, which consequently cannot have a local maximum at $X$.
-
-At zero we have for the one-sided directional derivative 
+At $X=0$ we have for the one-sided directional derivative 
 
 \begin{equation}
 \mathbb{D}_+\sigma(0,Y)=\lim_{\alpha\downarrow 0}\frac{\sigma(0+\alpha Y)-\sigma(0)}{\alpha}=-2\rho(Y)\leq 0,
 (\#eq:datzero)
 \end{equation} 
 
-which implies that the function is not Gateaux differentiable at zero and has a local maximum there.
+which implies that stress has a local maximum at zero.
+
+By contradiction: suppose that there is a local maximum at $X\not= 0$. Then on the line through zero and $X$ there should be a local maximum at $X$ as well. But  
+
+\begin{equation}
+\sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
+(\#eq:propnomax)
+\end{equation}
+
+is a convex quadratic, which consequently cannot have a local maximum at $X$.
+
 ```
 
 ### Local Minima {#proplocmin}
