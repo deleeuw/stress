@@ -1,0 +1,507 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Exceedingly Simple Monotone Regression},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Exceedingly Simple Monotone Regression}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version 02, march 30, 2017}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+A C implementation of Kruskal's up-and-down-blocks monotone regression
+algorithm for use wth .C(), and a comparison with other implementations.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome. The directory
+\href{http://deleeuwpdx.net/pubfolders/jbkPava}{deleeuwpdx.net/pubfolders/jbkPava}
+has a pdf version, the bib file, the complete Rmd file with the code
+chunks, and the R source code.
+
+\section{Introduction}\label{introduction}
+
+O no ! Not another monotone regression implementation !! There are
+already so many !!!
+
+There is \texttt{isoreg()} in the \texttt{stats} package (R Development
+Core Team (2017)), \texttt{gpava()} in \texttt{isotone()} (De Leeuw,
+Hornik, and Mair (2009)), and \texttt{pava} in \texttt{Iso} (Turner
+(2015)). There is also \texttt{wmonreg()} in \texttt{smacof} (De Leeuw
+and Mair (2009), Mair, De Leeuw, and Groenen (2015)) and
+\texttt{amalgm()} from De Leeuw (2016). Now \texttt{gpava()} is written
+in R, \texttt{amalgm()} calls the Fortran from Cran (1980),
+\texttt{pava()} from \texttt{Iso} calls ratfor Fortran, and
+\texttt{isoreg()} only does unweighted least squares. I wanted something
+in C (because C is not Fortran) which did weighted monotone regression,
+and I wanted to use the .C() interface (because I am exceedingly
+simple).
+
+Now \texttt{wmonreg} from \texttt{smacof} fits the bill. It was written
+in 2014 by Patrick Groenen and Gertjan van den Burg. Same as our
+proposed algorithm here, it implements the up-and-down-blocks algorithm
+of Kruskal (1964). If we compare computation time then
+\texttt{wmonreg()} is the main competitor. But I also wanted code that
+was easy to modify for different unimodal loss functions and that
+performed relatively uniformly over the range of ``almost in the correct
+order'' to ``order completely wrong''.
+
+\section{Algorithm}\label{algorithm}
+
+The best possible description of the algorithm was already given by
+Kruskal (1964) (page 127). We copy his recipe, with a slight change of
+notation and terminology.
+
+``Our algorithm starts with the finest possible partitions into blocks,
+and joins the blocks together step by step until the correct partition
+is found. The finest possible partition consists naturally of n blocks,
+each containing only a single \(x_i\).
+
+Suppose we have any partition into consecutive blocks. We shall use
+\(\overline{x}_b\) to denote the average of the \(x_i\) in block b. If
+\(b_- , b, b_+\) are three adjacent blocks in ascending order, then we
+call \(b\) up-satisfied if \(\overline{x}_b < \overline{x}_{b_+}\) and
+down- satisfied if \(\overline{x}_{b_-} < \overline{x}_b\) . We also
+call \(b\) up-satisfied if it is the highest block, and down-satisfied
+if it is the lowest block.
+
+At each stage of the algorithm we have a partition into blocks.
+Furthermore, one of these blocks is active. The active block may be
+up-active or down-active. At the beginning, the lowest block, consisting
+of \(x_{min}\), is up-active. The algorithm proceeds as follows. If the
+active block is up-active, check to see whether it is up-satisfied. If
+it is, the partition remains unchanged but the active block becomes
+down-active; if not, the active block is joined with the next higher
+block, thus changing the partition, and the new larger block becomes
+down-active. On the other hand, if the active block is down-active, do
+the same thing but upside-down. In other words, check to see whether the
+down-active block is down-satisfied. If it is, the partition remains
+unchanged but the active block becomes up-active; if not, the active
+block is joined with the next lower block into a new block which becomes
+up-active. Eventually this alternation between up-active and down-
+active results in an active block which is simultaneously up-satisfied
+and down-satisfied. When this happens, no further joinings can occur by
+this procedure, and we transfer activity up to the next higher block,
+which becomes up-active. The alternation is again performed until a
+block results which is simultaneously up-satisfied and down-satisfied.
+Activity is then again transferred to the next higher block, and so
+forth until the highest block is up-satisfied and down-satisfied. Then
+the algorithm is finished and the correct partition has been obtained."
+
+Our implementation \texttt{jbkPava()}, which uses Kruskal's initials to
+distinguish it from other pava's, stays as close as possible to this
+description. Blocks are C structures, collected in an array. Each block
+has a value, a weight, a size, the index of the previous block, and the
+index of the the next block.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{struct}\NormalTok{ block \{}
+    \DataTypeTok{double}\NormalTok{ value;}
+    \DataTypeTok{double}\NormalTok{ weight;}
+    \DataTypeTok{int}\NormalTok{ size;}
+    \DataTypeTok{int}\NormalTok{ previous;}
+    \DataTypeTok{int}\NormalTok{ next;}
+\NormalTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+At the end the block values are expanded and returned in the original
+vector. Space for the blocks is allocated and freed in the routine
+(i.e.~it is not under the control of R). Given Kruskal's description of
+the up-and-down blocks algorithm, the code in the appendix should be
+pretty readable.
+
+\section{Timings}\label{timings}
+
+We apply the six monotone regression methods to vectors of length 10,000
+with unit weights, repeating each analysis 100 times. We report the
+elapsed time from \texttt{system.time()}.
+
+\subsection{Random}\label{random}
+
+The vectors of length 10,000 are normal random numbers (a different
+vector for each of the runs).
+
+\begin{verbatim}
+## wmonreg        0.386
+\end{verbatim}
+
+\begin{verbatim}
+## gpava        280.351
+\end{verbatim}
+
+\begin{verbatim}
+## isoreg         0.128
+\end{verbatim}
+
+\begin{verbatim}
+## amalgm         2.550
+\end{verbatim}
+
+\begin{verbatim}
+## Iso::pava      6.544
+\end{verbatim}
+
+\begin{verbatim}
+## jbkPava        0.137
+\end{verbatim}
+
+Clearly \texttt{jbkPava()} and \texttt{isoreg()} are the clear winners,
+although \texttt{isoreg()} has the advantage that it does not have to
+take weighted means and keep track of the block weights. Note that
+\texttt{gpava()}, written in R, is abysmally slow. The two methods
+\texttt{amalgm()} and \texttt{Iso::pava()} that call Fortran routines
+are not really competitive. \texttt{wmonreg()} is doing quite well, but
+\texttt{jbkPava()} is more than twice as fast.
+
+\subsection{Reversed}\label{reversed}
+
+We apply our six methods, one hundred times each, to the vector
+\texttt{10000:1}, which obviously will produce a completely merged
+vector with all elements equal to the mean.
+
+\begin{verbatim}
+## wmonreg        4.424
+\end{verbatim}
+
+\begin{verbatim}
+## gpava        425.842
+\end{verbatim}
+
+\begin{verbatim}
+## isoreg         0.027
+\end{verbatim}
+
+\begin{verbatim}
+## amalgm         2.373
+\end{verbatim}
+
+\begin{verbatim}
+## Iso::pava     10.727
+\end{verbatim}
+
+\begin{verbatim}
+## jbkPava        0.052
+\end{verbatim}
+
+In this situtation, in which blocks are never up-satisfied and always
+down-satisfied, again \texttt{jbkPava()} and \texttt{isoreg()} are best.
+\texttt{wmonreg()} and \texttt{Iso::pava()} lose ground.
+
+\subsection{Ordered}\label{ordered}
+
+We apply our six methods, one hundred times each, to the vector
+\texttt{1:10000}, which obviously just returns the vector itself. There
+is no merging at all, block are always up-satisfied and down-satisfied,
+and we merely loop through the vector.
+
+\begin{verbatim}
+## wmonreg        0.026
+\end{verbatim}
+
+\begin{verbatim}
+## gpava          5.896
+\end{verbatim}
+
+\begin{verbatim}
+## isoreg        20.162
+\end{verbatim}
+
+\begin{verbatim}
+## amalgm         0.049
+\end{verbatim}
+
+\begin{verbatim}
+## Iso::pava      0.011
+\end{verbatim}
+
+\begin{verbatim}
+## jbkPava        0.042
+\end{verbatim}
+
+\texttt{wmonreg()} is best-in-show, which is interesting because in many
+applications we expect the vector to be closer to the correct ordering
+than to random or reverse ordering. Both Fortran calling routines
+perform well. \texttt{isoreg()} falls flat on its face and is even
+beaten by \texttt{gpava()}. There is probably some reasonable
+explanation for this, but since unweighted \texttt{isoreg()} is not
+really in the competition I did not explore this.
+
+\subsection{Conclusion}\label{conclusion}
+
+Both \texttt{pava()} and \texttt{wmonreg()} perform well over the range
+of examples. There is an indication that \texttt{pava()} is considerably
+better for vectors that are out of order, while \texttt{wmonreg()} may
+be better for vectors that are already close to correct. In future
+versions of this paper we will try to speed up \texttt{pava()}
+performance.
+
+\section{Code}\label{code}
+
+\subsection{R code}\label{r-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dyn.load}\NormalTok{(}\StringTok{"jbkPava.so"}\NormalTok{)}
+
+\NormalTok{jbkPava <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, }\DataTypeTok{w =} \KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{length}\NormalTok{(x))) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"jbkPava"}\NormalTok{,}
+       \DataTypeTok{x =} \KeywordTok{as.double}\NormalTok{(x),}
+       \DataTypeTok{w =} \KeywordTok{as.double}\NormalTok{ (w),}
+       \DataTypeTok{n =} \KeywordTok{as.integer}\NormalTok{(}\KeywordTok{length}\NormalTok{(x)))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{x)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{C code}\label{c-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include }\ImportTok{<stdlib.h>}
+\PreprocessorTok{#include }\ImportTok{<stdbool.h>}
+
+\KeywordTok{struct}\NormalTok{ block \{}
+    \DataTypeTok{double}\NormalTok{ value;}
+    \DataTypeTok{double}\NormalTok{ weight;}
+    \DataTypeTok{int}\NormalTok{ size;}
+    \DataTypeTok{int}\NormalTok{ previous;}
+    \DataTypeTok{int}\NormalTok{ next;}
+\NormalTok{\};}
+
+\DataTypeTok{void}\NormalTok{ jbkPava (}\DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n) \{}
+    \KeywordTok{struct}\NormalTok{ block *blocks = calloc ((}\DataTypeTok{size_t}\NormalTok{) * n, }\KeywordTok{sizeof}\NormalTok{(}\KeywordTok{struct}\NormalTok{ block));}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i < *n; i++) \{}
+\NormalTok{        blocks[i].value = x[i];}
+\NormalTok{        blocks[i].weight = w[i];}
+\NormalTok{        blocks[i].size = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        blocks[i].previous = i - }\DecValTok{1}\NormalTok{; }
+\NormalTok{        blocks[i].next = i + }\DecValTok{1}\NormalTok{;   }
+\NormalTok{    \}}
+    \DataTypeTok{int}\NormalTok{ active = }\DecValTok{0}\NormalTok{;}
+    \ControlFlowTok{do}\NormalTok{ \{}
+\NormalTok{        bool upsatisfied = false;}
+        \DataTypeTok{int}\NormalTok{ next = blocks[active].next; }
+        \ControlFlowTok{if}\NormalTok{ (next == *n) upsatisfied = true;}
+        \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (blocks[next].value > blocks[active].value) }
+\NormalTok{            upsatisfied = true;}
+        \ControlFlowTok{if}\NormalTok{ (!upsatisfied) \{}
+            \DataTypeTok{double}\NormalTok{ ww = blocks[active].weight + blocks[next].weight;}
+            \DataTypeTok{int}\NormalTok{ nextnext = blocks[next].next;}
+            \DataTypeTok{double}\NormalTok{ wxactive = blocks[active].weight * blocks[active].value;}
+            \DataTypeTok{double}\NormalTok{ wxnext = blocks[next].weight * blocks[next].value;}
+\NormalTok{            blocks[active].value = (wxactive + wxnext) / ww;}
+\NormalTok{            blocks[active].weight = ww;}
+\NormalTok{            blocks[active].size += blocks[next].size;}
+\NormalTok{            blocks[active].next = nextnext;}
+            \ControlFlowTok{if}\NormalTok{ (nextnext < *n)}
+\NormalTok{                blocks[nextnext].previous = active;}
+\NormalTok{            blocks[next].size = }\DecValTok{0}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{        bool downsatisfied = false;}
+        \DataTypeTok{int}\NormalTok{ previous = blocks[active].previous;}
+        \ControlFlowTok{if}\NormalTok{ (previous == -}\DecValTok{1}\NormalTok{) downsatisfied = true;}
+        \ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (blocks[previous].value < blocks[active].value) }
+\NormalTok{            downsatisfied = true;}
+        \ControlFlowTok{if}\NormalTok{ (!downsatisfied) \{}
+            \DataTypeTok{double}\NormalTok{ ww = blocks[active].weight + blocks[previous].weight;}
+            \DataTypeTok{int}\NormalTok{ previousprevious = blocks[previous].previous;}
+            \DataTypeTok{double}\NormalTok{ wxactive = blocks[active].weight * blocks[active].value;}
+            \DataTypeTok{double}\NormalTok{ wxprevious = blocks[previous].weight * blocks[previous].value;}
+\NormalTok{            blocks[active].value = (wxactive + wxprevious) / ww;}
+\NormalTok{            blocks[active].weight = ww;}
+\NormalTok{            blocks[active].size += blocks[previous].size;}
+\NormalTok{            blocks[active].previous = previousprevious;}
+            \ControlFlowTok{if}\NormalTok{ (previousprevious > -}\DecValTok{1}\NormalTok{)}
+\NormalTok{                blocks[previousprevious].next = active;}
+\NormalTok{            blocks[previous].size = }\DecValTok{0}\NormalTok{;}
+\NormalTok{        \}}
+        \ControlFlowTok{if}\NormalTok{ ((blocks[active].next == *n) && downsatisfied) }\ControlFlowTok{break}\NormalTok{;}
+        \ControlFlowTok{if}\NormalTok{ (upsatisfied && downsatisfied) active = next;}
+\NormalTok{    \} }\ControlFlowTok{while}\NormalTok{ (true);}
+    \DataTypeTok{int}\NormalTok{ k = }\DecValTok{0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i < *n; i++) \{}
+        \DataTypeTok{int}\NormalTok{ blksize = blocks[i].size;}
+        \ControlFlowTok{if}\NormalTok{ (blksize > }\FloatTok{0.0}\NormalTok{) \{}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{0}\NormalTok{; j < blksize; j++) \{}
+\NormalTok{                x[k] = blocks[i].value;}
+\NormalTok{                k++;}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    free (blocks);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-cran_80}{}
+Cran, G.W. 1980. ``Algorithm AS 149: Amalgamation of Means in the Case
+of Simple Ordering.'' \emph{Journal of the Royal Statistical Society,
+Series C (Applied Statistics)}, 209--11.
+
+\hypertarget{ref-deleeuw_E_16d}{}
+De Leeuw, J. 2016. ``Exceedingly Simple Isotone Regression with Ties.''
+\url{http://deleeuwpdx.net/pubfolders/isotone/isotone.pdf}.
+
+\hypertarget{ref-deleeuw_mair_A_09c}{}
+De Leeuw, J., and P. Mair. 2009. ``Multidimensional Scaling Using
+Majorization: SMACOF in R.'' \emph{Journal of Statistical Software} 31
+(3): 1--30.
+\url{http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf}.
+
+\hypertarget{ref-deleeuw_hornik_mair_A_09}{}
+De Leeuw, J., K. Hornik, and P. Mair. 2009. ``Isotone Optimization in R:
+Pool-Adjacent-Violators Algorithm (PAVA) and Active Set Methods.''
+\emph{Journal of Statistical Software} 32 (5): 1--24.
+\url{http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_hornik_mair_A_09.pdf}.
+
+\hypertarget{ref-kruskal_64b}{}
+Kruskal, J.B. 1964. ``Nonmetric Multidimensional Scaling: a Numerical
+Method.'' \emph{Psychometrika} 29: 115--29.
+
+\hypertarget{ref-mair_deleeuw_groenen_U_15}{}
+Mair, P., J. De Leeuw, and P.J.F. Groenen. 2015. ``Multidimensional
+Scaling: SMACOF in R.''
+\url{http://deleeuwpdx.net/janspubs/2015/notes/mair_deleeuw_groenen_U_15.pdf}.
+
+\hypertarget{ref-R_17}{}
+R Development Core Team. 2017. \emph{R: A Language and Environment for
+Statistical Computing}. Vienna, Austria: R Foundation for Statistical
+Computing.
+\href{\%7Bhttp://www.R-project.org\%7D}{\{http://www.R-project.org\}}.
+
+\hypertarget{ref-turner_15}{}
+Turner, R. 2015. \emph{Iso: Functions to Perform Isotonic Regression}.
+\href{\%7Bhttps://CRAN.R-project.org/package=Iso\%7D}{\{https://CRAN.R-project.org/package=Iso\}}.
+
+
+\end{document}

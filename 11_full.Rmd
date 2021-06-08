@@ -30,13 +30,13 @@ We call the space of all positive semi-definite $n\times n$ matrices *cross prod
 Stress is convex on cross product space.
 ```
 
-```{proof}
+::: {.proof}
 First, $\eta$ is linear in $C$. Second, 
 $$
 \rho(C)=\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}\delta_{ij}\sqrt{\mathbf{tr}\ A_{ij}C}.
 $$
 This is the weighted sum of square roots of non-negative functions that are linear in $C$, and it is consequently concave. Thus $\sigma$ is convex. 
-```
+:::
 
 Unfortunately the subset of cross product space of all matrices with rank less than or equal to $p$ is far from simple (see @datorro_15), so computational approaches to MDS prefer to work in configuration space.
 
@@ -65,9 +65,10 @@ For $\Delta\in\mathcal{K}$ we have
 +o(\epsilon).\label{E:expand}
 \end{equation}
 ```
-```{proof}
+::: {.proof}
 Simple expansion.
-```
+:::
+
 ***
 ```{theorem, label = "rockafellar"}
 Suppose $C$ is a solution to the problem of minimizing $\sigma$ over $\mathcal{K}$. Then
@@ -79,7 +80,7 @@ Suppose $C$ is a solution to the problem of minimizing $\sigma$ over $\mathcal{K
 
 ```
 ***
-```{proof}
+::: {.proof}
 The $\epsilon^\frac12$ term in $\eqref{E:expand}$ needs to vanish at a local minimum. This proves the first part. It follows that at a local minimum 
 
 \begin{equation*}
@@ -100,7 +101,7 @@ and choosing $\epsilon$ small and negative shows we must have $\mathbf{tr}\ (V-B
 $C$ to be a minimum. This proves the third part. Finally, if $\sigma$ has a minimum at $C$,
 and $C$ is positive definite, then from parts 2 and 3 we have $V=B(C)$. Comparing off-diagonal
 elements shows $\Delta=D(C)$, and thus $\sigma(C)=0$.
-```
+:::
 
 If $C$ is the solution of the FDS problem, then $\mathbf{rank}(C)$ defines the *Gower rank* of the dissimilarities. The number of positive eigenvalues of the negative of the doubly-centered matrix of squared dissimilarities, the matrix factored in classical MDS, defines the *Torgerson rank* of the dissimilarities. The *Gower conjecture* is that the
 Gower rank is less than or equal to the Torgerson rank. No proof and no counter examples have been found.

@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/292025/b468414fb5ab4a88adb062f1ec537abb
+bundleId: https://api.rpubs.com/api/v1/document/292025/b468414fb5ab4a88adb062f1ec537abb
+url: http://rpubs.com/deleeuw/292025
+when: 1507664889.38563

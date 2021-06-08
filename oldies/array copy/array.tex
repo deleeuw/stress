@@ -1,0 +1,783 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Arrays from R to C and Back},
+  pdfauthor={Jan de Leeuw},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+\title{Arrays from R to C and Back}
+\author{Jan de Leeuw}
+\date{First created on May 21, 2020. Last update on June 02, 2020}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For multidimensional arrays and symmetric arrays in compact storage the
+mapping of R array indices to C storage locations and its inverse can be
+complicated. This short note discusses and implements a systematic way
+of handling this mapping for vectors, general matrices, symmetric
+matrices in compact storage, general multidimensional arrays, and
+super-symmetric multidimensional arrays.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome. The directory
+\href{http://deleeuwpdx.net/pubfolders/array}{deleeuwpdx.net/pubfolders/array}
+has a pdf version, the bib file, the complete Rmd file with the code
+chunks, and the R and C source code.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Arrays in R are vectors with a dim attribute. Arrays in C are blocks of
+consecutive memory, and references to arrays \emph{usually} decay to
+pointers to the initial element of the block. Arrays of pointers can be
+used to create, or maybe we should say simulate, multidimensional
+arrays.
+
+There are two main differences between arrays in R and C. The first is
+that array indexing in R starts with 1, and in C it starts with 0. Thus
+in an R array x the first element is \(x[1]\), while in C it is \(x[0]\)
+or, using pointers, \(*x\) or \(*(x + 0)\). The second difference is
+that in R column-major ordering is used to store the content of arrays
+of rank two or higher, while C uses row-major storage. Thus if x is the
+matrix
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   1    3 
+## [2,]   2    4
+\end{verbatim}
+
+then for the third element in R storage we have \(x[3]=x[1,2]=3\), while
+in C for the third element we have \(*(x + 2)=x[2][1]=2\).
+
+If we pass arrays from R to C (or back) then this can become annoying,
+especially for arrays of high rank. Even more complications arise if we
+use compact storage of symmetric arrays, because the mapping of, say, R
+array indices to C storage locations and its inverse are bound to be
+more complicated. This short note discusses one systematic way to easily
+handle that mapping in some of the more important cases.
+
+\hypertarget{arrays-in-c}{%
+\section{Arrays in C}\label{arrays-in-c}}
+
+In array.h we define an array as a C structure with the following
+elements:
+
+\begin{itemize}
+\tightlist
+\item
+  content - pointer to data of type CTYPE (defaults to double);
+\item
+  length - pointer to the number of elements in content;
+\item
+  rank - pointer to number of dimensions of array;
+\item
+  shape - pointer to vector with number of levels in each dimension;
+\item
+  encode - pointer to a mapping of C memory locations to R array
+  indices;
+\item
+  decode - pointer to a mapping of R array indices to C memory
+  locations.
+\end{itemize}
+
+CTYPE is a macro which you can change in array.h from double to other
+types. encode and decode are of type ENCODE and DECODE, which are
+typedefs for function pointers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{typedef} \DataTypeTok{void}\NormalTok{ (*ENCODE)(}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *); }\CommentTok{// encode gives R array indices from C memory location}
+\KeywordTok{typedef} \DataTypeTok{void}\NormalTok{ (*DECODE)(}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *); }\CommentTok{// decode gives C memory location from R array indices}
+\end{Highlighting}
+\end{Shaded}
+
+For symmetric matrices and arrays shape can be a pointer to a single
+number.
+
+\hypertarget{subroutines}{%
+\section{Subroutines}\label{subroutines}}
+
+In array.c there are some auxiliary subroutines for sorting integers
+(using the system qsort()) and for binomial coefficients. The main
+routines implement encode and decode for arrays with element of type
+CTYPE in the following classes.
+
+\begin{itemize}
+\tightlist
+\item
+  general vectors (GVENCODE() and GVDECODE())
+\item
+  general matrices (GMENCODE() and GMDECODE())
+\item
+  symmetric matrices in compact storage (SMENCODE() and SMDECODE())
+\item
+  general multidimensional arrays (GAENCODE() and GADECODE())
+\item
+  super-symmetric multidimensional arrays in compact storage (SAENCODE()
+  and SADECODE())
+\end{itemize}
+
+Compact storage, as used here, is column-major and increasing (for
+details, see De Leeuw (2017)). Thus array element \(x_{i_1\cdots i_r}\)
+is stored if and only if \(i_1\leq\cdots\leq i_r\). The symmetric matrix
+versions of decode and encode can also be used for triangular matrices
+in compact storage. Of course decode and encode for vectors merely
+amounts to subtracting or adding one to the argument, so you want not
+want the overhead of a function call in that case.
+
+All \(5\times 2=10\) routines have the same arguments, as in the general
+prototypes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{XXDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank);}
+\NormalTok{XXENCODE(}\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank);}
+\end{Highlighting}
+\end{Shaded}
+
+Note that all arguments are pointers to integers. Not all subroutines
+need both shape and rank, but we always include them to avoid having to
+deal with a variable number of arguments. Note that we only map from R
+indices to C storage locations and back, not from C storage locations to
+R storage locations, or from C indices to R storage locations. Thus the
+workflow we have in mind is creating our data in R, passing it to C,
+computing in C using the subroutines, and passing the result back to R.
+The 10 subroutines are all written so they can be used directly using
+the .C() interface in R (i.e.~they pass all arguments by reference,
+return void, and have no I/O). The main reason for not using the .Call()
+interface is that we want to make the routines usable for people who do
+not have R. We may try at some point to change the R code to use the
+.C64() interface (Gerber, Mösinger, and Furrer (2018)).
+
+Using the array structure with pointers to corresponding subroutines
+will make it easy to extend our results to other types of arrays, such
+as triangular and banded matrices, and even to Hilbert, Vandermonde,
+Toeplitz, or Hankel matrices.
+
+\hypertarget{testers}{%
+\section{Testers}\label{testers}}
+
+I have also included five main programs in C which test the decode and
+encode routines. They are named appropriately:
+
+\begin{itemize}
+\tightlist
+\item
+  gvtester();
+\item
+  gmtester();
+\item
+  smtester();
+\item
+  gatester();
+\item
+  satester().
+\end{itemize}
+
+\hypertarget{appendix-code}{%
+\section{Appendix: Code}\label{appendix-code}}
+
+\hypertarget{array.h}{%
+\subsection{array.h}\label{array.h}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#ifndef INDEXING\_H}
+\PreprocessorTok{\#define INDEXING\_H}
+
+\PreprocessorTok{\#include }\ImportTok{\textless{}math.h\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}stdio.h\textgreater{}}
+\PreprocessorTok{\#include }\ImportTok{\textless{}stdlib.h\textgreater{}}
+
+\PreprocessorTok{\#define CTYPE double}
+
+\KeywordTok{typedef} \DataTypeTok{void}\NormalTok{ (*ENCODE)(}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *); }\CommentTok{// encode gives R array indices from C memory location}
+\KeywordTok{typedef} \DataTypeTok{void}\NormalTok{ (*DECODE)(}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *); }\CommentTok{// decode gives C memory location from R array indices}
+
+\KeywordTok{typedef} \KeywordTok{struct}\NormalTok{ \{}
+\NormalTok{  CTYPE *content;}
+  \DataTypeTok{int}\NormalTok{ *length;}
+  \DataTypeTok{int}\NormalTok{ *rank;}
+  \DataTypeTok{int}\NormalTok{ *shape;}
+\NormalTok{  ENCODE encode;}
+\NormalTok{  DECODE decode;}
+\NormalTok{\} ARRAY;}
+
+\CommentTok{/* protoypes */}
+
+\KeywordTok{extern} \DataTypeTok{int}\NormalTok{ binCoef(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ isort(}\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{int}\NormalTok{ icmp(}\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *);}
+
+\KeywordTok{extern} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GVENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GVDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GMDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GMENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GADECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ GAENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ SMDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ SMENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ SADECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\KeywordTok{extern} \DataTypeTok{void}\NormalTok{ SAENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *);}
+
+\PreprocessorTok{\#endif }\CommentTok{/* INDEXING\_H */}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{array.c}{%
+\subsection{array.c}\label{array.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\DataTypeTok{int}\NormalTok{ binCoef(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ m) \{}
+  \DataTypeTok{int}\NormalTok{ result;}
+  \DataTypeTok{int}\NormalTok{ *work = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)(m + }\DecValTok{1}\NormalTok{), }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  work[}\DecValTok{0}\NormalTok{] = }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= n; i++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = (i \textgreater{} m) ? m : i; j \textgreater{} }\DecValTok{0}\NormalTok{; j{-}{-}) \{}
+\NormalTok{      work[j] += work[j {-} }\DecValTok{1}\NormalTok{];}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  result = work[m];}
+\NormalTok{  free(work);}
+  \ControlFlowTok{return}\NormalTok{ (result);}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ isort(}\DataTypeTok{int}\NormalTok{ *cell, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n) \{}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)qsort(cell, (}\DataTypeTok{size\_t}\NormalTok{)*n, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{), icmp);}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{int}\NormalTok{ icmp(}\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *y) \{}
+  \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *ix = (}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *)x;}
+  \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *iy = (}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *)y;}
+  \ControlFlowTok{return}\NormalTok{ (*ix {-} *iy);}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GVENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+\NormalTok{  *indices = *location + }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GVDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+\NormalTok{  *location = *indices {-} }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GMENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ nrow = *(shape + }\DecValTok{0}\NormalTok{), icol, irow, iloc = *location;}
+\NormalTok{  irow = (iloc \% nrow) + }\DecValTok{1}\NormalTok{;}
+\NormalTok{  icol = (iloc / nrow) + }\DecValTok{1}\NormalTok{;}
+\NormalTok{  *(indices + }\DecValTok{0}\NormalTok{) = irow;}
+\NormalTok{  *(indices + }\DecValTok{1}\NormalTok{) = icol;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GMDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ nrow = *(shape + }\DecValTok{0}\NormalTok{), irow = *(indices + }\DecValTok{0}\NormalTok{), icol = *(indices + }\DecValTok{1}\NormalTok{),}
+\NormalTok{      iloc = (irow {-} }\DecValTok{1}\NormalTok{) + (icol {-} }\DecValTok{1}\NormalTok{) * nrow;}
+\NormalTok{  *location = iloc;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ SMDECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ nrow = *(shape + }\DecValTok{0}\NormalTok{), irow = *(indices + }\DecValTok{0}\NormalTok{), icol = *(indices + }\DecValTok{1}\NormalTok{),}
+\NormalTok{      iloc = }\DecValTok{0}\NormalTok{;}
+  \ControlFlowTok{if}\NormalTok{ (irow \textless{} icol) \{}
+\NormalTok{    iloc = irow;}
+\NormalTok{    irow = icol;}
+\NormalTok{    icol = iloc;}
+\NormalTok{  \}}
+  \DataTypeTok{int}\NormalTok{ *maxcol = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)nrow + }\DecValTok{1}\NormalTok{, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{}= nrow; i++) \{}
+\NormalTok{    *(maxcol + i) = i * nrow {-} i * (i {-} }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{;}
+\NormalTok{  \}}
+\NormalTok{  iloc = *(maxcol + (icol {-} }\DecValTok{1}\NormalTok{)) + (irow {-} icol + }\DecValTok{1}\NormalTok{);}
+\NormalTok{  *location = iloc {-} }\DecValTok{1}\NormalTok{;}
+\NormalTok{  free(maxcol);}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ SMENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ nrow = *(shape + }\DecValTok{0}\NormalTok{), irow, icol, iloc = *location + }\DecValTok{1}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *maxcol = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)nrow + }\DecValTok{1}\NormalTok{, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{}= nrow; i++) \{}
+\NormalTok{    *(maxcol + i) = i * nrow {-} i * (i {-} }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{;}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= nrow; i++) \{}
+    \ControlFlowTok{if}\NormalTok{ (iloc \textless{}= *(maxcol + i)) \{}
+\NormalTok{      icol = i;}
+\NormalTok{      irow = iloc {-} *(maxcol + (i {-} }\DecValTok{1}\NormalTok{)) + (i {-} }\DecValTok{1}\NormalTok{);}
+      \ControlFlowTok{break}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  *(indices + }\DecValTok{0}\NormalTok{) = irow;}
+\NormalTok{  *(indices + }\DecValTok{1}\NormalTok{) = icol;}
+\NormalTok{  free(maxcol);}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GADECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ aux = }\DecValTok{1}\NormalTok{, res = }\DecValTok{1}\NormalTok{, r = *rank;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} r; i++) \{}
+\NormalTok{    res += (*(indices + i) {-} }\DecValTok{1}\NormalTok{) * aux;}
+\NormalTok{    aux *= *(shape + i);}
+\NormalTok{  \}}
+\NormalTok{  *location = res {-} }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ GAENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ r = *rank, iloc = *location + }\DecValTok{1}\NormalTok{, aux = }\DecValTok{1}\NormalTok{, k = }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j \textless{} r; j++) \{}
+\NormalTok{    aux *= *(shape + j {-} }\DecValTok{1}\NormalTok{);}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = r {-} }\DecValTok{1}\NormalTok{; j \textgreater{} }\DecValTok{0}\NormalTok{; j{-}{-}) \{}
+\NormalTok{    k = (iloc {-} }\DecValTok{1}\NormalTok{) / aux;}
+\NormalTok{    *(indices + j) = k + }\DecValTok{1}\NormalTok{;}
+\NormalTok{    iloc {-}= k * aux;}
+\NormalTok{    aux /= *(shape + j {-} }\DecValTok{1}\NormalTok{);}
+\NormalTok{  \}}
+\NormalTok{  *(indices + }\DecValTok{0}\NormalTok{) = iloc;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ SADECODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ iloc = }\DecValTok{1}\NormalTok{, k = }\DecValTok{1}\NormalTok{, r = *rank;}
+  \DataTypeTok{int}\NormalTok{ *ind = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)r, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} r; i++) \{}
+\NormalTok{    *(ind + i) = *(indices + i);}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)isort(ind, rank);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= r; i++) \{}
+\NormalTok{    k = i + (*(ind + i {-} }\DecValTok{1}\NormalTok{) {-} }\DecValTok{1}\NormalTok{) {-} }\DecValTok{1}\NormalTok{;}
+\NormalTok{    iloc += binCoef(k, i);}
+\NormalTok{  \}}
+\NormalTok{  *location = iloc {-} }\DecValTok{1}\NormalTok{;}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(ind);}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ SAENCODE(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *location, }\DataTypeTok{int}\NormalTok{ *indices, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *shape,}
+              \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank) \{}
+  \DataTypeTok{int}\NormalTok{ n = *shape, r = *rank, iloc = *location + }\DecValTok{1}\NormalTok{, v = iloc {-} }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = r; k \textgreater{}= }\DecValTok{1}\NormalTok{; k{-}{-}) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{0}\NormalTok{; j \textless{} n; j++) \{}
+      \DataTypeTok{int}\NormalTok{ sj = binCoef(k + j {-} }\DecValTok{1}\NormalTok{, k), sk = binCoef(k + j, k);}
+      \ControlFlowTok{if}\NormalTok{ (v \textless{} sk) \{}
+\NormalTok{        indices[k {-} }\DecValTok{1}\NormalTok{] = j + }\DecValTok{1}\NormalTok{;}
+\NormalTok{        v {-}= sj;}
+        \ControlFlowTok{break}\NormalTok{;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gvtester.c}{%
+\subsection{gvtester.c}\label{gvtester.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\CommentTok{/*}
+\CommentTok{  a vector of shape (10)}
+\CommentTok{*/}
+
+\DataTypeTok{int}\NormalTok{ main(}\DataTypeTok{void}\NormalTok{) \{}
+\NormalTok{  ARRAY a;}
+  \DataTypeTok{int}\NormalTok{ length = }\DecValTok{10}\NormalTok{, rank = }\DecValTok{1}\NormalTok{, j = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *shape = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  *shape = }\DecValTok{10}\NormalTok{;}
+\NormalTok{  a.content = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)length, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{  a.length = \&length;}
+\NormalTok{  a.shape = shape;}
+\NormalTok{  a.rank = \&rank;}
+\NormalTok{  a.decode = GVDECODE;}
+\NormalTok{  a.encode = GVENCODE;}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GVDECODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.decode(\&i, \&j, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"index \%4d location \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j);}
+\NormalTok{  \}}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GVENCODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.encode(\&i, \&j, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"location \%4d index \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j);}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(shape);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(a.content);}
+  \ControlFlowTok{return}\NormalTok{ EXIT\_SUCCESS;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gmtester.c}{%
+\subsection{gmtester.c}\label{gmtester.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\CommentTok{/*}
+\CommentTok{  a general matrix of shape (4,3)}
+\CommentTok{*/}
+
+\DataTypeTok{int}\NormalTok{ main(}\DataTypeTok{void}\NormalTok{) \{}
+\NormalTok{  ARRAY a;}
+  \DataTypeTok{int}\NormalTok{ length = }\DecValTok{12}\NormalTok{, rank = }\DecValTok{2}\NormalTok{, k = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *shape = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+  \DataTypeTok{int}\NormalTok{ *indices = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  *(shape + }\DecValTok{0}\NormalTok{) = }\DecValTok{4}\NormalTok{;}
+\NormalTok{  *(shape + }\DecValTok{1}\NormalTok{) = }\DecValTok{3}\NormalTok{;}
+\NormalTok{  a.content = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)length, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{  a.length = \&length;}
+\NormalTok{  a.shape = shape;}
+\NormalTok{  a.rank = \&rank;}
+\NormalTok{  a.decode = GMDECODE;}
+\NormalTok{  a.encode = GMENCODE;}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GMDECODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j \textless{}= *(a.shape + }\DecValTok{1}\NormalTok{); j++) \{}
+\NormalTok{    *(indices + }\DecValTok{1}\NormalTok{) = j;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= *(a.shape + }\DecValTok{0}\NormalTok{); i++) \{}
+\NormalTok{      *(indices + }\DecValTok{0}\NormalTok{) = i;}
+\NormalTok{      (}\DataTypeTok{void}\NormalTok{)a.decode(indices, \&k, a.shape, a.rank);}
+\NormalTok{      printf(}\StringTok{"indices \%4d \%4d location \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j, k);}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GMENCODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.encode(\&i, indices, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"location \%4d indices \%4d \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, *(indices + }\DecValTok{0}\NormalTok{), *(indices + }\DecValTok{1}\NormalTok{));}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(shape);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(a.content);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(indices);}
+  \ControlFlowTok{return}\NormalTok{ EXIT\_SUCCESS;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{smtester.c}{%
+\subsection{smtester.c}\label{smtester.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\CommentTok{/*}
+\CommentTok{  a symmetric matrix of shape (4,4)}
+\CommentTok{*/}
+
+\DataTypeTok{int}\NormalTok{ main(}\DataTypeTok{void}\NormalTok{) \{}
+\NormalTok{  ARRAY a;}
+  \DataTypeTok{int}\NormalTok{ length = }\DecValTok{10}\NormalTok{, rank = }\DecValTok{2}\NormalTok{, shape = }\DecValTok{4}\NormalTok{, k = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *indices = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  a.content = (CTYPE *)calloc((}\DataTypeTok{size\_t}\NormalTok{)length, }\KeywordTok{sizeof}\NormalTok{(CTYPE));}
+\NormalTok{  a.length = \&length;}
+\NormalTok{  a.shape = \&shape;}
+\NormalTok{  a.rank = \&rank;}
+\NormalTok{  a.decode = SMDECODE;}
+\NormalTok{  a.encode = SMENCODE;}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"SMDECODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j \textless{}= shape; j++) \{}
+\NormalTok{    *(indices + }\DecValTok{1}\NormalTok{) = j;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= shape; i++) \{}
+\NormalTok{      *(indices + }\DecValTok{0}\NormalTok{) = i;}
+\NormalTok{      (}\DataTypeTok{void}\NormalTok{)a.decode(indices, \&k, a.shape, a.rank);}
+\NormalTok{      printf(}\StringTok{"indices \%4d \%4d location \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j, k);}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"SMENCODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.encode(\&i, indices, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"location \%4d indices \%4d \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, *(indices + }\DecValTok{0}\NormalTok{), *(indices + }\DecValTok{1}\NormalTok{));}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(a.content);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(indices);}
+  \ControlFlowTok{return}\NormalTok{ EXIT\_SUCCESS;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gatester.c}{%
+\subsection{gatester.c}\label{gatester.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\CommentTok{/*}
+\CommentTok{  a general array of shape (2,4,3)}
+\CommentTok{*/}
+
+\DataTypeTok{int}\NormalTok{ main(}\DataTypeTok{void}\NormalTok{) \{}
+\NormalTok{  ARRAY a;}
+  \DataTypeTok{int}\NormalTok{ length = }\DecValTok{24}\NormalTok{, rank = }\DecValTok{3}\NormalTok{, l = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *shape = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+  \DataTypeTok{int}\NormalTok{ *indices = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  *(shape + }\DecValTok{0}\NormalTok{) = }\DecValTok{2}\NormalTok{;}
+\NormalTok{  *(shape + }\DecValTok{1}\NormalTok{) = }\DecValTok{4}\NormalTok{;}
+\NormalTok{  *(shape + }\DecValTok{2}\NormalTok{) = }\DecValTok{3}\NormalTok{;}
+\NormalTok{  a.content = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)length, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{  a.length = \&length;}
+\NormalTok{  a.shape = shape;}
+\NormalTok{  a.rank = \&rank;}
+\NormalTok{  a.decode = GADECODE;}
+\NormalTok{  a.encode = GAENCODE;}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GADECODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k \textless{}= *(a.shape + }\DecValTok{2}\NormalTok{); k++) \{}
+\NormalTok{    *(indices + }\DecValTok{2}\NormalTok{) = k;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j \textless{}= *(a.shape + }\DecValTok{1}\NormalTok{); j++) \{}
+\NormalTok{      *(indices + }\DecValTok{1}\NormalTok{) = j;}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= *(a.shape + }\DecValTok{0}\NormalTok{); i++) \{}
+\NormalTok{        *(indices + }\DecValTok{0}\NormalTok{) = i;}
+\NormalTok{        (}\DataTypeTok{void}\NormalTok{)a.decode(indices, \&l, a.shape, a.rank);}
+\NormalTok{        printf(}\StringTok{"indices \%4d \%4d \%4d location \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j, k, l);}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"GAENCODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.encode(\&i, indices, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"location \%4d indices \%4d \%4d \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, *(indices + }\DecValTok{0}\NormalTok{),}
+\NormalTok{           *(indices + }\DecValTok{1}\NormalTok{), *(indices + }\DecValTok{2}\NormalTok{));}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(shape);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(a.content);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(indices);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{satester.c}{%
+\subsection{satester.c}\label{satester.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{\#include }\ImportTok{"array.h"}
+
+\CommentTok{/*}
+\CommentTok{  a symmetric array of shape (3,3,3)}
+\CommentTok{*/}
+
+\DataTypeTok{int}\NormalTok{ main(}\DataTypeTok{void}\NormalTok{) \{}
+\NormalTok{  ARRAY a;}
+  \DataTypeTok{int}\NormalTok{ length = }\DecValTok{10}\NormalTok{, rank = }\DecValTok{3}\NormalTok{, shape = }\DecValTok{3}\NormalTok{, l = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{int}\NormalTok{ *indices = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{  a.content = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size\_t}\NormalTok{)length, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{  a.length = \&length;}
+\NormalTok{  a.shape = \&shape;}
+\NormalTok{  a.rank = \&rank;}
+\NormalTok{  a.decode = SADECODE;}
+\NormalTok{  a.encode = SAENCODE;}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"SADECODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k \textless{}= shape; k++) \{}
+\NormalTok{    *(indices + }\DecValTok{2}\NormalTok{) = k;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j \textless{}= shape; j++) \{}
+\NormalTok{      *(indices + }\DecValTok{1}\NormalTok{) = j;}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i \textless{}= shape; i++) \{}
+\NormalTok{        *(indices + }\DecValTok{0}\NormalTok{) = i;}
+        \ControlFlowTok{if}\NormalTok{ ((i \textless{}= j) \&\& (j \textless{}= k)) \{}
+\NormalTok{          (}\DataTypeTok{void}\NormalTok{)a.decode(indices, \&l, a.shape, a.rank);}
+\NormalTok{          printf(}\StringTok{"indices \%4d \%4d \%4d location \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, j, k, l);}
+\NormalTok{        \}}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"SAENCODE}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{  printf(}\StringTok{"========}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{0}\NormalTok{; i \textless{} length; i++) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)a.encode(\&i, indices, a.shape, a.rank);}
+\NormalTok{    printf(}\StringTok{"location \%4d indices \%4d \%4d \%4d}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, i, *(indices + }\DecValTok{0}\NormalTok{),}
+\NormalTok{           *(indices + }\DecValTok{1}\NormalTok{), *(indices + }\DecValTok{2}\NormalTok{));}
+\NormalTok{  \}}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(a.content);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(indices);}
+  \ControlFlowTok{return}\NormalTok{ EXIT\_SUCCESS;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-deleeuw_E_17s}{}%
+De Leeuw, J. 2017. ``Multidimensional Array Indexing and Storage.''
+2017. \url{http://deleeuwpdx.net/pubfolders/indexing/indexing.pdf}.
+
+\leavevmode\hypertarget{ref-gerber_moesinger_furrer_18}{}%
+Gerber, F., K. Mösinger, and R. Furrer. 2018. ``dotCall64: An efficient
+interface to compiled C/C++ and Fortran code supporting long vectors.''
+\emph{SoftwareX} 7: 217--21.
+\end{cslreferences}
+
+\end{document}

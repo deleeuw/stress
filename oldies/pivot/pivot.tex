@@ -1,0 +1,857 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Exceedingly Simple Principal Pivot Transforms},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Exceedingly Simple Principal Pivot Transforms}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version 001, March 23, 2016}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome. The directory
+\href{http://deleeuwpdx.net/pubfolders/pivot}{deleeuwpdx.net/pubfolders/pivot}
+has a pdf version, the complete Rmd file with all code chunks, the bib
+file, and the R source code.
+
+\section{Single Pivots}\label{single-pivots}
+
+Suppose \(A\) is an \(n\times m\) matrix with \(a_{kk}\not= 0\). The
+\(k^{th}\) \emph{principal single pivot} or \emph{PSP} transforms \(A\)
+to the \(n\times m\) matrix \(\mathbf{piv}_k(A)\) with elements
+
+\begin{equation}\label{E:pivot}
+[\mathbf{piv}_k(A)]_{ij}=
+\begin{cases}
+\frac{1}{a_{kk}}&\text{ if }i=k\text{ and }j=k,\\
+-\frac{a_{kj}}{a_{kk}}&\text{ if }i=k\text{ and }j\not=k,\\
+\frac{a_{ik}}{a_{kk}}&\text{ if }i\not=k\text{ and }j=k,\\
+a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}&\text{ if }i\not=k\text{ and }j\not=k.
+\end{cases}
+\end{equation}
+
+\(\mathbf{piv}_k(A)\) is undefined if \(a_{kk}=0\) . Note that the
+matrix \(A\) is not necessarily square, symmetric, or positive
+semi-definite.
+
+If \(A\) is the matrix
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,]  1.00  1.00  1.00  1.00  1.00
+## [2,]  1.00  2.00  2.00  2.00  2.00
+## [3,]  1.00  2.00  3.00  3.00  3.00
+## [4,]  1.00  2.00  3.00  4.00  4.00
+## [5,]  1.00  2.00  3.00  4.00  5.00
+\end{verbatim}
+
+then pivoting on the second diagonal element, using our R function
+\texttt{pivotOneRC()}, produces \(\mathbf{piv}_2(A)\)
+
+\begin{verbatim}
+## $a
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  0.5  0.5    0    0    0
+## [2,] -0.5  0.5   -1   -1   -1
+## [3,]  0.0  1.0    1    1    1
+## [4,]  0.0  1.0    1    2    2
+## [5,]  0.0  1.0    1    2    3
+## 
+## $refuse
+## [1] 0
+\end{verbatim}
+
+Note that the pivot operation is an involution, i.e.~it is its own
+inverse, or \(\mathbf{piv}_k(\mathbf{piv}_k(A))=A\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mprint}\NormalTok{(}\KeywordTok{pivotOneRC}\NormalTok{(}\KeywordTok{pivotOneRC}\NormalTok{(a,}\DecValTok{2}\NormalTok{)}\OperatorTok{$}\NormalTok{a, }\DecValTok{2}\NormalTok{)}\OperatorTok{$}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,]  1.00  1.00  1.00  1.00  1.00
+## [2,]  1.00  2.00  2.00  2.00  2.00
+## [3,]  1.00  2.00  3.00  3.00  3.00
+## [4,]  1.00  2.00  3.00  4.00  4.00
+## [5,]  1.00  2.00  3.00  4.00  5.00
+\end{verbatim}
+
+PSP's are sometimes called \emph{sweeps}, and the \texttt{SWP()}
+operator for symmetric matrices was introduced in statistical computing
+by Beaton (1964), section 3.2. See Goodnight (1979), Stewart (1998) ,
+p.~330--333, and Lange (2010), p.~95--99, for discussions of the sweep
+operator in the context of numerical linear algebra. The version of the
+sweep operator that became popular in statistics, however, is slightly
+different from the one proposed by Beaton and from the one we use here.
+It is
+
+\begin{equation}\label{E:swp}
+[\mathbf{swp}_k(A)]_{ij}=
+\begin{cases}
+-\frac{1}{a_{kk}}&\text{ if }i=k\text{ and }j=k,\\
+\frac{a_{kj}}{a_{kk}}&\text{ if }i=k\text{ and }j\not=k,\\
+\frac{a_{ik}}{a_{kk}}&\text{ if }i\not=k\text{ and }j=k,\\
+a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}&\text{ if }i\not=k\text{ and }j\not=k.
+\end{cases}
+\end{equation}
+
+This version preserves symmetry, which is convenient because symmetry
+can be used to minimize storage. But the symmetric sweep of
+\$\eqref{E:swp} is not an involution. The inverse operation of this
+sweep is the \emph{reverse sweep}, which is
+
+\begin{equation}\label{E:rswp}
+[\mathbf{rswp}_k(A)]_{ij}=
+\begin{cases}
+-\frac{1}{a_{kk}}&\text{ if }i=k\text{ and }j=k,\\
+-\frac{a_{kj}}{a_{kk}}&\text{ if }i=k\text{ and }j\not=k,\\
+-\frac{a_{ik}}{a_{kk}}&\text{ if }i\not=k\text{ and }j=k,\\
+a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}&\text{ if }i\not=k\text{ and }j\not=k.
+\end{cases}
+\end{equation}
+
+In the funcion \texttt{pivotOneRC()} we have a type parameter. For type
+equal to 1 we do a symmetric sweep, for type equal to 2 a reverse
+symmetric sweep. Thus
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mprint}\NormalTok{ (}\KeywordTok{pivotOneRC}\NormalTok{(a, }\DecValTok{2}\NormalTok{, }\DataTypeTok{type =} \DecValTok{1}\NormalTok{)}\OperatorTok{$}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,]  0.50  0.50  0.00  0.00  0.00
+## [2,]  0.50 -0.50  1.00  1.00  1.00
+## [3,]  0.00  1.00  1.00  1.00  1.00
+## [4,]  0.00  1.00  1.00  2.00  2.00
+## [5,]  0.00  1.00  1.00  2.00  3.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mprint}\NormalTok{ (}\KeywordTok{pivotOneRC}\NormalTok{(}\KeywordTok{pivotOneRC}\NormalTok{(a, }\DecValTok{2}\NormalTok{, }\DataTypeTok{type =} \DecValTok{1}\NormalTok{)}\OperatorTok{$}\NormalTok{a, }\DecValTok{2}\NormalTok{, }\DataTypeTok{type =} \DecValTok{2}\NormalTok{)}\OperatorTok{$}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,]  1.00  1.00  1.00  1.00  1.00
+## [2,]  1.00  2.00  2.00  2.00  2.00
+## [3,]  1.00  2.00  3.00  3.00  3.00
+## [4,]  1.00  2.00  3.00  4.00  4.00
+## [5,]  1.00  2.00  3.00  4.00  5.00
+\end{verbatim}
+
+Type equal to 3 is the PSP we started out with, and type equal to 4 is
+its transpose, the involution
+
+\begin{equation}\label{E:qiv}
+[\mathbf{qiv}_k(A)]_{ij}=
+\begin{cases}
+\frac{1}{a_{kk}}&\text{ if }i=k\text{ and }j=k,\\
+\frac{a_{kj}}{a_{kk}}&\text{ if }i=k\text{ and }j\not=k,\\
+-\frac{a_{ik}}{a_{kk}}&\text{ if }i\not=k\text{ and }j=k,\\
+a_{ij}-\frac{a_{ik}a_{kj}}{a_{kk}}&\text{ if }i\not=k\text{ and }j\not=k.
+\end{cases}
+\end{equation}
+
+The default in \texttt{pivotOneRC()} is to set type equal to 3, and we
+will use this default throughout the rest of the paper.
+
+\section{Sequences of pivots}\label{sequences-of-pivots}
+
+Our R function \texttt{pivotRC()} performs a sequence of pivots on a
+matrix. If both PSP's are defined then
+\(\mathbf{piv}_k(\mathbf{piv}_\ell(A))=\mathbf{piv}_\ell(\mathbf{piv}_k(A))\),
+and thus the results are independent of the order in which we pivot. We
+obtain numerical stability by always pivoting on the largest diagonal
+element in the remainder of the sequence of pivots. This also ensures
+the function gives a sensible result if the matrices involved are
+singular.
+
+Consider the matrix we get from our previous one by setting element
+\((1,1)\) to zero. The resulting matrix is still non-singular.
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,]  0.00  1.00  1.00  1.00  1.00
+## [2,]  1.00  2.00  2.00  2.00  2.00
+## [3,]  1.00  2.00  3.00  3.00  3.00
+## [4,]  1.00  2.00  3.00  4.00  4.00
+## [5,]  1.00  2.00  3.00  4.00  5.00
+\end{verbatim}
+
+If we pivot on the first four elements we get
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4]  [,5] 
+## [1,] -2.00  1.00  0.00  0.00  0.00
+## [2,]  1.00  1.00 -1.00  0.00  0.00
+## [3,]  0.00 -1.00  2.00 -1.00 -0.00
+## [4,] -0.00  0.00 -1.00  1.00 -1.00
+## [5,]  0.00  0.00  0.00  1.00  1.00
+\end{verbatim}
+
+and pivots are done in the order 4, 2, 1, 3.
+
+Another example is the rank 2 matrix
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mprint}\NormalTok{(a<-}\KeywordTok{tcrossprod}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{))}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4] 
+## [1,]  1.00  0.00  0.00  1.00
+## [2,]  0.00  1.00  1.00  0.00
+## [3,]  0.00  1.00  1.00  0.00
+## [4,]  1.00  0.00  0.00  1.00
+\end{verbatim}
+
+A complete pivot uses the order 1, 2, 3, 4 and finds
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mprint}\NormalTok{(h}\OperatorTok{$}\NormalTok{a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4] 
+## [1,]  1.00 -0.00  0.00 -1.00
+## [2,] -0.00  1.00 -1.00 -0.00
+## [3,]  0.00  1.00  0.00  0.00
+## [4,]  1.00  0.00  0.00  0.00
+\end{verbatim}
+
+Note that if the function \texttt{pivotOneRC()} is asked to pivot on a
+zero diagonal element, it refuses and just returns its argument. Thus if
+zero diagonal elements are encountered, it is just as if the
+corresponding indices are not in the sequence, and we actually pivot on
+a shorter sequence. \texttt{pivotRC()} returns an indicator of the
+pivots that are skipped, which for our last example is 0, 0, 1, 1.
+
+Also note that order-invariance for \texttt{pivotRC()} is no longer true
+if pivots are skipped. Consider
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4] 
+## [1,]  0.00  0.00  0.00  1.00
+## [2,]  0.00  0.00  0.00  1.00
+## [3,]  0.00  0.00  0.00  1.00
+## [4,]  1.00  1.00  1.00  1.00
+\end{verbatim}
+
+Pivoting over all indices, but in a different order, gives different
+results.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pivotRC}\NormalTok{(a, }\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $a
+##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -1   -1    1
+## [2,]    1    0    0    0
+## [3,]    1    0    0    0
+## [4,]    1    0    0    0
+## 
+## $pivot
+## [1] 4 1 2 3
+## 
+## $skip
+## [1] 0 0 1 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pivotRC}\NormalTok{(a, }\DecValTok{4}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $a
+##      [,1] [,2] [,3] [,4]
+## [1,]    0    0    1    0
+## [2,]    0    0    1    0
+## [3,]   -1   -1   -1    1
+## [4,]    0    0    1    0
+## 
+## $pivot
+## [1] 4 3 2 1
+## 
+## $skip
+## [1] 0 0 1 1
+\end{verbatim}
+
+In the first case we compute \(\mathbf{piv}_{\{1,4\}}(A)\), in the
+second case \(\mathbf{piv}_{\{3,4\}}(A)\), and these are different.
+
+Suppose
+
+\begin{equation}
+A=\begin{bmatrix}\alpha&a'\\b&C\end{bmatrix},\label{E:psd}
+\end{equation}
+
+with \(\alpha\not= 0\). Then \[
+\mathbf{piv}_1(A)=\begin{bmatrix}\frac{1}{\alpha}&\frac{-a'}{\alpha}\\\frac{b}{\alpha}&C-\frac{ba'}{\alpha}\end{bmatrix}.
+\] The Schur complement (Ouellette (1981), Zhang (2005)) of
+\(\frac{1}{\alpha}\) in \(\mathbf{piv}_1(A)\) is \(C\). Since rank is
+additive over the Schur complement, we have \[
+\mathbf{rank}(\mathbf{piv}_1(A))=1+\mathbf{rank}(C),
+\] and thus \(\mathbf{piv}_1(A)\) is non-singular whenever \(A\) is.
+
+For a symmetric \(A\) in \(\eqref{E:psd}\) we have that \(A\) is
+positive definite if and only if \(\alpha>0\) and
+\(C-\frac{ba'}{\alpha}\) is positive definite (Bekker (1988)). Thus if
+\(A\) is positive definite, all subsequent pivot elements are positive.
+If \(A\) is unit triangular, either upper or lower, then
+\(C-\frac{ba'}{\alpha}\) is unit triangular as well, and thus all
+subsequent pivot elements are equal to one.
+
+Of course the choice of pivot \(k=1\) in \(\eqref{E:psd}\) was for
+notational convenience only, the results are true for any \(k\).
+
+\section{The partial inverse}\label{the-partial-inverse}
+
+Suppose \(K\) is a subset of \(N:=\{1,2,\cdots,n\}\) and
+\(\underline{K}\) is the complimentary subset. In our examples we
+usually take, for convenience, \(K=\{1,2,\cdots,k\}\). The
+\emph{principal pivot transform} or \emph{PPT} of \(A\) on \(K\), which
+generalizes the simple pivot, is \[
+\mathbf{piv}_K(A)=\begin{bmatrix}
+A_{KK}^{-1}&-A_{KK}^{-1}A_{K\underline{K}}\\
+A_{\underline K K}A_{KK^{}}^{-1}&A_{\underline K\underline K}-A_{\underline K K}A_{KK^{}}^{-1}A_{K\underline{K}}
+\end{bmatrix}.
+\] The PPT is defined only if \(A_{KK}\) is non-singular. A
+\emph{complete} PPT is defined as \(\mathbf{piv}_K()\) for \(K=N\).
+
+The PPT of a square matrix \(A\) is called the \emph{partial inverse} by
+Wermuth, Wiedenbeck, and Cox (2006) and Wiedenbeck and Wermuth (2010).
+The name makes sense because if \[
+\begin{bmatrix}
+A_{KK}&A_{\underline K}\\
+A_{\underline K K}&A_{\underline K\underline K}
+\end{bmatrix}
+\begin{bmatrix}
+x\\y
+\end{bmatrix}=
+\begin{bmatrix}
+u\\v
+\end{bmatrix},
+\] then \[
+\begin{bmatrix}
+A_{KK}^{-1}&-A_{KK}^{-1}A_{K\underline{K}}\\
+A_{\underline K K}A_{KK^{}}^{-1}&A_{\underline K\underline K}-A_{\underline K K}A_{KK^{}}^{-1}A_{K\underline{K}}
+\end{bmatrix}
+\begin{bmatrix}
+u\\y
+\end{bmatrix}=
+\begin{bmatrix}
+x\\v
+\end{bmatrix},
+\] And conversely. Of course all this assumes that \(A_{KK}\) is
+non-singular.
+
+The following results are true for arbitrary index sets \(K\) and \(L\)
+and their complement \(\underline K\) and \(\underline L\). For a proof,
+see Wermuth, Wiedenbeck, and Cox (2006), lemma 2.1. They assume that all
+principal submatrices are invertible, which is true for positive
+definite matrices and unit triangular matrices. In that case all PPT's
+are defined.
+
+\begin{itemize}
+\tightlist
+\item
+  \(A=\mathbf{piv}_K(\mathbf{piv}_K(A))\)
+\item
+  \(\mathbf{piv}_K(A)=(\mathbf{piv}_{\underline K}(A))^{-1}\)
+\item
+  \(\mathbf{piv}_{\underline K}(\mathbf{piv}_K(A))=A^{-1}\)
+\item
+  \(\mathbf{piv}_L(\mathbf{piv}_K(A))=\mathbf{piv}_K(\mathbf{piv}_L(A))\)
+\item
+  \(\mathbf{piv}_K(A)=\mathbf{piv}_{\underline K}(A^{-1})\)
+\item
+  \((\mathbf{piv}_K(A))^{-1}=\mathbf{piv}_K(A^{-1})\)
+\end{itemize}
+
+Wermuth, Wiedenbeck, and Cox (2006) summarize the main properties of
+partial inversion in their theorem 2.2. Suppose \(K,L,\) and \(M\)
+partition the \(n\) indices of a square matrix, and the PPT's are
+defined Then
+
+\begin{itemize}
+\tightlist
+\item
+  Commutativity:
+  \(\mathbf{piv}_K(\mathbf{piv}_L(A))=\mathbf{piv}_K(\mathbf{piv}_L(A))=\mathbf{piv}_H(A)\).
+\item
+  Exchangeability:
+  \([\mathbf{piv}_K(A)]_{K\cup L,K\cup L}=\mathbf{piv}_K(A_{K\cup L,K\cup L})\).
+\item
+  Symmetric Difference:
+  \(\mathbf{piv}_{K\cup L}(A)\mathbf{piv}_{L\cup M}(A)=\mathbf{piv}_{K\cup M}(A)\).
+\end{itemize}
+
+If \(A\) is not square, then some of these results still make sense. For
+both a \emph{broad} \(n\times m\) matrix A, with \(n<m\), and a
+\emph{tall} \(A\), with \(n>m\), we can pivot on the diagonal elements
+and the defining equations for the principal pivot transform still
+apply.
+
+Note that a PPT can be computed by a sequence of PSP's, provided all
+PSP's on the way are defined. But consider the example
+
+\begin{verbatim}
+##      [,1]  [,2]  [,3]  [,4] 
+## [1,]  0.00  1.00  1.00  0.00
+## [2,]  1.00  0.00  0.00  1.00
+## [3,]  1.00  0.00  1.00  0.00
+## [4,]  0.00  1.00  0.00  1.00
+\end{verbatim}
+
+Now \(\mathbf{piv}_1(A)\) and \(\mathbf{piv}_2(A)\) are both not
+defined, and thus our function \texttt{pivotRC(a,\ 1:2)} does nothing,
+while \[
+\mathbf{piv}_{\{1,2\}}(A)=\begin{bmatrix}
+\hphantom{+}0&\hphantom{+}1&\hphantom{+}0&-1\\
+\hphantom{+}1&\hphantom{+}0&-1&\hphantom{+}0\\
+\hphantom{+}0&\hphantom{+}1&\hphantom{+}1&-1\\
+\hphantom{+}1&\hphantom{+}0&-1&\hphantom{+}1
+\end{bmatrix}.
+\]
+
+\section{Inverse and determinant}\label{inverse-and-determinant}
+
+For a square matrix \[
+A=\begin{bmatrix}\alpha&a'\\b&C\end{bmatrix},
+\] with \(\alpha\not= 0\), by Schur's determinant formula, \[
+\mathbf{det}(A)=\alpha\ \mathbf{det}(C-\frac{ba'}{\alpha}),
+\] and thus \(\mathbf{det}(A)\) is the product of the pivots in a
+complete PPT.
+
+If \(A\) is square and non-singular, then carrying out a complete PPT
+produces the inverse of the matrix, or \(\mathbf{piv}_N(A)=A^{-1}\).
+This assumes, of course, that a complete PPT can actually be carried out
+and we do not run into a zero pivot.
+
+If \(A\) is singular, say of rank \(r\), then we can permute rows and
+columns so that we have the leading principal submatrix of order \(r\)
+is non-singular. This easily follows from the pivoted LU decomposition,
+see Stewart (1998), theorem 2.13. If \[
+A=\begin{bmatrix}B&C\\D&E\end{bmatrix}
+\] with \(B\) an \(r\times r\) matrix such that
+\(\mathbf{rank}(B)=\mathbf{rank}(A)=r\), and a pivot of \(A\) over the
+first \(r\) elements is possible, then \[
+\mathbf{piv}_{\{1,2,\cdots,r\}}(A)=\begin{bmatrix}B^{-1}&-B^{-1}C\\DB^{-1}&0\end{bmatrix}.
+\] This implies that
+\(A\left(\mathbf{piv}_{\{1,2,\cdots,r\}}(A)\right)A=A\), i.e.
+\(\mathbf{piv}_{\{1,2,\cdots,r\}}(A)\) satisfies the first Penrose
+condition, i.e.~is a (1)-inverse of \(A\).
+
+\section{Least Squares}\label{least-squares}
+
+Statisticians like the \(\mathbf{piv}()\) and \(\mathbf{swp}()\)
+operators, because of their connection with linear least squares
+regression, and with stepwise regression in particular (Jennrich
+(1977)). In addition there are connections with covariance selection
+(Dempster (1972)) and with graphical models (Wermuth, Wiedenbeck, and
+Cox (2006)).
+
+For the least squares problem of minimizing \((y-Xb)'(y-Xb)\) the normal
+equations are \(X'Xb=X'y\). Suppose \(X=(X_1\mid X_2)\), with \(m_1\)
+and \(m_2\) columns, and consider the matrix \[
+A=\begin{bmatrix}
+X_1'X_1&X_1'X_2&X_1'y\\
+X_2'X_1&X_2'X_2&X_2'y\\
+y'X_1&y'X_2&y'y
+\end{bmatrix}
+\] Pivoting on the \(m_1\) elements in \(X_1'X_1\), assuming it is
+invertible, gives \[
+\mathbf{piv}_{\{1,2,\cdots,m\}}(A)=
+\begin{bmatrix}
+(X_1'X_1)^{-1}&-(X_1'X_1)^{-1}X_1'X_2&-(X_1'X_1)^{-1}X_1'y\\
+X_2'X_1(X_1'X_1)^{-1}&X_2'(I-X_1(X_1'X_1)^{-1}X_1')X_2&X_2'(I-X_1(X_1'X_1)^{-1}X_1')y\\
+y'X_1(X_1'X_1)^{-1}&y'(I-X_1(X_1'X_1)^{-1}X_1')X_2&y'(I-X_1(X_1'X_1)^{-1}X_1')y
+\end{bmatrix}.
+\] All submatrices in the PPT give statistics which are relevant in the
+context of the least squares problem. We have the regression
+coefficients, their dispersion matrix, the residual sum of squares, and
+the partial covariances of \(X_2\) given \(X_1\). Moreover an additional
+PSP on one of the \(m_2\) elements from \(X_2\) will add a variable to
+the regression, and repeating a PSP from the first \(m_1\) will remove
+that variable from the regression. \#Code
+
+The basic PSP routine \texttt{pivotOneC()} is written in C. If a pivot
+is zero, it is skipped. Performing a number of pivots to get a PPT is
+done in \texttt{pivotC()}, also in C. The \texttt{.C()} interface is
+used in R to write wrappers \texttt{pivotOneRC()} and \texttt{pivotRC()}
+for the C routines. Note that the \texttt{ggm} package from CRAN
+(Marchetti, Drton, and Sadeghi (2015)) has a \texttt{swp()} function
+that uses \texttt{solve()} from base R to compute the partial inverse.
+Pivoting on principal submatrices to compute the partial inverse will
+generally be faster than building up the partial inverse from pivoting
+on a sequence of diagonal elements like we do.
+
+In previous work (({\textbf{???}})) we implemented sweeping by writing a
+simple R wrapper for the fortran routine in AS 178 (Clarke (1982)). We
+improve this by switching to principal pivoting, to C, and to
+incorporating reordering the remaining pivots for numerical stability,
+similar to the suggestions of Ridout and Cobby (1989).
+
+\subsection{R Code}\label{r-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dyn.load}\NormalTok{ (}\StringTok{"pivot.so"}\NormalTok{)}
+
+\NormalTok{pivotOneRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, k, }\DataTypeTok{type =} \DecValTok{3}\NormalTok{, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (a)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (a)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"pivotOneC"}\NormalTok{,}
+      \DataTypeTok{a =} \KeywordTok{as.double}\NormalTok{ (a),}
+      \DataTypeTok{k =} \KeywordTok{as.integer}\NormalTok{(k),}
+      \DataTypeTok{n =} \KeywordTok{as.integer}\NormalTok{ (n),}
+      \DataTypeTok{m =} \KeywordTok{as.integer}\NormalTok{ (m),}
+      \DataTypeTok{type =} \KeywordTok{as.integer}\NormalTok{ (type),}
+      \DataTypeTok{refuse =} \KeywordTok{as.integer}\NormalTok{ (}\DecValTok{0}\NormalTok{),}
+      \DataTypeTok{eos =} \KeywordTok{as.double}\NormalTok{ (eps)}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{matrix}\NormalTok{(h}\OperatorTok{$}\NormalTok{a, n, m), }\DataTypeTok{refuse =}\NormalTok{ h}\OperatorTok{$}\NormalTok{refuse))}
+\NormalTok{\}}
+
+\NormalTok{pivotRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, ind, }\DataTypeTok{type =} \DecValTok{3}\NormalTok{, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (a)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (a)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (ind)}
+\NormalTok{  done <-}\StringTok{ }\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, p)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"pivotC"}\NormalTok{,}
+      \DataTypeTok{a =} \KeywordTok{as.double}\NormalTok{ (a),}
+      \DataTypeTok{ind =} \KeywordTok{as.integer}\NormalTok{ (ind),}
+      \DataTypeTok{jnd =} \KeywordTok{as.integer}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, p)),}
+      \DataTypeTok{done =} \KeywordTok{as.integer}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, p)),}
+      \DataTypeTok{n =} \KeywordTok{as.integer}\NormalTok{ (n),}
+      \DataTypeTok{m =} \KeywordTok{as.integer}\NormalTok{ (m),}
+      \DataTypeTok{p =} \KeywordTok{as.integer}\NormalTok{ (p),}
+      \DataTypeTok{type =} \KeywordTok{as.integer}\NormalTok{ (type),}
+      \DataTypeTok{skip =} \KeywordTok{as.integer}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, p)),}
+      \DataTypeTok{eps =} \KeywordTok{as.double}\NormalTok{ (eps)}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{(}\DataTypeTok{a =} \KeywordTok{matrix}\NormalTok{(h}\OperatorTok{$}\NormalTok{a, n, m), }\DataTypeTok{pivot =}\NormalTok{ h}\OperatorTok{$}\NormalTok{jnd, }\DataTypeTok{skip =}\NormalTok{ h}\OperatorTok{$}\NormalTok{skip))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{C Code}\label{c-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ pivotOneC (}\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *eps);}
+\DataTypeTok{void}\NormalTok{ pivotC (}\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *eps);}
+\DataTypeTok{void}\NormalTok{ mprint (}\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{int}\NormalTok{ *);}
+
+\DataTypeTok{void}\NormalTok{ pivotOneC (}\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{int}\NormalTok{ *kk, }\DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{int}\NormalTok{ *mm, }\DataTypeTok{int}\NormalTok{ *type, }\DataTypeTok{int}\NormalTok{ *refuse, }\DataTypeTok{double}\NormalTok{ *eps) \{}
+    \DataTypeTok{int}\NormalTok{ i, j, ik, kj, ij, kp, s00, s01, s10, n = *nn, m = *mm, k = *kk, tp = *type;}
+    \DataTypeTok{double}\NormalTok{ pv, ee = *eps;}
+\NormalTok{    *refuse = }\DecValTok{0}\NormalTok{;}
+    \ControlFlowTok{if}\NormalTok{ (tp == }\DecValTok{1}\NormalTok{) \{}
+\NormalTok{        s00 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{        s01 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        s10 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (tp == }\DecValTok{2}\NormalTok{) \{}
+\NormalTok{        s00 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{        s01 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{        s10 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{    \}}
+   \ControlFlowTok{if}\NormalTok{ (tp == }\DecValTok{3}\NormalTok{) \{}
+\NormalTok{        s00 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        s01 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{        s10 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{    \}}
+   \ControlFlowTok{if}\NormalTok{ (tp == }\DecValTok{4}\NormalTok{) \{}
+\NormalTok{        s00 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        s01 = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        s10 = }\DecValTok{-1}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{    kp = MINDEX(k, k, n);}
+\NormalTok{    pv = a[kp];}
+    \ControlFlowTok{if}\NormalTok{ (fabs (pv) < ee) \{}
+\NormalTok{        *refuse = }\DecValTok{1}\NormalTok{; }
+        \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+        \ControlFlowTok{if}\NormalTok{ (i == k) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{        ik = MINDEX (i, k , n);}
+        \ControlFlowTok{for}\NormalTok{ (j = }\DecValTok{1}\NormalTok{; j <= m; j++) \{}
+            \ControlFlowTok{if}\NormalTok{ (j == k) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{            kj = MINDEX (k, j, n);}
+\NormalTok{            ij = MINDEX (i, j, n);}
+\NormalTok{            a[ij] = a[ij] - a[ik] * a[kj] / pv;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+        \ControlFlowTok{if}\NormalTok{ (i == k) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{        ik = MINDEX (i, k, n);}
+\NormalTok{        a[ik] = s10 * a[ik] / pv;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (j = }\DecValTok{1}\NormalTok{; j <= m; j++) \{}
+        \ControlFlowTok{if}\NormalTok{ (j == k) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{        kj = MINDEX (k, j, n);}
+\NormalTok{        a[kj] = s01 * a[kj] / pv;}
+\NormalTok{    \}}
+\NormalTok{    a[kp] = s00 / pv;}
+\NormalTok{\}}
+
+
+\DataTypeTok{void}\NormalTok{ pivotC (}\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{int}\NormalTok{ *ind, }\DataTypeTok{int}\NormalTok{ *jnd, }\DataTypeTok{int}\NormalTok{ *done, }\DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{int}\NormalTok{ *mm, }\DataTypeTok{int}\NormalTok{ *pp, }\DataTypeTok{int}\NormalTok{ *type, }\DataTypeTok{int}\NormalTok{ *skip, }\DataTypeTok{double}\NormalTok{ *eps) \{}
+    \DataTypeTok{int}\NormalTok{ ipiv, kpiv, lpiv, refuse;}
+    \DataTypeTok{int}\NormalTok{ n = *nn, m = *mm, p = *pp;}
+    \DataTypeTok{double}\NormalTok{ fmax, fpiv;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{0}\NormalTok{; l < p; l++) \{}
+\NormalTok{        jnd[l] = }\DecValTok{0}\NormalTok{;}
+\NormalTok{        done[l] = }\DecValTok{0}\NormalTok{;}
+\NormalTok{        skip[l] = }\DecValTok{0}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{1}\NormalTok{; l <= p; l++) \{}
+\NormalTok{        fmax = }\DecValTok{-1}\NormalTok{.}\DecValTok{0}\NormalTok{;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= p; k++) \{}
+\NormalTok{            kpiv = ind[k - }\DecValTok{1}\NormalTok{];}
+            \ControlFlowTok{if}\NormalTok{ (done[k - }\DecValTok{1}\NormalTok{] == }\DecValTok{1}\NormalTok{) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{            fpiv = fabs (a[MINDEX (kpiv, kpiv, n)]);}
+            \ControlFlowTok{if}\NormalTok{ (fpiv > fmax) \{}
+\NormalTok{                ipiv = k;}
+\NormalTok{                lpiv = kpiv;}
+\NormalTok{                fmax = fpiv;}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{        done[ipiv - }\DecValTok{1}\NormalTok{] = }\DecValTok{1}\NormalTok{;}
+\NormalTok{        jnd [l - }\DecValTok{1}\NormalTok{] = lpiv;}
+\NormalTok{        pivotOneC(a, &lpiv, &n, &m, type, &refuse, eps);}
+\NormalTok{        skip[l - }\DecValTok{1}\NormalTok{] = refuse;}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+
+\DataTypeTok{void}\NormalTok{ mprint (}\DataTypeTok{double}\NormalTok{ * a, }\DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{int}\NormalTok{ *mm) \{}
+    \DataTypeTok{int}\NormalTok{ i, j, ij, n = *nn, m = *mm;}
+    \ControlFlowTok{for}\NormalTok{ (i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (j = }\DecValTok{1}\NormalTok{; j <= m; j++) \{}
+\NormalTok{            ij = MINDEX (i, j, n);}
+\NormalTok{            printf (}\StringTok{" }\SpecialCharTok{%5.3f}\StringTok{ "}\NormalTok{, a[ij]);}
+\NormalTok{        \}}
+\NormalTok{    printf (}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{NEWS}\label{news}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-beaton_64}{}
+Beaton, A.E. 1964. ``The Use of Special Matrix Operators in Statistical
+Calculus.'' RB 64-51. Princeton, NJ: Educational Testing Service.
+
+\hypertarget{ref-bekker_88}{}
+Bekker, P.A. 1988. ``The Positive Semidefiniteness of Partitioned
+Matrices.'' \emph{Linear Algebra and Its Applications} 111: 261--78.
+
+\hypertarget{ref-clarke_82}{}
+Clarke, M.R.B. 1982. ``Algorithm AS 178: The Gauss-Jordan Sweep Operator
+with Detection of Collinearity.'' \emph{Journal of the Royal Statistical
+Society. Series C (Applied Statistics),} 31: 166--68.
+
+\hypertarget{ref-dempster_72}{}
+Dempster, A.P. 1972. ``Covariance Selection.'' \emph{Biometrics} 28:
+157--75.
+
+\hypertarget{ref-goodnight_79}{}
+Goodnight, J.H. 1979. ``A Tutorial on the SWEEP Operator.''
+\emph{American Statistician} 33: 149--58.
+
+\hypertarget{ref-jennrich_77}{}
+Jennrich, R.I. 1977. ``Stepwise Regression.'' In \emph{Statistical
+Methods for Digital Computers}, edited by Enslein K., A. Ralston, and
+H.S. Wilf. Wiley.
+
+\hypertarget{ref-lange_10}{}
+Lange, K. 2010. \emph{Numerical Analysis for Statisticians}. Second
+Edition. Springer.
+
+\hypertarget{ref-marchetti_drton_sadeghi_15}{}
+Marchetti, G.M., M. Drton, and K. Sadeghi. 2015. \emph{ggm: Functions
+for Graphical Markov Models}.
+\url{https://CRAN.R-project.org/package=ggm}.
+
+\hypertarget{ref-ouellette_81}{}
+Ouellette, D.V. 1981. ``Schur Complements and Statistics.'' \emph{Linear
+Algebra and Its Applications} 36: 187--295.
+
+\hypertarget{ref-ridout_cobby_89}{}
+Ridout, M.S., and J. M. Cobby. 1989. ``Remark AS R78: A Remark on
+Algorithm AS 178: The Gauss-Jordan Sweep Operator with Detection of
+Collinearity.'' \emph{Journal of the Royal Statistical Society. Series C
+(Applied Statistics),} 38: 420--22.
+
+\hypertarget{ref-stewart_98}{}
+Stewart, G.W. 1998. \emph{Matrix Algorithms. Volume I: Basic
+Decompositions}. SIAM.
+
+\hypertarget{ref-wermuth_wiedenbeck_cox_06}{}
+Wermuth, N., M. Wiedenbeck, and D.R. Cox. 2006. ``Partial Inversion for
+Linear Systems and Partial Closures of Independence Graphs.'' \emph{BIT
+Numerical Mathematics} 46: 883--901.
+
+\hypertarget{ref-wiedenbeck_wermuth_10}{}
+Wiedenbeck, M., and N. Wermuth. 2010. ``Changing Parameters by Partial
+Mappings.'' \emph{Statistica Sinica} 20: 823--36.
+
+\hypertarget{ref-zhang_05}{}
+Zhang, F., ed. 2005. \emph{The Schur Complement and its Applications}.
+Vol. 4. Numerical Methods and Algorithms. Springer.
+
+
+\end{document}

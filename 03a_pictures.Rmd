@@ -125,7 +125,7 @@ If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then  $C(\theta)\thet
 
 ------------------------------------------------------------------------
 
-```{proof}
+::: {.proof}
 If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then, by equations \@ref(eq:pictbformc) and \@ref(eq:pictbformu),
 
 \begin{equation}
@@ -134,7 +134,7 @@ U-C(\theta)=\begin{bmatrix}0&0\\0&\text{tr}\ Y'(V-B(X))Y\end{bmatrix}.
 \end{equation}
 
 Thus $(U-C(\theta))\theta=0$.
-```
+:::
 
 ------------------------------------------------------------------------
 
@@ -150,12 +150,12 @@ $\begin{bmatrix}X&Y\end{bmatrix}$ has rank $n-1$ then  $B(Z)Z=VZ$.
 
 ------------------------------------------------------------------------
 
-```{proof}
+::: {.proof}
 If  $C(\theta)\theta=U\theta$ then both $\text{tr}\ X'(V-B(Z)Z)=0$
 and $\text{tr}\ Y'(V-B(Z))Z=0$. If the $n\times 2p$ matrix
 $\begin{bmatrix}X&Y\end{bmatrix}$ has rank $n-1$ then this implies
 $(V-B(Z))Z=0$.
-```
+:::
 
 ------------------------------------------------------------------------
 
@@ -175,14 +175,14 @@ If $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$ then
 
 ------------------------------------------------------------------------
 
-```{proof}
+::: {.proof}
 Suppose $B(X)X=VX$ and $\theta=\begin{bmatrix}1&0\end{bmatrix}$. Then,
 from \@ref(eq:pichess2)  and \@ref(eq:picuminc),
 $$
 \nabla^2\sigma(\theta)=\begin{bmatrix}0&0\\0&\text{tr}\ Y'(V-B(X))Y\end{bmatrix}+\mathop{\sum\sum}_{1\leq i<j\leq n}
 w_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\frac{T_{ij}\theta\theta'T_{ij}}{\theta'T_{ij}\theta}.
 $$
-```
+:::
 
 ------------------------------------------------------------------------
 

@@ -788,7 +788,7 @@ Elementwise dividing the <span class="math inline">\(\text{up}_B\)</span> by the
 \end{equation}\]</span></p>
 <p>There are two values <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(2-\alpha\)</span>, equal to 0.9595728 and
 1.0404272, because the sequence has two accumulation points.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Things do not look good for <span class="math inline">\(\text{up}_B\)</span> but simple remedies are available. The first one is renormalization. After
 the iterations, with say stop_f, have converged, we scale the configuration such that <span class="math inline">\(\rho(X)=\eta^2(X)\)</span> and recompute stress. This corrects both stress and the confguration to the correct outcome. Another way to normalize is to
 do another single <span class="math inline">\(\text{up}_A\)</span> step after convergence of <span class="math inline">\(\text{up}_B\)</span>. This has the same effect. We tried <span class="math inline">\(\text{up}_B\)</span>

@@ -665,7 +665,7 @@ This can be done without loss of generality. If some of the distances are zero, 
 Our first IMDS step is to describe the set <span class="math inline">\(\mathfrak{D}(X)\)</span> of all <span class="math inline">\(\Delta\)</span>E for which <span class="math inline">\(X\)</span> is stationary.</p>
 
 <div class="lemma">
-<span id="lem:unnamed-chunk-28" class="lemma"><strong>Lemma 22.1  </strong></span>Suppose <span class="math inline">\(X\)</span> is an <span class="math inline">\(n\times p\)</span> matrix of rank <span class="math inline">\(p&lt;n\)</span>. Suppose <span class="math inline">\(K\)</span> is an <span class="math inline">\(n\times(n-p)\)</span> orthonormal matrix with <span class="math inline">\(K&#39;X=0\)</span>. Then a symmetric matrix <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(AX=0\)</span> if and only if there is a symmetric <span class="math inline">\(S\)</span> such that <span class="math inline">\(A=KSK&#39;\)</span>. If <span class="math inline">\(\text{rank}(K&#39;AK)=r\)</span> then <span class="math inline">\(S\)</span> can be chosento be of order <span class="math inline">\(r\)</span>.
+<span id="lem:unnamed-chunk-18" class="lemma"><strong>Lemma 22.1  </strong></span>Suppose <span class="math inline">\(X\)</span> is an <span class="math inline">\(n\times p\)</span> matrix of rank <span class="math inline">\(p&lt;n\)</span>. Suppose <span class="math inline">\(K\)</span> is an <span class="math inline">\(n\times(n-p)\)</span> orthonormal matrix with <span class="math inline">\(K&#39;X=0\)</span>. Then a symmetric matrix <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(AX=0\)</span> if and only if there is a symmetric <span class="math inline">\(S\)</span> such that <span class="math inline">\(A=KSK&#39;\)</span>. If <span class="math inline">\(\text{rank}(K&#39;AK)=r\)</span> then <span class="math inline">\(S\)</span> can be chosento be of order <span class="math inline">\(r\)</span>.
 </div>
 
 <div class="proof">
@@ -698,7 +698,7 @@ and <span class="math inline">\(A_{21}=0\)</span>, and by symmetry <span class="
 <p>The next result is corollary 6.3 in <span class="citation"><a href="#ref-deleeuw_groenen_A_97" role="doc-biblioref">De Leeuw and Groenen</a> (<a href="#ref-deleeuw_groenen_A_97" role="doc-biblioref">1997</a>)</span>.</p>
 
 <div class="corollary">
-<span id="cor:unnamed-chunk-31" class="corollary"><strong>Corollary 22.1  </strong></span><strong><code>r corollary_nums("full_result", display = "f")</code></strong> If <span class="math inline">\(p=n-1\)</span> then <span class="math inline">\(\Delta\in\mathfrak{D}(X)\)</span> if and only if <span class="math inline">\(\Delta=D(X)\)</span> if and only if <span class="math inline">\(\sigma(X)=0\)</span>.
+<span id="cor:unnamed-chunk-21" class="corollary"><strong>Corollary 22.1  </strong></span><strong><code>r corollary_nums("full_result", display = "f")</code></strong> If <span class="math inline">\(p=n-1\)</span> then <span class="math inline">\(\Delta\in\mathfrak{D}(X)\)</span> if and only if <span class="math inline">\(\Delta=D(X)\)</span> if and only if <span class="math inline">\(\sigma(X)=0\)</span>.
 </div>
 
 <div class="proof">
@@ -1208,14 +1208,14 @@ non-negative orthant of <span class="math inline">\(\mathbb{R}^3\)</span>.</p>
 \]</span></p>
 <p>ellipse with center <span class="math inline">\(\frac13\tau e\)</span> and radius <span class="math inline">\(\frac13(\tau-3)^2\)</span></p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="inverse-multidimensional-scaling.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imdsSolver</span>(<span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="inverse-multidimensional-scaling.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imdsSolver</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="inverse-multidimensional-scaling.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imdsSolver</span>(<span class="dv">3</span>)</span>
 <span id="cb60-2"><a href="inverse-multidimensional-scaling.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span> (<span class="dv">1</span>, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;RED&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-39-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-3.png" width="672" /></p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="inverse-multidimensional-scaling.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">imdsSolver</span>(<span class="dv">8</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-39-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-4.png" width="672" /></p>
 </div>
 <div id="order-four" class="section level2" number="22.11">
 <h2><span class="header-section-number">22.11</span> Order Four</h2>

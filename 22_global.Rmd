@@ -374,7 +374,7 @@ We can easily related stationary points and local minima of the FDS and PFDS pro
 $(1+\lambda)V-B(X)\gtrsim 0$, or $\lambda\geq\|V^+B(X)\|_\infty-1$, with $\|\bullet\|_\infty$ the spectral radius (largest eigenvalue).
 ```
 
-```{proof}
+::: {.proof}
 
 Part 1 follows by simple substitution in the stationary equations.
 
@@ -383,7 +383,7 @@ Part 2 follows from the expansion for $Z=[X+\epsilon P\mid\epsilon Q]$.
 \pi(Z)=\pi(X)+\epsilon\ \text{tr}\ P'\mathcal{D}\sigma(X)\ +\\+\frac12\epsilon^2\ \mathcal{D}^2\sigma(X)(P,P)+\frac12\epsilon^2\ \text{tr}\ Q'((1+\lambda)V-B(X))Q+o(\epsilon^2).
 \end{multline}
 At a local minimum we must have $\mathcal{D}\sigma(X)=0$ and $\mathcal{D}^2\sigma(X)(P,P)\gtrsim 0$, which are the necessary conditions for a local minimum of pMDS. We also must have $((1+\lambda)V-B(X))\gtrsim 0$.
-```
+:::
 
 Note that the conditions in part 2 of theorem \@ref(thm:globlocal) are also sufficient for PFDS to have a local minimum at $[X\mid 0]$, provided we eliminate translational and rotational indeterminacy by a suitable reparametrization, as in @deleeuw_R_93c. 
 

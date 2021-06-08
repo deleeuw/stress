@@ -1,0 +1,385 @@
+\documentclass[12pt]{amsart}
+%
+% choose the font family
+% computer modern by un-defining all
+%
+\def\tx{}    % times
+%\def\lu{}   % lucida
+%\def\pa{}   % palatino
+%\def\lm{}   % latin modern
+%\def\kp{}   % kepler
+%\def\fo{}   % fourier
+%
+% is this a draft ?
+%
+%\def\draft{}
+%
+% do we want a logo ?
+%
+\def\stat{}
+%\def\ces{}
+%\def\consult{}
+%\def\gifi{}
+%
+\newif\ifstat
+\ifx\stat\undefined
+\statfalse
+\else
+\stattrue
+\fi
+%
+\newif\ifconsult
+\ifx\consult\undefined
+\consultfalse
+\else
+\consulttrue
+\fi
+%
+\newif\ifces
+\ifx\ces\undefined
+\cesfalse
+\else
+\cestrue
+\fi
+%
+\newif\ifgifi
+\ifx\gifi\undefined
+\gififalse
+\else
+\gifitrue
+\fi
+%
+\newif\iflu
+\ifx\lu\undefined
+\lufalse
+\else
+\lutrue
+\fi
+%
+\newif\iftx
+\ifx\tx\undefined
+\txfalse
+\else
+\txtrue
+\fi
+%
+\newif\ifpa
+\ifx\pa\undefined
+\pafalse
+\else
+\patrue
+\fi
+%
+\newif\iflm
+\ifx\lm\undefined
+\lmfalse
+\else
+\lmtrue
+\fi
+%
+\newif\ifkp
+\ifx\kp\undefined
+\kpfalse
+\else
+\kptrue
+\fi
+%
+\newif\iffo
+\ifx\fo\undefined
+\fofalse
+\else
+\fotrue
+\fi
+%
+\newif\ifdraft
+\ifx\draft\undefined
+\draftfalse
+\else
+\drafttrue
+\fi
+%
+\def\myfont{\textsc{Computer Modern}}
+\iflu
+\usepackage[T1]{fontenc}
+\usepackage[full]{textcomp} % to get the right copyright, etc.
+\usepackage[altbullet]{lucidabr}     % get larger bullet
+\DeclareEncodingSubset{TS1}{hlh}{1}  % including \oldstylenums
+\def\myfont{\textsc{Lucida Bright}}
+\fi
+%
+\ifpa
+\usepackage[T1]{fontenc}
+\usepackage[full]{textcomp} % to get the right copyright, etc.
+\usepackage{pxfonts}
+\def\myfont{\textsc{Palatino}}
+\fi
+%
+\iftx
+\usepackage[T1]{fontenc}
+\usepackage[full]{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet} 
+\usepackage{courier}
+\def\myfont{\textsc{Times Roman}}
+\fi
+%
+\iflm
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\def\myfont{\textsc{Latin Modern}}
+\fi
+%
+\ifkp
+\usepackage{kpfonts}
+\usepackage[full]{textcomp}
+\def\myfont{\textsc{Kepler}}
+\fi
+%
+\iffo
+\usepackage{fourier}
+\def\myfont{\textsc{Utopia}}
+\fi
+%
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex]{color,graphicx,hyperref}
+\else
+\usepackage{color,graphicx,hyperref}
+\fi
+%
+\usepackage{amssymb,latexsym,amsxtra,upref}
+\usepackage{float,fancybox,fancyvrb,verbatim,caption,listings,epstopdf,subfigure,calc,datatool,datetime,fmtcount,rotating}
+\usepackage[square]{natbib}
+\usepackage{tikz,tikz-3dplot,tikz-inet,tikz-qtree,tikz-timing,tkz-tab,tkz-linknodes,tkz-graph}
+\usepackage{gnuplot-lua-tikz}
+%
+\ifdraft
+\usepackage[draft]{pdfdraftcopy}
+\draftstring{FROM JAN'S DESK}
+\definecolor{thisone}{rgb}{1,.7,.7}
+\draftcolor{thisone}
+\fi
+%
+\makeindex
+%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+%
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+%\renewcommand{\theremark}{}
+\newtheorem{result}{Result}
+%\renewcommand{\theresult}{}
+%
+\newtheorem{example}{Example}[section]
+\newtheorem{counter}{Counterexample}[section]
+%
+\newcounter{hours}
+\newcounter{minutes}
+\newcommand{\defi}{\mathop{=}\limits^{\Delta}}      % mathop for define
+\newcommand{\argmin}[1]{\mathop{\mathbf{argmin}}\limits_{#1}}      % mathop for argmin
+\newcommand{\argmax}[1]{\mathop{\mathbf{argmax}}\limits_{#1}}      % mathop for argmin
+\newcommand{\ip}[2]{\langle{#1},{#2}\rangle}
+\newcommand{\matdim}[2]{\mathop{#1}\limits_{#2}}
+\newcommand{\inlaw}{\mathop{\Rightarrow}\limits^{\mathcal{L}}}
+\newcommand{\inprob}{\mathop{\Rightarrow}\limits^{\mathcal{P}}}
+\newcommand{\pardev}[2]{\mathop{\frac{\partial{#1}}{\partial{#2}}}}
+\newcommand\printtime{\setcounter{hours}{\time/60}%
+	\setcounter{minutes}{\time-\value{hours}*60}%
+	\thehours h \theminutes min}
+\newcommand{\indexkeywords}[1]{\index{#1@\textit{\textcolor{red}{#1}}}}%
+\newcommand{\doublesum}[1]{\mathop{\sum\sum}\limits_{#1}}
+\newcommand{\longdownarrow}{\rotatebox{90}{$\longleftarrow$}}
+\newcommand{\Longdownarrow}{\rotatebox{90}{$\Longleftarrow$}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\inTable}[1]{\begin{center}\fbox{\sc Insert Table~\ref{#1} about here}\end{center}}
+\newcommand{\inFigure}[1]{\begin{center}\fbox{\sc Insert Figure~\ref{#1} about here}\end{center}}
+
+% three letters
+
+\newcommand{\del}{\delta}
+\newcommand{\gam}{\gamma}
+\newcommand{\lbd}{\lambda}
+\newcommand{\ome}{\omega}
+\newcommand{\eps}{\epsilon}
+\newcommand{\sig}{\sigma}
+\newcommand{\alp}{\alpha}
+\newcommand{\bet}{\beta}
+
+\newcommand{\Del}{\Delta}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\Lbd}{\Lambda}
+\newcommand{\Ome}{\Omega}
+\newcommand{\Eps}{\Epsilon}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\Alp}{\Alpha}
+
+\newcommand{\vat}{\vartheta}
+\newcommand{\bul}{\bullet}
+
+% and some calligraphy
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+% and some blackboard bold
+
+\newcommand{\mR}{\mathbb{R}}  % reals
+\newcommand{\mN}{\mathbb{N}}  % natural numbers
+\newcommand{\mS}{\mathbb{S}}  % unit simplex
+\newcommand{\mC}{\mathbb{C}}  % complex numbers
+\newcommand{\mQ}{\mathbb{Q}}  % rational numbers
+\newcommand{\mZ}{\mathbb{Z}}  % integers
+
+\definecolor{lightblue}{rgb}{0.8,0.85,1.0}
+\definecolor{gray95}{gray}{.95}
+
+\lstdefinelanguage{RPlus}[]{R}{% 
+morekeywords={acf,ar,arima,arima.sim,colMeans,colSums,is.na,is.null,%     
+mapply,ms,na.rm,nlmin,replicate,row.names,rowMeans,rowSums,seasonal,%     
+sys.time,system.time,ts.plot,which.max,which.min},%  
+deletekeywords={c},%
+alsoletter={.\%},% 
+alsoother={:_\$}} 
+%
+\lstset{language=RPlus,%
+extendedchars=true,%
+basicstyle=\small\ttfamily,%
+stringstyle=\small\ttfamily\color{magenta},%
+showstringspaces=false,%
+xleftmargin=4ex,%
+numbers=left,%
+numberstyle=\small,%
+stepnumber=1,%
+firstnumber=1,%
+breaklines=true,%
+keywordstyle=\color{red}\mdseries\underbar,%
+commentstyle=\color{green}\textsl,%
+index=[1][keywords],%
+indexstyle=[1]\indexkeywords%
+}
+%
+\lstset{language={[ANSI] C},%
+extendedchars=true,%
+basicstyle=\small\ttfamily,%
+stringstyle=\small\ttfamily\color{magenta},%
+showstringspaces=false,%
+xleftmargin=4ex,%
+numbers=left,%
+numberstyle=\small,%
+stepnumber=1,%
+firstnumber=1,%
+breaklines=true,%
+keywordstyle=\color{red}\mdseries\underbar,%
+commentstyle=\color{green}\textsl,%
+index=[1][keywords],%
+indexstyle=[1]\indexkeywords,
+backgroundcolor=\color{gray95}%
+}
+%
+\lstset{language=bash,%
+basicstyle=\normalsize\ttfamily\color{green},%
+stringstyle=\small\ttfamily\color{green},%
+keywordstyle=\color{red}\mdseries\underbar,%
+backgroundcolor=\color{black},%
+showstringspaces=false,%
+xleftmargin=4ex,%
+numbers=left,%
+numberstyle=\small,%
+stepnumber=1,%
+firstnumber=1,%
+breaklines=true%
+}
+%
+\lstloadlanguages{RPlus,[ANSI] C,bash} 
+%
+\parskip = 0.1in
+\parindent = 0.0in
+\usepackage[margin=.75in, paperwidth=11in, paperheight=8in]{geometry}
+%
+
+\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+\ifces
+\begin{center}
+\includegraphics{logoCES.png}
+\end{center}
+\fi
+
+\ifstat
+\begin{center}
+\includegraphics{logoStats.png}
+\end{center}
+\fi
+
+\ifconsult
+\begin{center}
+\includegraphics[scale=.3]{logoSCC.png}
+\end{center}
+\fi
+
+\ifgifi
+\begin{center}
+\includegraphics[scale=.75]{logoGifi.png}
+\end{center}
+\fi
+
+\title{Publish or Perish}
+\author{Jan de Leeuw}
+\address{Department of Statistics\\ University of California\\ Los Angeles, CA 90095-1554}
+\email[Jan de Leeuw]{deleeuw@stat.ucla.edu}
+\urladdr[Jan de Leeuw]{http://gifi.stat.ucla.edu}
+%\thanks{}
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+\date{\today\ ---\ \printtime\ --- \ Typeset in\ \myfont}
+\keywords{Template, \LaTeX}
+%\subjclass[2000]{00A00} % see http://www.ams.org/msc
+\begin{abstract}
+Meet the abstract. This is the abstract.
+\end{abstract}
+\maketitle
+%\tableofcontents
+%\listoftables
+%\listoffigures
+\bibliographystyle{plainnat}
+\bibliography{jans}
+%\printindex
+\end{document}
+
+

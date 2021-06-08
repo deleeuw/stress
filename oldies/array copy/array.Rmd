@@ -1,0 +1,196 @@
+---
+title: "Arrays from R to C and Back"
+author: "Jan de Leeuw"
+date: '`r paste("First created on May 21, 2020. Last update on", format(Sys.Date(),"%B %d, %Y"))`'
+output:
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+  html_document:
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+graphics: yes
+fontsize: 12pt
+bibliography: ["mypubs.bib","total.bib"]
+abstract: For multidimensional arrays and symmetric arrays in compact storage the mapping of R array indices to C storage locations and its inverse can be complicated. This short note discusses and implements a systematic way of handling this mapping for vectors, general matrices, symmetric matrices in compact storage, general multidimensional arrays, and super-symmetric multidimensional arrays.
+---
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+---
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 18px;
+}
+td {  /* Table  */
+   font-size: 18px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 18px;
+}
+pre { /* Code block */
+  font-size: 18px
+}
+</style>
+
+
+```{r function_code, echo = FALSE}
+```
+
+```{r packages, echo = FALSE}
+options (digits = 10) 
+suppressPackageStartupMessages (library (captioner, quietly = TRUE))
+suppressPackageStartupMessages (library (knitr, quietly = TRUE))
+suppressPackageStartupMessages (library (microbenchmark, quietly = TRUE))
+figure_nums <- captioner (prefix = "Figure")
+mprint <- function (x,
+                    d = 6,
+                    w = 8,
+                    f = "") {
+  print (noquote (formatC (
+    x,
+    di = d,
+    wi = w,
+    fo = "f",
+    flag = f
+  )))
+}
+```
+Note: This is a working paper which will be expanded/updated frequently. All suggestions for improvement are welcome. The directory [deleeuwpdx.net/pubfolders/array](http://deleeuwpdx.net/pubfolders/array) has a pdf version, the bib file, the complete Rmd file with the code chunks,  and the R and C source code.
+
+# Introduction
+
+Arrays in R are vectors with a dim attribute.  Arrays in C are blocks of consecutive memory,
+and references to arrays *usually* decay to pointers to the initial element of the block.
+Arrays of pointers can be used to create, or maybe we should say simulate, multidimensional arrays. 
+
+There are two main differences between arrays in R and C. The first is that array indexing in
+R starts with 1, and in C it starts with 0. Thus in an R array x the first element is $x[1]$,
+while in C it is $x[0]$ or, using pointers, $*x$ or $*(x + 0)$. The second difference is that in R column-major ordering is used to store the content of arrays of rank two or higher, while C uses row-major storage. Thus if x is the matrix
+```{r echo = FALSE}
+mprint(matrix(1:4, 2, 2), d = 0, w = 3)
+```
+then for the third element in R storage we have $x[3]=x[1,2]=3$, while in C for the third element we have $*(x + 2)=x[2][1]=2$.
+
+If we pass arrays from R to C (or back) then this can become annoying, especially for arrays of high rank. Even more complications arise if we use compact storage of symmetric arrays,
+because the mapping of, say, R array indices to C storage locations and its inverse are bound to be more complicated. This short note discusses one systematic way to easily handle
+that mapping in some of the more important cases.
+
+# Arrays in C
+
+In array.h we define an array as a C structure with the following elements:
+
+* content - pointer to data of type CTYPE (defaults to double);
+* length - pointer to the number of elements in content;
+* rank - pointer to number of dimensions of array;
+* shape - pointer to vector with number of levels in each dimension;
+* encode - pointer to a mapping of C memory locations to R array indices;
+* decode - pointer to a mapping of R array indices to C memory locations.
+
+CTYPE is a macro which you can change in array.h from double to other types.
+encode and decode are of type ENCODE and DECODE, which are typedefs for
+function pointers.
+
+```{c eval = FALSE}
+typedef void (*ENCODE)(
+    const int *, int *, const int *,
+    const int *); // encode gives R array indices from C memory location
+typedef void (*DECODE)(
+    const int *, int *, const int *,
+    const int *); // decode gives C memory location from R array indices
+```
+
+For symmetric matrices and arrays shape can be a pointer to a single number.
+
+# Subroutines
+
+In array.c there are some auxiliary subroutines for sorting integers (using the system qsort()) and for binomial coefficients. The main routines implement encode and decode
+for arrays with element of type CTYPE in the following classes.
+
+* general vectors (GVENCODE() and GVDECODE()) 
+* general matrices (GMENCODE() and GMDECODE()) 
+* symmetric matrices in compact storage (SMENCODE() and SMDECODE()) 
+* general multidimensional arrays (GAENCODE() and GADECODE()) 
+* super-symmetric multidimensional arrays in compact storage (SAENCODE() and SADECODE()) 
+
+Compact storage, as used here, is column-major and increasing (for details, see
+@deleeuw_E_17s). Thus array element $x_{i_1\cdots i_r}$ is stored if and only if $i_1\leq\cdots\leq i_r$. The symmetric matrix versions of decode and encode can also be used for triangular matrices in compact storage. Of course decode and encode for vectors merely amounts to subtracting or adding one to the argument, so you want not want the overhead of a function call in that case.
+
+All $5\times 2=10$ routines have the same arguments, as in the general prototypes.
+```{c eval = FALSE}
+XXDECODE(const int *indices, int *location, const int *shape, const int *rank);
+XXENCODE(int *indices, const int *location, const int *shape, const int *rank);
+```
+Note that all arguments are pointers to integers. 
+Not all subroutines need both shape and rank, but we always include them to avoid having to deal with a variable number of arguments. Note that we only map from R indices to C storage locations and back, not from C storage locations to R storage locations, or from C indices to R storage locations. Thus the workflow we have in mind is creating our data in R, passing it to C, computing in C using the subroutines, and passing the result back to R. The 10 subroutines are all written so they can be used directly using the .C() interface in R (i.e. they pass all arguments by reference, return void, and have no I/O). The main reason for not using the .Call() interface is that we want to make the routines usable for people who do not have R. We may try at some point to change the R code to use the .C64() interface (@gerber_moesinger_furrer_18).
+
+Using the array structure with pointers to corresponding subroutines will make it easy to extend our results to other types of arrays, such as triangular and banded matrices, and even to Hilbert, Vandermonde, Toeplitz, or Hankel matrices.
+
+# Testers
+
+I have also included five main programs in C which test the decode and encode routines.
+They are named appropriately:
+
+* gvtester();
+* gmtester();
+* smtester();
+* gatester();
+* satester().
+
+# Appendix: Code
+
+## array.h
+
+```{c file_auxilary, code = readLines("array.h"), eval = FALSE, results="hide"}
+```
+
+## array.c
+
+```{c file_auxilary, code = readLines("array.c"), eval = FALSE, results="hide"}
+```
+
+## gvtester.c
+
+```{c file_auxilary, code = readLines("gvtester.c"), eval = FALSE, results="hide"}
+```
+
+## gmtester.c
+
+```{c file_auxilary, code = readLines("gmtester.c"), eval = FALSE, results="hide"}
+```
+
+## smtester.c
+
+```{c file_auxilary, code = readLines("smtester.c"), eval = FALSE, results="hide"}
+```
+
+## gatester.c
+
+```{c file_auxilary, code = readLines("gatester.c"), eval = FALSE, results="hide"}
+```
+
+## satester.c
+
+```{c file_auxilary, code = readLines("satester.c"), eval = FALSE, results="hide"}
+```
+
+# References

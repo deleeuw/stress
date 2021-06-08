@@ -73,9 +73,10 @@ Thus maximizing $\rho_2$ with $\rho_2(X)=\text{tr}\ X'B_0X$ over $\text{tr}\ X'B
 
 Theorem: The set of squared Euclidean distance matrices between $n$ points $\mathfrak{D}:=\{D\mid D=D^{(2)}(X)\}$ is a closed convex cone.
 
-Proof: It suffices to observe that $\alpha D^{(2)}(X)=D^{(2)}(\sqrt(\alpha)X)$ and $D^{(2)}(X)+D^{(2)}(Y)=D^{(2)}(X\mid Y)$.
+::: {.proof}
+It suffices to observe that $\alpha D^{(2)}(X)=D^{(2)}(\sqrt(\alpha)X)$ and $D^{(2)}(X)+D^{(2)}(Y)=D^{(2)}(X\mid Y)$.
 Alternatively, $\mathfrak{D}$ is the intersection of two convex cones, and thus convex. The first cone are the hollow non-negative symmetric matrices and the second cone are the symmetric matrices $D$ for which $-JDJ\gtrsim 0$. 
-$\blacksquare$
+:::
 
 Corollary: $$\min_{D\in\mathfrak{D}}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}^2-d_{ij})^2$$ is a convex problem with a unique minimum.
 

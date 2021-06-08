@@ -183,7 +183,7 @@ Argyros
 
 To prove convergence of these sequences we slightly modify and extend the proofs in @deleeuw_C_77 and @deleeuw_heiser_C_77 (while I say to myself: that's 44 years ago). 
 
-```{proof}
+::: {.proof}
 
 1. For each $X\in\mathbb{R}^{n\times p}$ we have $\rho(X)\leq\eta(X)$ and thus
    $\lambda(X)\leq 1$.
@@ -214,7 +214,7 @@ and
 $$
 \rho(X^{(k)})\leq\frac{\eta(X^{(k)}}{X^{(k+1)}}\rho(X^{(k+1)})\leq\rho(X^{(k+1)})
 $$
-```
+:::
 
 ### From Majorization
 
@@ -304,7 +304,8 @@ m_{ij}=\frac{\lambda_is_{ij}+\lambda_js_{ji}}{\lambda_i^2-\lambda_j^2}.
 \end{equation}
   
 ```
-```{proof}
+
+::: {.proof}
 The proof involves computing the derivatives of the singular value decomposition of $X$, which is defined by the equations
 
 \begin{align}
@@ -349,7 +350,7 @@ Premultiply \@ref(eq:minsvdu1) and postmultiply \@ref(eq:minsvdu2) by $\Lambda$.
 
 If we add these two equations we can solve for the off-diagonal elements of $M$
 and find the expression in the theorem. Since $L_\Delta=LM$ this completes the proof.
-```
+:::
 
 ### Negative Dissimilarities
 

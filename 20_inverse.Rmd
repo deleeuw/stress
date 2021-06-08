@@ -18,7 +18,7 @@ Our first IMDS step is to describe the set $\mathfrak{D}(X)$ of all $\Delta$E fo
 ```{lemma, label = ""}
 Suppose $X$ is an $n\times p$ matrix of rank $p<n$. Suppose $K$ is an $n\times(n-p)$ orthonormal matrix with $K'X=0$. Then a symmetric matrix $A$ satisfies $AX=0$ if and only if there is a symmetric $S$ such that $A=KSK'$. If $\text{rank}(K'AK)=r$ then $S$ can be chosento be of order $r$.
 ```
-```{proof}
+::: {.proof}
 Suppose $X=LT$ with $L$ an orthonormal basis for the column space of $X$ and $T$ non-singular. Write $A$ as 
 
 \begin{equation}
@@ -34,7 +34,7 @@ Then $AX=LA_{11}T+KA_{21}=0$ which is true if and only if $A_{11}=0$
 and $A_{21}=0$, and by symmetry $A_{12}=0$. Thus $A=KA_{22}K'$. 
 ```
 
-```{theorem label = "keyresult"}
+```{theorem, label = "keyresult"}
 $\Delta\in\mathfrak{D}(X)$ if and only if there is a symmetric $S$ of order $n-p-1$ such that for all $i\not= j$ 
 
 \begin{equation}
@@ -44,9 +44,9 @@ $\Delta\in\mathfrak{D}(X)$ if and only if there is a symmetric $S$ of order $n-p
 
 ```
 
-```{proof}
-By lemma XXX we have $(V-B(X))X=0$ if and only if there is a symmetric $S$ such that $V-B(X)=KSK'$.  This can be rearranged to yield \@ref(eq:invalldelta). Since the vector $e$ satisfies both $X'e=0$ and $(V-B(X))e=0$ we can choose $S$ to be of order $n-p-1$. $\blacksquare$
-```
+::: {.proof}
+By lemma XXX we have $(V-B(X))X=0$ if and only if there is a symmetric $S$ such that $V-B(X)=KSK'$.  This can be rearranged to yield \@ref(eq:invalldelta). Since the vector $e$ satisfies both $X'e=0$ and $(V-B(X))e=0$ we can choose $S$ to be of order $n-p-1$. 
+:::
 
 Thus $\mathfrak{D}(X)$ is a non-empty affine space, a translation of a linear subspace, closed under all linear combinations with coefficients that add up to one. Since $S$ is symmetric of order $n-p-1$, equation \@ref(eq:invalldelta) defines an affine subspace of dimension $\frac12(n-p)(n-p-1)$. If $n=3$ and $p=1$, or if $n=4$ and $p=2$, the dimension is one. If $n=4$ and $p=1$ the dimension is three.
 
@@ -85,9 +85,9 @@ The next result is corollary 6.3 in @deleeuw_groenen_A_97.
 **`r corollary_nums("full_result", display = "f")`** If $p=n-1$ then $\Delta\in\mathfrak{D}(X)$ if and only if $\Delta=D(X)$ if and only if $\sigma(X)=0$.
 ```
 
-```{proof}
+::: {.proof}
 If $p=n-1$ then $S$ in theorem  \@ref(thm:keyresult) is of order zero.
-```
+:::
 
 For any two elements of $\mathfrak{D}(X)$, one cannot be elementwise larger (or smaller) than the other. This is corollary 3.3 in @deleeuw_groenen_A_97.
 
@@ -95,7 +95,8 @@ For any two elements of $\mathfrak{D}(X)$, one cannot be elementwise larger (or 
 If $\Delta_1$ and $\Delta_2$ are both in $\mathfrak{DS}(X)$ and $\Delta_1\leq\Delta_2$, then $\Delta_1=\Delta_2$.
 ```
 
-```{proof}With obvious notation $\mathbf{tr}\ X'(B_1(X)-B_2(X))X=0$, which can be written as
+::: {.proof}
+With obvious notation $\mathbf{tr}\ X'(B_1(X)-B_2(X))X=0$, which can be written as
 
 \begin{equation}
 \mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}\left(\delta_{1ij}-\delta_{2ij}\right)d_{ij}(X)=0,
@@ -103,6 +104,7 @@ If $\Delta_1$ and $\Delta_2$ are both in $\mathfrak{DS}(X)$ and $\Delta_1\leq\De
 \end{equation}
 
 and thus $\Delta_1\leq\Delta_2$ implies $\Delta_1=\Delta_2$.
+:::
 
 ## Non-negative Dissimilarities
 
@@ -113,9 +115,10 @@ Convex cone, affine convex cone
 ```{lemma, label = "goldman"}
 A non-vacuous polyhedral convex set $C=\{x\mid Ax\leq b\}$ is bounded if and only if $Q=\{x\mid Ax\leq 0\}=\{0\}$. 
 ```
-```{proof}
+
+::: {.proof}
 See @goldman_56, corollary 1B.
-```
+:::
 
 If $C$ satisfies the conditions of lemma \@ref(lem:goldman) then it is a bounded convex polyhedron and is the convex hull of its finite set of extreme vectors. 
 
@@ -130,9 +133,9 @@ We have $\Delta\in\Delta(W,X)\cap\Delta_+$ if and only if there is a symmetric $
 Thus $\Delta(W,X)\cap\Delta_+$ is a convex polyhedron, closed under non-negative linear combinations with coefficients that add up to one.
 ```
 
-```{proof}
+::: {.proof}
 Follows easily from the representation in theorem \@ref(thm:keyresult)} display = "n")`.
-```
+:::
 
 Of course the minimum of $\sigma(X,W,\Delta)$ over $\Delta\in\Delta(W,X)\cap\Delta_+$ is zero, attained at $D(X)$. The maximum of stress, which is a convex quadratic in $\Delta$, is attained at one of the vertices of $\Delta(W,X)\cap\Delta_+$.
 
@@ -140,7 +143,7 @@ Of course the minimum of $\sigma(X,W,\Delta)$ over $\Delta\in\Delta(W,X)\cap\Del
 $\mathfrak{D}(X)\cap\mathfrak{D}_+$ is bounded, i.e. it is a convex polygon.
 ```
 
-```{proof}
+::: {.proof}
 This is corollary 3.2 in @deleeuw_groenen_A_97, but the proof given there is incorrect. A hopefully correct proof goes as follows. A polyhedron is bounded if and only if its recession cone is the zero vector. If the polyhedron is defined by $Ax\leq b$ then the recession cone is the solution set of $Ax\leq 0$. Thus, in our case, the recession cone consists of all matrices $S$ for which $\text{low}\ (KSK')\leq 0$. Since $U:=KSK'$ is doubly-centered, and $K$ is orthogonal to $X$, we have
 
 \begin{equation}
@@ -148,7 +151,7 @@ This is corollary 3.2 in @deleeuw_groenen_A_97, but the proof given there is inc
 \end{equation}
 
 This implies $U=0$, and the recession cone is the zero vector.
-```
+:::
 
 We can compute the vertices of $\Delta(W,X)\cap\Delta_+$ using the complete description method of @fukuda_15, with an `R` implementation in the `rcdd` package by @geyer_meeden_15. Alternatively, as a check on our computations, we also use the `lrs` method of @avis_15, with an `R` implementation in the `vertexenum` package by @robere_15. Both methods convert the *H-representation* of the polygon, as the solution set of a number of linear inequalities, to the *V-representation*, as the convex combinations of a number of vertices.
 
@@ -511,13 +514,13 @@ We can now study $\Delta(W,X)\cap\Delta_H(W,X)$ or $\Delta(W,X)\cap\Delta_H(W,X)
 $\Delta_H(W,X)$ is a convex non-polyhedral set.
 ```
 
-```{proof}
+::: {.proof}
 In MDS the Hessian is $2(V-H(x,W,\Delta))$, where
 \begin{equation}
 H(x,W,\Delta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(x)}\left\{A_{ij}-\frac{A_{ij}xx'A_{ij}}{x'A_{ij}x}\right\}.
 \end{equation}
 Here we use $x:=\mathbf{vec}(X)$, and both $A_{ij}$ and $V$ are direct sums of $p$ copies of our previous $A_{ij}$ and $V$ (@deleeuw_groenen_mair_E_16c). The Hessian is linear in $\Delta$, which means that requiring it to be positive semi-definite defines a convex non-polyhedral set. The convex set is defined by the infinite system of linear inequalities $y'H(x,W,\Delta)y\geq 0$.
-```
+:::
 
 In example 3 the smallest eigenvalues of the Hessian at the 42 vertices are
 ```{r three_hess, echo = FALSE}
@@ -560,9 +563,9 @@ $\Delta\in\Delta_F(W,X)$ if and only if there is a positive semi-definite $S$ su
 Thus $\Delta_F(W,X)$ is a non-polyhedral convex set, closed under linear combinations with coefficients that add up to one.
 ```
 
-```{proof}
+::: {.proof}
 Of course $\Delta_F(W,X)\subseteq\Delta(W,X)$. Thus $V-B(X)=KSK'$ for some $S$, and $XX'$ and $V-B(X)$ must both be positive semi-definite, with complementary null spaces.
-```
+:::
 
 ```{r fds, echo = FALSE, cache = TRUE}
 d2 <- lower_triangle (as.matrix (dist (x2)))
@@ -639,9 +642,9 @@ Minimizing iStress means minimizing the projection distance between the observed
 $\min_X\sigma_\iota(X,W,\Delta)=0$ and the minimum is attained at all $X$ with $(V-B(X))X=0$.
 ```
 
-```{proof}
+::: {.proof}
 If $X$ is a stationary point of stress then $\Delta\in\mathfrak{D}(X)\cap\mathfrak{D}_+$ and thus iStress is zero. Conversely, if iStress is zero then $\Delta\in\mathfrak{D}(X)\cap\mathfrak{D}_+$ and $X$ is a stationary point of stress. 
-```
+:::
 
 Minimizing iStress may not be a actual practical MDS method, but it has some conceptual interest, because it provides another way of looking at the relationship of MDS and IMDS.
 

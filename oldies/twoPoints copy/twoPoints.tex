@@ -1,0 +1,897 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Pictures of Stress},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Pictures of Stress}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version 006, June 29, 2016}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+A low-dimensional multidimensional scaling example is used to illustrate
+properties of the stress loss function and of different iteration
+methods.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome, and some would be really
+benificial. For example, I only use base R graphics, nothing more fancy,
+because base is all I know. The directory
+\href{http://deleeuwpdx.net/pubfolders/twoPoints}{deleeuwpdx.net/pubfolders/twoPoints}
+has a pdf version, the complete Rmd file with all code chunks, the bib
+file, and the R source code.
+
+\section{Theory}\label{theory}
+
+In \emph{Multidimensional Scaling (MDS)} we minimize a loss function,
+called \emph{Kruskal's stress}, which is defined by (Kruskal (1964a),
+Kruskal (1964b))
+
+\begin{equation}
+\sigma(Z):=\frac12\sum_{i=1}^n\sum_{j=1}^nw_{ij}(\delta_{ij}-d_{ij}(Z))^2\label{E:loss}
+\end{equation}
+
+over the \(n\times p\) \emph{configurations} \(Z\). Here the
+\emph{weights} \(W\) and the \emph{dissimilarities} \(\Delta\) are known
+symmetric, non-negative, and hollow matrices of numbers. The matrix
+\(D(Z)\) in \(\eqref{E:loss}\) has the (Euclidean) \emph{distances}
+between the \(n\) \emph{points} in the configuration. Thus if \(e_i\)
+are unit vectors, with zeroes everywhere, except for element \(i\),
+which is one, and \(A_{ij}:=(e_i-e_j)(e_i-e_j)'\), then
+\(d_{ij}^2(Z)=\mathbf{tr}\ ZA_{ij}Z'\).
+
+Stress is a complicated function with potentially a large number of
+local minima and saddle points. In order to study the behavior of stress
+we shall look at configurations of the form \(Z=\alpha X+\beta Y\), with
+\(X\) and \(Y\) known, fixed, and centered configurations. This makes
+stress a function of the two variables \(\alpha\) and \(\beta\), and we
+can use standard contour and perspective plots to study the function.
+This extends earlier work by De Leeuw (1993). We assume linear
+independence, in the sense that \(\alpha X+\beta Y=0\) if and only if
+\(\alpha=\beta=0\).
+
+First some simplications. Define the \(2\times 2\) matrices \[
+V_{ij}:=\begin{bmatrix}\mathbf{tr}\ XA_{ij}X'&\mathbf{tr}\ XA_{ij}Y'\\\mathbf{tr}\ YA_{ij}X'&\mathbf{tr}\ YA_{ij}Y'\end{bmatrix},
+\] and define \(\gamma\) as the vector with elements \(\alpha\) and
+\(\beta\). Now
+
+\begin{equation}
+\sigma(\gamma)=1-\sum_{i=1}^n\sum_{j=1}^nw_{ij}\delta_{ij}\sqrt{\gamma'V_{ij}\gamma}+\frac12\gamma'V_{\star\star}\gamma,\label{E:gamma}
+\end{equation}
+
+where we have assumed for convenience that \[
+\frac12\sum_{i=1}^n\sum_{j=1}^nw_{ij}\delta_{ij}^2=1,
+\] and where \[
+V_{\star\star}:=\sum_{i=1}^n\sum_{j=1}^n w_{ij}V_{ij}.
+\] Note that if all \(w_{ij}\) are one, then \[
+V_{\star\star}=2n\begin{bmatrix}X'X&X'Y\\Y'X&Y'Y\end{bmatrix}.
+\]
+
+We now make a change of variables, using the Cholesky decomposition
+\(V_{\star\star}=S'S\), with \(S\) upper-triangular. Define
+\(\theta:=S\gamma\) and \(U_{ij}:=(S')^{-1}V_{ij}S^{-1}\). Then
+
+\begin{equation}
+\sigma(\theta)=1-\sum_{i=1}^n\sum_{j=1}^nw_{ij}\delta_{ij}\sqrt{\theta'U_{ij}\theta}+\frac12\theta'\theta.\label{E:theta}
+\end{equation}
+
+In MDS we usually (De Leeuw (1977)) also define the matrix-valued
+function
+
+\begin{equation}
+B(\theta):=\sum_{i=1}^n\sum_{j=1}^nw_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}U_{ij},\label{E:bdef}
+\end{equation}
+
+with \(d_{ij}(\theta):=\sqrt{\theta'U_{ij}\theta}\) and the function
+\(\rho(\theta):=\theta'B(\theta)\theta\). Definition \(\eqref{E:bdef}\)
+can be extended using subgradients if \(d_{ij}(\theta)=0\) for some
+\(i,j\) (see De Leeuw (1977)). For our purposes we can define
+\(B(\theta)\) more generally by omitting the terms with
+\(d_{ij}(\theta)=0\). The definition of \(\rho\) allows us to write
+
+\begin{equation}
+\sigma(\theta)=1-\rho(\theta)+\frac12\theta'\theta.\label{E:short}
+\end{equation}
+
+If \(d_{ij}(\theta)>0\) for all \(i,j\) such that
+\(w_{ij}\delta_{ij}>0\) then stress is differentiable at \(\theta\) and
+\(\mathcal{D}\sigma(\theta)=\theta-B(\theta)\theta\), so that stationary
+points are defined as solutions of \(\theta=B(\theta)\theta\). The more
+general definition is \(\theta\in\partial\rho(\theta)\). De Leeuw (1984)
+shows that stress is always differentiable at local minima.
+
+At a stationary point \(\theta\) is an eigenvector of \(B(\theta)\) with
+eigenvalue equal to one. If this is the largest eigenvalue, then
+\(\theta\) actually gives the global minimum of stress (De Leeuw,
+Groenen, and Mair (2016)). Also observe that at a stationary point
+\(\rho(\theta)=\theta'\theta\), and thus \(\eqref{E:short}\) implies
+\(\theta'\theta\leq 2\). All stationary values are within a circle or
+sphere with radius \(\sqrt{2}\).
+
+The \texttt{smacof} algorithm (De Leeuw (1977), De Leeuw and Mair
+(2009)) is the iterative algorithm
+
+\begin{equation}
+\theta^{(k+1)}=B(\theta^{(k)})\theta^{(k)}.
+\end{equation}
+
+Note that the algorithm is self-scaling, in the sense that all points on
+a ray through the origin have the same update. Thus
+\(B(\lambda\theta)(\lambda\theta)= B(\theta)\theta\) for all
+\(\lambda\not= 0\).
+
+If stress is differentiable at \(\theta\) then
+\(\mathcal{D}^2\sigma(\theta)=I-H(\theta)\), where
+
+\begin{equation}
+H(\theta):=\sum_{i=1}^n\sum_{j=1}^nw_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\left\{U_{ij}-\frac{U_{ij}\theta\theta'U_{ij}}{\theta'U_{ij}\theta}\right\}.
+\end{equation}
+
+Note that \(\mathcal{D}\rho(\theta)=B(\theta)\theta\) and
+\(\mathcal{D}^2\rho(\theta)=H(\theta)\). Also note that
+\(H(\lambda\theta)=|\lambda|^{-1}H(\theta)\), and thus for any
+\(\theta\) there is a \(\lambda(\theta)\) such that
+\(\mathcal{D}^2\sigma(\lambda\theta)\) is positive definite for all
+\(\lambda>\lambda(\theta)\).
+
+The \texttt{smacof} algorithm convergences to a solution \(\theta\) of
+the stationary equations, with a linear convergence rate equal to the
+largest eigenvalue of \(H(\theta)\) (see De Leeuw (1988)).
+
+Note that \(\mathcal{D}^2\sigma(\theta)\theta=\theta\), which means that
+Newton's method takes the form
+
+\begin{equation}
+\theta^{(k+1)}=(I-H(\theta^{(k)})^{-1}B(\theta^{(k)})\theta^{(k)}.\label{E:newton}
+\end{equation}
+
+Note that Newton is definitely not self-scaling. Equation
+\(\eqref{E:newton}\) also suggest a natural safeguarded version of
+Newton's method, using \(I-\eta H\), where \(0\leq\eta\leq 1\). For
+\(\eta=0\) this is a \texttt{smacof} step, for \(\eta=1\) this is a
+Newton step.
+
+On the line through \(\theta\) and the origin the function \(\sigma\) is
+a convex quadratic. Thus at every point, except at the origin, there is
+at least one direction of descent, and consequently stress has only a
+single local maximum at \(\theta=0\), equal to one. In the
+differentiable case this is also clear from
+\(\mathcal{D}^2\sigma(\theta)\theta=\theta\), which says that the
+Hessian has at least one positive eigenvalue.
+
+Because stress is an even function, with
+\(\sigma(\theta)=-\sigma(\theta)\) for all \(\theta\), minima come in
+pairs.
+
+\section{Example}\label{example}
+
+Our first example has \(n=4\), all weights equal to one, and all
+dissimilarities equal. The same example has been analyzed by De Leeuw
+(1988), De Leeuw (1993), Trosset and Mathar (1997). For this example the
+global minimum in two dimensions has its four points in the corners of a
+square. That is our \(X\), which has stress 0.02859548. Our \(Y\) is
+another stationary point, which has three points in the corners of an
+equilateral triangle and the fourth point in the center of the triangle.
+Its stress is 0.0669873. Another way of looking at the two
+configurations is that \(X\) are four points equally spaced on a circle,
+and \(Y\) are three points equally spaced on a circle with the fourth
+point in the center of the circle. De Leeuw (1988) erroneously claims
+that \(Y\) is a non-isolated local minimum of stress, but Trosset and
+Mathar (1997) have shown there exists a descent direction at \(Y\), and
+thus \(Y\) is actually a saddle point. Of course the stationary points
+defined by \(X\) and \(Y\) are far from unique, because we can
+distribute the four points over the various corners in many ways.
+
+The example is chosen in such a way that there are non-zero \(\alpha\)
+and \(\beta\) such that \(d_{12}(\alpha X+\beta Y)=0\). In fact
+\(d_{12}\) is the only distance that can be made zero by a non-trivial
+linear combination.
+
+Note that we have used \(\sigma\) for three different functions. The
+first one with argument \(Z\) is defined on \emph{configuration space},
+the second one with argument \(\gamma\) on \emph{coefficient space}, and
+the third one with argument \(\theta\) also on \emph{coefficient space}.
+This is a slight abuse of notation, rather innocuous, but we have to
+keep it in mind.
+
+From lemma 1we see that \(\mathcal{D}\sigma(X)=\mathcal{D}\sigma(Y)=0\)
+then \(\mathcal{D}\sigma(1,0)=\mathcal{D}\sigma(0,1)=0\). Thus
+stationary points in configuration space are preserved as stationary
+points in coefficient space, but the reverse implication may not be
+true. If \(\mathcal{D}^2\sigma(X)\) and \(\mathcal{D}^2\sigma(Y)\) are
+positive semi-definite, then so are \(\mathcal{D}^2\sigma(1,0)\) and
+\(\mathcal{D}^2\sigma(0,1)\). Thus local minima are preserved. But it is
+entirely possible that \(\mathcal{D}^2\sigma(X)\) and/or
+\(\mathcal{D}^2\sigma(Y)\) are indefinite, and that
+\(\mathcal{D}^2\sigma(1,0)\) and/or \(\mathcal{D}^2\sigma(0,1)\) are
+positive semi-definite. Thus saddle points in configuration space can be
+mapped into local minima in coefficient space. As we will see this
+actually happens with \(Y\), the equilateral triangle with center, in
+our example.
+
+\subsection{Global Pictures}\label{global-pictures}
+
+We first make a global perspective plot, over the range \((-2.5,+2.5)\).
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/global_perspective-1} \end{center}
+
+Figure 1: Global Perspective
+
+We see the symmetry, following from the fact that stress is even. We
+also see the local maximum at the origin, where stress is not
+differentiable. Also note the ridge, where \(d_{12}(\theta)=0\) and
+where stress is not differentiable either. The ridge shows nicely that
+on rays emanating from the origin stress is a convex quadratic. Also,
+far away from the origin, stress globally behaves very much like a
+convex quadratic (except for the ridge). Clearly local minima must be
+found in the valleys surrounding the small mountain at the origin, all
+within the sphere with radius \(\sqrt{2}\).
+
+Figure 2 is a countour plot of stress over \((-2,+2)\otimes(-2,+2)\).
+The red line is \(\{\theta\mid d_{12}(\theta) = 0\}\). The blue line has
+the minimum of the convex quadratic on each of the rays through the
+origin. Thus all local minima, and in fact all stationary points, are on
+the blue line. Note that the plot uses \(\theta\) to define the
+coordinate axes, not \(\gamma=(\alpha,\beta)\). Thus there are no
+stationary points at \((0,1)\) and \((1,0)\), but at the corresponding
+points (1.3938468501, 0) and (1.040640449, 0.8849253413) in the
+\(\theta\) coordinates (and, of course, at their mirror images).
+
+Besides the single local maximum at the origin, it turns out that in
+this example there are at least five pairs of stationary points. Or,
+more precisely, I have not been able to find more than five. Each
+stationary point \(\theta\) has a mirror image \(-\theta\). Three of the
+five are local minima, two are saddle points. Local minima are plotted
+as blue points, saddle points as red points.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/global_contour-1} \end{center}
+
+Figure 2: Global Contour
+
+\subsection{First Minimum}\label{first-minimum}
+
+We zoom in on the first local minimum at (1.0406404488, 0.8849253415).
+Its stress is 0.0669872981 and the corresponding configuration is in
+figure 3.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/configuration_first_minimum-1} \end{center}
+
+Figure 3: Configuration First Minimum
+
+Note that this local minimum corresponds with the equilateral triangle
+with center, which is a saddle point in configuration space (Trosset and
+Mathar (1997)). The eigenvalues of \(B(\theta)\) are (1.3686346146, 1)
+and those of the Hessian \(I-H(\theta)\) are (1, 0.0817218104). The area
+of the contour plot around the stationary value is in figure 4.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/contour_first_minimum-1} \end{center}
+
+Figure 4: Contour Plot First Minimum
+
+\subsection{Second Minimum}\label{second-minimum}
+
+The second local minimum (which is the global minimum) at (1.3938468501,
+0) has stress 0.0285954792 and the corresponding configuration is in
+figure 5.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/configuration_second_minimum-1} \end{center}
+
+Figure 5: Configuration Second Minimum
+
+The eigenvalues of \(B(\theta)\) are (1.1362798549, 1) and those of the
+Hessian \(I-H(\theta)\) are (1, 0.3743105348). The area of the contour
+plot around the stationary value is in figure 6.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/contour_second_minimum-1} \end{center}
+
+Figure 6: Contour Plot Second Minimum
+
+\subsection{Third Minimum}\label{third-minimum}
+
+The third local minimum at (0.1096253665, 1.3291941942) has stress
+0.1106125366 and the corresponding configuration is in figure 7.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/configuration_third_minimum-1} \end{center}
+
+Figure 7: Configuration Third Minimum
+
+The eigenvalues of \(B(\theta)\) are (1.5279386667, 1) and those of the
+Hessian \(I-H(\theta)\) are (1, 0.2362078313). The area of the contour
+plot around the stationary value is in figure 8.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/contour_third_minimum-1} \end{center}
+
+Figure 8: Contour Plot Third Minimum
+
+\subsection{First Saddle Point}\label{first-saddle-point}
+
+The saddle point at (0.3253284471, 1.2916758288) has stress 0.1128674774
+and the corresponding configuration is in figure 9.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/configuration_first_saddlepoint-1} \end{center}
+
+Figure 9: Configuration First Saddlepoint
+
+The eigenvalues of \(B(\theta)\) are (1.7778549251, 1) and those of the
+Hessian \(I-H(\theta)\) are (1, -0.3110880057). The area of the contour
+plot around the stationary value is in figure 10.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/contour_first_saddlepoint-1} \end{center}
+
+Figure 10: Contour Plot First Saddlepoint
+
+\subsection{Second Saddle Point}\label{second-saddle-point}
+
+The saddle point at (1.1238371005, 0.7762045565) has stress 0.067248329
+and the corresponding configuration is in figure 11.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/configuration_second_saddlepoint-1} \end{center}
+
+Figure 11: Configuration Second Saddlepoint
+
+The eigenvalues of \(B(\theta)\) are (1.4111961819, 1) and those of the
+Hessian \(I-H(\theta)\) are (1, -0.0841169222). The area of the contour
+plot around the stationary value is in figure 12.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/contour_second_saddlepoint-1} \end{center}
+
+Figure 12: Contour Plot Second Saddlepoint
+
+\section{Regions of Attraction}\label{regions-of-attraction}
+
+\subsection{Smacof}\label{smacof}
+
+We use the \texttt{smacof()} function from the code in the appendix with
+100 different starting points of \(\theta\), equally spaced on the
+circle. Figure 13 is a histogram of the number of smacof iterations to
+convergence within \(1e-15\). In all cases \texttt{smcof} converges to a
+local minimum in coefficient space, never to a saddle point. Figure 14
+shows which local minima are reached from the different starting points.
+This shows, more or less contrary to what Trosset and Mathar (1997)
+suggest, that non-global minima can indeed be points of attraction for
+\texttt{smacof} iterations.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/histogram_smacof-1} \end{center}
+
+Figure 13: Histogram Number of Smacof Iterations
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/path_smacof-1} \end{center}
+
+Figure 14: Path Endpoints of Smacof Iterations
+
+\subsection{Newton}\label{newton}
+
+We repeat the same exercise with Newton's method, which converges from
+all 100 starting points. In higher dimensions we may not be so lucky.
+The histogram of iteration counts is in figure 15. It shows in this
+example that \texttt{smacof} needs about 10 times the number of
+iterations that Newton needs. Because \texttt{smacof} iterations are
+much less expensve than Newton ones, this does not really say much about
+computing times. If we look at figure 16 we see the problem with
+non-safeguarded Newton. Although we have fast convergence from all 100
+starting points, Newton converges to a saddle point in 45 cases.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/histogram_newton-1} \end{center}
+
+Figure 15: Histogram Number of Newton Iterations
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/path_newton-1} \end{center}
+
+Figure 16: Path Endpoints of Newton Iterations
+
+\section{Another Look}\label{another-look}
+
+Remember that \(\rho(\theta)=\theta'B(\theta)\theta\). Thus
+\(\sigma(\lambda\theta)=1-\lambda\rho(\theta)+\frac12\lambda^2\theta'\theta\),
+and \[
+\min_\lambda\sigma(\lambda\theta)=1-\frac12\frac{\rho^2(\theta)}{\theta'\theta}.
+\] Thus we can minimize \(\sigma\) over \(\theta\) by maximizing
+\(\rho\) over the unit circle
+\(\mathcal{S}:=\{\theta\mid\theta'\theta=1\}\). This is a nice
+formulation, because \(\rho\) is norm, i.e.~a homogeneous convex
+function of \(\theta\). Consequently we have transformed the problem
+from unconstrained minimization of the DC function (i.e.~difference of
+convex functions) stress to that of maximization of a ratio of norms. In
+turn this is equivalent to maximization of the convex function \(\rho\)
+over the unit circle, or, again equivalently, over the unit ball, a
+compact convex set. This transform was first used in MDS by De Leeuw
+(1977), partly because it made the theory developed by Robert (1967)
+available.
+
+The levels sets \(\{\theta\mid\rho(\theta)=\kappa\}\) are the
+\(\rho\)-circles defined by the norm \(\rho\). The corresponding
+\(\rho\)-balls \(\{\theta\mid\rho(\theta)\leq\kappa\}\) are closed and
+nested convex sets containing the origin. Thus we want to find the
+largest \(\rho\)-circle that still intersects \(\mathcal{S}\). The
+similarity with the geometry of eigenvalue problems is obvious.
+
+In our example we know that the global optimum of stress is at
+(1.3938468501, 0), and if we project that point on the circle it becomes
+(1, 0). The corresponding optimal \(\rho\) is 1.3938468501. Figure 17
+gives the contourplot for \(\rho\), with the outer \(\rho\)-circle
+corresponding with the optimal value. The fact that the optimal value
+contour is disjoint from the interior of \(\mathcal{S}\) is necessary
+and sufficient for global optimality (Dür, Horst, and Locatelli (1998)).
+Notice the sharp corners in the contour plot, showing the
+non-diffentiability of \(\rho\) at the points where
+\(d_{12}(\theta)=0\). We could also look for the minimum of \(\rho\) on
+the unit circle, which means finding the largest \(\rho\)-circle that
+touches \(\mathcal{S}\) on the inside. Inspecting figure 17 shows that
+this will be a point where \(\rho\) is not differentiable, i.e.~a point
+with \(d_{12}(\theta)=0\). This minimum \(\rho\) problem does not make
+much sense in the context of multidimensional scaling, however, and it
+not related directly to the minimization of stress.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/rho_contour-1} \end{center}
+
+Figure 17: Contour Plot for Rho
+
+\section{A Final Look}\label{a-final-look}
+
+Now that we know that the MDS problem is equivalent to maximizing
+\(\rho\) on the unit circle, we can use nonlinear coordinates
+\((\theta_1,\theta_2)=(\sin\xi,\cos\xi)\) to reduce the problem to a
+one-dimensional unconstrained one in, say, ``circle space''. Thus, with
+the same abuse of notation as for stress,
+\(\rho(\xi):=\rho(\sin\xi,\cos\xi)\), and we have to maximize \(\rho\)
+over \(0\leq\xi\leq\pi\).
+
+In figure 18 we have plotted \(\rho\) as a function of \(\eta\). There
+are blue vertical lines at the three local minima in coefficient space,
+red vertical lines at the stationary points, and a green vertical line
+where \(d_{12}(\xi)=0\). Note that in circle space stress has both
+multiple local minima and multiple local maxima.
+
+\begin{center}\includegraphics{twoPoints_files/figure-latex/rho_nonlinear_plot-1} \end{center}
+
+Figure 18: One-dimensional Rho
+
+From lemma 2 we see that the second derivative
+\(\mathcal{D}^2\rho(\xi)\) is equal to
+\(\mathbf{tr}\ H(\xi)-\rho(\xi)\). For the three local minima in
+coordinate space we find second derivatives -0.111634069, -0.5217315599,
+-0.3150320881 in circle space, i.e.~they are properly converted to local
+maxima. The two stationary points in coordinate space have second
+derivatives 0.4143740166, 0.1148897778, and are turned into local
+minima.
+
+For more general cases, with a basis of \(n\) configurations, we know
+from Lyusternik and Schnirelmann (1934) that a continuously
+differentiable even function on the unit sphere in \(\mathbb{R}^n\) has
+at least \(n\) distinct pairs of stationary points.
+
+\section{Discussion}\label{discussion}
+
+Although our results are based on a single small example, there are some
+general conclusions we can draw.
+
+Stess has no local maxima, except one at the origin. It has saddle
+points and non-global minima. If we reparametrize configuration space by
+using linear combinations of a fixed number of configurations we can
+``upgrade'' some of the stationary point to local minima. If we remove
+homogeneity from the problem by working on the unit ball that can
+upgrade even more stationary points.
+
+In comparing \texttt{smacof} with Newton we have found, not
+surprisingly, that Newton uses fewer iterations but often converges to
+saddle points.
+
+The finding that saddle points in configuration space can correspond
+with local minima in coefficient space has an interesting implication
+for the \texttt{smacof} algorithm. We know that the set of starting
+points from which \texttt{smacof} converges to a saddle point has
+measure zero, in other words unless you start in a saddle point, you
+will almost certainly converge to a local minimum (Lee et al. (2016)).
+
+To illustrate this we repeat a calculation done first in De Leeuw
+(1988). Suppose we start \texttt{smacof} iterations with the
+\(Y+.001*E\), where \(E\) are random standard normals, and \(Y\) is the
+triangle with center (which has loss function value 0.0669872981).
+\texttt{smacof} starts with a loss function value for the perturbed
+\(Y\) of 0.066987868. It does not drop below 0.066 until iteration 1346.
+But then it rather quickly converges in iteration 1388 to 0.0285954792,
+the loss function value of the global minimum, four points in the
+corners of a square. On the other hand, if we minimize
+\(\sigma(\gamma)\) over \(\gamma\) we have a non-zero probability of
+converging to the local minimum in coefficient space at \((0,1)\),
+i.e.~to \(Y\).
+
+This indicates, perhaps, that \texttt{smacof} must be used with a
+somewhat higher precision than the default, and that testing for second
+derivative information is always a good idea, no matter what space we
+are working in.
+
+Minimizing stress over a plane spanned by two configurations may seem
+somewhat artificial and limited. But think of the situation in which we
+use configurations \(X\) and \(Y=\mathcal{D}\sigma(X)\). Or,
+equivalently, \(X\) and \(B(X)X\). In that case minimizing over the
+plane means computing the optimal step size of a gradient step or the
+optimum over-relaxation of \texttt{smacof} iterations, a problem first
+addressed perhaps in De Leeuw and Heiser (1980). Or the case in which
+\(Y\) is the Newton step, and optimizing over the plane is a stabilized
+version of Newton's method.
+
+\section{Appendix: Two Lemmas}\label{appendix-two-lemmas}
+
+Here we present two lemmas that describe the change of coordinates from
+configuration space to coefficient space and then to circle space. The
+proofs, which are just simple computations, are omitted.
+
+\textbf{Lemma 1: {[}On the Line{]}} Suppose \(X\) and Y are
+\(n\times m\) matrices and \(f\) is a twice-differentiable function on
+\(\mathbb{R}^{n\times m}\). Define
+\(g(\alpha,\beta):=f(\alpha X+\beta Y)\). Then \[
+\mathcal{D}g(\alpha,\beta)=\begin{bmatrix}\mathbf{tr}\ X'\mathcal{D}f(\alpha X+\beta Y)\\
+\mathbf{tr}\ Y'\mathcal{D}f(\alpha X+\beta Y)\end{bmatrix},
+\] and \[
+\mathcal{D}^2g(\alpha,\beta)=
+\begin{bmatrix}
+\sum_{i=1}^n\sum_{j=1}^m\sum_{k=1}^n\sum_{\ell=1}^m x_{ij}x_{k\ell}\frac{\partial f^2}{\partial z_{ij}\partial z_{k\ell}}(\alpha X+\beta Y)&
+\sum_{i=1}^n\sum_{j=1}^m\sum_{k=1}^n\sum_{\ell=1}^m x_{ij}y_{k\ell}\frac{\partial f^2}{\partial z_{ij}\partial z_{k\ell}}(\alpha X+\beta Y)\\
+\sum_{i=1}^n\sum_{j=1}^m\sum_{k=1}^n\sum_{\ell=1}^m y_{ij}x_{k\ell}\frac{\partial f^2}{\partial z_{ij}\partial z_{k\ell}}(\alpha X+\beta Y)&
+\sum_{i=1}^n\sum_{j=1}^m\sum_{k=1}^n\sum_{\ell=1}^m y_{ij}y_{k\ell}\frac{\partial f^2}{\partial z_{ij}\partial z_{k\ell}}(\alpha X+\beta Y)
+\end{bmatrix}.
+\]
+
+It is clear how this result generalizes to linear combinations of more
+than two matrices.
+
+\textbf{Lemma 2: {[}On the Circle{]}} If \(f\) is a twice-differentiable
+function of two variables and \(g(x)=f(sin(x),cos(x))\) then \[
+\mathcal{D}g(x)=y'\mathcal{D}f(z),
+\] with \(z:=(sin(x),cos(x))\) and \(y:=(cos(x),-sin(x))\), and \[
+\mathcal{D}^2g(x)=y'\mathcal{D}^2f(z)y-z'\mathcal{D}f(z).
+\]
+
+More generally, if a differentiable function \(f\) on the unit sphere
+has a stationary point at \(\theta\) then \(\theta'\theta=1\) and there
+is a multiplier \(\lambda\) such that
+\(\mathcal{D}f(\theta)=\lambda\theta\). If \(f\) is homogeneous of
+degree one then \(\theta'\mathcal{D}f(\theta)=f(\theta)\) and thus at a
+stationary point \(\lambda=f(\theta)\). If the function is twice
+differentiable and the stationary point is a local maximum then in
+addition \(\nu'\mathcal{D}^2f(\theta)\nu\leq\lambda\) for all
+\(\nu'\nu=1\) and \(\nu'\theta=0\). For a norm, i.e.~a homogeneous
+convex \(f\), this says equivalently that the largest eigenvalue of
+\(\mathcal{D}^2f(\theta)\) is less than or equal to \(f(\theta)\). Note
+that the second order necessary conditions for a local maximum become
+sufficient if the inequality is strict.
+
+\section{Appendix: Code}\label{appendix-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bmat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b, x, y, delta) \{}
+\NormalTok{  bm <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{  hm <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{c}\NormalTok{(a, b)}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
+    \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{) \{}
+      \ControlFlowTok{if}\NormalTok{ (i }\OperatorTok{==}\StringTok{ }\NormalTok{j) }\ControlFlowTok{next}
+\NormalTok{      uij <-}\StringTok{ }\KeywordTok{uu}\NormalTok{ (i, j, x, y)}
+\NormalTok{      uz <-}\StringTok{ }\KeywordTok{drop}\NormalTok{ (uij }\OperatorTok{%*%}\StringTok{ }\NormalTok{z)}
+\NormalTok{      dij <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\KeywordTok{sum}\NormalTok{ (uij }\OperatorTok{*}\StringTok{ }\KeywordTok{outer}\NormalTok{ (z, z)))}
+\NormalTok{      bm <-}\StringTok{ }\NormalTok{bm }\OperatorTok{+}\StringTok{ }\NormalTok{(delta[i,j] }\OperatorTok{/}\StringTok{ }\NormalTok{dij) }\OperatorTok{*}\StringTok{ }\NormalTok{uij}
+\NormalTok{      hm <-}\StringTok{ }\NormalTok{hm }\OperatorTok{+}\StringTok{ }\NormalTok{(delta[i,j] }\OperatorTok{/}\StringTok{ }\NormalTok{dij) }\OperatorTok{*}\StringTok{ }\NormalTok{(uij }\OperatorTok{-}\StringTok{ }\KeywordTok{outer}\NormalTok{ (uz, uz) }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{ (z }\OperatorTok{*}\StringTok{ }\NormalTok{uz))}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}\DataTypeTok{b =}\NormalTok{ bm, }\DataTypeTok{h =}\NormalTok{ hm))}
+\NormalTok{\}}
+
+\NormalTok{stress <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b, x, y, delta) \{}
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (a, b)}
+\NormalTok{  bm <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (a, b, x, y, delta)}\OperatorTok{$}\NormalTok{b}
+  \KeywordTok{return}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(z }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (z }\OperatorTok{*}\StringTok{ }\NormalTok{bm }\OperatorTok{%*%}\StringTok{ }\NormalTok{z))}
+\NormalTok{\}}
+
+\NormalTok{rho <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b, x, y, delta) \{}
+\NormalTok{  z <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (a, b)}
+\NormalTok{  bm <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (a, b, x, y, delta)}\OperatorTok{$}\NormalTok{b}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{sum}\NormalTok{ (z }\OperatorTok{*}\StringTok{ }\NormalTok{bm }\OperatorTok{%*%}\StringTok{ }\NormalTok{z))}
+\NormalTok{\}}
+
+\NormalTok{vv <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (i, j, x, y) \{}
+\NormalTok{  a <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{  a[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ ((x[i, ]}\OperatorTok{-}\StringTok{ }\NormalTok{x[j,]) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  a[}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ ((y[i, ]}\OperatorTok{-}\StringTok{ }\NormalTok{y[j,]) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  a[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{] <-}\StringTok{ }\NormalTok{a[}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ ((x[i, ]}\OperatorTok{-}\StringTok{ }\NormalTok{x[j,]) }\OperatorTok{*}\StringTok{ }\NormalTok{(y[i, ]}\OperatorTok{-}\StringTok{ }\NormalTok{y[j, ]))}
+  \KeywordTok{return}\NormalTok{ (a)}
+\NormalTok{\}}
+
+\NormalTok{uu <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (i, j, x, y) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  asum <-}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\KeywordTok{c}\NormalTok{ (}\KeywordTok{sum}\NormalTok{(x }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{), }\KeywordTok{sum}\NormalTok{ (x }\OperatorTok{*}\StringTok{ }\NormalTok{y), }\KeywordTok{sum}\NormalTok{ (x }\OperatorTok{*}\StringTok{ }\NormalTok{y), }\KeywordTok{sum}\NormalTok{ (y }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{)), }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{  csum <-}\StringTok{ }\KeywordTok{solve}\NormalTok{ (}\KeywordTok{chol}\NormalTok{ (asum))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{t}\NormalTok{(csum) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{vv}\NormalTok{ (i, j, x, y) }\OperatorTok{%*%}\StringTok{ }\NormalTok{csum)}
+\NormalTok{\}}
+
+\NormalTok{smacof <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b, x, y, delta, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{, }\DataTypeTok{itmax =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
+\NormalTok{  zold <-}\StringTok{ }\KeywordTok{c}\NormalTok{(a,b)}
+\NormalTok{  bold <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (a, b, x, y, delta)}\OperatorTok{$}\NormalTok{b}
+\NormalTok{  fold <-}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(zold }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (zold }\OperatorTok{*}\StringTok{ }\NormalTok{bold }\OperatorTok{%*%}\StringTok{ }\NormalTok{zold)}
+\NormalTok{  itel <-}\StringTok{ }\DecValTok{1}
+  \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{    znew <-}\StringTok{ }\KeywordTok{drop}\NormalTok{ (bold }\OperatorTok{%*%}\StringTok{ }\NormalTok{zold)}
+\NormalTok{    bhmt <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (znew[}\DecValTok{1}\NormalTok{], znew[}\DecValTok{2}\NormalTok{], x, y, delta)}
+\NormalTok{    bnew <-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{b}
+\NormalTok{    fnew <-}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(znew }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (znew }\OperatorTok{*}\StringTok{ }\NormalTok{bnew }\OperatorTok{%*%}\StringTok{ }\NormalTok{znew)}
+    \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+      \KeywordTok{cat}\NormalTok{ (}
+        \KeywordTok{formatC}\NormalTok{ (itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+        \KeywordTok{formatC}\NormalTok{ (}
+\NormalTok{          fold,}
+          \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+          \DataTypeTok{width =} \DecValTok{13}\NormalTok{,}
+          \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{        ),}
+        \KeywordTok{formatC}\NormalTok{ (}
+\NormalTok{          fnew,}
+          \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+          \DataTypeTok{width =} \DecValTok{13}\NormalTok{,}
+          \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{        ),}
+        \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{      )}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ ((itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax) }\OperatorTok{||}\StringTok{ }\NormalTok{(fold }\OperatorTok{-}\StringTok{ }\NormalTok{fnew) }\OperatorTok{<}\StringTok{ }\NormalTok{eps)}
+      \ControlFlowTok{break}\NormalTok{ ()}
+\NormalTok{    itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{    fold <-}\StringTok{ }\NormalTok{fnew}
+\NormalTok{    zold <-}\StringTok{ }\NormalTok{znew}
+\NormalTok{    bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}\DataTypeTok{stress =}\NormalTok{ fnew, }\DataTypeTok{theta =}\NormalTok{ znew, }\DataTypeTok{itel=}\NormalTok{ itel, }\DataTypeTok{b =}\NormalTok{ bnew, }\DataTypeTok{g =}\NormalTok{ znew }\OperatorTok{-}\StringTok{ }\NormalTok{bnew }\OperatorTok{%*%}\StringTok{ }\NormalTok{znew, }\DataTypeTok{h =} \KeywordTok{diag}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{h))}
+\NormalTok{\}}
+
+
+\NormalTok{newton <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b, x, y, delta, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{, }\DataTypeTok{itmax =} \DecValTok{1000}\NormalTok{, }\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{) \{}
+\NormalTok{  zold <-}\StringTok{ }\KeywordTok{c}\NormalTok{(a,b)}
+\NormalTok{  bhmt <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (a, b, x, y, delta)}
+\NormalTok{  bold <-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{b}
+\NormalTok{  hold <-}\StringTok{ }\KeywordTok{diag}\NormalTok{(}\DecValTok{2}\NormalTok{) }\OperatorTok{-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{h}
+\NormalTok{  fold <-}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(zold }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (zold }\OperatorTok{*}\StringTok{ }\NormalTok{bold }\OperatorTok{%*%}\StringTok{ }\NormalTok{zold)}
+\NormalTok{  itel <-}\StringTok{ }\DecValTok{1}
+  \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{    znew <-}\StringTok{ }\KeywordTok{drop}\NormalTok{ (}\KeywordTok{solve}\NormalTok{ (hold, bold }\OperatorTok{%*%}\StringTok{ }\NormalTok{zold))}
+\NormalTok{    bhmt <-}\StringTok{ }\KeywordTok{bmat}\NormalTok{ (znew[}\DecValTok{1}\NormalTok{], znew[}\DecValTok{2}\NormalTok{], x, y, delta)}
+\NormalTok{    bnew <-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{b}
+\NormalTok{    hnew <-}\StringTok{ }\KeywordTok{diag}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(bnew)) }\OperatorTok{-}\StringTok{ }\NormalTok{bhmt}\OperatorTok{$}\NormalTok{h}
+\NormalTok{    fnew <-}\StringTok{ }\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(znew }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2} \OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (znew }\OperatorTok{*}\StringTok{ }\NormalTok{bnew }\OperatorTok{%*%}\StringTok{ }\NormalTok{znew)}
+    \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+      \KeywordTok{cat}\NormalTok{ (}
+        \KeywordTok{formatC}\NormalTok{ (itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+        \KeywordTok{formatC}\NormalTok{ (}
+\NormalTok{          fold,}
+          \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+          \DataTypeTok{width =} \DecValTok{13}\NormalTok{,}
+          \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{        ),}
+        \KeywordTok{formatC}\NormalTok{ (}
+\NormalTok{          fnew,}
+          \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+          \DataTypeTok{width =} \DecValTok{13}\NormalTok{,}
+          \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{        ),}
+        \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{      )}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ ((itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax) }\OperatorTok{||}\StringTok{ }\KeywordTok{abs}\NormalTok{ (fold }\OperatorTok{-}\StringTok{ }\NormalTok{fnew) }\OperatorTok{<}\StringTok{ }\NormalTok{eps)}
+      \ControlFlowTok{break}\NormalTok{ ()}
+\NormalTok{    itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{    fold <-}\StringTok{ }\NormalTok{fnew}
+\NormalTok{    zold <-}\StringTok{ }\NormalTok{znew}
+\NormalTok{    bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{    hold <-}\StringTok{ }\NormalTok{hnew}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}\DataTypeTok{stress =}\NormalTok{ fnew, }\DataTypeTok{theta =}\NormalTok{ znew, }\DataTypeTok{itel =}\NormalTok{ itel, }\DataTypeTok{b =}\NormalTok{ bnew, }\DataTypeTok{g =}\NormalTok{ znew }\OperatorTok{-}\StringTok{ }\NormalTok{bnew }\OperatorTok{%*%}\StringTok{ }\NormalTok{znew, }\DataTypeTok{h =}\NormalTok{ hnew))}
+\NormalTok{\}}
+
+\NormalTok{mprint <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, }\DataTypeTok{d =} \DecValTok{2}\NormalTok{, }\DataTypeTok{w =} \DecValTok{5}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{ (}\KeywordTok{noquote}\NormalTok{ (}\KeywordTok{formatC}\NormalTok{ (x, }\DataTypeTok{di =}\NormalTok{ d, }\DataTypeTok{wi =}\NormalTok{ w, }\DataTypeTok{fo =} \StringTok{"f"}\NormalTok{)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-deleeuw_C_77}{}
+De Leeuw, J. 1977. ``Applications of Convex Analysis to Multidimensional
+Scaling.'' In \emph{Recent Developments in Statistics}, edited by J.R.
+Barra, F. Brodeau, G. Romier, and B. Van Cutsem, 133--45. Amsterdam, The
+Netherlands: North Holland Publishing Company.
+\url{http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_C_77.pdf}.
+
+\hypertarget{ref-deleeuw_A_84f}{}
+---------. 1984. ``Differentiability of Kruskal's Stress at a Local
+Minimum.'' \emph{Psychometrika} 49: 111--13.
+\url{http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84f.pdf}.
+
+\hypertarget{ref-deleeuw_A_88b}{}
+---------. 1988. ``Convergence of the Majorization Method for
+Multidimensional Scaling.'' \emph{Journal of Classification} 5: 163--80.
+\url{http://deleeuwpdx.net/janspubs/1988/articles/deleeuw_A_88b.pdf}.
+
+\hypertarget{ref-deleeuw_R_93c}{}
+---------. 1993. ``Fitting Distances by Least Squares.'' Preprint Series
+130. Los Angeles, CA: UCLA Department of Statistics.
+\url{http://deleeuwpdx.net/janspubs/1993/reports/deleeuw_R_93c.pdf}.
+
+\hypertarget{ref-deleeuw_heiser_C_80}{}
+De Leeuw, J., and W. J. Heiser. 1980. ``Multidimensional Scaling with
+Restrictions on the Configuration.'' In \emph{Multivariate Analysis,
+Volume V}, edited by P.R. Krishnaiah, 501--22. Amsterdam, The
+Netherlands: North Holland Publishing Company.
+\url{http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf}.
+
+\hypertarget{ref-deleeuw_mair_A_09c}{}
+De Leeuw, J., and P. Mair. 2009. ``Multidimensional Scaling Using
+Majorization: SMACOF in R.'' \emph{Journal of Statistical Software} 31
+(3): 1--30.
+\url{http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf}.
+
+\hypertarget{ref-deleeuw_groenen_mair_E_16e}{}
+De Leeuw, J., P. Groenen, and P. Mair. 2016. ``Full-Dimensional
+Scaling.''
+doi:\href{https://doi.org/10.13140/RG.2.1.1038.4407}{10.13140/RG.2.1.1038.4407}.
+
+\hypertarget{ref-dur_horst_locatelli_98}{}
+Dür, M., R. Horst, and M. Locatelli. 1998. ``Necessary and Sufficient
+Global Optimality Conditions for Convex Maximization Revisited.''
+\emph{Journal of Mathematical Analysis and Applications} 217: 637--49.
+
+\hypertarget{ref-kruskal_64a}{}
+Kruskal, J.B. 1964a. ``Multidimensional Scaling by Optimizing Goodness
+of Fit to a Nonmetric Hypothesis.'' \emph{Psychometrika} 29: 1--27.
+
+\hypertarget{ref-kruskal_64b}{}
+---------. 1964b. ``Nonmetric Multidimensional Scaling: a Numerical
+Method.'' \emph{Psychometrika} 29: 115--29.
+
+\hypertarget{ref-lee_simchowitz_jordan_recht_16}{}
+Lee, J.D., M. Simchowitz, M.I. Jordan, and B. Recht. 2016. ``Gradient
+Descent Converges to Minimizers.''
+\url{https://arxiv.org/abs/1602.04915}.
+
+\hypertarget{ref-lyusternik-schnirelmann_34}{}
+Lyusternik, L., and L. Schnirelmann. 1934. \emph{Méthodes Topologiues
+Dans Les Problèmes Variationelle}. Hermann.
+
+\hypertarget{ref-robert_67}{}
+Robert, F. 1967. ``Calcul du Rapport Maximal de Deux Normes sur
+\(\mathbb{R}^n\).'' \emph{Revue Francaise d'Automatique, d'Informatique
+et de Recherche Operationelle} 1: 97--118.
+
+\hypertarget{ref-trosset_mathar_97}{}
+Trosset, M.W., and R. Mathar. 1997. ``On the Existence on Nonglobal
+Minimizers of the STRESS Criterion for Metric Multidimensional
+Scaling.'' In \emph{Proceedings of the Statistical Computing Section},
+158--62. Alexandria, VA: American Statistical Association.
+
+
+\end{document}

@@ -1,0 +1,57 @@
+> sweepTimer()
+[1] "element sweeping in pure R"
+   user  system elapsed 
+ 43.801   5.830  46.222 
+   user  system elapsed 
+ 47.495   4.050  48.171 
+   user  system elapsed 
+ 43.764   5.680  46.142 
+   user  system elapsed 
+ 43.920   5.810  46.327 
+   user  system elapsed 
+ 43.715   5.649  46.083 
+[1] "element sweeping in R and fortran from R"
+   user  system elapsed 
+  9.039   1.937  10.975 
+   user  system elapsed 
+  7.208   2.236   9.445 
+   user  system elapsed 
+  7.244   2.132   9.376 
+   user  system elapsed 
+  7.224   2.218   9.443 
+   user  system elapsed 
+  7.188   2.067   9.256 
+[1] "element sweeping in R and C from R and fortran from C"
+   user  system elapsed 
+  1.200   0.020   1.221 
+   user  system elapsed 
+  1.171   0.021   1.191 
+   user  system elapsed 
+  1.169   0.023   1.192 
+   user  system elapsed 
+  1.170   0.021   1.192 
+   user  system elapsed 
+  1.171   0.023   1.194 
+[1] "matrix sweeping from ggm using solve"
+   user  system elapsed 
+  0.863   0.044   0.226 
+   user  system elapsed 
+  0.790   0.028   0.157 
+   user  system elapsed 
+  0.784   0.029   0.164 
+   user  system elapsed 
+  0.795   0.026   0.163 
+   user  system elapsed 
+  0.792   0.026   0.159 
+[1] "plain old solve"
+   user  system elapsed 
+  0.774   0.028   0.153 
+   user  system elapsed 
+  0.788   0.029   0.149 
+   user  system elapsed 
+  0.782   0.028   0.156 
+   user  system elapsed 
+  0.768   0.028   0.153 
+   user  system elapsed 
+  0.782   0.027   0.149 
+> 

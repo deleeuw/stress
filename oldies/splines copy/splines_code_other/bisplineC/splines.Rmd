@@ -1,0 +1,322 @@
+---
+title: "Computing and Fitting Monotone Splines"
+author: "Jan de Leeuw"
+date: "Version 10, March 17, 2017"
+output:
+  html_document:
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+fontsize: 12pt
+graphics: yes
+bibliography: splines.bib
+abstract: An introduction to spline functions and B-splines, and specifically to monotone
+  spline functions -- with code in R and C.
+---
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 18px;
+}
+td {  /* Table  */
+   font-size: 18px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 18px;
+}
+pre { /* Code block */
+  font-size: 18px
+}
+</style>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+```{r function_code, echo = FALSE}
+source("lowSpline.R")
+source("gslSpline.R")
+source("splineBasis.R")
+source("bispline.R")
+```
+```{r packages, echo = FALSE}
+options (digits = 10) 
+library (captioner)
+library (lsei)
+```
+```{r equation_numbering, echo = FALSE}
+figure_nums <- captioner (prefix = "Figure")
+figure_nums (name = "rectangle_conf", caption = "Rectangle Data, Configuration, Original Left, Rounded Right", display = FALSE)
+```
+Note: This is a working paper which will be expanded/updated frequently. All suggestions for improvement are welcome. The directory [gifi.stat.ucla.edu/splines](http://gifi.stat.ucla.edu/splines) has a pdf version, the complete Rmd file with all code chunks, the bib file, 
+and the R source code.
+
+#Introduction
+
+A *spline function* of *order* $k\geq 1$, or *degree* $k-1$, on a strictly increasing doubly infinite sequence $\{z_j\}$  of *knots*, 
+
+* is a polynomial of degree at most $k-1$ between each pair of consecutive knots, and 
+* the pieces are joined at the knots in such a way that the spline is everywhere $k-2$ times continuously differentiable. 
+
+For convenience we assume $\lim_{j\rightarrow-\infty} z_j=-\infty$ and $\lim_{j\rightarrow+\infty} z_j=+\infty$.
+
+The smoothness requirement needs some qualification. If $k=2$ we understand it as requiring continuity of the spline function, if $k=1$ it does not require anything. 
+
+Thus a spline function of order one is a step function which steps form one level to the next at each knot. A spline of order two
+is piecewise linear, which the pieces joined at the knots so that the spline function is continuous. Order three means piecewise quadratic and continuously differentiable at the knots. And so on. 
+
+Note that we only consider spline functions with *simple knots* in this paper. The definition can be extended to the case in which consecutive knots are equal. i.e. knots have different *multiplicities*,  but this leads to complications which are not needed for our purposes. 
+
+#Basic Splines
+
+Alternatively, a spline function of order $k$ can be defined as a linear combination of *B-splines* of order $k$ on the same knot sequence. A B-spline, or basic spline, is a 
+spline function that is positive in $k$ consecutive intervals and zero everywhere else. B-splines can be defined in various ways, using the piecewise polynomial definition,
+the divided differences definition, or the recursive definition. The recursive definition is the most convenient one for computational purposes, and that is the one we use.
+
+If we have $m$ knots we can define $m-k$ B-splines of order $k$, each covering $k$ consecutive intervals. At most $k$ different B-splines are non-zero at each point. B-spline
+$j$ is zero for all $x\leq z_j$, then is positive for all $z_{j}<x<z_{j+k)}$, and zero again for $x>z_{j+k}$.
+
+A key result in the theory of B-splines is that the different B-splines are linearly independent and form a basis for the linear space of spline functions (of a given order and knot sequence). There are two popular ways of normalizing B-splines. The $\mathcal{N}$-spline $\mathcal{N}_{kj}$, i.e. the normalized B-spline $j$ or order $k$, satisfies
+$$
+\sum_{\ell=j}^{j+n-k-1}\mathcal{N}_{k\ell}(x)=1
+$$
+for all $x$ and for all $j=1,\cdots,n-k$.
+
+Alternatively we can normalize to $\mathcal{M}$-splines, for which
+$$
+\int_{-\infty}^{+\infty}\mathcal{M}_{kj}(x)dx=\int_{z_j}^{z_{j+k}}\mathcal{M}_{kj}(x)dx=1.
+$$
+We now illustrate normalized B-splines in detail, using nine knots.
+```{r knot_sequence}
+knots <- c(-2,-1,0,.1,.7,.9,1,2,3)
+```
+We evaluate our B-splines at $x_i$, equally spaced with steps $.001$ on the interval $[0.05,0.95]$.
+```{r arguments}
+x <- seq(0.05, 0.95, by = .001)
+```
+Note that all $x_i$ are in the unit interval, which means that for this problem the three smallest and the three largest knots are *external knots*, while the three middle knots
+are *internal knots*. If we want our $n$ splines to have $k$ nonzero values at our $n$ arguments $x_i$, we need $k$ external knots smaller than `min (x)` and $k$ external knots larger than `max(x)`. . In @wang_yan_17  and  @sinha the *boundary knots* are chosen as $k$ copies of the minimum and $k$ copies of the maximum of the $x_i$, in @deleeuw_E_15d we use $k$ copies of `min (c (knots, x))` and `max( c (knots, x))`. But both these choices violate the simple knots restriction used in this paper.
+
+The file `lowSpline.R` has the three functions `ZbSpline()`, `LbSpline()`, and `QbSpline` that use the explicit piecewise polynomial representation to compute B-splines or
+orders one, two, and three.
+
+In our example there are eight B-splines or order one. Only four are not identically zero. The normalized B-splines $\mathcal{N}_{kj}$ are equal to one in the half-open interval $[z_j,z_{j+1})$ and zero outside the interval. Note that B-splines of order one are right-continuous. The corresponding $\mathcal{M}_{kj}$ have a value equal to the
+reciprocal of the length of the interval.
+
+```{r zbspline}
+par (mfrow = c (1,2))
+for (k in 1:8) {
+  y <- ZbSpline (x, knots, k = k)
+  if (all (y == 0)) next
+  stepPlotter (x, y, knots, xlab = "x")
+  for (i in 1:9) abline (v = knots[i])
+}
+```
+
+
+B-splines of order two are *hat functions*, with an increasing linear function from $z_j$ to $z_{j+1}$ and a decreasing linear function from $z_{j+1}$ to $z_{j+2}$. There are
+seven B-splines of order $k=2$ in our example, but only the middle five are non-zero on the range $[0.05,0.95]$.
+```{r lbspline}
+par (mfrow = c (1,2))
+for (k in 1:7) {
+  y <- LbSpline (x, knots, k = k)
+  if (all (y == 0)) next
+  plot (x, y, type = "l", col = "RED", lwd = 3)
+  for (i in 1:9) abline (v = knots[i])
+}
+
+```
+
+B-splines of order three are *hat functions*, with an increasing linear part from $z_j$ to $z_{j+1}$ and a decreasing linear part from $z_{j+1}$ to $z_{j+2}$. There are
+six B-splines of order three in our example, and all six are non-zero on the range $[0.05,0.95]$.
+
+```{r qbspline}
+par (mfrow = c (1,2))
+for (k in 1:6) {
+  y <- QbSpline (x, knots, k = k)
+  if (all (y == 0)) next
+  plot (x, y, type = "l", col = "RED", lwd = 3)
+  for (i in 1:9) abline (v = knots[i])
+}
+```
+##Derivatives of B-splines
+
+##Integrals of B-splines
+
+
+#Example
+
+```{r births_b_splines_plot}
+births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
+birthsts <- ts(births, frequency=12, start=c(1946,1))
+plot(birthsts, col = "RED", lwd = 2)
+```
+```{r births_fit}
+knots <- 12 * (-3:17) + .5
+h <- bisplineBasis(1:168,2,knots)
+b <- h$bbasis
+nb <- ncol(b)
+par(mfrow=c(1,2))
+for (i in 1:nb) {
+  plot(1:168, b[, i], type = "l", col = "RED", lwd = 3, xlab = "month", ylab = "b-spline")
+  for (y in knots) abline (v=y)
+}
+```
+```{r}
+u<-lm.fit(b, births)
+plot(1:168, births, type = "l", col = "RED", lwd = 3, xlab = "months", ylab = "births")
+lines (1:168, b%*%u$coefficients, col = "BLUE", lwd = 3)
+for (y in knots) abline (v=y)
+```
+
+`r sum ((births - b%*%u$coefficients)^2)`
+
+#B-Splines with monotone weights
+
+$$
+\min_{\beta_1\leq\beta_2\leq\cdots\leq\beta_p}\mathbf{SSQ}(y-X\beta)
+$$
+
+```{r}
+d<-matrix(0,nb-1,nb)
+diag(d)=-1
+d[outer(1:(nb-1),1:nb,function(i,j) (j - i) == 1)]<-1
+u<-lsi(b,births,e=d,f=rep(0,nb-1))
+plot(1:168, births, type = "l", col = "RED", lwd = 3, xlab = "months", ylab = "births")
+lines (1:168, b%*%u, col = "BLUE", lwd = 3)
+for (y in knots) abline (v=y)
+```
+
+`r sum ((births - b%*%u)^2)`
+
+```{r}
+h3 <- bisplineBasis(1:168,3,knots[1:13],lowknot = .5, highknot = 168.5)
+b3 <- h3$bbasis
+nb <- ncol(b3)
+d<-matrix(0,nb-1,nb)
+diag(d)=-1
+d[outer(1:(nb-1),1:nb,function(i,j) (j - i) == 1)]<-1
+u<-lsi(b3,births,e=d,f=rep(0,nb-1))
+plot(1:168, births, type = "l", col = "RED", lwd = 2, xlab = "months", ylab = "births")
+lines (1:168, b3%*%u)
+```
+
+#B-Splines with monotone values
+
+
+```{r}
+mregnnM <- function (x, y) {
+  k <- qr.Q(qr(x))
+  u <- drop (crossprod(k, y))
+  v <- -t(diff(k))
+  lb <- nnls(v, u)$x
+  xb <- drop(k %*% (u - v%*% lb))
+  return (list(xb = xb,lb = lb,f = sum((y - xb) ^ 2)))
+}
+```
+```{r}
+u<-mregnnM(b, births)
+plot(1:168, births, type = "l", col = "RED", lwd = 2, xlab = "months", ylab = "births")
+lines (1:168, u$xb)
+```
+
+
+`r sum ((births - u$xb)^2)`
+
+$$
+\min_{x_1'\beta\leq x_2'\beta\leq\cdots\leq x_n'\beta}\mathbf{SSQ}(y-X\beta)
+$$
+
+
+
+#I-splines
+
+$$
+\min_{\beta\geq 0}\mathbf{SSQ}(y-Z\beta)
+$$
+
+```{r births_isplines_plot}
+par(mfrow=c(1,2))
+h <- bisplineBasis(1:168,2,knots, norm = 1)
+g <- h$ibasis
+ng <- ncol(g)
+for (i in 1:ng) {
+  plot(1:168, g[, i], type = "l", col = "RED", lwd = 2, xlab = "month", ylab = "i-spline")
+}
+```
+
+```{r births_i_splines_fit}
+u<-nnls (g,births)
+plot(1:168, births, type = "l", col = "RED", lwd = 2, xlab = "months", ylab = "births")
+lines (1:168, g%*%u$x)
+```
+
+`r sum ((births - g%*%u$x)^2)`
+
+#Regression Example
+
+```{r example}
+data(neumann, package = "homals")
+neumann
+```
+
+#Appendix: Code
+
+##R code
+
+###lowspline.R
+
+```{r file_auxilary, code = readLines("lowspline.R")}
+```
+
+###gslSpline.R
+
+```{r file_auxilary, code = readLines("gslSpline.R")}
+```
+
+###splinebasis.R
+
+```{r file_auxilary, code = readLines("splinebasis.R")}
+```
+
+###bispline.R
+
+```{r file_auxilary, code = readLines("bispline.R")}
+```
+
+##C code
+
+###gslSpline.c
+
+```{c file_auxilary, code = readLines("gslSpline.c")}
+```
+
+###splinebasis.c
+
+```{c file_auxilary, code = readLines("splinebasis.c")}
+```
+
+###bispline.c
+
+```{c file_auxilary, code = readLines("bispline.c")}
+```
+

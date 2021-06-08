@@ -4,7 +4,7 @@
 
 The notation used in the smacof approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the related smacof references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c.
 
-### Expanding {#propexpand}
+### Expanding {#propexpand} 
 
 We expand stress by writing out the squares of the residuals and then summing. Define
 
@@ -673,9 +673,7 @@ For a fixed $\epsilon>0$ now $d_{ij}(X_\epsilon)$, and thus stress, is (infinite
 At a stationary point of stress we have $\eta(X)\leq 1$.
 ```
 
-```{proof}
-ozo
-```
+
 If $X$ is stationary we have $VX=B(X)X$ and thus $\rho(X)=\eta^2(X)$. Consequently $\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)$ and because $\sigma(X)\geq 0$ we see that $X$ must be in the ellipse $\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}$.
 
 Theorem \@ref(thm:statpointsbound) is important, because it means that we can require without loss of generality that $X$ is in the ellipsoidal disk $\eta(X)\leq 1$, which is a compact convex set.
@@ -686,7 +684,7 @@ Theorem \@ref(thm:statpointsbound) is important, because it means that we can re
 stress has a single local maximum at $X=0$ with value 1.
 ```
 
-```{proof}
+::: {.proof}
 At $X=0$ we have for the one-sided directional derivative 
 
 \begin{equation}
@@ -704,8 +702,7 @@ By contradiction: suppose that there is a local maximum at $X\not= 0$. Then on t
 \end{equation}
 
 is a convex quadratic, which consequently cannot have a local maximum at $X$.
-
-```
+:::
 
 ### Local Minima {#proplocmin}
 
@@ -717,7 +714,7 @@ give a slight strengthening of the result, along the lines of
 stress is differentiable at local minima.
 ```
 
-```{proof}
+::: {.proof}
 It suffices to prove that if stress has a local minimum at $X$ we have $d_{ij}(X)>0$ for all $w_{ij}\delta_{ij}>0$, in other words that $\rho$ in equation \@ref(eq:compszero1) is differentiable at $X$. Since $\eta^2$ is
 differentiable everywhere this will show stress is differentiable at
 $X$.
@@ -727,7 +724,7 @@ From equation \@ref(eq:propddstress) we see
 
 
 Because 
-```
+:::
 
 Note: suppose
 $\delta_{12}=0$ and $\delta_{13}=\delta_{23}=\frac12\sqrt{2}$ and all weights are one. Thus
@@ -765,7 +762,7 @@ intro
 $\sigma$ is the lower envelop of an infinite number of convex quadratics.
 ```
 
-```{proof}
+::: {.proof}
 By the CS inequality
 
 \begin{equation}
@@ -781,7 +778,7 @@ which implies
 \end{equation}
 
 which is what we set out to prove.
-```
+:::
 
 We can use the lower envelop of a finite number of the quadratics from theorem \@ref(thm:proplowenv) to approximate stress. This is illustrated graphically, using a small example in which the configuration is a convex combination of two fixed configurations. Thus in the example stress is a function of the single parameter $0\leq\lambda\leq 1$ defining the convex combination. In figure \@ref(fig:upperfig) stress is in red, and we have used the three quadratics corresponding with $\lambda$ equal to `r (1:3)/4`. The maximum of the three quadratics is in blue, and the approximation is really good, in fact almost perfect in the areas where the blue is not even visible. As an aside, we also see three points in the figure where stress is not differentiable. The minimum of the three quadratics is also not differentiable at a point, but that point is different from the points where stress is non-smooth.
 
@@ -811,11 +808,11 @@ csupper(lbd,mbdu)
 
 Instead of approximating stress from above, we can also approximate it from below.
 
-```{theorem, label="propupenv", name="Upper Envelop"}
+```{theorem}
 $\sigma$ is the upper envelop of an infinite number of quadratics.
 ```
 
-```{proof}
+::: {.proof}
 By AM/GM
 
 \begin{equation}
@@ -830,7 +827,7 @@ Thus
 \sigma(X)=\max_Y \left(1-\frac12\rho(Y)+\frac12\text{tr}\ X'(V-B(Y))X\right)
 (\#eq:sigmax)
 \end{equation}
-```
+:::
 
 ```{r lowerfig, fig.align = "center", fig.cap = "Piecewise Quadratic Lower Approximation", echo = FALSE, cache = TRUE}
 aglower(lbd,mbdl)

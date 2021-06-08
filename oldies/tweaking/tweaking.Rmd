@@ -1,0 +1,390 @@
+---
+title: "Tweaking the SMACOF Engine"
+author: "Jan de Leeuw"
+date: "Version 06, October 10, 2017"
+output:
+  html_document:
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+fontsize: 12pt
+graphics: yes
+bibliography: ["../../janspubs/0_bib_material/mypubs.bib","../../janspubs/0_bib_material/total.bib"]
+abstract: The *smacof* algorithm for (metric, Euclidean, least squares) multidimensional scaling is rewritten so that all computation is done in C, with only the data management, memory allocation, iteration counting, and I/O handled by R. All symmetric matrices use compact, lower triangular, column-wise storage. Second derivatives of the loss function are provided, but non-metric scaling, individual differences, and constraints still have to be added. 
+---
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+---
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 18px;
+}
+td {  /* Table  */
+   font-size: 18px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 18px;
+}
+pre { /* Code block */
+  font-size: 18px
+}
+</style>
+
+
+```{r function_code, echo = FALSE}
+dyn.load("smacof.so")
+source("smacofR.R")
+source("smacofRC.R")
+source("utilsRC.R")
+```
+```{r packages, echo = FALSE}
+options (digits = 10) 
+suppressPackageStartupMessages (library (MASS, quietly = TRUE))
+suppressPackageStartupMessages (library (captioner, quietly = TRUE))
+suppressPackageStartupMessages (library (microbenchmark, quietly = TRUE))
+suppressPackageStartupMessages (library (dotCall64, quietly = TRUE))
+library(captioner)
+figure_nums <- captioner (prefix = "Figure")
+figure_nums(name = "box4", caption = "Boxplot for n = 4", display = FALSE)
+figure_nums(name = "box10", caption = "Boxplot for n = 10", display = FALSE)
+figure_nums(name = "box50", caption = "Boxplot for n = 50", display = FALSE)
+figure_nums(name = "box100", caption = "Boxplot for n = 100", display = FALSE)
+figure_nums(name = "box250", caption = "Boxplot for n = 250", display = FALSE)
+```
+Note: This is a working paper which will be expanded/updated frequently. All suggestions for improvement are welcome. The directory [deleeuwpdx.net/pubfolders/tweaking](http://deleeuwpdx.net/pubfolders/tweaking) has a pdf version, the bib file, the complete Rmd file with the code chunks,  and the R and C source code.
+
+#Introduction
+
+The smacof algorithm is a majorization (or MM) algorithm to minimize
+the least squares loss function
+\begin{equation}\label{E:loss}
+\sigma(X):=\frac12\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}(\delta_{ij}-d_{ij}(X))^2
+\end{equation}
+over *configurations* $X\in\mathbb{R}^{n\times p}$. Here the *weights* $w_{ij}$ and *dissimilarities* $\delta_{ij}$ are known non-negative numbers, and the $d_{ij}(X)$ are the Euclidean distances between the rows of $X$, i.e.
+\begin{equation}\label{E:distance}
+d_{ij}(X):=\sqrt{(e_i-e_j)'XX'(e_i-e_j)},
+\end{equation}
+with $e_i$ and $e_j$ unit vectors in $\mathbb{R}^n$, with a single element equal to one and all other elements equal to zero.
+
+The smacof algorithm generates a sequence of configurations $X^{(k)}$ by the rule
+\begin{equation}\label{E:smacof}
+X^{(k+1)}=V^+B(X^{(k)})X^{(k)}
+\end{equation}
+Here
+\begin{equation}\label{E:vmat}
+V:=\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}A_{ij},
+\end{equation}
+and 
+\begin{equation}\label{E:bmat}
+B(X):=\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}A_{ij},
+\end{equation}
+where $A_{ij}=(e_i-e_j)(e_i-e_j)'$ and $V^+$ is the Moore-Penrose inverse of $V$. Note that $V, V^+,$ and $B(X)$ are all postitive semi-definite
+and doubly centered. Moreover $V$ has rank $n-1$ if the weights are irreducible, i.e. the nonzero weights are not the direct sum of a number of smaller matrices. The only vector in the null-space of $V$ is $e$, a vector with $n$ elements all equal to one. Thus in the irreducible case
+\begin{equation}\label{E:inverse}
+X^{(k+1)}=(V+\frac{1}{n}ee')^{-1}B(X^{(k)})X^{(k)}.
+\end{equation}
+Also, in the case of unit weights $V=nI-ee'$, with $e$ a vector with $n$ elements all equal to one, so that
+\begin{equation}\label{E:unit}
+X^{(k+1)}=\frac{1}{n}B(X^{(k)})X^{(k)}.
+\end{equation}
+
+For unit weights, i.e. $w_{ij}=1$ for all $i<j$, algorithm $\eqref{E:smacof}$ was originally proposed by @guttman_68, as a simple rewrite of the stationary equations $\mathcal{D}\sigma(X)=0$. Guttman did not show the algorithm actually converged. For general non-negative weights it was shown to converge to stationary points by @deleeuw_C_77, even though there clearly are configurations where $\eqref{E:loss}$ is not differentiable.
+Differentiability of $\eqref{E:loss}$ at local minima was shown in @deleeuw_A_84f. In @deleeuw_C_77, @deleeuw_heiser_C_77, and @deleeuw_heiser_C_80 the smacof algorithm is extended to non-euclidean distances, to individual difference scaling, and to various types of constrained configurations. @deleeuw_A_88b shows that in general the smacof algorithm has a linear convergence rate. A comprehensive implementation in R was published by @deleeuw_mair_A_09c.
+
+One important characteristic of smacof, next to its global convergence and monotone convergence, is that it is easily implemented in a matrix language such as R or MATLAB. The definition $\eqref{E:vmat}$ may look expensive computationally, but, expandng the $w_{ij}$ to a symmetric hollow matrix, it is actually
+\begin{equation}\label{E:expand}
+v_{ij}=\begin{cases}-w_{ij}&\text{ if }i\not= j,\\\sum_{j\not= i}w_{ij}&\text{ if }i=j,\end{cases}
+\end{equation}
+and a similar result applies for $B(X)$. 
+
+The iterations $\eqref{E:smacof}$ is thus a straightforward matrix operation, which require at most $\frac32n^2p$ multiplications. As @guttman_68 already observed, there is a formal similarity to the power method for computing some of the dominant eigenvalues and corresponding eigenvectors, although in smacof the matrix $B(X)$ changes at each iteration. At a stationary point $X$, which is a fixed point of the smacof iterations, we have $V^+B(X)X=X$, i.e. $V^+B(X)$ has $p$ eigenvalues equal to one, with $X$ corresponding eigenvectors. @deleeuw_U_14b
+shows that if the $p$ eigenvalues equal to one are actually the largest eigenvalues, then $X$ is a global minimum of stress.
+
+If we use a matrix language, then we will most likely use the symmetric matrices $V$ and $B(X)$ in our computations, and store them as
+full symmetric matrices. This, of course, is redundant, because of symmetry. It is possible to compute only the elements on and below the main diagonal and then store corresponding elements above the diagonal as well. This may save some time, but it does not save storage. In this paper we go one step further, and we compute and store all symmetric matrices in compact lower triangular column-wise form. The matrix operations now become
+more complicated, involving loops and index calculations, and they are most naturally done in C (or some other compiled language). Thus we save
+storage, which may be important in large examples. We may not save computing time, because the compact storage calculations are inherently more complicated, and matrix computations in R are already calls to efficient LAPACK C routines. One part of this paper is a time comparison of
+a standard smacof implementation in pure R and several implementations which use compact storage of the symmetric matrices, with all the necessary
+computations done in C.
+
+#Implementation
+
+One thing to remember is that we do not compare R and C implementations of smacof, we compare implementations in Jan's R and Jan's C. As in many other papers, we use a standard template for iterative routines in R. The C routines use inline functions to map matrix indexing from the colum-wise format of R to the row-wise format of C. We do not use any matrices (i.e. any double indexing) in C. Also, we use the calling conventions of the .C() interface in R, i.e. all functions return void, and all arguments are passed by reference (as pointers). The C routines do not handle I/O or dynamic memory allocation, that is all the responsibility of R. This implies that if a routine needs any working memory, then it is created in R, and a pointer is passed to C. The driver routine for the iterations is also always in R.
+
+This seems a natural division of labor between C and R. We could have decided to use .Call() or Rcpp, but we would like our C routines to be usuable with C drivers, in cases where R is not around at all. Also, if I had wanted to learn C++ I would have done it thirty years ago. Now it is too late, thank God.
+
+In the appendix there is code for four R implementations of smacof. `smacofR()` only uses basic R and no user written C code, symmetric matrices are stored as full matrices. `smacofRC()` uses compact lower-triangular storage, and calls a number of small C routines within each iteration to
+update the configuration. `smacofRCU()` is similar to `smacofRC()`, but it combines the small C routines into a single larger C routine, in order to minimize the number of .C() calls. This program was included following a suggestion of Patrick Groenen. `smacofRCU64()` uses the `.C64()` interface call described by @gerber_moesinger_furrer_16 and @gerber_moesinger_furrer_17. Compared to `C()` this new interface promises less copying of the arguments, and thus more efficiency, both in computing times and in memory use. We have checked that in all cases for a given random start the two programs carry out the exactly same iterations and converge to exactly the same solution, although of course from different random starts they can converge to different stationary points. 
+
+#Timing
+
+For our timing we use the example where all weights and all dissimilarities are one. In a sense, this is a worst-case example,
+because it corresponds with power method iterations in the case that all eigenvalues are equal. If $X$ is a solution to the
+stationary equations, then any permutation of its rows is a solutions as well, with the same loss function value. Since, from @deleeuw_A_84f, at a local minimum all rows of $X$ are different, this means there are at least $n!$ local minima with the same function value, and specifically at least $n!$ global minima.
+
+```{r timeloop4, echo = FALSE, cache = TRUE}
+m <- 100
+n <- 4
+wv <- dv <- rep (1, n * (n - 1) / 2)
+wm <- dm <- 1 - diag (n)
+set.seed(12345)
+user1 <- rep (0, m)
+user2 <- rep (0, m)
+user3 <- rep (0, m)
+user4 <- rep (0, m)
+for (j in 1:m) {
+  xold <- rnorm(2*n)
+  t1 <- system.time(h1 <- smacofR(wm, dm, 2, xold = matrix(xold, n, 2), eps = 1e-15,  itmax = 100), gcFirst = TRUE)
+  t2 <- system.time(h2 <- smacofRC(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t3 <- system.time(h2 <- smacofRCU(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t4 <- system.time(h2 <- smacofRCU64(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  user1[j] <- t1[1]
+  user2[j] <- t2[1]
+  user3[j] <- t3[1]
+  user4[j] <- t4[1]
+}
+```
+For all runs we use a maximum of
+100 iterations, and we stop if the maximum absolute value of $X^{(k)}-X^{(k+1)}$ is less than `1e-15`. Of course 100 iterations are not enough for convergence, but they are perfectly fine for time comparisons, because all three algorithms produce exactly the same sequence of iterations. Using 100 starting points and 100 iterations per starting point basically means timing 10,000 smacof updates.
+
+We start with $n=4$, using 100 random starts. The median user time over starts, measured by `system.time()`, for the pure R implementation `smacofR()` is `r median(user1)`, for the compact storage `smacofRC()` it is `r median(user2)`, for `smacofRCU()` it is `r median(user3)`
+and for `smacofRCU64()` it is `r median(user4)`. `smacofR()` is 16 times faster than `smacofRC()`, but only 4 times faster than `smacofRCU()`.
+Because `smacofRCU64()` has more overhead it is a tiny bit slower than `smacofRCU()` in this small example.
+
+<hr>
+```{r timeloop4_out, fig.align="center", echo = FALSE}
+  boxplot(list(smacofR = user1, smacofRC = user2, smacofRCU = user3, smacofRCU64 = user4))
+```
+<center>
+`r figure_nums("box4")`
+</center>
+<hr>
+
+```{r timeloop10, echo = FALSE, cache = TRUE}
+m <- 100
+n <- 10
+wv <- dv <- rep (1, n * (n - 1) / 2)
+wm <- dm <- 1 - diag (n)
+set.seed(12345)
+user1 <- rep (0, m)
+user2 <- rep (0, m)
+user3 <- rep (0, m)
+user4 <- rep (0, m)
+for (j in 1:m) {
+  xold <- rnorm(2*n)
+  t1 <- system.time(h1 <- smacofR(wm, dm, 2, xold = matrix(xold, n, 2), eps = 1e-15,  itmax = 100), gcFirst = TRUE)
+  t2 <- system.time(h2 <- smacofRC(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t3 <- system.time(h2 <- smacofRCU(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t4 <- system.time(h2 <- smacofRCU64(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  user1[j] <- t1[1]
+  user2[j] <- t2[1]
+  user3[j] <- t3[1]
+  user4[j] <- t4[1]
+}
+```
+The four medians for $n=10$ are `r median(user1)` for `smacofR()`, `r median(user2)` for `smacofRC()`,  `r median(user3)` for `smacofRCU()`,
+and `r median(user4)` for `smacofRCU64()`. This still gives roughly the same conclusions on relative times as for $n=4$.
+<hr>
+```{r timeloop10_out, fig.align="center", echo = FALSE}
+  boxplot(list(smacofR = user1, smacofRC = user2, smacofRCU = user3, smacofRCU64 = user4))
+```
+<center>
+`r figure_nums("box10")`
+</center>
+<hr>
+
+```{r timeloop50, echo = FALSE, cache = TRUE}
+m <- 100
+n <- 50
+wv <- dv <- rep (1, n * (n - 1) / 2)
+wm <- dm <- 1 - diag (n)
+set.seed(12345)
+user1 <- rep (0, m)
+user2 <- rep (0, m)
+user3 <- rep (0, m)
+user4 <- rep (0, m)
+for (j in 1:m) {
+  xold <- rnorm(2*n)
+  t1 <- system.time(h1 <- smacofR(wm, dm, 2, xold = matrix(xold, n, 2), eps = 1e-15,  itmax = 100), gcFirst = TRUE)
+  t2 <- system.time(h2 <- smacofRC(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t3 <- system.time(h2 <- smacofRCU(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t4 <- system.time(h2 <- smacofRCU64(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  user1[j] <- t1[1]
+  user2[j] <- t2[1]
+  user3[j] <- t3[1]
+  user4[j] <- t4[1]
+}
+```
+The medians for $n=50$ are `r median(user1)` for `smacofR()`, `r median(user2)` for `smacofRC()`,  `r median(user3)` for `smacofRCU()`,
+and `r median(user4)` for `smacofRCU64()`. `smacofR()` is still 3 times faster than `smacofRC()`, but now `smacofRCU()` has caught up with `smacofR()`. Time for `smacofRCU64()` is the same as for `smacofRCU()`.
+
+<hr>
+```{r timeloop50_out, fig.align="center", echo = FALSE}
+  boxplot(list(smacofR = user1, smacofRC = user2, smacofRCU = user3, smacofRCU64 = user4))
+```
+<center>
+`r figure_nums("box50")`
+</center>
+<hr>
+
+```{r timeloop100, echo = FALSE, cache = TRUE}
+m <- 100
+n <- 100
+wv <- dv <- rep (1, n * (n - 1) / 2)
+wm <- dm <- 1 - diag (n)
+set.seed(12345)
+user1 <- rep (0, m)
+user2 <- rep (0, m)
+user3 <- rep (0, m)
+user4 <- rep (0, m)
+for (j in 1:m) {
+  xold <- rnorm(2*n)
+  t1 <- system.time(h1 <- smacofR(wm, dm, 2, xold = matrix(xold, n, 2), eps = 1e-15,  itmax = 100), gcFirst = TRUE)
+  t2 <- system.time(h2 <- smacofRC(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t3 <- system.time(h2 <- smacofRCU(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t4 <- system.time(h2 <- smacofRCU64(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  user1[j] <- t1[1]
+  user2[j] <- t2[1]
+  user3[j] <- t3[1]
+  user4[j] <- t4[1]
+}
+```
+
+For $n=100$ things begin to change. The medians are `r median(user1)` for `smacofR()`, `r median(user2)` for `smacofRC()`,  `r median(user3)` for `smacofRCU()`,
+and `r median(user4)` for `smacofRCU64()`.
+`smacofR()` is now the slowest of the three, and `smacofRCU()` remains three times faster than `smacofRC()`. `smacofRCU64()` is now about 15\%
+faster than `smacofRCU()`.
+
+<hr>
+```{r timeloop100_out, fig.align="center", echo = FALSE}
+  boxplot(list(smacofR = user1, smacofRC = user2, smacofRCU = user3, smacofRCU64 = user4))
+```
+<center>
+`r figure_nums("box100")`
+</center>
+<hr>
+
+```{r timeloop250, echo = FALSE, cache = TRUE}
+m <- 100
+n <- 250
+wv <- dv <- rep (1, n * (n - 1) / 2)
+wm <- dm <- 1 - diag (n)
+set.seed(12345)
+user1 <- rep (0, m)
+user2 <- rep (0, m)
+user3 <- rep (0, m)
+user4 <- rep (0, m)
+for (j in 1:m) {
+  xold <- rnorm(2*n)
+  t1 <- system.time(h1 <- smacofR(wm, dm, 2, xold = matrix(xold, n, 2), eps = 1e-15,  itmax = 100), gcFirst = TRUE)
+  t2 <- system.time(h2 <- smacofRC(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t3 <- system.time(h2 <- smacofRCU(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  t4 <- system.time(h2 <- smacofRCU64(wv, dv, 2, xold = xold, eps = 1e-15, itmax = 100), gcFirst = TRUE)
+  user1[j] <- t1[1]
+  user2[j] <- t2[1]
+  user3[j] <- t3[1]
+  user4[j] <- t4[1]
+}
+```
+The medians for $n=250$ are `r median(user1)` for `smacofR()`, `r median(user2)` for `smacofRC()`,  `r median(user3)` for `smacofRCU()`,
+and `r median(user4)` for `smacofRCU64()`.
+`smacofR()` is losing ground, and `smacofRC()` and `smacofRCU()` are getting closer, although `smacofRCU()` still has the clear advantage.
+`smacofRCU64()` is about 20\% faster than `smacofRCU()`.
+
+<hr>
+```{r timeloop250_out, fig.align="center", echo = FALSE}
+  boxplot(list(smacofR = user1, smacofRC = user2, smacofRCU = user3, smacofRCU64 = user4))
+```
+<center>
+`r figure_nums("box250")`
+</center>
+<hr>
+
+#Conclusion
+
+More extensive comparisons would be useful. We have not used weights, and consequently did not look at multidimensional scaling problems such as unfolding. We did not include non-metric options or individual difference options yet. This will come later. 
+
+Also note that the code in the appendix includes both pure R and compact storage C versions to compute the Hessian of $\eqref{E:loss}$. Again, this is for future use, to implement variations of Newton's method and to draw pseudo-confidence intervals around the points of the configuration at the solution. There are also various utilities included, plus an interface to a subset of LAPACKE (@lapacke_16). Not all of this is used in the current project.
+
+For now it seems that for large $n$ the compact storage routines in C are comparable in speed to pure R smacof, if not faster, especially if the number of .C() calls within an iteration are limited. And they are obviously superior in terms of storage, although these days that is hardly a consideration any more. Ultimately, however, wasting space is just inelegant, and the interesting exercise was how much execution time we had to sacrifice to please our esthetic prejudices. 
+
+#Appendix: Code
+
+##Pure R code
+
+###smacofR.R
+
+```{r file_auxilary, code = readLines("smacofR.R"), size = 'footnotesize'}
+```
+
+##R Glue
+
+###smacofRC.R
+
+```{r file_auxilary, code = readLines("smacofRC.R"), size = 'footnotesize'}
+```
+
+###utilsRC.R
+
+```{r file_auxilary, code = readLines("utilsRC.R")}
+```
+
+###jacobiRC.R
+
+```{r file_auxilary, code = readLines("jacobiRC.R")}
+```
+
+###lapackeRC.R
+
+```{r file_auxilary, code = readLines("lapackeRC.R")}
+```
+
+##C code
+
+###smacof.h
+
+```{c file_auxilary, code = readLines("smacof.h"), eval = FALSE}
+```
+
+###smacof.c
+
+```{c file_auxilary, code = readLines("smacof.c"), eval = FALSE}
+```
+
+###utils.c
+
+```{c file_auxilary, code = readLines("utils.c"), eval = FALSE}
+```
+
+###jacobi.c
+
+```{c file_auxilary, code = readLines("jacobi.c"), eval = FALSE}
+```
+
+###lapacke.c
+
+```{c file_auxilary, code = readLines("lapacke.c"), eval = FALSE}
+```
+
+#References

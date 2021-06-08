@@ -1,0 +1,890 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={R/C Routines for Symmetric Matrices in Lower Triangular Column-Major Storage},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{R/C Routines for Symmetric Matrices in Lower Triangular Column-Major
+Storage}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version June 27, 2018}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+dodo
+\end{abstract}
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\textbf{Note:} This is a working paper which will be expanded/updated
+frequently. All suggestions for improvement are welcome. The directory
+\href{http://gifi.stat.ucla.edu/smatrix}{gifi.stat.ucla.edu/smatrix} has
+a pdf version, the bib file, the R and C code, and the complete Rmd
+file.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Suppose \(A\) is a symmetric matrix, say
+
+\begin{verbatim}
+##     2     3     4     5     6 
+##     3     4     5     6     7 
+##     4     5     6     7     8 
+##     5     6     7     8     9 
+##     6     7     8     9    10
+\end{verbatim}
+
+We store the elements on the matrix as a vector, using the lower
+triangle (including the diagonal) with the first column first, then the
+second column, and so on. In R this is simply
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a[}\KeywordTok{outer}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\StringTok{">="}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  2  3  4  5  6  4  5  6  7  6  7  8  8  9 10
+\end{verbatim}
+
+This is the symmetric matrix \(A\) in LTCM (lower triangle column-major)
+storage mode. Our job in this paper is to rewrite some of the basic
+linear algebra algorithms for symmetric matrices so that they apply to
+LTCM matrices. Clearly this implies we save memory, but since acsessing
+elements will be more complicated we sacrifice some speed.
+
+\hypertarget{code-principles}{%
+\section{Code Principles}\label{code-principles}}
+
+Our R code are wrappers for C routines. Since we want to be able to use
+our C routines outisde the R environment as well, they should use a few
+of the R resources as possible. Thus we use the .C() interface, and we
+try to avoid memory allocation and I/O as much as possible. All C
+routines return void, and pass by reference (take pointers as
+arguments).
+
+To find element \((i,j)\) in a matrix we use C routines
+\texttt{MINDEX,\ TINDEX,\ SINDEX} that compute the location of the
+element in the linear storage. \texttt{MINDEX} is for full matrices,
+\texttt{TINDEX} for LTCM matries, and \texttt{SINDEX} for strictly lower
+triangular matrices. In our routines roiw and column indices start at
+one, not at zero. Thus we also use \texttt{VINDEX} to access elements of
+a vector, where in C \texttt{a{[}VINDEX(i){]}\ =\ a{[}i-1{]}}. To
+complete the set we also have \texttt{UINDEX}, which is used for a
+sequence of LTCM matrices in linear storage. Because these routines are
+used heavily, we define them to be static inline in the header file
+\texttt{smatrix.h}. as few R
+
+\hypertarget{code}{%
+\section{Code}\label{code}}
+
+\hypertarget{r-code}{%
+\subsection{R code}\label{r-code}}
+
+\hypertarget{smatrix.r}{%
+\subsubsection{smatrix.R}\label{smatrix.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dyn.load}\NormalTok{(}\StringTok{"smatrix.so"}\NormalTok{)}
+
+\NormalTok{scholesky <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, }\DataTypeTok{pivot =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (a)}
+\NormalTok{  n <-}\StringTok{ }\NormalTok{(}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}\StringTok{ }\KeywordTok{.C}\NormalTok{(}
+    \StringTok{"pcholesky"}\NormalTok{,}
+    \DataTypeTok{n =} \KeywordTok{as.integer}\NormalTok{(n),}
+    \DataTypeTok{a =} \KeywordTok{as.double}\NormalTok{ (a),}
+    \DataTypeTok{rank =} \KeywordTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{),}
+    \DataTypeTok{order =} \KeywordTok{as.integer}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\NormalTok{n),}
+    \DataTypeTok{pivot =} \KeywordTok{as.integer}\NormalTok{(pivot),}
+    \DataTypeTok{eps =} \KeywordTok{as.double}\NormalTok{(eps)}
+\NormalTok{  )}
+  \KeywordTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+
+\NormalTok{triangle2matrix <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"trimat"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{ (n), }\KeywordTok{as.double}\NormalTok{ (x), }\KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{3}\NormalTok{]], n, n))}
+\NormalTok{\}}
+
+\NormalTok{matrix2triangle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(x)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  m <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"mattri"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{ (n), }\KeywordTok{as.double}\NormalTok{ (x), }\KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{ (h[[}\DecValTok{3}\NormalTok{]])}
+\NormalTok{\}}
+
+\NormalTok{triangle2triangle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"tritri"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{ (n), }\KeywordTok{as.double}\NormalTok{ (x), }\KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{3}\NormalTok{]], n, n))}
+\NormalTok{\}}
+
+\NormalTok{matrix2print <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, }\DataTypeTok{w =} \DecValTok{15}\NormalTok{, }\DataTypeTok{p =} \DecValTok{10}\NormalTok{) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (x)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"primat"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(m),}
+      \KeywordTok{as.integer}\NormalTok{(w),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \KeywordTok{as.double}\NormalTok{ (x)}
+\NormalTok{    )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{c-code}{%
+\subsection{C Code}\label{c-code}}
+
+\hypertarget{smatrix.h}{%
+\subsubsection{smatrix.h}\label{smatrix.h}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#ifndef SMATRIX_H}
+\PreprocessorTok{#define SMATRIX_H}
+
+\PreprocessorTok{#include }\ImportTok{<math.h>}
+\PreprocessorTok{#include }\ImportTok{<stdbool.h>}
+\PreprocessorTok{#include }\ImportTok{<stdio.h>}
+\PreprocessorTok{#include }\ImportTok{<stdlib.h>}
+
+\PreprocessorTok{#ifdef USING_R}
+\PreprocessorTok{#include }\ImportTok{<R.h>}
+\PreprocessorTok{#endif}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ VINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ MINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ SINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ TINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ AINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ UINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ SQUARE(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ THIRD(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FOURTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FIFTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MAX(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MIN(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMAX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\CommentTok{// index function for vector  }
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ VINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i) \{ }\ControlFlowTok{return}\NormalTok{ i - }\DecValTok{1}\NormalTok{; \}}
+
+\CommentTok{// index function for rectangular matrix }
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ MINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+  \ControlFlowTok{return}\NormalTok{ (i - }\DecValTok{1}\NormalTok{) + (j - }\DecValTok{1}\NormalTok{) * n;}
+\NormalTok{\}}
+
+\CommentTok{// index function for symmetric matrix }
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ AINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ k, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n,}
+                         \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ m) \{}
+  \ControlFlowTok{return}\NormalTok{ (i - }\DecValTok{1}\NormalTok{) + (j - }\DecValTok{1}\NormalTok{) * n + (k - }\DecValTok{1}\NormalTok{) * n * m;}
+\NormalTok{\}}
+
+\CommentTok{// index function for lower triangle without diagonal}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ SINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+  \ControlFlowTok{return}\NormalTok{ ((j - }\DecValTok{1}\NormalTok{) * n) - (j * (j - }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{) + (i - j) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// index function for lower triangle with diagonal}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ TINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+  \ControlFlowTok{return}\NormalTok{ ((j - }\DecValTok{1}\NormalTok{) * n) - ((j - }\DecValTok{1}\NormalTok{) * (j - }\DecValTok{2}\NormalTok{) / }\DecValTok{2}\NormalTok{) + (i - (j - }\DecValTok{1}\NormalTok{)) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// index function for multiple lower triangle with diagonal}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ UINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ k, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n,}
+                         \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ m) \{}
+  \ControlFlowTok{return}\NormalTok{ ((k - }\DecValTok{1}\NormalTok{) * n * (n + }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{) + ((j - }\DecValTok{1}\NormalTok{) * n) - ((j - }\DecValTok{1}\NormalTok{) * (j - }\DecValTok{2}\NormalTok{) / }\DecValTok{2}\NormalTok{) +}
+\NormalTok{         (i - (j - }\DecValTok{1}\NormalTok{)) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ SQUARE(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ THIRD(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FOURTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FIFTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x * x * x; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MAX(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ y) \{}
+  \ControlFlowTok{return}\NormalTok{ (x > y) ? x : y;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MIN(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ y) \{}
+  \ControlFlowTok{return}\NormalTok{ (x < y) ? x : y;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMAX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{ }\ControlFlowTok{return}\NormalTok{ (x > y) ? x : y; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{ }\ControlFlowTok{return}\NormalTok{ (x < y) ? x : y; \}}
+
+
+\PreprocessorTok{#endif }\CommentTok{/* SMATRIX_H */}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{smatrix.c}{%
+\subsubsection{smatrix.c}\label{smatrix.c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#define USING_R}
+
+\PreprocessorTok{#include }\ImportTok{"smatrix.h"}
+\PreprocessorTok{#include }\ImportTok{"sroutines.h"}
+
+\CommentTok{/*}
+\CommentTok{ * The routine scholesky() replaces a positive definite matrix A of order n}
+\CommentTok{ * in lower-triangular column-major storage by its Cholesky factor L. Thus}
+\CommentTok{ * A = LL'. The determinent of A is returned as well.}
+\CommentTok{ *}
+\CommentTok{ * If a pivot is zero the routine jumps over the pivot and continues,}
+\CommentTok{ * and sets the singularity warning. Zero of a pivot means less than a small}
+\CommentTok{ * positive eps.}
+\CommentTok{ *}
+\CommentTok{ * If a pivot is negative the routine stops, and sets the indefinite warning.}
+\CommentTok{ * Negativity of a pivot means less than -eps.}
+\CommentTok{ */}
+
+\DataTypeTok{void}\NormalTok{ scholesky(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{bool}\NormalTok{ *singular, }\DataTypeTok{bool}\NormalTok{ *indefinite,}
+               \DataTypeTok{double}\NormalTok{ *det, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn;}
+  \DataTypeTok{double}\NormalTok{ t = }\FloatTok{0.0}\NormalTok{, s = }\FloatTok{0.0}\NormalTok{, dt = }\FloatTok{1.0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{    t = a[TINDEX(k, k, n)];}
+    \ControlFlowTok{if}\NormalTok{ (t < -*eps) \{}
+\NormalTok{      *indefinite = true;}
+      \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (t < *eps) \{}
+\NormalTok{      *singular = true;}
+      \ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{    dt *= t;}
+\NormalTok{    s = sqrt(t);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k; i <= n; i++) \{}
+\NormalTok{      a[TINDEX(i, k, n)] = a[TINDEX(i, k, n)] / s;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = k + }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+\NormalTok{        a[TINDEX(i, j, n)] -= a[TINDEX(i, k, n)] * a[TINDEX(j, k, n)];}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  *det = dt;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{/*}
+\CommentTok{ * The routine pcholesky() replaces a pivoted version of a positive}
+\CommentTok{ * semi-definite matrix A of order n in lower-triangular column-major storage by}
+\CommentTok{ * its Cholesky factor L. Thus we find a permutation P of rows and columns of A}
+\CommentTok{ * such that P'AP=LL'.}
+\CommentTok{ *}
+\CommentTok{ * Pivoting is on the maximum diagonal element. If this is negative the matrix}
+\CommentTok{ * was not positive semidefinite and we return the indefinite flag.  Negatie for}
+\CommentTok{ * a pivot means less than minus a small positive eps. The approximate rank is}
+\CommentTok{ * returned as the number of nonzero pivots, and the dterminant is returned as}
+\CommentTok{ * the product of pivots. On exit the vector order has the pivot permutation.}
+\CommentTok{ */}
+
+\DataTypeTok{void}\NormalTok{ pcholesky(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *det, }\DataTypeTok{int}\NormalTok{ *rank, }\DataTypeTok{int}\NormalTok{ *order,}
+               \DataTypeTok{bool}\NormalTok{ *indefinite, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn, q = }\DecValTok{0}\NormalTok{, itp = }\DecValTok{0}\NormalTok{;}
+  \DataTypeTok{double}\NormalTok{ t = }\FloatTok{0.0}\NormalTok{, at = }\FloatTok{0.0}\NormalTok{, tmp = }\FloatTok{0.0}\NormalTok{, tp1 = }\FloatTok{0.0}\NormalTok{, tp2 = }\FloatTok{0.0}\NormalTok{, tp3 = }\FloatTok{0.0}\NormalTok{, s = }\FloatTok{0.0}\NormalTok{,}
+\NormalTok{         dt = }\FloatTok{1.0}\NormalTok{;}
+\NormalTok{  *rank = }\DecValTok{0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{    order[VINDEX(i)] = i;}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{    t = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{    q = }\DecValTok{0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k; i <= n; i++) \{}
+\NormalTok{      at = a[TINDEX(i, i, n)];}
+      \ControlFlowTok{if}\NormalTok{ (at >= t) \{}
+\NormalTok{        t = at;}
+\NormalTok{        q = i;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (t < -*eps) \{}
+\NormalTok{      *indefinite = true;}
+      \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{    (*rank)++;}
+\NormalTok{    dt /= t;}
+\NormalTok{    itp = order[VINDEX(k)];}
+\NormalTok{    order[VINDEX(k)] = order[VINDEX(q)];}
+\NormalTok{    order[VINDEX(q)] = itp;}
+\NormalTok{    tp1 = a[TINDEX(k, k, n)];}
+\NormalTok{    tp2 = a[TINDEX(q, q, n)];}
+\NormalTok{    tp3 = a[TINDEX(q, k, n)];}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= k - }\DecValTok{1}\NormalTok{; i++) \{}
+\NormalTok{      tmp = a[TINDEX(k, i, n)];}
+\NormalTok{      a[TINDEX(k, i, n)] = a[TINDEX(q, i, n)];}
+\NormalTok{      a[TINDEX(q, i, n)] = tmp;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k + }\DecValTok{1}\NormalTok{; i <= q - }\DecValTok{1}\NormalTok{; i++) \{}
+\NormalTok{      tmp = a[TINDEX(i, k, n)];}
+\NormalTok{      a[TINDEX(i, k, n)] = a[TINDEX(q, i, n)];}
+\NormalTok{      a[TINDEX(q, i, n)] = tmp;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = q + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{      tmp = a[TINDEX(i, q, n)];}
+\NormalTok{      a[TINDEX(i, q, n)] = a[TINDEX(i, k, n)];}
+\NormalTok{      a[TINDEX(i, k, n)] = tmp;}
+\NormalTok{    \}}
+\NormalTok{    a[TINDEX(q, q, n)] = tp1;}
+\NormalTok{    a[TINDEX(k, k, n)] = tp2;}
+\NormalTok{    a[TINDEX(q, k, n)] = tp3;}
+\NormalTok{    s = sqrt(t);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k; i <= n; i++) \{}
+\NormalTok{      a[TINDEX(i, k, n)] /= s;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = k + }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+\NormalTok{        a[TINDEX(i, j, n)] -= a[TINDEX(i, k, n)] * a[TINDEX(j, k, n)];}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  *det = dt;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ primat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p,}
+            \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= *m; j++) \{}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{      Rprintf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[MINDEX(i, j, *n)]);}
+\PreprocessorTok{#else}
+\NormalTok{      printf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[MINDEX(i, j, *n)]);}
+\PreprocessorTok{#endif}
+\NormalTok{    \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{    Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+\NormalTok{  \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{  Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{  printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ pritru(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{      Rprintf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[TINDEX(i, j, *n)]);}
+\PreprocessorTok{#else}
+\NormalTok{      printf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[TINDEX(i, j, *n)]);}
+\PreprocessorTok{#endif}
+\NormalTok{    \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{    Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+\NormalTok{  \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{  Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{  printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ prisru(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p,}
+            \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= *m; k++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{        Rprintf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[UINDEX(i, j, k, *n, *m)]);}
+\PreprocessorTok{#else}
+\NormalTok{        printf(}\StringTok{" %*.*f "}\NormalTok{, *w, *p, x[UINDEX(i, j, k, *n, *m)]);}
+\PreprocessorTok{#endif}
+\NormalTok{      \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{      Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{      printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+\NormalTok{    \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{    Rprintf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#else}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\PreprocessorTok{#endif}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ trimat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+  \DataTypeTok{int}\NormalTok{ nn = *n;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+\NormalTok{      y[MINDEX(i, j, nn)] =}
+\NormalTok{          (i >= j) ? x[TINDEX(i, j, nn)] : x[TINDEX(j, i, nn)];}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ tritri(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+  \DataTypeTok{int}\NormalTok{ nn = *n;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+\NormalTok{      y[MINDEX(i, j, nn)] = (i >= j) ? x[TINDEX(i, j, nn)] : }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ mattri(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+  \DataTypeTok{int}\NormalTok{ nn = *n;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{      y[TINDEX(i, j, nn)] = x[MINDEX(i, j, nn)];}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ invtri(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps, }\DataTypeTok{bool}\NormalTok{ *ierr) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn;}
+  \DataTypeTok{double}\NormalTok{ s = }\FloatTok{0.0}\NormalTok{, t = }\FloatTok{0.0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{    t = x[TINDEX(k, k, n)];}
+    \ControlFlowTok{if}\NormalTok{ (fabs(t) < *eps) \{}
+\NormalTok{      *ierr = true;}
+      \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{    x[TINDEX(k, k, n)] = }\FloatTok{1.0}\NormalTok{ / t;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{      s = }\FloatTok{0.0}\NormalTok{;}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = k; j < i; j++) \{}
+\NormalTok{        s += x[TINDEX(i, j, n)] * x[TINDEX(j, k, n)];}
+\NormalTok{      \}}
+\NormalTok{      x[TINDEX(i, k, n)] = -s / x[TINDEX(i, i, n)];}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ ssweep(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *det, }\DataTypeTok{bool}\NormalTok{ *singular,}
+            \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn;}
+  \DataTypeTok{double}\NormalTok{ dg = }\FloatTok{0.0}\NormalTok{, de = }\FloatTok{1.0}\NormalTok{;}
+\NormalTok{  *singular = false;}
+\NormalTok{  *det = }\FloatTok{1.0}\NormalTok{;}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{    dg = x[TINDEX(k, k, n)];}
+    \ControlFlowTok{if}\NormalTok{ (dg < *eps) \{}
+\NormalTok{      *singular = true;}
+      \ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{    de *= dg;}
+\NormalTok{    x[TINDEX(k, k, n)] = }\DecValTok{-1}\NormalTok{ / dg;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= k - }\DecValTok{1}\NormalTok{; j++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= k - }\DecValTok{1}\NormalTok{; i++) \{}
+\NormalTok{        x[TINDEX(i, j, n)] -= x[TINDEX(k, i, n)] * x[TINDEX(k, j, n)] / dg;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = k + }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= n; i++) \{}
+\NormalTok{        x[TINDEX(i, j, n)] -= x[TINDEX(i, k, n)] * x[TINDEX(j, k, n)] / dg;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= k - }\DecValTok{1}\NormalTok{; j++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = k + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{        x[TINDEX(i, j, n)] -= x[TINDEX(i, k, n)] * x[TINDEX(k, j, n)] / dg;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= k - }\DecValTok{1}\NormalTok{; j++) \{}
+\NormalTok{      x[TINDEX(k, j, n)] /= dg;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = k + }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+\NormalTok{      x[TINDEX(j, k, n)] /= dg;}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  *det = de;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smjacobi(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *mm, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *evec,}
+              \DataTypeTok{double}\NormalTok{ *fini, }\DataTypeTok{double}\NormalTok{ *f, }\DataTypeTok{int}\NormalTok{ *itel, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *itmax,}
+              \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps, }\DataTypeTok{const} \DataTypeTok{bool}\NormalTok{ *verbose, }\DataTypeTok{const} \DataTypeTok{bool}\NormalTok{ *vectors) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn, m = *mm;}
+  \DataTypeTok{double}\NormalTok{ d = }\FloatTok{0.0}\NormalTok{, cost = }\FloatTok{0.0}\NormalTok{, sint = }\FloatTok{0.0}\NormalTok{, u = }\FloatTok{0.0}\NormalTok{, p = }\FloatTok{0.0}\NormalTok{, q = }\FloatTok{0.0}\NormalTok{, r = }\FloatTok{0.0}\NormalTok{,}
+\NormalTok{         piil = }\FloatTok{0.0}\NormalTok{, pijl = }\FloatTok{0.0}\NormalTok{, lbd = }\FloatTok{0.0}\NormalTok{, dd = }\FloatTok{0.0}\NormalTok{, pp = }\FloatTok{0.0}\NormalTok{, dp = }\FloatTok{0.0}\NormalTok{;}
+  \DataTypeTok{double}\NormalTok{ fold = }\FloatTok{0.0}\NormalTok{, fnew = }\FloatTok{0.0}\NormalTok{, oldi = }\FloatTok{0.0}\NormalTok{, oldj = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{  *itel = }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{if}\NormalTok{ (*vectors) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+\NormalTok{        evec[MINDEX(i, j, n)] = (i == j) ? }\FloatTok{1.0}\NormalTok{ : }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= m; k++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{      fold += SQUARE(a[UINDEX(i, i, k, n, m)]);}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  *fini = fold;}
+  \ControlFlowTok{while}\NormalTok{ (true) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n - }\DecValTok{1}\NormalTok{; j++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{        dd = }\FloatTok{0.0}\NormalTok{, pp = }\FloatTok{0.0}\NormalTok{, dp = }\FloatTok{0.0}\NormalTok{;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= m; k++) \{}
+\NormalTok{          p = a[UINDEX(i, j, k, n, m)];}
+\NormalTok{          q = a[UINDEX(i, i, k, n, m)];}
+\NormalTok{          r = a[UINDEX(j, j, k, n, m)];}
+\NormalTok{          d = (q - r) / }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{          dd += SQUARE(d);}
+\NormalTok{          pp += SQUARE(p);}
+\NormalTok{          dp += p * d;}
+\NormalTok{        \}}
+\NormalTok{        lbd = ((dd + pp) - sqrt(SQUARE(dd - pp) + }\FloatTok{4.0}\NormalTok{ * SQUARE(dp))) / }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{        u = dp / sqrt(SQUARE(dp) + SQUARE(lbd - pp));}
+        \ControlFlowTok{if}\NormalTok{ ((fabs(dp) < }\FloatTok{1e-15}\NormalTok{) && (pp <= dd)) \{}
+          \ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{        cost = sqrt((}\DecValTok{1}\NormalTok{ + u) / }\DecValTok{2}\NormalTok{);}
+\NormalTok{        sint = -sqrt((}\DecValTok{1}\NormalTok{ - u) / }\DecValTok{2}\NormalTok{);}
+        \ControlFlowTok{if}\NormalTok{ (*vectors) \{}
+          \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{1}\NormalTok{; l <= n; l++) \{}
+\NormalTok{            piil = evec[MINDEX(l, i, n)];}
+\NormalTok{            pijl = evec[MINDEX(l, j, n)];}
+\NormalTok{            evec[MINDEX(l, i, n)] = cost * piil - sint * pijl;}
+\NormalTok{            evec[MINDEX(l, j, n)] = sint * piil + cost * pijl;}
+\NormalTok{          \}}
+\NormalTok{        \}}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= m; k++) \{}
+\NormalTok{          p = a[UINDEX(i, j, k, n, m)];}
+\NormalTok{          q = a[UINDEX(i, i, k, n, m)];}
+\NormalTok{          r = a[UINDEX(j, j, k, n, m)];}
+          \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{1}\NormalTok{; l <= n; l++) \{}
+            \ControlFlowTok{if}\NormalTok{ ((l == i) || (l == j))}
+              \ControlFlowTok{continue}\NormalTok{;}
+            \DataTypeTok{int}\NormalTok{ il = IMIN(i, l);}
+            \DataTypeTok{int}\NormalTok{ li = IMAX(i, l);}
+            \DataTypeTok{int}\NormalTok{ jl = IMIN(j, l);}
+            \DataTypeTok{int}\NormalTok{ lj = IMAX(j, l);}
+\NormalTok{            oldi = a[UINDEX(li, il, k, n, m)];}
+\NormalTok{            oldj = a[UINDEX(lj, jl, k, n, m)];}
+\NormalTok{            a[UINDEX(li, il, k, n, m)] = cost * oldi - sint * oldj;}
+\NormalTok{            a[UINDEX(lj, jl, k, n, m)] = sint * oldi + cost * oldj;}
+\NormalTok{          \}}
+\NormalTok{          a[UINDEX(i, i, k, n, m)] =}
+\NormalTok{              SQUARE(cost) * q + SQUARE(sint) * r - }\DecValTok{2}\NormalTok{ * cost * sint * p;}
+\NormalTok{          a[UINDEX(j, j, k, n, m)] =}
+\NormalTok{              SQUARE(sint) * q + SQUARE(cost) * r + }\DecValTok{2}\NormalTok{ * cost * sint * p;}
+\NormalTok{          a[UINDEX(i, j, k, n, m)] =}
+\NormalTok{              cost * sint * (q - r) + (SQUARE(cost) - SQUARE(sint)) * p;}
+\NormalTok{        \}}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{    fnew = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= m; k++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{        fnew += SQUARE(a[UINDEX(i, i, k, n, m)]);}
+\NormalTok{      \}}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (*verbose == true) \{}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{      Rprintf(}\StringTok{"itel %4d fold %15.10f fnew %15.10f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, *itel, fold, fnew);}
+\PreprocessorTok{#else}
+\NormalTok{      printf(}\StringTok{"itel %4d fold %15.10f fnew %15.10f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, *itel, fold, fnew);}
+\PreprocessorTok{#endif}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (((fnew - fold) < *eps) || (*itel == *itmax))}
+      \ControlFlowTok{break}\NormalTok{;}
+\NormalTok{    fold = fnew;}
+\NormalTok{    (*itel)++;}
+\NormalTok{  \}}
+\NormalTok{  *f = fnew;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ sjacobi(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *evec, }\DataTypeTok{double}\NormalTok{ *fini, }\DataTypeTok{double}\NormalTok{ *f,}
+             \DataTypeTok{int}\NormalTok{ *itel, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *itmax, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps,}
+             \DataTypeTok{const} \DataTypeTok{bool}\NormalTok{ *verbose, }\DataTypeTok{const} \DataTypeTok{bool}\NormalTok{ *vectors) \{}
+  \DataTypeTok{int}\NormalTok{ n = *nn;}
+  \DataTypeTok{double}\NormalTok{ d = }\FloatTok{0.0}\NormalTok{, cost = }\FloatTok{0.0}\NormalTok{, sint = }\FloatTok{0.0}\NormalTok{, u = }\FloatTok{0.0}\NormalTok{, p = }\FloatTok{0.0}\NormalTok{, q = }\FloatTok{0.0}\NormalTok{, r = }\FloatTok{0.0}\NormalTok{,}
+\NormalTok{         piil = }\FloatTok{0.0}\NormalTok{, pijl = }\FloatTok{0.0}\NormalTok{, lbd = }\FloatTok{0.0}\NormalTok{, dd = }\FloatTok{0.0}\NormalTok{, pp = }\FloatTok{0.0}\NormalTok{, dp = }\FloatTok{0.0}\NormalTok{;}
+  \DataTypeTok{double}\NormalTok{ fold = }\FloatTok{0.0}\NormalTok{, fnew = }\FloatTok{0.0}\NormalTok{, oldi = }\FloatTok{0.0}\NormalTok{, oldj = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{  *itel = }\DecValTok{1}\NormalTok{;}
+  \ControlFlowTok{if}\NormalTok{ (*vectors) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+\NormalTok{        evec[MINDEX(i, j, n)] = (i == j) ? }\FloatTok{1.0}\NormalTok{ : }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{    fold += SQUARE(a[TINDEX(i, i, n)]);}
+\NormalTok{  \}}
+\NormalTok{  *fini = fold;}
+  \ControlFlowTok{while}\NormalTok{ (true) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n - }\DecValTok{1}\NormalTok{; j++) \{}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{        dd = }\FloatTok{0.0}\NormalTok{, pp = }\FloatTok{0.0}\NormalTok{, dp = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{        p = a[TINDEX(i, j, n)];}
+\NormalTok{        q = a[TINDEX(i, i, n)];}
+\NormalTok{        r = a[TINDEX(j, j, n)];}
+\NormalTok{        d = (q - r) / }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{        dd = SQUARE(d);}
+\NormalTok{        pp = SQUARE(p);}
+\NormalTok{        dp = p * d;}
+\NormalTok{        lbd = ((dd + pp) - sqrt(SQUARE(dd - pp) + }\FloatTok{4.0}\NormalTok{ * SQUARE(dp))) / }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{        u = dp / sqrt(SQUARE(dp) + SQUARE(lbd - pp));}
+        \ControlFlowTok{if}\NormalTok{ ((fabs(dp) < }\FloatTok{1e-15}\NormalTok{) && (pp <= dd)) \{}
+          \ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{        cost = sqrt((}\DecValTok{1}\NormalTok{ + u) / }\DecValTok{2}\NormalTok{);}
+\NormalTok{        sint = -sqrt((}\DecValTok{1}\NormalTok{ - u) / }\DecValTok{2}\NormalTok{);}
+        \ControlFlowTok{if}\NormalTok{ (*vectors) \{}
+          \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{1}\NormalTok{; l <= n; l++) \{}
+\NormalTok{            piil = evec[MINDEX(l, i, n)];}
+\NormalTok{            pijl = evec[MINDEX(l, j, n)];}
+\NormalTok{            evec[MINDEX(l, i, n)] = cost * piil - sint * pijl;}
+\NormalTok{            evec[MINDEX(l, j, n)] = sint * piil + cost * pijl;}
+\NormalTok{          \}}
+\NormalTok{        \}}
+\NormalTok{        p = a[TINDEX(i, j, n)];}
+\NormalTok{        q = a[TINDEX(i, i, n)];}
+\NormalTok{        r = a[TINDEX(j, j, n)];}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ l = }\DecValTok{1}\NormalTok{; l <= n; l++) \{}
+          \ControlFlowTok{if}\NormalTok{ ((l == i) || (l == j))}
+            \ControlFlowTok{continue}\NormalTok{;}
+          \DataTypeTok{int}\NormalTok{ il = IMIN(i, l);}
+          \DataTypeTok{int}\NormalTok{ li = IMAX(i, l);}
+          \DataTypeTok{int}\NormalTok{ jl = IMIN(j, l);}
+          \DataTypeTok{int}\NormalTok{ lj = IMAX(j, l);}
+\NormalTok{          oldi = a[TINDEX(li, il, n)];}
+\NormalTok{          oldj = a[TINDEX(lj, jl, n)];}
+\NormalTok{          a[TINDEX(li, il, n)] = cost * oldi - sint * oldj;}
+\NormalTok{          a[TINDEX(lj, jl, n)] = sint * oldi + cost * oldj;}
+\NormalTok{        \}}
+\NormalTok{        a[TINDEX(i, i, n)] =}
+\NormalTok{            SQUARE(cost) * q + SQUARE(sint) * r - }\DecValTok{2}\NormalTok{ * cost * sint * p;}
+\NormalTok{        a[TINDEX(j, j, n)] =}
+\NormalTok{            SQUARE(sint) * q + SQUARE(cost) * r + }\DecValTok{2}\NormalTok{ * cost * sint * p;}
+\NormalTok{        a[TINDEX(i, j, n)] =}
+\NormalTok{            cost * sint * (q - r) + (SQUARE(cost) - SQUARE(sint)) * p;}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{    fnew = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{      fnew += SQUARE(a[TINDEX(i, i, n)]);}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (*verbose == true) \{}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{      Rprintf(}\StringTok{"itel %4d fold %15.10f fnew %15.10f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, *itel, fold, fnew);}
+\PreprocessorTok{#else}
+\NormalTok{      printf(}\StringTok{"itel %4d fold %15.10f fnew %15.10f}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, *itel, fold, fnew);}
+\PreprocessorTok{#endif}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (((fnew - fold) < *eps) || (*itel == *itmax))}
+      \ControlFlowTok{break}\NormalTok{;}
+\NormalTok{    fold = fnew;}
+\NormalTok{    (*itel)++;}
+\NormalTok{  \}}
+\NormalTok{  *f = fnew;}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smpinverse(}\DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{int}\NormalTok{ *type, }\DataTypeTok{int}\NormalTok{ *itmax, }\DataTypeTok{double}\NormalTok{ *eps) \{}
+  \DataTypeTok{double}\NormalTok{ fini = }\FloatTok{0.0}\NormalTok{, f = }\FloatTok{0.0}\NormalTok{, s = }\FloatTok{0.0}\NormalTok{, dg = }\FloatTok{0.0}\NormalTok{;}
+  \DataTypeTok{bool}\NormalTok{ verbose = false, vectors = true;}
+  \DataTypeTok{int}\NormalTok{ n = *nn, itel = }\DecValTok{1}\NormalTok{;}
+\PreprocessorTok{#ifdef USING_R}
+  \DataTypeTok{double}\NormalTok{ *evec = (}\DataTypeTok{double}\NormalTok{ *)Calloc((}\DataTypeTok{size_t}\NormalTok{)n * n, }\DataTypeTok{double}\NormalTok{);}
+  \DataTypeTok{double}\NormalTok{ *diag = (}\DataTypeTok{double}\NormalTok{ *)Calloc((}\DataTypeTok{size_t}\NormalTok{)n, }\DataTypeTok{double}\NormalTok{);}
+\PreprocessorTok{#else}
+  \DataTypeTok{double}\NormalTok{ *evec = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)n * n, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+  \DataTypeTok{double}\NormalTok{ *diag = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)n, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\PreprocessorTok{#endif}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)sjacobi(nn, a, evec, &fini, &f, &itel, itmax, eps, &verbose, &vectors);}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++)\{}
+\NormalTok{    dg = a[TINDEX(i, i, n)];}
+    \ControlFlowTok{if}\NormalTok{ (*type == }\DecValTok{0}\NormalTok{) \{}
+\NormalTok{      diag[VINDEX(i)] = (fabs(dg) < *eps) ? }\FloatTok{0.0}\NormalTok{ : }\FloatTok{1.0}\NormalTok{ / dg;}
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (*type == }\DecValTok{1}\NormalTok{) \{}
+\NormalTok{      diag[VINDEX(i)] = (dg < *eps) ? }\FloatTok{0.0}\NormalTok{ : sqrt (dg); }
+\NormalTok{    \}}
+    \ControlFlowTok{if}\NormalTok{ (*type == }\DecValTok{2}\NormalTok{) \{}
+\NormalTok{      diag[VINDEX(i)] = (dg < *eps) ? }\FloatTok{0.0}\NormalTok{ : }\FloatTok{1.0}\NormalTok{ / sqrt (dg);}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= n; i++) \{}
+\NormalTok{      s = }\FloatTok{0.0}\NormalTok{;}
+      \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{        s += evec[MINDEX(i, k, n)] * evec[MINDEX(j, k, n)] * diag[VINDEX(k)];}
+\NormalTok{      \}}
+\NormalTok{      a[TINDEX(i, j, n)] = s;}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\PreprocessorTok{#ifdef USING_R}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)Free(evec);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)Free(diag);}
+\PreprocessorTok{#else}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(evec);}
+\NormalTok{  (}\DataTypeTok{void}\NormalTok{)free(diag);}
+\PreprocessorTok{#endif}
+  \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+
+\end{document}

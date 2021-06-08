@@ -1,0 +1,2 @@
+unfolding <- smacofRect
+prefscal <- smacofRect

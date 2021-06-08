@@ -1085,14 +1085,13 @@ and thus
 <p><span id="exm:exantisym" class="example"><strong>Example 2.1  </strong></span>Suppose <span class="math inline">\(Y=XT\)</span>, with <span class="math inline">\(T\)</span> antisymmetric, so that <span class="math inline">\(X+\epsilon Y=X(I+\epsilon T)\)</span>. Then</p>
 <p><span class="math display" id="eq:antisym">\[\begin{equation}
 \sigma(X+\epsilon
-Y)=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
-+\frac12\epsilon^2\text{tr}\ Y&#39;(V-B(X))Y+o(\epsilon^2)
+Y)=\sigma(X)+\frac12\epsilon^2\text{tr}\ Y&#39;(V-B(X))Y+o(\epsilon^2)
 \tag{2.46}
 \end{equation}\]</span></p>
 </div>
 
 <div class="example">
-<p><span id="exm:exzeroes" class="example"><strong>Example 2.2  </strong></span>Suppose <span class="math inline">\(\underline{X}=[X\mid 0]\)</span> and <span class="math inline">\(\underline{X}=[0\mid Y]\)</span> so that <span class="math inline">\(\underline{X}+\epsilon\underline{Y}=[X\mid\epsilon Y]\)</span>. Here <span class="math inline">\(\underline{X}\)</span> and <span class="math inline">\(\underline{Y}\)</span> are <span class="math inline">\(n\times p\)</span>, <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times r\)</span>, with <span class="math inline">\(r&lt;p\)</span>, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(n\times(p-r)\)</span>. Then</p>
+<p><span id="exm:exzeroes" class="example"><strong>Example 2.2  </strong></span>Suppose <span class="math inline">\(\underline{X}=[X\mid 0]\)</span> and <span class="math inline">\(\underline{Y}=[0\mid Y]\)</span> so that <span class="math inline">\(\underline{X}+\epsilon\underline{Y}=[X\mid\epsilon Y]\)</span>. Here <span class="math inline">\(\underline{X}\)</span> and <span class="math inline">\(\underline{Y}\)</span> are <span class="math inline">\(n\times p\)</span>, <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times r\)</span>, with <span class="math inline">\(r&lt;p\)</span>, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(n\times(p-r)\)</span>. Then</p>
 <p><span class="math display" id="eq:exzeroes">\[\begin{equation}
 \sigma(\underline{X}+\epsilon
 \underline{Y})=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
@@ -1102,7 +1101,7 @@ Y)=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
 </div>
 
 <div class="example">
-<p><span id="exm:exsingular" class="example"><strong>Example 2.3  </strong></span>Suppose <span class="math inline">\(\underline{X}=[X\mid 0]\)</span> and <span class="math inline">\(\underline{X}=[Z\mid Y]\)</span> so that <span class="math inline">\(\underline{X}+\epsilon\underline{Y}=[X+\epsilon Z\mid\epsilon Y]\)</span>. Here <span class="math inline">\(\underline{X}\)</span> and <span class="math inline">\(\underline{Y}\)</span> are <span class="math inline">\(n\times p\)</span>, <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times r\)</span>, with <span class="math inline">\(r&lt;p\)</span>, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(n\times(p-r)\)</span>. Then</p>
+<p><span id="exm:exsingular" class="example"><strong>Example 2.3  </strong></span>Suppose <span class="math inline">\(\underline{X}=[X\mid 0]\)</span> and <span class="math inline">\(\underline{Y}=[Z\mid Y]\)</span> so that <span class="math inline">\(\underline{X}+\epsilon\underline{Y}=[X+\epsilon Z\mid\epsilon Y]\)</span>. Here <span class="math inline">\(\underline{X}\)</span> and <span class="math inline">\(\underline{Y}\)</span> are <span class="math inline">\(n\times p\)</span>, <span class="math inline">\(X\)</span> is <span class="math inline">\(n\times r\)</span>, with <span class="math inline">\(r&lt;p\)</span>, and <span class="math inline">\(Y\)</span> is <span class="math inline">\(n\times(p-r)\)</span>. Then</p>
 <p><span class="math display" id="eq:exsingular">\[\begin{equation}
 \sigma(\underline{X}+\epsilon
 \underline{Y})=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
@@ -1167,10 +1166,6 @@ Figure 2.2: Derivative for Various Epsilon
 <div class="theorem">
 <span id="thm:statpointsbound" class="theorem"><strong>Theorem 2.2  </strong></span>At a stationary point of stress we have <span class="math inline">\(\eta(X)\leq 1\)</span>.
 </div>
-
-<div class="proof">
-\iffalse{} <span class="proof"><em>Proof. </em></span> ozo
-</div>
 <p>If <span class="math inline">\(X\)</span> is stationary we have <span class="math inline">\(VX=B(X)X\)</span> and thus <span class="math inline">\(\rho(X)=\eta^2(X)\)</span>. Consequently <span class="math inline">\(\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)\)</span> and because <span class="math inline">\(\sigma(X)\geq 0\)</span> we see that <span class="math inline">\(X\)</span> must be in the ellipse <span class="math inline">\(\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}\)</span>.</p>
 <p>Theorem <a href="propchapter.html#thm:statpointsbound">2.2</a> is important, because it means that we can require without loss of generality that <span class="math inline">\(X\)</span> is in the ellipsoidal disk <span class="math inline">\(\eta(X)\leq 1\)</span>, which is a compact convex set.</p>
 <div id="local-maxima" class="section level3" number="2.6.1">
@@ -1179,21 +1174,20 @@ Figure 2.2: Derivative for Various Epsilon
 <div class="theorem">
 <span id="thm:locmax" class="theorem"><strong>Theorem 2.3  </strong></span>stress has a single local maximum at <span class="math inline">\(X=0\)</span> with value 1.
 </div>
-
-<div class="proof">
-<p>\iffalse{} <span class="proof"><em>Proof. </em></span> At <span class="math inline">\(X=0\)</span> we have for the one-sided directional derivative</p>
+<p><em>Proof:</em>
+At <span class="math inline">\(X=0\)</span> we have for the one-sided directional derivative</p>
 <p><span class="math display" id="eq:datzero">\[\begin{equation}
 \mathbb{D}_+\sigma(0,Y)=\lim_{\alpha\downarrow 0}\frac{\sigma(0+\alpha Y)-\sigma(0)}{\alpha}=-2\rho(Y)\leq 0,
 \tag{2.51}
 \end{equation}\]</span></p>
-<p>which implies that the stress has a local maximum at zero.</p>
+<p>which implies that stress has a local maximum at zero.</p>
 <p>By contradiction: suppose that there is a local maximum at <span class="math inline">\(X\not= 0\)</span>. Then on the line through zero and <span class="math inline">\(X\)</span> there should be a local maximum at <span class="math inline">\(X\)</span> as well. But</p>
 <p><span class="math display" id="eq:propnomax">\[\begin{equation}
 \sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
 \tag{2.52}
 \end{equation}\]</span></p>
-<p>is a convex quadratic, which consequently cannot have a local maximum at <span class="math inline">\(X\)</span>.</p>
-</div>
+<p>is a convex quadratic, which consequently cannot have a local maximum at <span class="math inline">\(X\)</span>.
+<span class="math inline">\(\blacksquare\)</span></p>
 </div>
 <div id="proplocmin" class="section level3" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> Local Minima</h3>
@@ -1204,14 +1198,13 @@ give a slight strengthening of the result, along the lines of
 <div class="theorem">
 <span id="thm:locmin" class="theorem"><strong>Theorem 2.4  </strong></span>stress is differentiable at local minima.
 </div>
-
-<div class="proof">
-<p>\iffalse{} <span class="proof"><em>Proof. </em></span> It suffices to prove that if stress has a local minimum at <span class="math inline">\(X\)</span> we have <span class="math inline">\(d_{ij}(X)&gt;0\)</span> for all <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span>, in other words that <span class="math inline">\(\rho\)</span> in equation <a href="propchapter.html#eq:compszero1">(2.4)</a> is differentiable at <span class="math inline">\(X\)</span>. Since <span class="math inline">\(\eta^2\)</span> is
+<p><em>Proof:</em>
+It suffices to prove that if stress has a local minimum at <span class="math inline">\(X\)</span> we have <span class="math inline">\(d_{ij}(X)&gt;0\)</span> for all <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span>, in other words that <span class="math inline">\(\rho\)</span> in equation <a href="propchapter.html#eq:compszero1">(2.4)</a> is differentiable at <span class="math inline">\(X\)</span>. Since <span class="math inline">\(\eta^2\)</span> is
 differentiable everywhere this will show stress is differentiable at
 <span class="math inline">\(X\)</span>.</p>
 <p>From equation <a href="propchapter.html#eq:propddstress">(2.40)</a> we see</p>
-Because
-</div>
+<p>Because
+<span class="math inline">\(\blacksquare\)</span></p>
 <p>Note: suppose
 <span class="math inline">\(\delta_{12}=0\)</span> and <span class="math inline">\(\delta_{13}=\delta_{23}=\frac12\sqrt{2}\)</span> and all weights are one. Thus
 <span class="math display">\[
@@ -1239,9 +1232,8 @@ If in addition <span class="math inline">\(w_{12}=0\)</span> then
 <div class="theorem">
 <span id="thm:proplowenv" class="theorem"><strong>Theorem 2.5  </strong></span><span class="math inline">\(\sigma\)</span> is the lower envelop of an infinite number of convex quadratics.
 </div>
-
-<div class="proof">
-<p>\iffalse{} <span class="proof"><em>Proof. </em></span> By the CS inequality</p>
+<p><em>Proof:</em>
+By the CS inequality</p>
 <p><span class="math display" id="eq:dasmax">\[\begin{equation}
 d_{ij}(X)=\max_Y \frac{\text{tr}\ X^TA_{ij}Y}{d_{ij}(Y)},
 \tag{2.53}
@@ -1251,8 +1243,8 @@ d_{ij}(X)=\max_Y \frac{\text{tr}\ X^TA_{ij}Y}{d_{ij}(Y)},
 \sigma(X)=\min_Y\left(1-\text{tr}\ X^TB(Y)Y+\frac12\text{tr}\ X^TVX\right),
 \tag{2.54}
 \end{equation}\]</span></p>
-which is what we set out to prove.
-</div>
+<p>which is what we set out to prove.
+<span class="math inline">\(\blacksquare\)</span></p>
 <p>We can use the lower envelop of a finite number of the quadratics from theorem <a href="propchapter.html#thm:proplowenv">2.5</a> to approximate stress. This is illustrated graphically, using a small example in which the configuration is a convex combination of two fixed configurations. Thus in the example stress is a function of the single parameter <span class="math inline">\(0\leq\lambda\leq 1\)</span> defining the convex combination. In figure <a href="propchapter.html#fig:upperfig">2.3</a> stress is in red, and we have used the three quadratics corresponding with <span class="math inline">\(\lambda\)</span> equal to 0.25, 0.5, 0.75. The maximum of the three quadratics is in blue, and the approximation is really good, in fact almost perfect in the areas where the blue is not even visible. As an aside, we also see three points in the figure where stress is not differentiable. The minimum of the three quadratics is also not differentiable at a point, but that point is different from the points where stress is non-smooth.</p>
 <p>Note that by definition stress and the lower envelop of the quadratics are equal at the three points where <span class="math inline">\(\lambda\)</span> is 0.25, 0.5, 0.75, i.e at the three vertical lines in the plot.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:upperfig"></span>
@@ -1269,20 +1261,19 @@ ffalse{-91-85-112-112-101-114-32-69-110-118-101-108-111-112-93-}
 <div class="theorem">
 <span id="thm:propupenv" class="theorem"><strong>Theorem 2.6  \iffalse (Upper Envelop)  </strong></span><span class="math inline">\(\sigma\)</span> is the upper envelop of an infinite number of quadratics.
 </div>
-
-<div class="proof">
-<p>\iffalse{} <span class="proof"><em>Proof. </em></span> By AM/GM</p>
+<p><em>Proof:</em>
+By AM/GM</p>
 <p><span class="math display" id="eq:dasmin">\[\begin{equation}
 d_{ij}(X)\leq\min
 \frac12\frac{1}{d_{ij}(Y)}\{d_{ij}^2(X)+d_{ij}^2(Y)\}
 \tag{2.55}
 \end{equation}\]</span></p>
 <p>Thus</p>
-<span class="math display" id="eq:sigmax">\[\begin{equation}
+<p><span class="math display" id="eq:sigmax">\[\begin{equation}
 \sigma(X)=\max_Y \left(1-\frac12\rho(Y)+\frac12\text{tr}\ X&#39;(V-B(Y))X\right)
 \tag{2.56}
 \end{equation}\]</span>
-</div>
+<span class="math inline">\(\blacksquare\)</span></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:lowerfig"></span>
 <img src="_main_files/figure-html/lowerfig-1.png" alt="Piecewise Quadratic Lower Approximation" width="672" />
 <p class="caption">

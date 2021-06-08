@@ -75,7 +75,7 @@ We start with a simple construction.
 For all $\Delta$ there is an $\alpha_0\geq 0$ such that for all $\alpha\geq\alpha_0$ we have $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-1$.
 ```
 
-```{proof}
+::: {.proof}
 We have, using $\Delta\times(E-I)=\Delta$ and $(E-I)\times(E-I)=E-I$,
 
 \begin{equation}
@@ -87,7 +87,7 @@ We have, using $\Delta\times(E-I)=\Delta$ and $(E-I)\times(E-I)=E-I$,
 Thus each off-diagonal element is a concave quadratic in $\alpha$, which
 is negative for $\alpha$ big enough. Choose $\alpha_0\geq 0$ to make all
 off-diagonal elements negative (and all dissimilarities non-negative). A doubly-centered matrix with all off-diagonal elements negative is positive semi-definite of rank $n-1$ (@taussky_49).
-```
+:::
 
 Note that by the same argument we can also find a negative $\alpha_0$ that makes all off-diagonal elements negative and thus $\Delta+\alpha(E-I))$ is again Euclidean of dimension $r\leq n-1$. But this $\alpha_0$ will usually result in negative dissimilarities.
 
@@ -106,12 +106,12 @@ This is the smallest non-trivial eigenvalue of the Torgerson transform in
 For all non-Euclidean $\Delta$ there is an $\alpha_1>0$ such that for all $\alpha\geq\alpha_1$ we have that $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-2$.
 ```
 
-```{proof}
+::: {.proof}
 Because $\Delta$ is non-Euclidean we have $\lambda_\star(0)<0$. By the construction in theorem \@ref(thm:nmn1) there is an $\alpha_0$ such that
 $\lambda_\star(\alpha)>0$ for all $\alpha>\alpha_0$. By the Maximum Theorem
 the function $\lambda_\star$ is continuous, and thus, by Bolzano's theorem, there is an $\alpha_1$ between $0$ and $\alpha_0$ such that $\lambda_\star(\alpha_1)=0$. If there is more than one zero between
 $0$ and $\alpha_0$ we take the largest one as $\alpha_1$.
-```
+:::
 
 
 The problem with extending theorem \@ref(thm:nmn2) to Euclidean $\Delta$ is that the equation $\lambda_\star(\alpha)=0$ may have only negative roots, or, even more seriously, no roots at all. This may not be too important from the practical point of view, because observed dissimilarities will usually not be exactly Euclidean. Nevertheless I feel compelled to address it.
@@ -120,9 +120,9 @@ The problem with extending theorem \@ref(thm:nmn2) to Euclidean $\Delta$ is that
 If $\Delta$ is Euclidean then $\lambda_\star(\alpha)$ is non-negative and non-decreasing on $[0,+\infty)$.
 ```
 
-```{proof}
+::: {.proof}
 If $\Delta$ is Euclidean, then $\sqrt{\Delta}$, which is short for the matrix with the square roots of the dissimilarities, is Euclidean as well. This follows because the square root is a Schoenberg transform (@schoenberg_37, @bavaud_11), and it implies that $\tau(\Delta)=\tau(\sqrt{\Delta}\times\sqrt{\Delta})$ is positive semi-definite. Thus the matrix \@ref(eq:tau1) is positive semi-definite for all $\alpha\geq 0$. By Danskin's Theorem the one-sided directional derivative of $\lambda_\star$ at $\alpha$ is $2x(\alpha)'\tau(\Delta)x(\alpha)+\alpha$, where $x(\alpha)$ is one of the minimizing eigenvectors. Because the one-sided derivative is non-negative, the function is non-decreasing (in fact increasing if $\alpha>0$).
-```
+:::
 
 Of course $\lambda_\star(\alpha)=0$ can still have negative solutions, and in particular it will have at least one negative solution if $\lambda_\star(\alpha)\leq 0$ for any $\alpha$. There can even be negative solutions with $\Delta+\alpha(E-I)$ non-negative. 
 
@@ -288,7 +288,7 @@ For any $X\in\mathbb{R}^{n\times p}$ with $p=n-2$ there is an $\alpha$
 such that $\sqrt{\delta_{ij}^2+\alpha}= d_{ij}(X)$.
 ```
 
-```{proof}
+::: {.proof}
 Now we have 
 
 \begin{equation}
@@ -305,7 +305,7 @@ $\underline{\lambda}$ is smallest eigenvalue we choose
 $\alpha=-2\underline{\lambda}$, and
 $\tau(\Delta\times\Delta)+\frac12\alpha J$ is positive semi-definite of
 rank $r\leq n-2$.
-```
+:::
 
 Note that theorem \@ref(thm:nmn2) implies that for any $\Delta$ there is
 a strictly increasing differentiable transformation to the space of

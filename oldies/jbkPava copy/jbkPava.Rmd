@@ -1,0 +1,385 @@
+---
+title: "Exceedingly Simple Monotone Regression"
+author: "Jan de Leeuw"
+date: "Version 02, march 30, 2017"
+output:
+  pdf_document:
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+  html_document:
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+fontsize: 12pt
+graphics: yes
+bibliography: ["../../janspubs/0_bib_material/mypubs.bib","../../janspubs/0_bib_material/total.bib"]
+abstract: A C implementation of Kruskal's up-and-down-blocks monotone regression algorithm
+  for use wth .C(), and a comparison with other implementations.
+---
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 18px;
+}
+td {  /* Table  */
+   font-size: 18px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 18px;
+}
+pre { /* Code block */
+  font-size: 18px
+}
+</style>
+
+
+```{r function_code, echo = FALSE}
+source("jbkPava.R")
+source("amalgm.R")
+source("wmonreg.R")
+```
+```{r packages, echo = FALSE}
+options (digits = 10) 
+suppressPackageStartupMessages (library (Iso, quietly = TRUE))
+suppressPackageStartupMessages (library (isotone, quietly = TRUE))
+```
+Note: This is a working paper which will be expanded/updated frequently. All suggestions for improvement are welcome. The directory [deleeuwpdx.net/pubfolders/jbkPava](http://deleeuwpdx.net/pubfolders/jbkPava) has a pdf version, the bib file, the complete Rmd file with the code chunks,  and the R source code.
+
+#Introduction
+
+O no ! Not another monotone regression implementation !! There are already so many !!!
+
+There is `isoreg()` in the `stats` package (@R_17), `gpava()` in `isotone()` (@deleeuw_hornik_mair_A_09), and `pava` in `Iso` (@turner_15). There is also
+`wmonreg()` in `smacof` (@deleeuw_mair_A_09c, @mair_deleeuw_groenen_U_15) and `amalgm()` from @deleeuw_E_16d. Now `gpava()` is written in R, `amalgm()`
+calls the Fortran from @cran_80, `pava()` from `Iso` calls ratfor Fortran, and `isoreg()` only does unweighted least squares. I wanted something in
+C (because C is not Fortran) which did weighted monotone regression, and I wanted to use the .C() interface (because I am exceedingly simple). 
+
+Now `wmonreg` from `smacof` fits the bill. It was written in 2014 by Patrick Groenen and Gertjan van den Burg. Same as our proposed algorithm here, 
+it implements the up-and-down-blocks algorithm of @kruskal_64b. If we compare computation time then `wmonreg()` is the main competitor. But I also
+wanted code that was easy to modify for different unimodal loss functions and that performed relatively uniformly over the range of "almost in the
+correct order" to "order completely wrong".
+
+#Algorithm
+
+The best possible description of the algorithm was already given by @kruskal_64b (page 127). We copy his recipe, with a slight change of notation and terminology.
+
+"Our algorithm starts with the finest possible partitions into blocks, and joins the blocks together step by step until the correct partition is found. The finest possible partition consists naturally of n blocks, each containing only a single $x_i$.
+
+Suppose we have any partition into consecutive blocks. We shall use $\overline{x}_b$ to denote the average of the $x_i$ in block b. If $b_- , b, b_+$ are three adjacent blocks in ascending order, then we call $b$ up-satisfied if $\overline{x}_b < \overline{x}_{b_+}$ and down- satisfied if $\overline{x}_{b_-} < \overline{x}_b$ . We also call $b$ up-satisfied if it is the highest block, and down-satisfied if it is the lowest block.
+
+At each stage of the algorithm we have a partition into blocks. Furthermore, one of these blocks is active. The active block may be up-active or down-active. At the beginning, the lowest block, consisting of $x_{min}$, is up-active. The algorithm proceeds as follows. If the active block is up-active, check to see whether it is up-satisfied. If it is, the partition remains unchanged but the active block becomes down-active; if not, the active block is joined with the next higher block, thus changing the partition, and the new larger block becomes down-active. On the other hand, if the active block is down-active, do the same thing but upside-down. In other words, check to see whether the down-active block is down-satisfied. If it is, the partition remains unchanged but the active block becomes up-active; if not, the active block is joined with the next lower block into a new block which becomes up-active. Eventually this alternation between up-active and down- active results in an active block which is simultaneously up-satisfied and down-satisfied. When this happens, no further joinings can occur by this procedure, and we transfer activity up to the next higher block, which becomes up-active. The alternation is again performed until a block results which is simultaneously up-satisfied and down-satisfied. Activity is then again transferred to the next higher block, and so forth until the highest block is up-satisfied and down-satisfied. Then the algorithm is finished and the correct partition has been obtained."
+
+Our implementation `jbkPava()`, which uses Kruskal's initials to distinguish it from other pava's,  stays as close as possible to this description. Blocks are C structures, collected in an array. Each block has a value, a weight, a size, the index of the previous block, and the index of the the next block.
+
+```{c blokcs, engine='c', results='hide'}
+struct block {
+	double value;
+	double weight;
+	int size;
+	int previous;
+	int next;
+};
+```
+
+At the end the block values are expanded and returned in the original vector. Space for the blocks is allocated and freed in the routine 
+(i.e. it is not under the control of R). Given Kruskal's description of the up-and-down blocks algorithm, the code in the appendix should be pretty readable.
+
+#Timings
+
+We apply the six monotone regression methods to vectors of length 10,000 with unit weights, repeating each analysis 100 times. 
+We report the elapsed time from `system.time()`.
+
+##Random
+
+The vectors of length 10,000 are normal random numbers (a different vector for each of the runs).
+
+```{r benchmark1, echo = FALSE, cache = TRUE}
+set.seed(123)
+f <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- pavak (x)
+  }
+}
+g <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- wmonreg (x)
+  }
+}
+h <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- isotone::gpava (y = x)
+  }
+}
+i <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- isoreg (x)
+  }
+}
+j <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- amalgm (x)
+  }
+}
+k <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- Iso::pava (x)
+  }
+}
+l <- function (n, m) {
+  for (i in 1:n) {
+  x <- rnorm (m)
+  h <- jbkPava (x)
+  }
+}
+wmonreg_random <- system.time (g (100, 10000))
+gpava_random <- system.time (h (100, 10000))
+isoreg_random <- system.time (i (100, 10000))
+amalgm_random <- system.time (j (100, 10000))
+isopava_random <- system.time (k (100, 10000))
+jbkPava_random <- system.time (l (100, 10000))
+```
+```{r output1, echo = FALSE}
+cat("wmonreg  ", formatC(wmonreg_random[3], format = "f", width = 10, digits = 3),"\n")
+cat("gpava    ", formatC(gpava_random[3], format = "f", width = 10, digits = 3),"\n")
+cat("isoreg   ", formatC(isoreg_random[3], format = "f", width = 10, digits = 3),"\n")
+cat("amalgm   ", formatC(amalgm_random[3], format = "f", width = 10, digits = 3),"\n")
+cat("Iso::pava", formatC(isopava_random[3], format = "f", width = 10, digits = 3),"\n")
+cat("jbkPava  ", formatC(jbkPava_random[3], format = "f", width = 10, digits = 3),"\n")
+```
+
+Clearly `jbkPava()` and `isoreg()` are the clear winners, although `isoreg()` has the advantage that it does not have to take weighted means and keep track of the block weights.
+Note that `gpava()`, written in R, is abysmally slow. The two methods `amalgm()` and `Iso::pava()` that call Fortran routines are not really competitive. `wmonreg()` is doing
+quite well, but `jbkPava()` is more than twice as fast.
+
+##Reversed
+
+We apply our six methods, one hundred times each, to the vector `10000:1`, which obviously will produce a completely merged vector with all elements equal to the mean.
+
+```{r benchmark2, echo = FALSE, cache = TRUE}
+g <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- wmonreg (x)
+  }
+}
+h <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- isotone::gpava (y = x)
+  }
+}
+i <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- isoreg (x)
+  }
+}
+j <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- amalgm (x)
+  }
+}
+k <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- Iso::pava (x)
+  }
+}
+l <- function (n, m) {
+  for (i in 1:n) {
+  x <- m:1
+  h <- jbkPava (x)
+  }
+}
+wmonreg_order <- system.time (g (100, 10000))
+gpava_order <- system.time (h (100, 10000))
+isoreg_order <- system.time (i (100, 10000))
+amalgm_order <- system.time (j (100, 10000))
+isopava_order <- system.time (k (100, 10000))
+jbkJava_order <- system.time (l (100, 10000))
+```
+```{r output2, echo = FALSE}
+cat("wmonreg  ", formatC(wmonreg_order[3], format = "f", width = 10, digits = 3),"\n")
+cat("gpava    ", formatC(gpava_order[3], format = "f", width = 10, digits = 3),"\n")
+cat("isoreg   ", formatC(isoreg_order[3], format = "f", width = 10, digits = 3),"\n")
+cat("amalgm   ", formatC(amalgm_order[3], format = "f", width = 10, digits = 3),"\n")
+cat("Iso::pava", formatC(isopava_order[3], format = "f", width = 10, digits = 3),"\n")
+cat("jbkPava  ", formatC(jbkJava_order[3], format = "f", width = 10, digits = 3),"\n")
+```
+In this situtation, in which blocks are never up-satisfied and always down-satisfied, again `jbkPava()` and `isoreg()` are best. `wmonreg()` and `Iso::pava()` lose ground.
+
+##Ordered
+
+We apply our six methods, one hundred times each, to the vector `1:10000`, which obviously just returns the vector itself. There is no merging at all, block are always
+up-satisfied and down-satisfied, and we merely loop through the vector. 
+
+```{r benchmark3, echo = FALSE, cache = TRUE}
+g <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- wmonreg (x)
+  }
+}
+h <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- isotone::gpava (y = x)
+  }
+}
+i <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- isoreg (x)
+  }
+}
+j <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- amalgm (x)
+  }
+}
+k <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- Iso::pava (x)
+  }
+}
+l <- function (n, m) {
+  for (i in 1:n) {
+  x <- 1:m
+  h <- jbkPava (x)
+  }
+}
+wmonreg_reverse <- system.time (g (100, 10000))
+gpava_reverse <- system.time (h (100, 10000))
+isoreg_reverse <- system.time (i (100, 10000))
+amalgm_reverse <- system.time (j (100, 10000))
+isopava_reverse <- system.time (k (100, 10000))
+jbkPava_reverse <- system.time (l (100, 10000))
+```
+```{r output3, echo = FALSE}
+cat("wmonreg  ", formatC(wmonreg_reverse[3], format = "f", width = 10, digits = 3),"\n")
+cat("gpava    ", formatC(gpava_reverse[3], format = "f", width = 10, digits = 3),"\n")
+cat("isoreg   ", formatC(isoreg_reverse[3], format = "f", width = 10, digits = 3),"\n")
+cat("amalgm   ", formatC(amalgm_reverse[3], format = "f", width = 10, digits = 3),"\n")
+cat("Iso::pava", formatC(isopava_reverse[3], format = "f", width = 10, digits = 3),"\n")
+cat("jbkPava  ", formatC(jbkPava_reverse[3], format = "f", width = 10, digits = 3),"\n")
+```
+
+`wmonreg()` is best-in-show, which is interesting because in many applications we expect the
+vector to be closer to the correct ordering than to random or reverse ordering. Both Fortran calling routines perform well.
+`isoreg()` falls flat on its face and is even beaten by `gpava()`. There is probably some reasonable explanation for this, but since 
+unweighted `isoreg()` is not really in the competition I did not explore this.
+
+##Conclusion
+
+Both `pava()` and `wmonreg()` perform well over the range of examples. There is an indication that `pava()` is considerably better for vectors that are out of order, while `wmonreg()` may be better for vectors that are already close to correct. In future versions of this paper we will try to speed up `pava()` performance.
+
+#Code
+
+##R code
+
+```{r file_auxilary, code = readLines("jbkPava.R")}
+```
+
+
+##C code
+
+```{c c_code, engine='c', results='hide'}
+#include <stdlib.h>
+#include <stdbool.h>
+
+struct block {
+	double value;
+	double weight;
+	int size;
+	int previous;
+	int next;
+};
+
+void jbkPava (double *x, double *w, const int *n) {
+	struct block *blocks = calloc ((size_t) * n, sizeof(struct block));
+	for (int i = 0; i < *n; i++) {
+		blocks[i].value = x[i];
+		blocks[i].weight = w[i];
+		blocks[i].size = 1;
+		blocks[i].previous = i - 1; 
+		blocks[i].next = i + 1;   
+	}
+	int active = 0;
+	do {
+		bool upsatisfied = false;
+		int next = blocks[active].next; 
+		if (next == *n) upsatisfied = true;
+		else if (blocks[next].value > blocks[active].value) 
+		    upsatisfied = true;
+		if (!upsatisfied) {
+			double ww = blocks[active].weight + blocks[next].weight;
+			int nextnext = blocks[next].next;
+			double wxactive = blocks[active].weight * blocks[active].value;
+			double wxnext = blocks[next].weight * blocks[next].value;
+			blocks[active].value = (wxactive + wxnext) / ww;
+			blocks[active].weight = ww;
+			blocks[active].size += blocks[next].size;
+			blocks[active].next = nextnext;
+			if (nextnext < *n)
+				blocks[nextnext].previous = active;
+			blocks[next].size = 0;
+		}
+		bool downsatisfied = false;
+		int previous = blocks[active].previous;
+		if (previous == -1) downsatisfied = true;
+		else if (blocks[previous].value < blocks[active].value) 
+		    downsatisfied = true;
+		if (!downsatisfied) {
+			double ww = blocks[active].weight + blocks[previous].weight;
+			int previousprevious = blocks[previous].previous;
+			double wxactive = blocks[active].weight * blocks[active].value;
+			double wxprevious = blocks[previous].weight * blocks[previous].value;
+			blocks[active].value = (wxactive + wxprevious) / ww;
+			blocks[active].weight = ww;
+			blocks[active].size += blocks[previous].size;
+			blocks[active].previous = previousprevious;
+			if (previousprevious > -1)
+				blocks[previousprevious].next = active;
+			blocks[previous].size = 0;
+		}
+		if ((blocks[active].next == *n) && downsatisfied) break;
+		if (upsatisfied && downsatisfied) active = next;
+	} while (true);
+	int k = 0;
+	for (int i = 0; i < *n; i++) {
+		int blksize = blocks[i].size;
+		if (blksize > 0.0) {
+			for (int j = 0; j < blksize; j++) {
+				x[k] = blocks[i].value;
+				k++;
+			}
+		}
+	}
+	free (blocks);
+}
+```
+
+#References

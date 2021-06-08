@@ -1,0 +1,1925 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Tweaking the SMACOF Engine},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Tweaking the SMACOF Engine}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version 06, October 10, 2017}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+The \emph{smacof} algorithm for (metric, Euclidean, least squares)
+multidimensional scaling is rewritten so that all computation is done in
+C, with only the data management, memory allocation, iteration counting,
+and I/O handled by R. All symmetric matrices use compact, lower
+triangular, column-wise storage. Second derivatives of the loss function
+are provided, but non-metric scaling, individual differences, and
+constraints still have to be added.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome. The directory
+\href{http://deleeuwpdx.net/pubfolders/tweaking}{deleeuwpdx.net/pubfolders/tweaking}
+has a pdf version, the bib file, the complete Rmd file with the code
+chunks, and the R and C source code.
+
+\section{Introduction}\label{introduction}
+
+The smacof algorithm is a majorization (or MM) algorithm to minimize the
+least squares loss function
+
+\begin{equation}\label{E:loss}
+\sigma(X):=\frac12\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}(\delta_{ij}-d_{ij}(X))^2
+\end{equation}
+
+over \emph{configurations} \(X\in\mathbb{R}^{n\times p}\). Here the
+\emph{weights} \(w_{ij}\) and \emph{dissimilarities} \(\delta_{ij}\) are
+known non-negative numbers, and the \(d_{ij}(X)\) are the Euclidean
+distances between the rows of \(X\), i.e.
+
+\begin{equation}\label{E:distance}
+d_{ij}(X):=\sqrt{(e_i-e_j)'XX'(e_i-e_j)},
+\end{equation}
+
+with \(e_i\) and \(e_j\) unit vectors in \(\mathbb{R}^n\), with a single
+element equal to one and all other elements equal to zero.
+
+The smacof algorithm generates a sequence of configurations \(X^{(k)}\)
+by the rule
+
+\begin{equation}\label{E:smacof}
+X^{(k+1)}=V^+B(X^{(k)})X^{(k)}
+\end{equation}
+
+Here
+
+\begin{equation}\label{E:vmat}
+V:=\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}A_{ij},
+\end{equation}
+
+and
+
+\begin{equation}\label{E:bmat}
+B(X):=\mathop{\sum\sum}_{1<=i<j<=n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}A_{ij},
+\end{equation}
+
+where \(A_{ij}=(e_i-e_j)(e_i-e_j)'\) and \(V^+\) is the Moore-Penrose
+inverse of \(V\). Note that \(V, V^+,\) and \(B(X)\) are all postitive
+semi-definite and doubly centered. Moreover \(V\) has rank \(n-1\) if
+the weights are irreducible, i.e.~the nonzero weights are not the direct
+sum of a number of smaller matrices. The only vector in the null-space
+of \(V\) is \(e\), a vector with \(n\) elements all equal to one. Thus
+in the irreducible case
+
+\begin{equation}\label{E:inverse}
+X^{(k+1)}=(V+\frac{1}{n}ee')^{-1}B(X^{(k)})X^{(k)}.
+\end{equation}
+
+Also, in the case of unit weights \(V=nI-ee'\), with \(e\) a vector with
+\(n\) elements all equal to one, so that
+
+\begin{equation}\label{E:unit}
+X^{(k+1)}=\frac{1}{n}B(X^{(k)})X^{(k)}.
+\end{equation}
+
+For unit weights, i.e. \(w_{ij}=1\) for all \(i<j\), algorithm
+\(\eqref{E:smacof}\) was originally proposed by Guttman (1968), as a
+simple rewrite of the stationary equations \(\mathcal{D}\sigma(X)=0\).
+Guttman did not show the algorithm actually converged. For general
+non-negative weights it was shown to converge to stationary points by De
+Leeuw (1977), even though there clearly are configurations where
+\(\eqref{E:loss}\) is not differentiable. Differentiability of
+\(\eqref{E:loss}\) at local minima was shown in De Leeuw (1984). In De
+Leeuw (1977), De Leeuw and Heiser (1977), and De Leeuw and Heiser (1980)
+the smacof algorithm is extended to non-euclidean distances, to
+individual difference scaling, and to various types of constrained
+configurations. De Leeuw (1988) shows that in general the smacof
+algorithm has a linear convergence rate. A comprehensive implementation
+in R was published by De Leeuw and Mair (2009).
+
+One important characteristic of smacof, next to its global convergence
+and monotone convergence, is that it is easily implemented in a matrix
+language such as R or MATLAB. The definition \(\eqref{E:vmat}\) may look
+expensive computationally, but, expandng the \(w_{ij}\) to a symmetric
+hollow matrix, it is actually
+
+\begin{equation}\label{E:expand}
+v_{ij}=\begin{cases}-w_{ij}&\text{ if }i\not= j,\\\sum_{j\not= i}w_{ij}&\text{ if }i=j,\end{cases}
+\end{equation}
+
+and a similar result applies for \(B(X)\).
+
+The iterations \(\eqref{E:smacof}\) is thus a straightforward matrix
+operation, which require at most \(\frac32n^2p\) multiplications. As
+Guttman (1968) already observed, there is a formal similarity to the
+power method for computing some of the dominant eigenvalues and
+corresponding eigenvectors, although in smacof the matrix \(B(X)\)
+changes at each iteration. At a stationary point \(X\), which is a fixed
+point of the smacof iterations, we have \(V^+B(X)X=X\), i.e. \(V^+B(X)\)
+has \(p\) eigenvalues equal to one, with \(X\) corresponding
+eigenvectors. De Leeuw (2014) shows that if the \(p\) eigenvalues equal
+to one are actually the largest eigenvalues, then \(X\) is a global
+minimum of stress.
+
+If we use a matrix language, then we will most likely use the symmetric
+matrices \(V\) and \(B(X)\) in our computations, and store them as full
+symmetric matrices. This, of course, is redundant, because of symmetry.
+It is possible to compute only the elements on and below the main
+diagonal and then store corresponding elements above the diagonal as
+well. This may save some time, but it does not save storage. In this
+paper we go one step further, and we compute and store all symmetric
+matrices in compact lower triangular column-wise form. The matrix
+operations now become more complicated, involving loops and index
+calculations, and they are most naturally done in C (or some other
+compiled language). Thus we save storage, which may be important in
+large examples. We may not save computing time, because the compact
+storage calculations are inherently more complicated, and matrix
+computations in R are already calls to efficient LAPACK C routines. One
+part of this paper is a time comparison of a standard smacof
+implementation in pure R and several implementations which use compact
+storage of the symmetric matrices, with all the necessary computations
+done in C.
+
+\section{Implementation}\label{implementation}
+
+One thing to remember is that we do not compare R and C implementations
+of smacof, we compare implementations in Jan's R and Jan's C. As in many
+other papers, we use a standard template for iterative routines in R.
+The C routines use inline functions to map matrix indexing from the
+colum-wise format of R to the row-wise format of C. We do not use any
+matrices (i.e.~any double indexing) in C. Also, we use the calling
+conventions of the .C() interface in R, i.e.~all functions return void,
+and all arguments are passed by reference (as pointers). The C routines
+do not handle I/O or dynamic memory allocation, that is all the
+responsibility of R. This implies that if a routine needs any working
+memory, then it is created in R, and a pointer is passed to C. The
+driver routine for the iterations is also always in R.
+
+This seems a natural division of labor between C and R. We could have
+decided to use .Call() or Rcpp, but we would like our C routines to be
+usuable with C drivers, in cases where R is not around at all. Also, if
+I had wanted to learn C++ I would have done it thirty years ago. Now it
+is too late, thank God.
+
+In the appendix there is code for four R implementations of smacof.
+\texttt{smacofR()} only uses basic R and no user written C code,
+symmetric matrices are stored as full matrices. \texttt{smacofRC()} uses
+compact lower-triangular storage, and calls a number of small C routines
+within each iteration to update the configuration. \texttt{smacofRCU()}
+is similar to \texttt{smacofRC()}, but it combines the small C routines
+into a single larger C routine, in order to minimize the number of .C()
+calls. This program was included following a suggestion of Patrick
+Groenen. \texttt{smacofRCU64()} uses the \texttt{.C64()} interface call
+described by Gerber, Moesinger, and Furrer (2016) and Gerber, Moesinger,
+and Furrer (2017). Compared to \texttt{C()} this new interface promises
+less copying of the arguments, and thus more efficiency, both in
+computing times and in memory use. We have checked that in all cases for
+a given random start the two programs carry out the exactly same
+iterations and converge to exactly the same solution, although of course
+from different random starts they can converge to different stationary
+points.
+
+\section{Timing}\label{timing}
+
+For our timing we use the example where all weights and all
+dissimilarities are one. In a sense, this is a worst-case example,
+because it corresponds with power method iterations in the case that all
+eigenvalues are equal. If \(X\) is a solution to the stationary
+equations, then any permutation of its rows is a solutions as well, with
+the same loss function value. Since, from De Leeuw (1984), at a local
+minimum all rows of \(X\) are different, this means there are at least
+\(n!\) local minima with the same function value, and specifically at
+least \(n!\) global minima.
+
+For all runs we use a maximum of 100 iterations, and we stop if the
+maximum absolute value of \(X^{(k)}-X^{(k+1)}\) is less than
+\texttt{1e-15}. Of course 100 iterations are not enough for convergence,
+but they are perfectly fine for time comparisons, because all three
+algorithms produce exactly the same sequence of iterations. Using 100
+starting points and 100 iterations per starting point basically means
+timing 10,000 smacof updates.
+
+We start with \(n=4\), using 100 random starts. The median user time
+over starts, measured by \texttt{system.time()}, for the pure R
+implementation \texttt{smacofR()} is 0.005, for the compact storage
+\texttt{smacofRC()} it is 0.071, for \texttt{smacofRCU()} it is 0.019
+and for \texttt{smacofRCU64()} it is 0.021. \texttt{smacofR()} is 16
+times faster than \texttt{smacofRC()}, but only 4 times faster than
+\texttt{smacofRCU()}. Because \texttt{smacofRCU64()} has more overhead
+it is a tiny bit slower than \texttt{smacofRCU()} in this small example.
+
+\begin{center}\includegraphics{tweaking_files/figure-latex/timeloop4_out-1} \end{center}
+
+Figure 1: Boxplot for n = 4
+
+The four medians for \(n=10\) are 0.008 for \texttt{smacofR()}, 0.105
+for \texttt{smacofRC()}, 0.028 for \texttt{smacofRCU()}, and 0.031 for
+\texttt{smacofRCU64()}. This still gives roughly the same conclusions on
+relative times as for \(n=4\).
+
+\begin{center}\includegraphics{tweaking_files/figure-latex/timeloop10_out-1} \end{center}
+
+Figure 2: Boxplot for n = 10
+
+The medians for \(n=50\) are 0.043 for \texttt{smacofR()}, 0.114 for
+\texttt{smacofRC()}, 0.033 for \texttt{smacofRCU()}, and 0.035 for
+\texttt{smacofRCU64()}. \texttt{smacofR()} is still 3 times faster than
+\texttt{smacofRC()}, but now \texttt{smacofRCU()} has caught up with
+\texttt{smacofR()}. Time for \texttt{smacofRCU64()} is the same as for
+\texttt{smacofRCU()}.
+
+\begin{center}\includegraphics{tweaking_files/figure-latex/timeloop50_out-1} \end{center}
+
+Figure 3: Boxplot for n = 50
+
+For \(n=100\) things begin to change. The medians are 0.2025 for
+\texttt{smacofR()}, 0.143 for \texttt{smacofRC()}, 0.055 for
+\texttt{smacofRCU()}, and 0.05 for \texttt{smacofRCU64()}.
+\texttt{smacofR()} is now the slowest of the three, and
+\texttt{smacofRCU()} remains three times faster than
+\texttt{smacofRC()}. \texttt{smacofRCU64()} is now about 15\% faster
+than \texttt{smacofRCU()}.
+
+\begin{center}\includegraphics{tweaking_files/figure-latex/timeloop100_out-1} \end{center}
+
+Figure 4: Boxplot for n = 100
+
+The medians for \(n=250\) are 1.2745 for \texttt{smacofR()}, 0.321 for
+\texttt{smacofRC()}, 0.19 for \texttt{smacofRCU()}, and 0.145 for
+\texttt{smacofRCU64()}. \texttt{smacofR()} is losing ground, and
+\texttt{smacofRC()} and \texttt{smacofRCU()} are getting closer,
+although \texttt{smacofRCU()} still has the clear advantage.
+\texttt{smacofRCU64()} is about 20\% faster than \texttt{smacofRCU()}.
+
+\begin{center}\includegraphics{tweaking_files/figure-latex/timeloop250_out-1} \end{center}
+
+Figure 5: Boxplot for n = 250
+
+\section{Conclusion}\label{conclusion}
+
+More extensive comparisons would be useful. We have not used weights,
+and consequently did not look at multidimensional scaling problems such
+as unfolding. We did not include non-metric options or individual
+difference options yet. This will come later.
+
+Also note that the code in the appendix includes both pure R and compact
+storage C versions to compute the Hessian of \(\eqref{E:loss}\). Again,
+this is for future use, to implement variations of Newton's method and
+to draw pseudo-confidence intervals around the points of the
+configuration at the solution. There are also various utilities
+included, plus an interface to a subset of LAPACKE (LAPACKE (2016)). Not
+all of this is used in the current project.
+
+For now it seems that for large \(n\) the compact storage routines in C
+are comparable in speed to pure R smacof, if not faster, especially if
+the number of .C() calls within an iteration are limited. And they are
+obviously superior in terms of storage, although these days that is
+hardly a consideration any more. Ultimately, however, wasting space is
+just inelegant, and the interesting exercise was how much execution time
+we had to sacrifice to please our esthetic prejudices.
+
+\section{Appendix: Code}\label{appendix-code}
+
+\subsection{Pure R code}\label{pure-r-code}
+
+\subsubsection{smacofR.R}\label{smacofr.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+
+\NormalTok{smacofLossR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d, w, delta) \{}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{sum}\NormalTok{ (w }\OperatorTok{*}\StringTok{ }\NormalTok{(delta }\OperatorTok{-}\StringTok{ }\NormalTok{d) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{4}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{smacofBmatR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d, w, delta) \{}
+\NormalTok{  dd <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{ (d }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{d)}
+\NormalTok{  b <-}\StringTok{ }\OperatorTok{-}\NormalTok{dd }\OperatorTok{*}\StringTok{ }\NormalTok{w }\OperatorTok{*}\StringTok{ }\NormalTok{delta}
+  \KeywordTok{diag}\NormalTok{ (b) <-}\StringTok{ }\OperatorTok{-}\KeywordTok{rowSums}\NormalTok{ (b)}
+  \KeywordTok{return}\NormalTok{(b)}
+\NormalTok{\}}
+
+\NormalTok{smacofVmatR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (w) \{}
+\NormalTok{  v <-}\StringTok{ }\OperatorTok{-}\NormalTok{w}
+  \KeywordTok{diag}\NormalTok{(v) <-}\StringTok{ }\OperatorTok{-}\KeywordTok{rowSums}\NormalTok{(v)}
+  \KeywordTok{return}\NormalTok{ (v)}
+\NormalTok{\}}
+
+\NormalTok{smacofGuttmanR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, vinv) \{}
+  \KeywordTok{return}\NormalTok{ (vinv }\OperatorTok{%*%}\StringTok{ }\NormalTok{b }\OperatorTok{%*%}\StringTok{ }\NormalTok{x)}
+\NormalTok{\}}
+
+\NormalTok{smacofGradientR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v) \{}
+  \KeywordTok{return}\NormalTok{ ((v }\OperatorTok{-}\StringTok{ }\NormalTok{b) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x)}
+\NormalTok{\}}
+
+\NormalTok{smacofHmatR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v, d, w, delta) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (x)}
+\NormalTok{  r <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{p}
+\NormalTok{  h <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, r, r)}
+\NormalTok{  dd <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{ (d }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{d)}
+\NormalTok{  cc <-}\StringTok{ }\NormalTok{w }\OperatorTok{*}\StringTok{ }\NormalTok{delta }\OperatorTok{*}\StringTok{ }\NormalTok{(dd }\OperatorTok{^}\StringTok{ }\DecValTok{3}\NormalTok{)}
+  \ControlFlowTok{for}\NormalTok{ (s }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{p) \{}
+    \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{s) \{}
+\NormalTok{      cst <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, n, n)}
+      \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n) \{}
+        \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n) \{}
+\NormalTok{          cst[i, j] <-}\StringTok{ }\NormalTok{cc[i, j] }\OperatorTok{*}\StringTok{ }\NormalTok{(x[i, s] }\OperatorTok{-}\StringTok{ }\NormalTok{x[j, s]) }\OperatorTok{*}\StringTok{ }\NormalTok{(x[i, t] }\OperatorTok{-}\StringTok{ }\NormalTok{x[j, t])}
+\NormalTok{        \}}
+\NormalTok{      \}}
+\NormalTok{      cst <-}\StringTok{ }\OperatorTok{-}\NormalTok{cst}
+      \KeywordTok{diag}\NormalTok{(cst) <-}\StringTok{ }\OperatorTok{-}\KeywordTok{rowSums}\NormalTok{(cst)}
+      \ControlFlowTok{if}\NormalTok{ (s }\OperatorTok{==}\StringTok{ }\NormalTok{t) \{}
+\NormalTok{        h[(s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n, (s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n] <-}\StringTok{ }\NormalTok{b }\OperatorTok{-}\StringTok{ }\NormalTok{cst}
+\NormalTok{      \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{        h[(s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n, (t }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n] <-}\StringTok{ }\OperatorTok{-}\NormalTok{cst}
+\NormalTok{        h[(t }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n, (s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n] <-}\StringTok{ }\OperatorTok{-}\NormalTok{cst}
+\NormalTok{      \}}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+
+\NormalTok{smacofHessianR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v, d, w, delta) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (x)}
+\NormalTok{  h <-}\StringTok{ }\OperatorTok{-}\KeywordTok{smacofHmatR}\NormalTok{ (x, b, v, d, w, delta)}
+  \ControlFlowTok{for}\NormalTok{ (s }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{p) \{}
+\NormalTok{    h[(s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n, (s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n] <-}
+\StringTok{      }\NormalTok{h[(s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n, (s }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n] }\OperatorTok{+}\StringTok{ }\NormalTok{v}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{(h)}
+\NormalTok{\}}
+
+\NormalTok{smacofInitialR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (delta, p) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(delta)}
+\NormalTok{  delta <-}\StringTok{ }\NormalTok{delta }\OperatorTok{^}\StringTok{ }\DecValTok{2}
+\NormalTok{  rw <-}\StringTok{ }\KeywordTok{rowSums}\NormalTok{ (delta) }\OperatorTok{/}\StringTok{ }\NormalTok{n}
+\NormalTok{  sw <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (delta) }\OperatorTok{/}\StringTok{ }\NormalTok{(n }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}\StringTok{ }\OperatorTok{-}\NormalTok{(delta }\OperatorTok{-}\StringTok{ }\KeywordTok{outer}\NormalTok{ (rw, rw, }\StringTok{"+"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{sw) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  e <-}\StringTok{ }\KeywordTok{eigen}\NormalTok{ (h)}
+\NormalTok{  ea <-}\StringTok{ }\NormalTok{e}\OperatorTok{$}\NormalTok{values}
+\NormalTok{  ev <-}\StringTok{ }\NormalTok{e}\OperatorTok{$}\NormalTok{vector}
+\NormalTok{  ea <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{ (ea }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\KeywordTok{sqrt}\NormalTok{ (}\KeywordTok{abs}\NormalTok{(ea)), }\DecValTok{0}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\NormalTok{p]}
+  \KeywordTok{return}\NormalTok{ (ev[, }\DecValTok{1}\OperatorTok{:}\NormalTok{p] }\OperatorTok{%*%}\StringTok{ }\KeywordTok{diag}\NormalTok{ (ea))}
+\NormalTok{\}}
+
+\NormalTok{smacofR <-}
+\StringTok{  }\ControlFlowTok{function}\NormalTok{ (w,}
+\NormalTok{            delta,}
+\NormalTok{            p,}
+            \DataTypeTok{xold =} \KeywordTok{smacofInitialR}\NormalTok{(delta, p),}
+            \DataTypeTok{itmax =} \DecValTok{100}\NormalTok{,}
+            \DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{,}
+            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{) \{}
+\NormalTok{    itel <-}\StringTok{ }\DecValTok{1}
+\NormalTok{    dold <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{ (}\KeywordTok{dist}\NormalTok{ (xold))}
+\NormalTok{    sold <-}\StringTok{ }\KeywordTok{smacofLossR}\NormalTok{ (dold, w, delta)}
+\NormalTok{    bold <-}\StringTok{ }\KeywordTok{smacofBmatR}\NormalTok{ (dold, w, delta)}
+\NormalTok{    vinv <-}\StringTok{ }\KeywordTok{ginv}\NormalTok{ (}\KeywordTok{smacofVmatR}\NormalTok{ (w))}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      xnew <-}\StringTok{ }\KeywordTok{smacofGuttmanR}\NormalTok{ (xold, bold, vinv)}
+\NormalTok{      eiff <-}\StringTok{ }\KeywordTok{max}\NormalTok{ (}\KeywordTok{abs}\NormalTok{ (xold }\OperatorTok{-}\StringTok{ }\NormalTok{xnew))}
+\NormalTok{      dnew <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{ (}\KeywordTok{dist}\NormalTok{ (xnew))}
+\NormalTok{      bnew <-}\StringTok{ }\KeywordTok{smacofBmatR}\NormalTok{ (dnew, w, delta)}
+\NormalTok{      snew <-}\StringTok{ }\KeywordTok{smacofLossR}\NormalTok{ (dnew, w, delta)}
+      \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+        \KeywordTok{cat}\NormalTok{(}
+          \StringTok{"itel "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+          \StringTok{"eiff "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            eiff,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"sold "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            sold,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"snew "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            snew,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{        )}
+\NormalTok{      \}}
+      \ControlFlowTok{if}\NormalTok{ ((eiff }\OperatorTok{<}\StringTok{ }\NormalTok{eps) }\OperatorTok{||}\StringTok{ }\NormalTok{(itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax)) \{}
+        \ControlFlowTok{break}
+\NormalTok{      \}}
+\NormalTok{      itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{      xold <-}\StringTok{ }\NormalTok{xnew}
+\NormalTok{      bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{      dold <-}\StringTok{ }\NormalTok{dnew}
+\NormalTok{      sold <-}\StringTok{ }\NormalTok{snew}
+\NormalTok{    \}}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}
+      \DataTypeTok{x =}\NormalTok{ xnew,}
+      \DataTypeTok{d =}\NormalTok{ dnew,}
+      \DataTypeTok{b =}\NormalTok{ bnew,}
+      \DataTypeTok{s =}\NormalTok{ snew,}
+      \DataTypeTok{itel =}\NormalTok{ itel}
+\NormalTok{    ))}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{R Glue}\label{r-glue}
+
+\subsubsection{smacofRC.R}\label{smacofrc.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smacofLossRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d, w, delta) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (d)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofLossC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{ (d),}
+      \KeywordTok{as.double}\NormalTok{ (w),}
+      \KeywordTok{as.double}\NormalTok{ (delta),}
+      \KeywordTok{as.integer}\NormalTok{ (m),}
+      \DataTypeTok{stress =} \KeywordTok{as.double}\NormalTok{ (}\DecValTok{0}\NormalTok{)}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{stress)}
+\NormalTok{\}}
+
+\NormalTok{smacofDistRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, p) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (}\KeywordTok{length}\NormalTok{ (x) }\OperatorTok{/}\StringTok{ }\NormalTok{p)}
+\NormalTok{  m <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"smacofDistC"}\NormalTok{,}
+       \KeywordTok{as.double}\NormalTok{ (x),}
+       \KeywordTok{as.integer}\NormalTok{ (n),}
+       \KeywordTok{as.integer}\NormalTok{(p),}
+       \DataTypeTok{dist =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{dist)}
+\NormalTok{\}}
+
+\NormalTok{smacofInitialRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (delta, p) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (delta)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m)) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofInitialC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(delta),}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n)),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r)),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n)),}
+      \DataTypeTok{x =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{p))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{x)}
+\NormalTok{\}}
+
+\NormalTok{smacofBmatRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d, w, delta) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (w)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m)) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofBmatC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(d),}
+      \KeywordTok{as.double}\NormalTok{(w),}
+      \KeywordTok{as.double}\NormalTok{(delta),}
+      \KeywordTok{as.integer}\NormalTok{ (n),}
+      \DataTypeTok{bmat =} \KeywordTok{as.double}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{bmat)}
+\NormalTok{\}}
+
+\NormalTok{smacofVmatRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (w) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (w)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m)) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"smacofVmatC"}\NormalTok{,}
+       \KeywordTok{as.double}\NormalTok{(w),}
+       \KeywordTok{as.integer}\NormalTok{ (n),}
+       \DataTypeTok{vmat =} \KeywordTok{as.double}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r)))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{vmat)}
+\NormalTok{\}}
+
+\NormalTok{smacofGuttmanRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, vinv) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (b)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofGuttmanC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(x),}
+      \KeywordTok{as.double}\NormalTok{ (b),}
+      \KeywordTok{as.double}\NormalTok{ (vinv),}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r)),}
+      \DataTypeTok{y =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+
+\NormalTok{smacofGradientRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (b)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofGradientC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(x),}
+      \KeywordTok{as.double}\NormalTok{ (b),}
+      \KeywordTok{as.double}\NormalTok{ (v),}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \DataTypeTok{y =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, r))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+
+\NormalTok{smacofHmatRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v, d, w, delta) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (w)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m)) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  q <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofHmatC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(x),}
+      \KeywordTok{as.double}\NormalTok{ (b),}
+      \KeywordTok{as.double}\NormalTok{ (v),}
+      \KeywordTok{as.double}\NormalTok{ (w),}
+      \KeywordTok{as.double}\NormalTok{ (delta),}
+      \KeywordTok{as.double}\NormalTok{ (d),}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, q)),}
+      \DataTypeTok{hmat =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, r }\OperatorTok{*}\StringTok{ }\NormalTok{(r }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{hmat)}
+\NormalTok{\}}
+
+\NormalTok{smacofHessianRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, b, v, d, w, delta) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (w)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m)) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  q <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofHessianC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{(x),}
+      \KeywordTok{as.double}\NormalTok{ (b),}
+      \KeywordTok{as.double}\NormalTok{ (v),}
+      \KeywordTok{as.double}\NormalTok{ (w),}
+      \KeywordTok{as.double}\NormalTok{ (delta),}
+      \KeywordTok{as.double}\NormalTok{ (d),}
+      \KeywordTok{as.integer}\NormalTok{(n),}
+      \KeywordTok{as.integer}\NormalTok{(p),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, q)),}
+      \DataTypeTok{hmat =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, r }\OperatorTok{*}\StringTok{ }\NormalTok{(r }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{hmat)}
+\NormalTok{\}}
+
+\NormalTok{smacofUpdateRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, w, delta, b, vinv) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (b)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  q <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"smacofUpdateC"}\NormalTok{,}
+      \KeywordTok{as.double}\NormalTok{ (x),}
+      \KeywordTok{as.double}\NormalTok{ (w),}
+      \KeywordTok{as.double}\NormalTok{ (delta),}
+      \KeywordTok{as.double}\NormalTok{ (vinv),}
+      \KeywordTok{as.integer}\NormalTok{ (n),}
+      \KeywordTok{as.integer}\NormalTok{ (p),}
+      \DataTypeTok{dnew =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, q)),}
+      \DataTypeTok{bnew =} \KeywordTok{as.double}\NormalTok{ (b),}
+      \DataTypeTok{work =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{p)),}
+      \DataTypeTok{snew =} \KeywordTok{as.double}\NormalTok{ (}\DecValTok{0}\NormalTok{),}
+      \DataTypeTok{xnew =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{p))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+
+\NormalTok{smacofUpdateRC64 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, w, delta, b, vinv) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (b)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (r }\OperatorTok{/}\StringTok{ }\NormalTok{n)}
+\NormalTok{  q <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C64}\NormalTok{(}
+      \StringTok{"smacofUpdateC"}\NormalTok{,}
+      \DataTypeTok{SIGNATURE =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\DecValTok{4}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"integer"}\NormalTok{, }\DecValTok{2}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\StringTok{"double"}\NormalTok{, }\DecValTok{5}\NormalTok{)),}
+      \DataTypeTok{x =}\NormalTok{ x,}
+      \DataTypeTok{w =}\NormalTok{ w,}
+      \DataTypeTok{delta =}\NormalTok{ delta,}
+      \DataTypeTok{vinv =}\NormalTok{ vinv,}
+      \DataTypeTok{n =}\NormalTok{ n,}
+      \DataTypeTok{p =}\NormalTok{ p,}
+      \DataTypeTok{dnew =} \KeywordTok{numeric_dc}\NormalTok{ (q),}
+      \DataTypeTok{bnew =} \KeywordTok{as.double}\NormalTok{ (b),}
+      \DataTypeTok{work =} \KeywordTok{numeric_dc}\NormalTok{ (n }\OperatorTok{*}\StringTok{ }\NormalTok{p),}
+      \DataTypeTok{snew =} \KeywordTok{numeric_dc}\NormalTok{ (}\DecValTok{1}\NormalTok{),}
+      \DataTypeTok{xnew =} \KeywordTok{numeric_dc}\NormalTok{ (n }\OperatorTok{*}\StringTok{ }\NormalTok{p),}
+      \DataTypeTok{INTENT =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"r"}\NormalTok{, }\DecValTok{6}\NormalTok{), }\StringTok{"w"}\NormalTok{, }\StringTok{"rw"}\NormalTok{, }\KeywordTok{rep}\NormalTok{ (}\StringTok{"w"}\NormalTok{, }\DecValTok{3}\NormalTok{)),}
+      \DataTypeTok{NAOK =} \OtherTok{TRUE}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+
+\NormalTok{smacofRC <-}
+\StringTok{  }\ControlFlowTok{function}\NormalTok{ (w,}
+\NormalTok{            delta,}
+\NormalTok{            p,}
+            \DataTypeTok{xold =} \KeywordTok{smacofInitialRC}\NormalTok{(delta, p),}
+            \DataTypeTok{itmax =} \DecValTok{100}\NormalTok{,}
+            \DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{,}
+            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{) \{}
+\NormalTok{    itel <-}\StringTok{ }\DecValTok{1}
+\NormalTok{    dold <-}\StringTok{ }\KeywordTok{smacofDistRC}\NormalTok{ (xold, p)}
+\NormalTok{    sold <-}\StringTok{ }\KeywordTok{smacofLossRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    bold <-}\StringTok{ }\KeywordTok{smacofBmatRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    vinv <-}\StringTok{ }\KeywordTok{mpowerRC}\NormalTok{ (}\KeywordTok{smacofVmatRC}\NormalTok{ (w), }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      xnew <-}\StringTok{ }\KeywordTok{smacofGuttmanRC}\NormalTok{ (xold, bold, vinv)}
+\NormalTok{      eiff <-}\StringTok{ }\KeywordTok{max}\NormalTok{ (}\KeywordTok{abs}\NormalTok{ (xold }\OperatorTok{-}\StringTok{ }\NormalTok{xnew))}
+\NormalTok{      dnew <-}\StringTok{ }\KeywordTok{smacofDistRC}\NormalTok{ (xnew, p)}
+\NormalTok{      bnew <-}\StringTok{ }\KeywordTok{smacofBmatRC}\NormalTok{ (dnew, w, delta)}
+\NormalTok{      snew <-}\StringTok{ }\KeywordTok{smacofLossRC}\NormalTok{ (dnew, w, delta)}
+      \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+        \KeywordTok{cat}\NormalTok{(}
+          \StringTok{"itel "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+          \StringTok{"eiff "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            eiff,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"sold "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            sold,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"snew "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            snew,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{        )}
+\NormalTok{      \}}
+      \ControlFlowTok{if}\NormalTok{ ((eiff }\OperatorTok{<}\StringTok{ }\NormalTok{eps) }\OperatorTok{||}\StringTok{ }\NormalTok{(itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax)) \{}
+        \ControlFlowTok{break}
+\NormalTok{      \}}
+\NormalTok{      itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{      xold <-}\StringTok{ }\NormalTok{xnew}
+\NormalTok{      bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{      dold <-}\StringTok{ }\NormalTok{dnew}
+\NormalTok{      sold <-}\StringTok{ }\NormalTok{snew}
+\NormalTok{    \}}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}
+      \DataTypeTok{x =}\NormalTok{ xnew,}
+      \DataTypeTok{d =}\NormalTok{ dnew,}
+      \DataTypeTok{b =}\NormalTok{ bnew,}
+      \DataTypeTok{s =}\NormalTok{ snew,}
+      \DataTypeTok{itel =}\NormalTok{ itel}
+\NormalTok{    ))}
+\NormalTok{  \}}
+
+\NormalTok{smacofRCU <-}
+\StringTok{  }\ControlFlowTok{function}\NormalTok{ (w,}
+\NormalTok{            delta,}
+\NormalTok{            p,}
+            \DataTypeTok{xold =} \KeywordTok{smacofInitialRC}\NormalTok{(delta, p),}
+            \DataTypeTok{itmax =} \DecValTok{100}\NormalTok{,}
+            \DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{,}
+            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{) \{}
+\NormalTok{    itel <-}\StringTok{ }\DecValTok{1}
+\NormalTok{    dold <-}\StringTok{ }\KeywordTok{smacofDistRC}\NormalTok{ (xold, p)}
+\NormalTok{    sold <-}\StringTok{ }\KeywordTok{smacofLossRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    bold <-}\StringTok{ }\KeywordTok{smacofBmatRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    vinv <-}\StringTok{ }\KeywordTok{mpowerRC}\NormalTok{ (}\KeywordTok{smacofVmatRC}\NormalTok{ (w), }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      h <-}\StringTok{ }\KeywordTok{smacofUpdateRC}\NormalTok{(xold, w, delta, bold, vinv)}
+\NormalTok{      xnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{xnew}
+\NormalTok{      dnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{dnew}
+\NormalTok{      snew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{snew}
+\NormalTok{      bnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{bnew}
+\NormalTok{      eiff <-}\StringTok{ }\KeywordTok{max}\NormalTok{ (}\KeywordTok{abs}\NormalTok{ (xold }\OperatorTok{-}\StringTok{ }\NormalTok{xnew))}
+      \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+        \KeywordTok{cat}\NormalTok{(}
+          \StringTok{"itel "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+          \StringTok{"eiff "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            eiff,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"sold "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            sold,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"snew "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            snew,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{        )}
+\NormalTok{      \}}
+      \ControlFlowTok{if}\NormalTok{ ((eiff }\OperatorTok{<}\StringTok{ }\NormalTok{eps) }\OperatorTok{||}\StringTok{ }\NormalTok{(itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax)) \{}
+        \ControlFlowTok{break}
+\NormalTok{      \}}
+\NormalTok{      itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{      xold <-}\StringTok{ }\NormalTok{xnew}
+\NormalTok{      bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{      dold <-}\StringTok{ }\NormalTok{dnew}
+\NormalTok{      sold <-}\StringTok{ }\NormalTok{snew}
+\NormalTok{    \}}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}
+      \DataTypeTok{x =}\NormalTok{ xnew,}
+      \DataTypeTok{d =}\NormalTok{ dnew,}
+      \DataTypeTok{b =}\NormalTok{ bnew,}
+      \DataTypeTok{s =}\NormalTok{ snew,}
+      \DataTypeTok{itel =}\NormalTok{ itel}
+\NormalTok{    ))}
+\NormalTok{  \}}
+
+\NormalTok{smacofRCU64 <-}
+\StringTok{  }\ControlFlowTok{function}\NormalTok{ (w,}
+\NormalTok{            delta,}
+\NormalTok{            p,}
+            \DataTypeTok{xold =} \KeywordTok{smacofInitialRC}\NormalTok{(delta, p),}
+            \DataTypeTok{itmax =} \DecValTok{100}\NormalTok{,}
+            \DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{,}
+            \DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{) \{}
+\NormalTok{    itel <-}\StringTok{ }\DecValTok{1}
+\NormalTok{    dold <-}\StringTok{ }\KeywordTok{smacofDistRC}\NormalTok{ (xold, p)}
+\NormalTok{    sold <-}\StringTok{ }\KeywordTok{smacofLossRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    bold <-}\StringTok{ }\KeywordTok{smacofBmatRC}\NormalTok{ (dold, w, delta)}
+\NormalTok{    vinv <-}\StringTok{ }\KeywordTok{mpowerRC}\NormalTok{ (}\KeywordTok{smacofVmatRC}\NormalTok{ (w), }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+    \ControlFlowTok{repeat}\NormalTok{ \{}
+\NormalTok{      h <-}\StringTok{ }\KeywordTok{smacofUpdateRC64}\NormalTok{(xold, w, delta, bold, vinv)}
+\NormalTok{      xnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{xnew}
+\NormalTok{      dnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{dnew}
+\NormalTok{      snew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{snew}
+\NormalTok{      bnew <-}\StringTok{ }\NormalTok{h}\OperatorTok{$}\NormalTok{bnew}
+\NormalTok{      eiff <-}\StringTok{ }\KeywordTok{max}\NormalTok{ (}\KeywordTok{abs}\NormalTok{ (xold }\OperatorTok{-}\StringTok{ }\NormalTok{xnew))}
+      \ControlFlowTok{if}\NormalTok{ (verbose) \{}
+        \KeywordTok{cat}\NormalTok{(}
+          \StringTok{"itel "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(itel, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{),}
+          \StringTok{"eiff "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            eiff,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"sold "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            sold,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"snew "}\NormalTok{,}
+          \KeywordTok{formatC}\NormalTok{(}
+\NormalTok{            snew,}
+            \DataTypeTok{width =} \DecValTok{15}\NormalTok{,}
+            \DataTypeTok{digits =} \DecValTok{10}\NormalTok{,}
+            \DataTypeTok{format =} \StringTok{"f"}
+\NormalTok{          ),}
+          \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{        )}
+\NormalTok{      \}}
+      \ControlFlowTok{if}\NormalTok{ ((eiff }\OperatorTok{<}\StringTok{ }\NormalTok{eps) }\OperatorTok{||}\StringTok{ }\NormalTok{(itel }\OperatorTok{==}\StringTok{ }\NormalTok{itmax)) \{}
+        \ControlFlowTok{break}
+\NormalTok{      \}}
+\NormalTok{      itel <-}\StringTok{ }\NormalTok{itel }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\NormalTok{      xold <-}\StringTok{ }\NormalTok{xnew}
+\NormalTok{      bold <-}\StringTok{ }\NormalTok{bnew}
+\NormalTok{      dold <-}\StringTok{ }\NormalTok{dnew}
+\NormalTok{      sold <-}\StringTok{ }\NormalTok{snew}
+\NormalTok{    \}}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}
+      \DataTypeTok{x =}\NormalTok{ xnew,}
+      \DataTypeTok{d =}\NormalTok{ dnew,}
+      \DataTypeTok{b =}\NormalTok{ bnew,}
+      \DataTypeTok{s =}\NormalTok{ snew,}
+      \DataTypeTok{itel =}\NormalTok{ itel}
+\NormalTok{    ))}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{utilsRC.R}\label{utilsrc.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dorpolRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (n) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"dorpol"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{(n), }\KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{2}\NormalTok{]], n, n))}
+\NormalTok{\}}
+
+\NormalTok{docentRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"docent"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{ (n), }\KeywordTok{as.double}\NormalTok{ (x), }\KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{(h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+
+\NormalTok{primatRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (n,}
+\NormalTok{                      m,}
+\NormalTok{                      x,}
+                      \DataTypeTok{width =} \DecValTok{6}\NormalTok{,}
+                      \DataTypeTok{precision =} \DecValTok{4}\NormalTok{) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"primat"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{ (n),}
+      \KeywordTok{as.integer}\NormalTok{ (m),}
+      \KeywordTok{as.integer}\NormalTok{ (width),}
+      \KeywordTok{as.integer}\NormalTok{ (precision),}
+      \KeywordTok{as.double}\NormalTok{ (x)}
+\NormalTok{    )}
+\NormalTok{\}}
+
+\NormalTok{pritrlRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x,}
+                      \DataTypeTok{width =} \DecValTok{6}\NormalTok{,}
+                      \DataTypeTok{precision =} \DecValTok{4}\NormalTok{) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"pritrl"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{ (n),}
+       \KeywordTok{as.integer}\NormalTok{ (width),}
+       \KeywordTok{as.integer}\NormalTok{ (precision),}
+       \KeywordTok{as.double}\NormalTok{ (x))}
+\NormalTok{\}}
+
+
+\NormalTok{pritruRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x,}
+                      \DataTypeTok{width =} \DecValTok{6}\NormalTok{,}
+                      \DataTypeTok{precision =} \DecValTok{4}\NormalTok{) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"pritru"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{ (n),}
+       \KeywordTok{as.integer}\NormalTok{ (width),}
+       \KeywordTok{as.integer}\NormalTok{ (precision),}
+       \KeywordTok{as.double}\NormalTok{ (x))}
+\NormalTok{\}}
+
+
+\NormalTok{priarrRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (n,}
+\NormalTok{                      m,}
+\NormalTok{                      r,}
+\NormalTok{                      x,}
+                      \DataTypeTok{width =} \DecValTok{6}\NormalTok{,}
+                      \DataTypeTok{precision =} \DecValTok{4}\NormalTok{) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"primat"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{ (n),}
+      \KeywordTok{as.integer}\NormalTok{ (m),}
+      \KeywordTok{as.integer}\NormalTok{ (r),}
+      \KeywordTok{as.integer}\NormalTok{(width),}
+      \KeywordTok{as.integer}\NormalTok{ (precision),}
+      \KeywordTok{as.double}\NormalTok{ (x)}
+\NormalTok{    )}
+\NormalTok{\}}
+
+\NormalTok{mpowerRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x, p) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"mpower"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.double}\NormalTok{ (x),}
+       \KeywordTok{as.double}\NormalTok{(p),}
+       \DataTypeTok{xpow =} \KeywordTok{as.double}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{xpow)}
+\NormalTok{\}}
+
+\NormalTok{trimatRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (x)}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ ((}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"trimat"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{(n), }\KeywordTok{as.double}\NormalTok{ (x), }\DataTypeTok{y =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)))}
+  \KeywordTok{return}\NormalTok{(h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+
+\NormalTok{mattriRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{round}\NormalTok{ (}\KeywordTok{sqrt}\NormalTok{ (}\KeywordTok{length}\NormalTok{ (x)))}
+\NormalTok{  m <-}\StringTok{ }\NormalTok{n }\OperatorTok{*}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"mattri"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{(n), }\KeywordTok{as.double}\NormalTok{ (x), }\DataTypeTok{y =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{(h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+
+\NormalTok{mutrmaRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (n, m, a, x) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"mutrma"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.integer}\NormalTok{(m),}
+       \KeywordTok{as.double}\NormalTok{ (a),}
+       \KeywordTok{as.double}\NormalTok{ (x),}
+       \DataTypeTok{y =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{m)))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{y)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{jacobiRC.R}\label{jacobirc.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{jacobi <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, }\DataTypeTok{itmax =} \DecValTok{100}\NormalTok{, }\DataTypeTok{eps =} \FloatTok{1e-10}\NormalTok{) \{}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (a)}
+\NormalTok{  n <-}\StringTok{ }\NormalTok{(}\KeywordTok{sqrt}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\DecValTok{8} \OperatorTok{*}\StringTok{ }\NormalTok{m) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}
+\NormalTok{  i <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{n}
+\NormalTok{  j <-}\StringTok{ }\NormalTok{(}\OperatorTok{-}\NormalTok{(i }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\NormalTok{(n }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{3} \OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)) }\OperatorTok{*}\StringTok{ }\NormalTok{i }\OperatorTok{-}\StringTok{ }\NormalTok{n}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"jacobiC"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{ (n),}
+      \DataTypeTok{a =} \KeywordTok{as.double}\NormalTok{ (a),}
+      \DataTypeTok{e =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, n }\OperatorTok{*}\StringTok{ }\NormalTok{n)),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n)),}
+      \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, n)),}
+      \KeywordTok{as.integer}\NormalTok{ (itmax),}
+      \KeywordTok{as.double}\NormalTok{ (eps)}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}\DataTypeTok{values =}\NormalTok{ h}\OperatorTok{$}\NormalTok{a[j], }\DataTypeTok{vectors =} \KeywordTok{matrix}\NormalTok{ (h}\OperatorTok{$}\NormalTok{e, n, n)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{lapackeRC.R}\label{lapackerc.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dposvR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a, b) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (a)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{max}\NormalTok{ (}\KeywordTok{ncol}\NormalTok{ (b), }\DecValTok{1}\NormalTok{)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"dposv"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.integer}\NormalTok{(m),}
+       \KeywordTok{as.double}\NormalTok{ (a),}
+       \KeywordTok{as.double}\NormalTok{ (b))}
+  \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{is.null}\NormalTok{(}\KeywordTok{ncol}\NormalTok{(b))) \{}
+    \KeywordTok{return}\NormalTok{ (h[[}\DecValTok{4}\NormalTok{]])}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{4}\NormalTok{]], n, m))}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\NormalTok{dsyevdR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (a) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (a)}
+\NormalTok{  x <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{ (}\DecValTok{0}\NormalTok{, n, n)}
+\NormalTok{  h <-}\StringTok{ }\KeywordTok{.C}\NormalTok{(}\StringTok{"dsyevd"}\NormalTok{, }\KeywordTok{as.integer}\NormalTok{(n), }\KeywordTok{as.double}\NormalTok{ (a), }\KeywordTok{as.double}\NormalTok{ (x))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{(}\DataTypeTok{values =}\NormalTok{ h[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\OperatorTok{:}\NormalTok{n], }\DataTypeTok{vectors =} \KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{2}\NormalTok{]], n, n)))}
+\NormalTok{\}}
+
+\NormalTok{dgeqrR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (x)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"dgeqrf"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.integer}\NormalTok{(m),}
+       \DataTypeTok{z =} \KeywordTok{as.double}\NormalTok{ (x),}
+       \DataTypeTok{tau =} \KeywordTok{as.double}\NormalTok{ (}\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{list}\NormalTok{ (}\DataTypeTok{z =} \KeywordTok{matrix}\NormalTok{(h}\OperatorTok{$}\NormalTok{z, n, m), }\DataTypeTok{tau =}\NormalTok{ h}\OperatorTok{$}\NormalTok{tau))}
+\NormalTok{\}}
+
+\NormalTok{dorgqrR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (z, tau) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (z)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (z)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"dorgqr"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.integer}\NormalTok{(m),}
+       \KeywordTok{as.double}\NormalTok{ (z),}
+       \KeywordTok{as.double}\NormalTok{ (tau))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{3}\NormalTok{]], n, m))}
+\NormalTok{\}}
+
+\NormalTok{dorthoR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  n <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{ (x)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{ncol}\NormalTok{ (x)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"dortho"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(n),}
+       \KeywordTok{as.integer}\NormalTok{(m),}
+       \KeywordTok{as.double}\NormalTok{ (x),}
+       \KeywordTok{as.double}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, m)))}
+  \KeywordTok{return}\NormalTok{ (}\KeywordTok{matrix}\NormalTok{(h[[}\DecValTok{3}\NormalTok{]], n, m))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{C code}\label{c-code}
+
+\subsubsection{smacof.h}\label{smacof.h}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#ifndef SMACOF_H}
+\PreprocessorTok{#define SMACOF_H}
+
+\PreprocessorTok{#include }\ImportTok{<lapacke.h>}
+\PreprocessorTok{#include }\ImportTok{<math.h>}
+\PreprocessorTok{#include }\ImportTok{<stdbool.h>}
+\PreprocessorTok{#include }\ImportTok{<stdio.h>}
+\PreprocessorTok{#include }\ImportTok{<stdlib.h>}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ VINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ MINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ SINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ TINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ AINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ SQUARE(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ THIRD(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FOURTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FIFTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MAX(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MIN(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMAX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMOD(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{);}
+
+\DataTypeTok{void}\NormalTok{ dposv(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ dsyevd(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ dgeqrf(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ dorgqr(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ dortho(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ dorpol(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ primat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ priarr(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+            \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ pritrl(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ pritru(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ mpinve(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ mpower(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ mpinvt(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ trimat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ mattri(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ mutrma(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+
+\DataTypeTok{void}\NormalTok{ jacobiC(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+             \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *);}
+
+\DataTypeTok{void}\NormalTok{ smacofDistC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofLossC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+                 \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofBmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+                 \DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofVmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofGuttmanC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+                    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofGradientC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *,}
+                     \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofHmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *,}
+                 \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+                 \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofHessianC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *,}
+                    \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *,}
+                    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+\DataTypeTok{void}\NormalTok{ smacofInitialC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *,}
+                    \DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *, }\DataTypeTok{double}\NormalTok{ *);}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ VINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i) \{ }\ControlFlowTok{return}\NormalTok{ i - }\DecValTok{1}\NormalTok{; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ MINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+    \ControlFlowTok{return}\NormalTok{ (i - }\DecValTok{1}\NormalTok{) + (j - }\DecValTok{1}\NormalTok{) * n;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ AINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ k, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n,}
+                         \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ m) \{}
+    \ControlFlowTok{return}\NormalTok{ (i - }\DecValTok{1}\NormalTok{) + (j - }\DecValTok{1}\NormalTok{) * n + (k - }\DecValTok{1}\NormalTok{) * n * m;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ SINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+    \ControlFlowTok{return}\NormalTok{ ((j - }\DecValTok{1}\NormalTok{) * n) - (j * (j - }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{) + (i - j) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ TINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ j, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n) \{}
+    \ControlFlowTok{return}\NormalTok{ ((j - }\DecValTok{1}\NormalTok{) * n) - ((j - }\DecValTok{1}\NormalTok{) * (j - }\DecValTok{2}\NormalTok{) / }\DecValTok{2}\NormalTok{) + (i - (j - }\DecValTok{1}\NormalTok{)) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ SQUARE(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ THIRD(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FOURTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x * x; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ FIFTH(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x) \{ }\ControlFlowTok{return}\NormalTok{ x * x * x * x * x; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MAX(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ y) \{}
+    \ControlFlowTok{return}\NormalTok{ (x > y) ? x : y;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{double}\NormalTok{ MIN(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ y) \{}
+    \ControlFlowTok{return}\NormalTok{ (x < y) ? x : y;}
+\NormalTok{\}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMAX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{ }\ControlFlowTok{return}\NormalTok{ (x > y) ? x : y; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{ }\ControlFlowTok{return}\NormalTok{ (x < y) ? x : y; \}}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMOD(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{}
+    \ControlFlowTok{return}\NormalTok{ (((x % y) == }\DecValTok{0}\NormalTok{) ? y : (x % y));}
+\NormalTok{\}}
+
+\PreprocessorTok{#endif }\CommentTok{/* SMACOF_H */}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{smacof.c}\label{smacof.c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\PreprocessorTok{#include }\ImportTok{"smacof.h"}
+
+\DataTypeTok{void}\NormalTok{ smacofDistC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *d) \{}
+    \DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{, nn = *n, pp = *p;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+            \DataTypeTok{double}\NormalTok{ dij = }\FloatTok{0.0}\NormalTok{;}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ s = }\DecValTok{1}\NormalTok{; s <= pp; s++) \{}
+\NormalTok{                dij += SQUARE(x[MINDEX(i, s, nn)] - x[MINDEX(j, s, nn)]);}
+\NormalTok{            \}}
+\NormalTok{            d[VINDEX(k)] = sqrt(dij);}
+\NormalTok{            k++;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofLossC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *dist, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta,}
+                 \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{double}\NormalTok{ *stress) \{}
+    \DataTypeTok{int}\NormalTok{ mm = *m;}
+\NormalTok{    *stress = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= mm; k++) \{}
+\NormalTok{        *stress += w[VINDEX(k)] * SQUARE(delta[VINDEX(k)] - dist[VINDEX(k)]);}
+\NormalTok{    \}}
+\NormalTok{    *stress /= }\FloatTok{2.0}\NormalTok{;}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofBmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *dist, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta,}
+                 \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *b) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+\NormalTok{        b[TINDEX(i, i, nn)] = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+            \DataTypeTok{int}\NormalTok{ k = SINDEX(i, j, nn);}
+            \DataTypeTok{double}\NormalTok{ dinv = (dist[k] == }\FloatTok{0.0}\NormalTok{) ? }\FloatTok{0.0}\NormalTok{ : }\FloatTok{1.0}\NormalTok{ / dist[k];}
+            \DataTypeTok{double}\NormalTok{ elem = w[k] * delta[k] * dinv;}
+\NormalTok{            b[TINDEX(i, j, nn)] = -elem;}
+\NormalTok{            b[TINDEX(i, i, nn)] += elem;}
+\NormalTok{            b[TINDEX(j, j, nn)] += elem;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofVmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *v) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+\NormalTok{        v[TINDEX(i, i, nn)] = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+            \DataTypeTok{double}\NormalTok{ elem = w[SINDEX(i, j, nn)];}
+\NormalTok{            v[TINDEX(i, j, nn)] = -elem;}
+\NormalTok{            v[TINDEX(i, i, nn)] += elem;}
+\NormalTok{            v[TINDEX(j, j, nn)] += elem;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofHmatC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *bmat, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *vmat,}
+                 \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *dist,}
+                 \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *work, }\DataTypeTok{double}\NormalTok{ *h) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, pp = *p, np = nn * pp;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ s = }\DecValTok{1}\NormalTok{; s <= pp; s++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ t = }\DecValTok{1}\NormalTok{; t <= s; t++) \{}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{                    work[TINDEX(i, j, nn)] = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{                \}}
+\NormalTok{            \}}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+                    \DataTypeTok{double}\NormalTok{ f1 = (x[MINDEX(i, s, nn)] - x[MINDEX(j, s, nn)]);}
+                    \DataTypeTok{double}\NormalTok{ f2 = (x[MINDEX(i, t, nn)] - x[MINDEX(j, t, nn)]);}
+                    \DataTypeTok{double}\NormalTok{ f3 = THIRD(dist[SINDEX(i, j, nn)]);}
+                    \DataTypeTok{double}\NormalTok{ f4 = delta[SINDEX(i, j, nn)] * w[SINDEX(i, j, nn)];}
+\NormalTok{                    f3 = (f3 < }\FloatTok{1e-10}\NormalTok{) ? }\DecValTok{0}\NormalTok{ : }\DecValTok{1}\NormalTok{ / f3;}
+                    \DataTypeTok{double}\NormalTok{ elem = f1 * f2 * f4 * f3;}
+\NormalTok{                    work[TINDEX(i, j, nn)] = -elem;}
+\NormalTok{                    work[TINDEX(i, i, nn)] += elem;}
+\NormalTok{                    work[TINDEX(j, j, nn)] += elem;}
+\NormalTok{                \}}
+\NormalTok{            \}}
+            \ControlFlowTok{if}\NormalTok{ (s == t) \{}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+                    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{                        h[TINDEX((s - }\DecValTok{1}\NormalTok{) * nn + i, (s - }\DecValTok{1}\NormalTok{) * nn + j, nn * pp)] =}
+\NormalTok{                            bmat[TINDEX(i, j, nn)] - work[TINDEX(i, j, nn)];}
+\NormalTok{                    \}}
+\NormalTok{                \}}
+\NormalTok{            \}}
+            \ControlFlowTok{if}\NormalTok{ (s != t) \{}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+                    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+                        \DataTypeTok{int}\NormalTok{ ij = IMIN(i, j);}
+                        \DataTypeTok{int}\NormalTok{ ji = IMAX(i, j);}
+                        \DataTypeTok{int}\NormalTok{ sj = (s - }\DecValTok{1}\NormalTok{) * nn + j;}
+                        \DataTypeTok{int}\NormalTok{ si = (t - }\DecValTok{1}\NormalTok{) * nn + i;}
+\NormalTok{                        h[TINDEX(sj, si, np)] = -work[TINDEX(ji, ij, nn)];}
+\NormalTok{                    \}}
+\NormalTok{                \}}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofGuttmanC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *bmat, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *vinv,}
+                    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *work, }\DataTypeTok{double}\NormalTok{ *y) \{}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, bmat, x, work);}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, vinv, work, y);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofGradientC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *bmat, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *vmat,}
+                     \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *work, }\DataTypeTok{double}\NormalTok{ *y) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, pp = *p;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, vmat, x, y);}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, bmat, x, work);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ s = }\DecValTok{1}\NormalTok{; s <= pp; s++) \{}
+\NormalTok{            y[MINDEX(i, s, nn)] -= work[MINDEX(i, s, nn)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofHessianC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *bmat, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *vmat,}
+                    \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *dist,}
+                    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *work, }\DataTypeTok{double}\NormalTok{ *h) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, pp = *p, np = nn * pp;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)smacofHmatC(x, bmat, vmat, w, delta, dist, n, p, work, h);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= np; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= np; i++) \{}
+\NormalTok{            h[TINDEX(i, j, np)] = -h[TINDEX(i, j, np)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ s = }\DecValTok{1}\NormalTok{; s <= pp; s++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{                h[TINDEX((s - }\DecValTok{1}\NormalTok{) * nn + i, (s - }\DecValTok{1}\NormalTok{) * nn + j, np)] +=}
+\NormalTok{                    vmat[TINDEX(i, j, nn)];}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofNewtonC() \{ }\ControlFlowTok{return}\NormalTok{; \}}
+
+\DataTypeTok{void}\NormalTok{ smacofInitialC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p,}
+                    \DataTypeTok{double}\NormalTok{ *work1, }\DataTypeTok{double}\NormalTok{ *work2, }\DataTypeTok{double}\NormalTok{ *work3, }\DataTypeTok{double}\NormalTok{ *work4,}
+                    \DataTypeTok{double}\NormalTok{ *x) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, pp = *p, itmax = }\DecValTok{100}\NormalTok{;}
+    \DataTypeTok{double}\NormalTok{ s, ss = }\FloatTok{0.0}\NormalTok{, eps = }\FloatTok{1e-6}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+\NormalTok{        work1[VINDEX(i)] = }\FloatTok{0.0}\NormalTok{;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+            \ControlFlowTok{if}\NormalTok{ (i == j) }\ControlFlowTok{continue}\NormalTok{;}
+            \DataTypeTok{int}\NormalTok{ ij = IMAX(i, j);}
+            \DataTypeTok{int}\NormalTok{ ji = IMIN(i, j);}
+\NormalTok{            s = SQUARE(delta[SINDEX(ij, ji, nn)]);}
+\NormalTok{            ss += s;}
+\NormalTok{            work1[VINDEX(i)] += s;}
+            \ControlFlowTok{if}\NormalTok{ (j < i) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{            work2[TINDEX(ij, ji, nn)] = s;}
+\NormalTok{        \}}
+\NormalTok{        work1[VINDEX(i)] /= (}\DataTypeTok{double}\NormalTok{)nn;}
+\NormalTok{    \}}
+\NormalTok{    ss /= SQUARE((}\DataTypeTok{double}\NormalTok{)nn);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{            work2[TINDEX(i, j, nn)] -= work1[VINDEX(i)];}
+\NormalTok{            work2[TINDEX(i, j, nn)] -= work1[VINDEX(j)];}
+\NormalTok{            work2[TINDEX(i, j, nn)] += ss;}
+\NormalTok{            work2[TINDEX(i, j, nn)] *= -}\FloatTok{0.5}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)jacobiC(n, work2, work3, work1, work4, &itmax, &eps);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= pp; j++) \{}
+\NormalTok{            s = work2[TINDEX(j, j, nn)];}
+            \ControlFlowTok{if}\NormalTok{ (s <= }\DecValTok{0}\NormalTok{) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{            x[MINDEX(i, j, nn)] = work3[MINDEX(i, j, nn)] * sqrt(s);}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ smacofUpdateC(}\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *xold, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *delta,}
+                   \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *vinv, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{double}\NormalTok{ *dnew,}
+                   \DataTypeTok{double}\NormalTok{ *bmat, }\DataTypeTok{double}\NormalTok{ *work, }\DataTypeTok{double}\NormalTok{ *snew, }\DataTypeTok{double}\NormalTok{ *xnew) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, pp = *p, mm = nn * (nn - }\DecValTok{1}\NormalTok{) / }\DecValTok{2}\NormalTok{;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, bmat, xold, work);}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)mutrma(n, p, vinv, work, xnew);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+            \DataTypeTok{double}\NormalTok{ dij = }\FloatTok{0.0}\NormalTok{;}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ s = }\DecValTok{1}\NormalTok{; s <= pp; s++) \{}
+\NormalTok{                dij += SQUARE(xnew[MINDEX(i, s, nn)] - xnew[MINDEX(j, s, nn)]);}
+\NormalTok{            \}}
+\NormalTok{            dnew[SINDEX(i, j, nn)] = sqrt(dij);}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+\NormalTok{        bmat[TINDEX(i, i, nn)] = }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn - }\DecValTok{1}\NormalTok{; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+            \DataTypeTok{int}\NormalTok{ k = SINDEX(i, j, nn);}
+            \DataTypeTok{double}\NormalTok{ dinv = (dnew[k] == }\FloatTok{0.0}\NormalTok{) ? }\FloatTok{0.0}\NormalTok{ : }\FloatTok{1.0}\NormalTok{ / dnew[k];}
+            \DataTypeTok{double}\NormalTok{ elem = w[k] * delta[k] * dinv;}
+\NormalTok{            bmat[TINDEX(i, j, nn)] = -elem;}
+\NormalTok{            bmat[TINDEX(i, i, nn)] += elem;}
+\NormalTok{            bmat[TINDEX(j, j, nn)] += elem;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    *snew = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= mm; k++) \{}
+\NormalTok{        *snew += w[VINDEX(k)] * SQUARE(delta[VINDEX(k)] - dnew[VINDEX(k)]);}
+\NormalTok{    \}}
+\NormalTok{    *snew /= }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{utils.c}\label{utils.c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include }\ImportTok{"smacof.h"}
+
+\CommentTok{// complete set of orthogonal polynomials}
+
+\DataTypeTok{void}\NormalTok{ dorpol(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *p) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+\NormalTok{        p[MINDEX(i, }\DecValTok{1}\NormalTok{, *n)] = }\FloatTok{1.0}\NormalTok{;}
+        \DataTypeTok{double}\NormalTok{ di = (}\DataTypeTok{double}\NormalTok{)i;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{2}\NormalTok{; j <= *n; j++) \{}
+\NormalTok{            p[MINDEX(i, j, *n)] = p[MINDEX(i, j - }\DecValTok{1}\NormalTok{, *n)] * di;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)dortho(n, n, p);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// double centering}
+
+\DataTypeTok{void}\NormalTok{ docent(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n;}
+    \DataTypeTok{double}\NormalTok{ *ssum = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)nn, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{)), t = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \DataTypeTok{double}\NormalTok{ s = }\FloatTok{0.0}\NormalTok{;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+            \DataTypeTok{int}\NormalTok{ ij = IMAX(i, j);}
+            \DataTypeTok{int}\NormalTok{ ji = IMIN(j, i);}
+\NormalTok{            s += x[TINDEX(ij, ji, nn)];}
+\NormalTok{            t += x[TINDEX(ij, ji, nn)];}
+\NormalTok{        \}}
+\NormalTok{        ssum[VINDEX(i)] = s / ((}\DataTypeTok{double}\NormalTok{)nn);}
+\NormalTok{    \}}
+\NormalTok{    t /= (}\DataTypeTok{double}\NormalTok{)SQUARE(nn);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{            y[TINDEX(i, j, nn)] =}
+\NormalTok{                -(x[TINDEX(i, j, nn)] - ssum[VINDEX(i)] - ssum[VINDEX(j)] + t) /}
+                \FloatTok{2.0}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    free(ssum);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// print a general matrix}
+
+\DataTypeTok{void}\NormalTok{ primat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p,}
+            \DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= *m; j++) \{}
+\NormalTok{            printf(}\StringTok{" %+*.*f "}\NormalTok{, *w, *p, x[MINDEX(i, j, *n)]);}
+\NormalTok{        \}}
+\NormalTok{        printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{    \}}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// print strict lower triangle}
+
+\DataTypeTok{void}\NormalTok{ pritrl(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+            \ControlFlowTok{if}\NormalTok{ (i == j) \{}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= *w + }\DecValTok{2}\NormalTok{; k++) \{}
+\NormalTok{                    printf(}\StringTok{"%c"}\NormalTok{, }\CharTok{'*'}\NormalTok{);}
+\NormalTok{                \}}
+\NormalTok{            \}}
+            \ControlFlowTok{if}\NormalTok{ (i > j) \{}
+\NormalTok{                printf(}\StringTok{" %+*.*f "}\NormalTok{, *w, *p, x[SINDEX(i, j, *n)]);}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{        printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{    \}}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// print inclusive lower triangle}
+
+\DataTypeTok{void}\NormalTok{ pritru(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= i; j++) \{}
+\NormalTok{            printf(}\StringTok{" %+*.*f "}\NormalTok{, *w, *p, x[TINDEX(i, j, *n)]);}
+\NormalTok{        \}}
+\NormalTok{        printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{    \}}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// print general array}
+
+\DataTypeTok{void}\NormalTok{ priarr(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *r, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *w,}
+            \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *p, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x) \{}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= *r; k++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= *n; i++) \{}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= *m; j++) \{}
+\NormalTok{                printf(}\StringTok{" %+*.*f "}\NormalTok{, *w, *p, x[AINDEX(i, j, k, *n, *m)]);}
+\NormalTok{            \}}
+\NormalTok{            printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{        \}}
+\NormalTok{        printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+\NormalTok{    \}}
+\NormalTok{    printf(}\StringTok{"}\SpecialCharTok{\textbackslash{}n\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// arbitrary power of a matrix}
+
+\DataTypeTok{void}\NormalTok{ mpower(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *power, }\DataTypeTok{double}\NormalTok{ *xpow) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, itmax = }\DecValTok{100}\NormalTok{;}
+    \DataTypeTok{double}\NormalTok{ eps = }\FloatTok{1e-6}\NormalTok{;}
+    \DataTypeTok{double}\NormalTok{ *e = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)SQUARE(nn), }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+    \DataTypeTok{double}\NormalTok{ *oldi = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)nn, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+    \DataTypeTok{double}\NormalTok{ *oldj = (}\DataTypeTok{double}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)nn, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)jacobiC(n, x, e, oldi, oldj, &itmax, &eps);}
+    \DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \DataTypeTok{double}\NormalTok{ s = x[VINDEX(k)];}
+\NormalTok{        oldi[VINDEX(i)] = (s > }\FloatTok{1e-10}\NormalTok{) ? pow(s, *power) : }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{        k += (nn - (i - }\DecValTok{1}\NormalTok{));}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+            \DataTypeTok{double}\NormalTok{ s = }\FloatTok{0.0}\NormalTok{;}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= nn; k++) \{}
+\NormalTok{                s +=}
+\NormalTok{                    e[MINDEX(i, k, nn)] * e[MINDEX(j, k, nn)] * oldi[VINDEX(k)];}
+\NormalTok{            \}}
+\NormalTok{            xpow[TINDEX(i, j, nn)] = s;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{    free(e);}
+\NormalTok{    free(oldi);}
+\NormalTok{    free(oldj);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// inclusive lower triangle to symmetric}
+
+\DataTypeTok{void}\NormalTok{ trimat(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+\NormalTok{            y[MINDEX(i, j, nn)] =}
+\NormalTok{                (i >= j) ? x[TINDEX(i, j, nn)] : x[TINDEX(j, i, nn)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// symmetric to inclusive lower triangular}
+
+\DataTypeTok{void}\NormalTok{ mattri(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x, }\DataTypeTok{double}\NormalTok{ *y) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{            y[TINDEX(i, j, nn)] = x[MINDEX(i, j, nn)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\CommentTok{// premultiply matrix by symmetric matrix in inclusive triangular storage}
+
+\DataTypeTok{void}\NormalTok{ mutrma(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *x,}
+            \DataTypeTok{double}\NormalTok{ *y) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, mm = *m;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= nn; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= mm; j++) \{}
+            \DataTypeTok{double}\NormalTok{ s = }\FloatTok{0.0}\NormalTok{;}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= nn; k++) \{}
+                \DataTypeTok{int}\NormalTok{ ik = IMAX(i, k);}
+                \DataTypeTok{int}\NormalTok{ ki = IMIN(i, k);}
+\NormalTok{                s += a[TINDEX(ik, ki, nn)] * x[MINDEX(k, j, nn)];}
+\NormalTok{            \}}
+\NormalTok{            y[MINDEX(i, j, nn)] = s;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+\CommentTok{// direct sum of two matrices -- can be used recursively}
+
+\DataTypeTok{void}\NormalTok{ dirsum(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *b,}
+            \DataTypeTok{double}\NormalTok{ *c) \{}
+    \DataTypeTok{int}\NormalTok{ nn = *n, mm = *m, mn = nn + mm;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= nn; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= nn; i++) \{}
+\NormalTok{            c[TINDEX(i, j, mn)] = a[TINDEX(i, j, nn)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= mm; j++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j; i <= mm; i++) \{}
+\NormalTok{            c[TINDEX(nn + i, nn + j, mn)] = b[TINDEX(i, j, mm)];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{jacobi.c}\label{jacobi.c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include }\ImportTok{"smacof.h"}
+
+\DataTypeTok{void}\NormalTok{ jacobiC(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *nn, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *evec, }\DataTypeTok{double}\NormalTok{ *oldi, }\DataTypeTok{double}\NormalTok{ *oldj,}
+             \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *itmax, }\DataTypeTok{const} \DataTypeTok{double}\NormalTok{ *eps) \{}
+    \DataTypeTok{int}\NormalTok{ n = *nn, itel = }\DecValTok{1}\NormalTok{;}
+    \DataTypeTok{double}\NormalTok{ d = }\FloatTok{0.0}\NormalTok{, s = }\FloatTok{0.0}\NormalTok{, t = }\FloatTok{0.0}\NormalTok{, u = }\FloatTok{0.0}\NormalTok{, v = }\FloatTok{0.0}\NormalTok{, p = }\FloatTok{0.0}\NormalTok{, q = }\FloatTok{0.0}\NormalTok{,}
+\NormalTok{           r = }\FloatTok{0.0}\NormalTok{;}
+    \DataTypeTok{double}\NormalTok{ fold = }\FloatTok{0.0}\NormalTok{, fnew = }\FloatTok{0.0}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n; j++) \{}
+\NormalTok{            evec[MINDEX(i, j, n)] = (i == j) ? }\FloatTok{1.0}\NormalTok{ : }\FloatTok{0.0}\NormalTok{;}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{        fold += SQUARE(a[TINDEX(i, i, n)]);}
+\NormalTok{    \}}
+    \ControlFlowTok{while}\NormalTok{ (true) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j <= n - }\DecValTok{1}\NormalTok{; j++) \{}
+            \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = j + }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{                p = a[TINDEX(i, j, n)];}
+\NormalTok{                q = a[TINDEX(i, i, n)];}
+\NormalTok{                r = a[TINDEX(j, j, n)];}
+                \ControlFlowTok{if}\NormalTok{ (fabs(p) < }\FloatTok{1e-10}\NormalTok{) }\ControlFlowTok{continue}\NormalTok{;}
+\NormalTok{                d = (q - r) / }\FloatTok{2.0}\NormalTok{;}
+\NormalTok{                s = (p < }\DecValTok{0}\NormalTok{) ? -}\FloatTok{1.0}\NormalTok{ : }\FloatTok{1.0}\NormalTok{;}
+\NormalTok{                t = -d / sqrt(SQUARE(d) + SQUARE(p));}
+\NormalTok{                u = sqrt((}\DecValTok{1}\NormalTok{ + t) / }\DecValTok{2}\NormalTok{);}
+\NormalTok{                v = s * sqrt((}\DecValTok{1}\NormalTok{ - t) / }\DecValTok{2}\NormalTok{);}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+                    \DataTypeTok{int}\NormalTok{ ik = IMIN(i, k);}
+                    \DataTypeTok{int}\NormalTok{ ki = IMAX(i, k);}
+                    \DataTypeTok{int}\NormalTok{ jk = IMIN(j, k);}
+                    \DataTypeTok{int}\NormalTok{ kj = IMAX(j, k);}
+\NormalTok{                    oldi[VINDEX(k)] = a[TINDEX(ki, ik, n)];}
+\NormalTok{                    oldj[VINDEX(k)] = a[TINDEX(kj, jk, n)];}
+\NormalTok{                \}}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+                    \DataTypeTok{int}\NormalTok{ ik = IMIN(i, k);}
+                    \DataTypeTok{int}\NormalTok{ ki = IMAX(i, k);}
+                    \DataTypeTok{int}\NormalTok{ jk = IMIN(j, k);}
+                    \DataTypeTok{int}\NormalTok{ kj = IMAX(j, k);}
+\NormalTok{                    a[TINDEX(ki, ik, n)] =}
+\NormalTok{                        u * oldi[VINDEX(k)] - v * oldj[VINDEX(k)];}
+\NormalTok{                    a[TINDEX(kj, jk, n)] =}
+\NormalTok{                        v * oldi[VINDEX(k)] + u * oldj[VINDEX(k)];}
+\NormalTok{                \}}
+                \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = }\DecValTok{1}\NormalTok{; k <= n; k++) \{}
+\NormalTok{                    oldi[VINDEX(k)] = evec[MINDEX(k, i, n)];}
+\NormalTok{                    oldj[VINDEX(k)] = evec[MINDEX(k, j, n)];}
+\NormalTok{                    evec[MINDEX(k, i, n)] =}
+\NormalTok{                        u * oldi[VINDEX(k)] - v * oldj[VINDEX(k)];}
+\NormalTok{                    evec[MINDEX(k, j, n)] =}
+\NormalTok{                        v * oldi[VINDEX(k)] + u * oldj[VINDEX(k)];}
+\NormalTok{                \}}
+\NormalTok{                a[TINDEX(i, i, n)] =}
+\NormalTok{                    SQUARE(u) * q + SQUARE(v) * r - }\DecValTok{2}\NormalTok{ * u * v * p;}
+\NormalTok{                a[TINDEX(j, j, n)] =}
+\NormalTok{                    SQUARE(v) * q + SQUARE(u) * r + }\DecValTok{2}\NormalTok{ * u * v * p;}
+\NormalTok{                a[TINDEX(i, j, n)] =}
+\NormalTok{                    u * v * (q - r) + (SQUARE(u) - SQUARE(v)) * p;}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{        fnew = }\FloatTok{0.0}\NormalTok{;}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+\NormalTok{            fnew += SQUARE(a[TINDEX(i, i, n)]);}
+\NormalTok{        \}}
+        \ControlFlowTok{if}\NormalTok{ (((fnew - fold) < *eps) || (itel == *itmax)) }\ControlFlowTok{break}\NormalTok{;}
+\NormalTok{        fold = fnew;}
+\NormalTok{        itel++;}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{lapacke.c}\label{lapacke.c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#include }\ImportTok{"smacof.h"}
+
+\DataTypeTok{void}\NormalTok{ dposv(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *b) \{}
+\NormalTok{    lapack_int nn = (lapack_int)*n, mm = (lapack_int)*m;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dposv(LAPACK_COL_MAJOR, }\CharTok{'U'}\NormalTok{, nn, mm, a, nn, b, nn);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ dsyevd(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *x) \{}
+\NormalTok{    lapack_int nn = (lapack_int)*n;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dsyevd(LAPACK_COL_MAJOR, }\CharTok{'V'}\NormalTok{, }\CharTok{'U'}\NormalTok{, nn, a, nn, x);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ dgeqrf(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *tau) \{}
+\NormalTok{    lapack_int nn = (lapack_int)*n, mm = (lapack_int)*m;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dgeqrf(LAPACK_COL_MAJOR, nn, mm, a, nn, tau);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ dorgqr(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{double}\NormalTok{ *a, }\DataTypeTok{double}\NormalTok{ *tau) \{}
+\NormalTok{    lapack_int nn = (lapack_int)*n, mm = (lapack_int)*m;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dorgqr(LAPACK_COL_MAJOR, nn, mm, mm, a, nn, tau);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ dortho(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{double}\NormalTok{ *a) \{}
+\NormalTok{    lapack_int nn = (lapack_int)*n, mm = (lapack_int)*m;}
+    \DataTypeTok{double}\NormalTok{ *tau = calloc((}\DataTypeTok{size_t}\NormalTok{)mm, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{double}\NormalTok{));}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dgeqrf(LAPACK_COL_MAJOR, nn, mm, a, nn, tau);}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)LAPACKE_dorgqr(LAPACK_COL_MAJOR, nn, mm, mm, a, nn, tau);}
+\NormalTok{    free(tau);}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-deleeuw_C_77}{}
+De Leeuw, J. 1977. ``Applications of Convex Analysis to Multidimensional
+Scaling.'' In \emph{Recent Developments in Statistics}, edited by J.R.
+Barra, F. Brodeau, G. Romier, and B. Van Cutsem, 133--45. Amsterdam, The
+Netherlands: North Holland Publishing Company.
+\url{http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_C_77.pdf}.
+
+\hypertarget{ref-deleeuw_A_84f}{}
+---------. 1984. ``Differentiability of Kruskal's Stress at a Local
+Minimum.'' \emph{Psychometrika} 49: 111--13.
+\url{http://deleeuwpdx.net/janspubs/1984/articles/deleeuw_A_84f.pdf}.
+
+\hypertarget{ref-deleeuw_A_88b}{}
+---------. 1988. ``Convergence of the Majorization Method for
+Multidimensional Scaling.'' \emph{Journal of Classification} 5: 163--80.
+\url{http://deleeuwpdx.net/janspubs/1988/articles/deleeuw_A_88b.pdf}.
+
+\hypertarget{ref-deleeuw_U_14b}{}
+---------. 2014. ``Bounding, and Sometimes Finding, the Global Minimum
+in Multidimensional Scaling.'' UCLA Department of Statistics.
+doi:\href{https://doi.org/10.13140/RG.2.1.5068.4248}{10.13140/RG.2.1.5068.4248}.
+
+\hypertarget{ref-deleeuw_heiser_C_80}{}
+De Leeuw, J., and W. J. Heiser. 1980. ``Multidimensional Scaling with
+Restrictions on the Configuration.'' In \emph{Multivariate Analysis,
+Volume V}, edited by P.R. Krishnaiah, 501--22. Amsterdam, The
+Netherlands: North Holland Publishing Company.
+\url{http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf}.
+
+\hypertarget{ref-deleeuw_heiser_C_77}{}
+De Leeuw, J., and W.J. Heiser. 1977. ``Convergence of Correction Matrix
+Algorithms for Multidimensional Scaling.'' In \emph{Geometric
+Representations of Relational Data}, edited by J.C. Lingoes, 735--53.
+Ann Arbor, Michigan: Mathesis Press.
+\url{http://deleeuwpdx.net/janspubs/1977/chapters/deleeuw_heiser_C_77.pdf}.
+
+\hypertarget{ref-deleeuw_mair_A_09c}{}
+De Leeuw, J., and P. Mair. 2009. ``Multidimensional Scaling Using
+Majorization: SMACOF in R.'' \emph{Journal of Statistical Software} 31
+(3): 1--30.
+\url{http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf}.
+
+\hypertarget{ref-gerber_moesinger_furrer_16}{}
+Gerber, F., K. Moesinger, and R. Furrer. 2016. ``dotCall64: An efficient
+interface to compiled C/C++ and Fortran code supporting long vectors.''
+\emph{R journal (submitted)}.
+
+\hypertarget{ref-gerber_moesinger_furrer_17}{}
+---------. 2017. ``Extending R packages to support 64-bit compiled code:
+An illustration with spam64 and GIMMS NDVI3g data.'' \emph{Computers \&
+Geosciences} 104: 109--19.
+
+\hypertarget{ref-guttman_68}{}
+Guttman, L. 1968. ``A General Nonmetric Technique for Fitting the
+Smallest Coordinate Space for a Configuration of Points.''
+\emph{Psychometrika} 33: 469--506.
+
+\hypertarget{ref-lapacke_16}{}
+LAPACKE. 2016. ``The LAPACKE C Interface to LAPACK.''
+\url{http://www.netlib.org/lapack/lapacke.html}.
+
+
+\end{document}

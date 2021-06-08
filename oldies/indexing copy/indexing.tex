@@ -1,0 +1,717 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Multidimensional Array Indexing and Storage},
+            pdfauthor={Jan de Leeuw},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Multidimensional Array Indexing and Storage}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jan de Leeuw}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Version 27, August 31, 2017}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We give R, C, and R-\textgreater{}C code to access lineary stored
+multidimensional arrays and compactly stored multidimensional
+super-symmetric arrays.
+\end{abstract}
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Note: This is a working paper which will be expanded/updated frequently.
+All suggestions for improvement are welcome. The directory
+\href{http://deleeuwpdx.net/pubfolders/indexing}{deleeuwpdx.net/pubfolders/indexing}
+has a pdf version, the bib file, the complete Rmd file with the code
+chunks, and the R and C source code.
+
+\section{Introduction}\label{introduction}
+
+Suppose \(A\) is an array of \emph{rank} \(r\) and \emph{dimension}
+\((n_1,\cdots,n_r)\). Here rank is used in the APL sense, i.e.~the
+length of the dimension vector.
+
+\(A\) has elements \(a_{i_1\cdots i_m}\). It is easy enough to
+visualize, or at least conceptualize, these \(n:=n_1\times\cdots n_m\)
+elements in an \(m\)-dimensional rectangular block of cells, but
+unfortunately such blocks cannot be stored directly in contiguous
+locations in computer memory. The array \(A\) is usually stored in \(n\)
+contiguous locations in memory, i.e.~in a form that corresponds with a
+vector, an array of rank one.
+
+Say \(b\) is a pointer to the first element stored. We need a mapping
+\(f\) from \(\mathcal{I}_{n_1}\otimes\cdots\mathcal{I}_{n_m}\) into
+\(\mathcal{I}_n\) such that \(b+f(i_1,\cdots,i_m)\) is a pointer to
+\(a_{i_1\cdots i_m}\). Or, using C,
+\(b[f(i_1,\cdots,i_m)]=*(b+f(i_1,\cdots,i_m))\) must be equal to
+\(a_{i_1\cdots i_m}\). Let's call such an \(f\) an \emph{index mapping}.
+We are interested in both the index mapping \(f\) and its inverse
+\(f^{-1}:\mathcal{I}_n\rightarrow\mathcal{I}_{n_1}\otimes\cdots\mathcal{I}_{n_m}\).
+
+If \(A\) is symmetric, or anti-symmetric, or triangular, or hollow, then
+it is not necessary to store all its elements. This means that \(f\) is
+no longer bijective, because fewer than \(n\) elements are stored in
+memory. In fact, the main motivation for this paper is to derive the
+index mapping, and its inverse, for the super-symmetric arrays of
+partials derivatives discussed in De Leeuw (2017).
+
+In this paper I review and program index mappings for arrays that can be
+used to assess and retrieve array elements from contiguous memory
+locations. I am \(99.99\%\) sure there is nothing new in the paper, I
+just wanted to collect these results in a single convenient place, and
+provide code. As for the programming languages, we first develop in R,
+and then translate to C.
+
+\section{Matrices}\label{matrices}
+
+\subsection{General Rectangular
+Matrices}\label{general-rectangular-matrices}
+
+Storing the elements of a general rectangular matrix in contiguous
+locations in memory can be done in many ways, but two specific ones are
+the most obvious. We can store row one first, then continue with row
+two, and so on. This is \emph{row major order}. Or we can store column
+one, append column two, and so on. That is \emph{column major order}. If
+\(A\) is
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]   3    2    1 
+## [2,]  10    6    7 
+## [3,]   8   12    5 
+## [4,]  11    9    4
+\end{verbatim}
+
+then column major order stores the matrix as
+
+\begin{verbatim}
+##  [1]   3  10   8  11   2   6  12   9   1   7   5   4
+\end{verbatim}
+
+and row major order stores it as
+
+\begin{verbatim}
+##  [1]   3   2   1  10   6   7   8  12   5  11   9   4
+\end{verbatim}
+
+The index mapping for column major order is
+
+\begin{verbatim}
+##  1  1  ***   1 
+##  2  1  ***   2 
+##  3  1  ***   3 
+##  4  1  ***   4 
+##  1  2  ***   5 
+##  2  2  ***   6 
+##  3  2  ***   7 
+##  4  2  ***   8 
+##  1  3  ***   9 
+##  2  3  ***  10 
+##  3  3  ***  11 
+##  4  3  ***  12
+\end{verbatim}
+
+and for row major order it is
+
+\begin{verbatim}
+##  1  1  ***   1 
+##  1  2  ***   2 
+##  1  3  ***   3 
+##  2  1  ***   4 
+##  2  2  ***   5 
+##  2  3  ***   6 
+##  3  1  ***   7 
+##  3  2  ***   8 
+##  3  3  ***   9 
+##  4  1  ***  10 
+##  4  2  ***  11 
+##  4  3  ***  12
+\end{verbatim}
+
+Because the row index changes fastest, we could call column major
+ordering \emph{first-fast}. Row major ordering has the second, i.e.~the
+last index changing fastest, and could therefore be called
+\emph{last-fast}. That terminology has the advantage it generalizes to
+multidimensional arrays, while the use of rows and columns is more or
+less limited to matrices.
+
+The main application we have in mind is to pass matrices and arrays from
+R to C, with I/O and memory allocation done in R, and computation in C.
+This implies that the C versions of our indexing routines are the most
+useful ones.
+
+R stores matrices first-fast (showing its origins, as a REPL interface
+to FORTRAN routines). Thus then \texttt{a{[}3{]}\ =}8 and
+\texttt{a{[}11{]}\ =}5, because \texttt{as.vector(a)} is
+
+\begin{verbatim}
+##  [1]  3 10  8 11  2  6 12  9  1  7  5  4
+\end{verbatim}
+
+First-fast is how the arrays arrive in C, where the index calculations
+are done to retrieve the elements. As a consequence, both for matrices
+and arrays, first-fast is the most relevant storage mode for our
+purposes. We do not have to worry about how C stores matrices
+multidimensional arrays, because for our purposes it is better to
+pretend that C does not have any matrices or multidimensional arrays at
+all.
+
+\subsection{Symmetric and Triangular
+Matrices}\label{symmetric-and-triangular-matrices}
+
+For symmetric and anti-symmetric matrices we only have to store half of
+the elements. This means making two choices, first if we want to store
+the upper or the lower triangle, second if we want to use first-fast or
+last-fast. Storing the lower triangle means storing all \(a_{ij}\) with
+\(i\geq j\), storing the upper triangle stores all \(a_{ij}\) with
+\(i\leq j\). Because of generalization to multidimensional arrays we
+call the first option \emph{decreasing} and the second option
+\emph{increasing}.
+
+We will choose the upper or increasing triangle combined with first-fast
+storage throughout. For a symmetric matrix we only have to store
+\(N=\frac12 n(n+1)\) elements. The mapping function will be defined for
+all \(i\leq j\), and it maps those index pairs bijectively on
+\(1,\cdots,N\). This mapping function also has an inverse. We then
+extend the mapping function to all index pairs by first ordering the
+pair, making the extended mapping function surjective. We will not give
+the mapping function yet, because it will be just a special case of the
+one for super-symmetric arrays.
+
+Just as an aside, our conventions imply that the elements of a lower
+triangular matrix, in which the non-zero \(a_{ij}\) have \(i\geq j\),
+will be stored in increasing or upper triangle form, in other words as
+its transpose. The extended mapping function for that case, which we do
+not really consider in detail, will have to take that into account.
+Also, strictly lower and upper triangular matrices, anti-symmetric
+matrices, and symmetric hollow matrices such as distance matrices, only
+need to store \(\frac12 n(n-1)\) elements. We do not discuss storage
+schemes that leave out the diagonal. We always store the diagonal
+elements, but the extended mapping function has no need to access them.
+
+\section{Arrays}\label{arrays}
+
+\subsection{General Arrays}\label{general-arrays}
+
+Linear storage of the elements of a general array or rank \(m\) and
+dimension \((n_1,\cdots,n_m)\) can be done in many ways. First-fast and
+last-fast are just two special cases of the \(m!\) ways in which we can
+nest the index loops. Since going through all possibilities is both
+boring and unnessary we limit ourselves to first-fast. If, for whatever
+reason, another permutation of the indices is needed we can first
+transpose the array in R, for instance using \texttt{aperm()} from the
+base package, or \texttt{aplTranspose()} from De Leeuw and Yajima
+(2016).
+
+The R version of the mapping function is \texttt{fArrayFirst()}. Note
+that it is identical to the \texttt{aplDecode()} function from De Leeuw
+and Yajima (2016). For completeness we also give
+\texttt{fArrayFirstInverse()}, which is \texttt{aplEncode()}, the
+inverse \(f^{-1}\), mapping \(\mathcal{I}_n\) into
+\(\mathcal{I}_{n_1}\otimes\cdots\mathcal{I}_{n_m}\). Our example is a
+\(4\times 3\times 2\) array. In tabular form the index mapping is
+
+\begin{verbatim}
+##  1  1  1  ***   1 
+##  2  1  1  ***   2 
+##  3  1  1  ***   3 
+##  4  1  1  ***   4 
+##  1  2  1  ***   5 
+##  2  2  1  ***   6 
+##  3  2  1  ***   7 
+##  4  2  1  ***   8 
+##  1  3  1  ***   9 
+##  2  3  1  ***  10 
+##  3  3  1  ***  11 
+##  4  3  1  ***  12 
+##  1  1  2  ***  13 
+##  2  1  2  ***  14 
+##  3  1  2  ***  15 
+##  4  1  2  ***  16 
+##  1  2  2  ***  17 
+##  2  2  2  ***  18 
+##  3  2  2  ***  19 
+##  4  2  2  ***  20 
+##  1  3  2  ***  21 
+##  2  3  2  ***  22 
+##  3  3  2  ***  23 
+##  4  3  2  ***  24
+\end{verbatim}
+
+and in array form it is
+
+\begin{verbatim}
+## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]   13   17   21
+## [2,]   14   18   22
+## [3,]   15   19   23
+## [4,]   16   20   24
+\end{verbatim}
+
+\subsection{Super-symmetry}\label{super-symmetry}
+
+An array \(A\) of rank \(m\) and dimension \((n,\cdots,n)\) is
+\emph{super-symmetric} if \(a_{i_1\cdots i_m}\) is invariant under
+permutation of indices. Think of arrays of product moments, cumulants,
+or partial derivatives. Super-symmetry generalizes symmetry of matrices.
+
+In order not to drown in the \((m!)\times (m!)\) combinations of
+what-fast and which-triangle, we limit ourselves to first-fast and
+increasing (i.e.~index tuples with \(i_1\leq\cdots\leq i_m\)).
+
+The number of elements we have to store is \(\binom{m+n-1}{m}\), instead
+of \(n^m\). This can be a considerable saving of storage if \(m\) and/or
+\(n\) are at all large. For \(n=10\) and \(m=4\), for example, we save
+\(93\%\) of the storage. For large \(n\) the savings are approximately
+\(100*(1-\frac{1}{m!})\%\).
+
+The mapping function for a super-symmetric array, with first-fast and
+increasing index vectors, is \texttt{fSupSymIncreasingFirst()}. Note
+that this function does not need to know the dimensions of the array.
+Also it starts by sorting the elements of the index vector. Thus
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fSupSymIncreasingFirstRC}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+and also
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fSupSymIncreasingFirstRC}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+The inverse mapping is \texttt{fSupSymIncreasingFirstInverse()}.
+
+As an example, here is the result for a four-dimensional super-symmetric
+array of order four. There are only 35, instead of 256, elements to
+consider.
+
+\begin{verbatim}
+##  1  1  1  1  ***   1 
+##  1  1  1  2  ***   2 
+##  1  1  2  2  ***   3 
+##  1  2  2  2  ***   4 
+##  2  2  2  2  ***   5 
+##  1  1  1  3  ***   6 
+##  1  1  2  3  ***   7 
+##  1  2  2  3  ***   8 
+##  2  2  2  3  ***   9 
+##  1  1  3  3  ***  10 
+##  1  2  3  3  ***  11 
+##  2  2  3  3  ***  12 
+##  1  3  3  3  ***  13 
+##  2  3  3  3  ***  14 
+##  3  3  3  3  ***  15 
+##  1  1  1  4  ***  16 
+##  1  1  2  4  ***  17 
+##  1  2  2  4  ***  18 
+##  2  2  2  4  ***  19 
+##  1  1  3  4  ***  20 
+##  1  2  3  4  ***  21 
+##  2  2  3  4  ***  22 
+##  1  3  3  4  ***  23 
+##  2  3  3  4  ***  24 
+##  3  3  3  4  ***  25 
+##  1  1  4  4  ***  26 
+##  1  2  4  4  ***  27 
+##  2  2  4  4  ***  28 
+##  1  3  4  4  ***  29 
+##  2  3  4  4  ***  30 
+##  3  3  4  4  ***  31 
+##  1  4  4  4  ***  32 
+##  2  4  4  4  ***  33 
+##  3  4  4  4  ***  34 
+##  4  4  4  4  ***  35
+\end{verbatim}
+
+\section{Implementation}\label{implementation}
+
+There are four versions of the two basic functions
+\texttt{fArrayFirst()} for general arrays and
+\texttt{fSupSymIncreasingFirst()} for super-symmetric arrays. Two are in
+C, one which passes by value and returns integers, and a second one
+which wraps the first one, and passes by reference and returns void. And
+two are in R, one in pure R, and one which uses .C() to wrap a call to
+the compiled C code.
+
+The two inverse functions \texttt{fArrayFirstInverse()} and
+\texttt{fSupSymIncreasingFirstInverse()} have only a single C version,
+which passes by reference and returns void. There are again two R
+versions of each, one in pure R and one a wrapper around a .C() call to
+the compiled C code.
+
+\section{Appendix: Code}\label{appendix-code}
+
+\subsection{R Code}\label{r-code}
+
+\subsubsection{indexing.R}\label{indexing.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fArrayFirstR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (cell, dimension) \{}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (cell)}
+\NormalTok{  k <-}\StringTok{ }\KeywordTok{cumprod}\NormalTok{ (}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, dimension))[}\DecValTok{1}\OperatorTok{:}\NormalTok{rank]}
+  \KeywordTok{return}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{ ((cell }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{*}\StringTok{ }\NormalTok{k))}
+\NormalTok{\}}
+
+\NormalTok{fSupSymIncreasingFirstR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (cell) \{}
+\NormalTok{  f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (r)}
+    \KeywordTok{choose}\NormalTok{ (r }\OperatorTok{+}\StringTok{ }\NormalTok{(cell[r] }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, r)}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (cell)}
+\NormalTok{  cell <-}\StringTok{ }\KeywordTok{sort}\NormalTok{ (cell)}
+  \KeywordTok{return}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{ (}\KeywordTok{sapply}\NormalTok{ (}\DecValTok{1}\OperatorTok{:}\NormalTok{rank, f)))}
+\NormalTok{\}}
+
+\NormalTok{fArrayFirstInverseR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(index, dimension) \{}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (dimension)}
+\NormalTok{  b <-}\StringTok{ }\KeywordTok{cumprod}\NormalTok{ (}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, dimension))[}\DecValTok{1}\OperatorTok{:}\NormalTok{rank]}
+\NormalTok{  r <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{length}\NormalTok{(b))}
+\NormalTok{  s <-}\StringTok{ }\NormalTok{index }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in}\NormalTok{ rank}\OperatorTok{:}\DecValTok{1}\NormalTok{) \{}
+\NormalTok{    r[j] <-}\StringTok{ }\NormalTok{s }\OperatorTok{%/%}\StringTok{ }\NormalTok{b[j]}
+\NormalTok{    s <-}\StringTok{ }\NormalTok{s }\OperatorTok{-}\StringTok{ }\NormalTok{r[j] }\OperatorTok{*}\StringTok{ }\NormalTok{b[j]}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{r)}
+\NormalTok{\}}
+
+\NormalTok{fSupSymIncreasingFirstInverseR <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (dimension, rank, index) \{}
+\NormalTok{  last.true <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}
+\NormalTok{    w <-}\StringTok{ }\KeywordTok{which}\NormalTok{ (x)}
+    \KeywordTok{return}\NormalTok{ (w[}\KeywordTok{length}\NormalTok{(w)])}
+\NormalTok{  \}}
+\NormalTok{  a <-}\StringTok{ }\KeywordTok{rep}\NormalTok{ (}\DecValTok{0}\NormalTok{, rank)}
+\NormalTok{  v <-}\StringTok{ }\NormalTok{index }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+  \ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in}\NormalTok{ rank}\OperatorTok{:}\DecValTok{1}\NormalTok{) \{}
+\NormalTok{    s <-}\StringTok{ }\KeywordTok{choose}\NormalTok{ (k }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{0}\OperatorTok{:}\NormalTok{(dimension }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, k)}
+\NormalTok{    u <-}\StringTok{ }\KeywordTok{last.true}\NormalTok{ (v }\OperatorTok{>=}\StringTok{ }\NormalTok{s)}
+\NormalTok{    a[k] <-}\StringTok{ }\NormalTok{u}
+\NormalTok{    v <-}\StringTok{ }\NormalTok{v }\OperatorTok{-}\StringTok{ }\NormalTok{s[u]}
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{ (a)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{indexingC.R}\label{indexingc.r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dyn.load}\NormalTok{(}\StringTok{"indexing.so"}\NormalTok{)}
+
+\NormalTok{fArrayFirstRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (cell, dimension) \{}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (cell)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"fArrayFirstGlue"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{(cell),}
+      \KeywordTok{as.integer}\NormalTok{(dimension),}
+      \KeywordTok{as.integer}\NormalTok{(rank),}
+      \DataTypeTok{index =} \KeywordTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{index)}
+\NormalTok{\}}
+
+
+\NormalTok{fSupSymIncreasingFirstRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (cell) \{}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{(cell)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}\StringTok{"fSupSymIncreasingGlue"}\NormalTok{,}
+       \KeywordTok{as.integer}\NormalTok{(cell),}
+       \KeywordTok{as.integer}\NormalTok{(rank),}
+       \DataTypeTok{index =} \KeywordTok{as.integer}\NormalTok{(}\DecValTok{0}\NormalTok{))}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{index)}
+\NormalTok{\}}
+
+\NormalTok{fArrayFirstInverseRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(index, dimension) \{}
+\NormalTok{  rank <-}\StringTok{ }\KeywordTok{length}\NormalTok{ (dimension)}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"fArrayFirstInverse"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{(rank),}
+      \KeywordTok{as.integer}\NormalTok{ (dimension),}
+      \KeywordTok{as.integer}\NormalTok{(index),}
+      \DataTypeTok{cell =} \KeywordTok{as.integer}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, rank))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{cell)}
+\NormalTok{\}}
+
+\NormalTok{fSupSymIncreasingFirstInverseRC <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (dimension, rank, index) \{}
+\NormalTok{  h <-}
+\StringTok{    }\KeywordTok{.C}\NormalTok{(}
+      \StringTok{"fSupSymIncreasingFirstInverse"}\NormalTok{,}
+      \KeywordTok{as.integer}\NormalTok{(dimension),}
+      \KeywordTok{as.integer}\NormalTok{(rank),}
+      \KeywordTok{as.integer}\NormalTok{(index),}
+      \DataTypeTok{cell =} \KeywordTok{as.integer}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, rank))}
+\NormalTok{    )}
+  \KeywordTok{return}\NormalTok{ (h}\OperatorTok{$}\NormalTok{cell)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{C Code}\label{c-code}
+
+\subsubsection{indexing.h}\label{indexing.h}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#ifndef INDEXING_H}
+\PreprocessorTok{#define INDEXING_H}
+
+\PreprocessorTok{#include }\ImportTok{<stdlib.h>}
+
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ IMIN(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ x, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ y) \{ }\ControlFlowTok{return}\NormalTok{ (x < y) ? x : y; \}}
+\DataTypeTok{static} \KeywordTok{inline} \DataTypeTok{int}\NormalTok{ VINDEX(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ i) \{ }\ControlFlowTok{return}\NormalTok{ i - }\DecValTok{1}\NormalTok{; \}}
+
+\PreprocessorTok{#endif }\CommentTok{/* INDEXING_H */}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{indexing.c}\label{indexing.c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\PreprocessorTok{#include }\ImportTok{"indexing.h"}
+
+\DataTypeTok{int}\NormalTok{ binCoef(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ m) \{}
+    \DataTypeTok{int}\NormalTok{ *work = (}\DataTypeTok{int}\NormalTok{ *)calloc((}\DataTypeTok{size_t}\NormalTok{)m + }\DecValTok{1}\NormalTok{, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{));}
+\NormalTok{    work[}\DecValTok{0}\NormalTok{] = }\DecValTok{1}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= n; i++) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = IMIN(i, m); j > }\DecValTok{0}\NormalTok{; j--) \{}
+\NormalTok{            work[j] = work[j] + work[j - }\DecValTok{1}\NormalTok{];}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \DataTypeTok{int}\NormalTok{ choose = work[m];}
+\NormalTok{    free(work);}
+    \ControlFlowTok{return}\NormalTok{ (choose);}
+\NormalTok{\}}
+
+\DataTypeTok{int}\NormalTok{ int_cmp(}\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *x, }\DataTypeTok{const} \DataTypeTok{void}\NormalTok{ *y) \{}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *ix = (}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *)x;}
+    \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *iy = (}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *)y;}
+    \ControlFlowTok{return}\NormalTok{ (*ix - *iy);}
+\NormalTok{\}}
+
+\DataTypeTok{int}\NormalTok{ fArrayFirst(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *cell, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *dimension, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ rank) \{}
+    \DataTypeTok{int}\NormalTok{ aux = }\DecValTok{1}\NormalTok{, result = }\DecValTok{1}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= rank; i++) \{}
+\NormalTok{        result += (cell[VINDEX(i)] - }\DecValTok{1}\NormalTok{) * aux;}
+\NormalTok{        aux *= dimension[VINDEX(i)];}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{ (result);}
+\NormalTok{\}}
+
+\DataTypeTok{int}\NormalTok{ fSupSymIncreasing(}\DataTypeTok{int}\NormalTok{ *cell, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ rank) \{}
+    \DataTypeTok{int}\NormalTok{ result = }\DecValTok{1}\NormalTok{;}
+\NormalTok{    (}\DataTypeTok{void}\NormalTok{)qsort(cell, (}\DataTypeTok{size_t}\NormalTok{)rank, }\KeywordTok{sizeof}\NormalTok{(}\DataTypeTok{int}\NormalTok{), int_cmp);}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ i = }\DecValTok{1}\NormalTok{; i <= rank; i++) \{}
+        \DataTypeTok{int}\NormalTok{ k = i + (cell[VINDEX(i)] - }\DecValTok{1}\NormalTok{) - }\DecValTok{1}\NormalTok{;}
+\NormalTok{        result += binCoef(k, i);}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{ (result);}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ fArrayFirstInverse(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *dimension, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *index,}
+                        \DataTypeTok{int}\NormalTok{ *cell) \{}
+    \DataTypeTok{int}\NormalTok{ m = *rank, l = *index, b = }\DecValTok{1}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{1}\NormalTok{; j < m; j++) \{}
+\NormalTok{        b *= dimension[VINDEX(j)];}
+\NormalTok{    \}}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = m - }\DecValTok{1}\NormalTok{; j > }\DecValTok{0}\NormalTok{; j--) \{}
+        \DataTypeTok{int}\NormalTok{ k = (l - }\DecValTok{1}\NormalTok{) / b;}
+\NormalTok{        cell[j] = k + }\DecValTok{1}\NormalTok{;}
+\NormalTok{        l -= k * b;}
+\NormalTok{        b /= dimension[j - }\DecValTok{1}\NormalTok{];}
+\NormalTok{    \}}
+\NormalTok{    cell[VINDEX(}\DecValTok{1}\NormalTok{)] = l;}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ fSupSymIncreasingFirstInverse(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *dimension, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank,}
+                                   \DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *index, }\DataTypeTok{int}\NormalTok{ *cell) \{}
+    \DataTypeTok{int}\NormalTok{ n = *dimension, m = *rank, l = *index, v = l - }\DecValTok{1}\NormalTok{;}
+    \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ k = m; k >= }\DecValTok{1}\NormalTok{; k--) \{}
+        \ControlFlowTok{for}\NormalTok{ (}\DataTypeTok{int}\NormalTok{ j = }\DecValTok{0}\NormalTok{; j < n; j++) \{}
+            \DataTypeTok{int}\NormalTok{ sj = binCoef(k + j - }\DecValTok{1}\NormalTok{, k), sk = binCoef(k + j, k);}
+            \ControlFlowTok{if}\NormalTok{ (v < sk) \{}
+\NormalTok{                cell[VINDEX(k)] = j + }\DecValTok{1}\NormalTok{;}
+\NormalTok{                v -= sj;}
+                \ControlFlowTok{break}\NormalTok{;}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+    \ControlFlowTok{return}\NormalTok{;}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ binCoefGlue(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *n, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *m, }\DataTypeTok{int}\NormalTok{ *choose) \{}
+\NormalTok{    *choose = binCoef(*n, *m);}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ fArrayFirstGlue(}\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *cell, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *dimension, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank,}
+                     \DataTypeTok{int}\NormalTok{ *result) \{}
+\NormalTok{    *result = fArrayFirst(cell, dimension, *rank);}
+\NormalTok{\}}
+
+\DataTypeTok{void}\NormalTok{ fSupSymIncreasingGlue(}\DataTypeTok{int}\NormalTok{ *cell, }\DataTypeTok{const} \DataTypeTok{int}\NormalTok{ *rank, }\DataTypeTok{int}\NormalTok{ *result) \{}
+\NormalTok{    *result = fSupSymIncreasing(cell, *rank);}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-deleeuw_E_17r}{}
+De Leeuw, J. 2017. ``Higher Partials of fStress. Who Needs Them ?''
+\url{http://deleeuwpdx.net/pubfolders/fStress/fStress.pdf}.
+
+\hypertarget{ref-deleeuw_yajima_E_16}{}
+De Leeuw, J., and M. Yajima. 2016. ``APL in R.''
+doi:\href{https://doi.org/10.13140/RG.2.1.2372.0724}{10.13140/RG.2.1.2372.0724}.
+
+
+\end{document}
