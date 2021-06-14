@@ -5,8 +5,7 @@
 ## Generalities
 
 In non-metric MDS the dissimilarities are not a vector of known non-negative numbers,
-but they are only known up to a transformation or quantification. Ever since @kruskal_64a
-the approach for dealing with this aspect of the MDS problem is to define stress as a function of both $X$ and $\Delta$, and to minimize
+but they are only known up to a transformation or quantification. Ever since @kruskal_64a the approach for dealing with this aspect of the MDS problem is to define stress as a function of both $X$ and $\Delta$, and to minimize
 
 \begin{equation}
 \sigma(X,\Delta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2
@@ -19,7 +18,7 @@ far as I know, by Forrest Young and used in our joint ALS work from the seventie
 (@takane_young_deleeuw_A_77). Kruskal's name for the transformed or
 quantified dissimilarities is *pseudo-distances*.
 
-To define a general notion of feasability of disparities we use the
+To work with a general notion of the feasability of a matrix of disparities we use the
 notation $\Delta\in\mathfrak{D}$. Typically, although not necessarily,
 $\mathfrak{D}$ is a convex set in disparity space. In interval, polynomial,
 splinical, and ordinal MDS it usually is a convex cone with apex at the origin.       This implies that $0\in\mathfrak{D}$, and consequently that
@@ -39,9 +38,23 @@ exclude one or both zero solutions. The commonly used options will be discussed 
 
 ## Single and Double Phase {#nmssingledouble}
 
-The distinction between *single phase* and *double phase* NMDS algorithms, names we borrow from @guttman_68 (see also @lingoes_roskam_73), has caused a great deal of confusion in the
-early stages of non-metric MDS (say between 1960 and 1970). Because I have been an
-active participant (with Carroll, Kruskal, Guttman, Young, and Lingoes) in discussing and perhaps perpetuating this confusion (@deleeuw_R_73g) I will pay some extra attention to it.
+The distinction between *single phase* and *double phase* NMDS algorithms, names we borrow from @guttman_68, has caused a great deal of confusion in the early stages of non-metric MDS (say between 1960 and 1970). 
+
+> This beguiling complex distinction has given rise to an almost endless debate (among > Guttman, Kruskal, Lingoes, Roskam, and Shepard -- for all permutations of five 
+> things taken two at a time) and has caused anguish and despair (accompanied by
+> an imprecation or two by at least four of the five) extending over a three year 
+> period -- only occasionally alleviated by evanescent flashes of partial insight
+> (@lingoes_roskam_73)
+
+I was an active, although late-arriving, participant in discussing and perhaps perpetuating the confusion (@deleeuw_R_73g). For raking up this debate
+at this late stage I was sternly spoken to by Jim Lingoes, who pointed me to the
+discussion in @lingoes_roskam_73.
+
+> I would hate to believe that after this heroic attempt on our part that "we all"
+> would once more be engaged in a "correspondence musical chairs" on these issues.
+> (Lingoes in @deleeuw_R_73g).
+
+Nevertheless, even in later discussions of the distinction between single-phanse and double-phase (@roskam_79) I get the feeling that there are still some unresolved misunderstandings. Thus I will pay some more attention to it here.
 
 By the very definition of the minimum of a function we have the mathematical truism
 

@@ -54,70 +54,6 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -155,7 +91,6 @@ div.csl-indent {
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
-<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introhist"><i class="fa fa-check"></i><b>1.1</b> Brief History</a>
@@ -212,6 +147,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.6.1" data-path="propchapter.html"><a href="propchapter.html#local-maxima"><i class="fa fa-check"></i><b>2.6.1</b> Local Maxima</a></li>
 <li class="chapter" data-level="2.6.2" data-path="propchapter.html"><a href="propchapter.html#proplocmin"><i class="fa fa-check"></i><b>2.6.2</b> Local Minima</a></li>
+<li class="chapter" data-level="2.6.3" data-path="propchapter.html"><a href="propchapter.html#propsaddle"><i class="fa fa-check"></i><b>2.6.3</b> Saddle Points</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="propchapter.html"><a href="propchapter.html#propenvelopes"><i class="fa fa-check"></i><b>2.7</b> Stress Envelopes</a>
 <ul>
@@ -589,51 +525,45 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="25.8" data-path="mathadd.html"><a href="mathadd.html#mathpenal"><i class="fa fa-check"></i><b>25.8</b> Quadratic penalties</a></li>
 </ul></li>
-<li class="appendix"><span><b>Appendices</b></span></li>
-<li class="chapter" data-level="A" data-path="apcode.html"><a href="apcode.html"><i class="fa fa-check"></i><b>A</b> Code</a>
+<li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="apcode.html"><a href="apcode.html#rapcode"><i class="fa fa-check"></i><b>A.1</b> R Code</a>
+<li class="chapter" data-level="25.9" data-path="mathadd.html"><a href="mathadd.html#rapcode"><i class="fa fa-check"></i><b>25.9</b> R Code</a>
 <ul>
-<li class="chapter" data-level="A.1.1" data-path="apcode.html"><a href="apcode.html#aputilitiescode"><i class="fa fa-check"></i><b>A.1.1</b> utilities.R</a></li>
-<li class="chapter" data-level="A.1.2" data-path="apcode.html"><a href="apcode.html#apindexingcode"><i class="fa fa-check"></i><b>A.1.2</b> commom/indexing.r</a></li>
-<li class="chapter" data-level="A.1.3" data-path="apcode.html"><a href="apcode.html#apiocode"><i class="fa fa-check"></i><b>A.1.3</b> commom/io.r</a></li>
-<li class="chapter" data-level="A.1.4" data-path="apcode.html"><a href="apcode.html#aplinearcode"><i class="fa fa-check"></i><b>A.1.4</b> commom/linear.r</a></li>
-<li class="chapter" data-level="A.1.5" data-path="apcode.html"><a href="apcode.html#appermcode"><i class="fa fa-check"></i><b>A.1.5</b> commom/nextPC.r</a></li>
-<li class="chapter" data-level="A.1.6" data-path="apcode.html"><a href="apcode.html#apsmacofcode"><i class="fa fa-check"></i><b>A.1.6</b> commom/smacof.r</a></li>
-<li class="chapter" data-level="A.1.7" data-path="apcode.html"><a href="apcode.html#apcodeprop"><i class="fa fa-check"></i><b>A.1.7</b> properties.R</a></li>
-<li class="chapter" data-level="A.1.8" data-path="apcode.html"><a href="apcode.html#apcodepic"><i class="fa fa-check"></i><b>A.1.8</b> pictures.R</a></li>
-<li class="chapter" data-level="A.1.9" data-path="apcode.html"><a href="apcode.html#apcodeclass"><i class="fa fa-check"></i><b>A.1.9</b> classical.R</a></li>
-<li class="chapter" data-level="A.1.10" data-path="apcode.html"><a href="apcode.html#apcodeminim"><i class="fa fa-check"></i><b>A.1.10</b> minimization.R</a></li>
-<li class="chapter" data-level="A.1.11" data-path="apcode.html"><a href="apcode.html#apcodefull"><i class="fa fa-check"></i><b>A.1.11</b> full.R</a></li>
-<li class="chapter" data-level="A.1.12" data-path="apcode.html"><a href="apcode.html#apcodeunfold"><i class="fa fa-check"></i><b>A.1.12</b> unfolding.R</a></li>
-<li class="chapter" data-level="A.1.13" data-path="apcode.html"><a href="apcode.html#apcodencons"><i class="fa fa-check"></i><b>A.1.13</b> constrained.R</a></li>
-<li class="chapter" data-level="A.1.14" data-path="apcode.html"><a href="apcode.html#apcodenominal"><i class="fa fa-check"></i><b>A.1.14</b> nominal.R</a></li>
-<li class="chapter" data-level="A.1.15" data-path="apcode.html"><a href="apcode.html#apcodesstress"><i class="fa fa-check"></i><b>A.1.15</b> sstress.R</a></li>
-<li class="chapter" data-level="A.1.16" data-path="apcode.html"><a href="apcode.html#apcodeinverse"><i class="fa fa-check"></i><b>A.1.16</b> inverse.R</a></li>
-<li class="chapter" data-level="A.1.17" data-path="apcode.html"><a href="apcode.html#apcodeglobal"><i class="fa fa-check"></i><b>A.1.17</b> global.R</a></li>
-<li class="chapter" data-level="A.1.18" data-path="apcode.html"><a href="apcode.html#apcodemathadd"><i class="fa fa-check"></i><b>A.1.18</b> mathadd.R</a></li>
+<li class="chapter" data-level="25.9.1" data-path="mathadd.html"><a href="mathadd.html#aputilitiescode"><i class="fa fa-check"></i><b>25.9.1</b> utilities.R</a></li>
+<li class="chapter" data-level="25.9.2" data-path="mathadd.html"><a href="mathadd.html#apindexingcode"><i class="fa fa-check"></i><b>25.9.2</b> commom/indexing.r</a></li>
+<li class="chapter" data-level="25.9.3" data-path="mathadd.html"><a href="mathadd.html#apiocode"><i class="fa fa-check"></i><b>25.9.3</b> commom/io.r</a></li>
+<li class="chapter" data-level="25.9.4" data-path="mathadd.html"><a href="mathadd.html#aplinearcode"><i class="fa fa-check"></i><b>25.9.4</b> commom/linear.r</a></li>
+<li class="chapter" data-level="25.9.5" data-path="mathadd.html"><a href="mathadd.html#appermcode"><i class="fa fa-check"></i><b>25.9.5</b> commom/nextPC.r</a></li>
+<li class="chapter" data-level="25.9.6" data-path="mathadd.html"><a href="mathadd.html#apsmacofcode"><i class="fa fa-check"></i><b>25.9.6</b> commom/smacof.r</a></li>
+<li class="chapter" data-level="25.9.7" data-path="mathadd.html"><a href="mathadd.html#apcodeprop"><i class="fa fa-check"></i><b>25.9.7</b> properties.R</a></li>
+<li class="chapter" data-level="25.9.8" data-path="mathadd.html"><a href="mathadd.html#apcodepic"><i class="fa fa-check"></i><b>25.9.8</b> pictures.R</a></li>
+<li class="chapter" data-level="25.9.9" data-path="mathadd.html"><a href="mathadd.html#apcodeclass"><i class="fa fa-check"></i><b>25.9.9</b> classical.R</a></li>
+<li class="chapter" data-level="25.9.10" data-path="mathadd.html"><a href="mathadd.html#apcodeminim"><i class="fa fa-check"></i><b>25.9.10</b> minimization.R</a></li>
+<li class="chapter" data-level="25.9.11" data-path="mathadd.html"><a href="mathadd.html#apcodefull"><i class="fa fa-check"></i><b>25.9.11</b> full.R</a></li>
+<li class="chapter" data-level="25.9.12" data-path="mathadd.html"><a href="mathadd.html#apcodeunfold"><i class="fa fa-check"></i><b>25.9.12</b> unfolding.R</a></li>
+<li class="chapter" data-level="25.9.13" data-path="mathadd.html"><a href="mathadd.html#apcodencons"><i class="fa fa-check"></i><b>25.9.13</b> constrained.R</a></li>
+<li class="chapter" data-level="25.9.14" data-path="mathadd.html"><a href="mathadd.html#apcodenominal"><i class="fa fa-check"></i><b>25.9.14</b> nominal.R</a></li>
+<li class="chapter" data-level="25.9.15" data-path="mathadd.html"><a href="mathadd.html#apcodesstress"><i class="fa fa-check"></i><b>25.9.15</b> sstress.R</a></li>
+<li class="chapter" data-level="25.9.16" data-path="mathadd.html"><a href="mathadd.html#apcodeinverse"><i class="fa fa-check"></i><b>25.9.16</b> inverse.R</a></li>
+<li class="chapter" data-level="25.9.17" data-path="mathadd.html"><a href="mathadd.html#apcodeglobal"><i class="fa fa-check"></i><b>25.9.17</b> global.R</a></li>
+<li class="chapter" data-level="25.9.18" data-path="mathadd.html"><a href="mathadd.html#apcodemathadd"><i class="fa fa-check"></i><b>25.9.18</b> mathadd.R</a></li>
 </ul></li>
-<li class="chapter" data-level="A.2" data-path="apcode.html"><a href="apcode.html#c-code"><i class="fa fa-check"></i><b>A.2</b> C code</a>
+<li class="chapter" data-level="25.10" data-path="mathadd.html"><a href="mathadd.html#c-code"><i class="fa fa-check"></i><b>25.10</b> C code</a>
 <ul>
-<li class="chapter" data-level="A.2.1" data-path="apcode.html"><a href="apcode.html#deboor.c"><i class="fa fa-check"></i><b>A.2.1</b> deboor.c</a></li>
-<li class="chapter" data-level="A.2.2" data-path="apcode.html"><a href="apcode.html#cleanup.c"><i class="fa fa-check"></i><b>A.2.2</b> cleanup.c</a></li>
-<li class="chapter" data-level="A.2.3" data-path="apcode.html"><a href="apcode.html#jacobi.c"><i class="fa fa-check"></i><b>A.2.3</b> jacobi.c</a></li>
-<li class="chapter" data-level="A.2.4" data-path="apcode.html"><a href="apcode.html#jbkties.c"><i class="fa fa-check"></i><b>A.2.4</b> jbkTies.c</a></li>
-<li class="chapter" data-level="A.2.5" data-path="apcode.html"><a href="apcode.html#matrix.c"><i class="fa fa-check"></i><b>A.2.5</b> matrix.c</a></li>
-<li class="chapter" data-level="A.2.6" data-path="apcode.html"><a href="apcode.html#jeffrey.c"><i class="fa fa-check"></i><b>A.2.6</b> jeffrey.c</a></li>
-<li class="chapter" data-level="A.2.7" data-path="apcode.html"><a href="apcode.html#mysort.c"><i class="fa fa-check"></i><b>A.2.7</b> mySort.c</a></li>
-<li class="chapter" data-level="A.2.8" data-path="apcode.html"><a href="apcode.html#nextpc.c"><i class="fa fa-check"></i><b>A.2.8</b> nextPC.c</a></li>
+<li class="chapter" data-level="25.10.1" data-path="mathadd.html"><a href="mathadd.html#deboor.c"><i class="fa fa-check"></i><b>25.10.1</b> deboor.c</a></li>
+<li class="chapter" data-level="25.10.2" data-path="mathadd.html"><a href="mathadd.html#cleanup.c"><i class="fa fa-check"></i><b>25.10.2</b> cleanup.c</a></li>
+<li class="chapter" data-level="25.10.3" data-path="mathadd.html"><a href="mathadd.html#jacobi.c"><i class="fa fa-check"></i><b>25.10.3</b> jacobi.c</a></li>
+<li class="chapter" data-level="25.10.4" data-path="mathadd.html"><a href="mathadd.html#jbkties.c"><i class="fa fa-check"></i><b>25.10.4</b> jbkTies.c</a></li>
+<li class="chapter" data-level="25.10.5" data-path="mathadd.html"><a href="mathadd.html#matrix.c"><i class="fa fa-check"></i><b>25.10.5</b> matrix.c</a></li>
+<li class="chapter" data-level="25.10.6" data-path="mathadd.html"><a href="mathadd.html#jeffrey.c"><i class="fa fa-check"></i><b>25.10.6</b> jeffrey.c</a></li>
+<li class="chapter" data-level="25.10.7" data-path="mathadd.html"><a href="mathadd.html#mysort.c"><i class="fa fa-check"></i><b>25.10.7</b> mySort.c</a></li>
+<li class="chapter" data-level="25.10.8" data-path="mathadd.html"><a href="mathadd.html#nextpc.c"><i class="fa fa-check"></i><b>25.10.8</b> nextPC.c</a></li>
 </ul></li>
+<li class="chapter" data-level="25.11" data-path="mathadd.html"><a href="mathadd.html#apdatadsmall"><i class="fa fa-check"></i><b>25.11</b> Small</a></li>
+<li class="chapter" data-level="25.12" data-path="mathadd.html"><a href="mathadd.html#apdatagruijter"><i class="fa fa-check"></i><b>25.12</b> De Gruijter</a></li>
+<li class="chapter" data-level="25.13" data-path="mathadd.html"><a href="mathadd.html#apdataekman"><i class="fa fa-check"></i><b>25.13</b> Ekman</a></li>
+<li class="chapter" data-level="25.14" data-path="mathadd.html"><a href="mathadd.html#apdataveg"><i class="fa fa-check"></i><b>25.14</b> Vegetables</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="apdatasets.html"><a href="apdatasets.html"><i class="fa fa-check"></i><b>B</b> Data</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="apdatasets.html"><a href="apdatasets.html#apdatadsmall"><i class="fa fa-check"></i><b>B.1</b> Small</a></li>
-<li class="chapter" data-level="B.2" data-path="apdatasets.html"><a href="apdatasets.html#apdatagruijter"><i class="fa fa-check"></i><b>B.2</b> De Gruijter</a></li>
-<li class="chapter" data-level="B.3" data-path="apdatasets.html"><a href="apdatasets.html#apdataekman"><i class="fa fa-check"></i><b>B.3</b> Ekman</a></li>
-<li class="chapter" data-level="B.4" data-path="apdatasets.html"><a href="apdatasets.html#apdataveg"><i class="fa fa-check"></i><b>B.4</b> Vegetables</a></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="apunlicense.html"><a href="apunlicense.html"><i class="fa fa-check"></i><b>C</b> Unlicense</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -667,7 +597,7 @@ dissimilarities). The name <em>disparities</em> was coined, as
 far as I know, by Forrest Young and used in our joint ALS work from the seventies
 (<span class="citation"><a href="#ref-takane_young_deleeuw_A_77" role="doc-biblioref">Takane, Young, and De Leeuw</a> (<a href="#ref-takane_young_deleeuw_A_77" role="doc-biblioref">1977</a>)</span>). Kruskal’s name for the transformed or
 quantified dissimilarities is <em>pseudo-distances</em>.</p>
-<p>To define a general notion of feasability of disparities we use the
+<p>To work with a general notion of the feasability of a matrix of disparities we use the
 notation <span class="math inline">\(\Delta\in\mathfrak{D}\)</span>. Typically, although not necessarily,
 <span class="math inline">\(\mathfrak{D}\)</span> is a convex set in disparity space. In interval, polynomial,
 splinical, and ordinal MDS it usually is a convex cone with apex at the origin. This implies that <span class="math inline">\(0\in\mathfrak{D}\)</span>, and consequently that</p>
@@ -683,9 +613,15 @@ exclude one or both zero solutions. The commonly used options will be discussed 
 </div>
 <div id="nmssingledouble" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Single and Double Phase</h2>
-<p>The distinction between <em>single phase</em> and <em>double phase</em> NMDS algorithms, names we borrow from <span class="citation"><a href="#ref-guttman_68" role="doc-biblioref">Guttman</a> (<a href="#ref-guttman_68" role="doc-biblioref">1968</a>)</span> (see also <span class="citation"><a href="#ref-lingoes_roskam_73" role="doc-biblioref">Lingoes and Roskam</a> (<a href="#ref-lingoes_roskam_73" role="doc-biblioref">1973</a>)</span>), has caused a great deal of confusion in the
-early stages of non-metric MDS (say between 1960 and 1970). Because I have been an
-active participant (with Carroll, Kruskal, Guttman, Young, and Lingoes) in discussing and perhaps perpetuating this confusion (<span class="citation"><a href="#ref-deleeuw_R_73g" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_73g" role="doc-biblioref">1973b</a>)</span>) I will pay some extra attention to it.</p>
+<p>The distinction between <em>single phase</em> and <em>double phase</em> NMDS algorithms, names we borrow from <span class="citation"><a href="#ref-guttman_68" role="doc-biblioref">Guttman</a> (<a href="#ref-guttman_68" role="doc-biblioref">1968</a>)</span>, has caused a great deal of confusion in the early stages of non-metric MDS (say between 1960 and 1970).</p>
+<blockquote>
+<p>This beguiling complex distinction has given rise to an almost endless debate (among &gt; Guttman, Kruskal, Lingoes, Roskam, and Shepard – for all permutations of five
+things taken two at a time) and has caused anguish and despair (accompanied by
+an imprecation or two by at least four of the five) extending over a three year
+period – only occasionally alleviated by evanescent flashes of partial insight
+(<span class="citation"><a href="#ref-lingoes_roskam_73" role="doc-biblioref">Lingoes and Roskam</a> (<a href="#ref-lingoes_roskam_73" role="doc-biblioref">1973</a>)</span>)</p>
+</blockquote>
+<p>I was an active, although late-arriving, participant in discussing and perhaps perpetuating this confusion (<span class="citation"><a href="#ref-deleeuw_R_73g" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_73g" role="doc-biblioref">1973</a>)</span>). I will pay some extra attention to it.</p>
 <p>By the very definition of the minimum of a function we have the mathematical truism</p>
 <p><span class="math display" id="eq:nmsminmin">\[\begin{equation}
 \min_{(X,\Delta)\in\mathfrak{X}\otimes\mathfrak{D}}\sigma(X,\Delta)=
@@ -702,7 +638,7 @@ X^{(k+1)}&amp;=\mathop{\text{argmin}}_{X\in\mathfrak{X}}\sigma(X,\Delta^{(k)}),\
 \Delta^{(k+1)}&amp;=\mathop{\text{argmin}}_{\Delta\in\mathfrak{D}}\sigma(X^{(k+1)},\Delta).\tag{8.5}.
 \end{align}\]</span></p>
 <p>Thus double phase algorithms are <em>alternating least squares</em> or ALS algorithms.
-The designation “alternating least squares” was first used, AFAIK, by <span class="citation"><a href="#ref-deleeuw_R_68d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_68d" role="doc-biblioref">1968b</a>)</span>, and of course it was widely disseminated by the series of ALS algorithms of Young, Takane, and De Leeuw in the seventies (see <span class="citation"><a href="#ref-young_81" role="doc-biblioref">F. W. Young</a> (<a href="#ref-young_81" role="doc-biblioref">1981</a>)</span> for a retrospective summary).</p>
+The designation “alternating least squares” was first used, AFAIK, by <span class="citation"><a href="#ref-deleeuw_R_68d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_68d" role="doc-biblioref">1968</a>)</span>, and of course it was widely disseminated by the series of ALS algorithms of Young, Takane, and De Leeuw in the seventies (see <span class="citation"><a href="#ref-young_81" role="doc-biblioref">Young</a> (<a href="#ref-young_81" role="doc-biblioref">1981</a>)</span> for a retrospective summary).</p>
 <p>There are some possible variations in the ALS scheme. In equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a>
 we update <span class="math inline">\(X\)</span> first, and then in equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> we update <span class="math inline">\(\Delta\)</span>. That order can be reversed without any essential changes. More importantly, we have to realizethat minimizing over <span class="math inline">\(X\)</span> in equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> is a basic metric MDS problem, which will generally take an infinite number of iterations for an exact solution. This means we have to truncate the minimization, and stop at some point. And, in addition, equation <a href="nonmtrmds.html#eq:nmsals1">(8.4)</a> implies we have to find the global minimum over <span class="math inline">\(X\)</span>, which is generally infeasible as well.Thus the ALS scheme as defined cannot really be implemented.</p>
 <p>We remedy this situations by switching from minimization in each substep to
@@ -808,12 +744,12 @@ that <span class="math inline">\(\mathfrak{D}\)</span> for missing data and for 
 not convex cones, and do not contain the zero matrix.</p>
 <p>In our versions of <em>non-metric</em> MDS we actually require that the
 transformed dissimilarities satisfy <span class="math inline">\(\eta_\delta=1\)</span>, so that formula
-<a href="propchapter.html#eq:expand">(2.6)</a> is still valid. We call this <strong>explicit normalization of
+<a href="#eq:expand">(<strong>??</strong>)</a> is still valid. We call this <strong>explicit normalization of
 the dissimilarities</strong>.</p>
 <p>To explain the different forms of normalization of stress that are
 needed whenever <span class="math inline">\(\mathfrak{D}\)</span> is a cone we look at some general
 properties of least squares loss functions. More details are in
-<span class="citation"><a href="#ref-kruskal_carroll_69" role="doc-biblioref">Kruskal and Carroll</a> (<a href="#ref-kruskal_carroll_69" role="doc-biblioref">1969</a>)</span> and in <span class="citation"><a href="#ref-deleeuw_U_75a" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_U_75a" role="doc-biblioref">1975a</a>)</span>, <span class="citation"><a href="#ref-deleeuw_E_19d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_E_19d" role="doc-biblioref">2019</a>)</span>.</p>
+<span class="citation"><a href="#ref-kruskal_carroll_69" role="doc-biblioref">Kruskal and Carroll</a> (<a href="#ref-kruskal_carroll_69" role="doc-biblioref">1969</a>)</span> and in <span class="citation"><a href="#ref-deleeuw_U_75a" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_U_75a" role="doc-biblioref">1975</a>)</span>, <span class="citation"><a href="#ref-deleeuw_E_19d" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_E_19d" role="doc-biblioref">2019</a>)</span>.</p>
 <p>Suppose <span class="math inline">\(K\)</span> and <span class="math inline">\(L\)</span> are cones in <span class="math inline">\(\mathbb{R}^n\)</span>, nor necessarily convex.
 Our problem is to minimize <span class="math inline">\(\|x-y\|^2\)</span> over both <span class="math inline">\(x\in K\)</span> and
 <span class="math inline">\(y\in L\)</span>. Here <span class="math inline">\(\|x\|^2=x&#39;Wx\)</span> for some positive definite <span class="math inline">\(W\)</span>. In the MDS context, for <span class="math inline">\(x\)</span> think disparities, for <span class="math inline">\(y\)</span> think distances.</p>
@@ -913,16 +849,16 @@ not of <span class="math inline">\(X\)</span> only (see section <a href="chapord
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-danskin_67" class="csl-entry">
-———. 1967. <em>The Theory of Max-Min and Its Application to Weapons Allocation Problems</em>. Springer.
+Danskin, J. M. 1967. <em>The Theory of Max-Min and Its Application to Weapons Allocation Problems</em>. Springer.
 </div>
 <div id="ref-deleeuw_R_68d" class="csl-entry">
-———. 1968b. <span>“Nonmetric Discriminant Analysis.”</span> Research Note 06-68. Department of Data Theory, University of Leiden. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf</a>.
+De Leeuw, J. 1968. <span>“Nonmetric Discriminant Analysis.”</span> Research Note 06-68. Department of Data Theory, University of Leiden. <a href="http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf">http://deleeuwpdx.net/janspubs/1968/reports/deleeuw_R_68d.pdf</a>.
 </div>
 <div id="ref-deleeuw_R_73g" class="csl-entry">
-———. 1973b. <span>“<span class="nocase">Smoothness Properties of Nonmetric Loss Functions</span>.”</span> Technical Memorandum. Murray Hill, N.J.: Bell Telephone Laboratories. <a href="http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf">http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf</a>.
+———. 1973. <span>“<span class="nocase">Smoothness Properties of Nonmetric Loss Functions</span>.”</span> Technical Memorandum. Murray Hill, N.J.: Bell Telephone Laboratories. <a href="http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf">http://deleeuwpdx.net/janspubs/1973/reports/deleeuw_R_73g.pdf</a>.
 </div>
 <div id="ref-deleeuw_U_75a" class="csl-entry">
-———. 1975a. <span>“<span class="nocase">A Normalized Cone Regression Approach to Alternating Least Squares Algorithms</span>.”</span> Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf">http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf</a>.
+———. 1975. <span>“<span class="nocase">A Normalized Cone Regression Approach to Alternating Least Squares Algorithms</span>.”</span> Department of Data Theory FSW/RUL. <a href="http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf">http://deleeuwpdx.net/janspubs/1975/notes/deleeuw_U_75a.pdf</a>.
 </div>
 <div id="ref-deleeuw_C_94c" class="csl-entry">
 ———. 1994. <span>“<span class="nocase">Block Relaxation Algorithms in Statistics</span>.”</span> In <em>Information Systems and Data Analysis</em>, edited by H. H. Bock, W. Lenski, and M. M. Richter, 308–24. Berlin: Springer Verlag. <a href="http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf">http://deleeuwpdx.net/janspubs/1994/chapters/deleeuw_C_94c.pdf</a>.
@@ -934,7 +870,7 @@ not of <span class="math inline">\(X\)</span> only (see section <a href="chapord
 Demyanov, V. F., and V. N. Malozemov. 1990. <em>Introduction to Minimax</em>. Dover.
 </div>
 <div id="ref-guttman_68" class="csl-entry">
-———. 1968. <span>“<span class="nocase">A General Nonmetric Technique for Fitting the Smallest Coordinate Space for a Configuration of Points</span>.”</span> <em>Psychometrika</em> 33: 469–506.
+Guttman, L. 1968. <span>“<span class="nocase">A General Nonmetric Technique for Fitting the Smallest Coordinate Space for a Configuration of Points</span>.”</span> <em>Psychometrika</em> 33: 469–506.
 </div>
 <div id="ref-kruskal_64a" class="csl-entry">
 Kruskal, J. B. 1964a. <span>“<span class="nocase">Multidimensional Scaling by Optimizing Goodness of Fit to a Nonmetric Hypothesis</span>.”</span> <em>Psychometrika</em> 29: 1–27.
@@ -1010,7 +946,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "none"
 },

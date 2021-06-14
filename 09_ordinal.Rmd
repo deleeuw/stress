@@ -211,4 +211,3 @@ $P$ given by $\max_P d(X)'Pd(X)$
 
 ## Bounds on Stress
 
-x
