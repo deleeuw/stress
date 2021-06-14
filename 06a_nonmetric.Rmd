@@ -146,6 +146,7 @@ For now it suffices to note that
 
 or, in words, that the derivative of $\sigma_\star$ at $X$ is the partial derivative of $\sigma$ at $(X,\Delta(X))$.
 
+
 ## Affine NMDS
 
 Basic MDS can now be interpreted as the special case of NMDS in which
@@ -298,6 +299,8 @@ $$
 So, again, it does not matter which one of the four normalizations we
 use, explicit/implicit on disparities/distances, the solutions will all
 be proportional, i.e. the same except for scale factors.
+
+### Hard Squeeze and Soft Squeeze
 
 ### Inner Iterations
 
