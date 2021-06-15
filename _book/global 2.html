@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>24 In Search of Global Minima | Least Squares Euclidean Multidimensional Scaling</title>
+  <meta name="description" content="null" />
+  <meta name="generator" content="bookdown 0.22.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="24 In Search of Global Minima | Least Squares Euclidean Multidimensional Scaling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="null" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="24 In Search of Global Minima | Least Squares Euclidean Multidimensional Scaling" />
+  
+  <meta name="twitter:description" content="null" />
+  
+
+<meta name="author" content="Jan de Leeuw" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="stability.html"/>
+<link rel="next" href="mathadd.html"/>
+<script src="libs/header-attrs-2.8.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#introhist"><i class="fa fa-check"></i><b>1.1</b> Brief History</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#milestones"><i class="fa fa-check"></i><b>1.1.1</b> Milestones</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#introbasic"><i class="fa fa-check"></i><b>1.2</b> Basic MDS</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#kruskals-stress"><i class="fa fa-check"></i><b>1.2.1</b> Kruskal’s stress</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#datasym"><i class="fa fa-check"></i><b>1.2.2</b> Data Asymmetry</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#local-and-global"><i class="fa fa-check"></i><b>1.2.3</b> Local and Global</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#introgeneralize"><i class="fa fa-check"></i><b>1.3</b> Generalizations</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#gennonmetric"><i class="fa fa-check"></i><b>1.3.1</b> Non-metric</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#genfstress"><i class="fa fa-check"></i><b>1.3.2</b> fstress</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#gencons"><i class="fa fa-check"></i><b>1.3.3</b> Constraints</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#inreplic"><i class="fa fa-check"></i><b>1.3.4</b> Replications</a></li>
+<li class="chapter" data-level="1.3.5" data-path="intro.html"><a href="intro.html#genasym"><i class="fa fa-check"></i><b>1.3.5</b> Distance Asymmetry</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="propchapter.html"><a href="propchapter.html"><i class="fa fa-check"></i><b>2</b> Properties of Stress</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propchapter.html"><a href="propchapter.html#propnotation"><i class="fa fa-check"></i><b>2.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="propchapter.html"><a href="propchapter.html#propexpand"><i class="fa fa-check"></i><b>2.1.1</b> Expanding</a></li>
+<li class="chapter" data-level="2.1.2" data-path="propchapter.html"><a href="propchapter.html#propmatrix"><i class="fa fa-check"></i><b>2.1.2</b> Matrix Expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="propchapter.html"><a href="propchapter.html#propglobal"><i class="fa fa-check"></i><b>2.2</b> Global Properties</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="propchapter.html"><a href="propchapter.html#propbounded"><i class="fa fa-check"></i><b>2.2.1</b> Boundedness</a></li>
+<li class="chapter" data-level="2.2.2" data-path="propchapter.html"><a href="propchapter.html#propinvariance"><i class="fa fa-check"></i><b>2.2.2</b> Invariance</a></li>
+<li class="chapter" data-level="2.2.3" data-path="propchapter.html"><a href="propchapter.html#propcontinuity"><i class="fa fa-check"></i><b>2.2.3</b> Continuity</a></li>
+<li class="chapter" data-level="2.2.4" data-path="propchapter.html"><a href="propchapter.html#propcoercive"><i class="fa fa-check"></i><b>2.2.4</b> Coercivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="propchapter.html"><a href="propchapter.html#propconvex"><i class="fa fa-check"></i><b>2.3</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="propchapter.html"><a href="propchapter.html#distances"><i class="fa fa-check"></i><b>2.3.1</b> Distances</a></li>
+<li class="chapter" data-level="2.3.2" data-path="propchapter.html"><a href="propchapter.html#propdc"><i class="fa fa-check"></i><b>2.3.2</b> DC Functions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="propchapter.html"><a href="propchapter.html#subdifferentials"><i class="fa fa-check"></i><b>2.3.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="2.3.4" data-path="propchapter.html"><a href="propchapter.html#propnegdis"><i class="fa fa-check"></i><b>2.3.4</b> Negative Dissimilarities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="propchapter.html"><a href="propchapter.html#propguttman"><i class="fa fa-check"></i><b>2.4</b> Guttman Transform</a></li>
+<li class="chapter" data-level="2.5" data-path="propchapter.html"><a href="propchapter.html#propdiff"><i class="fa fa-check"></i><b>2.5</b> Differentiability</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="propchapter.html"><a href="propchapter.html#regularity"><i class="fa fa-check"></i><b>2.5.1</b> Regularity</a></li>
+<li class="chapter" data-level="2.5.2" data-path="propchapter.html"><a href="propchapter.html#expansions"><i class="fa fa-check"></i><b>2.5.2</b> Expansions</a></li>
+<li class="chapter" data-level="2.5.3" data-path="propchapter.html"><a href="propchapter.html#propdirderivs"><i class="fa fa-check"></i><b>2.5.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="2.5.4" data-path="propchapter.html"><a href="propchapter.html#propspecexp"><i class="fa fa-check"></i><b>2.5.4</b> Special Expansions</a></li>
+<li class="chapter" data-level="2.5.5" data-path="propchapter.html"><a href="propchapter.html#propzerodist"><i class="fa fa-check"></i><b>2.5.5</b> Zero Distance Subspaces</a></li>
+<li class="chapter" data-level="2.5.6" data-path="propchapter.html"><a href="propchapter.html#propdistsmo"><i class="fa fa-check"></i><b>2.5.6</b> Distance Smoothing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="propchapter.html"><a href="propchapter.html#propstationary"><i class="fa fa-check"></i><b>2.6</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="propchapter.html"><a href="propchapter.html#local-maxima"><i class="fa fa-check"></i><b>2.6.1</b> Local Maxima</a></li>
+<li class="chapter" data-level="2.6.2" data-path="propchapter.html"><a href="propchapter.html#proplocmin"><i class="fa fa-check"></i><b>2.6.2</b> Local Minima</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="propchapter.html"><a href="propchapter.html#propenvelopes"><i class="fa fa-check"></i><b>2.7</b> Stress Envelopes</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="propchapter.html"><a href="propchapter.html#propcsmaj"><i class="fa fa-check"></i><b>2.7.1</b> CS Majorization</a></li>
+<li class="chapter" data-level="2.7.2" data-path="propchapter.html"><a href="propchapter.html#propamgmmin"><i class="fa fa-check"></i><b>2.7.2</b> AM/GM Minorization</a></li>
+<li class="chapter" data-level="2.7.3" data-path="propchapter.html"><a href="propchapter.html#dualities"><i class="fa fa-check"></i><b>2.7.3</b> Dualities</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="propchapter.html"><a href="propchapter.html#how-large-is-my-stress"><i class="fa fa-check"></i><b>2.8</b> How Large is My Stress ?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="propspaces.html"><a href="propspaces.html"><i class="fa fa-check"></i><b>3</b> Stress Spaces</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="propspaces.html"><a href="propspaces.html#propconfspace"><i class="fa fa-check"></i><b>3.1</b> Configuration Space</a></li>
+<li class="chapter" data-level="3.2" data-path="propspaces.html"><a href="propspaces.html#propcoefspace"><i class="fa fa-check"></i><b>3.2</b> Coefficient Space</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="propspaces.html"><a href="propspaces.html#on-the-planes"><i class="fa fa-check"></i><b>3.2.1</b> On the Planes</a></li>
+<li class="chapter" data-level="3.2.2" data-path="propspaces.html"><a href="propspaces.html#general"><i class="fa fa-check"></i><b>3.2.2</b> General</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="propspaces.html"><a href="propspaces.html#propspherespace"><i class="fa fa-check"></i><b>3.3</b> Sphere Space</a></li>
+<li class="chapter" data-level="3.4" data-path="propspaces.html"><a href="propspaces.html#cross-product-space"><i class="fa fa-check"></i><b>3.4</b> Cross-Product Space</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="picsstress.html"><a href="picsstress.html"><i class="fa fa-check"></i><b>4</b> Pictures of Stress</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="picsstress.html"><a href="picsstress.html#coefficient-space"><i class="fa fa-check"></i><b>4.1</b> Coefficient Space</a></li>
+<li class="chapter" data-level="4.2" data-path="picsstress.html"><a href="picsstress.html#global-perspective"><i class="fa fa-check"></i><b>4.2</b> Global Perspective</a></li>
+<li class="chapter" data-level="4.3" data-path="picsstress.html"><a href="picsstress.html#global-contour"><i class="fa fa-check"></i><b>4.3</b> Global Contour</a></li>
+<li class="chapter" data-level="4.4" data-path="picsstress.html"><a href="picsstress.html#stationary-points"><i class="fa fa-check"></i><b>4.4</b> Stationary Points</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="picsstress.html"><a href="picsstress.html#first-minimum"><i class="fa fa-check"></i><b>4.4.1</b> First Minimum</a></li>
+<li class="chapter" data-level="4.4.2" data-path="picsstress.html"><a href="picsstress.html#second-minimum"><i class="fa fa-check"></i><b>4.4.2</b> Second Minimum</a></li>
+<li class="chapter" data-level="4.4.3" data-path="picsstress.html"><a href="picsstress.html#third-minimum"><i class="fa fa-check"></i><b>4.4.3</b> Third Minimum</a></li>
+<li class="chapter" data-level="4.4.4" data-path="picsstress.html"><a href="picsstress.html#first-saddle-point"><i class="fa fa-check"></i><b>4.4.4</b> First Saddle Point</a></li>
+<li class="chapter" data-level="4.4.5" data-path="picsstress.html"><a href="picsstress.html#second-saddle-point"><i class="fa fa-check"></i><b>4.4.5</b> Second Saddle Point</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="picsstress.html"><a href="picsstress.html#picsphere"><i class="fa fa-check"></i><b>4.5</b> Another Look</a></li>
+<li class="chapter" data-level="4.6" data-path="picsstress.html"><a href="picsstress.html#picline"><i class="fa fa-check"></i><b>4.6</b> A Final Look</a></li>
+<li class="chapter" data-level="4.7" data-path="picsstress.html"><a href="picsstress.html#discuss"><i class="fa fa-check"></i><b>4.7</b> Discuss</a></li>
+<li class="chapter" data-level="4.8" data-path="picsstress.html"><a href="picsstress.html#coordinates"><i class="fa fa-check"></i><b>4.8</b> Coordinates</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html"><i class="fa fa-check"></i><b>5</b> Classical Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#algebra"><i class="fa fa-check"></i><b>5.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#torgerson-transform"><i class="fa fa-check"></i><b>5.1.1</b> Torgerson Transform</a></li>
+<li class="chapter" data-level="5.1.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#schoenbergs-theorem"><i class="fa fa-check"></i><b>5.1.2</b> Schoenberg’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation"><i class="fa fa-check"></i><b>5.2</b> Approximation</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#low-rank-approximation-of-the-torgersen-transform"><i class="fa fa-check"></i><b>5.2.1</b> Low Rank Approximation of the Torgersen Transform</a></li>
+<li class="chapter" data-level="5.2.2" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#minimization-of-strain"><i class="fa fa-check"></i><b>5.2.2</b> Minimization of Strain</a></li>
+<li class="chapter" data-level="5.2.3" data-path="classical-multidimensional-scaling.html"><a href="classical-multidimensional-scaling.html#approximation-from-below"><i class="fa fa-check"></i><b>5.2.3</b> Approximation from Below</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="minstr.html"><a href="minstr.html"><i class="fa fa-check"></i><b>6</b> Minimization of Stress</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="minstr.html"><a href="minstr.html#gradient-methods"><i class="fa fa-check"></i><b>6.1</b> Gradient Methods</a></li>
+<li class="chapter" data-level="6.2" data-path="minstr.html"><a href="minstr.html#initial-configurations"><i class="fa fa-check"></i><b>6.2</b> Initial Configurations</a></li>
+<li class="chapter" data-level="6.3" data-path="minstr.html"><a href="minstr.html#apmajmin"><i class="fa fa-check"></i><b>6.3</b> On MM Algorithms</a></li>
+<li class="chapter" data-level="6.4" data-path="minstr.html"><a href="minstr.html#smacof-algorithm"><i class="fa fa-check"></i><b>6.4</b> Smacof Algorithm</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="minstr.html"><a href="minstr.html#global-convergence"><i class="fa fa-check"></i><b>6.4.1</b> Global Convergence</a></li>
+<li class="chapter" data-level="6.4.2" data-path="minstr.html"><a href="minstr.html#from-the-cs-inequality"><i class="fa fa-check"></i><b>6.4.2</b> From the CS Inequality</a></li>
+<li class="chapter" data-level="6.4.3" data-path="minstr.html"><a href="minstr.html#from-majorization"><i class="fa fa-check"></i><b>6.4.3</b> From Majorization</a></li>
+<li class="chapter" data-level="6.4.4" data-path="minstr.html"><a href="minstr.html#mincomprot"><i class="fa fa-check"></i><b>6.4.4</b> Component Rotated Smacof</a></li>
+<li class="chapter" data-level="6.4.5" data-path="minstr.html"><a href="minstr.html#minlocconv"><i class="fa fa-check"></i><b>6.4.5</b> Local Convergence</a></li>
+<li class="chapter" data-level="6.4.6" data-path="minstr.html"><a href="minstr.html#negative-dissimilarities"><i class="fa fa-check"></i><b>6.4.6</b> Negative Dissimilarities</a></li>
+<li class="chapter" data-level="6.4.7" data-path="minstr.html"><a href="minstr.html#minunweight"><i class="fa fa-check"></i><b>6.4.7</b> Unweighting</a></li>
+<li class="chapter" data-level="6.4.8" data-path="minstr.html"><a href="minstr.html#smacof-in-coefficient-space"><i class="fa fa-check"></i><b>6.4.8</b> Smacof in Coefficient Space</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="minstr.html"><a href="minstr.html#regions-of-attraction"><i class="fa fa-check"></i><b>6.5</b> Regions of Attraction</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="minstr.html"><a href="minstr.html#smacof"><i class="fa fa-check"></i><b>6.5.1</b> Smacof</a></li>
+<li class="chapter" data-level="6.5.2" data-path="minstr.html"><a href="minstr.html#newton"><i class="fa fa-check"></i><b>6.5.2</b> Newton</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chacceleration.html"><a href="chacceleration.html"><i class="fa fa-check"></i><b>7</b> Acceleration of Convergence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chacceleration.html"><a href="chacceleration.html#accelsimple"><i class="fa fa-check"></i><b>7.1</b> Simple Acceleration</a></li>
+<li class="chapter" data-level="7.2" data-path="chacceleration.html"><a href="chacceleration.html#one-parameter-methods"><i class="fa fa-check"></i><b>7.2</b> One-Parameter Methods</a></li>
+<li class="chapter" data-level="7.3" data-path="chacceleration.html"><a href="chacceleration.html#squarem"><i class="fa fa-check"></i><b>7.3</b> SQUAREM</a></li>
+<li class="chapter" data-level="7.4" data-path="chacceleration.html"><a href="chacceleration.html#vector-extrapolation-methods"><i class="fa fa-check"></i><b>7.4</b> Vector extrapolation methods</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nonmtrmds.html"><a href="nonmtrmds.html"><i class="fa fa-check"></i><b>8</b> Nonmetric MDS</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#generalities"><i class="fa fa-check"></i><b>8.1</b> Generalities</a></li>
+<li class="chapter" data-level="8.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssingledouble"><i class="fa fa-check"></i><b>8.2</b> Single and Double Phase</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#double-phase"><i class="fa fa-check"></i><b>8.2.1</b> Double Phase</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmssinglephase"><i class="fa fa-check"></i><b>8.2.2</b> Single Phase</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#affine-nmds"><i class="fa fa-check"></i><b>8.3</b> Affine NMDS</a></li>
+<li class="chapter" data-level="8.4" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsconic"><i class="fa fa-check"></i><b>8.4</b> Conic MDS</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="nonmtrmds.html"><a href="nonmtrmds.html#nmdsnorm"><i class="fa fa-check"></i><b>8.4.1</b> Normalization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="nonmtrmds.html"><a href="nonmtrmds.html#hard-squeeze-and-soft-squeeze"><i class="fa fa-check"></i><b>8.4.2</b> Hard Squeeze and Soft Squeeze</a></li>
+<li class="chapter" data-level="8.4.3" data-path="nonmtrmds.html"><a href="nonmtrmds.html#inner-iterations"><i class="fa fa-check"></i><b>8.4.3</b> Inner Iterations</a></li>
+<li class="chapter" data-level="8.4.4" data-path="nonmtrmds.html"><a href="nonmtrmds.html#stress-1-and-stress-2"><i class="fa fa-check"></i><b>8.4.4</b> Stress-1 and Stress-2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="intinterval.html"><a href="intinterval.html"><i class="fa fa-check"></i><b>9</b> Interval MDS</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="intinterval.html"><a href="intinterval.html#intadditive"><i class="fa fa-check"></i><b>9.1</b> The Additive Constant</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="intinterval.html"><a href="intinterval.html#exactad"><i class="fa fa-check"></i><b>9.1.1</b> Algebra</a></li>
+<li class="chapter" data-level="9.1.2" data-path="intinterval.html"><a href="intinterval.html#examples"><i class="fa fa-check"></i><b>9.1.2</b> Examples</a></li>
+<li class="chapter" data-level="9.1.3" data-path="intinterval.html"><a href="intinterval.html#variation"><i class="fa fa-check"></i><b>9.1.3</b> A Variation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html"><i class="fa fa-check"></i><b>10</b> Polynomial and Splinical MDS</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#polynomial-mds"><i class="fa fa-check"></i><b>10.1</b> Polynomial MDS</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Monotone Polynomials</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#splinical-mds"><i class="fa fa-check"></i><b>10.2</b> Splinical MDS</a></li>
+<li class="chapter" data-level="10.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathsplines"><i class="fa fa-check"></i><b>10.3</b> Splines</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathbsplines"><i class="fa fa-check"></i><b>10.3.1</b> B-splines</a></li>
+<li class="chapter" data-level="10.3.2" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#mathisplines"><i class="fa fa-check"></i><b>10.3.2</b> I-splines</a></li>
+<li class="chapter" data-level="10.3.3" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#time-series-example"><i class="fa fa-check"></i><b>10.3.3</b> Time Series Example</a></li>
+<li class="chapter" data-level="10.3.4" data-path="polynomial-and-splinical-mds.html"><a href="polynomial-and-splinical-mds.html#monotone-splines"><i class="fa fa-check"></i><b>10.3.4</b> Monotone Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chapordinal.html"><a href="chapordinal.html"><i class="fa fa-check"></i><b>11</b> Ordinal MDS</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chapordinal.html"><a href="chapordinal.html#mathmonreg"><i class="fa fa-check"></i><b>11.1</b> Monotone Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="chapordinal.html"><a href="chapordinal.html#mathsimpiso"><i class="fa fa-check"></i><b>11.1.1</b> Simple Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chapordinal.html"><a href="chapordinal.html#mathweigmr"><i class="fa fa-check"></i><b>11.1.2</b> Weighted Monotone Regression</a></li>
+<li class="chapter" data-level="11.1.3" data-path="chapordinal.html"><a href="chapordinal.html#mathnorcone"><i class="fa fa-check"></i><b>11.1.3</b> Normalized Cone Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chapordinal.html"><a href="chapordinal.html#nmdsals"><i class="fa fa-check"></i><b>11.2</b> Alternating Least Squares</a></li>
+<li class="chapter" data-level="11.3" data-path="chapordinal.html"><a href="chapordinal.html#nmdskruskal"><i class="fa fa-check"></i><b>11.3</b> Kruskal’s Approach</a></li>
+<li class="chapter" data-level="11.4" data-path="chapordinal.html"><a href="chapordinal.html#nmdsguttman"><i class="fa fa-check"></i><b>11.4</b> Guttman’s Approach</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="chapordinal.html"><a href="chapordinal.html#smoothness-of-ordinal-loss-functions"><i class="fa fa-check"></i><b>11.4.1</b> Smoothness of Ordinal Loss Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chapordinal.html"><a href="chapordinal.html#scaling-with-distance-bounds"><i class="fa fa-check"></i><b>11.5</b> Scaling with Distance Bounds</a></li>
+<li class="chapter" data-level="11.6" data-path="chapordinal.html"><a href="chapordinal.html#bounds-on-stress"><i class="fa fa-check"></i><b>11.6</b> Bounds on Stress</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="unidimensional.html"><a href="unidimensional.html"><i class="fa fa-check"></i><b>12</b> Unidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unidimensional.html"><a href="unidimensional.html#an-example"><i class="fa fa-check"></i><b>12.1</b> An example</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="unidimensional.html"><a href="unidimensional.html#perspective"><i class="fa fa-check"></i><b>12.1.1</b> Perspective</a></li>
+<li class="chapter" data-level="12.1.2" data-path="unidimensional.html"><a href="unidimensional.html#contour"><i class="fa fa-check"></i><b>12.1.2</b> Contour</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="unidimensional.html"><a href="unidimensional.html#order-formulation"><i class="fa fa-check"></i><b>12.2</b> Order Formulation</a></li>
+<li class="chapter" data-level="12.3" data-path="unidimensional.html"><a href="unidimensional.html#permutation-formulation"><i class="fa fa-check"></i><b>12.3</b> Permutation Formulation</a></li>
+<li class="chapter" data-level="12.4" data-path="unidimensional.html"><a href="unidimensional.html#sign-matrix-formulation"><i class="fa fa-check"></i><b>12.4</b> Sign Matrix Formulation</a></li>
+<li class="chapter" data-level="12.5" data-path="unidimensional.html"><a href="unidimensional.html#unialgorithms"><i class="fa fa-check"></i><b>12.5</b> Algorithms for UMDS</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="unidimensional.html"><a href="unidimensional.html#unismacof"><i class="fa fa-check"></i><b>12.5.1</b> SMACOF</a></li>
+<li class="chapter" data-level="12.5.2" data-path="unidimensional.html"><a href="unidimensional.html#unismoothed"><i class="fa fa-check"></i><b>12.5.2</b> SMACOF (smoothed)</a></li>
+<li class="chapter" data-level="12.5.3" data-path="unidimensional.html"><a href="unidimensional.html#unibranchbound"><i class="fa fa-check"></i><b>12.5.3</b> Branch-and-Bound</a></li>
+<li class="chapter" data-level="12.5.4" data-path="unidimensional.html"><a href="unidimensional.html#unidynamic"><i class="fa fa-check"></i><b>12.5.4</b> Dynamic Programming</a></li>
+<li class="chapter" data-level="12.5.5" data-path="unidimensional.html"><a href="unidimensional.html#uniannealing"><i class="fa fa-check"></i><b>12.5.5</b> Simulated Annealing</a></li>
+<li class="chapter" data-level="12.5.6" data-path="unidimensional.html"><a href="unidimensional.html#unipenalty"><i class="fa fa-check"></i><b>12.5.6</b> Penalty Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fullchapter.html"><a href="fullchapter.html"><i class="fa fa-check"></i><b>13</b> Full-dimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fullchapter.html"><a href="fullchapter.html#fullconvex"><i class="fa fa-check"></i><b>13.1</b> Convexity</a></li>
+<li class="chapter" data-level="13.2" data-path="fullchapter.html"><a href="fullchapter.html#fulloptimal"><i class="fa fa-check"></i><b>13.2</b> Optimality</a></li>
+<li class="chapter" data-level="13.3" data-path="fullchapter.html"><a href="fullchapter.html#fulliteration"><i class="fa fa-check"></i><b>13.3</b> Iteration</a></li>
+<li class="chapter" data-level="13.4" data-path="fullchapter.html"><a href="fullchapter.html#fullcpspace"><i class="fa fa-check"></i><b>13.4</b> Cross Product Space</a></li>
+<li class="chapter" data-level="13.5" data-path="fullchapter.html"><a href="fullchapter.html#full-dimensional-scaling"><i class="fa fa-check"></i><b>13.5</b> Full-dimensional Scaling</a></li>
+<li class="chapter" data-level="13.6" data-path="fullchapter.html"><a href="fullchapter.html#ekman-example-1"><i class="fa fa-check"></i><b>13.6</b> Ekman example</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="chunfolding.html"><a href="chunfolding.html"><i class="fa fa-check"></i><b>14</b> Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="chunfolding.html"><a href="chunfolding.html#algebra-1"><i class="fa fa-check"></i><b>14.1</b> Algebra</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="chunfolding.html"><a href="chunfolding.html#one-dimensional"><i class="fa fa-check"></i><b>14.1.1</b> One-dimensional</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="chunfolding.html"><a href="chunfolding.html#classical-unfolding"><i class="fa fa-check"></i><b>14.2</b> Classical Unfolding</a></li>
+<li class="chapter" data-level="14.3" data-path="chunfolding.html"><a href="chunfolding.html#nonmetric-unfolding"><i class="fa fa-check"></i><b>14.3</b> Nonmetric Unfolding</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="chunfolding.html"><a href="chunfolding.html#unfdegenerate"><i class="fa fa-check"></i><b>14.3.1</b> Degenerate Solutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cmds.html"><a href="cmds.html"><i class="fa fa-check"></i><b>15</b> Constrained Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="cmds.html"><a href="cmds.html#baspar"><i class="fa fa-check"></i><b>15.1</b> Basic Partitioning</a></li>
+<li class="chapter" data-level="15.2" data-path="cmds.html"><a href="cmds.html#majawa"><i class="fa fa-check"></i><b>15.2</b> Unweigthing</a></li>
+<li class="chapter" data-level="15.3" data-path="cmds.html"><a href="cmds.html#constraints-on-the-distances"><i class="fa fa-check"></i><b>15.3</b> Constraints on the Distances</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="cmds.html"><a href="cmds.html#rectangles"><i class="fa fa-check"></i><b>15.3.1</b> Rectangles</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="cmds.html"><a href="cmds.html#lincons"><i class="fa fa-check"></i><b>15.4</b> Linear Constraints</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="cmds.html"><a href="cmds.html#uniqueness"><i class="fa fa-check"></i><b>15.4.1</b> Uniqueness</a></li>
+<li class="chapter" data-level="15.4.2" data-path="cmds.html"><a href="cmds.html#combinations"><i class="fa fa-check"></i><b>15.4.2</b> Combinations</a></li>
+<li class="chapter" data-level="15.4.3" data-path="cmds.html"><a href="cmds.html#stepsize"><i class="fa fa-check"></i><b>15.4.3</b> Step Size</a></li>
+<li class="chapter" data-level="15.4.4" data-path="cmds.html"><a href="cmds.html#singdesign"><i class="fa fa-check"></i><b>15.4.4</b> Single Design Matrix</a></li>
+<li class="chapter" data-level="15.4.5" data-path="cmds.html"><a href="cmds.html#multdesign"><i class="fa fa-check"></i><b>15.4.5</b> Multiple Design Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="cmds.html"><a href="cmds.html#circmds"><i class="fa fa-check"></i><b>15.5</b> Circular MDS</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="cmds.html"><a href="cmds.html#circhist"><i class="fa fa-check"></i><b>15.5.1</b> Some History</a></li>
+<li class="chapter" data-level="15.5.2" data-path="cmds.html"><a href="cmds.html#circprimal"><i class="fa fa-check"></i><b>15.5.2</b> Primal Methods</a></li>
+<li class="chapter" data-level="15.5.3" data-path="cmds.html"><a href="cmds.html#circdual"><i class="fa fa-check"></i><b>15.5.3</b> Dual Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="cmds.html"><a href="cmds.html#ellimcds"><i class="fa fa-check"></i><b>15.6</b> Elliptical MDS</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="cmds.html"><a href="cmds.html#elliprimal"><i class="fa fa-check"></i><b>15.6.1</b> Primal</a></li>
+<li class="chapter" data-level="15.6.2" data-path="cmds.html"><a href="cmds.html#ellidual"><i class="fa fa-check"></i><b>15.6.2</b> Dual</a></li>
+</ul></li>
+<li class="chapter" data-level="15.7" data-path="cmds.html"><a href="cmds.html#distance-bounds"><i class="fa fa-check"></i><b>15.7</b> Distance Bounds</a></li>
+<li class="chapter" data-level="15.8" data-path="cmds.html"><a href="cmds.html#localized-mds"><i class="fa fa-check"></i><b>15.8</b> Localized MDS</a></li>
+<li class="chapter" data-level="15.9" data-path="cmds.html"><a href="cmds.html#mds-as-mva"><i class="fa fa-check"></i><b>15.9</b> MDS as MVA</a></li>
+<li class="chapter" data-level="15.10" data-path="cmds.html"><a href="cmds.html#conshorseshoes"><i class="fa fa-check"></i><b>15.10</b> Horseshoes</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="asymmds.html"><a href="asymmds.html"><i class="fa fa-check"></i><b>16</b> Asymmetry in MDS</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="asymmds.html"><a href="asymmds.html#conditional-rankings"><i class="fa fa-check"></i><b>16.1</b> Conditional Rankings</a></li>
+<li class="chapter" data-level="16.2" data-path="asymmds.html"><a href="asymmds.html#confusion-matrices"><i class="fa fa-check"></i><b>16.2</b> Confusion Matrices</a></li>
+<li class="chapter" data-level="16.3" data-path="asymmds.html"><a href="asymmds.html#the-slide-vector"><i class="fa fa-check"></i><b>16.3</b> The Slide Vector</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chindif.html"><a href="chindif.html"><i class="fa fa-check"></i><b>17</b> Individual Differences</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="chindif.html"><a href="chindif.html#indifrepl"><i class="fa fa-check"></i><b>17.1</b> Replications</a></li>
+<li class="chapter" data-level="17.2" data-path="chindif.html"><a href="chindif.html#indifindscal"><i class="fa fa-check"></i><b>17.2</b> INDSCAL/PARAFAC</a></li>
+<li class="chapter" data-level="17.3" data-path="chindif.html"><a href="chindif.html#indifidioscal"><i class="fa fa-check"></i><b>17.3</b> IDIOSCAL/TUCKALS</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="chnominal.html"><a href="chnominal.html"><i class="fa fa-check"></i><b>18</b> Nominal MDS</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="chnominal.html"><a href="chnominal.html#binary-dissimilarities"><i class="fa fa-check"></i><b>18.1</b> Binary Dissimilarities</a></li>
+<li class="chapter" data-level="18.2" data-path="chnominal.html"><a href="chnominal.html#indicator-matrix"><i class="fa fa-check"></i><b>18.2</b> Indicator matrix</a></li>
+<li class="chapter" data-level="18.3" data-path="chnominal.html"><a href="chnominal.html#unfolding-indicator-matrices"><i class="fa fa-check"></i><b>18.3</b> Unfolding Indicator Matrices</a></li>
+<li class="chapter" data-level="18.4" data-path="chnominal.html"><a href="chnominal.html#linear-separation"><i class="fa fa-check"></i><b>18.4</b> Linear Separation</a></li>
+<li class="chapter" data-level="18.5" data-path="chnominal.html"><a href="chnominal.html#circular-separation"><i class="fa fa-check"></i><b>18.5</b> Circular Separation</a></li>
+<li class="chapter" data-level="18.6" data-path="chnominal.html"><a href="chnominal.html#multidimensional-scalogram-analysis"><i class="fa fa-check"></i><b>18.6</b> Multidimensional Scalogram Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="ssstr.html"><a href="ssstr.html"><i class="fa fa-check"></i><b>19</b> Sstress and strain</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="ssstr.html"><a href="ssstr.html#sstress"><i class="fa fa-check"></i><b>19.1</b> sstress</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="ssstr.html"><a href="ssstr.html#sstress-and-stress"><i class="fa fa-check"></i><b>19.1.1</b> sstress and stress</a></li>
+<li class="chapter" data-level="19.1.2" data-path="ssstr.html"><a href="ssstr.html#decomposition"><i class="fa fa-check"></i><b>19.1.2</b> Decomposition</a></li>
+<li class="chapter" data-level="19.1.3" data-path="ssstr.html"><a href="ssstr.html#full-dimensional-sstress"><i class="fa fa-check"></i><b>19.1.3</b> Full-dimensional sstress</a></li>
+<li class="chapter" data-level="19.1.4" data-path="ssstr.html"><a href="ssstr.html#minimizing-sstress"><i class="fa fa-check"></i><b>19.1.4</b> Minimizing sstress</a></li>
+<li class="chapter" data-level="19.1.5" data-path="ssstr.html"><a href="ssstr.html#bounds-for-sstress"><i class="fa fa-check"></i><b>19.1.5</b> Bounds for sstress</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ssstr.html"><a href="ssstr.html#strain"><i class="fa fa-check"></i><b>19.2</b> strain</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="ssstr.html"><a href="ssstr.html#unweighted"><i class="fa fa-check"></i><b>19.2.1</b> Unweighted</a></li>
+<li class="chapter" data-level="19.2.2" data-path="ssstr.html"><a href="ssstr.html#using-additivity"><i class="fa fa-check"></i><b>19.2.2</b> Using Additivity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="chrstress.html"><a href="chrstress.html"><i class="fa fa-check"></i><b>20</b> fstress and rstress</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="chrstress.html"><a href="chrstress.html#fstress"><i class="fa fa-check"></i><b>20.1</b> fstress</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="chrstress.html"><a href="chrstress.html#use-of-weights"><i class="fa fa-check"></i><b>20.1.1</b> Use of Weights</a></li>
+<li class="chapter" data-level="20.1.2" data-path="chrstress.html"><a href="chrstress.html#convexity"><i class="fa fa-check"></i><b>20.1.2</b> Convexity</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="chrstress.html"><a href="chrstress.html#rstress"><i class="fa fa-check"></i><b>20.2</b> rStress</a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="chrstress.html"><a href="chrstress.html#using-weights"><i class="fa fa-check"></i><b>20.2.1</b> Using Weights</a></li>
+<li class="chapter" data-level="20.2.2" data-path="chrstress.html"><a href="chrstress.html#minimizing-rstress"><i class="fa fa-check"></i><b>20.2.2</b> Minimizing rstress</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="chrstress.html"><a href="chrstress.html#mstress"><i class="fa fa-check"></i><b>20.3</b> mstress</a></li>
+<li class="chapter" data-level="20.4" data-path="chrstress.html"><a href="chrstress.html#astress"><i class="fa fa-check"></i><b>20.4</b> astress</a></li>
+<li class="chapter" data-level="20.5" data-path="chrstress.html"><a href="chrstress.html#pstress"><i class="fa fa-check"></i><b>20.5</b> pstress</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html"><i class="fa fa-check"></i><b>21</b> Alternative Least Squares Loss</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#sammons-mds"><i class="fa fa-check"></i><b>21.1</b> Sammon’s MDS</a></li>
+<li class="chapter" data-level="21.2" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#mcgees-work"><i class="fa fa-check"></i><b>21.2</b> McGee’s Work</a></li>
+<li class="chapter" data-level="21.3" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#shepards-nonmetric-mds"><i class="fa fa-check"></i><b>21.3</b> Shepard’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.4" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#guttmans-nonmetric-mds"><i class="fa fa-check"></i><b>21.4</b> Guttman’s Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.5" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#positive-orthant-nonmetric-mds"><i class="fa fa-check"></i><b>21.5</b> Positive Orthant Nonmetric MDS</a></li>
+<li class="chapter" data-level="21.6" data-path="alternative-least-squares-loss.html"><a href="alternative-least-squares-loss.html#interrole"><i class="fa fa-check"></i><b>21.6</b> Role Reversal</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html"><i class="fa fa-check"></i><b>22</b> Inverse Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#basic-imds"><i class="fa fa-check"></i><b>22.1</b> Basic IMDS</a></li>
+<li class="chapter" data-level="22.2" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section"><i class="fa fa-check"></i><b>22.2</b> [,1]</a></li>
+<li class="chapter" data-level="22.3" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-1"><i class="fa fa-check"></i><b>22.3</b> [1,] -0.5</a></li>
+<li class="chapter" data-level="22.4" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-2"><i class="fa fa-check"></i><b>22.4</b> [2,] -0.5</a></li>
+<li class="chapter" data-level="22.5" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-3"><i class="fa fa-check"></i><b>22.5</b> [3,] 0.5</a></li>
+<li class="chapter" data-level="22.6" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-4"><i class="fa fa-check"></i><b>22.6</b> [4,] 0.5</a></li>
+<li class="chapter" data-level="22.7" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-5"><i class="fa fa-check"></i><b>22.7</b> [,1] [,2] [,3] [,4]</a></li>
+<li class="chapter" data-level="22.8" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-6"><i class="fa fa-check"></i><b>22.8</b> [1,] 1 -1 1 -1</a></li>
+<li class="chapter" data-level="22.9" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-7"><i class="fa fa-check"></i><b>22.9</b> [2,] -1 1 -1 1</a></li>
+<li class="chapter" data-level="22.10" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-8"><i class="fa fa-check"></i><b>22.10</b> [3,] 1 -1 1 -1</a></li>
+<li class="chapter" data-level="22.11" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-9"><i class="fa fa-check"></i><b>22.11</b> [4,] -1 1 -1 1</a></li>
+<li class="chapter" data-level="22.12" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-10"><i class="fa fa-check"></i><b>22.12</b> [,1] [,2] [,3] [,4]</a></li>
+<li class="chapter" data-level="22.13" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-11"><i class="fa fa-check"></i><b>22.13</b> [1,] 1 -1 -1 1</a></li>
+<li class="chapter" data-level="22.14" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-12"><i class="fa fa-check"></i><b>22.14</b> [2,] -1 1 1 -1</a></li>
+<li class="chapter" data-level="22.15" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-13"><i class="fa fa-check"></i><b>22.15</b> [3,] -1 1 1 -1</a></li>
+<li class="chapter" data-level="22.16" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-14"><i class="fa fa-check"></i><b>22.16</b> [4,] 1 -1 -1 1</a></li>
+<li class="chapter" data-level="22.17" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-15"><i class="fa fa-check"></i><b>22.17</b> [,1] [,2] [,3] [,4]</a></li>
+<li class="chapter" data-level="22.18" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-16"><i class="fa fa-check"></i><b>22.18</b> [1,] -2 2 0 0</a></li>
+<li class="chapter" data-level="22.19" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-17"><i class="fa fa-check"></i><b>22.19</b> [2,] 2 -2 0 0</a></li>
+<li class="chapter" data-level="22.20" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-18"><i class="fa fa-check"></i><b>22.20</b> [3,] 0 0 2 -2</a></li>
+<li class="chapter" data-level="22.21" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-19"><i class="fa fa-check"></i><b>22.21</b> [4,] 0 0 -2 2</a></li>
+<li class="chapter" data-level="22.22" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-20"><i class="fa fa-check"></i><b>22.22</b> [,1] [,2]</a></li>
+<li class="chapter" data-level="22.23" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-21"><i class="fa fa-check"></i><b>22.23</b> [1,] -0.5 -0.5</a></li>
+<li class="chapter" data-level="22.24" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-22"><i class="fa fa-check"></i><b>22.24</b> [2,] -0.5 0.5</a></li>
+<li class="chapter" data-level="22.25" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-23"><i class="fa fa-check"></i><b>22.25</b> [3,] 0.5 0.5</a></li>
+<li class="chapter" data-level="22.26" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-24"><i class="fa fa-check"></i><b>22.26</b> [4,] 0.5 -0.5</a></li>
+<li class="chapter" data-level="22.27" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-25"><i class="fa fa-check"></i><b>22.27</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.28" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-26"><i class="fa fa-check"></i><b>22.28</b> 2 1.000000</a></li>
+<li class="chapter" data-level="22.29" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-27"><i class="fa fa-check"></i><b>22.29</b> 3 1.414214 1.000000</a></li>
+<li class="chapter" data-level="22.30" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-28"><i class="fa fa-check"></i><b>22.30</b> 4 1.000000 1.414214 1.000000</a></li>
+<li class="chapter" data-level="22.31" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-29"><i class="fa fa-check"></i><b>22.31</b> [1] -0.5 0.5 -0.5 0.5</a></li>
+<li class="chapter" data-level="22.32" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-30"><i class="fa fa-check"></i><b>22.32</b> [,1]</a></li>
+<li class="chapter" data-level="22.33" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-31"><i class="fa fa-check"></i><b>22.33</b> [1,] -0.6708204</a></li>
+<li class="chapter" data-level="22.34" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-32"><i class="fa fa-check"></i><b>22.34</b> [2,] -0.2236068</a></li>
+<li class="chapter" data-level="22.35" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-33"><i class="fa fa-check"></i><b>22.35</b> [3,] 0.2236068</a></li>
+<li class="chapter" data-level="22.36" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-34"><i class="fa fa-check"></i><b>22.36</b> [4,] 0.6708204</a></li>
+<li class="chapter" data-level="22.37" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-35"><i class="fa fa-check"></i><b>22.37</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.38" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-36"><i class="fa fa-check"></i><b>22.38</b> 2 3.464102</a></li>
+<li class="chapter" data-level="22.39" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-37"><i class="fa fa-check"></i><b>22.39</b> 3 4.472136 2.828427</a></li>
+<li class="chapter" data-level="22.40" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-38"><i class="fa fa-check"></i><b>22.40</b> 4 6.324555 4.472136 3.464102</a></li>
+<li class="chapter" data-level="22.41" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-39"><i class="fa fa-check"></i><b>22.41</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.42" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-40"><i class="fa fa-check"></i><b>22.42</b> 2 4.330127</a></li>
+<li class="chapter" data-level="22.43" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-41"><i class="fa fa-check"></i><b>22.43</b> 3 5.590170 2.121320</a></li>
+<li class="chapter" data-level="22.44" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-42"><i class="fa fa-check"></i><b>22.44</b> 4 4.743416 5.590170 4.330127</a></li>
+<li class="chapter" data-level="22.45" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-43"><i class="fa fa-check"></i><b>22.45</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.46" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-44"><i class="fa fa-check"></i><b>22.46</b> 2 3.983717</a></li>
+<li class="chapter" data-level="22.47" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-45"><i class="fa fa-check"></i><b>22.47</b> 3 3.801316 4.101219</a></li>
+<li class="chapter" data-level="22.48" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-46"><i class="fa fa-check"></i><b>22.48</b> 4 6.640783 3.801316 3.983717</a></li>
+<li class="chapter" data-level="22.49" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-47"><i class="fa fa-check"></i><b>22.49</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.50" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-48"><i class="fa fa-check"></i><b>22.50</b> 2 1.914908</a></li>
+<li class="chapter" data-level="22.51" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-49"><i class="fa fa-check"></i><b>22.51</b> 3 5.472136 2.828427</a></li>
+<li class="chapter" data-level="22.52" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-50"><i class="fa fa-check"></i><b>22.52</b> 4 6.324555 3.472136 5.013295</a></li>
+<li class="chapter" data-level="22.53" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-51"><i class="fa fa-check"></i><b>22.53</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.54" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-52"><i class="fa fa-check"></i><b>22.54</b> 2 20.784610</a></li>
+<li class="chapter" data-level="22.55" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-53"><i class="fa fa-check"></i><b>22.55</b> 3 0.000000 5.656854</a></li>
+<li class="chapter" data-level="22.56" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-54"><i class="fa fa-check"></i><b>22.56</b> 4 0.000000 13.416408 0.000000</a></li>
+<li class="chapter" data-level="22.57" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-55"><i class="fa fa-check"></i><b>22.57</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.58" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-56"><i class="fa fa-check"></i><b>22.58</b> 2 13.856406</a></li>
+<li class="chapter" data-level="22.59" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-57"><i class="fa fa-check"></i><b>22.59</b> 3 4.472136 0.000000</a></li>
+<li class="chapter" data-level="22.60" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-58"><i class="fa fa-check"></i><b>22.60</b> 4 0.000000 13.416408 0.000000</a></li>
+<li class="chapter" data-level="22.61" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-59"><i class="fa fa-check"></i><b>22.61</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.62" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-60"><i class="fa fa-check"></i><b>22.62</b> 2 20.78461</a></li>
+<li class="chapter" data-level="22.63" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-61"><i class="fa fa-check"></i><b>22.63</b> 3 0.00000 22.62742</a></li>
+<li class="chapter" data-level="22.64" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-62"><i class="fa fa-check"></i><b>22.64</b> 4 0.00000 0.00000 20.78461</a></li>
+<li class="chapter" data-level="22.65" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-63"><i class="fa fa-check"></i><b>22.65</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.66" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-64"><i class="fa fa-check"></i><b>22.66</b> 2 0.000000</a></li>
+<li class="chapter" data-level="22.67" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-65"><i class="fa fa-check"></i><b>22.67</b> 3 13.416408 5.656854</a></li>
+<li class="chapter" data-level="22.68" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-66"><i class="fa fa-check"></i><b>22.68</b> 4 0.000000 0.000000 20.784610</a></li>
+<li class="chapter" data-level="22.69" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-67"><i class="fa fa-check"></i><b>22.69</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.70" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-68"><i class="fa fa-check"></i><b>22.70</b> 2 0.000000</a></li>
+<li class="chapter" data-level="22.71" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-69"><i class="fa fa-check"></i><b>22.71</b> 3 13.416408 0.000000</a></li>
+<li class="chapter" data-level="22.72" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-70"><i class="fa fa-check"></i><b>22.72</b> 4 0.000000 4.472136 13.856406</a></li>
+<li class="chapter" data-level="22.73" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-71"><i class="fa fa-check"></i><b>22.73</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.74" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-72"><i class="fa fa-check"></i><b>22.74</b> 2 0.000000</a></li>
+<li class="chapter" data-level="22.75" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-73"><i class="fa fa-check"></i><b>22.75</b> 3 4.472136 0.000000</a></li>
+<li class="chapter" data-level="22.76" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-74"><i class="fa fa-check"></i><b>22.76</b> 4 8.432738 4.472136 0.000000</a></li>
+<li class="chapter" data-level="22.77" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-75"><i class="fa fa-check"></i><b>22.77</b> 1 2 3</a></li>
+<li class="chapter" data-level="22.78" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-76"><i class="fa fa-check"></i><b>22.78</b> 2 0.000000</a></li>
+<li class="chapter" data-level="22.79" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-77"><i class="fa fa-check"></i><b>22.79</b> 3 0.000000 5.656854</a></li>
+<li class="chapter" data-level="22.80" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-78"><i class="fa fa-check"></i><b>22.80</b> 4 12.649111 0.000000 0.000000</a></li>
+<li class="chapter" data-level="22.81" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-79"><i class="fa fa-check"></i><b>22.81</b> [1] 460.00000 248.00000 1072.00000 460.00000 248.00000 36.44444 112.00000</a></li>
+<li class="chapter" data-level="22.82" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-80"><i class="fa fa-check"></i><b>22.82</b> [1] 24.00000 24.00000 24.00000 21.75000 12.00000 13.33333 6.66667 13.33333</a></li>
+<li class="chapter" data-level="22.83" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-81"><i class="fa fa-check"></i><b>22.83</b> [9] 17.33333 17.33333 19.68000 13.33333 6.66667 17.33333 6.66667 21.75000</a></li>
+<li class="chapter" data-level="22.84" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-82"><i class="fa fa-check"></i><b>22.84</b> [17] 6.66667 60.00000 24.00000 21.75000 19.68000 17.33333 21.75000 13.33333</a></li>
+<li class="chapter" data-level="22.85" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-83"><i class="fa fa-check"></i><b>22.85</b> [25] 19.68000 17.33333 17.33333 21.75000 17.33333 17.33333 13.33333 6.66667</a></li>
+<li class="chapter" data-level="22.86" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-84"><i class="fa fa-check"></i><b>22.86</b> [33] 21.75000 17.33333 19.68000 13.33333 17.33333 19.68000 19.68000 17.33333</a></li>
+<li class="chapter" data-level="22.87" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-85"><i class="fa fa-check"></i><b>22.87</b> [41] 6.66667 17.33333</a></li>
+<li class="chapter" data-level="22.88" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-86"><i class="fa fa-check"></i><b>22.88</b> [,1] [,2]</a></li>
+<li class="chapter" data-level="22.89" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-87"><i class="fa fa-check"></i><b>22.89</b> [1,] 0.0000000 0.0000000</a></li>
+<li class="chapter" data-level="22.90" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-88"><i class="fa fa-check"></i><b>22.90</b> [2,] 0.0000000 0.0000000</a></li>
+<li class="chapter" data-level="22.91" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-89"><i class="fa fa-check"></i><b>22.91</b> [3,] 0.0000000 -0.8164966</a></li>
+<li class="chapter" data-level="22.92" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-90"><i class="fa fa-check"></i><b>22.92</b> [4,] 0.0000000 0.4082483</a></li>
+<li class="chapter" data-level="22.93" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-91"><i class="fa fa-check"></i><b>22.93</b> [5,] 0.7071068 0.0000000</a></li>
+<li class="chapter" data-level="22.94" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-92"><i class="fa fa-check"></i><b>22.94</b> [6,] -0.7071068 0.4082483</a></li>
+<li class="chapter" data-level="22.95" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-93"><i class="fa fa-check"></i><b>22.95</b> [,1] [,2] [,3] [,4] [,5] [,6]</a></li>
+<li class="chapter" data-level="22.96" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-94"><i class="fa fa-check"></i><b>22.96</b> [1,] 0 0 0 1 1 1</a></li>
+<li class="chapter" data-level="22.97" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-95"><i class="fa fa-check"></i><b>22.97</b> [2,] 0 0 0 1 1 1</a></li>
+<li class="chapter" data-level="22.98" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-96"><i class="fa fa-check"></i><b>22.98</b> [3,] 0 0 0 1 1 1</a></li>
+<li class="chapter" data-level="22.99" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-97"><i class="fa fa-check"></i><b>22.99</b> [4,] 1 1 1 0 0 0</a></li>
+<li class="chapter" data-level="22.100" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-98"><i class="fa fa-check"></i><b>22.100</b> [5,] 1 1 1 0 0 0</a></li>
+<li class="chapter" data-level="22.101" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-99"><i class="fa fa-check"></i><b>22.101</b> [6,] 1 1 1 0 0 0</a></li>
+<li class="chapter" data-level="22.102" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-100"><i class="fa fa-check"></i><b>22.102</b> 4 5 6</a></li>
+<li class="chapter" data-level="22.103" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-101"><i class="fa fa-check"></i><b>22.103</b> 1 0.0000000 1.414214 1.632993</a></li>
+<li class="chapter" data-level="22.104" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-102"><i class="fa fa-check"></i><b>22.104</b> 2 0.8164966 0.000000 0.000000</a></li>
+<li class="chapter" data-level="22.105" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-103"><i class="fa fa-check"></i><b>22.105</b> 3 1.2247449 1.080123 1.414214</a></li>
+<li class="chapter" data-level="22.106" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-104"><i class="fa fa-check"></i><b>22.106</b> 4 5 6</a></li>
+<li class="chapter" data-level="22.107" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-105"><i class="fa fa-check"></i><b>22.107</b> 1 0.8164966 0.000000 0.000000</a></li>
+<li class="chapter" data-level="22.108" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-106"><i class="fa fa-check"></i><b>22.108</b> 2 0.0000000 1.414214 1.632993</a></li>
+<li class="chapter" data-level="22.109" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-107"><i class="fa fa-check"></i><b>22.109</b> 3 1.2247449 1.080123 1.414214</a></li>
+<li class="chapter" data-level="22.110" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66"><i class="fa fa-check"></i><b>22.110</b> KVP PvdA VVD ARP CHU CPN PSP BP D66</a></li>
+<li class="chapter" data-level="22.111" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-0.00-5.63-5.27-4.60-4.80-7.54-6.73-7.18-6.17"><i class="fa fa-check"></i><b>22.111</b> KVP 0.00 5.63 5.27 4.60 4.80 7.54 6.73 7.18 6.17</a></li>
+<li class="chapter" data-level="22.112" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#pvda-5.63-0.00-6.72-5.64-6.22-5.12-4.59-7.22-5.47"><i class="fa fa-check"></i><b>22.112</b> PvdA 5.63 0.00 6.72 5.64 6.22 5.12 4.59 7.22 5.47</a></li>
+<li class="chapter" data-level="22.113" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#vvd-5.27-6.72-0.00-5.46-4.97-8.13-7.55-6.90-4.67"><i class="fa fa-check"></i><b>22.113</b> VVD 5.27 6.72 0.00 5.46 4.97 8.13 7.55 6.90 4.67</a></li>
+<li class="chapter" data-level="22.114" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#arp-4.60-5.64-5.46-0.00-3.20-7.84-6.73-7.28-6.13"><i class="fa fa-check"></i><b>22.114</b> ARP 4.60 5.64 5.46 0.00 3.20 7.84 6.73 7.28 6.13</a></li>
+<li class="chapter" data-level="22.115" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#chu-4.80-6.22-4.97-3.20-0.00-7.80-7.08-6.96-6.04"><i class="fa fa-check"></i><b>22.115</b> CHU 4.80 6.22 4.97 3.20 0.00 7.80 7.08 6.96 6.04</a></li>
+<li class="chapter" data-level="22.116" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#cpn-7.54-5.12-8.13-7.84-7.80-0.00-4.08-6.34-7.42"><i class="fa fa-check"></i><b>22.116</b> CPN 7.54 5.12 8.13 7.84 7.80 0.00 4.08 6.34 7.42</a></li>
+<li class="chapter" data-level="22.117" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#psp-6.73-4.59-7.55-6.73-7.08-4.08-0.00-6.88-6.36"><i class="fa fa-check"></i><b>22.117</b> PSP 6.73 4.59 7.55 6.73 7.08 4.08 0.00 6.88 6.36</a></li>
+<li class="chapter" data-level="22.118" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#bp-7.18-7.22-6.90-7.28-6.96-6.34-6.88-0.00-7.36"><i class="fa fa-check"></i><b>22.118</b> BP 7.18 7.22 6.90 7.28 6.96 6.34 6.88 0.00 7.36</a></li>
+<li class="chapter" data-level="22.119" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#d66-6.17-5.47-4.67-6.13-6.04-7.42-6.36-7.36-0.00"><i class="fa fa-check"></i><b>22.119</b> D66 6.17 5.47 4.67 6.13 6.04 7.42 6.36 7.36 0.00</a></li>
+<li class="chapter" data-level="22.120" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-108"><i class="fa fa-check"></i><b>22.120</b> [,1] [,2]</a></li>
+<li class="chapter" data-level="22.121" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-109"><i class="fa fa-check"></i><b>22.121</b> [1,] 1.78 3.579</a></li>
+<li class="chapter" data-level="22.122" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-110"><i class="fa fa-check"></i><b>22.122</b> [2,] -1.46 2.297</a></li>
+<li class="chapter" data-level="22.123" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-111"><i class="fa fa-check"></i><b>22.123</b> [3,] 3.42 -2.776</a></li>
+<li class="chapter" data-level="22.124" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-112"><i class="fa fa-check"></i><b>22.124</b> [4,] 3.30 1.837</a></li>
+<li class="chapter" data-level="22.125" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-113"><i class="fa fa-check"></i><b>22.125</b> [5,] 3.84 0.308</a></li>
+<li class="chapter" data-level="22.126" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-114"><i class="fa fa-check"></i><b>22.126</b> [6,] -5.09 -0.044</a></li>
+<li class="chapter" data-level="22.127" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-115"><i class="fa fa-check"></i><b>22.127</b> [7,] -3.79 2.132</a></li>
+<li class="chapter" data-level="22.128" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-116"><i class="fa fa-check"></i><b>22.128</b> [8,] -2.86 -4.318</a></li>
+<li class="chapter" data-level="22.129" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-117"><i class="fa fa-check"></i><b>22.129</b> [9,] 0.86 -3.015</a></li>
+<li class="chapter" data-level="22.130" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-1"><i class="fa fa-check"></i><b>22.130</b> KVP PvdA VVD ARP CHU CPN PSP BP D66</a></li>
+<li class="chapter" data-level="22.131" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-0.0-32.6-9.7-9.3-24.6-24.3-11.7-18.9-15.2"><i class="fa fa-check"></i><b>22.131</b> KVP 0.0 32.6 9.7 9.3 24.6 24.3 11.7 18.9 15.2</a></li>
+<li class="chapter" data-level="22.132" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#pvda-32.6-0.0-25.7-36.9-20.7-34.1-36.1-29.7-22.2"><i class="fa fa-check"></i><b>22.132</b> PvdA 32.6 0.0 25.7 36.9 20.7 34.1 36.1 29.7 22.2</a></li>
+<li class="chapter" data-level="22.133" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#vvd-9.7-25.7-0.0-17.4-32.0-34.4-22.3-23.5-20.4"><i class="fa fa-check"></i><b>22.133</b> VVD 9.7 25.7 0.0 17.4 32.0 34.4 22.3 23.5 20.4</a></li>
+<li class="chapter" data-level="22.134" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#arp-9.3-36.9-17.4-0.0-28.0-33.7-25.6-28.9-23.0"><i class="fa fa-check"></i><b>22.134</b> ARP 9.3 36.9 17.4 0.0 28.0 33.7 25.6 28.9 23.0</a></li>
+<li class="chapter" data-level="22.135" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#chu-24.6-20.7-32.0-28.0-0.0-20.8-31.9-33.3-26.3"><i class="fa fa-check"></i><b>22.135</b> CHU 24.6 20.7 32.0 28.0 0.0 20.8 31.9 33.3 26.3</a></li>
+<li class="chapter" data-level="22.136" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#cpn-24.3-34.1-34.4-33.7-20.8-0.0-24.9-30.7-31.8"><i class="fa fa-check"></i><b>22.136</b> CPN 24.3 34.1 34.4 33.7 20.8 0.0 24.9 30.7 31.8</a></li>
+<li class="chapter" data-level="22.137" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#psp-11.7-36.1-22.3-25.6-31.9-24.9-0.0-23.7-27.7"><i class="fa fa-check"></i><b>22.137</b> PSP 11.7 36.1 22.3 25.6 31.9 24.9 0.0 23.7 27.7</a></li>
+<li class="chapter" data-level="22.138" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#bp-18.9-29.7-23.5-28.9-33.3-30.7-23.7-0.0-35.0"><i class="fa fa-check"></i><b>22.138</b> BP 18.9 29.7 23.5 28.9 33.3 30.7 23.7 0.0 35.0</a></li>
+<li class="chapter" data-level="22.139" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#d66-15.2-22.2-20.4-23.0-26.3-31.8-27.7-35.0-0.0"><i class="fa fa-check"></i><b>22.139</b> D66 15.2 22.2 20.4 23.0 26.3 31.8 27.7 35.0 0.0</a></li>
+<li class="chapter" data-level="22.140" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-2"><i class="fa fa-check"></i><b>22.140</b> KVP PvdA VVD ARP CHU CPN PSP BP D66</a></li>
+<li class="chapter" data-level="22.141" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#kvp-0.00-3.48-0.00-0.00-2.34-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.141</b> KVP 0.00 3.48 0.00 0.00 2.34 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.142" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#pvda-3.48-0.00-0.00-0.00-0.00-0.00-0.93-0.00-0.00"><i class="fa fa-check"></i><b>22.142</b> PvdA 3.48 0.00 0.00 0.00 0.00 0.00 0.93 0.00 0.00</a></li>
+<li class="chapter" data-level="22.143" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#vvd-0.00-0.00-0.00-0.00-0.83-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.143</b> VVD 0.00 0.00 0.00 0.00 0.83 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.144" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#arp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.144</b> ARP 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.145" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#chu-2.34-0.00-0.83-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.145</b> CHU 2.34 0.00 0.83 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.146" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#cpn-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.146</b> CPN 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.147" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#psp-0.00-0.93-0.00-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.147</b> PSP 0.00 0.93 0.00 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.148" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#bp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.148</b> BP 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.149" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#d66-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00"><i class="fa fa-check"></i><b>22.149</b> D66 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00</a></li>
+<li class="chapter" data-level="22.150" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-118"><i class="fa fa-check"></i><b>22.150</b> [1] 0.00000 0.00000 0.00000 -5.86238 0.00000 -2.96688 0.00000</a></li>
+<li class="chapter" data-level="22.151" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-119"><i class="fa fa-check"></i><b>22.151</b> [8] -2.96688 -4.47894 -4.47894 -5.71312 -2.96688 0.00000 -5.00453</a></li>
+<li class="chapter" data-level="22.152" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-120"><i class="fa fa-check"></i><b>22.152</b> [15] 0.00000 -5.86238 0.00000 -12.00000 0.00000 -5.86238 -5.71312</a></li>
+<li class="chapter" data-level="22.153" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-121"><i class="fa fa-check"></i><b>22.153</b> [22] -5.00453 -5.86238 -2.96688 -5.71312 -4.47894 -5.00453 -5.86238</a></li>
+<li class="chapter" data-level="22.154" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-122"><i class="fa fa-check"></i><b>22.154</b> [29] -5.00453 -5.00453 -2.96688 0.00000 -5.86238 -4.47894 -5.71312</a></li>
+<li class="chapter" data-level="22.155" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#section-123"><i class="fa fa-check"></i><b>22.155</b> [36] -2.96688 -5.00453 -5.71312 -5.71312 -4.47894 0.00000 -4.47894</a></li>
+<li class="chapter" data-level="22.156" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#multiple-solutions"><i class="fa fa-check"></i><b>22.156</b> Multiple Solutions</a></li>
+<li class="chapter" data-level="22.157" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#minimizing-istress"><i class="fa fa-check"></i><b>22.157</b> Minimizing iStress</a></li>
+<li class="chapter" data-level="22.158" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-three"><i class="fa fa-check"></i><b>22.158</b> Order three</a></li>
+<li class="chapter" data-level="22.159" data-path="inverse-multidimensional-scaling.html"><a href="inverse-multidimensional-scaling.html#order-four"><i class="fa fa-check"></i><b>22.159</b> Order Four</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="stability.html"><a href="stability.html"><i class="fa fa-check"></i><b>23</b> Stability of MDS Solutions</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="stability.html"><a href="stability.html#null-distribution"><i class="fa fa-check"></i><b>23.1</b> Null Distribution</a></li>
+<li class="chapter" data-level="23.2" data-path="stability.html"><a href="stability.html#pseudo-confidence-ellipsoids"><i class="fa fa-check"></i><b>23.2</b> Pseudo-confidence Ellipsoids</a></li>
+<li class="chapter" data-level="23.3" data-path="stability.html"><a href="stability.html#a-pseudo-bootstrap"><i class="fa fa-check"></i><b>23.3</b> A Pseudo-Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="global.html"><a href="global.html"><i class="fa fa-check"></i><b>24</b> In Search of Global Minima</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="global.html"><a href="global.html#random-starts"><i class="fa fa-check"></i><b>24.1</b> Random Starts</a>
+<ul>
+<li class="chapter" data-level="24.1.1" data-path="global.html"><a href="global.html#examples-1"><i class="fa fa-check"></i><b>24.1.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="global.html"><a href="global.html#tunneling-filling-annealing-etc."><i class="fa fa-check"></i><b>24.2</b> Tunneling, Filling, Annealing, etc.</a></li>
+<li class="chapter" data-level="24.3" data-path="global.html"><a href="global.html#globcutplanes"><i class="fa fa-check"></i><b>24.3</b> Cutting Planes</a>
+<ul>
+<li class="chapter" data-level="24.3.1" data-path="global.html"><a href="global.html#globalcircle"><i class="fa fa-check"></i><b>24.3.1</b> On the Circle</a></li>
+<li class="chapter" data-level="24.3.2" data-path="global.html"><a href="global.html#cauchy-step-size"><i class="fa fa-check"></i><b>24.3.2</b> Cauchy Step Size</a></li>
+<li class="chapter" data-level="24.3.3" data-path="global.html"><a href="global.html#balls"><i class="fa fa-check"></i><b>24.3.3</b> Balls</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="global.html"><a href="global.html#distance-smoothing"><i class="fa fa-check"></i><b>24.4</b> Distance Smoothing</a></li>
+<li class="chapter" data-level="24.5" data-path="global.html"><a href="global.html#penalizing-dimensions"><i class="fa fa-check"></i><b>24.5</b> Penalizing Dimensions</a>
+<ul>
+<li class="chapter" data-level="24.5.1" data-path="global.html"><a href="global.html#local-minima"><i class="fa fa-check"></i><b>24.5.1</b> Local Minima</a></li>
+<li class="chapter" data-level="24.5.2" data-path="global.html"><a href="global.html#algorithm"><i class="fa fa-check"></i><b>24.5.2</b> Algorithm</a></li>
+<li class="chapter" data-level="24.5.3" data-path="global.html"><a href="global.html#examples-2"><i class="fa fa-check"></i><b>24.5.3</b> Examples</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="mathadd.html"><a href="mathadd.html"><i class="fa fa-check"></i><b>25</b> Mathematical Addenda</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="mathadd.html"><a href="mathadd.html#apnotation"><i class="fa fa-check"></i><b>25.1</b> Notation</a>
+<ul>
+<li class="chapter" data-level="25.1.1" data-path="mathadd.html"><a href="mathadd.html#symbols"><i class="fa fa-check"></i><b>25.1.1</b> Symbols</a></li>
+<li class="chapter" data-level="25.1.2" data-path="mathadd.html"><a href="mathadd.html#summation"><i class="fa fa-check"></i><b>25.1.2</b> Summation</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="mathadd.html"><a href="mathadd.html#apmatrices"><i class="fa fa-check"></i><b>25.2</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="25.2.1" data-path="mathadd.html"><a href="mathadd.html#apmspaces"><i class="fa fa-check"></i><b>25.2.1</b> Matrix Spaces</a></li>
+<li class="chapter" data-level="25.2.2" data-path="mathadd.html"><a href="mathadd.html#apconstants"><i class="fa fa-check"></i><b>25.2.2</b> Constants</a></li>
+<li class="chapter" data-level="25.2.3" data-path="mathadd.html"><a href="mathadd.html#difmat"><i class="fa fa-check"></i><b>25.2.3</b> Diff Matrices</a></li>
+<li class="chapter" data-level="25.2.4" data-path="mathadd.html"><a href="mathadd.html#apsign"><i class="fa fa-check"></i><b>25.2.4</b> Sign Matrices</a></li>
+<li class="chapter" data-level="25.2.5" data-path="mathadd.html"><a href="mathadd.html#apcombo"><i class="fa fa-check"></i><b>25.2.5</b> Sums and Products</a></li>
+<li class="chapter" data-level="25.2.6" data-path="mathadd.html"><a href="mathadd.html#apinverse"><i class="fa fa-check"></i><b>25.2.6</b> Inverse</a></li>
+<li class="chapter" data-level="25.2.7" data-path="mathadd.html"><a href="mathadd.html#aploewner"><i class="fa fa-check"></i><b>25.2.7</b> The Loewner order</a></li>
+<li class="chapter" data-level="25.2.8" data-path="mathadd.html"><a href="mathadd.html#apeigen"><i class="fa fa-check"></i><b>25.2.8</b> Eigen Decomposition</a></li>
+<li class="chapter" data-level="25.2.9" data-path="mathadd.html"><a href="mathadd.html#apsvd"><i class="fa fa-check"></i><b>25.2.9</b> Singular Value Decomposition</a></li>
+<li class="chapter" data-level="25.2.10" data-path="mathadd.html"><a href="mathadd.html#apmpi"><i class="fa fa-check"></i><b>25.2.10</b> Moore-Penrose Inverse</a></li>
+<li class="chapter" data-level="25.2.11" data-path="mathadd.html"><a href="mathadd.html#apfullrank"><i class="fa fa-check"></i><b>25.2.11</b> Full-rank Decomposition</a></li>
+<li class="chapter" data-level="25.2.12" data-path="mathadd.html"><a href="mathadd.html#apsdc"><i class="fa fa-check"></i><b>25.2.12</b> SDC matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="mathadd.html"><a href="mathadd.html#apineq"><i class="fa fa-check"></i><b>25.3</b> Inequalities</a>
+<ul>
+<li class="chapter" data-level="25.3.1" data-path="mathadd.html"><a href="mathadd.html#apcs"><i class="fa fa-check"></i><b>25.3.1</b> Cauchy-Schwartz</a></li>
+<li class="chapter" data-level="25.3.2" data-path="mathadd.html"><a href="mathadd.html#apamgm"><i class="fa fa-check"></i><b>25.3.2</b> Arithmetic/Geometric Mean</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="mathadd.html"><a href="mathadd.html#apanal"><i class="fa fa-check"></i><b>25.4</b> Calculus/Analysis</a>
+<ul>
+<li class="chapter" data-level="25.4.1" data-path="mathadd.html"><a href="mathadd.html#appfunctions"><i class="fa fa-check"></i><b>25.4.1</b> Functions</a></li>
+<li class="chapter" data-level="25.4.2" data-path="mathadd.html"><a href="mathadd.html#appdiffer"><i class="fa fa-check"></i><b>25.4.2</b> Differentiation</a></li>
+<li class="chapter" data-level="25.4.3" data-path="mathadd.html"><a href="mathadd.html#apdirder"><i class="fa fa-check"></i><b>25.4.3</b> Directional Derivatives</a></li>
+<li class="chapter" data-level="25.4.4" data-path="mathadd.html"><a href="mathadd.html#local-minima-critical-points"><i class="fa fa-check"></i><b>25.4.4</b> Local Minima, Critical Points</a></li>
+<li class="chapter" data-level="25.4.5" data-path="mathadd.html"><a href="mathadd.html#necessary"><i class="fa fa-check"></i><b>25.4.5</b> Necessary Conditions</a></li>
+<li class="chapter" data-level="25.4.6" data-path="mathadd.html"><a href="mathadd.html#hopital"><i class="fa fa-check"></i><b>25.4.6</b> l’Hôpital’s Rule</a></li>
+<li class="chapter" data-level="25.4.7" data-path="mathadd.html"><a href="mathadd.html#mathimplcit"><i class="fa fa-check"></i><b>25.4.7</b> Implicit Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="mathadd.html"><a href="mathadd.html#mathconvexfuncs"><i class="fa fa-check"></i><b>25.5</b> Convexity</a>
+<ul>
+<li class="chapter" data-level="25.5.1" data-path="mathadd.html"><a href="mathadd.html#mathextminima"><i class="fa fa-check"></i><b>25.5.1</b> Existence of Minima</a></li>
+<li class="chapter" data-level="25.5.2" data-path="mathadd.html"><a href="mathadd.html#mathduality"><i class="fa fa-check"></i><b>25.5.2</b> Duality</a></li>
+<li class="chapter" data-level="25.5.3" data-path="mathadd.html"><a href="mathadd.html#mathsubdif"><i class="fa fa-check"></i><b>25.5.3</b> Subdifferentials</a></li>
+<li class="chapter" data-level="25.5.4" data-path="mathadd.html"><a href="mathadd.html#mathextdcfunc"><i class="fa fa-check"></i><b>25.5.4</b> DC Functions</a></li>
+<li class="chapter" data-level="25.5.5" data-path="mathadd.html"><a href="mathadd.html#mathdanskin"><i class="fa fa-check"></i><b>25.5.5</b> Danskin-Berge Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.6" data-path="mathadd.html"><a href="mathadd.html#apiterate"><i class="fa fa-check"></i><b>25.6</b> Fixed-Point Iterations</a>
+<ul>
+<li class="chapter" data-level="25.6.1" data-path="mathadd.html"><a href="mathadd.html#point-to-set-maps"><i class="fa fa-check"></i><b>25.6.1</b> Point-to-set Maps</a></li>
+<li class="chapter" data-level="25.6.2" data-path="mathadd.html"><a href="mathadd.html#zangwill"><i class="fa fa-check"></i><b>25.6.2</b> Zangwill’s Theorem</a></li>
+<li class="chapter" data-level="25.6.3" data-path="mathadd.html"><a href="mathadd.html#ostrowski"><i class="fa fa-check"></i><b>25.6.3</b> Ostrowski’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="25.7" data-path="mathadd.html"><a href="mathadd.html#mathls"><i class="fa fa-check"></i><b>25.7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="25.7.1" data-path="mathadd.html"><a href="mathadd.html#mathquprog"><i class="fa fa-check"></i><b>25.7.1</b> Quadratic Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="25.8" data-path="mathadd.html"><a href="mathadd.html#mathpenal"><i class="fa fa-check"></i><b>25.8</b> Quadratic penalties</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="apcode.html"><a href="apcode.html"><i class="fa fa-check"></i><b>A</b> Code</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="apcode.html"><a href="apcode.html#rapcode"><i class="fa fa-check"></i><b>A.1</b> R Code</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="apcode.html"><a href="apcode.html#aputilitiescode"><i class="fa fa-check"></i><b>A.1.1</b> utilities.R</a></li>
+<li class="chapter" data-level="A.1.2" data-path="apcode.html"><a href="apcode.html#apindexingcode"><i class="fa fa-check"></i><b>A.1.2</b> commom/indexing.r</a></li>
+<li class="chapter" data-level="A.1.3" data-path="apcode.html"><a href="apcode.html#apiocode"><i class="fa fa-check"></i><b>A.1.3</b> commom/io.r</a></li>
+<li class="chapter" data-level="A.1.4" data-path="apcode.html"><a href="apcode.html#aplinearcode"><i class="fa fa-check"></i><b>A.1.4</b> commom/linear.r</a></li>
+<li class="chapter" data-level="A.1.5" data-path="apcode.html"><a href="apcode.html#appermcode"><i class="fa fa-check"></i><b>A.1.5</b> commom/nextPC.r</a></li>
+<li class="chapter" data-level="A.1.6" data-path="apcode.html"><a href="apcode.html#apsmacofcode"><i class="fa fa-check"></i><b>A.1.6</b> commom/smacof.r</a></li>
+<li class="chapter" data-level="A.1.7" data-path="apcode.html"><a href="apcode.html#apcodeprop"><i class="fa fa-check"></i><b>A.1.7</b> properties.R</a></li>
+<li class="chapter" data-level="A.1.8" data-path="apcode.html"><a href="apcode.html#apcodepic"><i class="fa fa-check"></i><b>A.1.8</b> pictures.R</a></li>
+<li class="chapter" data-level="A.1.9" data-path="apcode.html"><a href="apcode.html#apcodeclass"><i class="fa fa-check"></i><b>A.1.9</b> classical.R</a></li>
+<li class="chapter" data-level="A.1.10" data-path="apcode.html"><a href="apcode.html#apcodeminim"><i class="fa fa-check"></i><b>A.1.10</b> minimization.R</a></li>
+<li class="chapter" data-level="A.1.11" data-path="apcode.html"><a href="apcode.html#apcodefull"><i class="fa fa-check"></i><b>A.1.11</b> full.R</a></li>
+<li class="chapter" data-level="A.1.12" data-path="apcode.html"><a href="apcode.html#apcodeunfold"><i class="fa fa-check"></i><b>A.1.12</b> unfolding.R</a></li>
+<li class="chapter" data-level="A.1.13" data-path="apcode.html"><a href="apcode.html#apcodencons"><i class="fa fa-check"></i><b>A.1.13</b> constrained.R</a></li>
+<li class="chapter" data-level="A.1.14" data-path="apcode.html"><a href="apcode.html#apcodenominal"><i class="fa fa-check"></i><b>A.1.14</b> nominal.R</a></li>
+<li class="chapter" data-level="A.1.15" data-path="apcode.html"><a href="apcode.html#apcodesstress"><i class="fa fa-check"></i><b>A.1.15</b> sstress.R</a></li>
+<li class="chapter" data-level="A.1.16" data-path="apcode.html"><a href="apcode.html#apcodeinverse"><i class="fa fa-check"></i><b>A.1.16</b> inverse.R</a></li>
+<li class="chapter" data-level="A.1.17" data-path="apcode.html"><a href="apcode.html#apcodeglobal"><i class="fa fa-check"></i><b>A.1.17</b> global.R</a></li>
+<li class="chapter" data-level="A.1.18" data-path="apcode.html"><a href="apcode.html#apcodemathadd"><i class="fa fa-check"></i><b>A.1.18</b> mathadd.R</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="apcode.html"><a href="apcode.html#c-code"><i class="fa fa-check"></i><b>A.2</b> C code</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="apcode.html"><a href="apcode.html#deboor.c"><i class="fa fa-check"></i><b>A.2.1</b> deboor.c</a></li>
+<li class="chapter" data-level="A.2.2" data-path="apcode.html"><a href="apcode.html#cleanup.c"><i class="fa fa-check"></i><b>A.2.2</b> cleanup.c</a></li>
+<li class="chapter" data-level="A.2.3" data-path="apcode.html"><a href="apcode.html#jacobi.c"><i class="fa fa-check"></i><b>A.2.3</b> jacobi.c</a></li>
+<li class="chapter" data-level="A.2.4" data-path="apcode.html"><a href="apcode.html#jbkties.c"><i class="fa fa-check"></i><b>A.2.4</b> jbkTies.c</a></li>
+<li class="chapter" data-level="A.2.5" data-path="apcode.html"><a href="apcode.html#matrix.c"><i class="fa fa-check"></i><b>A.2.5</b> matrix.c</a></li>
+<li class="chapter" data-level="A.2.6" data-path="apcode.html"><a href="apcode.html#jeffrey.c"><i class="fa fa-check"></i><b>A.2.6</b> jeffrey.c</a></li>
+<li class="chapter" data-level="A.2.7" data-path="apcode.html"><a href="apcode.html#mysort.c"><i class="fa fa-check"></i><b>A.2.7</b> mySort.c</a></li>
+<li class="chapter" data-level="A.2.8" data-path="apcode.html"><a href="apcode.html#nextpc.c"><i class="fa fa-check"></i><b>A.2.8</b> nextPC.c</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="apdatasets.html"><a href="apdatasets.html"><i class="fa fa-check"></i><b>B</b> Data</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="apdatasets.html"><a href="apdatasets.html#apdatadsmall"><i class="fa fa-check"></i><b>B.1</b> Small</a></li>
+<li class="chapter" data-level="B.2" data-path="apdatasets.html"><a href="apdatasets.html#apdatagruijter"><i class="fa fa-check"></i><b>B.2</b> De Gruijter</a></li>
+<li class="chapter" data-level="B.3" data-path="apdatasets.html"><a href="apdatasets.html#apdataekman"><i class="fa fa-check"></i><b>B.3</b> Ekman</a></li>
+<li class="chapter" data-level="B.4" data-path="apdatasets.html"><a href="apdatasets.html#apdataveg"><i class="fa fa-check"></i><b>B.4</b> Vegetables</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="apunlicense.html"><a href="apunlicense.html"><i class="fa fa-check"></i><b>C</b> Unlicense</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Least Squares Euclidean Multidimensional Scaling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="global" class="section level1" number="24">
+<h1><span class="header-section-number">24</span> In Search of Global Minima</h1>
+<p>We have already discussed the problem of finding the global minimum, instead of merely one or more local minima, in chapters <a href="fullchapter.html#fullchapter">13</a> and <a href="unidimensional.html#unidimensional">12</a>. In the uni-dimensional case the basic MDS problem becomes combinatorial, we have to minimize over all <span class="math inline">\(n!\)</span> permutations of <span class="math inline">\(\iota_n\)</span>, and there usually are very many local minima, all of them strict. The case in which all <span class="math inline">\(\delta_{ij}\)</span> are the same shows there can be <span class="math inline">\(n!\)</span> local minima, all global. All these minima are strict and isolated, and thus a small perturbation of the equal-dissimilarity case still has <span class="math inline">\(n!\)</span> local minima (<span class="citation"><a href="#ref-pliner_96" role="doc-biblioref">Pliner</a> (<a href="#ref-pliner_96" role="doc-biblioref">1996</a>)</span>). In the full-dimensional case there is only one minimum, which is by definition the global minimum. For <span class="math inline">\(1&lt;p&lt;n-1\)</span> we can expect to be somewhere between these two extremes, with in addition the possibility that some of the critical points are saddle points and not local minima. But note that if all dissimilarities are equal all permutations of the points in the global minimum configuration also give global minima, which means that even in higher dimensional cases we may have <span class="math inline">\(n!\)</span>
+local minima.</p>
+<p>One way to protect against non-global minima is to start with a really good initial configuration. Generally, the Torgerson and Guttman initial configurations are helpful, and so are the first <span class="math inline">\(p\)</span> principal components of the full-dimensional solution. Another important tool is to stop iterations using the size of the gradient (or the difference between <span class="math inline">\(X\)</span> and <span class="math inline">\(\mathfrak{G}(X)\)</span>), with a cut-off value of at least <span class="math inline">\(1e-7\)</span>, but preferably <span class="math inline">\(1e-10\)</span> or even <span class="math inline">\(1e-15\)</span>. Earlier implementations of smacof may have stopped too soon if the target local minimum is in a
+flat region of the configuration space, or if the iterations stray too close to a saddle point and must flex their muscle to get away from it.</p>
+<p>In this chapter we will discuss some methods to find the global minimum, or, more modestly, to move from one local minimum to another better local minimum. The global optimization battlefield is in constant flux. New methods for general of specific global optimization problems seem to be invented every day, all struggling with the curse of dimensionality. The field is riddled with the remains of methods that died in infancy. So I am not saying I will discuss the best, or even the most promising, global optimization methods for MDS. I simply choose the ones I like best, and the ones that fit nicely into the smacof framework.</p>
+<div id="random-starts" class="section level2" number="24.1">
+<h2><span class="header-section-number">24.1</span> Random Starts</h2>
+<p>The simplest way to get an idea about the local minima of stress in any specific example is to run smacof with multiple random initial configurations. The implementation is simple. Put the smacof runs in a loop from 1 to <span class="math inline">\(N\)</span>,
+start each run with a random initial configuration, and collect the results in some data structure. It is true that our analysis will take <span class="math inline">\(N\)</span> times as long to finish, but just start up your PC and go and do something else while it runs. It seems to me that this ought to be standard practice for actual MDS applications. Not only do we find the best local minimum in terms of stress, but we get valuable information about the stability of our result.
+If we take, for example, <span class="math inline">\(N=1000\)</span> and we find the same local minimum in all runs, we can be reasonably confident
+that we have found the global minimum. A small change in the dissimilarities will probably find the same global minimum. If we find multiple local minima, all with about the same frequency and with stress values that are close, then a small change may very well switch to another local minimum with the smallest stress value.</p>
+<p>There is some freedom in the choice of method to generate random initial configurations. In the examples in this chapter we sample from the standard multivariate normal, but since we know that at local minima <span class="math inline">\(\eta(X)\leq 1\)</span>
+it may be more appropriate to sample from the unit ball in <span class="math inline">\(\mathbb{R}^{n\times p}\)</span> (<span class="citation"><a href="#ref-harman_lacko_10" role="doc-biblioref">Harman and Lacko</a> (<a href="#ref-harman_lacko_10" role="doc-biblioref">2010</a>)</span>). In fact, since we also know that at a local minimum <span class="math inline">\(\rho(X)=\eta^2(X)\)</span>, we may project our intial configurations on that surface.</p>
+<p>metric - nonmetric</p>
+<div id="examples-1" class="section level3" number="24.1.1">
+<h3><span class="header-section-number">24.1.1</span> Examples</h3>
+<div id="ekman" class="section level4" number="24.1.1.1">
+<h4><span class="header-section-number">24.1.1.1</span> Ekman</h4>
+<p>We use the Ekman data to illustrate this. We use 1000 random starts, and we stop iterating when the decrease in stress is less than 1e-15. We find 8 local minima, listed in table <a href="global.html#tab:ekmanminima">24.1</a>.</p>
+<table>
+<caption>
+<span id="tab:ekmanminima">Table 24.1: </span>Local Minima in Ekman Example
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+minimum
+</th>
+<th style="text-align:right;">
+frequency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0086066
+</td>
+<td style="text-align:right;">
+824
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0182714
+</td>
+<td style="text-align:right;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0300985
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0309922
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0317395
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0331013
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0337281
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.0379281
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ekmanhistplot1"></span>
+<img src="_main_files/figure-html/ekmanhistplot1-1.png" alt="Ekman Stress Values" width="672" />
+<p class="caption">
+Figure 24.1: Ekman Stress Values
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ekmanhistplot2"></span>
+<img src="_main_files/figure-html/ekmanhistplot2-1.png" alt="Ekman Iteration Counts" width="672" />
+<p class="caption">
+Figure 24.2: Ekman Iteration Counts
+</p>
+</div>
+<p>The results are encouraging, because they indicate that, at least in the Ekman example, the lower the local minimum, the more attractive it is for the smacof iterations. The lowest local minima have the largest regions of attraction. Specifically, we find what is presumably the global minimum in more than 80% of the cases. Nevertheless, if our clients were so unwise to start their MDS analysis with a random initial configuration then about 20% of them will get the wrong answer.</p>
+<p>In the example we also see a number of local minima, found only in a small number of cases, whose stress values are very close to each other. It seems likely that others of roughly the same stress level will be found if we continue sampling additional random initial configurations.</p>
+<p>The configurations corresponding with the two dominant local minima are in <a href="global.html#fig:ekmanlmplot1">24.3</a> and <a href="global.html#fig:ekmanlmplot2">24.4</a>. if we compare them we see that the color circle has two separate circular segments. In the second local minimum the order of the colors on one of these two segments is reversed.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ekmanlmplot1"></span>
+<img src="_main_files/figure-html/ekmanlmplot1-1.png" alt="Global (?) Minimum" width="672" />
+<p class="caption">
+Figure 24.3: Global (?) Minimum
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ekmanlmplot2"></span>
+<img src="_main_files/figure-html/ekmanlmplot2-1.png" alt="Largest (?) Non-global Minimum" width="672" />
+<p class="caption">
+Figure 24.4: Largest (?) Non-global Minimum
+</p>
+</div>
+</div>
+<div id="de-gruijter" class="section level4" number="24.1.1.2">
+<h4><span class="header-section-number">24.1.1.2</span> De Gruijter</h4>
+<p>The Ekman example is somewhat atypical, because it has an exceptionally good fit. We perform the same computations for the De Gruijter example, still using a cut-off at 1e-15, but now allowing for up to 10,000 iterations.</p>
+<p>The data in this example are averages of preference rankings for nine Dutch political parties by 100 students. Due to the heterogeneity of the population there is a considerable regression to the mean. Typically this would suggest splitting the students into more homogeneous groups (which is what <span class="citation"><a href="#ref-degruijter_67" role="doc-biblioref">De Gruijter</a> (<a href="#ref-degruijter_67" role="doc-biblioref">1967</a>)</span> did), and/or using a form of non-metric scaling (which is what De Gruijter did as well).</p>
+<p>Our 1000 runs produce 21 local minima, in table @ref{tab:gruijterlocalminima}, with stress values that are close to each other. In this case it is easy to imagine that more runs will produce many more local minima, with low frequencies, mainly permuting the political parties on the horseshoe. In other words, the situation is somewhat like the case in which all dissimilarities between the nine objects are equal, in which case we have $9!=$3.6288^{5} local minima, all with the same stress value.</p>
+<table>
+<caption>
+<span id="tab:gruijterminima">Table 24.2: </span>Local Minima in De Gruijter Example
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+no
+</th>
+<th style="text-align:right;">
+minimum
+</th>
+<th style="text-align:right;">
+frequency
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0222149
+</td>
+<td style="text-align:right;">
+155
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.0222262
+</td>
+<td style="text-align:right;">
+85
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.0222631
+</td>
+<td style="text-align:right;">
+156
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.0223017
+</td>
+<td style="text-align:right;">
+248
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0232310
+</td>
+<td style="text-align:right;">
+130
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0244955
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0245003
+</td>
+<td style="text-align:right;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.0246216
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.0254775
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.0254982
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.0261988
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0.0273897
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0.0274695
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.0297550
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+0.0303408
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0.0315674
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+0.0315679
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+0.0356327
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+0.0362333
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+0.0364538
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+0.0375689
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>Another comparison may be useful. The Ekman example is like a matrix with two dominant eigenvalues,
+the De Gruijter example is like a matrix will all eigenvalues approximately equal to each other.
+Since smacof is somewhat like the power method, we expect poor convergence in the De Gruijter example,
+and histogram <a href="global.html#fig:histgruijter2">24.6</a> shows exactly that. There is even one random start from which there is no converged in 10,000 iterations. In the Ekman example the frequency of
+the local minima seems closely related to the stress value at the local minimum, in the De Gruijter
+example the frequency of the local minims seems more random. In the Ekman case we can be pretty sure we
+have found the global minimum, in the De Gruijter case we are far from sure.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histgruijter1"></span>
+<img src="_main_files/figure-html/histgruijter1-1.png" alt="De Gruijter Stress Values" width="672" />
+<p class="caption">
+Figure 24.5: De Gruijter Stress Values
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histgruijter2"></span>
+<img src="_main_files/figure-html/histgruijter2-1.png" alt="De Gruijter Iteration Count" width="672" />
+<p class="caption">
+Figure 24.6: De Gruijter Iteration Count
+</p>
+</div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="global.html#cb63-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> hgruijter[[<span class="dv">14</span>]]<span class="sc">$</span>x</span>
+<span id="cb63-2"><a href="global.html#cb63-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> hgruijter[[<span class="dv">1</span>]]<span class="sc">$</span>x</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gruijterlmplot1"></span>
+<img src="_main_files/figure-html/gruijterlmplot1-1.png" alt="Largest Local Minimum" width="672" />
+<p class="caption">
+Figure 24.7: Largest Local Minimum
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gruijterlmplot2"></span>
+<img src="_main_files/figure-html/gruijterlmplot2-1.png" alt="Another Local Minimum" width="672" />
+<p class="caption">
+Figure 24.8: Another Local Minimum
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="tunneling-filling-annealing-etc." class="section level2" number="24.2">
+<h2><span class="header-section-number">24.2</span> Tunneling, Filling, Annealing, etc.</h2>
+</div>
+<div id="globcutplanes" class="section level2" number="24.3">
+<h2><span class="header-section-number">24.3</span> Cutting Planes</h2>
+<p>In cutting plane methods we approximate a non-polyhedral compact convex set <span class="math inline">\(\mathcal{C}\)</span> by a sequence <span class="math inline">\(\mathcal{P}_n\)</span> of convex polyhedra. Approximation is from the outside, i.e. <span class="math inline">\(\mathcal{C}\subset\mathcal{P}_n\)</span>, strictly monotonic, i.e <span class="math inline">\(\mathcal{P}_{n+1}\subset\mathcal{P}_n\)</span>, and convergent, i.e. <span class="math inline">\(\lim_{n\rightarrow\infty}\mathcal{P_n}=\mathcal{C}\)</span>. Under suitable conditions the maximum/minimum <span class="math inline">\(f^\star_n\)</span> of a function <span class="math inline">\(f\)</span> on <span class="math inline">\(\mathcal{P}_n\)</span> will converge to <span class="math inline">\(f^\star\)</span>, the maximum/minimum of <span class="math inline">\(f\)</span> on <span class="math inline">\(\mathcal{C}\)</span>.</p>
+<p>If we are maximizing a convex function on <span class="math inline">\(\mathcal{C}\)</span> then the maximum on the approximating polyhedron <span class="math inline">\(\mathcal{P}_n\)</span> will be at one of the vertices <span class="math inline">\(x^\star\)</span>. If
+<span class="math inline">\(x^\star\not\in\mathcal{C}\)</span> we cut it off by finding a hyperplane that separates <span class="math inline">\(x\)</span>
+and <span class="math inline">\(\mathcal{C}\)</span>. We can, for example, project <span class="math inline">\(x^\star\)</span> on <span class="math inline">\(\mathcal{C}\)</span> and use the tangent hyperplane to <span class="math inline">\(\mathcal{C}\)</span> in the projection <span class="math inline">\(\hat x\)</span>. Define <span class="math inline">\(\mathcal{P}_{n+1}\cap\{x\mid a&#39;x\leq b\}\)</span>, with <span class="math inline">\(a&#39;x=b\)</span> the separating hyperplane that has <span class="math inline">\(a&#39;x\leq b\)</span> for each <span class="math inline">\(x\in\mathcal{C}\)</span> and <span class="math inline">\(a&#39;x^\star &gt; b\)</span>.</p>
+<p>The basic MDS problem can be reformulated as maximization of <span class="math inline">\(\rho(x)\)</span> on the unit ball <span class="math inline">\(\eta^2(x)=x&#39;x\leq 1\)</span>. See sections <a href="propspaces.html#propcoefspace">3.2</a> and <a href="propspaces.html#propspherespace">3.3</a> for the reformulation tools. The cutting plane method in the case of a ball is particulary simple, at least conceptually. If <span class="math inline">\(x^\star\not\in\mathcal{C}\)</span> then its projection on the ball is <span class="math inline">\(\hat x=x^\star/\|x^\star\|\)</span> and the tangent hyperplane in <span class="math inline">\(\hat x\)</span> is <span class="math inline">\(\hat x&#39;x\leq 1\)</span>.</p>
+<p>Computationally, however, matters are not so simple. The polyhedron <span class="math inline">\(\mathcal{P}_n\)</span> is described by an increasing number of linear inequalities.
+Finding all vertices requires a non-trivial effort, and in the general case the method seems practical only for small or moderately small examples. In an actual implementation we would have to have a scheme for dropping or not adding redundant inequalities (that are implied by earlier inequalities) and a scheme for dropping inequalities generating vertices that can never be the global maximum. Such strategfies will depend on the nature of the function <span class="math inline">\(f\)</span> and on the convex set <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<div id="globalcircle" class="section level3" number="24.3.1">
+<h3><span class="header-section-number">24.3.1</span> On the Circle</h3>
+<p>For the circle the cutting plane method can be made very simple. Suppose we start with a <span class="math inline">\(n\)</span> distinct inner points <span class="math inline">\(x_1,\cdots,x_n\)</span> on the unit circle <span class="math inline">\(\mathcal{S}\)</span>, ordered clockwise so that <span class="math inline">\(x_1\)</span> is at the top of the circle (high noon). Let <span class="math inline">\(\mathcal{Q}_n\)</span> be their convex hull. Then <span class="math inline">\(\mathcal{Q}_n\subset\mathcal{S}\)</span>.
+The tangent lines at <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_{i+1}\)</span> intersect outside the circle in an outer point <span class="math inline">\(y_i\)</span>, with <span class="math inline">\(y_n\)</span> the intersection of the tangents at <span class="math inline">\(x_n\)</span> and <span class="math inline">\(x_1\)</span>. Let <span class="math inline">\(\mathcal{P}_n\)</span> be the convex hull of the <span class="math inline">\(y_i\)</span>. Then <span class="math inline">\(\mathcal{Q}_n\subset\mathcal{S}\subset\mathcal{P}_n\)</span> and thus
+<span class="math display">\[
+\max_{i=1}^n\rho(x_i)=\max_{x\in\mathcal{Q}_n}\rho(x)\leq\max_{x\in\mathcal{S}}\rho(x)\leq\max_{x\in\mathcal{P}_n}\rho(x)=\max_{i=1}^n\rho(y_i).
+\]</span>
+Thus we have easily computable lower and upper bounds for the global maximum of <span class="math inline">\(\rho\)</span> on <span class="math inline">\(\mathcal{S}\)</span>. The next step is to add the <span class="math inline">\(n\)</span> projections <span class="math inline">\(y_i/\|y_i\|\)</span> to the <span class="math inline">\(n\)</span> inner points to have a new set of <span class="math inline">\(2n\)</span> inner points. Then compute the corresponding <span class="math inline">\(2n\)</span> outer points, and so on. After <span class="math inline">\(k\)</span> steps we have <span class="math inline">\(2^kk_0\)</span> inner and outer points, where <span class="math inline">\(k_0\)</span> is the number of inner points we started with.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:circseg"></span>
+<img src="_main_files/figure-html/circseg-1.png" alt="Circle Segment" width="672" />
+<p class="caption">
+Figure 24.9: Circle Segment
+</p>
+</div>
+<p>As figure <a href="global.html#fig:circseg">24.9</a> shows, the outer point corresponding with two consecutive points on the circle lies on the perpendicular bisector of the line connecting the points. Using non-consecutive points will produce tangent lines which intersect farther away from the circle, and which consequently leads to a larger convex hull, and a worse approximation.</p>
+<p>The next three figures illustrate the first iterations of the algorithm. We always start with <span class="math inline">\(n\)</span> inner points equally distributed on the unit circle, in this case <span class="math inline">\(n=4\)</span>. The circle is in red, the convex hulls of the outer and inner points are in blue.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:globalcircleplotfirst"></span>
+<img src="_main_files/figure-html/globalcircleplotfirst-1.png" alt="Starting Point" width="672" />
+<p class="caption">
+Figure 24.10: Starting Point
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:globalcircleplotsecond"></span>
+<img src="_main_files/figure-html/globalcircleplotsecond-1.png" alt="After First Iteration" width="672" />
+<p class="caption">
+Figure 24.11: After First Iteration
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:globalcircleplotthird"></span>
+<img src="_main_files/figure-html/globalcircleplotthird-1.png" alt="After Second Iteration" width="672" />
+<p class="caption">
+Figure 24.12: After Second Iteration
+</p>
+</div>
+<p>We see rapid convergence of the convex hulls to the circle. The figures also suggest
+an improvement of the method. Suppose <span class="math inline">\(\rho_0\)</span> is a lower bound of the global minimum
+<span class="math inline">\(\rho_\star\)</span> equal to the largest <span class="math inline">\(\rho\)</span> value of the inner points. Suppose an outer point has a <span class="math inline">\(\rho\)</span> value less than or equal to <span class="math inline">\(\rho_0\)</span>, consider the triangle with the outer point and the two inner points. All three vertices have a <span class="math inline">\(\rho\)</span> value less than or equal to <span class="math inline">\(\rho_0\)</span>, and because <span class="math inline">\(\rho\)</span> is convex so have all points in the triangle, including a segment of the circle. Thus we can <em>phantom</em> that segment of the circle and create no new inner points there. If <span class="math inline">\(\rho_0\)</span> get closer to <span class="math inline">\(\rho_\star\)</span> more and more segments of the circle are eliminated, which will presumably lead to faster computation. It seems advantageous to start with a value of <span class="math inline">\(\rho_0\)</span> that is as large as possible, for example by using the value the smacof algorithm converges to. We can then use the inner and outer points to check if the <span class="math inline">\(\rho\)</span> value is a global minimum.</p>
+</div>
+<div id="cauchy-step-size" class="section level3" number="24.3.2">
+<h3><span class="header-section-number">24.3.2</span> Cauchy Step Size</h3>
+<p>The standard smacof update of <span class="math inline">\(X\)</span> (update method <span class="math inline">\(\text{up}_A\)</span> of section <a href="chacceleration.html#accelsimple">7.1</a>) is <span class="math inline">\(\mathfrak{G}(X)=V^+B(X)X\)</span>. The relaxed update is <span class="math inline">\(X(\lambda):=\lambda \mathfrak{G}(X)+(1-\lambda)X\)</span>. We usually choose
+<span class="math inline">\(\lambda=2\)</span>, which gives update method <span class="math inline">\(\text{up}_B\)</span> of section <a href="chacceleration.html#accelsimple">7.1</a>.</p>
+<p>The Cauchy or steepest descent update is <span class="math inline">\(X(\hat\lambda)\)</span>, with
+<span class="math display" id="eq:globlbdopt">\[\begin{equation}
+\hat\lambda=\mathop{\text{argmin}}_{\lambda\geq 0}\sigma(X(\lambda)).
+\tag{24.1}
+\end{equation}\]</span>
+There are some examples of the use of <span class="math inline">\(\hat\lambda\)</span> in <span class="citation"><a href="#ref-deleeuw_heiser_C_80" role="doc-biblioref">De Leeuw and Heiser</a> (<a href="#ref-deleeuw_heiser_C_80" role="doc-biblioref">1980</a>)</span>, but there the optimal step-size is computed by using constrained smacof iterations, which may
+actually take us to just a local minimum along the line. In this example we use our circle
+methodology to compute the global minimum.</p>
+<p>Now <span class="math inline">\(\text{tr}\ X&#39;V\mathfrak{G}(X)=\rho(X)\)</span> and thus if <span class="math inline">\(\text{tr}\ X&#39;VX=1\)</span>
+then <span class="math inline">\(Y=\mathfrak{G}(X)-\rho(X)X\)</span> satisfies <span class="math inline">\(\text{tr}\ X&#39;VY=0\)</span> and
+<span class="math inline">\(\eta^2(Y)=\eta^2(\mathfrak{G}(X))-\rho^2(X)\)</span>. Normalize
+<span class="math inline">\(Y\)</span> such that <span class="math inline">\(\text{tr}\ Y&#39;VY=1\)</span>, and now maximize <span class="math inline">\(\rho\)</span> over <span class="math inline">\(\alpha\)</span> and
+<span class="math inline">\(\beta\)</span>, i.e. in configuration space maximize <span class="math inline">\(\rho(\alpha X+\beta Y)\)</span>,
+where <span class="math inline">\(\alpha^2+\beta^2=1\)</span>.</p>
+<p>In the example we choose <span class="math inline">\(X\)</span> to be a <span class="math inline">\(10\times 2\)</span> matrix filled with random standard normals, and we start with 10 inner points on the circle. The iterations until convergence are as follows.</p>
+<pre><code>## itel       1 vertices      10 innermax       0.96683250 outermax       1.01451883 
+## itel       2 vertices      20 innermax       0.96683250 outermax       0.97744943 
+## itel       3 vertices      40 innermax       0.96683250 outermax       0.97008052 
+## itel       4 vertices      80 innermax       0.96709009 outermax       0.96794626 
+## itel       5 vertices     160 innermax       0.96720000 outermax       0.96739328 
+## itel       6 vertices     320 innermax       0.96720681 outermax       0.96726518 
+## itel       7 vertices     640 innermax       0.96721856 outermax       0.96722816 
+## itel       8 vertices    1280 innermax       0.96721856 outermax       0.96722140 
+## itel       9 vertices    2560 innermax       0.96721856 outermax       0.96721949 
+## itel      10 vertices    5120 innermax       0.96721876 outermax       0.96721890 
+## itel      11 vertices   10240 innermax       0.96721876 outermax       0.96721880 
+## itel      12 vertices   20480 innermax       0.96721876 outermax       0.96721877 
+## itel      13 vertices   40960 innermax       0.96721876 outermax       0.96721877</code></pre>
+<p>The optimal <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are -0.5464817, -0.837471. In configuration space this translates to
+1.7919402<span class="math inline">\(\ X+\)</span>-2.6770034<span class="math inline">\(\ \mathfrak{G}(X)\)</span>.</p>
+</div>
+<div id="balls" class="section level3" number="24.3.3">
+<h3><span class="header-section-number">24.3.3</span> Balls</h3>
+<p>In dimension <span class="math inline">\(p&gt;2\)</span>, where <span class="math inline">\(\rho\)</span> must be maximized on the unit ball in <span class="math inline">\(\mathbb{R}^p\)</span>, matters are not so simple any more. There is no single compelling natural ordering of the points on the sphere or hypersphere, and thus we have to improvise more.
+We would like to maintain both upper and lower bounds for the global minimum that both keep improving in every iteration.</p>
+<div id="outer-approximation" class="section level4" number="24.3.3.1">
+<h4><span class="header-section-number">24.3.3.1</span> Outer Approximation</h4>
+<p>Let’s first discuss a possible initial set of inner and outer points that are more or less regularly spaced inside or outside the unit sphere. For the inner points we can use the vertices of the cross-polytope (or the <span class="math inline">\(\ell_1\)</span>-ball), which is the set of all <span class="math inline">\(x\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span> with <span class="math inline">\(\sum_{i=1}^n|x_i|\leq 1\)</span>. If <span class="math inline">\(|x_i|\leq 1\)</span> then <span class="math inline">\(x_i^2\leq|x_i|\)</span> with equality iff <span class="math inline">\(x_i\in\{-1,0,1\}\)</span>. Thus <span class="math inline">\(x&#39;x\leq\sum_{i=1}^n|x_i|\)</span> and <span class="math inline">\(x&#39;x=\sum_{i=1}^n|x_i|=1\)</span> iff exactly one of
+<span class="math inline">\(x_i\)</span> is <span class="math inline">\(\pm 1\)</span>, i.e. there are <span class="math inline">\(2n\)</span> inner points on the sphere.</p>
+<p>For the outer points we choose the vertices of <span class="math inline">\(\max_{i=1}^n|x_i|\leq 1\)</span>, or equivalently <span class="math inline">\(-1\leq x_i\leq +1\)</span> for all <span class="math inline">\(i\)</span>. Thus there are <span class="math inline">\(2^n\)</span> vertices which have <span class="math inline">\(x_i=\pm 1\)</span> for all <span class="math inline">\(i\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="distance-smoothing" class="section level2" number="24.4">
+<h2><span class="header-section-number">24.4</span> Distance Smoothing</h2>
+<p><span class="math display">\[
+d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}
+\]</span>
+<span class="math display">\[
+d_{ij}^\epsilon(X):=\sqrt{d_{ij}^2(X)+\epsilon^2}
+\]</span>
+<span class="math display">\[
+\mathcal{D}d_{ij}^\epsilon(X)=\frac{1}{d_{ij}^\epsilon(X)}A_{ij}X
+\]</span>
+<span class="math display">\[
+\nabla\sigma_\epsilon(X)=2(V-B_\epsilon(X))X
+\]</span></p>
+<span class="math display">\[
+\mathcal{D}^2\sigma_\epsilon(X)=
+\]</span>
+
+<div class="theorem">
+<span id="thm:smoothsconvex" class="theorem"><strong>Theorem 24.1  </strong></span>If <span class="math inline">\(\epsilon\geq\max_{i,j}\delta_{ij}\)</span> then <span class="math inline">\(B(X_\epsilon)\lesssim V\)</span> and thus <span class="math inline">\(\mathcal{D}^2(X_\epsilon)\gtrsim 0\)</span> for all <span class="math inline">\(X\)</span> and <span class="math inline">\(\sigma_\epsilon\)</span> is convex.
+</div>
+<p><span class="math display">\[
+\mathcal{D}_1d_{ij}(X,\epsilon)=\frac{1}{d_{ij}(X,\epsilon)}A_{ij}X
+\]</span></p>
+<p><span class="math display">\[
+\nabla\sigma_\epsilon(X)=2\left(V-\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X_\epsilon)}A_{ij}\right)X
+\]</span>
+<span class="math display">\[
+\nabla^2\sigma_\epsilon(X)=2V-\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X_\epsilon)}A_{ij}X
+\]</span></p>
+</div>
+<div id="penalizing-dimensions" class="section level2" number="24.5">
+<h2><span class="header-section-number">24.5</span> Penalizing Dimensions</h2>
+<p>In <span class="citation"><a href="#ref-shepard_62a" role="doc-biblioref">Shepard</a> (<a href="#ref-shepard_62a" role="doc-biblioref">1962a</a>)</span> and <span class="citation"><a href="#ref-shepard_62b" role="doc-biblioref">Shepard</a> (<a href="#ref-shepard_62b" role="doc-biblioref">1962b</a>)</span> an NMDS technique is developed that minimizes a loss function over configurations in full dimensionality <span class="math inline">\(n-1\)</span>. In that sense the technique is similar to FDS. Shepard’s iterative process, however, aims to maintain monotonicity between distances and dissimilarities and at the same time concentrate as much of the variation as possible in a small number of dimensions (<span class="citation"><a href="#ref-deleeuw_E_17e" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_E_17e" role="doc-biblioref">2017f</a>)</span>).</p>
+<p>Let us explore the idea of concentrating variation in <span class="math inline">\(p&lt;n-1\)</span> dimensions, but use an approach which is quite different from the one used by Shepard. We remain in the FDS framework, but we aim for solutions in <span class="math inline">\(p&lt;n-1\)</span> dimensions by penalizing <span class="math inline">\(n-p\)</span> dimensions of the full configuration, using the classical Courant quadratic penalty function.</p>
+<p>Partition a full configuration
+<span class="math inline">\(Z=\begin{bmatrix}X&amp;\mid&amp;Y\end{bmatrix}\)</span>, with <span class="math inline">\(X\)</span> of dimension <span class="math inline">\(n\times p\)</span> and <span class="math inline">\(Y\)</span> of dimension <span class="math inline">\(n\times(n-p)\)</span>. Then
+<span class="math display">\[\begin{equation}\label{E:part}   
+\sigma(Z)=1-\mathbf{tr}\ X&#39;B(Z)X - \mathbf{tr}\ Y&#39;B(Z)Y+\frac12 \mathbf{tr}\ X&#39;VX+\frac12 \mathbf{tr}\ Y&#39;VY.
+\end{equation}\]</span>
+Also define the <em>penalty term</em>
+<span class="math display">\[\begin{equation}\label{E:tau}
+\tau(Y)=\frac12\mathbf{tr}\ Y&#39;VY,
+\end{equation}\]</span>
+and <em>penalized stress</em>
+<span class="math display">\[\begin{equation}\label{E:pi}
+\pi(Z,\lambda)=\sigma(Z)+\lambda\ \tau(Y).
+\end{equation}\]</span></p>
+<p>Our proposed method is to minimize penalized stress over <span class="math inline">\(Z\)</span> for a sequence of values <span class="math inline">\(0=\lambda_1&lt;\lambda_2&lt;\cdots\lambda_m\)</span>. For <span class="math inline">\(\lambda=0\)</span> this is simply the FDS problem, for which we know we can compute the global minimum. For fixed <span class="math inline">\(0&lt;\lambda&lt;+\infty\)</span> this is a Penalized FDS or PFDS problem. PFDS problems with increasing values of <span class="math inline">\(\lambda\)</span> generate a <em>trajectory</em> <span class="math inline">\(Z(\lambda)\)</span> in configuration space.</p>
+<p>The general theory of exterior penalty functions, which we review in section XX of this paper, shows that increasing <span class="math inline">\(\lambda\)</span> leads to an increasing sequence of stress values <span class="math inline">\(\sigma\)</span> and a decreasing sequence of penalty terms <span class="math inline">\(\tau\)</span>.
+If <span class="math inline">\(\lambda\rightarrow+\infty\)</span> we approximate the global minimum of the FDS problem with <span class="math inline">\(Z\)</span> of the form <span class="math inline">\(Z=\begin{bmatrix}X&amp;\mid&amp;0\end{bmatrix}\)</span>, i.e. of the pMDS problem. This assumes we do actually compute the global minimum for each value of <span class="math inline">\(\lambda\)</span>, which we hope we can do because we start at the FDS global minimum, and we slowly increase <span class="math inline">\(\lambda\)</span>. There is also a local version of the exterior penalty result, which implies that <span class="math inline">\(\lambda\rightarrow\infty\)</span> takes us to a local minimum of pMDS, so there is always the possibility of taking the wrong trajectory to a local minimum of pMDS.</p>
+<div id="local-minima" class="section level3" number="24.5.1">
+<h3><span class="header-section-number">24.5.1</span> Local Minima</h3>
+<p>The stationary equations of the PFDS problem are solutions to the equations</p>
+<p><span class="math display">\[\begin{align}
+(V-B(Z))X&amp;=0,\\
+((1+\lambda)V-B(Z))Y&amp;=0.
+\end{align}\]</span></p>
+<p>We can easily related stationary points and local minima of the FDS and PFDS problem.</p>
+
+<div class="theorem">
+<p><span id="thm:globlocal" class="theorem"><strong>Theorem 24.2  </strong></span>1: If <span class="math inline">\(X\)</span> is a stationary point of the pMDS problem then <span class="math inline">\(Z=[X\mid 0]\)</span> is a stationary point of the PFDS problem, no matter what <span class="math inline">\(\lambda\)</span> is.</p>
+2: If <span class="math inline">\(Z=[X\mid 0]\)</span> is a local minimum of the PFDS problem then <span class="math inline">\(X\)</span> is a local minimum of pMDS and
+<span class="math inline">\((1+\lambda)V-B(X)\gtrsim 0\)</span>, or <span class="math inline">\(\lambda\geq\|V^+B(X)\|_\infty-1\)</span>, with <span class="math inline">\(\|\bullet\|_\infty\)</span> the spectral radius (largest eigenvalue).
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-22" class="proof"><em>Proof</em>. </span>Part 1 follows by simple substitution in the stationary equations.</p>
+<p>Part 2 follows from the expansion for <span class="math inline">\(Z=[X+\epsilon P\mid\epsilon Q]\)</span>.
+<span class="math display">\[\begin{multline}\label{E:expand2}
+\pi(Z)=\pi(X)+\epsilon\ \text{tr}\ P&#39;\mathcal{D}\sigma(X)\ +\\+\frac12\epsilon^2\ \mathcal{D}^2\sigma(X)(P,P)+\frac12\epsilon^2\ \text{tr}\ Q&#39;((1+\lambda)V-B(X))Q+o(\epsilon^2).
+\end{multline}\]</span>
+At a local minimum we must have <span class="math inline">\(\mathcal{D}\sigma(X)=0\)</span> and <span class="math inline">\(\mathcal{D}^2\sigma(X)(P,P)\gtrsim 0\)</span>, which are the necessary conditions for a local minimum of pMDS. We also must have <span class="math inline">\(((1+\lambda)V-B(X))\gtrsim 0\)</span>.</p>
+</div>
+<p>Note that the conditions in part 2 of theorem <a href="global.html#thm:globlocal">24.2</a> are also sufficient for PFDS to have a local minimum at <span class="math inline">\([X\mid 0]\)</span>, provided we eliminate translational and rotational indeterminacy by a suitable reparametrization, as in <span class="citation"><a href="#ref-deleeuw_R_93c" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_R_93c" role="doc-biblioref">1993</a>)</span>.</p>
+</div>
+<div id="algorithm" class="section level3" number="24.5.2">
+<h3><span class="header-section-number">24.5.2</span> Algorithm</h3>
+<p>The smacof algorithm for penalized stress is a small modification of the unpenalized FDS algorithm (ref). We start our iterations for <span class="math inline">\(\lambda_j\)</span> with the solution for <span class="math inline">\(\lambda_{j-1}\)</span> (the starting solution for <span class="math inline">\(\lambda_1=0\)</span> can be completely arbitrary). The update rules for fixed <span class="math inline">\(\lambda\)</span> are</p>
+<p><span class="math display">\[\begin{align}
+X^{(k+1)}&amp;=V^+B(Z^{(k)})X^{(k)},\\
+Y^{(k+1)}&amp;=\frac{1}{1+\lambda}V^+B(Z^{(k)})Y^{(k)}.
+\end{align}\]</span></p>
+<p>Thus we compute the FDS update <span class="math inline">\(Z^{(k+1)}=V^+B(Z^{(k)})Z^{(k)}\)</span> and then divide the last <span class="math inline">\(n-p\)</span> columns by <span class="math inline">\(1+\lambda\)</span>.</p>
+<p>Code is in the appendix. Let us analyze a number of examples.</p>
+</div>
+<div id="examples-2" class="section level3" number="24.5.3">
+<h3><span class="header-section-number">24.5.3</span> Examples</h3>
+<p>This section has a number of two-dimensional and a number of one-dimensional examples. The one-dimensional examples are of interest, because of the documented large number of local minima of stress in the one-dimensional case, and the fact that for small and medium <span class="math inline">\(n\)</span> exact solutions are available (for example, <span class="citation"><a href="#ref-deleeuw_C_05h" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_05h" role="doc-biblioref">2005c</a>)</span>). By default we use <code>seq(0, 1, length = 101)</code> for <span class="math inline">\(\lambda\)</span> in most examples, but for some of them we dig a bit deeper and use longer sequences with smaller increments.</p>
+<p>If for some value of <span class="math inline">\(\lambda\)</span> the penalty term drops below the small cutoff <span class="math inline">\(\gamma\)</span>, for example 10^{-10}, then there is not need to try larger values of <span class="math inline">\(\lambda\)</span>, because they will just repeat the same result. We hope that result is the global minimum of the 2MDS problem.</p>
+<p>The output for each example is a table in which we give, the minimum value of stress, the value of the penalty term at the minimum, the value of <span class="math inline">\(\lambda\)</span>, and the number of iterations needed for convergence. Typically we print for the first three, the last three, and some regularly spaced intermediate values of <span class="math inline">\(\lambda\)</span>. Remember that the stress values increase with increasing <span class="math inline">\(\lambda\)</span>, and the penalty values decrease.</p>
+<p>For two-dimensional examples we plot all two-dimensional configurations, after rotating to optimum match (using the function <code>matchMe()</code> from the appendix). We connect corresponding points for different values of <span class="math inline">\(\lambda\)</span>. Points corresponding to the highest value of <span class="math inline">\(\lambda\)</span> are labeled and have a different plot symbol. For one-dimensional examples we put <code>1:n</code> on the horizontal axes and plot the single dimension on the vertical axis, again connecting corresponding points. We label the points corresponding with the highest value of <span class="math inline">\(\lambda\)</span>, and draw horizontal lines through them to more clearly show their order on the dimension.</p>
+<p>The appendix also has code for the function <code>checkUni()</code>, which we have used to check the solutions in the one dimensional case are indeed local minima. The function checks the necessary condition for a local minimum <span class="math inline">\(x=V^+u\)</span>, with
+<span class="math display">\[
+u_i=\sum_{j=1}^nw_{ij}\delta_{ij}\ \mathbf{sign}\ (x_i-x_j).
+\]</span>
+It should be emphasized that all examples are just meant to study convergence of penalized FDS. There is no interpretation of the MDS results</p>
+<div id="chi-squares" class="section level4" number="24.5.3.1">
+<h4><span class="header-section-number">24.5.3.1</span> Chi Squares</h4>
+<p>In this example, of order 10, the <span class="math inline">\(\delta_{ij}\)</span> are independent draws from a chi-square distribution with two degrees of freedom. There is no structure in this example, everything is random.</p>
+<pre><code>## itel  198 lambda   0.000000 stress 0.175144 penalty 0.321138 
+## itel    5 lambda   0.010000 stress 0.175156 penalty 0.027580 
+## itel    3 lambda   0.020000 stress 0.175187 penalty 0.025895 
+## itel    1 lambda   0.100000 stress 0.175914 penalty 0.015172 
+## itel    1 lambda   0.200000 stress 0.177666 penalty 0.004941 
+## itel    4 lambda   0.300000 stress 0.178912 penalty 0.000088 
+## itel    6 lambda   0.310000 stress 0.178933 penalty 0.000020 
+## itel   20 lambda   0.320000 stress 0.178939 penalty 0.000000</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chi"></span>
+<img src="_main_files/figure-html/chi-1.png" alt="10 Chi Squares" width="672" />
+<p class="caption">
+Figure 24.13: 10 Chi Squares
+</p>
+</div>
+<p>It seems that in this example the first two dimensions of FDS are already close to optimal for 2MDS. This is because the Gower rank of the dissimilarities is only three (or maybe four, the fourth singular value of the FDS solution <span class="math inline">\(Z\)</span> is very small).</p>
+</div>
+<div id="regular-simplex" class="section level4" number="24.5.3.2">
+<h4><span class="header-section-number">24.5.3.2</span> Regular Simplex</h4>
+<p>The regular simplex has all dissimilarities equal to one. We use an example with <span class="math inline">\(n=10\)</span>, for which the global minimum (as far as we know) of pMDS with <span class="math inline">\(p=2\)</span> is a configuration with nine points equally spaced on a circle and one point in the center.</p>
+<pre><code>## itel    1 lambda   0.000000 stress 0.000000 penalty 0.400000 
+## itel    7 lambda   0.010000 stress 0.000101 penalty 0.375653 
+## itel    5 lambda   0.020000 stress 0.000422 penalty 0.360483 
+## itel    1 lambda   0.100000 stress 0.008849 penalty 0.258090 
+## itel    1 lambda   0.200000 stress 0.032243 penalty 0.149427 
+## itel    1 lambda   0.300000 stress 0.059088 penalty 0.079592 
+## itel    1 lambda   0.400000 stress 0.079534 penalty 0.043250 
+## itel    1 lambda   0.500000 stress 0.095361 penalty 0.020895 
+## itel    1 lambda   0.600000 stress 0.105667 penalty 0.006921 
+## itel    1 lambda   0.610000 stress 0.106337 penalty 0.005862 
+## itel    1 lambda   0.620000 stress 0.106951 penalty 0.004879 
+## itel  105 lambda   0.630000 stress 0.109880 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/simplex10a-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Next, we look at the regular simplex with <span class="math inline">\(n=4\)</span>, for which the global minimum has four points equally spaced on a circle (i.e. in the corners of a square). We use <code>seq(0, 1, length = 101)</code> for the <span class="math inline">\(\lambda\)</span> sequence.</p>
+<pre><code>## itel    1 lambda   0.000000 stress 0.000000 penalty 0.250000 
+## itel    2 lambda   0.010000 stress 0.000035 penalty 0.162295 
+## itel    1 lambda   0.020000 stress 0.000122 penalty 0.158591 
+## itel    1 lambda   0.100000 stress 0.003808 penalty 0.122344 
+## itel    1 lambda   0.200000 stress 0.014089 penalty 0.084111 
+## itel    1 lambda   0.300000 stress 0.028044 penalty 0.053366 
+## itel    1 lambda   0.400000 stress 0.043331 penalty 0.028965 
+## itel    1 lambda   0.500000 stress 0.056851 penalty 0.011482 
+## itel    1 lambda   0.600000 stress 0.064718 penalty 0.002471 
+## itel    1 lambda   0.700000 stress 0.066799 penalty 0.000203 
+## itel    1 lambda   0.800000 stress 0.066982 penalty 0.000005 
+## itel    1 lambda   0.820000 stress 0.066985 penalty 0.000002 
+## itel    1 lambda   0.830000 stress 0.066986 penalty 0.000001 
+## itel    1 lambda   0.840000 stress 0.066986 penalty 0.000001</code></pre>
+<p><img src="_main_files/figure-html/simplex4a-1.png" width="672" style="display: block; margin: auto;" />
+The solution converges to an equilateral triangle with the fourth point in the centroid. This is a local minimum. What basically happens is that the first two dimensions of the FDS solution are too close to the local minimum. Or, what amounts to the same thing, the Gower rank is too large (it is <span class="math inline">\(n-1\)</span> for a regular simplex) , there is too much variation in the higher dimensions, and as a consequence the first two dimensions of FDS are a bad 2MDS solution. We try to repair this by refining the trajectory, using <code>seq(0, 1, 10001)</code>.</p>
+<pre><code>## itel    1 lambda   0.000000 stress 0.000000 penalty 0.250000 
+## itel    2 lambda   0.000100 stress 0.000000 penalty 0.166622 
+## itel    1 lambda   0.000200 stress 0.000000 penalty 0.166583 
+## itel    1 lambda   0.202200 stress 0.028595 penalty 0.000001 
+## itel    1 lambda   0.202300 stress 0.028595 penalty 0.000001 
+## itel    1 lambda   0.202400 stress 0.028595 penalty 0.000001</code></pre>
+<p><img src="_main_files/figure-html/simplex4b-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Now the trajectories move us from what starts out similar to an equilateral triangle to the corners of the square, and thus we do find the global minimum in this way. It is remarkable that we manage to find the square even when we start closer to the triangle with midpoint.</p>
+</div>
+<div id="intelligence" class="section level4" number="24.5.3.3">
+<h4><span class="header-section-number">24.5.3.3</span> Intelligence</h4>
+<p>These are correlations between eight intelligence tests, taken from the smacof package. We convert to dissimilarities by taking the negative logarithm of the correlations. As in the chi-square example, the FDS and the 2MDS solution are very similar and the PMDS trajectories are short.</p>
+<pre><code>## itel 2951 lambda   0.000000 stress 0.107184 penalty 7.988384 
+## itel    7 lambda   0.010000 stress 0.107560 penalty 0.685654 
+## itel    4 lambda   0.020000 stress 0.108528 penalty 0.628538 
+## itel    3 lambda   0.030000 stress 0.110045 penalty 0.573208 
+## itel    3 lambda   0.040000 stress 0.112449 penalty 0.510730 
+## itel    2 lambda   0.050000 stress 0.114714 penalty 0.464650 
+## itel    2 lambda   0.060000 stress 0.117623 penalty 0.415037 
+## itel    2 lambda   0.070000 stress 0.121095 penalty 0.364536 
+## itel    2 lambda   0.080000 stress 0.125010 penalty 0.315023 
+## itel    2 lambda   0.090000 stress 0.129226 penalty 0.267831 
+## itel    2 lambda   0.100000 stress 0.133589 penalty 0.223898 
+## itel    2 lambda   0.110000 stress 0.137944 penalty 0.183868 
+## itel    3 lambda   0.120000 stress 0.143921 penalty 0.133739 
+## itel    2 lambda   0.130000 stress 0.147473 penalty 0.106166 
+## itel    4 lambda   0.140000 stress 0.153215 penalty 0.064499 
+## itel    4 lambda   0.150000 stress 0.157159 penalty 0.037735 
+## itel    9 lambda   0.160000 stress 0.161434 penalty 0.010337 
+## itel   72 lambda   0.170000 stress 0.163122 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/intelligence-1.png" width="672" style="display: block; margin: auto;" />
+The singular values of the FDS solution are 1.78e+00, 1.36e+00, 5.94e-01, 1.47e-01, 3.29e-03, 2.39e-16, 1.15e-16, 9.35e-18, which shows that the Gower rank is probably five, but approximately two.</p>
+</div>
+<div id="countries" class="section level4" number="24.5.3.4">
+<h4><span class="header-section-number">24.5.3.4</span> Countries</h4>
+<p>This is the wish dataset from the smacof package, with similarities between 12 countries. They are converted to dissimilarties by subtracting each of them from seven.</p>
+<pre><code>## itel 1381 lambda   0.000000 stress 4.290534 penalty 98.617909 
+## itel    4 lambda   0.010000 stress 4.301341 penalty 36.137074 
+## itel    3 lambda   0.020000 stress 4.336243 penalty 34.389851 
+## itel    1 lambda   0.100000 stress 5.187917 penalty 23.300775 
+## itel    1 lambda   0.200000 stress 7.539228 penalty 11.543635 
+## itel    1 lambda   0.300000 stress 9.901995 penalty 4.963372 
+## itel    1 lambda   0.400000 stress 11.523357 penalty 1.859569 
+## itel    1 lambda   0.500000 stress 12.391692 penalty 0.556411 
+## itel    1 lambda   0.590000 stress 12.696493 penalty 0.080144 
+## itel    1 lambda   0.600000 stress 12.708627 penalty 0.060113 
+## itel  100 lambda   0.610000 stress 12.738355 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/countries-1.png" width="672" style="display: block; margin: auto;" />
+The singular values of the FDS solution are 4.20e+00, 3.71e+00, 2.67e+00, 1.80e+00, 1.33e+00, 6.64e-01, 5.97e-04, 6.75e-16, 4.70e-16, 2.38e-16, 1.14e-16, 1.98e-17, and the Gower rank is six or seven.</p>
+</div>
+<div id="dutch-political-parties" class="section level4" number="24.5.3.5">
+<h4><span class="header-section-number">24.5.3.5</span> Dutch Political Parties</h4>
+<p>In 1967 one hundred psychology students at Leiden University judged the similarity of nine Dutch political parties, using the complete method of triads (<span class="citation"><a href="#ref-degruijter_67" role="doc-biblioref">De Gruijter</a> (<a href="#ref-degruijter_67" role="doc-biblioref">1967</a>)</span>). Data were aggregated and converted to dissimilarities. We first print the matrix of dissimilarities.</p>
+<pre><code>##      KVP    PvdA   VVD    ARP    CHU    CPN    PSP    BP     D66   
+## KVP  +0.000 +0.209 +0.196 +0.171 +0.179 +0.281 +0.250 +0.267 +0.230
+## PvdA +0.209 +0.000 +0.250 +0.210 +0.231 +0.190 +0.171 +0.269 +0.204
+## VVD  +0.196 +0.250 +0.000 +0.203 +0.185 +0.302 +0.281 +0.257 +0.174
+## ARP  +0.171 +0.210 +0.203 +0.000 +0.119 +0.292 +0.250 +0.271 +0.228
+## CHU  +0.179 +0.231 +0.185 +0.119 +0.000 +0.290 +0.263 +0.259 +0.225
+## CPN  +0.281 +0.190 +0.302 +0.292 +0.290 +0.000 +0.152 +0.236 +0.276
+## PSP  +0.250 +0.171 +0.281 +0.250 +0.263 +0.152 +0.000 +0.256 +0.237
+## BP   +0.267 +0.269 +0.257 +0.271 +0.259 +0.236 +0.256 +0.000 +0.274
+## D66  +0.230 +0.204 +0.174 +0.228 +0.225 +0.276 +0.237 +0.274 +0.000</code></pre>
+<p>The trajectories from FDS to 2MDS show some clear movement, especially of the D’66 party, which was new at the time.</p>
+<pre><code>## itel  223 lambda   0.000000 stress 0.000000 penalty 0.414526 
+## itel    5 lambda   0.010000 stress 0.000061 penalty 0.196788 
+## itel    2 lambda   0.020000 stress 0.000199 penalty 0.190472 
+## itel    1 lambda   0.100000 stress 0.004399 penalty 0.136576 
+## itel    1 lambda   0.200000 stress 0.015811 penalty 0.075466 
+## itel    1 lambda   0.300000 stress 0.028235 penalty 0.036636 
+## itel    1 lambda   0.400000 stress 0.038275 penalty 0.012608 
+## itel    1 lambda   0.500000 stress 0.043644 penalty 0.002156 
+## itel    1 lambda   0.520000 stress 0.044091 penalty 0.001324 
+## itel    1 lambda   0.530000 stress 0.044253 penalty 0.001019 
+## itel  277 lambda   0.540000 stress 0.044603 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/poldist_run-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>There seems to be some bifurcation going on at the end, so we repeat the analysis using <code>seq(0, 1, length = 1001)</code> for <span class="math inline">\(\lambda\)</span>. The results turn out to be basically the same.</p>
+<pre><code>## itel  223 lambda   0.000000 stress 0.000000 penalty 0.414526 
+## itel    4 lambda   0.001000 stress 0.000001 penalty 0.204225 
+## itel    2 lambda   0.002000 stress 0.000002 penalty 0.203535 
+## itel    1 lambda   0.468000 stress 0.044604 penalty 0.000001 
+## itel    1 lambda   0.469000 stress 0.044604 penalty 0.000000 
+## itel  166 lambda   0.470000 stress 0.044603 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/poldist2-1.png" width="672" style="display: block; margin: auto;" />
+The singular values of the FDS solution are 2.95e-01, 2.10e-01, 1.89e-01, 1.34e-01, 1.16e-01, 1.06e-01, 8.61e-02, 7.06e-02, 3.98e-18, and the Gower rank is probably eight. This is mainly because these data, being averages, regress to the mean and thus have a substantial additive constant. If we repeat the analysis after subtracting .1 from all dissimilarities we get basically the same solution, but with somewhat smoother trajectories.</p>
+<pre><code>## itel  511 lambda   0.000000 stress 0.000176 penalty 0.150789 
+## itel    2 lambda   0.001000 stress 0.000176 penalty 0.037759 
+## itel    2 lambda   0.002000 stress 0.000176 penalty 0.037619 
+## itel    1 lambda   0.370000 stress 0.007642 penalty 0.000000 
+## itel    1 lambda   0.371000 stress 0.007642 penalty 0.000000 
+## itel    1 lambda   0.372000 stress 0.007642 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/poldist3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Now the singular values of the FDS solution are 2.05e-01, 1.34e-01, 1.11e-01, 6.03e-02, 3.11e-02, 3.97e-04, 1.18e-07, 4.55e-12, 8.75e-18, and the approximate Gower rank is more like five or six.</p>
+</div>
+<div id="ekman-1" class="section level4" number="24.5.3.6">
+<h4><span class="header-section-number">24.5.3.6</span> Ekman</h4>
+<p>The next example analyzes dissimilarities between 14 colors, taken from <span class="citation"><a href="#ref-ekman_54" role="doc-biblioref">Ekman</a> (<a href="#ref-ekman_54" role="doc-biblioref">1954</a>)</span>. The original similarities <span class="math inline">\(s_{ij}\)</span>, averaged over 31 subjects, were transformed to dissimilarities by <span class="math inline">\(\delta_{ij}=1-s_{ij}\)</span>.</p>
+<pre><code>## itel 1482 lambda   0.000000 stress 0.000088 penalty 0.426110 
+## itel    5 lambda   0.010000 stress 0.000132 penalty 0.118988 
+## itel    3 lambda   0.020000 stress 0.000253 penalty 0.112777 
+## itel    1 lambda   0.100000 stress 0.003195 penalty 0.070791 
+## itel    1 lambda   0.200000 stress 0.010778 penalty 0.024407 
+## itel    1 lambda   0.300000 stress 0.016125 penalty 0.003230 
+## itel    1 lambda   0.400000 stress 0.017142 penalty 0.000165 
+## itel    4 lambda   0.500000 stress 0.017213 penalty 0.000000 
+## itel    1 lambda   0.600000 stress 0.017213 penalty 0.000000 
+## itel    1 lambda   0.610000 stress 0.017213 penalty 0.000000 
+## itel    1 lambda   0.620000 stress 0.017213 penalty 0.000000 
+## itel    1 lambda   0.630000 stress 0.017213 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/ekman_global-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>If we transform the Ekman similarities by <span class="math inline">\(\delta_{ij}=(1-s_{ij})^3\)</span> then its is known (<span class="citation"><a href="#ref-deleeuw_E_16k" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_E_16k" role="doc-biblioref">2016c</a>)</span>) that the Gower rank is equal to two. Thus the FDS solution has rank 2, and the 2MDS solution is the global minimum.</p>
+<pre><code>## itel   99 lambda   0.000000 stress 0.011025 penalty 0.433456 
+## itel    1 lambda   0.010000 stress 0.011025 penalty 0.000000 
+## itel    1 lambda   0.020000 stress 0.011025 penalty 0.000000 
+## itel    1 lambda   0.100000 stress 0.011025 penalty 0.000000 
+## itel    1 lambda   0.110000 stress 0.011025 penalty 0.000000 
+## itel    1 lambda   0.120000 stress 0.011025 penalty 0.000000 
+## itel    1 lambda   0.130000 stress 0.011025 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/okman-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="morse-in-two" class="section level4" number="24.5.3.7">
+<h4><span class="header-section-number">24.5.3.7</span> Morse in Two</h4>
+<p>Next, we use dissimilarities between 36 Morse code signals (<span class="citation"><a href="#ref-rothkopf_57" role="doc-biblioref">Rothkopf</a> (<a href="#ref-rothkopf_57" role="doc-biblioref">1957</a>)</span>). We used the symmetrized version <code>morse</code> from the <code>smacof</code> package (<span class="citation"><a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">De Leeuw and Mair</a> (<a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">2009</a>)</span>).</p>
+<pre><code>## itel 1461 lambda   0.000000 stress 0.000763 penalty 0.472254 
+## itel    6 lambda   0.010000 stress 0.000858 penalty 0.322181 
+## itel    4 lambda   0.020000 stress 0.001147 penalty 0.308335 
+## itel    1 lambda   0.100000 stress 0.008576 penalty 0.216089 
+## itel    1 lambda   0.200000 stress 0.028903 penalty 0.119364 
+## itel    1 lambda   0.300000 stress 0.051285 penalty 0.060060 
+## itel    1 lambda   0.400000 stress 0.068653 penalty 0.028190 
+## itel    1 lambda   0.500000 stress 0.080258 penalty 0.011356 
+## itel    1 lambda   0.600000 stress 0.086572 penalty 0.003578 
+## itel    1 lambda   0.700000 stress 0.089140 penalty 0.000854 
+## itel    1 lambda   0.800000 stress 0.089898 penalty 0.000116 
+## itel    1 lambda   0.830000 stress 0.089958 penalty 0.000053 
+## itel    1 lambda   0.840000 stress 0.089970 penalty 0.000040 
+## itel  197 lambda   0.850000 stress 0.089949 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/morse-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="vegetables" class="section level4" number="24.5.3.8">
+<h4><span class="header-section-number">24.5.3.8</span> Vegetables</h4>
+<p>Our first one-dimensional example uses paired comparisons of 9 vegetables, originating with <span class="citation"><a href="#ref-guilford_54" role="doc-biblioref">Guilford</a> (<a href="#ref-guilford_54" role="doc-biblioref">1954</a>)</span>. The proportions are transformed to dissimilarities by using the absolute values of the normal quantile function, i.e. <span class="math inline">\(\delta_{ij}=|\Phi^{-1}(p_{ij})|\)</span>. We use a short sequence for <span class="math inline">\(\lambda\)</span>.</p>
+<pre><code>## itel 1412 lambda   0.000000 stress 0.013675 penalty 0.269308 
+## itel    5 lambda   0.010000 stress 0.013716 penalty 0.114786 
+## itel    5 lambda   0.100000 stress 0.016719 penalty 0.069309 
+## itel   23 lambda   1.000000 stress 0.035301 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/veg-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This example was previously analyzed by me in <span class="citation"><a href="#ref-deleeuw_C_05h" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_05h" role="doc-biblioref">2005c</a>)</span> using enumeration of all permutations. I found 14354 isolated local minima, and a global minimum equal to the one we computed here.</p>
+</div>
+<div id="plato" class="section level4" number="24.5.3.9">
+<h4><span class="header-section-number">24.5.3.9</span> Plato</h4>
+<p><span class="citation"><a href="#ref-mair_groenen_deleeuw_A_19" role="doc-biblioref">Mair, Groenen, and De Leeuw</a> (<a href="#ref-mair_groenen_deleeuw_A_19" role="doc-biblioref">2019</a>)</span> use seriation of the works of Plato, from the data collected by <span class="citation"><a href="#ref-cox_brandwood_59" role="doc-biblioref">D. R. Cox and Brandwood</a> (<a href="#ref-cox_brandwood_59" role="doc-biblioref">1959</a>)</span>, as an example of unidimensional scaling. We first run this example with our usual sequence of five <span class="math inline">\(\lambda\)</span> values.</p>
+<pre><code>## itel  169 lambda   0.000000 stress 0.000000 penalty 0.410927 
+## itel    3 lambda   0.010000 stress 0.000062 penalty 0.255246 
+## itel    3 lambda   0.100000 stress 0.005117 penalty 0.194993 
+## itel    4 lambda   1.000000 stress 0.106058 penalty 0.019675 
+## itel    9 lambda  10.000000 stress 0.139462 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/plato-1.png" width="672" style="display: block; margin: auto;" />
+This gives the order</p>
+<pre><code>##      [,1]       
+## [1,] &quot;Timaeus&quot;  
+## [2,] &quot;Republic&quot; 
+## [3,] &quot;Critias&quot;  
+## [4,] &quot;Sophist&quot;  
+## [5,] &quot;Politicus&quot;
+## [6,] &quot;Philebus&quot; 
+## [7,] &quot;Laws&quot;</code></pre>
+<p>which is different from the order at the global minimum that has Republic before Timaeus. Thus we have recovered a local minimum, and it seems our sequence of <span class="math inline">\(\lambda\)</span> values was not fine enough to do the job properly. So we try a longer and finer sequence.</p>
+<pre><code>## itel  169 lambda   0.000000 stress 0.000000 penalty 0.410927 
+## itel    3 lambda   0.000100 stress 0.000000 penalty 0.263015 
+## itel    3 lambda   0.001000 stress 0.000001 penalty 0.262280 
+## itel    3 lambda   0.010000 stress 0.000064 penalty 0.255078 
+## itel    3 lambda   0.100000 stress 0.005123 penalty 0.194945 
+## itel    2 lambda   0.200000 stress 0.016184 penalty 0.147493 
+## itel    1 lambda   0.300000 stress 0.026997 penalty 0.119323 
+## itel    1 lambda   0.400000 stress 0.040023 penalty 0.093615 
+## itel    1 lambda   0.500000 stress 0.053688 penalty 0.072330 
+## itel    1 lambda   0.600000 stress 0.066833 penalty 0.055452 
+## itel    1 lambda   0.700000 stress 0.078832 penalty 0.042269 
+## itel    1 lambda   0.800000 stress 0.089439 penalty 0.032019 
+## itel    1 lambda   0.900000 stress 0.098557 penalty 0.024079 
+## itel    1 lambda   1.000000 stress 0.106135 penalty 0.017940 
+## itel    6 lambda   2.000000 stress 0.130789 penalty 0.000148 
+## itel   13 lambda   3.000000 stress 0.131135 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/plato2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Now the order is</p>
+<pre><code>##      [,1]       
+## [1,] &quot;Republic&quot; 
+## [2,] &quot;Timaeus&quot;  
+## [3,] &quot;Critias&quot;  
+## [4,] &quot;Sophist&quot;  
+## [5,] &quot;Politicus&quot;
+## [6,] &quot;Philebus&quot; 
+## [7,] &quot;Laws&quot;</code></pre>
+<p>which does indeed correspond to the global minimum.</p>
+<p>With a different <span class="math inline">\(\lambda\)</span> sequence we find the same solution.</p>
+<pre><code>## itel  169 lambda   0.000000 stress 0.000000 penalty 0.410927 
+## itel    3 lambda   0.001000 stress 0.000001 penalty 0.262296 
+## itel    2 lambda   0.002000 stress 0.000003 penalty 0.261483 
+## itel    2 lambda   0.004000 stress 0.000010 penalty 0.259872 
+## itel    2 lambda   0.008000 stress 0.000041 penalty 0.256690 
+## itel    2 lambda   0.016000 stress 0.000159 penalty 0.250470 
+## itel    2 lambda   0.032000 stress 0.000613 penalty 0.238574 
+## itel    2 lambda   0.064000 stress 0.002266 penalty 0.216785 
+## itel    2 lambda   0.128000 stress 0.007791 penalty 0.180067 
+## itel    2 lambda   0.256000 stress 0.023483 penalty 0.127006 
+## itel    2 lambda   0.512000 stress 0.056940 penalty 0.067948 
+## itel    3 lambda   1.024000 stress 0.107743 penalty 0.017937 
+## itel    8 lambda   2.048000 stress 0.131059 penalty 0.000032 
+## itel    9 lambda   4.096000 stress 0.131135 penalty 0.000000</code></pre>
+<p><img src="_main_files/figure-html/plato3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The order is</p>
+<pre><code>##      [,1]       
+## [1,] &quot;Republic&quot; 
+## [2,] &quot;Timaeus&quot;  
+## [3,] &quot;Critias&quot;  
+## [4,] &quot;Sophist&quot;  
+## [5,] &quot;Politicus&quot;
+## [6,] &quot;Philebus&quot; 
+## [7,] &quot;Laws&quot;</code></pre>
+</div>
+<div id="morse-in-one" class="section level4" number="24.5.3.10">
+<h4><span class="header-section-number">24.5.3.10</span> Morse in One</h4>
+<p>Now for a more challenging example. The Morse code data have been used to try out exact unidimensional MDS techniques, for example by <span class="citation"><a href="#ref-palubeckis_13" role="doc-biblioref">Palubeckis</a> (<a href="#ref-palubeckis_13" role="doc-biblioref">2013</a>)</span>. We will enter the global minimum contest by using 10,000 values of <span class="math inline">\(\lambda\)</span>, in an equally spaced sequence from 0 to 10. This is not as bad as it sounds. For the 10,000 FDS solutions <code>system.time()</code> tells us</p>
+<pre><code>##    user  system elapsed 
+##  14.350   0.506  14.941</code></pre>
+<p>The one-dimensional plot show quite a bit of movement, but much of it seems to be contained in the very first change of <span class="math inline">\(\lambda\)</span>.</p>
+<p><img src="graphics/morse.png" width="85%" style="display: block; margin: auto;" /></p>
+<p>We can also plot stress and the penalty term as functions of <span class="math inline">\(\lambda\)</span>. Again, note the big change in the penalty term when <span class="math inline">\(\lambda\)</span> goes from zero to 0.001.</p>
+<p><img src="_main_files/figure-html/iter-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>After the first 2593 values of <span class="math inline">\(\lambda\)</span> the penalty term is zero and we stop, i.e. we estimate <span class="math inline">\(\lambda_+\)</span> is 2.593. At that point we have run a total of 5013 FDS iterations, and thus on average about two iterations per <span class="math inline">\(\lambda\)</span> value. Stress has increased from 0.0007634501 to 0.2303106976 and the penalty value has decreased from 0.4815136419 to 0.0000000001. We find the following order of the points on the dimension.</p>
+<pre><code>##       [,1]   
+##  [1,] &quot;.&quot;    
+##  [2,] &quot;-&quot;    
+##  [3,] &quot;..&quot;   
+##  [4,] &quot;.-&quot;   
+##  [5,] &quot;-.&quot;   
+##  [6,] &quot;--&quot;   
+##  [7,] &quot;...&quot;  
+##  [8,] &quot;..-&quot;  
+##  [9,] &quot;.-.&quot;  
+## [10,] &quot;.--&quot;  
+## [11,] &quot;....&quot; 
+## [12,] &quot;-..&quot;  
+## [13,] &quot;-.-&quot;  
+## [14,] &quot;...-&quot; 
+## [15,] &quot;.....&quot;
+## [16,] &quot;....-&quot;
+## [17,] &quot;..-.&quot; 
+## [18,] &quot;.-..&quot; 
+## [19,] &quot;-...&quot; 
+## [20,] &quot;-..-&quot; 
+## [21,] &quot;-....&quot;
+## [22,] &quot;...--&quot;
+## [23,] &quot;-.-.&quot; 
+## [24,] &quot;-.--&quot; 
+## [25,] &quot;--...&quot;
+## [26,] &quot;--..&quot; 
+## [27,] &quot;--.-&quot; 
+## [28,] &quot;.--.&quot; 
+## [29,] &quot;.---&quot; 
+## [30,] &quot;--.&quot;  
+## [31,] &quot;---&quot;  
+## [32,] &quot;..---&quot;
+## [33,] &quot;---..&quot;
+## [34,] &quot;.----&quot;
+## [35,] &quot;----.&quot;
+## [36,] &quot;-----&quot;</code></pre>
+<p>Our order, and consequently our solution, is the same as the exact global solution given by <span class="citation"><a href="#ref-palubeckis_13" role="doc-biblioref">Palubeckis</a> (<a href="#ref-palubeckis_13" role="doc-biblioref">2013</a>)</span>. See his table 4, reproduced below. The difference is that computing our solution takes 10 seconds, while his takes 494 seconds. But of course we would not have known we actually found the global mimimum if the exact exhaustive methods had not analyzed the same data as well.</p>
+
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-cox_brandwood_59" class="csl-entry">
+Cox, D. R., and L. Brandwood. 1959. <span>“<span class="nocase">On a Discriminatory Problem Connected with the Works of Plato</span>.”</span> <em>Journal of the Royal Statistical Society, Series B</em> 21: 195–200.
+</div>
+<div id="ref-degruijter_67" class="csl-entry">
+De Gruijter, D. N. M. 1967. <span>“<span class="nocase">The Cognitive Structure of Dutch Political Parties in 1966</span>.”</span> Report E019-67. Psychological Institute, University of Leiden.
+</div>
+<div id="ref-deleeuw_R_93c" class="csl-entry">
+———. 1993. <span>“Fitting Distances by Least Squares.”</span> Preprint Series 130. Los Angeles, CA: UCLA Department of Statistics. <a href="http://deleeuwpdx.net/janspubs/1993/reports/deleeuw_R_93c.pdf">http://deleeuwpdx.net/janspubs/1993/reports/deleeuw_R_93c.pdf</a>.
+</div>
+<div id="ref-deleeuw_C_05h" class="csl-entry">
+———. 2005c. <span>“<span>Unidimensional Scaling</span>.”</span> In <em>The Encyclopedia of Statistics in Behavioral Science</em>, edited by B. S. Everitt and D. C, 4:2095–97. New York, N.Y.: Wiley. <a href="http://deleeuwpdx.net/janspubs/2005/chapters/deleeuw_C_05h.pdf">http://deleeuwpdx.net/janspubs/2005/chapters/deleeuw_C_05h.pdf</a>.
+</div>
+<div id="ref-deleeuw_E_16k" class="csl-entry">
+———. 2016c. <span>“Gower Rank.”</span> 2016. <a href="http://deleeuwpdx.net/pubfolders/gower/gower.pdf">http://deleeuwpdx.net/pubfolders/gower/gower.pdf</a>.
+</div>
+<div id="ref-deleeuw_E_17e" class="csl-entry">
+———. 2017f. <span>“<span class="nocase">Shepard Non-metric Multidimensional Scaling</span>.”</span> 2017. <a href="http://deleeuwpdx.net/pubfolders/shepard/shepard.pdf">http://deleeuwpdx.net/pubfolders/shepard/shepard.pdf</a>.
+</div>
+<div id="ref-deleeuw_heiser_C_80" class="csl-entry">
+———. 1980. <span>“Multidimensional Scaling with Restrictions on the Configuration.”</span> In <em>Multivariate Analysis, Volume v</em>, edited by P. R. Krishnaiah, 501–22. Amsterdam, The Netherlands: North Holland Publishing Company. <a href="http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf">http://deleeuwpdx.net/janspubs/1980/chapters/deleeuw_heiser_C_80.pdf</a>.
+</div>
+<div id="ref-deleeuw_mair_A_09c" class="csl-entry">
+De Leeuw, J., and P. Mair. 2009. <span>“<span class="nocase">Multidimensional Scaling Using Majorization: SMACOF in R</span>.”</span> <em>Journal of Statistical Software</em> 31 (3): 1–30. <a href="http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf">http://deleeuwpdx.net/janspubs/2009/articles/deleeuw_mair_A_09c.pdf</a>.
+</div>
+<div id="ref-ekman_54" class="csl-entry">
+Ekman, G. 1954. <span>“<span class="nocase">Dimensions of Color Vision</span>.”</span> <em>Journal of Psychology</em> 38: 467–74.
+</div>
+<div id="ref-guilford_54" class="csl-entry">
+Guilford, J. P. 1954. <em>Psychometric Methods</em>. McGraw-Hill.
+</div>
+<div id="ref-harman_lacko_10" class="csl-entry">
+Harman, R., and V. Lacko. 2010. <span>“<span class="nocase">On Decompositional aAgorithms for Uniform Sampling from n-Spheres and n-Balls</span>.”</span> <em>Journal of Multivariate Analysis</em> 101: 2297–2304.
+</div>
+<div id="ref-mair_groenen_deleeuw_A_19" class="csl-entry">
+Mair, P., P. J. F. Groenen, and J. De Leeuw. 2019. <span>“<span class="nocase">More on Multidimensional Scaling in R: smacof Version 2</span>.”</span> <em>Journal of Statistical Software</em>. <a href="http://deleeuwpdx.net/janspubs/2019/articles/mair_groenen_deleeuw_A_19.pdf">http://deleeuwpdx.net/janspubs/2019/articles/mair_groenen_deleeuw_A_19.pdf</a>.
+</div>
+<div id="ref-palubeckis_13" class="csl-entry">
+Palubeckis, G. 2013. <span>“<span class="nocase">An Improved Exact Algorithm for Least-Squares Unidimensional Scaling</span>.”</span> <em>Journal of Applied Mathematics</em>, 1–15.
+</div>
+<div id="ref-pliner_96" class="csl-entry">
+———. 1996. <span>“<span class="nocase">Metric Unidimensional Scaling and Global Optimization</span>.”</span> <em>Journal of Classification</em> 13: 3–18.
+</div>
+<div id="ref-rothkopf_57" class="csl-entry">
+Rothkopf, E. Z. 1957. <span>“<span class="nocase">A Measure of Stimulus Similarity and Errors in some Paired-associate Learning</span>.”</span> <em>Journal of Experimental Psychology</em> 53: 94–101.
+</div>
+<div id="ref-shepard_62a" class="csl-entry">
+Shepard, R. N. 1962a. <span>“<span class="nocase">The Analysis of Proximities: Multidimensional Scaling with an Unknown Distance Function. I</span>.”</span> <em>Psychometrika</em> 27: 125–40.
+</div>
+<div id="ref-shepard_62b" class="csl-entry">
+———. 1962b. <span>“<span class="nocase">The Analysis of Proximities: Multidimensional Scaling with an Unknown Distance Function. II</span>.”</span> <em>Psychometrika</em> 27: 219–46.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="stability.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mathadd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "none"
+},
+"keep_md": true,
+"toolbar": {
+"position": "fixed"
+},
+"toc_depth": 5
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
