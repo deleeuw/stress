@@ -2,7 +2,7 @@
 
 ## Notation {#propnotation}
 
-The notation used in the smacof approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the related smacof references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c.
+The notation used in the smacof approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the later key smacof references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c.
 
 ### Expanding {#propexpand} 
 
@@ -378,7 +378,7 @@ These problems have been largely ignored in the MDS literature, and there are in
 
 ### Regularity
 
-A configuration $X$ is *regular* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. I apologize for yet another instance of overloading the word "regular". 
+A configuration $X$ is *regular* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. I apologize for yet another overload o  the word "regular". 
 
 #### Distances
 
@@ -597,12 +597,12 @@ Suppose $\underline{X}=[X\mid 0]$ and $\underline{Y}=[Z\mid Y]$ so that $\underl
 
 ### Zero Distance Subspaces {#propzerodist}
 
-A *zero-distance subspace* is a subspace of configuration space in which one or more distances are zero. That a zero distance indeed defines a subspace follows from the fact that $d_{ij}(X)=0$ is equivalent to $x_i=x_j$.
+A *zero-distance subspace* is a subspace of configuration space in which one or more distances are zero. That a zero distance indeed defines a subspace follows from the fact that the nonlinear equation $d_{ij}(X)=0$ is equivalent to the homogeneous linear equation $x_i=x_j$.
 
-How many zero-distance subspaces are there ? The same as the number of set partitions of $n$ objects, which is the Bell number $B_n$. Bell numbers are defined by the recursion 
+The number of zero-distance subspaces is the same as the number of set partitions of $n$ objects, which is the Bell number $B_n$. Bell numbers are defined by the recursion 
 \begin{equation}
 B_{n+1}=\sum_{k=0}^n\binom{n}{k}B_k, 
-(\$eq:bellnums)
+(\eq:bellnums)
 \end{equation}
 with $B_0=1$. The next ten Bell numbers $B_1,\cdots,B_{10}$ are 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 11597. So there are lots of zero-distance subspaces.
 
@@ -620,12 +620,14 @@ Stability
 ### Distance Smoothing {#propdistsmo}
 
 In sections \@ref(propconvex) and \@ref(propstationary) we show the lack of differentiability 
-in basic MDS is not a serious problem in the actual computation of local minima. There is another
+in basic MDS is not a serious problem in the actual computation of local minima.
+
+There is another
 rather straightforward way to circumvent the differentiabily issue, which actually may have additional
 benefits. The idea is to use an approximation of the Euclidean distance that is as
 close as possible on the positive real axis but smooth at zero. This was first applied in unidimensional MDS by Pliner (@pliner_86,  @pliner_96) and later taken up and generalized to pMDS for arbitrary $p$, and even for arbitrary Minkovski metrics, by @groenen_heiser_meulman_98 and @groenen_heiser_meulman_99. They coined the term *distance smoothing* for this variation of the smacof framework for MDS.
 
-Pliner uses a smooth approximation of the sign function, while Groenen et al. use a smooth Huber approximation of the absolute value function. We use a classical and efficient approximation $|x|\approx\sqrt{x^2+\epsilon^2}$ to the absolute value function, used in image analysis, location analysis, and computational geometry (@deleeuw_E_18f, @ramirez_sanchez_kreinovich_argaez_14). In our context that becomes $d_{ij}(X)\approx d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}$. Note that on the non-negative reals
+Pliner uses a smooth approximation of the sign function, while Groenen et al. use a smooth Huber approximation of the absolute value function. We use another classical and efficient approximation $|x|\approx\sqrt{x^2+\epsilon^2}$ to the absolute value function, used in image analysis, location analysis, and computational geometry (@deleeuw_E_18f, @ramirez_sanchez_kreinovich_argaez_14). In our context that becomes $d_{ij}(X)\approx d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}$. Note that on the non-negative reals
 
 \begin{equation}
 \max(\epsilon,d_{ij}(X))\leq d_{ij}(X,\epsilon)\leq d_{ij}(X)+\epsilon.

@@ -1,0 +1,24 @@
+Version 0.5.0:
+  * Fixed several rchk warnings.
+  * Add boolean/logical allocators.
+  * Make is_Rnull() a simple macro.
+  * Rewrote allocator internals.
+  * Changed API for make_list/dataframe and friends.
+
+Version 0.4.0:
+  * Clean up internals; better internal guarding.
+  * Deprecate non-double float functions.
+  * Create build system for non-header-only uses.
+  * Fixed dataframe naming bug (Christian Heckendorf).
+  * Fixed segfault when creating 0-len dataframes in make_dataframe().
+
+Version 0.3.0:
+  * Fixed warnings visible with -Wall -pedantic.
+  * Use strnlen() over strlen(); shorten string checks in allocator.
+  * Simplify initializer in allocator using memset().
+
+Version 0.2.0:
+  * Converted to header only.
+
+Version 0.1.0:
+  * Initial release.

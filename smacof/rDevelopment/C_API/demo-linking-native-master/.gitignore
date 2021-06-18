@@ -1,0 +1,8 @@
+*.so
+*.o
+
+*~
+*.swp
+*.Rcheck
+
+*.tar.gz

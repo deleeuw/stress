@@ -57,7 +57,7 @@ configurations have already been discussed in general in chapter
 \@ref(propchapter), section \@ref(propspaces) as the transformation from
 configuration space to coefficient space. Since we are dealing here with
 the special case of linear combinations of only two configurations we
-specialize some of these general results.
+specialize some of these general results. 
 
 We start with $d_{ij}^(\theta)=\theta'T_{ij}\theta$, where $\theta$ has
 elements $\alpha$ and $\beta$, and where $T$ is the $2\times 2$ matrix

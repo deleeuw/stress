@@ -54,7 +54,7 @@ discussion in @lingoes_roskam_73.
 > would once more be engaged in a "correspondence musical chairs" on these issues.
 > (Lingoes in @deleeuw_R_73g).
 
-Nevertheless, even in later discussions of the distinction between single-phanse and double-phase (@roskam_79) I get the feeling that there are still some unresolved misunderstandings. Thus I will pay some more attention to it here.
+Nevertheless, even in later discussions of the distinction between single-phanse and double-phase (such as @roskam_79) I still get the feeling that there are some unresolved misunderstandings. Thus I will pay some more attention to it here.
 
 By the very definition of the minimum of a function we have the mathematical truism
 
@@ -64,8 +64,7 @@ By the very definition of the minimum of a function we have the mathematical tru
 (\#eq:nmsminmin)
 \end{equation}
 
-no matter what the subsets $\mathfrak{X}$ of configuration space and $\mathfrak{D}$ of
-disparity space are.
+provided all minima exist. This is true no matter what the subsets $\mathfrak{X}$ of configuration space and $\mathfrak{D}$ of disparity space are.
 
 ### Double Phase
 

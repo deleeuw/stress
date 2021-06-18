@@ -116,7 +116,7 @@ We have $0\lesssim H(\theta)\lesssim B(\theta)$ and thus $I-B(\theta)\lesssim\ma
 
 Hessian in coef and conf space
 
-## Sphere Space {#propspherespace}
+## Spherical Space {#propspherespace}
 
 \begin{equation}
 \min_X\sigma(X)=\min_{\lambda\geq 0}\min_{\eta^2(X)=1}\sigma(\lambda X)=\min_{\eta^2(X)=1}\min_{\lambda\geq 0}\sigma(\lambda X)=
@@ -130,13 +130,9 @@ This shows that the MDS problem can be seen as a rather special nonlinear eigenv
 
 $\alpha X+\beta Y$ in sphere space one-dimensional \@ref(picline)
 
-## Cross-Product Space
+## Gramian Space
 
-We can write
-
-$$
-d_{ij}^2(X)=\text{tr}\ X'A_{ij}X = \text{tr}\ A_{ij}C,
-$$
+We can write $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X = \text{tr}\ A_{ij}C,$
 with $C=XX'$. This shows minimizing stress can also be formulated as minimizing
 
 \begin{equation}
@@ -144,4 +140,6 @@ with $C=XX'$. This shows minimizing stress can also be formulated as minimizing
 (\#eq:stresspsd)
 \end{equation}
 
-over all positive semi-definite $C$ of rank $r\leq p$. A fundamental result, which forms the basis of chapter \@ref(fullchapter) in this book, is that $\sigma$ is convex on *Cross-Product Space*, i.e. the closed convex cone of all $C\gtrsim 0$.
+over all $C\gtrsim 0$ of rank $r\leq p$. 
+
+A fundamental result, which forms the basis of chapter \@ref(fullchapter) in this book, is that $\sigma$ is convex on *Gramian Space*, i.e. on the closed convex cone of all $C\gtrsim 0$.

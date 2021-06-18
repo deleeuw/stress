@@ -1,0 +1,123 @@
+---
+title: "dodo"
+author: "Jan de Leeuw"
+date: "6/16/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Suppose $Y_1,\cdots,Y_r$ are $r$ linearly independent column-centered matrices 
+in configuration space $\mathbb{R}^{n\times p}$. We write $\mathcal{Y}$ for the $r$-dimensional subspace spanned by the $Y_s$.
+
+If $X\in\mathcal{Y}$ then there is a $\theta$ in coefficient space $\mathbb{R}^r$ such that $X=\sum_{s=1}^r\theta_s Y_s$. Define
+
+$$
+\tilde d_{ij}^2(\theta):=\text{tr}\ X'A_{ij}X=\theta'\tilde{A}_{ij}\theta,
+$$
+with 
+$$
+\{\tilde A_{ij}\}_{st}:=\text{tr}\ Y_s'A_{ij}Y_t.
+$$
+Now
+$$
+\tilde B(\theta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{\tilde d_{ij}(\theta)}\tilde A_{ij},
+$$
+
+$$
+\tilde V:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\tilde A_{ij},
+$$
+
+and
+
+$$
+\tilde\sigma(\theta):=1-2\tilde\rho(\theta)+\tilde\eta^2(\theta)=1-2\ \theta'\tilde B(\theta)\theta+\theta'\tilde V\theta
+$$
+For the elements of $\tilde B$ and $\tilde V$ we see
+
+\begin{align}
+\tilde b_{st}(\theta)&=\text{tr}\ Y_s'B(X)Y_t,\\
+\tilde v_{st}&=\text{tr}\ Y_s'VY_t.
+\end{align}
+
+Minimizing $\sigma$ over $X\in\mathcal{Y}$ is now equivalent to minimizing 
+$\tilde\sigma$ over $\theta\in\mathbb{R}^r$.
+
+The gradient in configuration space for all $X\in\mathbb{R}^{n\times p}$ is
+$$
+\frac12\nabla\sigma(X)=(V-B(X))X.
+$$
+$$
+\frac12\nabla\tilde\sigma(\theta)=(\tilde V\theta-\tilde B(\theta)\theta)
+$$
+$$
+\frac12\{\nabla\tilde\sigma(\theta)\}_s=\text{tr}\ Y_s'(VX-B(X)X)=\text{tr}\ Y_s'\nabla\sigma(X),
+$$
+with $X=\sum_{s=1}^r\theta_sY_s$.
+
+Thus $\nabla\tilde\sigma(\theta)=0$ if and only if $\nabla\sigma(X)\in\mathcal{Y}_\perp$, the subspace of $\mathbb{R}^{n\times p}$ orthogonal to $\mathcal{Y}$. Specifically $\nabla\sigma(X)=0$ implies
+$\nabla\tilde\sigma(\theta)=0$. If the 
+$Y_s$ span all of $\mathbb{R}^{n\times p}$ then $\nabla\tilde\sigma(\theta)=0$
+if and only if $\nabla\sigma(X)=0$.
+
+For the relationship between the minimization problems in coefficient space and
+configuration space  we also study the relationship
+between the two Hessians.
+
+For all $X$ and $Z$ in configuration space
+$$
+\frac12\nabla^2\sigma(X)(Z,Z)=\text{tr}\ Z'VZ-\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}\left\{\text{tr}\ Z'A_{ij}Z-\frac{\{\text{tr}\ Z'A_{ij}Y\}^2}{d_{ij}^2(X)}\right\}
+$$
+
+For any $\theta$ in coefficient space
+$$
+\frac12\nabla^2\tilde\sigma(\theta)=\tilde V-\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(\theta)}\left\{\tilde A_{ij}-\frac{\tilde A_{ij}\theta\theta'\tilde A_{ij}}{d_{ij}^2(\theta)}\right\}
+$$
+and thus 
+
+$$
+\xi'\nabla^2\tilde\sigma(\theta)\xi=\nabla^2\sigma(X)(Z,Z).
+$$
+where $Z:=\sum_{s=1}^r\xi_s Y_s$ and $X:=\sum_{s=1}^r\theta_s Y_s$. 
+
+
+Thus if $\theta$ is a local minimum in coefficient space then $\nabla^2\sigma(X)$ is positive semi-definite on
+the subspace $\mathcal{Y}$. If $X\in\mathcal{Y}$ but $Z\not\in\mathcal{Y}$ it is perfectly possible that
+$\nabla^2\sigma(X)(Z,Z)<0$, and thus $X$ can be a saddle point in 
+configuration space. If $X\in\mathcal{Y}$ is a local minimum in
+configuration space, then $\theta$ is a local minimum in coefficient
+space. Of course if $\mathcal{Y}$ is the whole space then $\theta$
+is a local minimum in coefficient space if and only if $X$ is a local minimum
+in configuration space.
+
+\begin{multline}
+\sigma(X(\theta+\epsilon\xi))=\sigma(X(\theta)+\epsilon\mathcal{D}X(\theta)(\xi)+\frac12\epsilon^2\mathcal{D}^2X(\theta)(\xi,\xi))=\\
+\sigma(X(\theta))+\epsilon\mathcal{D}\sigma(X(\theta))\mathcal{D}X(\theta)\xi+\frac12\epsilon^2\{\mathcal{D}\sigma(X(\theta))\mathcal{D}^2X(\theta)(\xi,\xi)+\mathcal{D}\sigma(X(\theta))\mathcal{D}\sigma(X(\theta))\}
+\end{multline}
+
+$$
+\{\mathcal{D}^2X(\theta)(\xi,\xi)\}_{ip}=\sum\sum\xi_s\xi_t\mathcal{D}_{st}x_{ip}(\theta)=\xi'H_{ip}(\theta)\xi
+$$
+$$
+\{\mathcal{D}X(\theta)(\xi)\}_{ip}=\sum\xi_s\mathcal{D}_sx_{ip}(\theta)=G_{ip}(\theta)\xi
+$$
+
+$$
+\mathcal{D}\sigma(X(\theta))=\{V-B(X(\theta))\}X(\theta)=F(\theta)
+$$
+
+$$
+\mathcal{D}\sigma(\theta)=\mathcal{D}\sigma(X(\theta))\mathcal{D}X(\theta)
+$$
+
+$\sigma(x_{11}(\theta),\cdots,x_{np}(\theta))$
+
+$$
+\mathcal{D}_s\sigma(\theta)=\sum_{i=1}^n\sum_{s=1}^p\mathcal{D}_{ip}\sigma(X(\theta))\mathcal{D}_sx_{ip}(\theta)
+$$
+
+$$
+\mathcal{D}_{st}\sigma(\theta)=\sum_{i=1}^n\sum_{s=1}^p
+\sum_{j=1}^n\sum_{r=1}^p\mathcal{D}_{is,jr}\sigma(X(\theta))\mathcal{D}_sx_{is}(\theta)\mathcal{D}_tx_{jr}(\theta)
++\sum_{i=1}^n\sum_{s=1}^p\mathcal{D}_{is}\sigma(X(\theta))\mathcal{D}_{st}x_{is}(\theta)
+$$

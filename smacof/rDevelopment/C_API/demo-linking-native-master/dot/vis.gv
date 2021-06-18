@@ -1,0 +1,35 @@
+digraph D {
+  compound=true;
+
+  node [shape = ellipse,
+      style = filled,
+      fixedsize=true,
+      width=1,
+      height=0.618,
+      fontsize=14,
+      fillcolor = "lightyellow:khaki",
+      gradientangle=315,
+      fontname="Helvetica"]
+  ar [label = "R code"];
+  ac [label = "C code", shape = "diamond"];
+  br [label = "R code", fillcolor = "cornsilk:bisque"];
+  bc [label = "C code", shape = "diamond", fillcolor = "cornsilk:bisque"];
+
+  edge [color = black,
+       arrowname = vee,
+       fontname="Helvetica",
+       fontsize=10]
+
+  /* to be visually separated, subgraphs must be prefixed with cluster_ */
+  /* and only the DOT and FDP layout seam to support subgraphs */
+  subgraph cluster_pkgOut {
+    label = "pkgOut";
+    ac -> ar;
+  }
+  subgraph cluster_pkgIn {
+    label = "pkgIn";
+    bc -> br;
+  }
+
+  ac -> bc [color="red", penwidth=2, style="dashed"];
+}

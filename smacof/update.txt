@@ -1,0 +1,15 @@
+Here is a rather unfortunate fact. Suppose we run smacof until stress decreases less than epsilon. We can use two strategies
+
+A: update(X)=guttman(X)
+B: update(X)= 2 * guttman(X) - X
+
+We generally find that B is faster, in the sense that it stops sooner for a given epsilon. There are several versions of smacof in which B is the default. But if we compare A and B we find
+
+-- A and B converge to different stress values (and the one reached by A is lower).
+-- using B the configurations X do not converge, i.e. ||X-update(X)|| does not converge to zero.
+-- the configuration X where B stops does not have a zero gradient.
+
+This is discussed in more detail in my book. For now it is useful to know that using the update B in smacof gives the wrong stress value and the wrong configuration.  
+
+The book is still very incomplete and sketchy -- but you can look at updates on my publication page
+http://deleeuwpdx.net/publication/. Let me know if the link does not work, sometimes apache shuts down on me.
