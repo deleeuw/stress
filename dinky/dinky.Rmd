@@ -1,0 +1,151 @@
+---
+title: "toto"
+author: "Jan de Leeuw"
+date: "6/18/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Squared Distances
+
+$$
+\frac{d_{ij}^2(X+\epsilon Y)-d_{ij}^2(X)}{\epsilon}=2\ \text{tr}\ X'A_{ij}Y+\epsilon\ \text{tr}\ Y'A_{ij}Y
+$$
+Thus, letting $\epsilon\downarrow 0$,
+$$
+\mathbb{D}d_{ij}^2(X;Y)=2\ \text{tr}\ X'A_{ij}Y,
+$$
+which is also equal to $\mathcal{D}d_{ij}^2(X)(Y)$.
+
+
+$$
+\mathbb{D}d_{ij}^2(X+\epsilon Z;Y)=2\ \text{tr}\ X'A_{ij}Y+2\ \epsilon\ \text{tr}\ Z'A_{ij}Y,
+$$
+
+Since the derivative is linear in $X$ it is immediately obvious that
+$$
+\mathcal{D}^2d_{ij}^2(X)(Y,Z)=\mathcal{D}\{\mathcal{D}d_{ij}^2(X)(Y)\}(Z)=2\ \text{tr}\ Z'A_{ij}Y.
+$$
+Although it is overkill in this case we nevertheless use it as a first illustration of the Ben-Tal \& Zowe parabolic second directional derivative.
+
+$$
+d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}^2(X)+\epsilon^2d_{ij}^2(Y)+\epsilon^4d_{ij}^2(Z)+\\
++2\epsilon\text{tr}\ X'A_{ij}Y+2\epsilon^2\text{tr}\ X'A_{ij}Z
++2\epsilon^3\text{tr}\ Y'A_{ij}Z
+$$
+$$
+\frac{d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)-d_{ij}^2(X)-\epsilon\ \mathbb{D}d_{ij}^2(X;Y)}{\epsilon^2}=\\=d_{ij}^2(Y)+\epsilon^2d_{ij}^2(Z)+
+2\ \text{tr}\ X'A_{ij}Z+2\ \epsilon\ \text{tr}\ Y'A_{ij}Z.
+$$
+Taking limits shows
+$$
+\mathbb{D}^2d_{ij}^2(X;Y,Z)=d_{ij}^2(Y)+2\ \text{tr}\ X'A_{ij}Z=
+\frac12\mathcal{D}^2d_{ij}^2(X)(Y,Y)+\mathcal{D}d_{ij}^2(X)(Z).
+$$
+
+## Distance
+
+For distances the situation is more complicated than for squared
+distances, basically because the square root is not differentiable
+at the origin.
+
+
+$$
+d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X'A_{ij}X+2\epsilon\ \text{tr}\ X'A_{ij}Y+\epsilon^2\text{tr}\ Y'A_{ij}Y}
+$$
+
+If $d_{ij}(X)>0$ then
+
+$$
+d_{ij}(X+\epsilon Y)=d_{ij}(X)\sqrt{1+2\epsilon\ \text{tr}\ \frac{X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}}
+$$
+
+Now use $\sqrt{1+x}=1+\frac12 x-\frac18x^2 + o(x^2)$
+
+$$
+d_{ij}(X+\epsilon Y)=
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
++\frac12\epsilon^2\left\{\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^3(X)}\right\}+o(\epsilon^2)
+$$
+
+
+Thus
+
+$$
+\mathbb{D}d_{ij}(X;Y)=\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
+$$
+and 
+
+$$
+\mathbb{D}^2d_{ij}(X;Y)=\frac12\frac{1}{d_{ij}(X)}\left\{ d_{ij}^2(Y)
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^2(X)}\right\}
+$$
+
+$$
+\mathbb{D}d_{ij}(X+\epsilon\ Z;Y)=\frac{\text{tr}\ X'A_{ij}Y+\epsilon\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+o(\epsilon)}=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}(1+\epsilon\ \frac{\  \text{tr}\ Z'A_{ij}Y}{\text{tr}\ X'A_{ij}Y})(1-\epsilon\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+o(\epsilon))=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\epsilon\left\{\frac{\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)}-\frac{\text{tr}\ (X'A_{ij}Y)^2}{d_{ij}^3(X)}\right\}
+$$
+
+
+$$
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}(X)\sqrt{1+2\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}+2\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}^2(X)}+o(\epsilon^2)}=\\
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\frac12\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\epsilon^2\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}\\
+$$
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac12\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}=\\
+\frac12\mathbb{D}^2d_{ij}(X;Y)+\mathbb{D}d_{ij}(X;Z)
+$$
+
+## Zero Distances
+
+$$
+d_{ij}(X+\epsilon\ Y)=\epsilon\ d_{ij}(Y)
+$$
+$$
+\mathbb{D}d_{ij}(X;Y)= d_{ij}(Y)
+$$
+$$
+\mathbb{D}d_{ij}(X+\epsilon Z;Y)= d_{ij}(Y)
+$$
+
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=0
+$$
+
+$$
+d_{ij}(X+\epsilon\ Y+\epsilon^2 Z)=\epsilon\ d_{ij}(Y+\epsilon\ Z)
+$$
+
+If $d_{ij}(Y)>0$ then
+
+$$
+\epsilon(d_{ij}(Y) + \epsilon\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)})
+$$
+and thus
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)}=\mathbb{D}d_{ij}(Y;Z)
+$$
+
+If $d_{ij}(X)=d_{ij}(Y)=0$ then
+
+$$
+d_{ij}(X+\epsilon Y)=0
+$$
+and thus
+$$
+\mathbb{D}d_{ij}(X;Y)=0
+$$
+$$
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\epsilon^2 d_{ij}(Z)
+$$
+
+and 
+
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=d_{ij}(Z)
+$$
