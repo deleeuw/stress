@@ -214,10 +214,11 @@ ae twice differentiable
 all twice differentiable are DC
 
 
-```{theorem}
+... {#rholip .theorem}
 $\rho$ is Lipschitz, with Lipschitz constant $\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}$.
-```
+...
 
+... {proof}
 In the first place 
 
 $$
@@ -231,14 +232,15 @@ and, using the reverse triangle inequality,
 $$
 |d_{ij}(X)-d_{ij}(Y)|=|\|X^T(e_i-e_j)\|-\|Y^T(e_i-e_j))\||\leq\|(X-Y)^T(e_i-e_j)\|\leq\|X-Y\|.
 $$
-
-
+:::
 
 On the other hand $\eta^2$ is only locally Lipschitz.
 
 
 ### Subdifferentials
 
+This section needs considerable improvement. When is $Y\in\partial\rho(X)$ ? Use Clarke.
+-----
 To compute the subdifferential (defined in chapter \@ref(mathadd) section \@ref(mathsubdif)) of $\rho$ we represent distances as maximum functions over the unit ball $\mathfrak{S}_p$ in $\mathbb{R}^p$.
 
 \begin{equation}
@@ -371,16 +373,62 @@ and thus the Guttman transform is Lipschitz.
 
 The fact that $d_{ij}(X)$ can be zero creates some problems with differentiability. Clearly $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X$ is
 quadratic, and thus inifinitely many times differentiable. But $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ is not differentiable
-at points where $x_i=x_j$ and thus $d_{ij}(X)=0$, because the square root is not differentiable at zero. For stress this means that $\eta^2(X)$ is differentiable but $\rho(X)$ is not if $d_{ij}(X)=0$
-for some $i$ and $j$ with $w_{ij}\delta_{ij}>0$.
+at points where $x_i=x_j$ and $d_{ij}(X)=0$, because the square root is not differentiable at zero. For stress this means that $\eta^2(X)$ is differentiable but $\rho(X)$ is not if $d_{ij}(X)=0$
+for one or more $i$ and $j$ with $w_{ij}\delta_{ij}>0$.
 
 These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by zero distances were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
-### Regularity
+We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. A quick reminder of terminology and notation. The*derivative* of stress at configuration $X$ is $\mathcal{D}\sigma(X)$. It is a linear transformation of configuration space $\mathbb{R}^{n\times p}$ into
+$\mathbb{R}$. The derivative at $X$ evaluated at configuration $Y$ is
+$\mathcal{D}\sigma(X)(Y)$, which also defines the *differential* $\delta(X;Y)$.
+The *partial derivatives* at $X$ are $\mathcal{D}\sigma(X)(E_s)=\delta(X,E_s)$, where the  $E_s$ are a basis for configuration space. The matrix of partial derivatives is the *gradient* at $X$.
 
-A configuration $X$ is *regular* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. I apologize for yet another overload o  the word "regular". 
 
-#### Distances
+
+### Squared Distances
+
+$$
+\frac{d_{ij}^2(X+\epsilon Y)-d_{ij}^2(X)}{\epsilon}=2\ \text{tr}\ X'A_{ij}Y+\epsilon\ \text{tr}\ Y'A_{ij}Y
+$$
+Thus, letting $\epsilon\downarrow 0$,
+$$
+\mathbb{D}d_{ij}^2(X;Y)=2\ \text{tr}\ X'A_{ij}Y,
+$$
+which is also equal to $\mathcal{D}d_{ij}^2(X)(Y)$.
+
+$$
+\mathbb{D}d_{ij}^2(X+\epsilon Z;Y)=2\ \text{tr}\ X'A_{ij}Y+2\ \epsilon\ \text{tr}\ Z'A_{ij}Y,
+$$
+
+Since the derivative is linear in $X$ it is immediately obvious that
+$$
+\mathcal{D}^2d_{ij}^2(X)(Y,Z)=\mathcal{D}\{\mathcal{D}d_{ij}^2(X)(Y)\}(Z)=2\ \text{tr}\ Z'A_{ij}Y.
+$$
+Although it is overkill in this case we nevertheless use it as a first illustration of the Ben-Tal \& Zowe parabolic second directional derivative.
+
+$$
+d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}^2(X)+\epsilon^2d_{ij}^2(Y)+\epsilon^4d_{ij}^2(Z)+\\
++2\epsilon\text{tr}\ X'A_{ij}Y+2\epsilon^2\text{tr}\ X'A_{ij}Z
++2\epsilon^3\text{tr}\ Y'A_{ij}Z
+$$
+$$
+\frac{d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)-d_{ij}^2(X)-\epsilon\ \mathbb{D}d_{ij}^2(X;Y)}{\epsilon^2}=\\=d_{ij}^2(Y)+\epsilon^2d_{ij}^2(Z)+
+2\ \text{tr}\ X'A_{ij}Z+2\ \epsilon\ \text{tr}\ Y'A_{ij}Z.
+$$
+Taking limits shows
+$$
+\mathbb{D}^2d_{ij}^2(X;Y,Z)=d_{ij}^2(Y)+2\ \text{tr}\ X'A_{ij}Z=
+\frac12\mathcal{D}^2d_{ij}^2(X)(Y,Y)+\mathcal{D}d_{ij}^2(X)(Z).
+$$
+
+### Distances
+
+For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.
+
+A configuration $X$ is *regular* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. I apologize for yet another overloading of the word "regular". 
+
+#### Regular Case
 
 If $X$ is regular then all $d_{ij}$ are differentiable at $X$, in fact infinitely many times differentiable. Remembering that $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ we see that
 
@@ -401,9 +449,110 @@ For the quadratic form defined by the second derivatives we find
 
 From the CS inequality we see that $\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0$, as we would expect from any decent twice-differentiable convex function.
 
-Of course $\mathcal{D}d_{ij}^2(X)=2A_{ij}X,$ and $\mathcal{D}^2d_{ij}^2(X)(Y,Y)=2\text{tr}\ Y'A_{ij}Y$.
 
-#### Rho and stress
+
+$$
+d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X'A_{ij}X+2\epsilon\ \text{tr}\ X'A_{ij}Y+\epsilon^2\text{tr}\ Y'A_{ij}Y}
+$$
+
+If $d_{ij}(X)>0$ then
+
+$$
+d_{ij}(X+\epsilon Y)=d_{ij}(X)\sqrt{1+2\epsilon\ \text{tr}\ \frac{X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}}
+$$
+
+Now use $\sqrt{1+x}=1+\frac12 x-\frac18x^2 + o(x^2)$
+
+$$
+d_{ij}(X+\epsilon Y)=
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
++\frac12\epsilon^2\left\{\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^3(X)}\right\}+o(\epsilon^2)
+$$
+
+
+Thus
+
+$$
+\mathbb{D}d_{ij}(X;Y)=\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
+$$
+and 
+
+$$
+\mathbb{D}^2d_{ij}(X;Y)=\frac12\frac{1}{d_{ij}(X)}\left\{ d_{ij}^2(Y)
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^2(X)}\right\}
+$$
+
+$$
+\mathbb{D}d_{ij}(X+\epsilon\ Z;Y)=\frac{\text{tr}\ X'A_{ij}Y+\epsilon\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+o(\epsilon)}=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}(1+\epsilon\ \frac{\  \text{tr}\ Z'A_{ij}Y}{\text{tr}\ X'A_{ij}Y})(1-\epsilon\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+o(\epsilon))=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\epsilon\left\{\frac{\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)}-\frac{\text{tr}\ (X'A_{ij}Y)^2}{d_{ij}^3(X)}\right\}
+$$
+
+
+$$
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}(X)\sqrt{1+2\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}+2\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}^2(X)}+o(\epsilon^2)}=\\
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\frac12\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\epsilon^2\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}\\
+$$
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac12\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}=\\
+\frac12\mathbb{D}^2d_{ij}(X;Y)+\mathbb{D}d_{ij}(X;Z)
+$$
+
+#### Zero Distances
+
+$$
+d_{ij}(X+\epsilon\ Y)=\epsilon\ d_{ij}(Y)
+$$
+$$
+\mathbb{D}d_{ij}(X;Y)= d_{ij}(Y)
+$$
+$$
+\mathbb{D}d_{ij}(X+\epsilon Z;Y)= d_{ij}(Y)
+$$
+
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=0
+$$
+
+$$
+d_{ij}(X+\epsilon\ Y+\epsilon^2 Z)=\epsilon\ d_{ij}(Y+\epsilon\ Z)
+$$
+
+If $d_{ij}(Y)>0$ then
+
+$$
+\epsilon(d_{ij}(Y) + \epsilon\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)})
+$$
+and thus
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)}=\mathbb{D}d_{ij}(Y;Z)
+$$
+
+If $d_{ij}(X)=d_{ij}(Y)=0$ then
+
+$$
+d_{ij}(X+\epsilon Y)=0
+$$
+and thus
+$$
+\mathbb{D}d_{ij}(X;Y)=0
+$$
+$$
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\epsilon^2 d_{ij}(Z)
+$$
+
+and 
+
+$$
+\mathbb{D}^2d_{ij}(X;Y,Z)=d_{ij}(Z)
+$$
+
+#### Distances
+
+
+### Rho and stress
 
 At a regular configuration $\rho$ is twice differentiable, with $\mathcal{D}\rho(X)=B(X)X$, and
 
@@ -602,7 +751,7 @@ A *zero-distance subspace* is a subspace of configuration space in which one or 
 The number of zero-distance subspaces is the same as the number of set partitions of $n$ objects, which is the Bell number $B_n$. Bell numbers are defined by the recursion 
 \begin{equation}
 B_{n+1}=\sum_{k=0}^n\binom{n}{k}B_k, 
-(\eq:bellnums)
+(\#eq:bellnums)
 \end{equation}
 with $B_0=1$. The next ten Bell numbers $B_1,\cdots,B_{10}$ are 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 11597. So there are lots of zero-distance subspaces.
 
