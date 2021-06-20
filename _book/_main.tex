@@ -150,7 +150,7 @@
 
 \title{Least Squares Euclidean Multidimensional Scaling}
 \author{Jan de Leeuw}
-\date{Started October 02, 2020. Last update June 16, 2021}
+\date{Started October 02, 2020. Last update June 20, 2021}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -860,7 +860,7 @@ When Kruskal introduced gradient based methods to minimize stress he also discus
 \hypertarget{propnotation}{%
 \section{Notation}\label{propnotation}}
 
-The notation used in the smacof approach to MDS first appeared in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}), and was subsequently used in several of the related smacof references, such as \protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}), \protect\hyperlink{ref-deleeuw_A_88b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_88b}{1988}), chapter 8 of \protect\hyperlink{ref-borg_groenen_05}{Borg and Groenen} (\protect\hyperlink{ref-borg_groenen_05}{2005}), and \protect\hyperlink{ref-deleeuw_mair_A_09c}{De Leeuw and Mair} (\protect\hyperlink{ref-deleeuw_mair_A_09c}{2009}).
+The notation used in the smacof approach to MDS first appeared in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}), and was subsequently used in several of the later key smacof references, such as \protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}), \protect\hyperlink{ref-deleeuw_A_88b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_88b}{1988}), chapter 8 of \protect\hyperlink{ref-borg_groenen_05}{Borg and Groenen} (\protect\hyperlink{ref-borg_groenen_05}{2005}), and \protect\hyperlink{ref-deleeuw_mair_A_09c}{De Leeuw and Mair} (\protect\hyperlink{ref-deleeuw_mair_A_09c}{2009}).
 
 \hypertarget{propexpand}{%
 \subsection{Expanding}\label{propexpand}}
@@ -1085,10 +1085,11 @@ It follows from the general properties of convex and DC functions that \(\sigma\
 ae twice differentiable
 all twice differentiable are DC
 
-\begin{theorem}
-\protect\hypertarget{thm:unnamed-chunk-1}{}{\label{thm:unnamed-chunk-1} }\(\rho\) is Lipschitz, with Lipschitz constant \(\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\).
-\end{theorem}
+\ldots{} \{\#rholip .theorem\}
+\(\rho\) is Lipschitz, with Lipschitz constant \(\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\).
+\ldots{}
 
+\ldots{} \{proof\}
 In the first place
 
 \[
@@ -1102,11 +1103,15 @@ and, using the reverse triangle inequality,
 \[
 |d_{ij}(X)-d_{ij}(Y)|=|\|X^T(e_i-e_j)\|-\|Y^T(e_i-e_j))\||\leq\|(X-Y)^T(e_i-e_j)\|\leq\|X-Y\|.
 \]
+:::
 
 On the other hand \(\eta^2\) is only locally Lipschitz.
 
 \hypertarget{subdifferentials}{%
 \subsection{Subdifferentials}\label{subdifferentials}}
+
+\hypertarget{this-section-needs-considerable-improvement.-when-is-yinpartialrhox-use-clarke.}{%
+\section{\texorpdfstring{This section needs considerable improvement. When is \(Y\in\partial\rho(X)\) ? Use Clarke.}{This section needs considerable improvement. When is Y\textbackslash in\textbackslash partial\textbackslash rho(X) ? Use Clarke.}}\label{this-section-needs-considerable-improvement.-when-is-yinpartialrhox-use-clarke.}}
 
 To compute the subdifferential (defined in chapter \ref{mathadd} section \ref{mathsubdif}) of \(\rho\) we represent distances as maximum functions over the unit ball \(\mathfrak{S}_p\) in \(\mathbb{R}^p\).
 
@@ -1243,18 +1248,63 @@ and thus the Guttman transform is Lipschitz.
 
 The fact that \(d_{ij}(X)\) can be zero creates some problems with differentiability. Clearly \(d_{ij}^2(X)=\text{tr}\ X'A_{ij}X\) is
 quadratic, and thus inifinitely many times differentiable. But \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) is not differentiable
-at points where \(x_i=x_j\) and thus \(d_{ij}(X)=0\), because the square root is not differentiable at zero. For stress this means that \(\eta^2(X)\) is differentiable but \(\rho(X)\) is not if \(d_{ij}(X)=0\)
-for some \(i\) and \(j\) with \(w_{ij}\delta_{ij}>0\).
+at points where \(x_i=x_j\) and \(d_{ij}(X)=0\), because the square root is not differentiable at zero. For stress this means that \(\eta^2(X)\) is differentiable but \(\rho(X)\) is not if \(d_{ij}(X)=0\)
+for one or more \(i\) and \(j\) with \(w_{ij}\delta_{ij}>0\).
 
 These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \ref{proplocmin} of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by zero distances were one of the reasons why I switched from differentiability to convexity in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}) and from derivatives to directional derivatives in \protect\hyperlink{ref-deleeuw_A_84f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_84f}{1984c}). It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
-\hypertarget{regularity}{%
-\subsection{Regularity}\label{regularity}}
+We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. A quick reminder of terminology and notation. The\emph{derivative} of stress at configuration \(X\) is \(\mathcal{D}\sigma(X)\). It is a linear transformation of configuration space \(\mathbb{R}^{n\times p}\) into
+\(\mathbb{R}\). The derivative at \(X\) evaluated at configuration \(Y\) is
+\(\mathcal{D}\sigma(X)(Y)\), which also defines the \emph{differential} \(\delta(X;Y)\).
+The \emph{partial derivatives} at \(X\) are \(\mathcal{D}\sigma(X)(E_s)=\delta(X,E_s)\), where the \(E_s\) are a basis for configuration space. The matrix of partial derivatives is the \emph{gradient} at \(X\).
 
-A configuration \(X\) is \emph{regular} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). I apologize for yet another instance of overloading the word ``regular.''
+\hypertarget{squared-distances}{%
+\subsection{Squared Distances}\label{squared-distances}}
+
+\[
+\frac{d_{ij}^2(X+\epsilon Y)-d_{ij}^2(X)}{\epsilon}=2\ \text{tr}\ X'A_{ij}Y+\epsilon\ \text{tr}\ Y'A_{ij}Y
+\]
+Thus, letting \(\epsilon\downarrow 0\),
+\[
+\mathbb{D}d_{ij}^2(X;Y)=2\ \text{tr}\ X'A_{ij}Y,
+\]
+which is also equal to \(\mathcal{D}d_{ij}^2(X)(Y)\).
+
+\[
+\mathbb{D}d_{ij}^2(X+\epsilon Z;Y)=2\ \text{tr}\ X'A_{ij}Y+2\ \epsilon\ \text{tr}\ Z'A_{ij}Y,
+\]
+
+Since the derivative is linear in \(X\) it is immediately obvious that
+\[
+\mathcal{D}^2d_{ij}^2(X)(Y,Z)=\mathcal{D}\{\mathcal{D}d_{ij}^2(X)(Y)\}(Z)=2\ \text{tr}\ Z'A_{ij}Y.
+\]
+Although it is overkill in this case we nevertheless use it as a first illustration of the Ben-Tal \& Zowe parabolic second directional derivative.
+
+\[
+d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}^2(X)+\epsilon^2d_{ij}^2(Y)+\epsilon^4d_{ij}^2(Z)+\\
++2\epsilon\text{tr}\ X'A_{ij}Y+2\epsilon^2\text{tr}\ X'A_{ij}Z
++2\epsilon^3\text{tr}\ Y'A_{ij}Z
+\]
+\[
+\frac{d_{ij}^2(X+\epsilon Y+\epsilon^2 Z)-d_{ij}^2(X)-\epsilon\ \mathbb{D}d_{ij}^2(X;Y)}{\epsilon^2}=\\=d_{ij}^2(Y)+\epsilon^2d_{ij}^2(Z)+
+2\ \text{tr}\ X'A_{ij}Z+2\ \epsilon\ \text{tr}\ Y'A_{ij}Z.
+\]
+Taking limits shows
+\[
+\mathbb{D}^2d_{ij}^2(X;Y,Z)=d_{ij}^2(Y)+2\ \text{tr}\ X'A_{ij}Z=
+\frac12\mathcal{D}^2d_{ij}^2(X)(Y,Y)+\mathcal{D}d_{ij}^2(X)(Z).
+\]
 
 \hypertarget{distances-1}{%
-\subsubsection{Distances}\label{distances-1}}
+\subsection{Distances}\label{distances-1}}
+
+For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.
+
+A configuration \(X\) is \emph{regular} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). I apologize for yet another overloading of the word ``regular.''
+
+\hypertarget{regular-case}{%
+\subsubsection{Regular Case}\label{regular-case}}
 
 If \(X\) is regular then all \(d_{ij}\) are differentiable at \(X\), in fact infinitely many times differentiable. Remembering that \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) we see that
 
@@ -1275,10 +1325,108 @@ For the quadratic form defined by the second derivatives we find
 
 From the CS inequality we see that \(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\), as we would expect from any decent twice-differentiable convex function.
 
-Of course \(\mathcal{D}d_{ij}^2(X)=2A_{ij}X,\) and \(\mathcal{D}^2d_{ij}^2(X)(Y,Y)=2\text{tr}\ Y'A_{ij}Y\).
+\[
+d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X'A_{ij}X+2\epsilon\ \text{tr}\ X'A_{ij}Y+\epsilon^2\text{tr}\ Y'A_{ij}Y}
+\]
+
+If \(d_{ij}(X)>0\) then
+
+\[
+d_{ij}(X+\epsilon Y)=d_{ij}(X)\sqrt{1+2\epsilon\ \text{tr}\ \frac{X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}}
+\]
+
+Now use \(\sqrt{1+x}=1+\frac12 x-\frac18x^2 + o(x^2)\)
+
+\[
+d_{ij}(X+\epsilon Y)=
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
++\frac12\epsilon^2\left\{\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^3(X)}\right\}+o(\epsilon^2)
+\]
+
+Thus
+
+\[
+\mathbb{D}d_{ij}(X;Y)=\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}
+\]
+and
+
+\[
+\mathbb{D}^2d_{ij}(X;Y)=\frac12\frac{1}{d_{ij}(X)}\left\{ d_{ij}^2(Y)
+-\frac{\{\text{tr}\ X'A_{ij}Y\}^2}{d_{ij}^2(X)}\right\}
+\]
+
+\[
+\mathbb{D}d_{ij}(X+\epsilon\ Z;Y)=\frac{\text{tr}\ X'A_{ij}Y+\epsilon\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+o(\epsilon)}=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}(1+\epsilon\ \frac{\  \text{tr}\ Z'A_{ij}Y}{\text{tr}\ X'A_{ij}Y})(1-\epsilon\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+o(\epsilon))=\\
+\frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\epsilon\left\{\frac{\  \text{tr}\ Z'A_{ij}Y}{d_{ij}(X)}-\frac{\text{tr}\ (X'A_{ij}Y)^2}{d_{ij}^3(X)}\right\}
+\]
+
+\[
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\\
+d_{ij}(X)\sqrt{1+2\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}^2(X)}+\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}^2(X)}+2\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}^2(X)}+o(\epsilon^2)}=\\
+d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X'A_{ij}Y}{d_{ij}(X)}+\frac12\epsilon^2\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\epsilon^2\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\epsilon^2\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}\\
+\]
+\[
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac12\frac{\text{tr}\ Y'A_{ij}Y}{d_{ij}(X)}+\frac{\text{tr}\  X'A_{ij}Z}{d_{ij}(X)}-\frac12\frac{(\text{tr}\ X'A_{ij}Y)^2}{d_{ij}^3(X)}=\\
+\frac12\mathbb{D}^2d_{ij}(X;Y)+\mathbb{D}d_{ij}(X;Z)
+\]
+
+\hypertarget{zero-distances}{%
+\subsubsection{Zero Distances}\label{zero-distances}}
+
+\[
+d_{ij}(X+\epsilon\ Y)=\epsilon\ d_{ij}(Y)
+\]
+\[
+\mathbb{D}d_{ij}(X;Y)= d_{ij}(Y)
+\]
+\[
+\mathbb{D}d_{ij}(X+\epsilon Z;Y)= d_{ij}(Y)
+\]
+
+\[
+\mathbb{D}^2d_{ij}(X;Y,Z)=0
+\]
+
+\[
+d_{ij}(X+\epsilon\ Y+\epsilon^2 Z)=\epsilon\ d_{ij}(Y+\epsilon\ Z)
+\]
+
+If \(d_{ij}(Y)>0\) then
+
+\[
+\epsilon(d_{ij}(Y) + \epsilon\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)})
+\]
+and thus
+\[
+\mathbb{D}^2d_{ij}(X;Y,Z)=\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)}=\mathbb{D}d_{ij}(Y;Z)
+\]
+
+If \(d_{ij}(X)=d_{ij}(Y)=0\) then
+
+\[
+d_{ij}(X+\epsilon Y)=0
+\]
+and thus
+\[
+\mathbb{D}d_{ij}(X;Y)=0
+\]
+\[
+d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\epsilon^2 d_{ij}(Z)
+\]
+
+and
+
+\[
+\mathbb{D}^2d_{ij}(X;Y,Z)=d_{ij}(Z)
+\]
+
+\hypertarget{distances-2}{%
+\subsubsection{Distances}\label{distances-2}}
 
 \hypertarget{rho-and-stress}{%
-\subsubsection{Rho and stress}\label{rho-and-stress}}
+\subsection{Rho and stress}\label{rho-and-stress}}
 
 At a regular configuration \(\rho\) is twice differentiable, with \(\mathcal{D}\rho(X)=B(X)X\), and
 
@@ -1475,12 +1623,12 @@ Y)=\sigma(X)+\frac12\epsilon^2\text{tr}\ Y'(V-B(X))Y+o(\epsilon^2)
 \hypertarget{propzerodist}{%
 \subsection{Zero Distance Subspaces}\label{propzerodist}}
 
-A \emph{zero-distance subspace} is a subspace of configuration space in which one or more distances are zero. That a zero distance indeed defines a subspace follows from the fact that \(d_{ij}(X)=0\) is equivalent to \(x_i=x_j\).
+A \emph{zero-distance subspace} is a subspace of configuration space in which one or more distances are zero. That a zero distance indeed defines a subspace follows from the fact that the nonlinear equation \(d_{ij}(X)=0\) is equivalent to the homogeneous linear equation \(x_i=x_j\).
 
-How many zero-distance subspaces are there ? The same as the number of set partitions of \(n\) objects, which is the Bell number \(B_n\). Bell numbers are defined by the recursion
+The number of zero-distance subspaces is the same as the number of set partitions of \(n\) objects, which is the Bell number \(B_n\). Bell numbers are defined by the recursion
 \begin{equation}
 B_{n+1}=\sum_{k=0}^n\binom{n}{k}B_k, 
-(\$eq:bellnums)
+\label{eq:bellnums}
 \end{equation}
 with \(B_0=1\). The next ten Bell numbers \(B_1,\cdots,B_{10}\) are 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 11597. So there are lots of zero-distance subspaces.
 
@@ -1499,12 +1647,14 @@ Stability
 \subsection{Distance Smoothing}\label{propdistsmo}}
 
 In sections \ref{propconvex} and \ref{propstationary} we show the lack of differentiability
-in basic MDS is not a serious problem in the actual computation of local minima. There is another
+in basic MDS is not a serious problem in the actual computation of local minima.
+
+There is another
 rather straightforward way to circumvent the differentiabily issue, which actually may have additional
 benefits. The idea is to use an approximation of the Euclidean distance that is as
 close as possible on the positive real axis but smooth at zero. This was first applied in unidimensional MDS by Pliner (\protect\hyperlink{ref-pliner_86}{Pliner} (\protect\hyperlink{ref-pliner_86}{1986}), \protect\hyperlink{ref-pliner_96}{Pliner} (\protect\hyperlink{ref-pliner_96}{1996})) and later taken up and generalized to pMDS for arbitrary \(p\), and even for arbitrary Minkovski metrics, by \protect\hyperlink{ref-groenen_heiser_meulman_98}{Groenen, Heiser, and Meulman} (\protect\hyperlink{ref-groenen_heiser_meulman_98}{1998}) and \protect\hyperlink{ref-groenen_heiser_meulman_99}{Groenen, Heiser, and Meulman} (\protect\hyperlink{ref-groenen_heiser_meulman_99}{1999}). They coined the term \emph{distance smoothing} for this variation of the smacof framework for MDS.
 
-Pliner uses a smooth approximation of the sign function, while Groenen et al.~use a smooth Huber approximation of the absolute value function. We use a classical and efficient approximation \(|x|\approx\sqrt{x^2+\epsilon^2}\) to the absolute value function, used in image analysis, location analysis, and computational geometry (\protect\hyperlink{ref-deleeuw_E_18f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_E_18f}{2018b}), \protect\hyperlink{ref-ramirez_sanchez_kreinovich_argaez_14}{Ramirez et al.} (\protect\hyperlink{ref-ramirez_sanchez_kreinovich_argaez_14}{2014})). In our context that becomes \(d_{ij}(X)\approx d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}\). Note that on the non-negative reals
+Pliner uses a smooth approximation of the sign function, while Groenen et al.~use a smooth Huber approximation of the absolute value function. We use another classical and efficient approximation \(|x|\approx\sqrt{x^2+\epsilon^2}\) to the absolute value function, used in image analysis, location analysis, and computational geometry (\protect\hyperlink{ref-deleeuw_E_18f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_E_18f}{2018b}), \protect\hyperlink{ref-ramirez_sanchez_kreinovich_argaez_14}{Ramirez et al.} (\protect\hyperlink{ref-ramirez_sanchez_kreinovich_argaez_14}{2014})). In our context that becomes \(d_{ij}(X)\approx d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}\). Note that on the non-negative reals
 
 \begin{equation}
 \max(\epsilon,d_{ij}(X))\leq d_{ij}(X,\epsilon)\leq d_{ij}(X)+\epsilon.
@@ -1673,7 +1823,7 @@ Note that by definition stress and the lower envelop of the quadratics are equal
 Instead of approximating stress from above, we can also approximate it from below.
 
 \begin{theorem}
-\protect\hypertarget{thm:unnamed-chunk-2}{}{\label{thm:unnamed-chunk-2} }\(\sigma\) is the upper envelop of an infinite number of quadratics.
+\protect\hypertarget{thm:unnamed-chunk-1}{}{\label{thm:unnamed-chunk-1} }\(\sigma\) is the upper envelop of an infinite number of quadratics.
 \end{theorem}
 
 \begin{proof}
@@ -1865,7 +2015,7 @@ We have \(0\lesssim H(\theta)\lesssim B(\theta)\) and thus \(I-B(\theta)\lesssim
 Hessian in coef and conf space
 
 \hypertarget{propspherespace}{%
-\section{Sphere Space}\label{propspherespace}}
+\section{Spherical Space}\label{propspherespace}}
 
 \begin{equation}
 \min_X\sigma(X)=\min_{\lambda\geq 0}\min_{\eta^2(X)=1}\sigma(\lambda X)=\min_{\eta^2(X)=1}\min_{\lambda\geq 0}\sigma(\lambda X)=
@@ -1879,14 +2029,10 @@ This shows that the MDS problem can be seen as a rather special nonlinear eigenv
 
 \(\alpha X+\beta Y\) in sphere space one-dimensional \ref{picline}
 
-\hypertarget{cross-product-space}{%
-\section{Cross-Product Space}\label{cross-product-space}}
+\hypertarget{gramian-space}{%
+\section{Gramian Space}\label{gramian-space}}
 
-We can write
-
-\[
-d_{ij}^2(X)=\text{tr}\ X'A_{ij}X = \text{tr}\ A_{ij}C,
-\]
+We can write \(d_{ij}^2(X)=\text{tr}\ X'A_{ij}X = \text{tr}\ A_{ij}C,\)
 with \(C=XX'\). This shows minimizing stress can also be formulated as minimizing
 
 \begin{equation}
@@ -1894,7 +2040,9 @@ with \(C=XX'\). This shows minimizing stress can also be formulated as minimizin
 \label{eq:stresspsd}
 \end{equation}
 
-over all positive semi-definite \(C\) of rank \(r\leq p\). A fundamental result, which forms the basis of chapter \ref{fullchapter} in this book, is that \(\sigma\) is convex on \emph{Cross-Product Space}, i.e.~the closed convex cone of all \(C\gtrsim 0\).
+over all \(C\gtrsim 0\) of rank \(r\leq p\).
+
+A fundamental result, which forms the basis of chapter \ref{fullchapter} in this book, is that \(\sigma\) is convex on \emph{Gramian Space}, i.e.~on the closed convex cone of all \(C\gtrsim 0\).
 
 \hypertarget{picsstress}{%
 \chapter{Pictures of Stress}\label{picsstress}}
@@ -3128,7 +3276,7 @@ Elementwise dividing the \(\text{up}_B\) by the \(\text{up}_A\) final configurat
 There are two values \(\alpha\) and \(2-\alpha\), equal to 0.9595728 and
 1.0404272, because the sequence has two accumulation points.
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-6-1.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 Things do not look good for \(\text{up}_B\) but simple remedies are available. The first one is renormalization. After
 the iterations, with say stop\_f, have converged, we scale the configuration such that \(\rho(X)=\eta^2(X)\) and recompute stress. This corrects both stress and the confguration to the correct outcome. Another way to normalize is to
@@ -4699,7 +4847,7 @@ and \(d_{ij}^2(C):=\mathbf{tr}\ A_{ij}C\).
 We call the space of all positive semi-definite \(n\times n\) matrices \emph{cross product space}. The problem of minimizing \(\sigma\) over \(n\times p\)-dimensional configuration space is equivalent to the problem of minimizing \(\sigma\) over the set of matrices \(C\) in \(n\times n\)-dimensional cross product space that have rank less than or equal to \(p\). The corresponding solutions are related by the simple relationship \(C=XX'\).
 
 \begin{theorem}
-\protect\hypertarget{thm:unnamed-chunk-9}{}{\label{thm:unnamed-chunk-9} }Stress is convex on cross product space.
+\protect\hypertarget{thm:unnamed-chunk-8}{}{\label{thm:unnamed-chunk-8} }Stress is convex on cross product space.
 \end{theorem}
 
 \begin{proof}
@@ -4718,7 +4866,7 @@ Unfortunately the subset of cross product space of all matrices with rank less t
 Cross product space, the set of all positive semi-definite matrices, is a closed convex cone \(\mathcal{K}\) in the linear space of all \(n\times n\) symmetric matrices. This has an interesting consequence.
 
 \begin{theorem}
-\protect\hypertarget{thm:unnamed-chunk-10}{}{\label{thm:unnamed-chunk-10} }Full-dimensional scaling, i.e.~minimizing \(\sigma\) over \(\mathcal{K}\), is a convex programming problem. Thus in FDS all local minima are global. If \(w_{ij}\delta_{ij}>0\) for all \(i,j\) then the minimum is unique.
+\protect\hypertarget{thm:unnamed-chunk-9}{}{\label{thm:unnamed-chunk-9} }Full-dimensional scaling, i.e.~minimizing \(\sigma\) over \(\mathcal{K}\), is a convex programming problem. Thus in FDS all local minima are global. If \(w_{ij}\delta_{ij}>0\) for all \(i,j\) then the minimum is unique.
 \end{theorem}
 
 This result has been around since about 1985. \protect\hyperlink{ref-deleeuw_R_93c}{De Leeuw} (\protect\hyperlink{ref-deleeuw_R_93c}{1993}) gives a proof, but the report it appeared in remained unpublished. A published proof is in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}). Another treatment of FDS, with a somewhat different emphasis, is in \protect\hyperlink{ref-deleeuw_U_14b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_U_14b}{2014a}).
@@ -6093,9 +6241,9 @@ rstress, qstress, power stress
 
 \protect\hyperlink{ref-groenen_deleeuw_U_10}{Groenen and De Leeuw} (\protect\hyperlink{ref-groenen_deleeuw_U_10}{2010})
 \protect\hyperlink{ref-deleeuw_U_14c}{De Leeuw} (\protect\hyperlink{ref-deleeuw_U_14c}{2014b})
-\protect\hyperlink{ref-deleeuw_groenen_mair_E_16a}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16a}{2016b})
-\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{2016d})
-\protect\hyperlink{ref-deleeuw_groenen_mair_E_16h}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16h}{2016a})
+\protect\hyperlink{ref-deleeuw_groenen_mair_E_16a}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16a}{2016c})
+\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{2016e})
+\protect\hyperlink{ref-deleeuw_groenen_mair_E_16h}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16h}{2016b})
 
 \hypertarget{mstress}{%
 \section{mstress}\label{mstress}}
@@ -6236,10 +6384,10 @@ Kruskal, arithmetic with dissimilarities
 In MDS we start with dissimilarities and we find a configuration that locally minimizes stress. We know that the equation we have to solve is \(B(X)X=VX\). MDS maps dissimilarities into configurations by finding one (or, ideally, all) solutions of this equation. In Inverse MDS (IMDS) we start wth the same equation
 \(B(X)X=VX\), but now we find all dissimilarity matrices for which a given configuration is a local optimum, or at least a stationary point. Thus we solve for \(\Delta\) for given \(X\), and we study the inverse of the MDS map.
 
-Inverse MDS was first described in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}), R code was provided in \protect\hyperlink{ref-deleeuw_U_12b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_U_12b}{2012}), and some elaborations are in \protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{2016c}). This chapter leans heavily on \protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{2016c}), but we have reformulated some results and pruned some of the examples.
+Inverse MDS was first described in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}), R code was provided in \protect\hyperlink{ref-deleeuw_U_12b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_U_12b}{2012}), and some elaborations are in \protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{2016d}). This chapter leans heavily on \protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16f}{2016d}), but we have reformulated some results and pruned some of the examples.
 
 In studying the IMDS mapping we limit ourselves, unless explicitly stated otherwise, to configurations \(X\) that are \emph{regular}, in the sense that \(d_{ij}(X)>0\) for all \(i\not= j\).
-This can be done without loss of generality. If some of the distances are zero, then the corresponding IMDS problem can be reduced to a regular problem with a smaller number of points (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16g}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16g}{2016e})). Also, an \(n\times p\) configuration \(X\) is \emph{normalized} if it is column-centered and has rank \(p\). For such \(X\) there exist \(n\times (n-p-1)\) centered orthonormal matrix \(K\) such that \(K'X=0\). In IMDS we will always assume that \(X\) is both regular and normalized. We also assume, unless it is explicitly stated otherwise, that all off-diagonal weights \(w_{ij}\) are non-zero.
+This can be done without loss of generality. If some of the distances are zero, then the corresponding IMDS problem can be reduced to a regular problem with a smaller number of points (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16g}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16g}{2016f})). Also, an \(n\times p\) configuration \(X\) is \emph{normalized} if it is column-centered and has rank \(p\). For such \(X\) there exist \(n\times (n-p-1)\) centered orthonormal matrix \(K\) such that \(K'X=0\). In IMDS we will always assume that \(X\) is both regular and normalized. We also assume, unless it is explicitly stated otherwise, that all off-diagonal weights \(w_{ij}\) are non-zero.
 
 In \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}) two different basic IMDS versions are discussed. Both versions start with the stationary equation \(B(X)X=VX\). The first finds all \(W\) and \(\Delta\) for which a given \(X\) is stationary. The second finds all \(\Delta\) for a given \(X\) and \(W\) for which \(X\) is stationary. In this chapter we only look at the second form of IMDS. As we shall see, the first version turns out introduce too many unknowns in \(W\) and \(\Delta\) to be useful. The second form also reflects the point of view that \(\Delta\) are the data, while the \(W\) are part of the definition of the loss function.
 
@@ -6250,9 +6398,10 @@ Suppose \(X\) is a regular and normalized configuration satisfying the stationar
 Our first IMDS step is to describe the set \(\mathfrak{D}(X)\) of all \(\Delta\)E for which \(X\) is stationary.
 
 \begin{lemma}
-\protect\hypertarget{lem:unnamed-chunk-11}{}{\label{lem:unnamed-chunk-11} }Suppose \(X\) is an \(n\times p\) matrix of rank \(p<n\). Suppose \(K\) is an \(n\times(n-p)\) orthonormal matrix with \(K'X=0\). Then a symmetric matrix \(A\) satisfies \(AX=0\) if and only if there is a symmetric \(S\) such that \(A=KSK'\). If \(\text{rank}(K'AK)=r\) then \(S\) can be chosento be of order \(r\).
+\protect\hypertarget{lem:syminv}{}\label{lem:syminv}Suppose \(X\) is an \(n\times p\) matrix of rank \(p<n\). Suppose \(K\) is an \(n\times(n-p)\) orthonormal matrix with \(K'X=0\). Then a symmetric matrix \(A\) satisfies \(AX=0\) if and only if there is a symmetric \(S\) such that \(A=KSK'\). If \(\text{rank}(K'AK)=r\) then \(S\) can be chosento be of order \(r\).
 \end{lemma}
-::: \{.proof\}
+
+\begin{proof}
 Suppose \(X=LT\) with \(L\) an orthonormal basis for the column space of \(X\) and \(T\) non-singular. Write \(A\) as
 
 \begin{equation}
@@ -6266,10 +6415,10 @@ A_{11}&A_{12}\\A_{21}&A_{22}
 
 Then \(AX=LA_{11}T+KA_{21}=0\) which is true if and only if \(A_{11}=0\)
 and \(A_{21}=0\), and by symmetry \(A_{12}=0\). Thus \(A=KA_{22}K'\).
+\end{proof}
 
-\begin{verbatim}
 \begin{theorem}
-<span class="theorem" id="thm:keyresult"><strong>\label{thm:keyresult} </strong></span>$\Delta\in\mathfrak{D}(X)$ if and only if there is a symmetric $S$ of order $n-p-1$ such that for all $i\not= j$ 
+\protect\hypertarget{thm:keyresult}{}\label{thm:keyresult}\(\Delta\in\mathfrak{D}(X)\) if and only if there is a symmetric \(S\) of order \(n-p-1\) such that for all \(i\not= j\)
 
 \begin{equation}
 \delta_{ij}=d_{ij}(X)\left\{1-\frac{k_i'Sk_j^{\ }}{w_{ij}}\right\}.
@@ -6277,673 +6426,412 @@ and \(A_{21}=0\), and by symmetry \(A_{12}=0\). Thus \(A=KA_{22}K'\).
 \end{equation}
 \end{theorem}
 
-::: {.proof}
-By lemma XXX we have $(V-B(X))X=0$ if and only if there is a symmetric $S$ such that $V-B(X)=KSK'$.  This can be rearranged to yield \\eqref{eq:invalldelta}. Since the vector $e$ satisfies both $X'e=0$ and $(V-B(X))e=0$ we can choose $S$ to be of order $n-p-1$. 
-:::
+\begin{proof}
+By lemma XXX we have \((V-B(X))X=0\) if and only if there is a symmetric \(S\) such that \(V-B(X)=KSK'\). This can be rearranged to yield \eqref{eq:invalldelta}. Since the vector \(e\) satisfies both \(X'e=0\) and \((V-B(X))e=0\) we can choose \(S\) to be of order \(n-p-1\).
+\end{proof}
 
-Thus $\mathfrak{D}(X)$ is a non-empty affine space, a translation of a linear subspace, closed under all linear combinations with coefficients that add up to one. Since $S$ is symmetric of order $n-p-1$, equation \\eqref{eq:invalldelta} defines an affine subspace of dimension $\frac12(n-p)(n-p-1)$. If $n=3$ and $p=1$, or if $n=4$ and $p=2$, the dimension is one. If $n=4$ and $p=1$ the dimension is three.
+Thus \(\mathfrak{D}(X)\) is a non-empty affine space, a translation of a linear subspace, closed under all linear combinations with coefficients that add up to one. Since \(S\) is symmetric of order \(n-p-1\), equation \eqref{eq:invalldelta} defines an affine subspace of dimension \(\frac12(n-p)(n-p-1)\). If \(n=3\) and \(p=1\), or if \(n=4\) and \(p=2\), the dimension is one. If \(n=4\) and \(p=1\) the dimension is three.
 
-If $\Delta_1,\cdots,\Delta_m$ are in $\mathfrak{D}(X)$, then so is the affine subspace spanned by the $\Delta_j$. For all configurations $X$ we have $D(X)\in\mathfrak{D}(X)$. Specifically, if we compute a solution to the stationary equations $X$ with some MDS algorithm such as smacof, then the whole line through the data $\Delta$ and $D(X)$ is in $\mathfrak{D}(X)$. 
+If \(\Delta_1,\cdots,\Delta_m\) are in \(\mathfrak{D}(X)\), then so is the affine subspace spanned by the \(\Delta_j\). For all configurations \(X\) we have \(D(X)\in\mathfrak{D}(X)\). Specifically, if we compute a solution to the stationary equations \(X\) with some MDS algorithm such as smacof, then the whole line through the data \(\Delta\) and \(D(X)\) is in \(\mathfrak{D}(X)\).
 
-
-
-
-
-
-The next result is corollary 6.3 in @deleeuw_groenen_A_97.
+The next result is corollary 6.3 in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}).
 
 \begin{corollary}
-<span class="corollary" id="cor:unnamed-chunk-12"><strong>\label{cor:unnamed-chunk-12} </strong></span>**`r corollary_nums("full_result", display = "f")`** If $p=n-1$ then $\Delta\in\mathfrak{D}(X)$ if and only if $\Delta=D(X)$ if and only if $\sigma(X)=0$.
+\protect\hypertarget{cor:unnamed-chunk-10}{}{\label{cor:unnamed-chunk-10} }\textbf{\texttt{r\ corollary\_nums("full\_result",\ display\ =\ "f")}} If \(p=n-1\) then \(\Delta\in\mathfrak{D}(X)\) if and only if \(\Delta=D(X)\) if and only if \(\sigma(X)=0\).
 \end{corollary}
 
-::: {.proof}
-If $p=n-1$ then $S$ in theorem  \\ref{thm:keyresult} is of order zero.
-:::
+\begin{proof}
+If \(p=n-1\) then \(S\) in theorem \ref{thm:keyresult} is of order zero.
+\end{proof}
 
-For any two elements of $\mathfrak{D}(X)$, one cannot be elementwise larger (or smaller) than the other. This is corollary 3.3 in @deleeuw_groenen_A_97.
+For any two elements of \(\mathfrak{D}(X)\), one cannot be elementwise larger (or smaller) than the other. This is corollary 3.3 in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}).
 
 \begin{corollary}
-<span class="corollary" id="cor:dominate"><strong>\label{cor:dominate} </strong></span>If $\Delta_1$ and $\Delta_2$ are both in $\mathfrak{DS}(X)$ and $\Delta_1\leq\Delta_2$, then $\Delta_1=\Delta_2$.
+\protect\hypertarget{cor:dominate}{}{\label{cor:dominate} }If \(\Delta_1\) and \(\Delta_2\) are both in \(\mathfrak{DS}(X)\) and \(\Delta_1\leq\Delta_2\), then \(\Delta_1=\Delta_2\).
 \end{corollary}
 
-::: {.proof}
-With obvious notation $\mathbf{tr}\ X'(B_1(X)-B_2(X))X=0$, which can be written as
+\begin{proof}
+With obvious notation \(\mathbf{tr}\ X'(B_1(X)-B_2(X))X=0\), which can be written as
 
 \begin{equation}
 \mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}\left(\delta_{1ij}-\delta_{2ij}\right)d_{ij}(X)=0,
 \label{eq:invcompare}
 \end{equation}
 
-and thus $\Delta_1\leq\Delta_2$ implies $\Delta_1=\Delta_2$.
-:::
+and thus \(\Delta_1\leq\Delta_2\) implies \(\Delta_1=\Delta_2\).
+\end{proof}
 
-## Non-negative Dissimilarities
+\hypertarget{non-negative-dissimilarities}{%
+\section{Non-negative Dissimilarities}\label{non-negative-dissimilarities}}
 
-From equation \\eqref{eq:invalldelta} it follows $\delta_{ij}$ is a decreasing function of $\tau_{ij}$, and $\delta_{ij}\geq 0$ if and only if $\tau_{ij}\leq w_{ij}$. 
+From equation \eqref{eq:invalldelta} it follows \(\delta_{ij}\) is a decreasing function of \(\tau_{ij}\), and \(\delta_{ij}\geq 0\) if and only if \(\tau_{ij}\leq w_{ij}\).
 
 Convex cone, affine convex cone
 
 \begin{lemma}
-<span class="lemma" id="lem:goldman"><strong>\label{lem:goldman} </strong></span>A non-vacuous polyhedral convex set $C=\{x\mid Ax\leq b\}$ is bounded if and only if $Q=\{x\mid Ax\leq 0\}=\{0\}$. 
+\protect\hypertarget{lem:goldman}{}{\label{lem:goldman} }A non-vacuous polyhedral convex set \(C=\{x\mid Ax\leq b\}\) is bounded if and only if \(Q=\{x\mid Ax\leq 0\}=\{0\}\).
 \end{lemma}
 
-::: {.proof}
-See @goldman_56, corollary 1B.
-:::
+\begin{proof}
+See \protect\hyperlink{ref-goldman_56}{Goldman} (\protect\hyperlink{ref-goldman_56}{1956}), corollary 1B.
+\end{proof}
 
-If $C$ satisfies the conditions of lemma \\ref{lem:goldman} then it is a bounded convex polyhedron and is the convex hull of its finite set of extreme vectors. 
+If \(C\) satisfies the conditions of lemma \ref{lem:goldman} then it is a bounded convex polyhedron and is the convex hull of its finite set of extreme vectors.
 
-
-There are, of course, affine combinations $\Delta$ with negative elements. We could decide that we are only interested in non-negative dissimilarities. In order to deal with non-negativity we define $\Delta_+$ as the polyhedral convex cone of all symmetric, hollow, and non-negative matrices.
+There are, of course, affine combinations \(\Delta\) with negative elements. We could decide that we are only interested in non-negative dissimilarities. In order to deal with non-negativity we define \(\Delta_+\) as the polyhedral convex cone of all symmetric, hollow, and non-negative matrices.
 
 \begin{theorem}
-<span class="theorem" id="thm:posresult"><strong>\label{thm:posresult} </strong></span>We have $\Delta\in\Delta(W,X)\cap\Delta_+$ if and only if there is a symmetric $S$ such that \@(eq:invalldelta) holds and such that 
+\protect\hypertarget{thm:posresult}{}{\label{thm:posresult} }We have \(\Delta\in\Delta(W,X)\cap\Delta_+\) if and only if there is a symmetric \(S\) such that @(eq:invalldelta) holds and such that
 \begin{equation}
 \mathbf{low}\ (KSK')\leq \mathbf{low}\ (W).
 \end{equation}
-Thus $\Delta(W,X)\cap\Delta_+$ is a convex polyhedron, closed under non-negative linear combinations with coefficients that add up to one.
+Thus \(\Delta(W,X)\cap\Delta_+\) is a convex polyhedron, closed under non-negative linear combinations with coefficients that add up to one.
 \end{theorem}
 
-::: {.proof}
-Follows easily from the representation in theorem \\ref{thm:keyresult}} display = "n")`.
-:::
+\begin{proof}
+Follows easily from the representation in theorem \ref{thm:keyresult}\} display = ``n'')`.
+\end{proof}
 
-Of course the minimum of $\sigma(X,W,\Delta)$ over $\Delta\in\Delta(W,X)\cap\Delta_+$ is zero, attained at $D(X)$. The maximum of stress, which is a convex quadratic in $\Delta$, is attained at one of the vertices of $\Delta(W,X)\cap\Delta_+$.
+Of course the minimum of \(\sigma(X,W,\Delta)\) over \(\Delta\in\Delta(W,X)\cap\Delta_+\) is zero, attained at \(D(X)\). The maximum of stress, which is a convex quadratic in \(\Delta\), is attained at one of the vertices of \(\Delta(W,X)\cap\Delta_+\).
 
 \begin{theorem}
-<span class="theorem" id="thm:bounded"><strong>\label{thm:bounded} </strong></span>$\mathfrak{D}(X)\cap\mathfrak{D}_+$ is bounded, i.e. it is a convex polygon.
+\protect\hypertarget{thm:bounded}{}{\label{thm:bounded} }\(\mathfrak{D}(X)\cap\mathfrak{D}_+\) is bounded, i.e.~it is a convex polygon.
 \end{theorem}
 
-::: {.proof}
-This is corollary 3.2 in @deleeuw_groenen_A_97, but the proof given there is incorrect. A hopefully correct proof goes as follows. A polyhedron is bounded if and only if its recession cone is the zero vector. If the polyhedron is defined by $Ax\leq b$ then the recession cone is the solution set of $Ax\leq 0$. Thus, in our case, the recession cone consists of all matrices $S$ for which $\text{low}\ (KSK')\leq 0$. Since $U:=KSK'$ is doubly-centered, and $K$ is orthogonal to $X$, we have
+\begin{proof}
+This is corollary 3.2 in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}), but the proof given there is incorrect. A hopefully correct proof goes as follows. A polyhedron is bounded if and only if its recession cone is the zero vector. If the polyhedron is defined by \(Ax\leq b\) then the recession cone is the solution set of \(Ax\leq 0\). Thus, in our case, the recession cone consists of all matrices \(S\) for which \(\text{low}\ (KSK')\leq 0\). Since \(U:=KSK'\) is doubly-centered, and \(K\) is orthogonal to \(X\), we have
 
 \begin{equation}
 0=\text{tr}\ X'UX=2\mathop{\sum\sum}_{1\leq i<j\leq n}u_{ij}d_{ij}^2(X).\
 \end{equation}
 
-This implies $U=0$, and the recession cone is the zero vector.
-:::
+This implies \(U=0\), and the recession cone is the zero vector.
+\end{proof}
 
-We can compute the vertices of $\Delta(W,X)\cap\Delta_+$ using the complete description method of @fukuda_15, with an `R` implementation in the `rcdd` package by @geyer_meeden_15. Alternatively, as a check on our computations, we also use the `lrs` method of @avis_15, with an `R` implementation in the `vertexenum` package by @robere_15. Both methods convert the *H-representation* of the polygon, as the solution set of a number of linear inequalities, to the *V-representation*, as the convex combinations of a number of vertices.
+We can compute the vertices of \(\Delta(W,X)\cap\Delta_+\) using the complete description method of \protect\hyperlink{ref-fukuda_15}{Fukuda} (\protect\hyperlink{ref-fukuda_15}{2015}), with an \texttt{R} implementation in the \texttt{rcdd} package by \protect\hyperlink{ref-geyer_meeden_15}{Geyer and Meeden} (\protect\hyperlink{ref-geyer_meeden_15}{2015}). Alternatively, as a check on our computations, we also use the \texttt{lrs} method of \protect\hyperlink{ref-avis_15}{Avis} (\protect\hyperlink{ref-avis_15}{2015}), with an \texttt{R} implementation in the \texttt{vertexenum} package by \protect\hyperlink{ref-robere_15}{Robere} (\protect\hyperlink{ref-robere_15}{2015}). Both methods convert the \emph{H-representation} of the polygon, as the solution set of a number of linear inequalities, to the \emph{V-representation}, as the convex combinations of a number of vertices.
 
-There is also a brute-force method of converting H to V that is somewhat wasteful, but still practical for small examples. Start with the H-representation $Ax\leq b$, where $A$ is $n\times m$ with $n\geq m$. Then look at all $\binom{n}{m}$ choices of $m$ rows of $A$. Each choice partitions $A$ into the $m\times m$ matrix $A_1$ and the $(n-m)\times m$ matrix $A_2$ and $b$ into $B-1$ and $b_2$. If $rank(A_1)<m$ there is no extreme point associated with this partitioning. If $rank(A_1)=m$ we compute $\hat v=A_1^{-1}b_1$ and if $A_2\hat v\leq b_2$ then we add $\hat v$ to the V representation.
+There is also a brute-force method of converting H to V that is somewhat wasteful, but still practical for small examples. Start with the H-representation \(Ax\leq b\), where \(A\) is \(n\times m\) with \(n\geq m\). Then look at all \(\binom{n}{m}\) choices of \(m\) rows of \(A\). Each choice partitions \(A\) into the \(m\times m\) matrix \(A_1\) and the \((n-m)\times m\) matrix \(A_2\) and \(b\) into \(B-1\) and \(b_2\). If \(rank(A_1)<m\) there is no extreme point associated with this partitioning. If \(rank(A_1)=m\) we compute \(\hat v=A_1^{-1}b_1\) and if \(A_2\hat v\leq b_2\) then we add \(\hat v\) to the V representation.
 
+\hypertarget{zero-weights-andor-distances}{%
+\section{Zero Weights and/or Distances}\label{zero-weights-andor-distances}}
 
-## Zero Weights and/or Distances
+If a distance is zero then the corresponding element of \(B(X)\) must be zero as well. If a weight is zero, then the corresponding elements of both \(V\) and \(B(X)\) are zero. It is still true that \((V-B)X=0\) if and only if there is an \(S\) such that \(B=V-KSK'\), but it may no longer be possible to find the \(\Delta\) corresponding with some \(V+KSK'\). In other words, not all solutions \(B\) to \((V-B)X=0\) correspond with a proper \(B(X)\). Specifically, zero weights and/or distances imply that one or more elements of \(B\) are required to be zero. If these zero requirements are taken into account then not all matrices \(S\) are allowed.
 
-If a distance is zero then the corresponding element of $B(X)$ must be zero as well. If a weight is zero, then the corresponding elements of both $V$ and $B(X)$ are zero. It is still true that $(V-B)X=0$ if and only if there is an $S$ such that $B=V-KSK'$, but it may no longer be possible to find the $\Delta$ corresponding with some $V+KSK'$. In other words, not all solutions $B$ to $(V-B)X=0$ correspond with a proper $B(X)$. Specifically, zero weights and/or distances imply that one or more elements of $B$ are required to be zero. If these zero requirements are taken into account then not all matrices $S$ are allowed.
-
-
-If, for example, $X$ is
-\end{verbatim}
-
-\hypertarget{section}{%
-\section{{[},1{]}}\label{section}}
-
-\hypertarget{section-1}{%
-\section{{[}1,{]} -0.5}\label{section-1}}
-
-\hypertarget{section-2}{%
-\section{{[}2,{]} -0.5}\label{section-2}}
-
-\hypertarget{section-3}{%
-\section{{[}3,{]} 0.5}\label{section-3}}
-
-\hypertarget{section-4}{%
-\section{{[}4,{]} 0.5}\label{section-4}}
+If, for example, \(X\) is
 
 \begin{verbatim}
-and the weights are all one, 
-then $V-B$ must be a linear combination of the three matrices, say $P_{11}, P_{22}$ and $P_{12}$,
+##      [,1]
+## [1,] -0.5
+## [2,] -0.5
+## [3,]  0.5
+## [4,]  0.5
 \end{verbatim}
 
-\hypertarget{section-5}{%
-\section{{[},1{]} {[},2{]} {[},3{]} {[},4{]}}\label{section-5}}
-
-\hypertarget{section-6}{%
-\section{{[}1,{]} 1 -1 1 -1}\label{section-6}}
-
-\hypertarget{section-7}{%
-\section{{[}2,{]} -1 1 -1 1}\label{section-7}}
-
-\hypertarget{section-8}{%
-\section{{[}3,{]} 1 -1 1 -1}\label{section-8}}
-
-\hypertarget{section-9}{%
-\section{{[}4,{]} -1 1 -1 1}\label{section-9}}
+and the weights are all one,
+then \(V-B\) must be a linear combination of the three matrices, say \(P_{11}, P_{22}\) and \(P_{12}\),
 
 \begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1   -1    1   -1
+## [2,]   -1    1   -1    1
+## [3,]    1   -1    1   -1
+## [4,]   -1    1   -1    1
 \end{verbatim}
 
-\hypertarget{section-10}{%
-\section{{[},1{]} {[},2{]} {[},3{]} {[},4{]}}\label{section-10}}
-
-\hypertarget{section-11}{%
-\section{{[}1,{]} 1 -1 -1 1}\label{section-11}}
-
-\hypertarget{section-12}{%
-\section{{[}2,{]} -1 1 1 -1}\label{section-12}}
-
-\hypertarget{section-13}{%
-\section{{[}3,{]} -1 1 1 -1}\label{section-13}}
-
-\hypertarget{section-14}{%
-\section{{[}4,{]} 1 -1 -1 1}\label{section-14}}
-
 \begin{verbatim}
+##      [,1] [,2] [,3] [,4]
+## [1,]    1   -1   -1    1
+## [2,]   -1    1    1   -1
+## [3,]   -1    1    1   -1
+## [4,]    1   -1   -1    1
 \end{verbatim}
 
-\hypertarget{section-15}{%
-\section{{[},1{]} {[},2{]} {[},3{]} {[},4{]}}\label{section-15}}
-
-\hypertarget{section-16}{%
-\section{{[}1,{]} -2 2 0 0}\label{section-16}}
-
-\hypertarget{section-17}{%
-\section{{[}2,{]} 2 -2 0 0}\label{section-17}}
-
-\hypertarget{section-18}{%
-\section{{[}3,{]} 0 0 2 -2}\label{section-18}}
-
-\hypertarget{section-19}{%
-\section{{[}4,{]} 0 0 -2 2}\label{section-19}}
-
 \begin{verbatim}
-and $B$ is $V$ minus the linear combination. For any $B$ computed this way we have $BX=VX$, but we have
-$b_{12}=b_{34}=0$ if and only if $B=V-\alpha P_{11} + (1-\alpha) P_{22}$.
-
-## Examples
-
-### First Example 
-
-
-
-As our first example we take $X$ equal to four points in the corners of a square. This example is also used in @deleeuw_groenen_A_97 and @deleeuw_U_12b. Here $X$ is
+##      [,1] [,2] [,3] [,4]
+## [1,]   -2    2    0    0
+## [2,]    2   -2    0    0
+## [3,]    0    0    2   -2
+## [4,]    0    0   -2    2
 \end{verbatim}
 
-\hypertarget{section-20}{%
-\section{{[},1{]} {[},2{]}}\label{section-20}}
+and \(B\) is \(V\) minus the linear combination. For any \(B\) computed this way we have \(BX=VX\), but we have
+\(b_{12}=b_{34}=0\) if and only if \(B=V-\alpha P_{11} + (1-\alpha) P_{22}\).
 
-\hypertarget{section-21}{%
-\section{{[}1,{]} -0.5 -0.5}\label{section-21}}
+\hypertarget{examples-1}{%
+\section{Examples}\label{examples-1}}
 
-\hypertarget{section-22}{%
-\section{{[}2,{]} -0.5 0.5}\label{section-22}}
+\hypertarget{first-example}{%
+\subsection{First Example}\label{first-example}}
 
-\hypertarget{section-23}{%
-\section{{[}3,{]} 0.5 0.5}\label{section-23}}
-
-\hypertarget{section-24}{%
-\section{{[}4,{]} 0.5 -0.5}\label{section-24}}
+As our first example we take \(X\) equal to four points in the corners of a square. This example is also used in \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}) and \protect\hyperlink{ref-deleeuw_U_12b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_U_12b}{2012}). Here \(X\) is
 
 \begin{verbatim}
+##      [,1] [,2]
+## [1,] -0.5 -0.5
+## [2,] -0.5  0.5
+## [3,]  0.5  0.5
+## [4,]  0.5 -0.5
+\end{verbatim}
+
 with distances
-\end{verbatim}
-
-\hypertarget{section-25}{%
-\section{1 2 3}\label{section-25}}
-
-\hypertarget{section-26}{%
-\section{2 1.000000}\label{section-26}}
-
-\hypertarget{section-27}{%
-\section{3 1.414214 1.000000}\label{section-27}}
-
-\hypertarget{section-28}{%
-\section{4 1.000000 1.414214 1.000000}\label{section-28}}
 
 \begin{verbatim}
-and $K$ is the vector
+##          1        2        3
+## 2 1.000000                  
+## 3 1.414214 1.000000         
+## 4 1.000000 1.414214 1.000000
 \end{verbatim}
 
-\hypertarget{section-29}{%
-\section{{[}1{]} -0.5 0.5 -0.5 0.5}\label{section-29}}
+and \(K\) is the vector
 
 \begin{verbatim}
-For unit weights we have $\Delta\in\Delta(X,W)$ if and only if 
-$\Delta=D(X)\{W-\lambda kk'\}$
-for some real $\lambda$. This means that $\Delta\in\Delta(X,W)\cap\Delta_+$ if and only if $-4\leq\lambda\leq 4$. The endpoints of this interval correspond with the two dissimilarity matrices
-$$
+## [1] -0.5  0.5 -0.5  0.5
+\end{verbatim}
+
+For unit weights we have \(\Delta\in\Delta(X,W)\) if and only if
+\(\Delta=D(X)\{W-\lambda kk'\}\)
+for some real \(\lambda\). This means that \(\Delta\in\Delta(X,W)\cap\Delta_+\) if and only if \(-4\leq\lambda\leq 4\). The endpoints of this interval correspond with the two dissimilarity matrices
+\[
 \Delta_1:=2\sqrt{2}\begin{bmatrix}0&0&1&0\\0&0&0&1\\1&0&0&0\\0&1&0&0\end{bmatrix},
-$$
+\]
 and
-$$
+\[
 \Delta_2:=2\begin{bmatrix}0&1&0&1\\1&0&1&0\\0&1&0&1\\1&0&1&0\end{bmatrix}.
-$$
-Thus $\Delta(X,W)\cap\Delta_+$ are the convex combinations
-$$
+\]
+Thus \(\Delta(X,W)\cap\Delta_+\) are the convex combinations
+\[
 \Delta(\alpha):=\alpha\Delta_1+(1-\alpha)\Delta_2=
 \begin{bmatrix}0&2(1-\alpha)&2\alpha\sqrt{2}&2(1-\alpha)\\2(1-\alpha)&0&2(1-\alpha)&2\alpha\sqrt{2}\\2\alpha\sqrt{2}&2(1-\alpha)&0&2(1-\alpha)\\2(1-\alpha)&2\alpha\sqrt{2}&2(1-\alpha)&0\end{bmatrix}.
-$$
-This can be thought of as the distances between points on a (generally non-Euclidean) square with sides $2(1-\alpha)$ and diagonal $2\alpha\sqrt{2}$. The triangle inequalities are satisfied if the length of the diagonal is less than twice the length of the sides, i.e. if 
-$\alpha\leq\frac{2}{2+\sqrt{2}}\approx .585786$. 
+\]
+This can be thought of as the distances between points on a (generally non-Euclidean) square with sides \(2(1-\alpha)\) and diagonal \(2\alpha\sqrt{2}\). The triangle inequalities are satisfied if the length of the diagonal is less than twice the length of the sides, i.e.~if
+\(\alpha\leq\frac{2}{2+\sqrt{2}}\approx .585786\).
 
-The distances are certainly Euclidean if Pythagoras is satisfied, i.e. if the square of the length of the diagonal is twice the square of the length of the sides. This gives $\alpha=\frac12$, for which $\Delta=D(X)$. For a more precise analysis, observe that the two binary matrices, say $E_1$ and $E_2$, in the definition of $\Delta_1$ and $\Delta_2$ commute, and are both diagonalized by
+The distances are certainly Euclidean if Pythagoras is satisfied, i.e.~if the square of the length of the diagonal is twice the square of the length of the sides. This gives \(\alpha=\frac12\), for which \(\Delta=D(X)\). For a more precise analysis, observe that the two binary matrices, say \(E_1\) and \(E_2\), in the definition of \(\Delta_1\) and \(\Delta_2\) commute, and are both diagonalized by
 
-$$
+\[
 L:=\begin{bmatrix}
 \frac12&\frac12\sqrt{2}&0&\frac12\\
 \frac12&0&\frac12\sqrt{2}&-\frac12\\
 \frac12&-\frac12\sqrt{2}&0&\frac12\\
 \frac12&0&-\frac12\sqrt{2}&-\frac12
 \end{bmatrix}
-$$
+\]
 
-The diagonal elements of $L'E_1L$ are $1,-1,-1,1$ and those of $L'E_2 L$ are $2,0,0,-2$. Because $L$ diagonalizes $E_1$ and $E_2$, it also diagonalizes $\Delta_1$ and $\Delta_2$, as well as the elementwise squares $\Delta^2_1$ and $\Delta^2_2$. And consequently also the Torgerson transform $-\frac12 J\Delta^2(\alpha)J$, which has eigenvalues $0,4\alpha^2,4\alpha^2,4(1-2\alpha)$. All eigenvalues are non-negative for $\alpha\leq\frac12$. 
+The diagonal elements of \(L'E_1L\) are \(1,-1,-1,1\) and those of \(L'E_2 L\) are \(2,0,0,-2\). Because \(L\) diagonalizes \(E_1\) and \(E_2\), it also diagonalizes \(\Delta_1\) and \(\Delta_2\), as well as the elementwise squares \(\Delta^2_1\) and \(\Delta^2_2\). And consequently also the Torgerson transform \(-\frac12 J\Delta^2(\alpha)J\), which has eigenvalues \(0,4\alpha^2,4\alpha^2,4(1-2\alpha)\). All eigenvalues are non-negative for \(\alpha\leq\frac12\).
 
 We see that
-$\Delta(\alpha)$ is two-dimensional Euclidean for $\alpha=\frac12$, one-dimensional Euclidean for $\alpha=0$, and three-dimensional Euclidean for $0<\alpha<\frac12$. In particular for $\alpha=\frac{1}{1+\sqrt{2}}$ all dissimilarities are equal and $\Delta(\alpha)$ is the distance matrix of a regular simplex.
+\(\Delta(\alpha)\) is two-dimensional Euclidean for \(\alpha=\frac12\), one-dimensional Euclidean for \(\alpha=0\), and three-dimensional Euclidean for \(0<\alpha<\frac12\). In particular for \(\alpha=\frac{1}{1+\sqrt{2}}\) all dissimilarities are equal and \(\Delta(\alpha)\) is the distance matrix of a regular simplex.
 
+On the unit interval stress is the quadratic \(32(\alpha-\frac12)^2\), which attains its maximum equal to 8 at the endpoints.
 
-On the unit interval stress is the quadratic $32(\alpha-\frac12)^2$, which attains its maximum equal to 8 at the endpoints.
+\hypertarget{second-example}{%
+\subsection{Second Example}\label{second-example}}
 
-### Second Example
-
-
-
-We next give another small example with four equally spaced points on the line, normalized to sum of squares one, and unit weights. Thus $X$ is
-\end{verbatim}
-
-\hypertarget{section-30}{%
-\section{{[},1{]}}\label{section-30}}
-
-\hypertarget{section-31}{%
-\section{{[}1,{]} -0.6708204}\label{section-31}}
-
-\hypertarget{section-32}{%
-\section{{[}2,{]} -0.2236068}\label{section-32}}
-
-\hypertarget{section-33}{%
-\section{{[}3,{]} 0.2236068}\label{section-33}}
-
-\hypertarget{section-34}{%
-\section{{[}4,{]} 0.6708204}\label{section-34}}
+We next give another small example with four equally spaced points on the line, normalized to sum of squares one, and unit weights. Thus \(X\) is
 
 \begin{verbatim}
-and $D(X)$ is
+##            [,1]
+## [1,] -0.6708204
+## [2,] -0.2236068
+## [3,]  0.2236068
+## [4,]  0.6708204
 \end{verbatim}
 
-\hypertarget{section-35}{%
-\section{1 2 3}\label{section-35}}
-
-\hypertarget{section-36}{%
-\section{2 3.464102}\label{section-36}}
-
-\hypertarget{section-37}{%
-\section{3 4.472136 2.828427}\label{section-37}}
-
-\hypertarget{section-38}{%
-\section{4 6.324555 4.472136 3.464102}\label{section-38}}
+and \(D(X)\) is
 
 \begin{verbatim}
-For $S$ we use the basis $\begin{bmatrix}1&0\\0&0\end{bmatrix}$, $\begin{bmatrix}0&0\\0&1\end{bmatrix}$, and $\begin{bmatrix}0&1\\1&0\end{bmatrix}$. Thus $\Delta(X,W)$ are the affine linear combinations of $D(X)$ and
+##          1        2        3
+## 2 3.464102                  
+## 3 4.472136 2.828427         
+## 4 6.324555 4.472136 3.464102
+\end{verbatim}
+
+For \(S\) we use the basis \(\begin{bmatrix}1&0\\0&0\end{bmatrix}\), \(\begin{bmatrix}0&0\\0&1\end{bmatrix}\), and \(\begin{bmatrix}0&1\\1&0\end{bmatrix}\). Thus \(\Delta(X,W)\) are the affine linear combinations of \(D(X)\) and
 the three matrices
-\end{verbatim}
-
-\hypertarget{section-39}{%
-\section{1 2 3}\label{section-39}}
-
-\hypertarget{section-40}{%
-\section{2 4.330127}\label{section-40}}
-
-\hypertarget{section-41}{%
-\section{3 5.590170 2.121320}\label{section-41}}
-
-\hypertarget{section-42}{%
-\section{4 4.743416 5.590170 4.330127}\label{section-42}}
 
 \begin{verbatim}
+##          1        2        3
+## 2 4.330127                  
+## 3 5.590170 2.121320         
+## 4 4.743416 5.590170 4.330127
 \end{verbatim}
 
-\hypertarget{section-43}{%
-\section{1 2 3}\label{section-43}}
-
-\hypertarget{section-44}{%
-\section{2 3.983717}\label{section-44}}
-
-\hypertarget{section-45}{%
-\section{3 3.801316 4.101219}\label{section-45}}
-
-\hypertarget{section-46}{%
-\section{4 6.640783 3.801316 3.983717}\label{section-46}}
-
 \begin{verbatim}
+##          1        2        3
+## 2 3.983717                  
+## 3 3.801316 4.101219         
+## 4 6.640783 3.801316 3.983717
 \end{verbatim}
 
-\hypertarget{section-47}{%
-\section{1 2 3}\label{section-47}}
-
-\hypertarget{section-48}{%
-\section{2 1.914908}\label{section-48}}
-
-\hypertarget{section-49}{%
-\section{3 5.472136 2.828427}\label{section-49}}
-
-\hypertarget{section-50}{%
-\section{4 6.324555 3.472136 5.013295}\label{section-50}}
-
 \begin{verbatim}
-Both `scdd()` from `rcdd` and `enumerate.vertices()` from `vertexenum` find the same seven vertices. All non-negative dissimilarity matrices for which $x$ is stationary are convex combinations of these seven matrices.
-
+##          1        2        3
+## 2 1.914908                  
+## 3 5.472136 2.828427         
+## 4 6.324555 3.472136 5.013295
 \end{verbatim}
 
-\hypertarget{section-51}{%
-\section{1 2 3}\label{section-51}}
-
-\hypertarget{section-52}{%
-\section{2 20.784610}\label{section-52}}
-
-\hypertarget{section-53}{%
-\section{3 0.000000 5.656854}\label{section-53}}
-
-\hypertarget{section-54}{%
-\section{4 0.000000 13.416408 0.000000}\label{section-54}}
-
-\hypertarget{section-55}{%
-\section{1 2 3}\label{section-55}}
-
-\hypertarget{section-56}{%
-\section{2 13.856406}\label{section-56}}
-
-\hypertarget{section-57}{%
-\section{3 4.472136 0.000000}\label{section-57}}
-
-\hypertarget{section-58}{%
-\section{4 0.000000 13.416408 0.000000}\label{section-58}}
-
-\hypertarget{section-59}{%
-\section{1 2 3}\label{section-59}}
-
-\hypertarget{section-60}{%
-\section{2 20.78461}\label{section-60}}
-
-\hypertarget{section-61}{%
-\section{3 0.00000 22.62742}\label{section-61}}
-
-\hypertarget{section-62}{%
-\section{4 0.00000 0.00000 20.78461}\label{section-62}}
-
-\hypertarget{section-63}{%
-\section{1 2 3}\label{section-63}}
-
-\hypertarget{section-64}{%
-\section{2 0.000000}\label{section-64}}
-
-\hypertarget{section-65}{%
-\section{3 13.416408 5.656854}\label{section-65}}
-
-\hypertarget{section-66}{%
-\section{4 0.000000 0.000000 20.784610}\label{section-66}}
-
-\hypertarget{section-67}{%
-\section{1 2 3}\label{section-67}}
-
-\hypertarget{section-68}{%
-\section{2 0.000000}\label{section-68}}
-
-\hypertarget{section-69}{%
-\section{3 13.416408 0.000000}\label{section-69}}
-
-\hypertarget{section-70}{%
-\section{4 0.000000 4.472136 13.856406}\label{section-70}}
-
-\hypertarget{section-71}{%
-\section{1 2 3}\label{section-71}}
-
-\hypertarget{section-72}{%
-\section{2 0.000000}\label{section-72}}
-
-\hypertarget{section-73}{%
-\section{3 4.472136 0.000000}\label{section-73}}
-
-\hypertarget{section-74}{%
-\section{4 8.432738 4.472136 0.000000}\label{section-74}}
-
-\hypertarget{section-75}{%
-\section{1 2 3}\label{section-75}}
-
-\hypertarget{section-76}{%
-\section{2 0.000000}\label{section-76}}
-
-\hypertarget{section-77}{%
-\section{3 0.000000 5.656854}\label{section-77}}
-
-\hypertarget{section-78}{%
-\section{4 12.649111 0.000000 0.000000}\label{section-78}}
+Both \texttt{scdd()} from \texttt{rcdd} and \texttt{enumerate.vertices()} from \texttt{vertexenum} find the same seven vertices. All non-negative dissimilarity matrices for which \(x\) is stationary are convex combinations of these seven matrices.
 
 \begin{verbatim}
+##           1         2         3
+## 2 20.784610                    
+## 3  0.000000  5.656854          
+## 4  0.000000 13.416408  0.000000
+##           1         2         3
+## 2 13.856406                    
+## 3  4.472136  0.000000          
+## 4  0.000000 13.416408  0.000000
+##          1        2        3
+## 2 20.78461                  
+## 3  0.00000 22.62742         
+## 4  0.00000  0.00000 20.78461
+##           1         2         3
+## 2  0.000000                    
+## 3 13.416408  5.656854          
+## 4  0.000000  0.000000 20.784610
+##           1         2         3
+## 2  0.000000                    
+## 3 13.416408  0.000000          
+## 4  0.000000  4.472136 13.856406
+##          1        2        3
+## 2 0.000000                  
+## 3 4.472136 0.000000         
+## 4 8.432738 4.472136 0.000000
+##           1         2         3
+## 2  0.000000                    
+## 3  0.000000  5.656854          
+## 4 12.649111  0.000000  0.000000
+\end{verbatim}
+
 The stress values for these seven vertices are
-\end{verbatim}
-
-\hypertarget{section-79}{%
-\section{{[}1{]} 460.00000 248.00000 1072.00000 460.00000 248.00000 36.44444 112.00000}\label{section-79}}
 
 \begin{verbatim}
-and we know that 1072 is the maximum of stress over $\Delta\in\Delta(X,W)\cap\Delta_+$.
-
-In general the vanishing of the stationary equations does not imply that $X$ corresponds with a local minimum. It can also give a local maximum or a saddle point. We know, however, that the only local maximum of stress is the origin (@deleeuw_groenen_mair_E_16e), and that in the one-dimensional case all solutions of the stationary equations that do not have tied coordinates are local minima (@deleeuw_C_05h).
-
-### Third Example
-
-The number of extreme points of the polytope $\Delta(W,X)\cap\Delta_+$ grows very quickly if the problem becomes larger. In our next example we take six points equally spaced on the unit sphere. Due to the intricacies of floating point comparisons (testing for zero, testing for equality)
-it can be difficult to determine exactly how many extreme points there are. 
-
-
-
-
-@deleeuw_groenen_A_97 analyzed this example and found 42 extreme points. We repeat their analysis with our `R` function `bruteForce()` from the code section.
-We select $\binom{15}{6}=5005$ sets of six linear equations from our 15 linear inequalities, test them for non-singularity, and solve them to see if they satisfy the remaining nine inequalities. This gives 1394 extreme points of the polytope, but many of them are duplicates. We use
-our function `cleanUp()` to remove duplicates, which leaves 42 vertices, same number as found by @deleeuw_groenen_A_97. The 42 stress values are
-
+## [1]  460.00000  248.00000 1072.00000  460.00000  248.00000   36.44444  112.00000
 \end{verbatim}
 
-\hypertarget{section-80}{%
-\section{{[}1{]} 24.00000 24.00000 24.00000 21.75000 12.00000 13.33333 6.66667 13.33333}\label{section-80}}
+and we know that 1072 is the maximum of stress over \(\Delta\in\Delta(X,W)\cap\Delta_+\).
 
-\hypertarget{section-81}{%
-\section{{[}9{]} 17.33333 17.33333 19.68000 13.33333 6.66667 17.33333 6.66667 21.75000}\label{section-81}}
+In general the vanishing of the stationary equations does not imply that \(X\) corresponds with a local minimum. It can also give a local maximum or a saddle point. We know, however, that the only local maximum of stress is the origin (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16e}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16e}{2016a})), and that in the one-dimensional case all solutions of the stationary equations that do not have tied coordinates are local minima (\protect\hyperlink{ref-deleeuw_C_05h}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_05h}{2005c})).
 
-\hypertarget{section-82}{%
-\section{{[}17{]} 6.66667 60.00000 24.00000 21.75000 19.68000 17.33333 21.75000 13.33333}\label{section-82}}
+\hypertarget{third-example}{%
+\subsection{Third Example}\label{third-example}}
 
-\hypertarget{section-83}{%
-\section{{[}25{]} 19.68000 17.33333 17.33333 21.75000 17.33333 17.33333 13.33333 6.66667}\label{section-83}}
+The number of extreme points of the polytope \(\Delta(W,X)\cap\Delta_+\) grows very quickly if the problem becomes larger. In our next example we take six points equally spaced on the unit sphere. Due to the intricacies of floating point comparisons (testing for zero, testing for equality)
+it can be difficult to determine exactly how many extreme points there are.
 
-\hypertarget{section-84}{%
-\section{{[}33{]} 21.75000 17.33333 19.68000 13.33333 17.33333 19.68000 19.68000 17.33333}\label{section-84}}
-
-\hypertarget{section-85}{%
-\section{{[}41{]} 6.66667 17.33333}\label{section-85}}
+\protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}) analyzed this example and found 42 extreme points. We repeat their analysis with our \texttt{R} function \texttt{bruteForce()} from the code section.
+We select \(\binom{15}{6}=5005\) sets of six linear equations from our 15 linear inequalities, test them for non-singularity, and solve them to see if they satisfy the remaining nine inequalities. This gives 1394 extreme points of the polytope, but many of them are duplicates. We use
+our function \texttt{cleanUp()} to remove duplicates, which leaves 42 vertices, same number as found by \protect\hyperlink{ref-deleeuw_groenen_A_97}{De Leeuw and Groenen} (\protect\hyperlink{ref-deleeuw_groenen_A_97}{1997}). The 42 stress values are
 
 \begin{verbatim}
-and their maximum is 60. 
-
-
-
-
-
-If we perform the calculations more efficiently in `rcdd`, using rational arithmetic, we come up with a list of 153 extreme points. Using `cleanUp()` to remove what seem to be duplicates leaves 43. 
-The `vertexenum` package, which uses a different conversion from float to rational and back, finds 147 extreme points, and removing what seem to be duplicates leaves 51.
-
-The fact that we get different numbers of vertices with different methods is somewhat disconcerting. We test the vertices found by `rcdd` and `vertexenum` that are not found with the brute force method by using our function `rankTest()`. This test is based on the fact that a vector $x$
-satisfying the $n\times m$ system $Ax\leq b$ is an extreme point if and only if matrix with all rows $a_i$ for which $a_i'x=b_i$ is of 
-rank $m$. It turns out all the additional vertices found by `rcdd` and `vertexenum` do not satisfy this rank test, because the matrix of active constraints (satisfied as equalities) is of rank 5. 
-
-
-
-
-
-### Fourth Example
-
-
-
-This is an unfolding example with $n=3+3$ points, configuration
+##  [1] 24.00000 24.00000 24.00000 21.75000 12.00000 13.33333  6.66667 13.33333
+##  [9] 17.33333 17.33333 19.68000 13.33333  6.66667 17.33333  6.66667 21.75000
+## [17]  6.66667 60.00000 24.00000 21.75000 19.68000 17.33333 21.75000 13.33333
+## [25] 19.68000 17.33333 17.33333 21.75000 17.33333 17.33333 13.33333  6.66667
+## [33] 21.75000 17.33333 19.68000 13.33333 17.33333 19.68000 19.68000 17.33333
+## [41]  6.66667 17.33333
 \end{verbatim}
 
-\hypertarget{section-86}{%
-\section{{[},1{]} {[},2{]}}\label{section-86}}
+and their maximum is 60.
 
-\hypertarget{section-87}{%
-\section{{[}1,{]} 0.0000000 0.0000000}\label{section-87}}
+If we perform the calculations more efficiently in \texttt{rcdd}, using rational arithmetic, we come up with a list of 153 extreme points. Using \texttt{cleanUp()} to remove what seem to be duplicates leaves 43.
+The \texttt{vertexenum} package, which uses a different conversion from float to rational and back, finds 147 extreme points, and removing what seem to be duplicates leaves 51.
 
-\hypertarget{section-88}{%
-\section{{[}2,{]} 0.0000000 0.0000000}\label{section-88}}
+The fact that we get different numbers of vertices with different methods is somewhat disconcerting. We test the vertices found by \texttt{rcdd} and \texttt{vertexenum} that are not found with the brute force method by using our function \texttt{rankTest()}. This test is based on the fact that a vector \(x\)
+satisfying the \(n\times m\) system \(Ax\leq b\) is an extreme point if and only if matrix with all rows \(a_i\) for which \(a_i'x=b_i\) is of
+rank \(m\). It turns out all the additional vertices found by \texttt{rcdd} and \texttt{vertexenum} do not satisfy this rank test, because the matrix of active constraints (satisfied as equalities) is of rank 5.
 
-\hypertarget{section-89}{%
-\section{{[}3,{]} 0.0000000 -0.8164966}\label{section-89}}
+\hypertarget{fourth-example}{%
+\subsection{Fourth Example}\label{fourth-example}}
 
-\hypertarget{section-90}{%
-\section{{[}4,{]} 0.0000000 0.4082483}\label{section-90}}
-
-\hypertarget{section-91}{%
-\section{{[}5,{]} 0.7071068 0.0000000}\label{section-91}}
-
-\hypertarget{section-92}{%
-\section{{[}6,{]} -0.7071068 0.4082483}\label{section-92}}
+This is an unfolding example with \(n=3+3\) points, configuration
 
 \begin{verbatim}
+##            [,1]       [,2]
+## [1,]  0.0000000  0.0000000
+## [2,]  0.0000000  0.0000000
+## [3,]  0.0000000 -0.8164966
+## [4,]  0.0000000  0.4082483
+## [5,]  0.7071068  0.0000000
+## [6,] -0.7071068  0.4082483
+\end{verbatim}
+
 and weight matrix
-\end{verbatim}
-
-\hypertarget{section-93}{%
-\section{{[},1{]} {[},2{]} {[},3{]} {[},4{]} {[},5{]} {[},6{]}}\label{section-93}}
-
-\hypertarget{section-94}{%
-\section{{[}1,{]} 0 0 0 1 1 1}\label{section-94}}
-
-\hypertarget{section-95}{%
-\section{{[}2,{]} 0 0 0 1 1 1}\label{section-95}}
-
-\hypertarget{section-96}{%
-\section{{[}3,{]} 0 0 0 1 1 1}\label{section-96}}
-
-\hypertarget{section-97}{%
-\section{{[}4,{]} 1 1 1 0 0 0}\label{section-97}}
-
-\hypertarget{section-98}{%
-\section{{[}5,{]} 1 1 1 0 0 0}\label{section-98}}
-
-\hypertarget{section-99}{%
-\section{{[}6,{]} 1 1 1 0 0 0}\label{section-99}}
 
 \begin{verbatim}
-Note that row-points one and two in $X$ are equal, and thus $d_{12}(X)=0$. The example has both zero weights and zero distances. We now require that $(V-B(X))X=0$, but also that the elements of $B(X)$ in the two $3\times 3$ principal submatrices corresponding with the rows and columns are zero. This means that for the elements of $B(X)$ we require $k_i'Sk_j\leq 1$ for $w_{ij}=1$ and both $k_i'Sk_j\leq 0$ and $-k_i'Sk_j\leq 0$ for $w_{ij}=0$. We can then solve for edges of the off-diagonal block of dissimilarities. There are no constraints on the dissimilarities in the
+##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    0    0    0    1    1    1
+## [2,]    0    0    0    1    1    1
+## [3,]    0    0    0    1    1    1
+## [4,]    1    1    1    0    0    0
+## [5,]    1    1    1    0    0    0
+## [6,]    1    1    1    0    0    0
+\end{verbatim}
+
+Note that row-points one and two in \(X\) are equal, and thus \(d_{12}(X)=0\). The example has both zero weights and zero distances. We now require that \((V-B(X))X=0\), but also that the elements of \(B(X)\) in the two \(3\times 3\) principal submatrices corresponding with the rows and columns are zero. This means that for the elements of \(B(X)\) we require \(k_i'Sk_j\leq 1\) for \(w_{ij}=1\) and both \(k_i'Sk_j\leq 0\) and \(-k_i'Sk_j\leq 0\) for \(w_{ij}=0\). We can then solve for edges of the off-diagonal block of dissimilarities. There are no constraints on the dissimilarities in the
 diagonal blocks, because they are not part of the MDS problem.
 
 Using our brute force method, we find the two edges
-\end{verbatim}
-
-\hypertarget{section-100}{%
-\section{4 5 6}\label{section-100}}
-
-\hypertarget{section-101}{%
-\section{1 0.0000000 1.414214 1.632993}\label{section-101}}
-
-\hypertarget{section-102}{%
-\section{2 0.8164966 0.000000 0.000000}\label{section-102}}
-
-\hypertarget{section-103}{%
-\section{3 1.2247449 1.080123 1.414214}\label{section-103}}
 
 \begin{verbatim}
+##           4        5        6
+## 1 0.0000000 1.414214 1.632993
+## 2 0.8164966 0.000000 0.000000
+## 3 1.2247449 1.080123 1.414214
 \end{verbatim}
 
-\hypertarget{section-104}{%
-\section{4 5 6}\label{section-104}}
-
-\hypertarget{section-105}{%
-\section{1 0.8164966 0.000000 0.000000}\label{section-105}}
-
-\hypertarget{section-106}{%
-\section{2 0.0000000 1.414214 1.632993}\label{section-106}}
-
-\hypertarget{section-107}{%
-\section{3 1.2247449 1.080123 1.414214}\label{section-107}}
-
 \begin{verbatim}
-and the off-diagonal blocks for which $X$ is an unfolding solution are convex combinations of these two.
+##           4        5        6
+## 1 0.8164966 0.000000 0.000000
+## 2 0.0000000 1.414214 1.632993
+## 3 1.2247449 1.080123 1.414214
+\end{verbatim}
 
-## MDS Sensitivity
+and the off-diagonal blocks for which \(X\) is an unfolding solution are convex combinations of these two.
 
-Suppose $X$ is a solution to the MDS problem with dissimilarities $\Delta$, found by some iterative algorithm such as `smacof`. We can then compute $\mathfrak{D}(X)\cap\mathfrak{D}_+$, which is a convex neighborhood of the data $\Delta$, and consists of all non-negative dissimilarity matrices that have $X$ as a solution to the stationary equations. The size of this convex neighborhood can be thought of as a measure of *stability* or *sensitivity*.
+\hypertarget{mds-sensitivity}{%
+\section{MDS Sensitivity}\label{mds-sensitivity}}
 
-For typical MDS examples there is no hope of computing all vertices of $\mathfrak{D}(X)\cap\mathfrak{D}_+$. Consider the data from @degruijter_67, for example, with
-$n=9$ objects, to be scaled in $p=2$ dimensions. We have $\frac12 n(n-1)=36$ dissimilarities, and because $m=n-p-1=6$ there are
-$\frac12 m(m+1)=21$ variables. It suffices to consider that there are 5567902560 ways in which we can pick 21 rows from 36 rows to understand the number of potential vertices.
+Suppose \(X\) is a solution to the MDS problem with dissimilarities \(\Delta\), found by some iterative algorithm such as \texttt{smacof}. We can then compute \(\mathfrak{D}(X)\cap\mathfrak{D}_+\), which is a convex neighborhood of the data \(\Delta\), and consists of all non-negative dissimilarity matrices that have \(X\) as a solution to the stationary equations. The size of this convex neighborhood can be thought of as a measure of \emph{stability} or \emph{sensitivity}.
 
-What we can do, however, is to optimize linear (or quadratic functions) over $\mathfrak{D}(X)\cap\mathfrak{D}_+$, because 36 linear inequalities in
-21 variables define an easily manageable LP (or QP) problem. As an example, not necessarily a very sensible one, we solve 36 linear programs to maximize and minimize each of the $\delta_{ij}$ in $\mathfrak{D}(X)\cap\mathfrak{D}_+$ separately. We use the `lpSolve` package (@berkelaar_15), and collect the maximum and minimum $\delta_{ij}$ in a matrix. The range from the smallest possible 
-$\delta_{ij}$ to the largest possible $\delta_{ij}$ turns out to be quite large.
+For typical MDS examples there is no hope of computing all vertices of \(\mathfrak{D}(X)\cap\mathfrak{D}_+\). Consider the data from \protect\hyperlink{ref-degruijter_67}{De Gruijter} (\protect\hyperlink{ref-degruijter_67}{1967}), for example, with
+\(n=9\) objects, to be scaled in \(p=2\) dimensions. We have \(\frac12 n(n-1)=36\) dissimilarities, and because \(m=n-p-1=6\) there are
+\(\frac12 m(m+1)=21\) variables. It suffices to consider that there are 5567902560 ways in which we can pick 21 rows from 36 rows to understand the number of potential vertices.
+
+What we can do, however, is to optimize linear (or quadratic functions) over \(\mathfrak{D}(X)\cap\mathfrak{D}_+\), because 36 linear inequalities in
+21 variables define an easily manageable LP (or QP) problem. As an example, not necessarily a very sensible one, we solve 36 linear programs to maximize and minimize each of the \(\delta_{ij}\) in \(\mathfrak{D}(X)\cap\mathfrak{D}_+\) separately. We use the \texttt{lpSolve} package (\protect\hyperlink{ref-berkelaar_15}{Berkelaar, M. and others} (\protect\hyperlink{ref-berkelaar_15}{2015})), and collect the maximum and minimum \(\delta_{ij}\) in a matrix. The range from the smallest possible
+\(\delta_{ij}\) to the largest possible \(\delta_{ij}\) turns out to be quite large.
 
 The data are
 
+\begin{verbatim}
+##       KVP PvdA  VVD  ARP  CHU  CPN  PSP   BP  D66
+## KVP  0.00 5.63 5.27 4.60 4.80 7.54 6.73 7.18 6.17
+## PvdA 5.63 0.00 6.72 5.64 6.22 5.12 4.59 7.22 5.47
+## VVD  5.27 6.72 0.00 5.46 4.97 8.13 7.55 6.90 4.67
+## ARP  4.60 5.64 5.46 0.00 3.20 7.84 6.73 7.28 6.13
+## CHU  4.80 6.22 4.97 3.20 0.00 7.80 7.08 6.96 6.04
+## CPN  7.54 5.12 8.13 7.84 7.80 0.00 4.08 6.34 7.42
+## PSP  6.73 4.59 7.55 6.73 7.08 4.08 0.00 6.88 6.36
+## BP   7.18 7.22 6.90 7.28 6.96 6.34 6.88 0.00 7.36
+## D66  6.17 5.47 4.67 6.13 6.04 7.42 6.36 7.36 0.00
 \end{verbatim}
 
-\hypertarget{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66}{%
-\section{KVP PvdA VVD ARP CHU CPN PSP BP D66}\label{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66}}
-
-\hypertarget{kvp-0.00-5.63-5.27-4.60-4.80-7.54-6.73-7.18-6.17}{%
-\section{KVP 0.00 5.63 5.27 4.60 4.80 7.54 6.73 7.18 6.17}\label{kvp-0.00-5.63-5.27-4.60-4.80-7.54-6.73-7.18-6.17}}
-
-\hypertarget{pvda-5.63-0.00-6.72-5.64-6.22-5.12-4.59-7.22-5.47}{%
-\section{PvdA 5.63 0.00 6.72 5.64 6.22 5.12 4.59 7.22 5.47}\label{pvda-5.63-0.00-6.72-5.64-6.22-5.12-4.59-7.22-5.47}}
-
-\hypertarget{vvd-5.27-6.72-0.00-5.46-4.97-8.13-7.55-6.90-4.67}{%
-\section{VVD 5.27 6.72 0.00 5.46 4.97 8.13 7.55 6.90 4.67}\label{vvd-5.27-6.72-0.00-5.46-4.97-8.13-7.55-6.90-4.67}}
-
-\hypertarget{arp-4.60-5.64-5.46-0.00-3.20-7.84-6.73-7.28-6.13}{%
-\section{ARP 4.60 5.64 5.46 0.00 3.20 7.84 6.73 7.28 6.13}\label{arp-4.60-5.64-5.46-0.00-3.20-7.84-6.73-7.28-6.13}}
-
-\hypertarget{chu-4.80-6.22-4.97-3.20-0.00-7.80-7.08-6.96-6.04}{%
-\section{CHU 4.80 6.22 4.97 3.20 0.00 7.80 7.08 6.96 6.04}\label{chu-4.80-6.22-4.97-3.20-0.00-7.80-7.08-6.96-6.04}}
-
-\hypertarget{cpn-7.54-5.12-8.13-7.84-7.80-0.00-4.08-6.34-7.42}{%
-\section{CPN 7.54 5.12 8.13 7.84 7.80 0.00 4.08 6.34 7.42}\label{cpn-7.54-5.12-8.13-7.84-7.80-0.00-4.08-6.34-7.42}}
-
-\hypertarget{psp-6.73-4.59-7.55-6.73-7.08-4.08-0.00-6.88-6.36}{%
-\section{PSP 6.73 4.59 7.55 6.73 7.08 4.08 0.00 6.88 6.36}\label{psp-6.73-4.59-7.55-6.73-7.08-4.08-0.00-6.88-6.36}}
-
-\hypertarget{bp-7.18-7.22-6.90-7.28-6.96-6.34-6.88-0.00-7.36}{%
-\section{BP 7.18 7.22 6.90 7.28 6.96 6.34 6.88 0.00 7.36}\label{bp-7.18-7.22-6.90-7.28-6.96-6.34-6.88-0.00-7.36}}
-
-\hypertarget{d66-6.17-5.47-4.67-6.13-6.04-7.42-6.36-7.36-0.00}{%
-\section{D66 6.17 5.47 4.67 6.13 6.04 7.42 6.36 7.36 0.00}\label{d66-6.17-5.47-4.67-6.13-6.04-7.42-6.36-7.36-0.00}}
+The optimal configuration found by \texttt{smacof} is
 
 \begin{verbatim}
-The optimal configuration found by `smacof` is
+##        [,1]   [,2]
+##  [1,]  1.78  3.579
+##  [2,] -1.46  2.297
+##  [3,]  3.42 -2.776
+##  [4,]  3.30  1.837
+##  [5,]  3.84  0.308
+##  [6,] -5.09 -0.044
+##  [7,] -3.79  2.132
+##  [8,] -2.86 -4.318
+##  [9,]  0.86 -3.015
 \end{verbatim}
 
-\hypertarget{section-108}{%
-\section{{[},1{]} {[},2{]}}\label{section-108}}
-
-\hypertarget{section-109}{%
-\section{{[}1,{]} 1.78 3.579}\label{section-109}}
-
-\hypertarget{section-110}{%
-\section{{[}2,{]} -1.46 2.297}\label{section-110}}
-
-\hypertarget{section-111}{%
-\section{{[}3,{]} 3.42 -2.776}\label{section-111}}
-
-\hypertarget{section-112}{%
-\section{{[}4,{]} 3.30 1.837}\label{section-112}}
-
-\hypertarget{section-113}{%
-\section{{[}5,{]} 3.84 0.308}\label{section-113}}
-
-\hypertarget{section-114}{%
-\section{{[}6,{]} -5.09 -0.044}\label{section-114}}
-
-\hypertarget{section-115}{%
-\section{{[}7,{]} -3.79 2.132}\label{section-115}}
-
-\hypertarget{section-116}{%
-\section{{[}8,{]} -2.86 -4.318}\label{section-116}}
-
-\hypertarget{section-117}{%
-\section{{[}9,{]} 0.86 -3.015}\label{section-117}}
-
-\begin{verbatim}
 \begin{figure}
 
 {\centering \includegraphics{_main_files/figure-latex/poldistconfplot-1} 
@@ -6953,142 +6841,85 @@ The optimal configuration found by `smacof` is
 \caption{De Gruijter Configuration}\label{fig:poldistconfplot}
 \end{figure}
 
-The maximum and minimum dissimilarities in $\Delta(X,W)\cap\Delta_+$ are
-\end{verbatim}
-
-\hypertarget{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-1}{%
-\section{KVP PvdA VVD ARP CHU CPN PSP BP D66}\label{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-1}}
-
-\hypertarget{kvp-0.0-32.6-9.7-9.3-24.6-24.3-11.7-18.9-15.2}{%
-\section{KVP 0.0 32.6 9.7 9.3 24.6 24.3 11.7 18.9 15.2}\label{kvp-0.0-32.6-9.7-9.3-24.6-24.3-11.7-18.9-15.2}}
-
-\hypertarget{pvda-32.6-0.0-25.7-36.9-20.7-34.1-36.1-29.7-22.2}{%
-\section{PvdA 32.6 0.0 25.7 36.9 20.7 34.1 36.1 29.7 22.2}\label{pvda-32.6-0.0-25.7-36.9-20.7-34.1-36.1-29.7-22.2}}
-
-\hypertarget{vvd-9.7-25.7-0.0-17.4-32.0-34.4-22.3-23.5-20.4}{%
-\section{VVD 9.7 25.7 0.0 17.4 32.0 34.4 22.3 23.5 20.4}\label{vvd-9.7-25.7-0.0-17.4-32.0-34.4-22.3-23.5-20.4}}
-
-\hypertarget{arp-9.3-36.9-17.4-0.0-28.0-33.7-25.6-28.9-23.0}{%
-\section{ARP 9.3 36.9 17.4 0.0 28.0 33.7 25.6 28.9 23.0}\label{arp-9.3-36.9-17.4-0.0-28.0-33.7-25.6-28.9-23.0}}
-
-\hypertarget{chu-24.6-20.7-32.0-28.0-0.0-20.8-31.9-33.3-26.3}{%
-\section{CHU 24.6 20.7 32.0 28.0 0.0 20.8 31.9 33.3 26.3}\label{chu-24.6-20.7-32.0-28.0-0.0-20.8-31.9-33.3-26.3}}
-
-\hypertarget{cpn-24.3-34.1-34.4-33.7-20.8-0.0-24.9-30.7-31.8}{%
-\section{CPN 24.3 34.1 34.4 33.7 20.8 0.0 24.9 30.7 31.8}\label{cpn-24.3-34.1-34.4-33.7-20.8-0.0-24.9-30.7-31.8}}
-
-\hypertarget{psp-11.7-36.1-22.3-25.6-31.9-24.9-0.0-23.7-27.7}{%
-\section{PSP 11.7 36.1 22.3 25.6 31.9 24.9 0.0 23.7 27.7}\label{psp-11.7-36.1-22.3-25.6-31.9-24.9-0.0-23.7-27.7}}
-
-\hypertarget{bp-18.9-29.7-23.5-28.9-33.3-30.7-23.7-0.0-35.0}{%
-\section{BP 18.9 29.7 23.5 28.9 33.3 30.7 23.7 0.0 35.0}\label{bp-18.9-29.7-23.5-28.9-33.3-30.7-23.7-0.0-35.0}}
-
-\hypertarget{d66-15.2-22.2-20.4-23.0-26.3-31.8-27.7-35.0-0.0}{%
-\section{D66 15.2 22.2 20.4 23.0 26.3 31.8 27.7 35.0 0.0}\label{d66-15.2-22.2-20.4-23.0-26.3-31.8-27.7-35.0-0.0}}
+The maximum and minimum dissimilarities in \(\Delta(X,W)\cap\Delta_+\) are
 
 \begin{verbatim}
+##      KVP   PvdA  VVD   ARP   CHU   CPN   PSP   BP    D66  
+## KVP    0.0  32.6   9.7   9.3  24.6  24.3  11.7  18.9  15.2
+## PvdA  32.6   0.0  25.7  36.9  20.7  34.1  36.1  29.7  22.2
+## VVD    9.7  25.7   0.0  17.4  32.0  34.4  22.3  23.5  20.4
+## ARP    9.3  36.9  17.4   0.0  28.0  33.7  25.6  28.9  23.0
+## CHU   24.6  20.7  32.0  28.0   0.0  20.8  31.9  33.3  26.3
+## CPN   24.3  34.1  34.4  33.7  20.8   0.0  24.9  30.7  31.8
+## PSP   11.7  36.1  22.3  25.6  31.9  24.9   0.0  23.7  27.7
+## BP    18.9  29.7  23.5  28.9  33.3  30.7  23.7   0.0  35.0
+## D66   15.2  22.2  20.4  23.0  26.3  31.8  27.7  35.0   0.0
 \end{verbatim}
 
-\hypertarget{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-2}{%
-\section{KVP PvdA VVD ARP CHU CPN PSP BP D66}\label{kvp-pvda-vvd-arp-chu-cpn-psp-bp-d66-2}}
-
-\hypertarget{kvp-0.00-3.48-0.00-0.00-2.34-0.00-0.00-0.00-0.00}{%
-\section{KVP 0.00 3.48 0.00 0.00 2.34 0.00 0.00 0.00 0.00}\label{kvp-0.00-3.48-0.00-0.00-2.34-0.00-0.00-0.00-0.00}}
-
-\hypertarget{pvda-3.48-0.00-0.00-0.00-0.00-0.00-0.93-0.00-0.00}{%
-\section{PvdA 3.48 0.00 0.00 0.00 0.00 0.00 0.93 0.00 0.00}\label{pvda-3.48-0.00-0.00-0.00-0.00-0.00-0.93-0.00-0.00}}
-
-\hypertarget{vvd-0.00-0.00-0.00-0.00-0.83-0.00-0.00-0.00-0.00}{%
-\section{VVD 0.00 0.00 0.00 0.00 0.83 0.00 0.00 0.00 0.00}\label{vvd-0.00-0.00-0.00-0.00-0.83-0.00-0.00-0.00-0.00}}
-
-\hypertarget{arp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{ARP 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00}\label{arp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}}
-
-\hypertarget{chu-2.34-0.00-0.83-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{CHU 2.34 0.00 0.83 0.00 0.00 0.00 0.00 0.00 0.00}\label{chu-2.34-0.00-0.83-0.00-0.00-0.00-0.00-0.00-0.00}}
-
-\hypertarget{cpn-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{CPN 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00}\label{cpn-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}}
-
-\hypertarget{psp-0.00-0.93-0.00-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{PSP 0.00 0.93 0.00 0.00 0.00 0.00 0.00 0.00 0.00}\label{psp-0.00-0.93-0.00-0.00-0.00-0.00-0.00-0.00-0.00}}
-
-\hypertarget{bp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{BP 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00}\label{bp-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}}
-
-\hypertarget{d66-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}{%
-\section{D66 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00}\label{d66-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00-0.00}}
-
 \begin{verbatim}
-## Second Order Inverse MDS
+##      KVP   PvdA  VVD   ARP   CHU   CPN   PSP   BP    D66  
+## KVP   0.00  3.48  0.00  0.00  2.34  0.00  0.00  0.00  0.00
+## PvdA  3.48  0.00  0.00  0.00  0.00  0.00  0.93  0.00  0.00
+## VVD   0.00  0.00  0.00  0.00  0.83  0.00  0.00  0.00  0.00
+## ARP   0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00
+## CHU   2.34  0.00  0.83  0.00  0.00  0.00  0.00  0.00  0.00
+## CPN   0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00
+## PSP   0.00  0.93  0.00  0.00  0.00  0.00  0.00  0.00  0.00
+## BP    0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00
+## D66   0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00
+\end{verbatim}
 
-As we mentioned many times before, stationary values are not necessarily local minima. It is necessary for a local minimum that the stationary equations are satisfied, but it is also necessary that at a solution of the stationary equations the Hessian is positive semi-definite. Thus it becomes interesting to find the dissimilarities in $\Delta(W,X)\cap\Delta_+$ for which the Hessian is positive semi-definite. Define
-$$
+\hypertarget{second-order-inverse-mds}{%
+\section{Second Order Inverse MDS}\label{second-order-inverse-mds}}
+
+As we mentioned many times before, stationary values are not necessarily local minima. It is necessary for a local minimum that the stationary equations are satisfied, but it is also necessary that at a solution of the stationary equations the Hessian is positive semi-definite. Thus it becomes interesting to find the dissimilarities in \(\Delta(W,X)\cap\Delta_+\) for which the Hessian is positive semi-definite. Define
+\[
 \Delta_H(W,X):=\{\Delta\mid\mathcal{D}^2\sigma(X)\gtrsim 0\}.
-$$
-We can now study $\Delta(W,X)\cap\Delta_H(W,X)$ or $\Delta(W,X)\cap\Delta_H(W,X)\cap\Delta_+$.
+\]
+We can now study \(\Delta(W,X)\cap\Delta_H(W,X)\) or \(\Delta(W,X)\cap\Delta_H(W,X)\cap\Delta_+\).
 
 \begin{theorem}
-<span class="theorem" id="thm:invconvset"><strong>\label{thm:invconvset} </strong></span>$\Delta_H(W,X)$ is a convex non-polyhedral set.
+\protect\hypertarget{thm:invconvset}{}{\label{thm:invconvset} }\(\Delta_H(W,X)\) is a convex non-polyhedral set.
 \end{theorem}
 
-::: {.proof}
-In MDS the Hessian is $2(V-H(x,W,\Delta))$, where
+\begin{proof}
+In MDS the Hessian is \(2(V-H(x,W,\Delta))\), where
 \begin{equation}
 H(x,W,\Delta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(x)}\left\{A_{ij}-\frac{A_{ij}xx'A_{ij}}{x'A_{ij}x}\right\}.
 \end{equation}
-Here we use $x:=\mathbf{vec}(X)$, and both $A_{ij}$ and $V$ are direct sums of $p$ copies of our previous $A_{ij}$ and $V$ (@deleeuw_groenen_mair_E_16c). The Hessian is linear in $\Delta$, which means that requiring it to be positive semi-definite defines a convex non-polyhedral set. The convex set is defined by the infinite system of linear inequalities $y'H(x,W,\Delta)y\geq 0$.
-:::
+Here we use \(x:=\mathbf{vec}(X)\), and both \(A_{ij}\) and \(V\) are direct sums of \(p\) copies of our previous \(A_{ij}\) and \(V\) (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16c}{2016e})). The Hessian is linear in \(\Delta\), which means that requiring it to be positive semi-definite defines a convex non-polyhedral set. The convex set is defined by the infinite system of linear inequalities \(y'H(x,W,\Delta)y\geq 0\).
+\end{proof}
 
 In example 3 the smallest eigenvalues of the Hessian at the 42 vertices are
-\end{verbatim}
-
-\hypertarget{section-118}{%
-\section{{[}1{]} 0.00000 0.00000 0.00000 -5.86238 0.00000 -2.96688 0.00000}\label{section-118}}
-
-\hypertarget{section-119}{%
-\section{{[}8{]} -2.96688 -4.47894 -4.47894 -5.71312 -2.96688 0.00000 -5.00453}\label{section-119}}
-
-\hypertarget{section-120}{%
-\section{{[}15{]} 0.00000 -5.86238 0.00000 -12.00000 0.00000 -5.86238 -5.71312}\label{section-120}}
-
-\hypertarget{section-121}{%
-\section{{[}22{]} -5.00453 -5.86238 -2.96688 -5.71312 -4.47894 -5.00453 -5.86238}\label{section-121}}
-
-\hypertarget{section-122}{%
-\section{{[}29{]} -5.00453 -5.00453 -2.96688 0.00000 -5.86238 -4.47894 -5.71312}\label{section-122}}
-
-\hypertarget{section-123}{%
-\section{{[}36{]} -2.96688 -5.00453 -5.71312 -5.71312 -4.47894 0.00000 -4.47894}\label{section-123}}
 
 \begin{verbatim}
+##  [1]   0.00000   0.00000   0.00000  -5.86238   0.00000  -2.96688   0.00000
+##  [8]  -2.96688  -4.47894  -4.47894  -5.71312  -2.96688   0.00000  -5.00453
+## [15]   0.00000  -5.86238   0.00000 -12.00000   0.00000  -5.86238  -5.71312
+## [22]  -5.00453  -5.86238  -2.96688  -5.71312  -4.47894  -5.00453  -5.86238
+## [29]  -5.00453  -5.00453  -2.96688   0.00000  -5.86238  -4.47894  -5.71312
+## [36]  -2.96688  -5.00453  -5.71312  -5.71312  -4.47894   0.00000  -4.47894
+\end{verbatim}
+
 and thus there are at most 11 vertices corresponding with local minima.
 
-The next step is to refine the polyhedral approximation to $\Delta(W,X)\cap\Delta_H(W,X)\cap\Delta_+$ by using cutting planes. We add linear inequalities to the H-representation by using the eigenvectors corresponding to the smallest eigenvalues of all
-those vertices for which this smallest eigenvalue is negative. Thus, if the eigenvector is $y$, we would add the inequality
+The next step is to refine the polyhedral approximation to \(\Delta(W,X)\cap\Delta_H(W,X)\cap\Delta_+\) by using cutting planes. We add linear inequalities to the H-representation by using the eigenvectors corresponding to the smallest eigenvalues of all
+those vertices for which this smallest eigenvalue is negative. Thus, if the eigenvector is \(y\), we would add the inequality
 \begin{equation}
 \mathop{\sum\sum}_{1\leq i<j\leq n}\zeta_{ij}(w_{ij}-k_i'Sk_j)\geq 0,
 \end{equation}
 where
-$$
+\[
 \zeta_{ij}:=y'\left(A_{ij}-\frac{A_{ij}xx'A_{ij}}{x'A_{ij}x}\right)y.
-$$
-It is clear, however, that adding a substantial number of linear inequalities will inevitably lead to a very large number of potential extreme points. We proceed conservatively by cutting off only the solution with the smallest negative eigenvalue in computing the new V representation, using our function `bruteForceOne()`.
+\]
+It is clear, however, that adding a substantial number of linear inequalities will inevitably lead to a very large number of potential extreme points. We proceed conservatively by cutting off only the solution with the smallest negative eigenvalue in computing the new V representation, using our function \texttt{bruteForceOne()}.
 
+\hypertarget{inverse-fds}{%
+\section{Inverse FDS}\label{inverse-fds}}
 
+A configuration \(X\) is a \emph{full dimensional scaling} or \emph{FDS} solution (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16e}{De Leeuw, Groenen, and Mair} (\protect\hyperlink{ref-deleeuw_groenen_mair_E_16e}{2016a})) if \((V-B(X))X=0\) and \(V-B(X)\) is positive semi-definite. In that case \(X\) actually provides the global minimum of stress. The \emph{inverse FDS} or \emph{iFDS} problem is to find all \(\Delta\) such that a given \(X\) is the FDS solution.
 
-## Inverse FDS
-
-A configuration $X$ is a *full dimensional scaling* or *FDS* solution (@deleeuw_groenen_mair_E_16e) if $(V-B(X))X=0$ and $V-B(X)$ is positive semi-definite. In that case $X$ actually provides the global minimum of stress.  The *inverse FDS* or *iFDS* problem is to find all $\Delta$ such that a given $X$ is the FDS solution.
-
-
-```{theorem< label = "invfull"}
-$\Delta\in\Delta_F(W,X)$ if and only if there is a positive semi-definite $S$ such that for all $i\not= j$ 
-\begin{equation}
-\delta_{ij}=d_{ij}(X)(1-\frac{1}{w_{ij}}k_i'Sk_j),
-\end{equation}
-Thus $\Delta_F(W,X)$ is a non-polyhedral convex set, closed under linear combinations with coefficients that add up to one.
-\end{verbatim}
+\texttt{\{theorem\textless{}\ label\ =\ "invfull"\}\ \$\textbackslash{}Delta\textbackslash{}in\textbackslash{}Delta\_F(W,X)\$\ if\ and\ only\ if\ there\ is\ a\ positive\ semi-definite\ \$S\$\ such\ that\ for\ all\ \$i\textbackslash{}not=\ j\$\ \ \textbackslash{}begin\{equation\}\ \textbackslash{}delta\_\{ij\}=d\_\{ij\}(X)(1-\textbackslash{}frac\{1\}\{w\_\{ij\}\}k\_i\textquotesingle{}Sk\_j),\ \textbackslash{}end\{equation\}\ Thus\ \$\textbackslash{}Delta\_F(W,X)\$\ is\ a\ non-polyhedral\ convex\ set,\ closed\ under\ linear\ combinations\ with\ coefficients\ that\ add\ up\ to\ one.}
 
 \begin{proof}
 Of course \(\Delta_F(W,X)\subseteq\Delta(W,X)\). Thus \(V-B(X)=KSK'\) for some \(S\), and \(XX'\) and \(V-B(X)\) must both be positive semi-definite, with complementary null spaces.
@@ -7308,7 +7139,7 @@ ellipse with center \(\frac13\tau e\) and radius \(\frac13(\tau-3)^2\)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7316,7 +7147,7 @@ ellipse with center \(\frac13\tau e\) and radius \(\frac13(\tau-3)^2\)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-13-2.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-11-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7325,7 +7156,7 @@ ellipse with center \(\frac13\tau e\) and radius \(\frac13(\tau-3)^2\)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-13-3.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-11-3.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7333,7 +7164,7 @@ ellipse with center \(\frac13\tau e\) and radius \(\frac13(\tau-3)^2\)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{_main_files/figure-latex/unnamed-chunk-13-4.pdf}
+\includegraphics{_main_files/figure-latex/unnamed-chunk-11-4.pdf}
 
 \hypertarget{order-four}{%
 \section{Order Four}\label{order-four}}
@@ -7398,8 +7229,8 @@ it may be more appropriate to sample from the unit ball in \(\mathbb{R}^{n\times
 
 metric - nonmetric
 
-\hypertarget{examples-1}{%
-\subsection{Examples}\label{examples-1}}
+\hypertarget{examples-2}{%
+\subsection{Examples}\label{examples-2}}
 
 \hypertarget{ekman}{%
 \subsubsection{Ekman}\label{ekman}}
@@ -7799,8 +7630,8 @@ Thus we compute the FDS update \(Z^{(k+1)}=V^+B(Z^{(k)})Z^{(k)}\) and then divid
 
 Code is in the appendix. Let us analyze a number of examples.
 
-\hypertarget{examples-2}{%
-\subsection{Examples}\label{examples-2}}
+\hypertarget{examples-3}{%
+\subsection{Examples}\label{examples-3}}
 
 This section has a number of two-dimensional and a number of one-dimensional examples. The one-dimensional examples are of interest, because of the documented large number of local minima of stress in the one-dimensional case, and the fact that for small and medium \(n\) exact solutions are available (for example, \protect\hyperlink{ref-deleeuw_C_05h}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_05h}{2005c})). By default we use \texttt{seq(0,\ 1,\ length\ =\ 101)} for \(\lambda\) in most examples, but for some of them we dig a bit deeper and use longer sequences with smaller increments.
 
@@ -13177,6 +13008,9 @@ For more information, please refer to \url{http://unlicense.org/}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-avis_15}{}%
+Avis, D. 2015. \emph{{User's Guide for lrs - Version 6.1}}. {The Computational Geometry Lab at McGill}. \url{http://cgm.cs.mcgill.ca/~avis/C/lrslib/USERGUIDE.html}.
+
 \leavevmode\hypertarget{ref-bacak_borwein_11}{}%
 Bacak, M., and J. M. Borwein. 2011. {``{On Difference Convexity of Locally Lipschitz Functions}.''} \emph{Optimization} 60 (8-9): 961--78.
 
@@ -13191,6 +13025,9 @@ Bavaud, F. 2011. {``{On the Schoenberg Transformations in Data Analysis: Theory 
 
 \leavevmode\hypertarget{ref-berge_63}{}%
 Berge, C. 1963. \emph{Topological Spaces}. Oliver \& Boyd.
+
+\leavevmode\hypertarget{ref-berkelaar_15}{}%
+Berkelaar, M. and others. 2015. \url{\%7Bhttps://CRAN.R-project.org/package=lpSolve\%7D}.
 
 \leavevmode\hypertarget{ref-best_17}{}%
 Best, M. J. 2017. \emph{Quadratic Programming with Computer Programs}. Advances in Applied Mathematics. CRC Press.
@@ -13414,20 +13251,23 @@ De Leeuw, J. 1968a. {``Canonical Discriminant Analysis of Relational Data.''} Re
 \leavevmode\hypertarget{ref-deleeuw_groenen_A_97}{}%
 De Leeuw, J., and P. J. F. Groenen. 1997. {``Inverse Multidimensional Scaling.''} \emph{Journal of Classification} 14 (3--21). \url{http://deleeuwpdx.net/janspubs/1997/articles/deleeuw_groenen_A_97.pdf}.
 
+\leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16e}{}%
+De Leeuw, J., P. Groenen, and P. Mair. 2016a. {``Full-Dimensional Scaling.''} 2016. \url{http://deleeuwpdx.net/pubfolders/full/full.pdf}.
+
 \leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16h}{}%
-De Leeuw, J., P. Groenen, and P. Mair. 2016a. {``Minimizing qStress for Small q.''} 2016. \url{https://doi.org/10.13140/RG.2.1.4843.1764}.
+---------. 2016b. {``Minimizing qStress for Small q.''} 2016. \url{https://doi.org/10.13140/RG.2.1.4843.1764}.
 
 \leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16a}{}%
----------. 2016b. {``{Minimizing rStress Using Majorization}.''} 2016. \url{https://doi.org/10.13140/RG.2.1.3871.3366}.
+---------. 2016c. {``{Minimizing rStress Using Majorization}.''} 2016. \url{https://doi.org/10.13140/RG.2.1.3871.3366}.
 
 \leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16f}{}%
----------. 2016c. {``More on Inverse Multidimensional Scaling.''} 2016. \url{https://doi.org/10.13140/RG.2.1.1454.5684}.
+---------. 2016d. {``More on Inverse Multidimensional Scaling.''} 2016. \url{https://doi.org/10.13140/RG.2.1.1454.5684}.
 
 \leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16c}{}%
----------. 2016d. {``{Second Derivatives of rStress, with Applications}.''} 2016. \url{https://doi.org/10.13140/RG.2.1.1058.4081}.
+---------. 2016e. {``{Second Derivatives of rStress, with Applications}.''} 2016. \url{https://doi.org/10.13140/RG.2.1.1058.4081}.
 
 \leavevmode\hypertarget{ref-deleeuw_groenen_mair_E_16g}{}%
----------. 2016e. {``Singularities and Zero Distances in Multidimensional Scaling.''} 2016. \url{https://doi.org/10.13140/RG.2.1.3339.2403}.
+---------. 2016f. {``Singularities and Zero Distances in Multidimensional Scaling.''} 2016. \url{https://doi.org/10.13140/RG.2.1.3339.2403}.
 
 \leavevmode\hypertarget{ref-deleeuw_groenen_pietersz_E_16m}{}%
 De Leeuw, J., P. Groenen, and R. Pietersz. 2016. {``An Alternating Least Squares Approach to Squared Distance Scaling.''} 2016. \url{https://doi.org/10.13140/RG.2.2.15357.97766}.
@@ -13480,8 +13320,14 @@ Ekman, G. 1954. {``{Dimensions of Color Vision}.''} \emph{Journal of Psychology}
 \leavevmode\hypertarget{ref-flett_80}{}%
 Flett, T. M. 1980. \emph{{Differential Analysis}}. Cambridge University Press.
 
+\leavevmode\hypertarget{ref-fukuda_15}{}%
+Fukuda, K. 2015. \emph{{cdd and cddplus Homepage}}. \url{https://www.inf.ethz.ch/personal/fukudak/cdd_home/}.
+
 \leavevmode\hypertarget{ref-gaffney_76}{}%
 Gaffney, P. W. 1976. {``{The Calculation of Indefinite Integrals of B-splines}.''} \emph{Journal of the Institute of Mathematics and Its Applications} 17: 37--41.
+
+\leavevmode\hypertarget{ref-geyer_meeden_15}{}%
+Geyer, C. J., and G. D. Meeden. 2015. {``{rcdd: Computational Geometry}.''} 2015. \url{https://CRAN.R-project.org/package=rcdd}.
 
 \leavevmode\hypertarget{ref-gifi_B_90}{}%
 Gifi, A. 1990. \emph{Nonlinear Multivariate Analysis}. New York, N.Y.: Wiley.
@@ -13491,6 +13337,9 @@ Gohberg, I., P. Lancaster, and L. Rodman. 2009. \emph{Matrix Polynomials}. Class
 
 \leavevmode\hypertarget{ref-gold_73}{}%
 Gold, E. Mark. 1973. {``{Metric Unfolding: Data Requirement for Unique Solution \& Clarification of Sch{ö}nemann's Algorithm}.''} \emph{Psychometrika} 38 (4): 555--69.
+
+\leavevmode\hypertarget{ref-goldman_56}{}%
+Goldman, A. J. 1956. {``{Resolution and Separation Theorems for Polyhedral Convex Sets}.''} In \emph{Linear Inequalities and Related Systems}, edited by Kuhn H. W. and A. W. Tucker, 41--51. Annals of Mathematics Studies 38. Princeton University Press.
 
 \leavevmode\hypertarget{ref-gower_66}{}%
 Gower, J. C. 1966. {``{Some Distance Properties of Latent Root and Vector Methods Used in Multivariate Analysis}.''} \emph{Biometrika} 53: 325--38.
@@ -13641,6 +13490,9 @@ Ramsay, J. O. 1977. {``{Maximum Likelihood Estimation in Multidimensional Scalin
 
 \leavevmode\hypertarget{ref-ramsay_88}{}%
 ---------. 1988. {``{Monotone Regression Splines in Action}.''} \emph{Statistical Science} 3: 425--61.
+
+\leavevmode\hypertarget{ref-robere_15}{}%
+Robere, R. 2015. \emph{{vertexenum: Vertex Enumeration of Polytopes}}. \url{https://CRAN.R-project.org/package=vertexenum}.
 
 \leavevmode\hypertarget{ref-robert_67}{}%
 Robert, F. 1967. {``{Calcul du Rapport Maximal de Deux Normes sur \(\mathbb{R}^n\)}.''} \emph{Revue Francaise d'Automatique, d'Informatique Et De Recherche Operationelle} 1: 97--118.

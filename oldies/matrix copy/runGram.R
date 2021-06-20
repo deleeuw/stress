@@ -1,6 +1,0 @@
-system("R CMD SHLIB matrix.c")
-source("matrix.R")
-x1<-matrix(c(1,1,1,1,1,1),1,6)
-x2<-matrix(c(1,1,1,1,1,0,1,1),2,4)
-h1 <- solveRC(x1, 1)
-h2 <- solveRC(x2, c(1,2))

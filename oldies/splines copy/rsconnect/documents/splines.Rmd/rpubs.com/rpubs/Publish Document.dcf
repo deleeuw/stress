@@ -1,8 +1,0 @@
-name: Publish Document
-title:
-account: rpubs
-server: rpubs.com
-appId: https://api.rpubs.com/api/v1/document/268327/b28a11bc9830495488abfe9f5320163b
-bundleId: https://api.rpubs.com/api/v1/document/268327/b28a11bc9830495488abfe9f5320163b
-url: http://rpubs.com/deleeuw/268327
-when: 1492448879.20389

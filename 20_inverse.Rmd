@@ -15,9 +15,10 @@ In @deleeuw_groenen_A_97 two different basic IMDS versions are discussed. Both v
 Suppose $X$ is a regular and normalized configuration satisfying the stationary equation $(V-B(X))X=0$.
 Our first IMDS step is to describe the set $\mathfrak{D}(X)$ of all $\Delta$E for which $X$ is stationary. 
 
-```{lemma, label = ""}
+::: {#syminv .lemma}
 Suppose $X$ is an $n\times p$ matrix of rank $p<n$. Suppose $K$ is an $n\times(n-p)$ orthonormal matrix with $K'X=0$. Then a symmetric matrix $A$ satisfies $AX=0$ if and only if there is a symmetric $S$ such that $A=KSK'$. If $\text{rank}(K'AK)=r$ then $S$ can be chosento be of order $r$.
-```
+::: 
+
 ::: {.proof}
 Suppose $X=LT$ with $L$ an orthonormal basis for the column space of $X$ and $T$ non-singular. Write $A$ as 
 
@@ -32,9 +33,9 @@ A_{11}&A_{12}\\A_{21}&A_{22}
 
 Then $AX=LA_{11}T+KA_{21}=0$ which is true if and only if $A_{11}=0$
 and $A_{21}=0$, and by symmetry $A_{12}=0$. Thus $A=KA_{22}K'$. 
-```
+:::
 
-```{theorem, label = "keyresult"}
+::: {#keyresult .theorem}
 $\Delta\in\mathfrak{D}(X)$ if and only if there is a symmetric $S$ of order $n-p-1$ such that for all $i\not= j$ 
 
 \begin{equation}
@@ -42,7 +43,7 @@ $\Delta\in\mathfrak{D}(X)$ if and only if there is a symmetric $S$ of order $n-p
 (\#eq:invalldelta)
 \end{equation}
 
-```
+:::
 
 ::: {.proof}
 By lemma XXX we have $(V-B(X))X=0$ if and only if there is a symmetric $S$ such that $V-B(X)=KSK'$.  This can be rearranged to yield \@ref(eq:invalldelta). Since the vector $e$ satisfies both $X'e=0$ and $(V-B(X))e=0$ we can choose $S$ to be of order $n-p-1$. 
