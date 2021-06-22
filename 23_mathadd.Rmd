@@ -266,6 +266,14 @@ If $f$ on $X\otimes Y$ then $f(\bullet,y)$ is on $X$ $g(x)=f(x,y)$. Projection
 
 ### Differentiation {#appdiffer}
 
+A quick reminder of terminology and notation. The *derivative* of stress at configuration $X$ is $\mathcal{D}\sigma(X)$. It is a linear transformation of configuration space $\mathbb{R}^{n\times p}$ into
+$\mathbb{R}$. The derivative at $X$ at configuration $Y$ is
+$\mathcal{D}\sigma(X)(Y)$, which also defines the *differential* $\Delta\sigma(X;Y)$, a function of $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$ into $\mathbb{R}$. 
+
+The *partial derivatives* at $X$ are $\mathcal{D}\sigma(X)(E_s)=\Delta\sigma(X,E_s)$, where the  $E_s$ are a basis for configuration space. The matrix of partial derivatives is the *gradient matrix* at $X$.
+
+The *second derivative* $\mathcal{D}^2\sigma$ is the derivative of the first derivative. It defines a symmetric bilinear form on $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$. The *second differential* is $\mathcal{D}^2\sigma(X)(Y,Z)=\Delta^2\sigma(X;Y,Z)$, and the *Hessian* is the 
+symmetric matrix with as elements the *second partial derivatives* $\Delta^2\sigma(X;E_s,E_t)$.
 
 
 #### Derivative

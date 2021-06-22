@@ -939,14 +939,32 @@ and thus the Guttman transform is Lipschitz.</p>
 <div id="propdiff" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Differentiability</h2>
 <p>The fact that <span class="math inline">\(d_{ij}(X)\)</span> can be zero creates some problems with differentiability. Clearly <span class="math inline">\(d_{ij}^2(X)=\text{tr}\ X&#39;A_{ij}X\)</span> is
-quadratic, and thus inifinitely many times differentiable. But <span class="math inline">\(d_{ij}(X)=\sqrt{\text{tr}\ X&#39;A_{ij}X}\)</span> is not differentiable
-at points where <span class="math inline">\(x_i=x_j\)</span> and <span class="math inline">\(d_{ij}(X)=0\)</span>, because the square root is not differentiable at zero. For stress this means that <span class="math inline">\(\eta^2(X)\)</span> is differentiable but <span class="math inline">\(\rho(X)\)</span> is not if <span class="math inline">\(d_{ij}(X)=0\)</span>
-for one or more <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> with <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span>.</p>
-<p>These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section <a href="propchapter.html#proplocmin">2.7.2</a> of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by zero distances were one of the reasons why I switched from differentiability to convexity in <span class="citation"><a href="#ref-deleeuw_C_77" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_77" role="doc-biblioref">1977a</a>)</span> and from derivatives to directional derivatives in <span class="citation"><a href="#ref-deleeuw_A_84f" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_A_84f" role="doc-biblioref">1984c</a>)</span>. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.</p>
-<p>We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. A quick reminder of terminology and notation. The<em>derivative</em> of stress at configuration <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal{D}\sigma(X)\)</span>. It is a linear transformation of configuration space <span class="math inline">\(\mathbb{R}^{n\times p}\)</span> into
-<span class="math inline">\(\mathbb{R}\)</span>. The derivative at <span class="math inline">\(X\)</span> evaluated at configuration <span class="math inline">\(Y\)</span> is
-<span class="math inline">\(\mathcal{D}\sigma(X)(Y)\)</span>, which also defines the <em>differential</em> <span class="math inline">\(\delta(X;Y)\)</span>.
-The <em>partial derivatives</em> at <span class="math inline">\(X\)</span> are <span class="math inline">\(\mathcal{D}\sigma(X)(E_s)=\delta(X,E_s)\)</span>, where the <span class="math inline">\(E_s\)</span> are a basis for configuration space. The matrix of partial derivatives is the <em>gradient</em> at <span class="math inline">\(X\)</span>.</p>
+quadratic, and thus infinitely many times differentiable. But <span class="math inline">\(d_{ij}(X)=\sqrt{\text{tr}\ X&#39;A_{ij}X}\)</span> is not differentiable
+at points where <span class="math inline">\(d_{ij}(X)=0\)</span>, because the square root is not differentiable at zero. For stress this means that <span class="math inline">\(\eta^2\)</span> is differentiable but if <span class="math inline">\(d_{ij}(X)=0\)</span>
+for one or more <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> with <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span> then <span class="math inline">\(\rho\)</span> (and thus <span class="math inline">\(\sigma\)</span>) is not differentiable at <span class="math inline">\(X\)</span>.</p>
+<p>These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section <a href="propchapter.html#proplocmin">2.7.2</a> of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused <span class="math inline">\(d_{ij}(X)=0\)</span> were one of the reasons why I switched from differentiability to convexity in <span class="citation"><a href="#ref-deleeuw_C_77" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_77" role="doc-biblioref">1977a</a>)</span> and from derivatives to directional derivatives in <span class="citation"><a href="#ref-deleeuw_A_84f" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_A_84f" role="doc-biblioref">1984c</a>)</span>. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.</p>
+<p>We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances.</p>
+<div id="non-zero-distances" class="section level4" number="2.6.0.1">
+<h4><span class="header-section-number">2.6.0.1</span> Non-zero Distances</h4>
+<p>A configuration <span class="math inline">\(X\)</span> is <em>distinct</em> if <span class="math inline">\(d_{ij}(X)&gt;0\)</span> for all <span class="math inline">\(i\not= j\)</span> with <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span>. If <span class="math inline">\(X\)</span> is distinct then all <span class="math inline">\(d_{ij}\)</span> are differentiable at <span class="math inline">\(X\)</span>, in fact infinitely many times differentiable. Remembering that <span class="math inline">\(d_{ij}(X)=\sqrt{\text{tr}\ X&#39;A_{ij}X}\)</span> we see that</p>
+<p><span class="math display" id="eq:distder1">\[\begin{equation}
+\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)&#39;}{d_{ij}(X)}.
+\tag{2.31}
+\end{equation}\]</span></p>
+<p>If we collect the partials in the <span class="math inline">\(n\times p\)</span> gradient matrix, then row <span class="math inline">\(i\)</span> of this matrix is <span class="math inline">\((x_i-x_j)/\|x_i-x_j\|\)</span> and row <span class="math inline">\(j\)</span> is <span class="math inline">\(-(x_i-x_j)/\|x_i-x_j\|\)</span>. The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of <span class="math inline">\(\mathcal{D}d_{ij}(X)\)</span> is equal to two, and thus all partial derivatives are less than or equal to <span class="math inline">\(\sqrt{2}\)</span>.</p>
+<p>For the symmetric bilinear form defined by the second derivatives we find</p>
+<p><span class="math display" id="eq:distder2">\[\begin{equation}
+\mathcal{D}^2 d_{ij}(X)(Y,Z)=\frac{1}{d_{ij}(X)}\left\{
+\text{tr}\ Y&#39;A_{ij}Z-\frac{\text{tr}\ Y&#39;A_{ij}X\ \text{tr}\ Z&#39;A_{ij}X}{d_{ij}^2(X)}\right\}.
+\tag{2.32}
+\end{equation}\]</span></p>
+<p>From the CS inequality we see that <span class="math inline">\(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\)</span>, as we would expect from any decent twice-differentiable convex function.</p>
+<p><span class="math display">\[\begin{align}
+\Delta\rho(X;Y&amp;=\text{tr}\ Y&#39;B(X)X,\\
+\Delta\eta^2(X;Y)&amp;=2\text{tr}\ Y&#39;VX,\\
+\Delta\sigma(X;Y)&amp;=2\text{tr}\ Y&#39;(V-B(X))X=2\text{tr}\ Y&#39;V(X-\mathfrak{G}(X)),
+\end{align}\]</span></p>
+</div>
 <div id="squared-distances" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Squared Distances</h3>
 <p><span class="math display">\[
@@ -984,22 +1002,6 @@ Taking limits shows
 <div id="distances-1" class="section level3" number="2.6.2">
 <h3><span class="header-section-number">2.6.2</span> Distances</h3>
 <p>For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.</p>
-<p>A configuration <span class="math inline">\(X\)</span> is <em>regular</em> if <span class="math inline">\(d_{ij}(X)&gt;0\)</span> for all <span class="math inline">\(i\not= j\)</span> with <span class="math inline">\(w_{ij}\delta_{ij}&gt;0\)</span>. I apologize for yet another overloading of the word “regular.”</p>
-<div id="regular-case" class="section level4" number="2.6.2.1">
-<h4><span class="header-section-number">2.6.2.1</span> Regular Case</h4>
-<p>If <span class="math inline">\(X\)</span> is regular then all <span class="math inline">\(d_{ij}\)</span> are differentiable at <span class="math inline">\(X\)</span>, in fact infinitely many times differentiable. Remembering that <span class="math inline">\(d_{ij}(X)=\sqrt{\text{tr}\ X&#39;A_{ij}X}\)</span> we see that</p>
-<p><span class="math display" id="eq:distder1">\[\begin{equation}
-\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)&#39;}{d_{ij}(X)}.
-\tag{2.31}
-\end{equation}\]</span></p>
-<p>If we collect the partials in an <span class="math inline">\(n\times p\)</span> matrix, then row <span class="math inline">\(i\)</span> matrix of this matrix is <span class="math inline">\((x_i-x_j)/\|x_i-x_j\|\)</span> and row <span class="math inline">\(j\)</span> is <span class="math inline">\((x_j-x_i)/\|x_i-x_j\|\)</span>. The rest of the matrix are zeroes, and the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of <span class="math inline">\(\mathcal{D}d_{ij}(X)\)</span> is equal to two, and thus all partial derivatives are less than or equal to <span class="math inline">\(\sqrt{2}\)</span>.</p>
-<p>For the quadratic form defined by the second derivatives we find</p>
-<p><span class="math display" id="eq:distder2">\[\begin{equation}
-\mathcal{D}^2 d_{ij}(X)(Y,Y)=\frac{1}{d_{ij}(X)}\left\{
-\text{tr}\ Y&#39;A_{ij}Y-\frac{(\text{tr}\ Y&#39;A_{ij}X)^2}{d_{ij}^2(X)}\right\}.
-\tag{2.32}
-\end{equation}\]</span></p>
-<p>From the CS inequality we see that <span class="math inline">\(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\)</span>, as we would expect from any decent twice-differentiable convex function.</p>
 <p><span class="math display">\[
 d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X&#39;A_{ij}X+2\epsilon\ \text{tr}\ X&#39;A_{ij}Y+\epsilon^2\text{tr}\ Y&#39;A_{ij}Y}
 \]</span></p>
@@ -1037,9 +1039,8 @@ d_{ij}(X)+\epsilon\ \frac{\text{tr}\ X&#39;A_{ij}Y}{d_{ij}(X)}+\frac12\epsilon^2
 \mathbb{D}^2d_{ij}(X;Y,Z)=\frac12\frac{\text{tr}\ Y&#39;A_{ij}Y}{d_{ij}(X)}+\frac{\text{tr}\  X&#39;A_{ij}Z}{d_{ij}(X)}-\frac12\frac{(\text{tr}\ X&#39;A_{ij}Y)^2}{d_{ij}^3(X)}=\\
 \frac12\mathbb{D}^2d_{ij}(X;Y)+\mathbb{D}d_{ij}(X;Z)
 \]</span></p>
-</div>
-<div id="zero-distances" class="section level4" number="2.6.2.2">
-<h4><span class="header-section-number">2.6.2.2</span> Zero Distances</h4>
+<div id="zero-distances" class="section level4" number="2.6.2.1">
+<h4><span class="header-section-number">2.6.2.1</span> Zero Distances</h4>
 <p><span class="math display">\[
 d_{ij}(X+\epsilon\ Y)=\epsilon\ d_{ij}(Y)
 \]</span>
@@ -1079,8 +1080,8 @@ d_{ij}(X+\epsilon Y+\epsilon^2 Z)=\epsilon^2 d_{ij}(Z)
 \mathbb{D}^2d_{ij}(X;Y,Z)=d_{ij}(Z)
 \]</span></p>
 </div>
-<div id="distances-2" class="section level4" number="2.6.2.3">
-<h4><span class="header-section-number">2.6.2.3</span> Distances</h4>
+<div id="distances-2" class="section level4" number="2.6.2.2">
+<h4><span class="header-section-number">2.6.2.2</span> Distances</h4>
 </div>
 </div>
 <div id="rho-and-stress" class="section level3" number="2.6.3">

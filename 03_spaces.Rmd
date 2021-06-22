@@ -12,7 +12,13 @@ Even for $n$ as small as four and $p$ as small as two the dimension of
 the space of centered configurations is six, and there is no natural way
 to visualize a function of six variables. 
 
-coordinates
+centered matrices $\mathbb{R}_C^{n\times p}$  $p(n-1)$
+
+lower triangular matrices $\mathbb{R}_T^{n\times p}$ $\sum_{s=1}^p (n-s)=np-\frac12 p(p+1)$
+
+orthogonal matrices $\mathbb{R}_O^{n\times p}$ $\sum_{s=1}^p (n-s)=np-\frac12 p(p+1)$
+
+using coordinates (as in CCD)
 
 ## Coefficient Space {#propcoefspace}
 

@@ -10,7 +10,7 @@ We discuss some of the ways in which we can express the nominal information
 in terms of distances and apply techniques in the smacof family to computed
 optimal least squares configurations.
 
-For historical and other reasons this topic is of great interest to me. Some of my first rambling red reports (@deleeuw_R_68e, @deleeuw_R_69d) were on the analysis of relational or categorical data. The first one discussed mainly the quantification methods of @guttman_41, the second one explored using the topological notion of separation. My dissertation (@deleeuw_B_73) systematized that early research. Making it available to a wider audience was the main motivation for starting the Gifi project (@gifi_B_90, @deleeuw_B_20).
+For historical and other reasons this topic is of great interest to me. Some of my first rambling red reports (@deleeuw_R_68e, @deleeuw_R_69d) were on the analysis of relational or categorical data. The first one discussed mainly the quantification methods of @guttman_41, the second one explored using the topological notion of separation. My dissertation (@deleeuw_B_73) systematized that early research. Making it available to a wider audience, and as software, was the main motivation for starting the Gifi project (@gifi_B_90, @deleeuw_B_20).
 
 
 ## Binary Dissimilarities
@@ -181,6 +181,7 @@ cxy <- (my[1] - mx[1]) / (mx[2] - my[2])
 dxy <- mm[2] - cxy * mm[1]
 abline(dxy, cxy)
 ```
+
 ```{r dbmcafigparxz, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
 baseplot(x, y, z, wy = FALSE)
 mm <- (mx + mz) / 2
@@ -188,6 +189,7 @@ cxz <- (mz[1] - mx[1]) / (mx[2] - mz[2])
 dxz <- mm[2] - cxz * mm[1]
 abline(dxz, cxz)
 ```
+
 ```{r dbmcafigparyz, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
 baseplot(x, y, z, wx = FALSE)
 mm <- (my + mz) / 2
@@ -197,7 +199,6 @@ abline(dyz, cyz)
 ```
 
 What if the star centers are on a straight line
-
 
 ## Circular Separation
 

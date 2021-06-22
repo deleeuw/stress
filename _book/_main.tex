@@ -150,7 +150,7 @@
 
 \title{Least Squares Euclidean Multidimensional Scaling}
 \author{Jan de Leeuw}
-\date{Started October 02, 2020. Last update June 20, 2021}
+\date{Started October 02, 2020. Last update June 21, 2021}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1248,7 +1248,7 @@ and thus the Guttman transform is Lipschitz.
 
 The fact that \(d_{ij}(X)\) can be zero creates some problems with differentiability. Clearly \(d_{ij}^2(X)=\text{tr}\ X'A_{ij}X\) is
 quadratic, and thus inifinitely many times differentiable. But \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) is not differentiable
-at points where \(x_i=x_j\) and \(d_{ij}(X)=0\), because the square root is not differentiable at zero. For stress this means that \(\eta^2(X)\) is differentiable but \(\rho(X)\) is not if \(d_{ij}(X)=0\)
+at points where \(d_{ij}^2(X)=0\), because the square root is not differentiable at zero. For stress this means that \(\eta^2(X)\) is differentiable but \(\rho(X)\) is not if \(d_{ij}(X)=0\)
 for one or more \(i\) and \(j\) with \(w_{ij}\delta_{ij}>0\).
 
 These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \ref{proplocmin} of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by zero distances were one of the reasons why I switched from differentiability to convexity in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}) and from derivatives to directional derivatives in \protect\hyperlink{ref-deleeuw_A_84f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_84f}{1984c}). It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
@@ -1257,6 +1257,30 @@ We start with ordinary (total) differentiation of stress and then discuss, in co
 \(\mathbb{R}\). The derivative at \(X\) evaluated at configuration \(Y\) is
 \(\mathcal{D}\sigma(X)(Y)\), which also defines the \emph{differential} \(\delta(X;Y)\).
 The \emph{partial derivatives} at \(X\) are \(\mathcal{D}\sigma(X)(E_s)=\delta(X,E_s)\), where the \(E_s\) are a basis for configuration space. The matrix of partial derivatives is the \emph{gradient} at \(X\).
+
+\hypertarget{regular-case}{%
+\subsubsection{Regular Case}\label{regular-case}}
+
+A configuration \(X\) is \emph{regular} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). I apologize for yet another overloading of the word ``regular.''
+
+If \(X\) is regular then all \(d_{ij}\) are differentiable at \(X\), in fact infinitely many times differentiable. Remembering that \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) we see that
+
+\begin{equation}
+\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
+\label{eq:distder1}
+\end{equation}
+
+If we collect the partials in the \(n\times p\) gradient, then row \(i\) matrix of this matrix is \((x_i-x_j)/\|x_i-x_j\|\) and row \(j\) is \(-(x_i-x_j)/\|x_i-x_j\|\). The rest of the matrix are zeroes, and the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of \(\mathcal{D}d_{ij}(X)\) is equal to two, and thus all partial derivatives are less than or equal to \(\sqrt{2}\).
+
+For the quadratic form defined by the second derivatives we find
+
+\begin{equation}
+\mathcal{D}^2 d_{ij}(X)(Y,Y)=\frac{1}{d_{ij}(X)}\left\{
+\text{tr}\ Y'A_{ij}Y-\frac{(\text{tr}\ Y'A_{ij}X)^2}{d_{ij}^2(X)}\right\}.
+\label{eq:distder2}
+\end{equation}
+
+From the CS inequality we see that \(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\), as we would expect from any decent twice-differentiable convex function.
 
 \hypertarget{squared-distances}{%
 \subsection{Squared Distances}\label{squared-distances}}
@@ -1300,30 +1324,6 @@ Taking limits shows
 \subsection{Distances}\label{distances-1}}
 
 For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.
-
-A configuration \(X\) is \emph{regular} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). I apologize for yet another overloading of the word ``regular.''
-
-\hypertarget{regular-case}{%
-\subsubsection{Regular Case}\label{regular-case}}
-
-If \(X\) is regular then all \(d_{ij}\) are differentiable at \(X\), in fact infinitely many times differentiable. Remembering that \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) we see that
-
-\begin{equation}
-\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
-\label{eq:distder1}
-\end{equation}
-
-If we collect the partials in an \(n\times p\) matrix, then row \(i\) matrix of this matrix is \((x_i-x_j)/\|x_i-x_j\|\) and row \(j\) is \((x_j-x_i)/\|x_i-x_j\|\). The rest of the matrix are zeroes, and the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of \(\mathcal{D}d_{ij}(X)\) is equal to two, and thus all partial derivatives are less than or equal to \(\sqrt{2}\).
-
-For the quadratic form defined by the second derivatives we find
-
-\begin{equation}
-\mathcal{D}^2 d_{ij}(X)(Y,Y)=\frac{1}{d_{ij}(X)}\left\{
-\text{tr}\ Y'A_{ij}Y-\frac{(\text{tr}\ Y'A_{ij}X)^2}{d_{ij}^2(X)}\right\}.
-\label{eq:distder2}
-\end{equation}
-
-From the CS inequality we see that \(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\), as we would expect from any decent twice-differentiable convex function.
 
 \[
 d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X'A_{ij}X+2\epsilon\ \text{tr}\ X'A_{ij}Y+\epsilon^2\text{tr}\ Y'A_{ij}Y}

@@ -372,18 +372,40 @@ and thus the Guttman transform is Lipschitz.
 ## Differentiability {#propdiff}
 
 The fact that $d_{ij}(X)$ can be zero creates some problems with differentiability. Clearly $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X$ is
-quadratic, and thus inifinitely many times differentiable. But $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ is not differentiable
-at points where $x_i=x_j$ and $d_{ij}(X)=0$, because the square root is not differentiable at zero. For stress this means that $\eta^2(X)$ is differentiable but $\rho(X)$ is not if $d_{ij}(X)=0$
-for one or more $i$ and $j$ with $w_{ij}\delta_{ij}>0$.
+quadratic, and thus infinitely many times differentiable. But $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ is not differentiable
+at points where $d_{ij}(X)=0$, because the square root is not differentiable at zero. For stress this means that $\eta^2$ is differentiable but if $d_{ij}(X)=0$
+for one or more $i$ and $j$ with $w_{ij}\delta_{ij}>0$ then $\rho$ (and thus $\sigma$) is not differentiable at $X$.
 
-These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by zero distances were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
+These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
-We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. A quick reminder of terminology and notation. The*derivative* of stress at configuration $X$ is $\mathcal{D}\sigma(X)$. It is a linear transformation of configuration space $\mathbb{R}^{n\times p}$ into
-$\mathbb{R}$. The derivative at $X$ evaluated at configuration $Y$ is
-$\mathcal{D}\sigma(X)(Y)$, which also defines the *differential* $\delta(X;Y)$.
-The *partial derivatives* at $X$ are $\mathcal{D}\sigma(X)(E_s)=\delta(X,E_s)$, where the  $E_s$ are a basis for configuration space. The matrix of partial derivatives is the *gradient* at $X$.
+We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. 
 
+#### Non-zero Distances
 
+A configuration $X$ is *distinct* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. If $X$ is distinct then all $d_{ij}$ are differentiable at $X$, in fact infinitely many times differentiable. Remembering that $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ we see that
+
+\begin{equation}
+\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
+(\#eq:distder1)
+\end{equation}
+
+If we collect the partials in the $n\times p$ gradient matrix, then row $i$ of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $-(x_i-x_j)/\|x_i-x_j\|$. The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\mathcal{D}d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
+
+For the symmetric bilinear form defined by the second derivatives we find
+
+\begin{equation}
+\mathcal{D}^2 d_{ij}(X)(Y,Z)=\frac{1}{d_{ij}(X)}\left\{
+\text{tr}\ Y'A_{ij}Z-\frac{\text{tr}\ Y'A_{ij}X\ \text{tr}\ Z'A_{ij}X}{d_{ij}^2(X)}\right\}.
+(\#eq:distder2)
+\end{equation}
+
+From the CS inequality we see that $\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0$, as we would expect from any decent twice-differentiable convex function.
+
+\begin{align}
+\Delta\rho(X;Y&=\text{tr}\ Y'B(X)X,\\
+\Delta\eta^2(X;Y)&=2\text{tr}\ Y'VX,\\
+\Delta\sigma(X;Y)&=2\text{tr}\ Y'(V-B(X))X=2\text{tr}\ Y'V(X-\mathfrak{G}(X)),
+\end{align}
 
 ### Squared Distances
 
@@ -425,29 +447,6 @@ $$
 ### Distances
 
 For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.
-
-A configuration $X$ is *regular* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. I apologize for yet another overloading of the word "regular". 
-
-#### Regular Case
-
-If $X$ is regular then all $d_{ij}$ are differentiable at $X$, in fact infinitely many times differentiable. Remembering that $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ we see that
-
-\begin{equation}
-\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
-(\#eq:distder1)
-\end{equation}
-
-If we collect the partials in an $n\times p$ matrix, then row $i$ matrix of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $(x_j-x_i)/\|x_i-x_j\|$. The rest of the matrix are zeroes, and the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\mathcal{D}d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
-
-For the quadratic form defined by the second derivatives we find
-
-\begin{equation}
-\mathcal{D}^2 d_{ij}(X)(Y,Y)=\frac{1}{d_{ij}(X)}\left\{
-\text{tr}\ Y'A_{ij}Y-\frac{(\text{tr}\ Y'A_{ij}X)^2}{d_{ij}^2(X)}\right\}.
-(\#eq:distder2)
-\end{equation}
-
-From the CS inequality we see that $\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0$, as we would expect from any decent twice-differentiable convex function.
 
 
 
