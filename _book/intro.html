@@ -659,14 +659,14 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="intro" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>In this book we study the smacof family of <em>Multidimensional Scaling</em> (<em>MDS</em> from now on) techniques. In MDS the data consist of some type of
+<p>In this book we study the <span class="math inline">\(\textrm{smacof}\)</span> family of <em>Multidimensional Scaling</em> (<em>MDS</em>) techniques. In MDS the data consist of some type of
 information about the <em>dissimilarities</em> between a number of <em>objects</em>.
 The information we have about these dissimilarities can be numerical,
 ordinal, or categorical. Thus we may have the actual values of some or
 all of the dissimilarities, we may know their rank order, or we may have
 a classification of them into a small number of qualitative bins.</p>
 <p>MDS techniques map the objects into <em>points</em> in a metric space in such a
-way that the relation between the distances between the points mirrors
+way that the relation between the distances of the points mirrors
 or approximates the relation between dissimilarities of the objects. For
 numerical dissimilarities it is clear what “approximation” means,
 although it can be measured in many different ways. For ordinal and
@@ -677,7 +677,7 @@ and we have to develop more specialized techniques to measure fit.</p>
 <p><span class="citation"><a href="#ref-deleeuw_heiser_C_80" role="doc-biblioref">De Leeuw and Heiser</a> (<a href="#ref-deleeuw_heiser_C_80" role="doc-biblioref">1980</a>)</span></p>
 <p>This is reviewed ably in the presidential address of <span class="citation"><a href="#ref-torgerson_65" role="doc-biblioref">Torgerson</a> (<a href="#ref-torgerson_65" role="doc-biblioref">1965</a>)</span>.</p>
 <p>As I mentioned in the preface, a complete overview of the state of the art until 2005 is <span class="citation"><a href="#ref-borg_groenen_05" role="doc-biblioref">Borg and Groenen</a> (<a href="#ref-borg_groenen_05" role="doc-biblioref">2005</a>)</span>.</p>
-<p>A more recent review paper, emphasizing smacof, is <span class="citation"><a href="#ref-groenen_vandevelden_16" role="doc-biblioref">Groenen and Van de Velden</a> (<a href="#ref-groenen_vandevelden_16" role="doc-biblioref">2016</a>)</span>.</p>
+<p>A more recent review paper, emphasizing <span class="math inline">\(\textrm{smacof}\)</span>, is <span class="citation"><a href="#ref-groenen_vandevelden_16" role="doc-biblioref">Groenen and Van de Velden</a> (<a href="#ref-groenen_vandevelden_16" role="doc-biblioref">2016</a>)</span>.</p>
 <p>This section has a different emphasis. We limit ourselves to developments in Euclidean MDS, to contributions with direct computational consequences with a direct or indirect link to psychometrics, and to work before 1960.</p>
 <p>Our history review takes the form of brief summaries of what we consider to be milestone papers or books.</p>
 <div id="milestones" class="section level3" number="1.1.1">
@@ -715,11 +715,12 @@ And several relatively minor variations of the Bell Laboratories
 approach were proposed by <span class="citation"><a href="#ref-guttman_68" role="doc-biblioref">Guttman</a> (<a href="#ref-guttman_68" role="doc-biblioref">1968</a>)</span>, but Guttman’s influence on
 further MDS implementations turned out to be marginal.</p>
 <p>The main development after the Bell Laboratories surge was probably
-smacof. Initially, in <span class="citation"><a href="#ref-deleeuw_C_77" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_77" role="doc-biblioref">1977a</a>)</span>, this stood for
+<span class="math inline">\(\textrm{smacof}\)</span>. Initially, in <span class="citation"><a href="#ref-deleeuw_C_77" role="doc-biblioref">De Leeuw</a> (<a href="#ref-deleeuw_C_77" role="doc-biblioref">1977a</a>)</span>, this stood for
 <em>Scaling by Maximizing a Convex Function</em>.
 Later it was also used to mean
-<em>Scaling by Majorizing a Complicated Function</em>. Whatever. In this book smacof just stands for smacof. No capitals.</p>
-<p>The first smacof programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (<span class="citation"><a href="#ref-heiser_deleeuw_R_77" role="doc-biblioref">Heiser and De Leeuw</a> (<a href="#ref-heiser_deleeuw_R_77" role="doc-biblioref">1977</a>)</span>). Eventually they migrated to SPSS (for example, <span class="citation"><a href="#ref-meulman_heiser_12" role="doc-biblioref">J. M. Meulman and Heiser</a> (<a href="#ref-meulman_heiser_12" role="doc-biblioref">2012</a>)</span>) and to R (<span class="citation"><a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">De Leeuw and Mair</a> (<a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">2009</a>)</span>). The SPSS branch and the R branch have diverged somewhat, and continue to be developed independently.</p>
+<em>Scaling by Majorizing a Complicated Function</em>. Whatever. In this book <span class="math inline">\(\textrm{smacof}\)</span> just stands for <span class="math inline">\(\textrm{smacof}\)</span>. No capitals.</p>
+<p>The first <span class="math inline">\(\textrm{smacof}\)</span> programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (<span class="citation"><a href="#ref-heiser_deleeuw_R_77" role="doc-biblioref">Heiser and De Leeuw</a> (<a href="#ref-heiser_deleeuw_R_77" role="doc-biblioref">1977</a>)</span>). Eventually they migrated to SPSS (for example, <span class="citation"><a href="#ref-meulman_heiser_12" role="doc-biblioref">J. M. Meulman and Heiser</a> (<a href="#ref-meulman_heiser_12" role="doc-biblioref">2012</a>)</span>) and to R (<span class="citation"><a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">De Leeuw and Mair</a> (<a href="#ref-deleeuw_mair_A_09c" role="doc-biblioref">2009</a>)</span>). The SPSS branch and the R branch have diverged somewhat, and they continue to be developed independently.</p>
+<p>github new <span class="math inline">\(\textrm{smacof}\)</span></p>
 </div>
 </div>
 <div id="introbasic" class="section level2" number="1.2">
@@ -729,7 +730,7 @@ dissimilarities using an explicit real-valued <em>loss function</em> (a.k.a.
 <em>badness-of-fit measure</em>), which is minimized over the possible maps of
 the objects into the metric space. This is a very general definition of MDS,
 covering all kinds of variations in the target metric space and in the
-way fit is measured. Obviously we can not discuss all possible forms and implementations, which also includes various techniques more properly discussed as cluster analysis, classification, or discrimination.</p>
+way fit is measured. Obviously we will not discuss all possible forms and implementations, which also includes various techniques more properly discussed as cluster analysis, classification, or discrimination.</p>
 <p>To outline our scope we define <em>basic MDS</em>, which is short for
 <em>Least Squares Euclidean Metric MDS</em> (LSEM-MDS). It is defined as MDS
 with the following characteristics.</p>
@@ -743,7 +744,7 @@ which are the differences between dissimilarities and distances.</li>
 <li>Self-dissimilarities are zero and the corresponding terms in the
 loss function have weight zero.</li>
 </ol>
-<p>The <em>loss function</em> we use is called <em>stress</em>. It was first explicitly introduced in MDS as <em>raw stress</em> by <span class="citation"><a href="#ref-kruskal_64a" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64a" role="doc-biblioref">1964a</a>)</span> and <span class="citation"><a href="#ref-kruskal_64b" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64b" role="doc-biblioref">1964b</a>)</span>. We define stress in a slightly different way, because we want to be consistent over the whole range of the smacof versions and implementations. In smacof stress is the real-valued function <span class="math inline">\(\sigma\)</span>, defined on the space <span class="math inline">\(\mathbb{R}^{n\times p}\)</span> of configurations, as</p>
+<p>The <em>loss function</em> we use is called <em>stress</em>. It was first explicitly introduced in MDS as <em>raw stress</em> by <span class="citation"><a href="#ref-kruskal_64a" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64a" role="doc-biblioref">1964a</a>)</span> and <span class="citation"><a href="#ref-kruskal_64b" role="doc-biblioref">Kruskal</a> (<a href="#ref-kruskal_64b" role="doc-biblioref">1964b</a>)</span>. We define stress in a slightly different way, because we want to be consistent over the whole range of the <span class="math inline">\(\textrm{smacof}\)</span> versions and implementations. In <span class="math inline">\(\textrm{smacof}\)</span> stress is the real-valued function <span class="math inline">\(\sigma\)</span>, defined on the space <span class="math inline">\(\mathbb{R}^{n\times p}\)</span> of configurations, as</p>
 <p><span class="math display" id="eq:stressall">\[\begin{equation}
 \sigma(X):=\frac12\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}(\delta_{ij}-d_{ij}(X))^2.
 \tag{1.1}
@@ -846,7 +847,7 @@ the choices made there will play a role in the normalization discussion
 in the ordinal scaling chapter (section <a href="nonmtrmds.html#nmdsnorm">8.4.1</a>), in the
 comparison of Kruskal’s and Guttman’s approach to ordinal MDS (sections <a href="chapordinal.html#nmdskruskal">11.3</a> and <a href="chapordinal.html#nmdsguttman">11.4</a>), and in our discussions about the
 differences between Kruskal’s stress <a href="intro.html#eq:kruskalstressfinal">(1.7)</a> and
-smacof’s stress <a href="intro.html#eq:stressall">(1.1)</a> in the next three sections of this chapter.</p>
+<span class="math inline">\(\textrm{smacof}\)</span>’s stress <a href="intro.html#eq:stressall">(1.1)</a> in the next three sections of this chapter.</p>
 <div id="square-root" class="section level4" number="1.2.1.1">
 <h4><span class="header-section-number">1.2.1.1</span> Square root</h4>
 <p>Let’s discuss the square root first. Using it or not using it
@@ -870,21 +871,26 @@ all those unnecessary square roots in my algorithms, and I do not want to drag t
 </div>
 <div id="intronorm" class="section level4" number="1.2.1.3">
 <h4><span class="header-section-number">1.2.1.3</span> Normalization</h4>
-<p>This section deals with a rather trivial problem, which has however caused problems in various stages of smacof’s 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.</p>
+<p>This section deals with a rather trivial problem, which has however caused problems in various stages of <span class="math inline">\(\textrm{smacof}\)</span>’s 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.</p>
 <p>Multiplying all weights by a constant does not change the value of stress, and consequently the minimization problem remains exactly the same. No matter how we scale <span class="math inline">\(W\)</span> the numerator of stress is the weighted mean square of the <em>residuals</em> <span class="math inline">\(\delta_{ij}-d_{ij}(X)\)</span> and the denominator is the weighted mean square of the dissimilarities. So there is no need to normalize the weights, and we leave them just as the user inputs them (or as they are chosen by default).</p>
-<p>We do scale the dissimilarities, however. It is clear that if we multiply the dissimilarities by a constant, then the optimal approximating distances <span class="math inline">\(D(X)\)</span> and the optimal configuration <span class="math inline">\(X\)</span> will be multiplied by the same constant. Consequently we always scale dissimilarities by <span class="math inline">\(\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=1\)</span>. This simplifies our formulas and makes them look better. It presupposes, of course, that <span class="math inline">\(w_{ij}\delta_{ij}\not=0\)</span> for at least one <span class="math inline">\(i\not= j\)</span>, which we will happily assume in the sequel. Using normalized dissimilarities amounts to the same as minimizing stress defined as</p>
-<p><span class="math display" id="eq:stressrat">\[\begin{equation}
-\sigma(X)=\frac{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}\delta_{ij}^2}.
+<p>We do scale the dissimilarities, however. It is clear that if we multiply the dissimilarities by a constant, then the optimal approximating distances <span class="math inline">\(D(X)\)</span> and the optimal configuration <span class="math inline">\(X\)</span> will be multiplied by the same constant. Consequently we in basic MDS we always scale dissimilarities by</p>
+<p><span class="math display" id="eq:scaldiss">\[\begin{equation}
+\frac12\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=1.
 \tag{1.8}
 \end{equation}\]</span></p>
-<p>This is useful to remember when we discuss the various normalizatons of non-metric MDS in chapter <a href="nonmtrmds.html#nonmtrmds">8</a>, section <a href="nonmtrmds.html#nmdsnorm">8.4.1</a>.</p>
-<p>In <em>output</em> using the scaling <span class="math inline">\(\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=1\)</span> has some disadvantages. There are <span class="math inline">\(\binom{n}{2}\)</span> weights, and, say, <span class="math inline">\(M\)</span> non-zero weights. The summation in the numerator and denominator of #ref(eq:stressall) is really over <span class="math inline">\(M\)</span> terms only. If <span class="math inline">\(n\)</span> is at all large the scaled dissimilarities, and consequently the distances and configuration, will become very small. Thus, in actual computation, we scale our dissimilarities as <span class="math inline">\(\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=\binom{n}{2}\)</span>. So, we scale our dissimilarities to one in formulas and to <span class="math inline">\(\binom{n}{2}\)</span> in computations. Thus the computed stress will be</p>
+<p>This simplifies our formulas and makes them look better. It presupposes, of course, that <span class="math inline">\(w_{ij}\delta_{ij}\not=0\)</span> for at least one <span class="math inline">\(i\not= j\)</span>, which we will happily assume in the sequel. Using normalized dissimilarities amounts to the same as minimizing stress defined as</p>
+<p><span class="math display" id="eq:stressrat">\[\begin{equation}
+\sigma(X)=\frac{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}\delta_{ij}^2}.
+\tag{1.9}
+\end{equation}\]</span></p>
+<p>This is useful to remember when we discuss the various normalizatons for non-metric MDS in section <a href="nonmtrmds.html#nmdsnorm">8.4.1</a>.</p>
+<p>In <em>computer output</em> using the scaling <span class="math inline">\(\frac12\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=1\)</span> has some disadvantages. There are <span class="math inline">\(\binom{n}{2}\)</span> weights, and, say, <span class="math inline">\(M\)</span> non-zero weights. The summation in the numerator and denominator of #ref(eq:stressall) is really over <span class="math inline">\(M\)</span> terms only. If <span class="math inline">\(n\)</span> is at all large the scaled dissimilarities, and consequently the distances and configuration, will become very small. Thus, in actual computation, we scale our dissimilarities as <span class="math inline">\(\mathop{\sum\sum}_{1\leq i&lt;j\leq n} w_{ij}^{\ }\delta_{ij}^2=\binom{n}{2}\)</span>. So, we scale our dissimilarities to one in formulas and to <span class="math inline">\(\binom{n}{2}\)</span> in computations. Thus the computed stress will be</p>
 <p><span class="math display" id="eq:stressnrm">\[\begin{align}
 \begin{split}
 \sigma(X)&amp;=\frac{1}{\binom{n}{2}}\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2=\\
 &amp;=1-2\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}\delta_{ij}d_{ij}(X)+\mathop{\sum\sum}_{1\leq i&lt;j\leq n}w_{ij}d_{ij}^2(X).
 \end{split}
-\tag{1.9}
+\tag{1.10}
 \end{align}\]</span></p>
 <p>… we shall find ourselves doing arithmetic with dissimilarities. This we must not do, because we are committed to using only the rank ordering of the dissimilarities. (a, p 6-7)</p>
 </div>
@@ -899,12 +905,12 @@ although it is just standard linear least squares projection theory.</p>
 Then</p>
 <p><span class="math display" id="eq:emadsym">\[\begin{equation}
 \frac12\sum_{i=1}^n\sum_{j=1}^nw_{ij}d_{ij}^2(X)=\mathop{\sum\sum}_{1\leq i&lt;j\leq n}\underline{w}_{ij}d_{ij}^2(X),
-\tag{1.10}
+\tag{1.11}
 \end{equation}\]</span></p>
 <p>and</p>
 <p><span class="math display" id="eq:rmadsym">\[\begin{equation}
 \sum_{i=1}^n\sum_{j=1}^nw_{ij}\delta_{ij}d_{ij}(X)=2\mathop{\sum\sum}_{1\leq i&lt;j\leq n}\underline{w}_{ij}\underline{\delta}_{ij}d_{ij}(X).
-\tag{1.11}
+\tag{1.12}
 \end{equation}\]</span></p>
 <p>Thus</p>
 <p><span class="math display" id="eq:smadsym">\[\begin{align}
@@ -912,7 +918,7 @@ Then</p>
 \sigma(X)&amp;=1-2\mathop{\sum\sum}_{1\leq j&lt;i\leq n}\underline{w}_{ij}\underline{\delta}_{ij}d_{ij}(X)+\mathop{\sum\sum}_{1\leq j&lt;i\leq n}\underline{w}_{ij}d_{ij}^2(X)\\&amp;=(1-\mathop{\sum\sum}_{1\leq j&lt;i\leq n}\underline{w}_{ij}\underline{\delta}_{ij}^2)+
 \mathop{\sum\sum}_{1\leq j&lt;i\leq n}\underline{w}_{ij}(\underline{\delta}_{ij}-d_{ij}(X))^2
 \end{split}
-\tag{1.12}
+\tag{1.13}
 \end{align}\]</span></p>
 </div>
 <div id="local-and-global" class="section level3" number="1.2.3">
@@ -965,7 +971,7 @@ rank order.</p>
 <div id="genasym" class="section level3" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Distance Asymmetry</h3>
 <p>We have seen in section <a href="intro.html#datasym">1.2.2</a> of this chapter that in basic MDS the assumption that <span class="math inline">\(W\)</span> and <span class="math inline">\(\Delta\)</span> are symmetric and hollow can be made without loss of generality. The simple partitioning which proved this was based on the fact that <span class="math inline">\(D(X)\)</span> is symmetric and hollow. By the way, the assumption that <span class="math inline">\(W\)</span> and <span class="math inline">\(D\)</span> are non-negative cannot be made without loss of generality, as we will see below.</p>
-<p>In <a href="asymmds.html#asymmds">16</a> we relax the assumption that <span class="math inline">\(D(X)\)</span> is symmetric (still requiring it to be non-negative and hollow). This could be called <em>Asymmetric MDS</em>, or <em>AMDS</em>. I was reluctant at first to include this chapter, because asymmetric distances do not exist. And certainly are not Euclidean distances, so they are not covered by the title of this book. But as long as we stay close to Euclidean distances, least squares, and the smacof approach, I now feel reasonably confident the chapter is not too much of a foreign body.</p>
+<p>In <a href="asymmds.html#asymmds">16</a> we relax the assumption that <span class="math inline">\(D(X)\)</span> is symmetric (still requiring it to be non-negative and hollow). This could be called <em>Asymmetric MDS</em>, or <em>AMDS</em>. I was reluctant at first to include this chapter, because asymmetric distances do not exist. And certainly are not Euclidean distances, so they are not covered by the title of this book. But as long as we stay close to Euclidean distances, least squares, and the <span class="math inline">\(\textrm{smacof}\)</span> approach, I now feel reasonably confident the chapter is not too much of a foreign body.</p>
 <p>When Kruskal introduced gradient based methods to minimize stress he also discussed the possibility to use Minkovski metrics other than the Euclidean metric. This certainly was part of the appeal of the new methods, in fact it seemed as if the gradient methods made it possible to use any distance function at all. This initial feeling of empowerment was somewhat naive, because it ignored the seriousness of the local minimum problem, the combinatorial nature of one-dimensional scaling, the problems with nonmetric unfolding, and the problematic nature of gradient methods if the distances are not everywhere differentiable. All these complications will be discussed later in this book. But it made me decide to ignore Minkovski distances (and hyperbolic and elliptic non-Euclidean distances), because life with stress is complicated and challenging enough as it is.</p>
 
 </div>

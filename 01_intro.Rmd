@@ -1,6 +1,6 @@
 # Introduction {#intro}
 
-In this book we study the smacof family of *Multidimensional Scaling* (*MDS*) techniques. In MDS the data consist of some type of
+In this book we study the $\textrm{smacof}$ family of *Multidimensional Scaling* (*MDS*) techniques. In MDS the data consist of some type of
 information about the *dissimilarities* between a number of *objects*.
 The information we have about these dissimilarities can be numerical,
 ordinal, or categorical. Thus we may have the actual values of some or
@@ -23,7 +23,7 @@ This is reviewed ably in the presidential address of @torgerson_65.
 
 As I mentioned in the preface, a complete overview of the state of the art until 2005 is @borg_groenen_05. 
 
-A more recent review paper, emphasizing smacof, is @groenen_vandevelden_16.
+A more recent review paper, emphasizing $\textrm{smacof}$, is @groenen_vandevelden_16.
 
 This section has a different emphasis. We limit ourselves to developments in Euclidean MDS, to contributions with direct computational consequences with a direct or indirect link to psychometrics, and to work before 1960.
 
@@ -73,14 +73,14 @@ approach were proposed by @guttman_68, but Guttman's influence on
 further MDS implementations turned out to be marginal.
 
 The main development after the Bell Laboratories surge was probably
-smacof. Initially, in @deleeuw_C_77, this stood for 
+$\textrm{smacof}$. Initially, in @deleeuw_C_77, this stood for 
 *Scaling by Maximizing a Convex Function*. 
 Later it was also used to mean 
-*Scaling by Majorizing a Complicated Function*. Whatever. In this book smacof just stands for smacof. No capitals.
+*Scaling by Majorizing a Complicated Function*. Whatever. In this book $\textrm{smacof}$ just stands for $\textrm{smacof}$. No capitals.
 
-The first smacof programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (@heiser_deleeuw_R_77). Eventually they migrated to SPSS (for example, @meulman_heiser_12) and to R (@deleeuw_mair_A_09c). The SPSS branch and the R branch have diverged somewhat, and they continue to be developed independently.
+The first $\textrm{smacof}$ programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (@heiser_deleeuw_R_77). Eventually they migrated to SPSS (for example, @meulman_heiser_12) and to R (@deleeuw_mair_A_09c). The SPSS branch and the R branch have diverged somewhat, and they continue to be developed independently.
 
-github new smacof
+github new $\textrm{smacof}$
 
 ## Basic MDS {#introbasic}
 
@@ -104,7 +104,7 @@ with the following characteristics.
 6.  Self-dissimilarities are zero and the corresponding terms in the
     loss function have weight zero.
 
-The *loss function* we use is called *stress*. It was first explicitly introduced in MDS as *raw stress* by @kruskal_64a and @kruskal_64b. We define stress in a slightly different way, because we want to be consistent over the whole range of the smacof versions and implementations. In smacof stress is the real-valued function $\sigma$, defined on the space $\mathbb{R}^{n\times p}$ of configurations, as
+The *loss function* we use is called *stress*. It was first explicitly introduced in MDS as *raw stress* by @kruskal_64a and @kruskal_64b. We define stress in a slightly different way, because we want to be consistent over the whole range of the $\textrm{smacof}$ versions and implementations. In $\textrm{smacof}$ stress is the real-valued function $\sigma$, defined on the space $\mathbb{R}^{n\times p}$ of configurations, as
 
 \begin{equation}
 \sigma(X):=\frac12\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}(\delta_{ij}-d_{ij}(X))^2.
@@ -226,7 +226,7 @@ the choices made there will play a role in the normalization discussion
 in the ordinal scaling chapter (section \@ref(nmdsnorm)), in the 
 comparison of Kruskal's and Guttman's approach to ordinal MDS (sections \@ref(nmdskruskal) and \@ref(nmdsguttman)), and in our discussions about the
 differences between Kruskal's stress \@ref(eq:kruskalstressfinal) and
-smacof's stress \@ref(eq:stressall) in the next three sections of this chapter.
+$\textrm{smacof}$'s stress \@ref(eq:stressall) in the next three sections of this chapter.
 
 #### Square root
 
@@ -250,7 +250,7 @@ In some situations, for example for huge data sets, it is computationally conven
 
 #### Normalization {#intronorm}
 
-This section deals with a rather trivial problem, which has however caused problems in various stages of smacof's 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.
+This section deals with a rather trivial problem, which has however caused problems in various stages of $\textrm{smacof}$'s 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.
 
 Multiplying all weights by a constant does not change the value of stress, and consequently the minimization problem remains exactly the same. No matter how we scale $W$ the numerator of stress is the weighted mean square of the *residuals* $\delta_{ij}-d_{ij}(X)$ and the denominator is the weighted mean square of the dissimilarities.  So there is no need to normalize the weights, and we leave them just as the user inputs them (or as they are chosen by default). 
 
@@ -376,7 +376,7 @@ ind diff {#chindif}
 
 We have seen in section \@ref(datasym) of this chapter that in basic MDS the assumption that $W$ and $\Delta$ are symmetric and hollow can be made without loss of generality. The simple partitioning which proved this was based on the fact that $D(X)$ is symmetric and hollow. By the way, the assumption that $W$ and $D$ are non-negative cannot be made without loss of generality, as we will see below.
 
-In \@ref(asymmds) we relax the assumption that $D(X)$ is symmetric (still requiring it to be non-negative and hollow). This could be called *Asymmetric MDS*, or *AMDS*. I was reluctant at first to include this chapter, because asymmetric distances do not exist. And certainly are not Euclidean distances, so they are not covered by the title of this book. But as long as we stay close to Euclidean distances, least squares, and the smacof approach, I now feel reasonably confident the chapter is not too much of a foreign body.
+In \@ref(asymmds) we relax the assumption that $D(X)$ is symmetric (still requiring it to be non-negative and hollow). This could be called *Asymmetric MDS*, or *AMDS*. I was reluctant at first to include this chapter, because asymmetric distances do not exist. And certainly are not Euclidean distances, so they are not covered by the title of this book. But as long as we stay close to Euclidean distances, least squares, and the $\textrm{smacof}$ approach, I now feel reasonably confident the chapter is not too much of a foreign body.
 
 When Kruskal introduced gradient based methods to minimize stress he also discussed the possibility to use Minkovski metrics other than the Euclidean metric. This certainly was part of the appeal of the new methods, in fact it seemed as if the gradient methods made it possible to use any distance function at all. This initial feeling of empowerment was somewhat naive, because it ignored the seriousness of the local minimum problem, the combinatorial nature of one-dimensional scaling, the problems with nonmetric unfolding, and the problematic nature of gradient methods if the distances are not everywhere differentiable. All these complications will be discussed later in this book. But it made me decide to ignore Minkovski distances (and hyperbolic and elliptic non-Euclidean distances), because life with stress is complicated and challenging enough as it is.
 

@@ -2,7 +2,7 @@
 
 ## Notation {#propnotation}
 
-The notation used in the smacof approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the later key smacof references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c.
+The notation used in the $\textrm{smacof}$ approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the later key $\textrm{smacof}$ references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c.
 
 ### Expanding {#propexpand} 
 
@@ -290,7 +290,7 @@ A bit more
 ## Guttman Transform {#propguttman}
 
 The Guttman Transform is named to honor the contribution of Louis Guttman to non-metric MDS (mainly, but by no means exclusively, in @guttman_68). Guttman introduced the transform in a slightly different way, and partly for 
-different reasons. In chapter \@ref(minstr) we shall see that the Guttman Transform plays a major role in defining and understanding the smacof algorithm.
+different reasons. In chapter \@ref(minstr) we shall see that the Guttman Transform plays a major role in defining and understanding the $\textrm{smacof}$ algorithm.
 
 The *Guttman Transform* of a configuration $X$ (for given weights and dissimilarities) is defined as 
 
@@ -376,7 +376,7 @@ quadratic, and thus infinitely many times differentiable. But $d_{ij}(X)=\sqrt{\
 at points where $d_{ij}(X)=0$, because the square root is not differentiable at zero. For stress this means that $\eta^2$ is differentiable but if $d_{ij}(X)=0$
 for one or more $i$ and $j$ with $w_{ij}\delta_{ij}>0$ then $\rho$ (and thus $\sigma$) is not differentiable at $X$.
 
-These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
+These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the $\textrm{smacof}$ algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
 We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. 
 
@@ -773,7 +773,7 @@ in basic MDS is not a serious problem in the actual computation of local minima.
 There is another
 rather straightforward way to circumvent the differentiabily issue, which actually may have additional
 benefits. The idea is to use an approximation of the Euclidean distance that is as
-close as possible on the positive real axis but smooth at zero. This was first applied in unidimensional MDS by Pliner (@pliner_86,  @pliner_96) and later taken up and generalized to pMDS for arbitrary $p$, and even for arbitrary Minkovski metrics, by @groenen_heiser_meulman_98 and @groenen_heiser_meulman_99. They coined the term *distance smoothing* for this variation of the smacof framework for MDS.
+close as possible on the positive real axis but smooth at zero. This was first applied in unidimensional MDS by Pliner (@pliner_86,  @pliner_96) and later taken up and generalized to pMDS for arbitrary $p$, and even for arbitrary Minkovski metrics, by @groenen_heiser_meulman_98 and @groenen_heiser_meulman_99. They coined the term *distance smoothing* for this variation of the $\textrm{smacof}$ framework for MDS.
 
 Pliner uses a smooth approximation of the sign function, while Groenen et al. use a smooth Huber approximation of the absolute value function. We use another classical and efficient approximation $|x|\approx\sqrt{x^2+\epsilon^2}$ to the absolute value function, used in image analysis, location analysis, and computational geometry (@deleeuw_E_18f, @ramirez_sanchez_kreinovich_argaez_14). In our context that becomes $d_{ij}(X)\approx d_{ij}(X,\epsilon):=\sqrt{d_{ij}^2(X)+\epsilon^2}$. Note that on the non-negative reals
 
@@ -802,7 +802,7 @@ for (eps in c(0, .01, .05, .1, .5)) {
 }
 ```
 
-The distance smoother we use fits nicely into smacof. Define $X_\epsilon:=\begin{bmatrix}X&\mid&\epsilon I\end{bmatrix}$. Then $d_{ij}(X_\epsilon)=\sqrt{d_{ij}^2(X)+\epsilon^2}$. Thus we can define
+The distance smoother we use fits nicely into $\textrm{smacof}$. Define $X_\epsilon:=\begin{bmatrix}X&\mid&\epsilon I\end{bmatrix}$. Then $d_{ij}(X_\epsilon)=\sqrt{d_{ij}^2(X)+\epsilon^2}$. Thus we can define
 
 \begin{equation}
 \sigma_\epsilon(X):=\sigma(X_\epsilon)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}- d_{ij}(X_\epsilon))^2,
