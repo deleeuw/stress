@@ -219,7 +219,7 @@ multidimensional scaling (MDS) theory and history. It emphasizes the
 computation, and the mathematics needed for computation. In addition, it
 is a summary of over 50 years of MDS work by me, either solo or together
 with my many excellent current or former co-workers and co-authors. It
-is heavily biased in favor of the **smacof** formulation of MDS
+is heavily biased in favor of the **$\textrm{smacof}$** formulation of MDS
 (@deleeuw_C_77, @deleeuw_heiser_C_77, @deleeuw_mair_A_09c), and the
 corresponding majorization (or MM) algorithm. And, moreover, I am
 shamelessly squeezing in as many references to my published and
@@ -301,18 +301,18 @@ developed since 1968 into a quite formidable five-year publication
 machine, with at its zenith @takane_young_deleeuw_A_77.
 
 In La Jolla I gave the first presentation of the majorization method for
-MDS, later known as smacof, with the first formal convergence proof. The
-canonical account of smacof was published in @deleeuw_C_77. Again I did
+MDS, later known as $\textrm{smacof}$, with the first formal convergence proof. The
+canonical account of $\textrm{smacof}$ was published in @deleeuw_C_77. Again I did
 not bother to get the results into a journal or into some other
 effective form of publication. The basic theory for what became known as
-smacof was also presented around the same time in the book chapter
+$\textrm{smacof}$ was also presented around the same time in the book chapter
 @deleeuw_heiser_C_77.
 
 In 1978 I was invited to the Fifth International Symposium on
 Multivariate Analysis in Pittsburgh to present what became
 @deleeuw_heiser_C_80. There I met Nan Laird, one of the authors of the
 basic paper on the EM algorithm (@dempster_laird_rubin_77). I remember
-enthusiastically telling her on the conference bus that EM and smacof
+enthusiastically telling her on the conference bus that EM and $\textrm{smacof}$
 were both special case of the general majorization approach to algorithm
 construction, which was consequently born around the same time. But that
 is a story for a companion volume, which currently only exists in a very
