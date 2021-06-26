@@ -295,7 +295,7 @@ If $d_{ij}X)>0$
 
 :::
 
-If we collect the partials in the $n\times p$ gradient matrix $\nabla d_{ij}(X)$, then row $i$ of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $-(x_i-x_j)/\|x_i-x_j\|$. The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\nabla d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
+If we collect the partials in the $n\times p$ gradient matrix $\nabla d_{ij}(X)$, then row $i$ of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $-(x_i-x_j)/\|x_i-x_j\|$. The other elements of the matrix are zero, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\nabla d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
 
 From the CS inequality we see that $\mathrm{d}^2 d_{ij}(X)(Y,Y)\geq 0$, for all $X$ and $Y$, as we would expect from any decent twice-differentiable convex function.
 
@@ -392,9 +392,6 @@ $$
 
 ### Distances
 
-For distances the situation is more complicated than for squared distances, basically because the square root is not differentiable at the origin.
-
-
 
 $$
 d_{ij}(X+\epsilon Y)=\sqrt{\text{tr}\ X'A_{ij}X+2\epsilon\ \text{tr}\ X'A_{ij}Y+\epsilon^2\text{tr}\ Y'A_{ij}Y}
@@ -468,7 +465,7 @@ $$
 If $d_{ij}(Y)>0$ then
 
 $$
-\epsilon(d_{ij}(Y) + \epsilon\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)})
+\epsilon\ d_{ij}(Y) + \epsilon\frac{\text{tr}\ Y'A_{ij}Z}{d_{ij}(Y)})
 $$
 and thus
 $$
