@@ -79,6 +79,86 @@ smacof: hard squeeze double phase
 
 ## Kruskal's Approach {#nmdskruskal}
 
+### Kruskal's Stress
+
+Remember that Kruskal's definition was intended for ordinal multidimensional scaling only. 
+Thus dissimilarities are not numbers, as in basic MDS, and only their rank order is known. He first defined *raw stress* as
+
+\begin{equation}
+\sigma^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
+(\#eq:rawstress1)
+\end{equation}
+
+where the $\hat d_{ij}$ is some set of numbers monotone with the dissimilarities. 
+
+> To simplify the discussion, we delay the precise definition of 
+> $\hat d$, for a little while. (@kruskal_64a, p. 8)
+
+Kruskal then mentions that raw stress satisfies $\sigma^\star_K(\alpha X)=\alpha^2\sigma^\star_K(X)$, which is clearly undesirable because 
+the size of the configuration should not influence the quality of 
+the fit. 
+
+> An obvious way to cure this defect in the raw stress is to divide it by a 
+> scaling factor, that is, a quantity which has the same quadratic
+> dependence on the scale of the configuration that raw stress does.
+> (@kruskal_64a, p. 8).
+
+By the way, although the precise definition of $\hat D$
+has been delayed, the uniform stretching/shrinking argument already assumes that
+if we multiply $D$ by $\alpha$ then $\hat D$ also gets multiplied
+by $\alpha$. Thus it sort of gives away that $\hat D$ is also a
+function of $X$, at least of the scale of $X$. 
+
+For the normalization of raw stress Kruskal chooses
+
+\begin{equation}
+\tau^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X),
+(\#eq:rawtau)
+\end{equation}
+
+> Finally, it is desirable to use the square root of this expression, which
+> is analogous to choosing the standard deviation in place of the variance. 
+> (@kruskal_64a, p. 9)
+
+Thus Kruskal's normalized loss function for ordinal MDS becomes
+
+\begin{equation}
+\sigma_K(X):=\sqrt{\frac{\sigma^\star_K(X)}{\tau^\star_K(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstress)
+\end{equation}
+
+At this point in @kruskal_64a the definition of $\hat D$ still hangs in the
+air, although we know that the $\hat D$ are monotone with $\Delta$, and that multiplying $X$ by a constant will multiply
+both $D(X)$ and $\hat D$ by the same constant. Matters are clarified 
+right after the definition of stress.
+
+> Now it is easy to define the $\hat d_{ij}$. They are the numbers which 
+> minimize $\sigma$ (or equivalently, $\sigma^\star$) subject to the 
+> monotonicity constraints. (@kruskal_64a, p. 9)
+
+Thus, actually, raw stress is the minimum over the pseudo-distance matrices
+$\Omega$ in $\mathfrak{D}$, the set of all monotone transformations of the dissimilarities. 
+
+\begin{equation}
+\sigma^\star(X):=\min_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2,
+(\#eq:rawstressfinal)
+\end{equation}
+
+and $\hat D$ is the minimizer, which is now clearly a function of $X$,
+
+\begin{equation}
+\hat D(X):=\mathop{\text{argmin}}_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2.
+(\#eq:dhatdef)
+\end{equation}
+
+So, finally,
+
+\begin{equation}
+\sigma(X):=\min_{\Omega\in\mathfrak{D}}\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstressfinal)
+\end{equation}
+
+
 In Guttman's terminology Kruskal's approach is hard squeeze single phase.
 Thus what is minimized is
 

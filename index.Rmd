@@ -215,16 +215,17 @@ include_graphics("graphics/lajolla_08_75.png")
 # Preface {.unnumbered}
 
 This book is definitely *not* an impartial and balanced review of all of
-multidimensional scaling (MDS) theory and history. It emphasizes the
+multidimensional scaling (MDS) theory and history. It emphasizes 
 computation, and the mathematics needed for computation. In addition, it
 is a summary of over 50 years of MDS work by me, either solo or together
 with my many excellent current or former co-workers and co-authors. It
-is heavily biased in favor of the **$\textrm{smacof}$** formulation of MDS
+is heavily biased in favor of the $\textrm{smacof}$ formulation of MDS
 (@deleeuw_C_77, @deleeuw_heiser_C_77, @deleeuw_mair_A_09c), and the
 corresponding majorization (or MM) algorithm. And, moreover, I am
 shamelessly squeezing in as many references to my published and
 unpublished work as possible, with links to the corresponding pdf's if
-they are available.
+they are available. Thus this book is also a jumpstation into my 
+bibliography.
 
 I have not organized the book along historical lines because most of the
 early techniques and results have been either drastically improved or
@@ -252,25 +253,25 @@ also emphasized that data were often non-metric, i.e. ordinal or
 categorical, and that it was possible to analyze these ordinal or
 categorical relationships directly, without first constructing numerical
 scales to which classical techniques could be applied. One of the new
-techniques discussed in @coombs_64 was a non-metric form of MDS, in
+techniques discussed in @coombs_64 was a ordinal form of MDS, in
 which not only the data but also the representation of the data in
-Euclidean space was non-metric.
+Euclidean space were non-metric.
 
 John van de Geer had just published @vandegeer_67. In that book, and in
 the subsequent book @vandegeer_71, he developed his unique geometric
 approach to multivariate analysis. Relationship between variables, and
 between variables and individuals, were not just discussed using matrix
 algebra, but were also visualized in diagrams. This was related to the
-geometry in Coombs' Theory of Data, but it concentrated on numerical
-data in the form of rectangular matrices of objects by variables.
+geometric representations in Coombs' Theory of Data, but it concentrated 
+on numerical data in the form of rectangular matrices of objects by variables.
 
 Looking back it is easy to see that both Van de Geer and Coombs
 influenced my approach to data analysis. I inherited the emphasis on
 non-metric data and on visualization. But, from the beginning, I
-interpreted "Data Theory" as "Data Analysis", with the emphasis shifting
-almost completely to techniques, loss functions, implementations,
+interpreted "Data Theory" as "Data Analysis", with my emphasis shifting
+to techniques, loss functions, implementations,
 algorithms, optimization, computing, and programming. This is of
-interest because in 2020 my old Department of Statistics at UCLA,
+interest because in 2020 my former Department of Statistics at UCLA,
 together with the Department of Mathematics, started a bachelor's
 program in Data Theory, in which "Emphasis is placed on the development
 and theoretical support of a statistical model or algorithmic approach.
@@ -302,10 +303,9 @@ machine, with at its zenith @takane_young_deleeuw_A_77.
 
 In La Jolla I gave the first presentation of the majorization method for
 MDS, later known as $\textrm{smacof}$, with the first formal convergence proof. The
-canonical account of $\textrm{smacof}$ was published in @deleeuw_C_77. Again I did
-not bother to get the results into a journal or into some other
-effective form of publication. The basic theory for what became known as
-$\textrm{smacof}$ was also presented around the same time in the book chapter
+canonical account of $\textrm{smacof}$ was published in the conference paper @deleeuw_C_77. Again I did not bother to get the results into a journal or into some other
+more effective form of publication. The basic theory for what became known as
+$\textrm{smacof}$ was also presented around the same time in another book chapter
 @deleeuw_heiser_C_77.
 
 In 1978 I was invited to the Fifth International Symposium on
@@ -323,13 +323,13 @@ actually my second attempt at a dissertation. I had to get a PhD, any
 PhD, before going to Bell Labs, because of the discrepancy in the Dutch
 and American academic title and reward systems. I started writing a
 dissertation on MDS, in the spirit of what later became
-@deleeuw_heiser_C_82. But halfway through I lost interest and became
+@deleeuw_heiser_C_82. But halfway through I lost interest and got
 impatient, and I decided to switch to nonlinear multivariate analysis.
 This second attempt did produced a finished dissertation, which
-blossomed, with the help of many, into @gifi_B_90. But that again is a
+grew over time, with the help of many, into @gifi_B_90. But that again is a
 different history, which I will tell some other time in yet another
 companion volume (@deleeuw_B_16a). For a long time I did not do much
-work on MDS, until the arrival of the R language and Patrick Mair led to
+work on MDS, until the arrival of Patrick Mair and the R language led to
 a resurgence of my interest, and ultimately to @deleeuw_mair_A_09c and
 @mair_groenen_deleeuw_A_19.
 
@@ -338,10 +338,10 @@ papers @deleeuw_C_77 (reprinted as @deleeuw_R_05b),
 @deleeuw_heiser_C_77, @deleeuw_heiser_C_80, @deleeuw_heiser_C_82, and
 @deleeuw_A_88b (published version of @deleeuw_R_84c), all written 30-40
 years ago. Footprints in the sands of time. It can also be seen as an
-elaboration of the more mathematical sections of the excellent and
+elaboration of the more mathematical and computational sections of the excellent and
 comprehensive textbook of @borg_groenen_05. That book has much more
 information about the origins, the data, and the applications of MDS, as
-well as on the interpretation of MDS solutions. In this book we
+well as on the interpretation of MDS solutions. In this book I
 concentrate almost exclusively on the mathematical, computational, and
 programming aspects of MDS.
 

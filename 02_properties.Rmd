@@ -147,7 +147,7 @@ Stress only depends on the distances between the points in the configuration, an
 
 It follows directly that the minimizer of stress, if it exists, cannot possibly be unique. Whatever the value at a minimum, it is shared by all rigid transformations of the configuration.
 
-It also follows from translational invariance that we can minimize stress over the $p(n-1)$ dimensional subspace of $\mathbb{R}^{n\times p}$ of all $n\times p$ matrices which are centered, i.e. have $e'X=0$. Rotational invariance implies we can also require without loss of generality that $X$ is orthogonal, i.e. that $X^TX$ is diagonal. This studied in more detail in chapter \#ref(propspaces).
+It also follows from translational invariance that we can minimize stress over the $p(n-1)$ dimensional subspace of $\mathbb{R}^{n\times p}$ of all $n\times p$ matrices which are centered, i.e. have $e^TX=0$. Rotational invariance implies we can also require without loss of generality that $X$ is orthogonal, i.e. that $X^TX$ is diagonal. This studied in more detail in section \#ref(propconfspace).
 
 ### Continuity {#propcontinuity}
 
@@ -156,8 +156,7 @@ It also follows from translational invariance that we can minimize stress over t
 On $\mathbb{R}^{n\times p}$ 
 
 * $d_{ij}$ is Lipschitz continuous, and thus uniformly continuous. The Lipschitz constant is $\sqrt{2}$.
-* $d_{ij}^2$ is locally Lipschitz, and thus continuous, but it is not globally 
-Lipschitz.
+* $d_{ij}^2$ is locally Lipschitz, and thus continuous, but it is not globally Lipschitz.
 :::
 
 ::: {.proof}
@@ -176,6 +175,15 @@ To show the Lipschitz bound is sharp use $Y=0$ and $X=\begin{bmatrix}\hfill x\\-
 Because $d_{ij}^2$ is continuously differentiable it is locally Lipschitz, and because its derivative is unbounded it is not globally Lipschitz. 
 :::
 
+::: {#proplosscont .corollary}
+On $\mathbb{R}^{n\times p}$ 
+
+* $\rho$ is Lipschitz continuous, and thus uniformly continuous. The Lipschitz constant is $\sqrt{2}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}\|X-Y\|$.
+* $\eta^2$ and $\sigma$ are both locally Lipschitz, and thus continuous, but not globally Lipschitz.
+:::
+::: {.proof}
+This follows directly from theorem \@ref(thm:proplip).
+:::
 
 ### Coercivity {#propcoercive}
 
@@ -195,104 +203,107 @@ It follows from coercivity that all level sets of stress $\mathcal{L}_s:=\{X\mid
 The following theorem provides more bowl-shapedness.
 
 ::: {#rayquad .theorem}
-If $X\not=0$ then on the ray $\{Y\mid Y=\alpha X \text{with} \alpha\geq 0\}$ stress is an unbounded convex quadratic in $\alpha$. The minimum of this quadratic is at $\alpha=\rho(X)/\eta^2(X)$ and it is equal to $1-\frac12\rho^2(X)/\eta^2(X)$. There is a local maximum at the boundary $\alpha=0$, equal to 1.
+If $X\not=0$ then on the ray $\{Y\mid Y=\alpha X\text{ with }\alpha\geq 0\}$ stress is an unbounded convex quadratic in $\alpha$. The minimum of this quadratic is at $\alpha=\rho(X)/\eta^2(X)$ and it is equal to $1-\frac12\rho^2(X)/\eta^2(X)$. There is a local maximum at the boundary $\alpha=0$, equal to 1.
 :::
 ::: {.proof}
-We  have $\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)$. The staements in the theorem follow easily from this.
+We  have $\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)$. The statements in the theorem follow easily from this.
 :::
 
 ## Differentiability {#propdiff}
 
-The fact that $d_{ij}$ can be zero for some configurations creates problems with its differentiability. 
+The fact that $d_{ij}$ can be zero for some configurations creates problems with the differentiability of stress. 
 
 Because $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X$ is a
 quadratic it is everywhere infinitely many times differentiable. But $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ is not differentiable
 at points where $d_{ij}(X)=0$, i.e. where $x_i=x_j$, because the square root is not differentiable at zero. For stress this means that $\eta^2$ is differentiable but if $d_{ij}(X)=0$ for one or more $i$ and $j$ with $w_{ij}\delta_{ij}>0$ then $\rho$ (and thus $\sigma$) is not differentiable at $X$.
 
-These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the $\textrm{smacof}$ algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
+These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that the important characteristics of the $\textrm{smacof}$ algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
 We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances. 
 
 ### Notation and Terminology
 
-A quick reminder of terminology and notation. The *derivative* of stress at configuration $X$ is $\mathcal{D}\sigma(X)$. It is a linear transformation of configuration space $\mathbb{R}^{n\times p}$ into
-$\mathbb{R}$. The derivative at $X$ at configuration $Y$ is
-$\mathcal{D}\sigma(X)(Y)$, which also defines the *differential* $\Delta\sigma(X;Y)$, a function of $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$ into $\mathbb{R}$. 
+A quick reminder of terminology and notation. We follow @spivak_65, @dieudonne_69, and @flett_80, except that we limit ourselves to inner product spaces of finite dimension. 
 
-The *partial derivatives* at $X$ are $\mathcal{D}\sigma(X)(E_s)=\Delta\sigma(X,E_s)$, where the  $E_s$ are a basis for configuration space. The matrix of partial derivatives is the *gradient matrix* at $X$.
-
-The *second derivative* $\mathcal{D}^2\sigma$ is the derivative of the first derivative. It defines a symmetric bilinear form on $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$. The *second differential* is $\mathcal{D}^2\sigma(X)(Y,Z)=\Delta^2\sigma(X;Y,Z)$, and the *Hessian* is the 
-symmetric matrix with as elements the *second partial derivatives* $\Delta^2\sigma(X;E_s,E_t)$.
-
-
-#### Derivative
-
-Suppose $f$ maps an open set $X\subseteq\mathbb{R}^n$ into $\mathbb{R}^m$. Then $f$ is (Fréchet, totally) differentiable at $x\in X$ if there is a *linear* map $\mathcal{D}f$ of $X$ into $\mathbb{R}^m$ such that
+A *Euclidean space* is a finite-dimensional vector space with an inner product (and an associated norm). Suppose $X$ is an open subset of n-dimensional Euclidean space $\mathcal{X}$, and $f$ and $g$ are continuous mappings of $X$ into an m-dimensional Euclidean space $\mathcal{Y}$. The mappings $f$ and $g$ are *tangent* at $x\in X$ if
 
 \begin{equation}
-\mathcal{D}f(x)=\lim_{\delta\rightarrow 0} \frac{f(x+\delta)-f(x)-\mathcal{D}f(x)\delta}{\|\delta\|}=0,
-(\#eq:apfrderdef1)
+\lim_{z\rightarrow x}\frac{\|f(z)-g(z)\|}{\|z-x\|}=0.
+(\#eq:proptangent)
 \end{equation}
 
-which we can also write as
+It is understood that we let $z\rightarrow x$ in such a way that $z\not=x$. 
+
+There is at most one linear function $g$ which is tangent to $f$ at $x$. This unique $g$, if it exists, can be written as $g(z)=f(x)+A(z-x)$, where $A$ is a linear map from $\mathcal{X}$ into $\mathcal{Y}$. Thus $A$ must satisfy
+\begin{equation}
+\lim_{z\rightarrow x}\frac{\|f(z)-f(x)+A(z-x)\|}{\|z-x\|}=0,
+(\#eq:proplintangent1)
+\end{equation}
+
+or
 
 \begin{equation}
-\mathcal{D}f(x+\delta)=f(x)+\mathcal{D}f(x)\delta+o(\|\delta\|).
-(\#eq:apfrderdef2)
+\lim_{z\rightarrow 0}\frac{\|f(x+z)-f(x)+A(z)\|}{\|z\|}=0,
+(\#eq:proptangent2)
 \end{equation}
 
-So, just to be clear about the notation, $\mathcal{D}f(x)(y)$ means the value in $\mathbb{R}^m$ of the linear map $\mathcal{D}f(x)$ at $y\in X$.
+or
 
+\begin{equation}
+\|f(x+z)-f(x)+A(z)\|=o(\|z\|).
+(\#eq:proptangent3)
+\end{equation}
 
-Second derivatives symmetric quadratic form
+If such an linear map $A$ exists, it is called the derivative of $f$ at $x$, and we write it as $\mathcal{D}f(x)$. This definition does not require any choice of coordinates, and it is invariant under choice of inner products or associated norms. 
 
-$\mathcal{D}^2f(x)=\mathcal{D}(\mathcal{D}f(x))$
+It is important to remember that for each $x$ the derivative $\mathcal{D}f(x)$ is a linear map, and that, assuming $\mathcal{D}f(x)$ exists at all elements of $X$, $\mathcal{D}f$ maps $X$ into $\mathcal{L}(\mathcal{X},\mathcal{Y})$, the linear maps of $\mathcal{X}$ into $\mathcal{Y}$. 
 
-$$\mathcal{D}^2f(x)(y,z)=\mathcal{D}^2f(x)(z,y)$$
+The value of the derivative at $x$ for $y$ is
+$\mathcal{D}f(x)(y)$, which also defines the *differential* $\mathrm{d}f(x;y)$,  The differential is a function of $\mathcal{X}\otimes\mathcal{X}$ into $\mathcal{Y}$. 
 
-#### Partial Derivatives {#mathaddparder}
+If we choose a basis for both $\mathcal{X}$ and $\mathcal{Y}$ we can represent $\mathcal{D}f(x)$ as an $m\times n$ matrix Jacobian.
 
-$$
-\mathcal{D}_f(x,y)=
-$$
-$$
-f_i(\epsilon)=f(x+\epsilon\ e_i)
-$$
+The *partial derivatives* at $X$ are $\mathcal{D}f(x)(e_i)=\mathrm{d}f(x,e_i)$, where the $e_i$ form the usual canonical basis of $\mathcal{X}$. The matrix of partial derivatives $\nabla f(x)$ is the *gradient* at $x$. Note that $\mathfrak{d}f(x;y)=<y,\nabla\sigma(x)>$.
 
-$$
-\mathcal{D}_if(x)=\mathcal{D}f_i(0)
-$$
+$\mathcal{D}^2f(x)$, the *second derivative* at $x$, is the derivative of the first derivative. It defines a symmetric bilinear form on $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$. The *second differential* is $\mathrm{d}^2\sigma(X;Y,Z):=\mathcal{D}^2\sigma(X)(Y,Z)$, and the *Hessian* $\mathcal{H}f(x)$ at $x$ is the 
+symmetric matrix with as elements the *second partial derivatives* $\mathrm{d}^2f(x;e_i,e_j)$.
 
-$$
-\mathcal{D}f(x)(y)=\sum_{i=1}^n\mathcal{D}_if(x)(y_i)
-$$
+Two Eucliean spaces. 
 
-#### Jacobian
+$\mathbb{R}^n$ with inner product $x^Ty$ and norm $\sqrt{x^Tx}$, basis $e_1,\cdots,e_n$
 
-$$
-\{\mathcal{J}F(x)\}_{ij}=\{\mathcal{D}_i^{\ }f_j(x)\}
-$$
+$\mathbb{R}^{n\times p}$ with inner product $\text{tr}\ X^TY$ and norm $\sqrt{\text{tr}\ X^TX}$, basis
+$e_ie_s^T$ with $i=1,\cdots,n$ and $s=1,\cdots,p$.
 
-#### Gradient
+Brouhaha 
 
-$$
-\{\nabla f(x)\}_i=\mathcal{D}f(x)(e_i)
-$$
+matrix differential calculus Dwyer, Tracy, MacDonald, Swaminathan, Bentler, Lee, Pollack, Magnus, Neudecker
 
-#### Hessian
+### Non-zero Distances
 
-$$
-\{\nabla^2 f(x)\}_{ij}=\mathcal{D}^2f(x)(e_i,e_j)
-$$
+A configuration $X$ is *simplicial* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. If $X$ is simplicial then all $d_{ij}$ are differentiable at $X$, in fact infinitely many times differentiable. Remembering that $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ we see that 
 
-#### Differentials
+::: {#distdiff .theorem}
 
-If $f$ is differentiable at $x$ then the function 
-$\mathcal{D}f(x)(u)$ is called the differential
+If $d_{ij}X)>0$
 
-@flett_80 
+\begin{align}
+\mathrm{d}d_{ij}(X;Y)&=\frac{1}{d_{ij}(X)}\text{tr}\ Y'A_{ij}X=\frac{(x_i-x_j)'(y_i-y_i)}{d_{ij}(X)},\\
+\mathrm{d}^2 d_{ij}(X)(Y,Z)&=\frac{1}{d_{ij}(X)}\left\{
+\text{tr}\ Y'A_{ij}Z-\frac{\text{tr}\ Y'A_{ij}X\ \text{tr}\ Z'A_{ij}X}{d_{ij}^2(X)}\right\}.
+\end{align}
 
-@magnus_neudecker_99
+:::
+
+If we collect the partials in the $n\times p$ gradient matrix $\nabla d_{ij}(X)$, then row $i$ of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $-(x_i-x_j)/\|x_i-x_j\|$. The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\nabla d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
+
+From the CS inequality we see that $\mathrm{d}^2 d_{ij}(X)(Y,Y)\geq 0$, for all $X$ and $Y$, as we would expect from any decent twice-differentiable convex function.
+
+\begin{align}
+\Delta\rho(X;Y)&=\text{tr}\ Y'B(X)X,\\
+\Delta\eta^2(X;Y)&=2\text{tr}\ Y'VX,\\
+\Delta\sigma(X;Y)&=2\text{tr}\ Y'(V-B(X))X=2\text{tr}\ Y'V(X-\mathfrak{G}(X)),
+\end{align}
 
 
 ### Directional Derivatives {#apdirder}
@@ -341,32 +352,6 @@ If $f$ is twice differentiable
 \end{equation}
 
 
-#### Non-zero Distances
-
-A configuration $X$ is *separated* if $d_{ij}(X)>0$ for all $i\not= j$ with $w_{ij}\delta_{ij}>0$. If $X$ is separated then all $d_{ij}$ are differentiable at $X$, in fact infinitely many times differentiable. Remembering that $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ we see that
-
-\begin{equation}
-\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
-(\#eq:distder1)
-\end{equation}
-
-If we collect the partials in the $n\times p$ gradient matrix, then row $i$ of this matrix is $(x_i-x_j)/\|x_i-x_j\|$ and row $j$ is $-(x_i-x_j)/\|x_i-x_j\|$. The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of $\mathcal{D}d_{ij}(X)$ is equal to two, and thus all partial derivatives are less than or equal to $\sqrt{2}$.
-
-For the symmetric bilinear form defined by the second derivatives we find
-
-\begin{equation}
-\mathcal{D}^2 d_{ij}(X)(Y,Z)=\frac{1}{d_{ij}(X)}\left\{
-\text{tr}\ Y'A_{ij}Z-\frac{\text{tr}\ Y'A_{ij}X\ \text{tr}\ Z'A_{ij}X}{d_{ij}^2(X)}\right\}.
-(\#eq:distder2)
-\end{equation}
-
-From the CS inequality we see that $\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0$, as we would expect from any decent twice-differentiable convex function.
-
-\begin{align}
-\Delta\rho(X;Y&=\text{tr}\ Y'B(X)X,\\
-\Delta\eta^2(X;Y)&=2\text{tr}\ Y'VX,\\
-\Delta\sigma(X;Y)&=2\text{tr}\ Y'(V-B(X))X=2\text{tr}\ Y'V(X-\mathfrak{G}(X)),
-\end{align}
 
 ### Squared Distances
 
@@ -1063,6 +1048,9 @@ $$
 $$
 and thus the Guttman transform is Lipschitz.
 
+### Subdifferentials
+
+### Derivative
 
 ## Stationary Points {#propstationary}
 

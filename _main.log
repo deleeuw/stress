@@ -1,0 +1,4053 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.22)  25 JUN 2021 19:07
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**_main.tex
+(./_main.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-06-18> (/Users/deleeuw/Library/TinyTeX/texmf-dist/te
+x/latex/base/book.cls
+Document Class: book 2021/02/12 v1.4n Standard LaTeX document class
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count182
+\c@chapter=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\c@figure=\count189
+\c@table=\count190
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
+\@mathmargin=\skip49
+For additional information on amsmath, use the `?' option.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen139
+)) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count191
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count192
+\leftroot@=\count193
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count194
+\DOTSCASE@=\count195
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box50
+\strutbox@=\box51
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count196
+\c@MaxMatrixCols=\count197
+\dotsspace@=\muskip16
+\c@parentequation=\count198
+\dspbrk@lvl=\count199
+\tag@help=\toks17
+\row@=\count266
+\column@=\count267
+\maxfields@=\count268
+\andhelp@=\toks18
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks19
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.st
+y
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.st
+y
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekey
+s.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.st
+y
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.st
+y
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen148
+\Hy@linkcounter=\count269
+\Hy@pagecounter=\count270
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatc
+hes.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count271
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count272
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen149
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.st
+y
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count273
+\Field@Width=\dimen150
+\Fld@charsize=\dimen151
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count274
+\c@Item=\count275
+\c@Hfootnote=\count276
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+\Fld@listcount=\count277
+\c@bookmark@seq@number=\count278
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilech
+eck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecoun
+ter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2021/01/20 v3.7 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count279
+\FV@InFile=\read2
+\FV@TabBox=\box52
+\c@FancyVerbLine=\count280
+\FV@StepNumber=\count281
+\FV@OutFile=\write3
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen152
+\fb@frh=\dimen153
+\FrameRule=\dimen154
+\FrameSep=\dimen155
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count282
+\LTcapwidth=\dimen156
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count283
+\LT@rows=\count284
+\c@LT@tables=\count285
+\c@LT@chunks=\count286
+\LT@p@ftn=\toks24
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen157
+\lightrulewidth=\dimen158
+\cmidrulewidth=\dimen159
+\belowrulesep=\dimen160
+\belowbottomsep=\dimen161
+\aboverulesep=\dimen162
+\abovetopsep=\dimen163
+\cmidrulesep=\dimen164
+\cmidrulekern=\dimen165
+\defaultaddspace=\dimen166
+\@cmidla=\count287
+\@cmidlb=\count288
+\@aboverulesep=\dimen167
+\@belowrulesep=\dimen168
+\@thisruleclass=\count289
+\@lastruleclass=\count290
+\@thisrulewidth=\dimen169
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen170
+\ar@mcellbox=\box58
+\extrarowheight=\dimen171
+\NC@list=\toks25
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box59
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count291
+\calc@Bcount=\count292
+\calc@Adimen=\dimen172
+\calc@Bdimen=\dimen173
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count293
+\calc@Cskip=\skip62
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count294
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box60
+\fn@width=\dimen174
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen175
+\Gin@req@width=\dimen176
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip63
+\multirow@cntb=\count295
+\multirow@dima=\skip64
+\bigstrutjot=\dimen177
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen178
+\WF@size=\dimen179
+\c@WF@wrappedlines=\count296
+\WF@box=\box61
+\WF@everypar=\toks26
+Package: wrapfig 2003/01/31  v 3.6
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count297
+\float@exts=\toks27
+\float@box=\box62
+\@float@everytoks=\toks28
+\@floatcapt=\box63
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+\everycr=\toks29
+\minrowclearance=\skip65
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box64
+\sift@deathcycles=\count298
+\@vwid@loff=\dimen180
+\@vwid@roff=\dimen181
+)
+\c@taburow=\count299
+\tabu@nbcols=\count300
+\tabu@cnt=\count301
+\tabu@Xcol=\count302
+\tabu@alloc=\count303
+\tabu@nested=\count304
+\tabu@target=\dimen182
+\tabu@spreadtarget=\dimen183
+\tabu@naturalX=\dimen184
+\tabucolX=\dimen185
+\tabu@Xsum=\dimen186
+\extrarowdepth=\dimen187
+\abovetabulinesep=\dimen188
+\belowtabulinesep=\dimen189
+\tabustrutrule=\dimen190
+\tabu@thebody=\toks30
+\tabu@footnotes=\toks31
+\tabu@box=\box65
+\tabu@arstrutbox=\box66
+\tabu@hleads=\box67
+\tabu@vleads=\box68
+\tabu@cellskip=\skip66
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threepartta
+ble.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box69
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threepartt
+ablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\TPTL@width=\skip67
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box70
+\UL@hyphenbox=\box71
+\UL@skip=\skip68
+\UL@hook=\toks32
+\UL@height=\dimen191
+\UL@pe=\count305
+\UL@pixel=\dimen192
+\ULC@box=\box72
+Package: ulem 2019/11/18
+\ULdepth=\dimen193
+) (/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen194
+\c@nlinenum=\count306
+\TeXr@lab=\toks33
+)
+\cslhangindent=\skip69
+\csllabelwidth=\skip70
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks34
+\thm@bodyfont=\toks35
+\thm@headfont=\toks36
+\thm@notefont=\toks37
+\thm@headpunct=\toks38
+\thm@preskip=\skip71
+\thm@postskip=\skip72
+\thm@headsep=\skip73
+\dth@everypar=\toks39
+)
+\c@theorem=\count307
+\c@lemma=\count308
+\c@corollary=\count309
+\c@proposition=\count310
+\c@conjecture=\count311
+\c@definition=\count312
+\c@example=\count313
+\c@exercise=\count314
+\c@hypothesis=\count315
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex
+.def
+File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count316
+\l__pdf_internal_box=\box73
+) (./_main.aux)
+\openout1 = `_main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base
+.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.c
+fg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring OFF on input line 172.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitles
+tring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count317
+)
+LaTeX Info: Redefining \ref on input line 172.
+LaTeX Info: Redefining \pageref on input line 172.
+LaTeX Info: Redefining \nameref on input line 172.
+(./_main.out) (./_main.out)
+\@outlinefile=\write4
+\openout4 = `_main.out'.
+
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+74.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+74.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+174.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+174.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 174.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 174.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 174.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 174
+.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 174
+.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+{/Users/deleeuw/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] 
+[2
+
+] (./_main.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 4.
+[3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17])
+\tf@toc=\write5
+\openout5 = `_main.toc'.
+
+[18]
+Underfull \hbox (badness 5274) in paragraph at lines 183--190
+\T1/lmr/m/n/12 This book will be ex-panded/updated fre-quently. The di-rec-tory
+
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+02.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [19
+
+] [20]
+<graphics/lajolla_08_75.png, id=2079, 337.26pt x 266.9975pt>
+File: graphics/lajolla_08_75.png Graphic file (type png)
+<use graphics/lajolla_08_75.png>
+Package pdftex.def Info: graphics/lajolla_08_75.png  used on input line 276.
+(pdftex.def)             Requested size: 234.00648pt x 185.25511pt.
+[21pdfTeX warning (ext4): destination with the same identifier (name{figure.0.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.285 \chapter*{Preface}\label{preface}}
+                                         <./graphics/lajolla_08_75.png>] [22
+
+] [23] [24] [25] [26]
+Chapter 1.
+[27
+
+] [28] [29] [30]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[31] [32]
+Underfull \vbox (badness 3965) has occurred while \output is active []
+
+[33] [34] [35] [36] [37] [38]
+Chapter 2.
+[39
+
+] [40] [41] [42]
+Overfull \hbox (32.8132pt too wide) detected at line 940
+[]\OMS/lmsy/m/n/12 j\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1
+/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lm
+m/m/it/12 Y\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 j \OT1/lmr/m/n/12 = \OMS/lmsy/m/n/
+12 jk\OML/lmm/m/it/12 X[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 e[] \OMS/lmsy/m/n/12
+ ^^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 k ^^@ k\OML/lmm/m/it
+/12 Y[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 e[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it
+/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 kj ^^T k\OT1/lmr/m/n/12 (\OML/lmm/m/it
+/12 X \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 )[](\OML/lmm/m/it/
+12 e[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/
+12 k ^^T [] k\OML/lmm/m/it/12 X \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y\OMS/lms
+y/m/n/12 k\OML/lmm/m/it/12 :
+ []
+
+
+LaTeX Warning: Reference `thm:proplip' on page 43 undefined on input line 948.
+
+[43] [44] [45]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 103
+3.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+)
+Underfull \hbox (badness 1675) in paragraph at lines 1047--1048
+[]\T1/lmr/m/n/12 matrix dif-fer-en-tial cal-cu-lus Dwyer, Tracy, Mac-Don-ald, S
+wami-nathan,
+ []
+
+[46] [47]
+Overfull \hbox (71.72853pt too wide) detected at line 1149
+\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X \OT1/lmr/m/n/12 + \OML/
+lmm/m/it/12 ^^OY \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 ^^O[]Z\OT1/lmr/m/n/12 ) = [
+] \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) + \O
+ML/lmm/m/it/12 ^^O[]d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 ) + \
+OML/lmm/m/it/12 ^^O[]d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Z\OT1/lmr/m/n/12 ) + 
+[]  + 2\OML/lmm/m/it/12 ^^O[] X[]A[]Y \OT1/lmr/m/n/12 + 2\OML/lmm/m/it/12 ^^O[]
+[] X[]A[]Z \OT1/lmr/m/n/12 + 2\OML/lmm/m/it/12 ^^O[][] Y[]A[]Z
+ []
+
+
+Overfull \hbox (93.0752pt too wide) detected at line 1153
+[] \OT1/lmr/m/n/12 = []  = \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/1
+2 Y\OT1/lmr/m/n/12 ) + \OML/lmm/m/it/12 ^^O[]d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/
+12 Z\OT1/lmr/m/n/12 ) + 2 [] \OML/lmm/m/it/12 X[]A[]Z \OT1/lmr/m/n/12 + 2 \OML/
+lmm/m/it/12 ^^O [] Y[]A[]Z:
+ []
+
+[48]
+Overfull \hbox (4.1206pt too wide) detected at line 1182
+\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X \OT1/lmr/m/n/12 + \OML/
+lmm/m/it/12 ^^OY\OT1/lmr/m/n/12 ) = \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/l
+mm/m/it/12 X\OT1/lmr/m/n/12 ) + \OML/lmm/m/it/12 ^^O [] \OT1/lmr/m/n/12 + []\OM
+L/lmm/m/it/12 ^^O[] [] \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 o\OT1/lmr/m/n/12 (\OM
+L/lmm/m/it/12 ^^O[]\OT1/lmr/m/n/12 )
+ []
+
+
+Overfull \hbox (356.17426pt too wide) detected at line 1200
+\U/msb/m/n/12 D\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X \OT1/lmr
+/m/n/12 + \OML/lmm/m/it/12 ^^O Z\OT1/lmr/m/n/12 ; \OML/lmm/m/it/12 Y\OT1/lmr/m/
+n/12 ) = [] = [] [](1 + \OML/lmm/m/it/12 ^^O []\OT1/lmr/m/n/12 )(1 \OMS/lmsy/m/
+n/12 ^^@ \OML/lmm/m/it/12 ^^O[] \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 o\OT1/lmr/m/
+n/12 (\OML/lmm/m/it/12 ^^O\OT1/lmr/m/n/12 )) = [] [] + \OML/lmm/m/it/12 ^^O []
+ []
+
+
+Overfull \hbox (410.99777pt too wide) detected at line 1206
+\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X \OT1/lmr/m/n/12 + \OML/
+lmm/m/it/12 ^^OY \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 ^^O[]Z\OT1/lmr/m/n/12 ) = [
+] \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 )[] = 
+[] \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) + \
+OML/lmm/m/it/12 ^^O [] \OT1/lmr/m/n/12 + []\OML/lmm/m/it/12 ^^O[][] \OT1/lmr/m/
+n/12 + \OML/lmm/m/it/12 ^^O[][] \OMS/lmsy/m/n/12 ^^@ []\OML/lmm/m/it/12 ^^O[][]
+[] 
+ []
+
+
+Overfull \hbox (60.55797pt too wide) detected at line 1210
+\U/msb/m/n/12 D[]\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lm
+r/m/n/12 ; \OML/lmm/m/it/12 Y; Z\OT1/lmr/m/n/12 ) = [][] + [] \OMS/lmsy/m/n/12 
+^^@ [][] \OT1/lmr/m/n/12 = [] []\U/msb/m/n/12 D[]\OML/lmm/m/it/12 d[]\OT1/lmr/m
+/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ; \OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 ) 
++ \U/msb/m/n/12 D\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lm
+r/m/n/12 ; \OML/lmm/m/it/12 Z\OT1/lmr/m/n/12 )
+ []
+
+[49]
+Overfull \hbox (27.90047pt too wide) detected at line 1273
+[]\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 ^^Z\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\O
+T1/lmr/m/n/12 )(\OML/lmm/m/it/12 Y; Z\OT1/lmr/m/n/12 ) = [] \OML/lmm/m/it/12 w[
+][] []
+ []
+
+[50]
+Overfull \hbox (47.99553pt too wide) detected at line 1294
+[]\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\O
+T1/lmr/m/n/12 )(\OML/lmm/m/it/12 Y; Z\OT1/lmr/m/n/12 ) = 2[] \OML/lmm/m/it/12 Y
+[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 V \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 B\O
+T1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ))\OML/lmm/m/it/12 Z \OT1/lmr/
+m/n/12 + 2 [] \OML/lmm/m/it/12 w[][] [] :
+ []
+
+[51]
+Overfull \hbox (72.2059pt too wide) detected at line 1326
+[]
+ []
+
+[52]
+Overfull \hbox (12.08987pt too wide) detected at line 1394
+ []$[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 
+X\OT1/lmr/m/n/12 ) + \OML/lmm/m/it/12 ^^O[] \OT1/lmr/m/n/12 + []\OML/lmm/m/it/1
+2 ^^O[] [] \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 o\OT1/lmr/m/n/12 (\OML/lmm/m/it/1
+2 ^^O[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ;$ []  
+ []
+
+[53] [54] [55]
+<_main_files/figure-latex/dfsmoother-1.pdf, id=2655, 245.91875pt x 248.93pt>
+File: _main_files/figure-latex/dfsmoother-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/dfsmoother-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/dfsmoother-1.pdf  used on inp
+ut line 1505.
+(pdftex.def)             Requested size: 245.92188pt x 248.93317pt.
+<_main_files/figure-latex/ddsmoother-1.pdf, id=2656, 245.91875pt x 248.93pt>
+File: _main_files/figure-latex/ddsmoother-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ddsmoother-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ddsmoother-1.pdf  used on inp
+ut line 1514.
+(pdftex.def)             Requested size: 245.92188pt x 248.93317pt.
+[56] [57pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.2.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1522 
+        <./_main_files/figure-latex/dfsmoother-1.pdf>] [58pdfTeX warning (ext4)
+: destination with the same identifier (name{figure.2.2}) has been already used
+, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1522 
+        <./_main_files/figure-latex/ddsmoother-1.pdf>]
+Overfull \hbox (150.77946pt too wide) detected at line 1546
+\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^UX \OT1/lmr/m/n/12 + (1
+ \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^U\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 Y\O
+T1/lmr/m/n/12 ) = \OMS/lmsy/m/n/12 k\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^UX \OT1
+/lmr/m/n/12 + (1 \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^U\OT1/lmr/m/n/12 )\OML
+/lmm/m/it/12 Y\OT1/lmr/m/n/12 )[](\OML/lmm/m/it/12 e[] \OMS/lmsy/m/n/12 ^^@ \OM
+L/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 k \OT1/lmr/m/n/12 = \OMS/lms
+y/m/n/12 k\OML/lmm/m/it/12 ^^UX[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 e[] \OMS/lms
+y/m/n/12 ^^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 ) + (1 \OMS/lmsy/m/n/12 ^^@ \O
+ML/lmm/m/it/12 ^^U\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/12 (\OML/lm
+m/m/it/12 e[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lm
+sy/m/n/12 k ^^T \OML/lmm/m/it/12 ^^Ud[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/
+lmr/m/n/12 ) + (1 \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^U\OT1/lmr/m/n/12 )\OM
+L/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 )\OML/lmm/m
+/it/12 :
+ []
+
+[59] [60]
+Underfull \hbox (badness 4013) in paragraph at lines 1608--1611
+[]\T1/lmr/m/n/12 ... {#rholip .the-o-rem} $\OML/lmm/m/it/12 ^^Z$ \T1/lmr/m/n/12
+ is Lip-s-chitz, with Lip-s-chitz con-stant
+ []
+
+
+Overfull \hbox (24.70601pt too wide) detected at line 1619
+\OMS/lmsy/m/n/12 j\OML/lmm/m/it/12 ^^Z\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/l
+mr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^Z\OT1/lmr/m/n/12 (\OML/lmm/
+m/it/12 Y\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 j \OT1/lmr/m/n/12 =\OMS/lmsy/m/n/12 
+j [] \OML/lmm/m/it/12 w[]^^N[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 d[]\OT1/lmr/m/n
+/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 
+d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 )) \OMS/lmsy/m/n/12 j^^T 
+[] \OML/lmm/m/it/12 w[]^^N[]\OMS/lmsy/m/n/12 j\OT1/lmr/m/n/12 (\OML/lmm/m/it/12
+ d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \
+OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 ))\OMS/lm
+sy/m/n/12 j\OML/lmm/m/it/12 ;
+ []
+
+
+Overfull \hbox (30.36755pt too wide) detected at line 1625
+\OMS/lmsy/m/n/12 j\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/l
+mr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/
+m/it/12 Y\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 j \OT1/lmr/m/n/12 = \OMS/lmsy/m/n/12
+ jk\OML/lmm/m/it/12 X[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 e[] \OMS/lmsy/m/n/12 ^
+^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 k ^^@ k\OML/lmm/m/it/1
+2 Y[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 e[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/1
+2 e[]\OT1/lmr/m/n/12 ))\OMS/lmsy/m/n/12 kj ^^T k\OT1/lmr/m/n/12 (\OML/lmm/m/it/
+12 X \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y\OT1/lmr/m/n/12 )[](\OML/lmm/m/it/1
+2 e[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 e[]\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/1
+2 k ^^T k\OML/lmm/m/it/12 X \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y\OMS/lmsy/m/
+n/12 k\OML/lmm/m/it/12 :
+ []
+
+[61] [62] [63] [64] [65] [66] [67] [68]
+<_main_files/figure-latex/upperfig-1.pdf, id=2839, 407.5225pt x 248.93pt>
+File: _main_files/figure-latex/upperfig-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/upperfig-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/upperfig-1.pdf  used on input
+ line 1958.
+(pdftex.def)             Requested size: 390.01701pt x 238.23698pt.
+[69]
+<_main_files/figure-latex/lowerfig-1.pdf, id=2850, 407.5225pt x 248.93pt>
+File: _main_files/figure-latex/lowerfig-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/lowerfig-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/lowerfig-1.pdf  used on input
+ line 1993.
+(pdftex.def)             Requested size: 390.01701pt x 238.23698pt.
+[70pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2011 \[
+          <./_main_files/figure-latex/upperfig-1.pdf>]
+Underfull \hbox (badness 4229) in paragraph at lines 2015--2015
+[]\T1/lmr/m/n/12 By the min-i-max in-equal-ity $[][] \OML/lmm/m/it/12 ^^[\OT1/l
+mr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) = [][] [][] \OML/lmm/m/it/12 ^^R
+\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X; Y\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^U
+ []
+
+[71pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2032 \]
+          <./_main_files/figure-latex/lowerfig-1.pdf>] [72]
+Chapter 3.
+
+Underfull \vbox (badness 1755) has occurred while \output is active []
+
+[73
+
+] [74]
+Overfull \hbox (36.44737pt too wide) detected at line 2155
+ []$[]\OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\
+OML/lmm/m/it/12 ^^R\OT1/lmr/m/n/12 )) + \OML/lmm/m/it/12 ^^O\OMS/lmsy/m/n/12 D\
+OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm
+/m/it/12 ^^R\OT1/lmr/m/n/12 ))\OMS/lmsy/m/n/12 D\OML/lmm/m/it/12 X\OT1/lmr/m/n/
+12 (\OML/lmm/m/it/12 ^^R\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ^^X \OT1/lmr/m/n/12 +
+ []\OML/lmm/m/it/12 ^^O[]\OMS/lmsy/m/n/12 fD\OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12
+ (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\OT1/lmr/m/n/12 ))\OMS
+/lmsy/m/n/12 D[]\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\OT1/lmr
+/m/n/12 )(\OML/lmm/m/it/12 ^^X; ^^X\OT1/lmr/m/n/12 ) + \OMS/lmsy/m/n/12 D\OML/l
+mm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it
+/12 ^^R\OT1/lmr/m/n/12 ))\OMS/lmsy/m/n/12 D\OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 
+(\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\OT1/lmr/m/n/12 ))\OMS/
+lmsy/m/n/12 g$ []  
+ []
+
+[75]
+Overfull \hbox (32.4192pt too wide) detected at line 2182
+\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\O
+T1/lmr/m/n/12 ) = [] [] [] [] \OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 ^^[\OT1/lmr/
+m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\OT1/lmr/m/n/12 
+))\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R
+\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 (\OML/
+lmm/m/it/12 ^^R\OT1/lmr/m/n/12 ) + [] [] \OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 ^
+^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^R\OT1/
+lmr/m/n/12 ))\OMS/lmsy/m/n/12 D[]\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 (\OML/lmm/
+m/it/12 ^^R\OT1/lmr/m/n/12 )
+ []
+
+[76] [77] [78] [79] [80]
+Chapter 4.
+[81
+
+] [82] [83]
+<_main_files/figure-latex/globalperspective-1.pdf, id=3006, 570.13pt x 519.9425
+pt>
+File: _main_files/figure-latex/globalperspective-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/globalperspective-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/globalperspective-1.pdf  used
+ on input line 2496.
+(pdftex.def)             Requested size: 389.99733pt x 355.66658pt.
+[84] [85pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.4.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2526 
+        <./_main_files/figure-latex/globalperspective-1.pdf>]
+<_main_files/figure-latex/globalcontour-1.pdf, id=3031, 660.4675pt x 617.30624p
+t>
+File: _main_files/figure-latex/globalcontour-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/globalcontour-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/globalcontour-1.pdf  used on 
+input line 2536.
+(pdftex.def)             Requested size: 390.01509pt x 364.52779pt.
+<_main_files/figure-latex/contfirstmin-1.pdf, id=3035, 617.30624pt x 617.30624p
+t>
+File: _main_files/figure-latex/contfirstmin-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/contfirstmin-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/contfirstmin-1.pdf  used on i
+nput line 2561.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+<_main_files/figure-latex/contsecmin-1.pdf, id=3037, 617.30624pt x 617.30624pt>
+
+File: _main_files/figure-latex/contsecmin-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/contsecmin-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/contsecmin-1.pdf  used on inp
+ut line 2581.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+<_main_files/figure-latex/confthirdmin-1.pdf, id=3039, 252.945pt x 251.94125pt>
+
+File: _main_files/figure-latex/confthirdmin-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/confthirdmin-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/confthirdmin-1.pdf  used on i
+nput line 2597.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+[86] [87pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.4.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2602 \end{figure}
+                    <./_main_files/figure-latex/globalcontour-1.pdf>] [88pdfTeX
+ warning (ext4): destination with the same identifier (name{figure.4.3}) has be
+en already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2602 \end{figure}
+                    <./_main_files/figure-latex/contfirstmin-1.pdf>] [89pdfTeX 
+warning (ext4): destination with the same identifier (name{figure.4.4}) has bee
+n already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2602 \end{figure}
+                    <./_main_files/figure-latex/contsecmin-1.pdf>]
+<_main_files/figure-latex/contthirdmin-1.pdf, id=3087, 617.30624pt x 617.30624p
+t>
+File: _main_files/figure-latex/contthirdmin-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/contthirdmin-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/contthirdmin-1.pdf  used on i
+nput line 2611.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+<_main_files/figure-latex/conffirstsad-1.pdf, id=3089, 252.945pt x 251.94125pt>
+
+File: _main_files/figure-latex/conffirstsad-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/conffirstsad-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/conffirstsad-1.pdf  used on i
+nput line 2626.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+<_main_files/figure-latex/contfirstsad-1.pdf, id=3091, 617.30624pt x 617.30624p
+t>
+File: _main_files/figure-latex/contfirstsad-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/contfirstsad-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/contfirstsad-1.pdf  used on i
+nput line 2640.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+<_main_files/figure-latex/confsecsad-1.pdf, id=3093, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/confsecsad-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/confsecsad-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/confsecsad-1.pdf  used on inp
+ut line 2655.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+[90pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2660 \end{figure}
+                    <./_main_files/figure-latex/confthirdmin-1.pdf>] [91pdfTeX 
+warning (ext4): destination with the same identifier (name{figure.4.6}) has bee
+n already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2660 \end{figure}
+                    <./_main_files/figure-latex/contthirdmin-1.pdf>] [92pdfTeX 
+warning (ext4): destination with the same identifier (name{figure.4.7}) has bee
+n already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2660 \end{figure}
+                    <./_main_files/figure-latex/conffirstsad-1.pdf>] [93pdfTeX 
+warning (ext4): destination with the same identifier (name{figure.4.8}) has bee
+n already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2660 \end{figure}
+                    <./_main_files/figure-latex/contfirstsad-1.pdf>]
+<_main_files/figure-latex/contsecsad-1.pdf, id=3146, 617.30624pt x 617.30624pt>
+
+File: _main_files/figure-latex/contsecsad-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/contsecsad-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/contsecsad-1.pdf  used on inp
+ut line 2669.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+[94pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2693 
+        <./_main_files/figure-latex/confsecsad-1.pdf>] [95pdfTeX warning (ext4)
+: destination with the same identifier (name{figure.4.10}) has been already use
+d, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2693 
+        <./_main_files/figure-latex/contsecsad-1.pdf>]
+<_main_files/figure-latex/rhocontour-1.pdf, id=3181, 617.30624pt x 617.30624pt>
+
+File: _main_files/figure-latex/rhocontour-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/rhocontour-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/rhocontour-1.pdf  used on inp
+ut line 2720.
+(pdftex.def)             Requested size: 390.00705pt x 390.00705pt.
+[96] [97pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.4.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2744 
+        <./_main_files/figure-latex/rhocontour-1.pdf>]
+<_main_files/figure-latex/rhononlinearplot-1.pdf, id=3204, 689.57625pt x 656.45
+25pt>
+File: _main_files/figure-latex/rhononlinearplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/rhononlinearplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/rhononlinearplot-1.pdf  used 
+on input line 2747.
+(pdftex.def)             Requested size: 390.00061pt x 371.26697pt.
+[98pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2767 
+        <./_main_files/figure-latex/rhononlinearplot-1.pdf>]
+<_main_files/figure-latex/coordinates1-1.pdf, id=3219, 436.63126pt x 250.9375pt
+>
+File: _main_files/figure-latex/coordinates1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/coordinates1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/coordinates1-1.pdf  used on i
+nput line 2796.
+(pdftex.def)             Requested size: 389.99971pt x 224.13774pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[99]
+<_main_files/figure-latex/coordinates2-1.pdf, id=3227, 436.63126pt x 250.9375pt
+>
+File: _main_files/figure-latex/coordinates2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/coordinates2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/coordinates2-1.pdf  used on i
+nput line 2798.
+(pdftex.def)             Requested size: 389.99971pt x 224.13774pt.
+[100 <./_main_files/figure-latex/coordinates1-1.pdf> <./_main_files/figure-late
+x/coordinates2-1.pdf>]
+<_main_files/figure-latex/equalcontourplot-1.pdf, id=3247, 407.5225pt x 219.821
+24pt>
+File: _main_files/figure-latex/equalcontourplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/equalcontourplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/equalcontourplot-1.pdf  used 
+on input line 2813.
+(pdftex.def)             Requested size: 390.01701pt x 210.37862pt.
+<_main_files/figure-latex/equallineplot-1.pdf, id=3248, 436.63126pt x 252.945pt
+>
+File: _main_files/figure-latex/equallineplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/equallineplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/equallineplot-1.pdf  used on 
+input line 2828.
+(pdftex.def)             Requested size: 389.99971pt x 225.93086pt.
+[101pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2836 ...bel{classical-multidimensional-scaling}}
+                                                   <./_main_files/figure-latex/
+equalcontourplot-1.pdf>] [102pdfTeX warning (ext4): destination with the same i
+dentifier (name{figure.4.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2836 ...bel{classical-multidimensional-scaling}}
+                                                   <./_main_files/figure-latex/
+equallineplot-1.pdf>]
+Chapter 5.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[103
+
+] [104]
+Underfull \hbox (badness 1708) in paragraph at lines 2918--2918
+[]\T1/lmr/bx/n/14.4 Low Rank Ap-prox-i-ma-tion of the Torg-ersen
+ []
+
+[105] [106] [107] [108
+
+]
+Chapter 6.
+[109] [110]
+Overfull \hbox (26.73691pt too wide) in paragraph at lines 3073--3075
+[]\T1/lmr/m/n/12 with the un-der-stand-ing that the al-go-rithms stops when $\O
+ML/lmm/m/it/12 x[] \OMS/lmsy/m/n/12 2 [][] \OML/lmm/m/it/12 g\OT1/lmr/m/n/12 (\
+OML/lmm/m/it/12 x; x[]\OT1/lmr/m/n/12 )$\T1/lmr/m/n/12 . 
+ []
+
+[111] [112] [113] [114] [115] [116]
+Overfull \hbox (244.16106pt too wide) detected at line 3327
+[]\OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 ) \OMS/l
+msy/m/n/12 ^^T \OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z\OT1/lmr/m/
+n/12 ) + 2(\OML/lmm/m/it/12 x \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 z\OT1/lmr/m
+/n/12 )[]\OML/lmm/m/it/12 W\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z \OMS/lmsy/m/n/12
+ ^^@ \OML/lmm/m/it/12 y\OT1/lmr/m/n/12 ) + (\OML/lmm/m/it/12 x \OMS/lmsy/m/n/12
+ ^^@ \OML/lmm/m/it/12 z\OT1/lmr/m/n/12 )[]\OML/lmm/m/it/12 V\OT1/lmr/m/n/12 (\O
+ML/lmm/m/it/12 x \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 z\OT1/lmr/m/n/12 ) = [] 
+\OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z\OT1/lmr/m/n/12 ) + 2(\OML
+/lmm/m/it/12 x \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 z\OT1/lmr/m/n/12 )[]\OML/l
+mm/m/it/12 Vu \OT1/lmr/m/n/12 + (\OML/lmm/m/it/12 x \OMS/lmsy/m/n/12 ^^@ \OML/l
+mm/m/it/12 z\OT1/lmr/m/n/12 )[]\OML/lmm/m/it/12 V\OT1/lmr/m/n/12 (\OML/lmm/m/it
+/12 x \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 z\OT1/lmr/m/n/12 ) = [] \OML/lmm/m/
+it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z\OT1/lmr/m/n/12 ) + (\OML/lmm/m/it/12
+ x \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z \OMS/lmsy/m/n/12 ^^
+@ \OML/lmm/m/it/12 u\OT1/lmr/m/n/12 ))[]\OML/lmm/m/it/12 V\OT1/lmr/m/n/12 (\OML
+/lmm/m/it/12 x \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z \OMS/lm
+sy/m/n/12 ^^@ \OML/lmm/m/it/12 u\OT1/lmr/m/n/12 )) \OMS/lmsy/m/n/12 ^^@ \OML/lm
+m/m/it/12 u[]Vu:
+ []
+
+
+Underfull \hbox (badness 1478) in paragraph at lines 3332--3335
+[]\T1/lmr/m/n/12 For any $\OML/lmm/m/it/12 W$ \T1/lmr/m/n/12 we can choose $\OM
+L/lmm/m/it/12 V \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 ^^U[]\OT1/lmr/m/n/12 (\OML/l
+mm/m/it/12 W\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 I$\T1/lmr/m/n/12 . Or, more gen-e
+r-ally,
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+348.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 3349.
+[117] [118]
+<_main_files/figure-latex/histsmacof-1.pdf, id=3531, 429.605pt x 283.0575pt>
+File: _main_files/figure-latex/histsmacof-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/histsmacof-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/histsmacof-1.pdf  used on inp
+ut line 3397.
+(pdftex.def)             Requested size: 390.00375pt x 256.96507pt.
+<_main_files/figure-latex/pathsmacof-1.pdf, id=3532, 646.415pt x 646.415pt>
+File: _main_files/figure-latex/pathsmacof-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/pathsmacof-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/pathsmacof-1.pdf  used on inp
+ut line 3406.
+(pdftex.def)             Requested size: 390.00223pt x 390.00223pt.
+<_main_files/figure-latex/histnewton-1.pdf, id=3535, 429.605pt x 283.0575pt>
+File: _main_files/figure-latex/histnewton-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/histnewton-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/histnewton-1.pdf  used on inp
+ut line 3421.
+(pdftex.def)             Requested size: 390.00375pt x 256.96507pt.
+[119pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.3426 \end{figure}
+                    <./_main_files/figure-latex/histsmacof-1.pdf>] [120pdfTeX w
+arning (ext4): destination with the same identifier (name{figure.6.2}) has been
+ already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.3426 \end{figure}
+                    <./_main_files/figure-latex/pathsmacof-1.pdf>]
+<_main_files/figure-latex/pathnewton-1.pdf, id=3564, 646.415pt x 646.415pt>
+File: _main_files/figure-latex/pathnewton-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/pathnewton-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/pathnewton-1.pdf  used on inp
+ut line 3430.
+(pdftex.def)             Requested size: 390.00223pt x 390.00223pt.
+<graphics/calcutta_12_85.png, id=3565, 369.38pt x 288.07625pt>
+File: graphics/calcutta_12_85.png Graphic file (type png)
+<use graphics/calcutta_12_85.png>
+Package pdftex.def Info: graphics/calcutta_12_85.png  used on input line 3439.
+(pdftex.def)             Requested size: 234.00133pt x 182.49559pt.
+[121pdfTeX warning (ext4): destination with the same identifier (name{figure.6.
+3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.3447 ...n of Convergence}\label{chacceleration}}
+                                                   <./_main_files/figure-latex/
+histnewton-1.pdf>] [122pdfTeX warning (ext4): destination with the same identif
+ier (name{figure.6.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.3447 ...n of Convergence}\label{chacceleration}}
+                                                   <./_main_files/figure-latex/
+pathnewton-1.pdf>] [123pdfTeX warning (ext4): destination with the same identif
+ier (name{figure.6.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.3447 ...n of Convergence}\label{chacceleration}}
+                                                   <./graphics/calcutta_12_85.p
+ng>] [124
+
+]
+Chapter 7.
+<_main_files/figure-latex/updtstrategy-1.pdf, id=3603, 436.63126pt x 249.93375p
+t>
+File: _main_files/figure-latex/updtstrategy-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/updtstrategy-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/updtstrategy-1.pdf  used on i
+nput line 3466.
+(pdftex.def)             Requested size: 389.99971pt x 223.2412pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[125] [126 <./_main_files/figure-latex/updtstrategy-1.pdf>] [127]
+<_main_files/figure-latex/unnamed-chunk-5-1.pdf, id=3628, 248.93pt x 250.9375pt
+>
+File: _main_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/unnamed-chunk-5-1.pdf  used o
+n input line 3543.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[128]
+Underfull \vbox (badness 1584) has occurred while \output is active []
+
+[129 <./_main_files/figure-latex/unnamed-chunk-5-1.pdf>] [130]
+Chapter 8.
+[131
+
+] [132]
+Overfull \hbox (39.79462pt too wide) detected at line 3640
+[] [] \OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X; \OT1/lmr/m/n/12 
+^^A) = [] [] \OML/lmm/m/it/12 ^^[\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X; \OT1/lmr/
+m/n/12 ^^A) = [] [] = [] [] \OML/lmm/m/it/12 ;
+ []
+
+[133] [134]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[135]
+Overfull \hbox (79.69296pt too wide) detected at line 3762
+[]\OML/lmm/m/it/12 ^^[[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) = 
+[] [] \OML/lmm/m/it/12 w[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^N[] \OT1/lmr/m/n/
+12 + \OML/lmm/m/it/12  \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 d[]\OT1/lmr/m/n/1
+2 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ))[] = [] \OML/lmm/m/it/12 w[]\OT1/lmr/m/n
+/12 (\OML/lmm/m/it/12 ^^N[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 d[]\OT1/lmr/m
+/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ))[] \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n
+/12 ([] \OMS/lmsy/m/n/12 ^^@ []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/
+12 ))[] [] \OML/lmm/m/it/12 w[];
+ []
+
+[136] [137]
+Overfull \hbox (241.00508pt too wide) detected at line 3855
+[] [] [] [] [] \OT1/lmr/m/n/12 = []  [] [] [] [] [] = []  [] [] \OMS/lmsy/m/n/1
+2 f\OT1/lmr/m/n/12 1 \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]
+Wy\OT1/lmr/m/n/12 )[]\OMS/lmsy/m/n/12 g\OML/lmm/m/it/12 :
+ []
+
+[138]
+Overfull \hbox (124.52177pt too wide) detected at line 3873
+[] [] \OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 1 + \OML/lmm/m/it/12 y[]Wy \OMS/lmsy/m/
+n/12 ^^@ \OT1/lmr/m/n/12 2\OML/lmm/m/it/12 y[]Wx\OMS/lmsy/m/n/12 g \OT1/lmr/m/n
+/12 = []  [] [] []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 1 + \OML/lmm/m/it/12 ^^L[] 
+\OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/12 2\OML/lmm/m/it/12 ^^Lx[]Wy\OMS/lmsy/m/n/12
+ g \OT1/lmr/m/n/12 = []  [] [] \OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 1 \OMS/lmsy/m/
+n/12 ^^@ \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]Wy\OT1/lmr/m/n/12 )[]\OMS/lmsy/m/
+n/12 g\OML/lmm/m/it/12 ;
+ []
+
+[139] [140]
+Chapter 9.
+[141
+
+] [142] [143] [144] [145]
+<_main_files/figure-latex/acplot-1.pdf, id=3889, 440.64626pt x 250.9375pt>
+File: _main_files/figure-latex/acplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/acplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/acplot-1.pdf  used on input l
+ine 4143.
+(pdftex.def)             Requested size: 390.01561pt x 222.10455pt.
+[146 <./_main_files/figure-latex/acplot-1.pdf>]
+Overfull \hbox (17.52919pt too wide) in paragraph at lines 4153--4153
+[]\T1/lmtt/m/n/12 ## [1] -8.192582+0.000000i  5.713075+0.000000i -3.500000+2.17
+9449i[] 
+ []
+
+
+Overfull \hbox (17.5362pt too wide) in paragraph at lines 4153--4153
+[]\T1/lmtt/m/n/12 ## [4] -3.500000-2.179449i -2.807418+0.000000i -2.713075+0.00
+0000i[] 
+ []
+
+<_main_files/figure-latex/gruadd-1.pdf, id=3901, 440.64626pt x 250.9375pt>
+File: _main_files/figure-latex/gruadd-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/gruadd-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/gruadd-1.pdf  used on input l
+ine 4172.
+(pdftex.def)             Requested size: 390.01561pt x 222.10455pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[147]
+Overfull \hbox (42.24321pt too wide) in paragraph at lines 4181--4181
+[]\T1/lmtt/m/n/12 ##  [1] -20.527411+0.000000i -10.174103+0.000000i  -9.472504+
+0.000000i[] 
+ []
+
+
+Overfull \hbox (42.16617pt too wide) in paragraph at lines 4181--4181
+[]\T1/lmtt/m/n/12 ##  [4]  -6.622263+0.352619i  -6.622263-0.352619i  -5.885691+
+0.287544i[] 
+ []
+
+
+Overfull \hbox (42.18018pt too wide) in paragraph at lines 4181--4181
+[]\T1/lmtt/m/n/12 ##  [7]  -5.885691-0.287544i  -5.640580+0.366889i  -5.640580-
+0.366889i[] 
+ []
+
+
+Overfull \hbox (42.20819pt too wide) in paragraph at lines 4181--4181
+[]\T1/lmtt/m/n/12 ## [10]  -4.391289+0.253248i  -4.391289-0.253248i  -3.708911+
+0.386844i[] 
+ []
+
+
+Overfull \hbox (42.2222pt too wide) in paragraph at lines 4181--4181
+[]\T1/lmtt/m/n/12 ## [13]  -3.708911-0.386844i  -3.238930+0.000000i  -2.311379+
+0.000000i[] 
+ []
+
+<_main_files/figure-latex/ekkadd-1.pdf, id=3907, 440.64626pt x 256.96pt>
+File: _main_files/figure-latex/ekkadd-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekkadd-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekkadd-1.pdf  used on input l
+ine 4186.
+(pdftex.def)             Requested size: 390.01561pt x 227.43506pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[148 <./_main_files/figure-latex/gruadd-1.pdf>]
+Overfull \hbox (97.79723pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ##  [1] -5.713009655+0.0000000i -3.782729083+0.0000000i -1.79
+1313475+0.0000000i[] 
+ []
+
+
+Overfull \hbox (97.7622pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ##  [4] -1.628964140+0.0000000i -0.976213035+0.0000000i -0.74
+4289350+0.0495939i[] 
+ []
+
+
+Overfull \hbox (97.78322pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ##  [7] -0.744289350-0.0495939i -0.682321433+0.0000000i -0.53
+4849034+0.0000000i[] 
+ []
+
+
+Overfull \hbox (97.77621pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ## [10] -0.513033529+0.0000000i -0.497908376+0.0248145i -0.49
+7908376-0.0248145i[] 
+ []
+
+
+Overfull \hbox (97.79723pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ## [13] -0.372321687+0.1313892i -0.372321687-0.1313892i -0.38
+8308013+0.0000000i[] 
+ []
+
+
+Overfull \hbox (97.78322pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ## [16] -0.229813135+0.1825985i -0.229813135-0.1825985i -0.28
+6712033+0.0000000i[] 
+ []
+
+
+Overfull \hbox (97.7552pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ## [19] -0.212601059+0.1185199i -0.212601059-0.1185199i  0.20
+6312577+0.0000000i[] 
+ []
+
+
+Overfull \hbox (97.7622pt too wide) in paragraph at lines 4198--4198
+[]\T1/lmtt/m/n/12 ## [22] -0.194299448+0.0000000i  0.132767430+0.0000000i -0.07
+9646956+0.0000000i[] 
+ []
+
+<_main_files/figure-latex/ekk3add-1.pdf, id=3920, 440.64626pt x 250.9375pt>
+File: _main_files/figure-latex/ekk3add-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekk3add-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekk3add-1.pdf  used on input 
+line 4200.
+(pdftex.def)             Requested size: 390.01561pt x 222.10455pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[149 <./_main_files/figure-latex/ekkadd-1.pdf>]
+Overfull \hbox (60.7402pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ##  [1] -7.9740652+0.0000000i -4.8679294+0.0000000i -1.224234
+2+0.0000000i[] 
+ []
+
+
+Overfull \hbox (60.7402pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ##  [4] -0.9822376+0.0000000i  0.7856448+0.0000000i  0.648677
+5+0.0000000i[] 
+ []
+
+
+Overfull \hbox (60.7332pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ##  [7] -0.5540332+0.0000000i -0.5426006+0.0129703i -0.542600
+6-0.0129703i[] 
+ []
+
+
+Overfull \hbox (60.7262pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ## [10]  0.4864182+0.0000000i -0.1118921+0.3923586i -0.111892
+1-0.3923586i[] 
+ []
+
+
+Overfull \hbox (60.74721pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ## [13]  0.3829746+0.0000000i  0.3530897+0.0000000i -0.351610
+3+0.0000000i[] 
+ []
+
+
+Overfull \hbox (60.70518pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ## [16] -0.3073607+0.0000000i -0.1265941+0.2630789i -0.126594
+1-0.2630789i[] 
+ []
+
+
+Overfull \hbox (60.7262pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ## [19] -0.0735448+0.2698631i -0.0735448-0.2698631i -0.233302
+7+0.0000000i[] 
+ []
+
+
+Overfull \hbox (60.7332pt too wide) in paragraph at lines 4212--4212
+[]\T1/lmtt/m/n/12 ## [22] -0.0081376+0.1948006i -0.0081376-0.1948006i -0.138025
+4+0.1175071i[] 
+ []
+
+[150 <./_main_files/figure-latex/ekk3add-1.pdf>]
+<_main_files/figure-latex/breakcircle1-1.pdf, id=3951, 248.93pt x 248.93pt>
+File: _main_files/figure-latex/breakcircle1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/breakcircle1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/breakcircle1-1.pdf  used on i
+nput line 4267.
+(pdftex.def)             Requested size: 248.93317pt x 248.93317pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[151]
+<_main_files/figure-latex/breakcircle2-1.pdf, id=3960, 248.93pt x 248.93pt>
+File: _main_files/figure-latex/breakcircle2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/breakcircle2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/breakcircle2-1.pdf  used on i
+nput line 4269.
+(pdftex.def)             Requested size: 248.93317pt x 248.93317pt.
+[152 <./_main_files/figure-latex/breakcircle1-1.pdf> <./_main_files/figure-late
+x/breakcircle2-1.pdf>]
+Chapter 10.
+[153
+
+] [154] [155] [156]
+<_main_files/figure-latex/order1mult1-1.pdf, id=4038, 442.65375pt x 261.97874pt
+>
+File: _main_files/figure-latex/order1mult1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/order1mult1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/order1mult1-1.pdf  used on in
+put line 4380.
+(pdftex.def)             Requested size: 390.0228pt x 230.82982pt.
+<_main_files/figure-latex/order2mult1-1.pdf, id=4039, 449.68pt x 275.0275pt>
+File: _main_files/figure-latex/order2mult1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/order2mult1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/order2mult1-1.pdf  used on in
+put line 4391.
+(pdftex.def)             Requested size: 390.01767pt x 238.53758pt.
+<_main_files/figure-latex/order3mult1-1.pdf, id=4042, 449.68pt x 275.0275pt>
+File: _main_files/figure-latex/order3mult1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/order3mult1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/order3mult1-1.pdf  used on in
+put line 4402.
+(pdftex.def)             Requested size: 390.01767pt x 238.53758pt.
+<_main_files/figure-latex/order3mult2-1.pdf, id=4043, 449.68pt x 284.06125pt>
+File: _main_files/figure-latex/order3mult2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/order3mult2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/order3mult2-1.pdf  used on in
+put line 4413.
+(pdftex.def)             Requested size: 390.01767pt x 246.37274pt.
+[157pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4426 
+        <./_main_files/figure-latex/order1mult1-1.pdf>] [158pdfTeX warning (ext
+4): destination with the same identifier (name{figure.10.2}) has been already u
+sed, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4426 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.10.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4426 
+        <./_main_files/figure-latex/order2mult1-1.pdf> <./_main_files/figure-la
+tex/order3mult1-1.pdf>] [159pdfTeX warning (ext4): destination with the same id
+entifier (name{figure.10.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4438 \]
+          <./_main_files/figure-latex/order3mult2-1.pdf>] [160]
+<_main_files/figure-latex/Iorder1mult1-1.pdf, id=4114, 442.65375pt x 261.97874p
+t>
+File: _main_files/figure-latex/Iorder1mult1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/Iorder1mult1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/Iorder1mult1-1.pdf  used on i
+nput line 4463.
+(pdftex.def)             Requested size: 390.0228pt x 230.82982pt.
+<_main_files/figure-latex/Iorder2mult1-1.pdf, id=4117, 449.68pt x 275.0275pt>
+File: _main_files/figure-latex/Iorder2mult1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/Iorder2mult1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/Iorder2mult1-1.pdf  used on i
+nput line 4474.
+(pdftex.def)             Requested size: 390.01767pt x 238.53758pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+[]\T1/lmtt/m/n/12 {r Iorder3mult2, echo = FALSE, fig.align = "center",  fig.cap
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 = "Monotone Piecewise Quadratic Splines with Multiple Knots"}
+ []
+
+
+Overfull \hbox (17.5502pt too wide) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 multiplicities <- c(1, 2, 3) order <- 3 knots <-   extendPartit
+ion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 (innerknots, multiplicities, order, lowend, highend)$knots h <-
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 isplineBasis (x, knots, order) par (mfrow = c(3, 3)) for (j in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 2:ncol(h)) {   ylab <-     paste("B-spline", formatC(       j,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 digits = 1,       width = 2,       format = "d"     ))   plot
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4483--4484
+\T1/lmtt/m/n/12 (     x,     h[, j],     type = "l",     col = "RED",     lwd =
+
+ []
+
+[161pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4489 
+        <./_main_files/figure-latex/Iorder1mult1-1.pdf>] [162pdfTeX warning (ex
+t4): destination with the same identifier (name{figure.10.6}) has been already 
+used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4516 \end{Shaded}
+                    <./_main_files/figure-latex/Iorder2mult1-1.pdf>]
+<_main_files/figure-latex/birthbsplineplot-1.pdf, id=4145, 436.63126pt x 248.93
+pt>
+File: _main_files/figure-latex/birthbsplineplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/birthbsplineplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/birthbsplineplot-1.pdf  used 
+on input line 4520.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+[163pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4538 \begin{Shaded}
+                      <./_main_files/figure-latex/birthbsplineplot-1.pdf>]
+<_main_files/figure-latex/birthsisplinesplot-1.pdf, id=4162, 436.63126pt x 248.
+93pt>
+File: _main_files/figure-latex/birthsisplinesplot-1.pdf Graphic file (type pdf)
+
+<use _main_files/figure-latex/birthsisplinesplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/birthsisplinesplot-1.pdf  use
+d on input line 4550.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+[164pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4568 \begin{Shaded}
+                      <./_main_files/figure-latex/birthsisplinesplot-1.pdf>]
+<_main_files/figure-latex/birthsisplinesvaluesplot-1.pdf, id=4179, 436.63126pt 
+x 248.93pt>
+File: _main_files/figure-latex/birthsisplinesvaluesplot-1.pdf Graphic file (typ
+e pdf)
+<use _main_files/figure-latex/birthsisplinesvaluesplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/birthsisplinesvaluesplot-1.pd
+f  used on input line 4583.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+[165 <./_main_files/figure-latex/birthsisplinesvaluesplot-1.pdf>]
+<_main_files/figure-latex/birthsbsplinesmonotonicplot-1.pdf, id=4193, 436.63126
+pt x 248.93pt>
+File: _main_files/figure-latex/birthsbsplinesmonotonicplot-1.pdf Graphic file (
+type pdf)
+<use _main_files/figure-latex/birthsbsplinesmonotonicplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/birthsbsplinesmonotonicplot-1
+.pdf  used on input line 4608.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+[166pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4621 \chapter{Ordinal MDS}\label{chapordinal}}
+                                                 <./_main_files/figure-latex/bi
+rthsbsplinesmonotonicplot-1.pdf>]
+Chapter 11.
+[167
+
+] [168] [169] [170] [171]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 4807.
+
+[172] [173pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.11.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4886 
+       ] [174pdfTeX warning (ext4): destination with the same identifier (name{
+table.11.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.4919 ...l{smoothness-of-ordinal-loss-functions}}
+                                                  ] [175] [176
+
+]
+Chapter 12.
+[177]
+<_main_files/figure-latex/global_perspective2-1.pdf, id=4335, 573.14125pt x 520
+.94624pt>
+File: _main_files/figure-latex/global_perspective2-1.pdf Graphic file (type pdf
+)
+<use _main_files/figure-latex/global_perspective2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/global_perspective2-1.pdf  us
+ed on input line 4998.
+(pdftex.def)             Requested size: 390.002pt x 354.48518pt.
+[178] [179 <./_main_files/figure-latex/global_perspective2-1.pdf>]
+<_main_files/figure-latex/global_contour_one-1.pdf, id=4358, 689.57625pt x 648.
+4225pt>
+File: _main_files/figure-latex/global_contour_one-1.pdf Graphic file (type pdf)
+
+<use _main_files/figure-latex/global_contour_one-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/global_contour_one-1.pdf  use
+d on input line 5007.
+(pdftex.def)             Requested size: 390.00061pt x 366.72548pt.
+[180 <./_main_files/figure-latex/global_contour_one-1.pdf>] [181] [182]
+Underfull \hbox (badness 10000) in paragraph at lines 5103--5104
+
+ []
+
+
+Overfull \hbox (47.74149pt too wide) detected at line 5138
+\OML/lmm/m/it/12 ^^Z\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 ) = [] [
+] \OML/lmm/m/it/12 w[]^^N[]s[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x\OT1/lmr/m/n/1
+2 )(\OML/lmm/m/it/12 x[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/
+12 ) \OMS/lmsy/m/n/12 ^^U [] [] \OML/lmm/m/it/12 w[]^^N[]s[]\OT1/lmr/m/n/12 (\O
+ML/lmm/m/it/12 y\OT1/lmr/m/n/12 )(\OML/lmm/m/it/12 x[] \OMS/lmsy/m/n/12 ^^@ \OM
+L/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) = 2 [] \OML/lmm/m/it/12 x[] [] w[]^^N[]s[]\O
+T1/lmr/m/n/12 (\OML/lmm/m/it/12 y\OT1/lmr/m/n/12 )
+ []
+
+[183] [184]
+Chapter 13.
+[185
+
+] [186] [187] [188]
+Overfull \hbox (48.3832pt too wide) in paragraph at lines 5332--5332
+[]\T1/lmtt/m/n/12 ##      434  445  465  472  490  504  537  555  584  600  610
+  628  651[] 
+ []
+
+
+Overfull \hbox (17.5362pt too wide) in paragraph at lines 5332--5332
+[]\T1/lmtt/m/n/12 ## 651 0.13 0.13 0.05 0.02 0.02 0.02 0.02 0.02 0.20 0.41 0.62
+ 0.85[] 
+ []
+
+
+Overfull \hbox (48.3972pt too wide) in paragraph at lines 5332--5332
+[]\T1/lmtt/m/n/12 ## 674 0.16 0.14 0.03 0.04 0.00 0.01 0.00 0.02 0.23 0.28 0.55
+ 0.68 0.76[] 
+ []
+
+
+Overfull \hbox (54.53018pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [1] 0.1797609824 0.1454675297 0.0843865491 0.0777136109 0
+.0486123551[] 
+ []
+
+
+Overfull \hbox (54.54419pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [6] 0.0393576522 0.0236290817 0.0162344515 0.0072756171 0
+.0000031164[] 
+ []
+
+
+Overfull \hbox (54.5652pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [1] 0.2159661347 0.1549184093 0.0000000727 0.0000000041 0
+.0000000000[] 
+ []
+
+
+Overfull \hbox (54.59322pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [6] 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0
+.0000000000[] 
+ []
+
+
+Overfull \hbox (54.54419pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [1] 0.1336126813 0.1139019875 0.0880453752 0.0851609618 0
+.0710424935[] 
+ []
+
+
+Overfull \hbox (54.50217pt too wide) in paragraph at lines 5356--5356
+[]\T1/lmtt/m/n/12 ##  [6] 0.0664988952 0.0561005006 0.0535112029 0.0492295395 0
+.0479964575[] 
+ []
+
+[189]
+Overfull \hbox (54.60022pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [1] 1.0000000432 1.0000000222 1.0000000012 1.0000000005 1
+.0000000002[] 
+ []
+
+
+Overfull \hbox (54.52318pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [6] 1.0000000001 1.0000000000 1.0000000000 0.9999993553 0
+.9989115116[] 
+ []
+
+
+Overfull \hbox (54.53719pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [1] 1.0000000000 1.0000000000 0.9234970864 0.9079012130 0
+.8629365849[] 
+ []
+
+
+Overfull \hbox (54.51617pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [6] 0.8526920031 0.8298036209 0.8145561677 0.7932385763 0
+.7916517225[] 
+ []
+
+
+Overfull \hbox (54.59322pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [1] 1.0000000820 1.0000000241 1.0000000047 1.0000000009 1
+.0000000004[] 
+ []
+
+
+Overfull \hbox (54.59322pt too wide) in paragraph at lines 5373--5373
+[]\T1/lmtt/m/n/12 ##  [6] 1.0000000003 1.0000000001 1.0000000001 1.0000000001 1
+.0000000000[] 
+ []
+
+<_main_files/figure-latex/ekmanconfs-1.pdf, id=4494, 448.67625pt x 160.6pt>
+File: _main_files/figure-latex/ekmanconfs-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmanconfs-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmanconfs-1.pdf  used on inp
+ut line 5379.
+(pdftex.def)             Requested size: 390.00972pt x 139.60078pt.
+[190]
+<_main_files/figure-latex/ekmantrans-1.pdf, id=4501, 448.67625pt x 158.5925pt>
+File: _main_files/figure-latex/ekmantrans-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmantrans-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmantrans-1.pdf  used on inp
+ut line 5391.
+(pdftex.def)             Requested size: 390.00972pt x 137.85576pt.
+[191pdfTeX warning (ext4): destination with the same identifier (name{figure.13
+.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5399 \chapter{Unfolding}\label{chunfolding}}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{figure.13.2}) has been already used, duplicate
+ ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5399 \chapter{Unfolding}\label{chunfolding}}
+                                               <./_main_files/figure-latex/ekma
+nconfs-1.pdf> <./_main_files/figure-latex/ekmantrans-1.pdf>] [192
+
+]
+Chapter 14.
+[193] [194] [195] [196] [197] [198
+
+]
+Chapter 15.
+[199] [200] [201] [202]
+<graphics/johnvdg.jpeg, id=4667, 188.705pt x 269.005pt>
+File: graphics/johnvdg.jpeg Graphic file (type jpg)
+<use graphics/johnvdg.jpeg>
+Package pdftex.def Info: graphics/johnvdg.jpeg  used on input line 5715.
+(pdftex.def)             Requested size: 188.7074pt x 269.00844pt.
+[203pdfTeX warning (ext4): destination with the same identifier (name{figure.15
+.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5726 
+        <./graphics/johnvdg.jpeg>]
+Overfull \hbox (53.27995pt too wide) detected at line 5741
+\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; x[]; x[]; x[]\OT1/lmr/m/n/12 ) = [] ([](
+\OML/lmm/m/it/12 ^^X[]\OT1/lmr/m/n/12 ) [](\OML/lmm/m/it/12 ^^R[]\OT1/lmr/m/n/1
+2 ) [](\OML/lmm/m/it/12 ^^V[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ;  []\OT1/lmr/m/
+n/12 (\OML/lmm/m/it/12 ^^X[]\OT1/lmr/m/n/12 ) [](\OML/lmm/m/it/12 ^^R[]\OT1/lmr
+/m/n/12 ) [](\OML/lmm/m/it/12 ^^V[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ;  []\OT1/
+lmr/m/n/12 (\OML/lmm/m/it/12 ^^X[]\OT1/lmr/m/n/12 ) [](\OML/lmm/m/it/12 ^^R[]\O
+T1/lmr/m/n/12 )\OML/lmm/m/it/12 ;  []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^X[]\OT
+1/lmr/m/n/12 ))\OML/lmm/m/it/12 :
+ []
+
+[204]
+<_main_files/figure-latex/ekcircpnts-1.pdf, id=4703, 357.335pt x 357.335pt>
+File: _main_files/figure-latex/ekcircpnts-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekcircpnts-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekcircpnts-1.pdf  used on inp
+ut line 5754.
+(pdftex.def)             Requested size: 357.35048pt x 357.35048pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[205] [206 <./_main_files/figure-latex/ekcircpnts-1.pdf>]
+<_main_files/figure-latex/plcircpnts-1.pdf, id=4722, 357.335pt x 357.335pt>
+File: _main_files/figure-latex/plcircpnts-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plcircpnts-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plcircpnts-1.pdf  used on inp
+ut line 5770.
+(pdftex.def)             Requested size: 357.35048pt x 357.35048pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[207 <./_main_files/figure-latex/plcircpnts-1.pdf>]
+Overfull \hbox (272.26073pt too wide) detected at line 5801
+\OML/lmm/m/it/12 ^^^\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y; \OT1/lmr/m/n/12 ^^C) =
+ [] ^^C[](([] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/12 ) \OMS/l
+msy/m/n/12 ^^@ \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y \OMS/lmsy/m/n/12 ^^@ \OML/lm
+m/m/it/12 Y[]\OT1/lmr/m/n/12 ))[]\OML/lmm/m/it/12 V\OT1/lmr/m/n/12 (([] \OMS/lm
+sy/m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OT1/l
+mr/m/n/12 (\OML/lmm/m/it/12 Y \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr
+/m/n/12 )) = [] \OML/lmm/m/it/12 ^^^\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y[]; \OT1
+/lmr/m/n/12 ^^C) \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/12 2 [] ^^C[]([] \OMS/lmsy/m
+/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/12 )[]\OML/lmm/m/it/12 V\OT1/lmr/m/n
+/12 (\OML/lmm/m/it/12 Y \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/1
+2 ) + [] ^^C[](\OML/lmm/m/it/12 Y \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1
+/lmr/m/n/12 )[]\OML/lmm/m/it/12 V\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y \OMS/lmsy/
+m/n/12 ^^@ \OML/lmm/m/it/12 Y[]\OT1/lmr/m/n/12 )
+ []
+
+<_main_files/figure-latex/ekellikpnts-1.pdf, id=4736, 400.49625pt x 357.335pt>
+File: _main_files/figure-latex/ekellikpnts-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekellikpnts-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekellikpnts-1.pdf  used on in
+put line 5821.
+(pdftex.def)             Requested size: 390.02089pt x 347.98856pt.
+[208] [209 <./_main_files/figure-latex/ekellikpnts-1.pdf>]
+<_main_files/figure-latex/plpnts-1.pdf, id=4754, 357.335pt x 357.335pt>
+File: _main_files/figure-latex/plpnts-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plpnts-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plpnts-1.pdf  used on input l
+ine 5847.
+(pdftex.def)             Requested size: 357.35048pt x 357.35048pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[210]
+<_main_files/figure-latex/plellip-1.pdf, id=4759, 400.49625pt x 357.335pt>
+File: _main_files/figure-latex/plellip-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plellip-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plellip-1.pdf  used on input 
+line 5849.
+(pdftex.def)             Requested size: 390.02089pt x 347.98856pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[211 <./_main_files/figure-latex/plpnts-1.pdf>]
+Overfull \hbox (30.00597pt too wide) in paragraph at lines 5851--5855
+[]\T1/lmr/m/n/12 hyperbola: dif-fer-ence of dis-tances con-stant $\OMS/lmsy/m/n
+/12 j\OML/lmm/m/it/12 d\OT1/lmr/m/n/12 ((\OML/lmm/m/it/12 x[]; x[]\OT1/lmr/m/n/
+12 )\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 f[]; \OT1/lmr/m/n/12 0
+)) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 d\OT1/lmr/m/n/12 ((\OML/lmm/m/it/12 x[
+]; x[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 g[]
+; \OT1/lmr/m/n/12 0))\OMS/lmsy/m/n/12 j \OT1/lmr/m/n/12 =
+ []
+
+
+Underfull \vbox (badness 3492) has occurred while \output is active []
+
+[212 <./_main_files/figure-latex/plellip-1.pdf>] [213] [214
+
+]
+Chapter 16.
+[215] [216
+
+]
+Chapter 17.
+[217] [218]
+Chapter 18.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[219
+
+]
+Overfull \hbox (11.34718pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ##    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 1
+9 20[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 1   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 2   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 3   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 4   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 5   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3682pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 6   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 7   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 8   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3682pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 9   0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 10  0  0  0  0  0  0  0  0  0  0  1  1  1  1  1  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 11  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 12  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 13  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 14  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 15  1  1  1  1  1  1  1  1  1  1  0  0  0  0  0  1  1  1  
+1  1[] 
+ []
+
+
+Overfull \hbox (11.3682pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 16  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  
+0  0[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 17  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  
+0  0[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 18  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  
+0  0[] 
+ []
+
+
+Overfull \hbox (11.3682pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 19  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  
+0  0[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 6030--6030
+[]\T1/lmtt/m/n/12 ## 20  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  0  0  0  
+0  0[] 
+ []
+
+<_main_files/figure-latex/catexampleplot-1.pdf, id=4863, 219.82124pt x 219.8212
+4pt>
+File: _main_files/figure-latex/catexampleplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/catexampleplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/catexampleplot-1.pdf  used on
+ input line 6034.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+[220] [221pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.18.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6047 
+       ]
+<_main_files/figure-latex/dbmcafigtot-1.pdf, id=4875, 219.82124pt x 219.82124pt
+>
+File: _main_files/figure-latex/dbmcafigtot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/dbmcafigtot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/dbmcafigtot-1.pdf  used on in
+put line 6059.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+<_main_files/figure-latex/bwdistance-1.pdf, id=4876, 436.63126pt x 248.93pt>
+File: _main_files/figure-latex/bwdistance-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/bwdistance-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/bwdistance-1.pdf  used on inp
+ut line 6068.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+<_main_files/figure-latex/bwdots-1.pdf, id=4877, 382.42876pt x 248.93pt>
+File: _main_files/figure-latex/bwdots-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/bwdots-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/bwdots-1.pdf  used on input l
+ine 6077.
+(pdftex.def)             Requested size: 382.43364pt x 248.93317pt.
+<_main_files/figure-latex/bwhist-1.pdf, id=4878, 422.57875pt x 283.0575pt>
+File: _main_files/figure-latex/bwhist-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/bwhist-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/bwhist-1.pdf  used on input l
+ine 6086.
+(pdftex.def)             Requested size: 390.00873pt x 261.241pt.
+[222pdfTeX warning (ext4): destination with the same identifier (name{figure.18
+.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6104 \]
+          <./_main_files/figure-latex/catexampleplot-1.pdf>] [223pdfTeX warning
+ (ext4): destination with the same identifier (name{figure.18.2}) has been alre
+ady used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6104 \]
+         pdfTeX warning (ext4): destination with the same identifier (name{figu
+re.18.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6104 \]
+          <./_main_files/figure-latex/dbmcafigtot-1.pdf> <./_main_files/figure-
+latex/bwdistance-1.pdf>] [224pdfTeX warning (ext4): destination with the same i
+dentifier (name{figure.18.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6104 \]
+          <./_main_files/figure-latex/bwdots-1.pdf>] [225pdfTeX warning (ext4):
+ destination with the same identifier (name{figure.18.5}) has been already used
+, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6104 \]
+          <./_main_files/figure-latex/bwhist-1.pdf>]
+<_main_files/figure-latex/dbmcafigparxy-1.pdf, id=4940, 219.82124pt x 219.82124
+pt>
+File: _main_files/figure-latex/dbmcafigparxy-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/dbmcafigparxy-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/dbmcafigparxy-1.pdf  used on 
+input line 6124.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+<_main_files/figure-latex/dbmcafigparxz-1.pdf, id=4941, 219.82124pt x 219.82124
+pt>
+File: _main_files/figure-latex/dbmcafigparxz-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/dbmcafigparxz-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/dbmcafigparxz-1.pdf  used on 
+input line 6133.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+<_main_files/figure-latex/dbmcafigparyz-1.pdf, id=4942, 219.82124pt x 219.82124
+pt>
+File: _main_files/figure-latex/dbmcafigparyz-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/dbmcafigparyz-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/dbmcafigparyz-1.pdf  used on 
+input line 6142.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+[226pdfTeX warning (ext4): destination with the same identifier (name{figure.18
+.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6156 k
+         within balls must be disjoint =\textgreater{} they can be separated...
+ <./_main_files/figure-latex/dbmcafigparxy-1.pdf>] [227pdfTeX warning (ext4): d
+estination with the same identifier (name{figure.18.7}) has been already used, 
+duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6156 k
+         within balls must be disjoint =\textgreater{} they can be separated...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.18.8})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.6156 k
+         within balls must be disjoint =\textgreater{} they can be separated...
+ <./_main_files/figure-latex/dbmcafigparxz-1.pdf> <./_main_files/figure-latex/d
+bmcafigparyz-1.pdf>] [228]
+Chapter 19.
+
+Underfull \vbox (badness 2181) has occurred while \output is active []
+
+[229
+
+] [230] [231] [232]
+Overfull \hbox (28.68088pt too wide) detected at line 6338
+[]\OML/lmm/m/it/12 ^^Q[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^O\OT1/lmr/m/n/12 ) 
+= \OML/lmm/m/it/12 ^^Q[]\OT1/lmr/m/n/12 (0) \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/1
+2 4\OML/lmm/m/it/12 ^^O [] w[]d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/
+n/12 )\OML/lmm/m/it/12 u[] \OT1/lmr/m/n/12 + 2\OML/lmm/m/it/12 ^^O[] [] w[]\OT1
+/lmr/m/n/12 (\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/
+n/12 ) + 2\OML/lmm/m/it/12 u[]\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ [] \OT1/lm
+r/m/n/12 4\OML/lmm/m/it/12 ^^O[] [] w[]u[] \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 ^
+^O[] [] w[]
+ []
+
+
+Overfull \hbox (93.00027pt too wide) detected at line 6344
+[]\OML/lmm/m/it/12 ^^[[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^O\OT1/lmr/m/n/12 ) 
+= \OML/lmm/m/it/12 ^^[[]\OT1/lmr/m/n/12 (0) \OMS/lmsy/m/n/12 ^^@ \OT1/lmr/m/n/1
+2 4\OML/lmm/m/it/12 ^^O [] w[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 d[]\OT1/lmr/m/n
+/12 (\OML/lmm/m/it/12 X\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 
+^^N[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 u[] \OT1/lmr/m/n/12 + 2\OML/lmm/m/it/12 
+^^O[] [] w[]\OT1/lmr/m/n/12 ((\OML/lmm/m/it/12 d[]\OT1/lmr/m/n/12 (\OML/lmm/m/i
+t/12 X\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^N[]\OT1/lmr/m/n
+/12 ) + 2\OML/lmm/m/it/12 u[]\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^@ [] \OT1/lmr
+/m/n/12 4\OML/lmm/m/it/12 ^^O[] [] w[]u[] \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 ^^
+O[] [] w[]
+ []
+
+[233]
+<_main_files/figure-latex/alscalgruijter-1.pdf, id=5055, 400.49625pt x 357.335p
+t>
+File: _main_files/figure-latex/alscalgruijter-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/alscalgruijter-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/alscalgruijter-1.pdf  used on
+ input line 6356.
+(pdftex.def)             Requested size: 390.02089pt x 347.98856pt.
+<_main_files/figure-latex/alscalgruijter-2.pdf, id=5056, 404.51125pt x 360.3462
+5pt>
+File: _main_files/figure-latex/alscalgruijter-2.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/alscalgruijter-2.pdf>
+Package pdftex.def Info: _main_files/figure-latex/alscalgruijter-2.pdf  used on
+ input line 6358.
+(pdftex.def)             Requested size: 390.00525pt x 347.42404pt.
+[234 <./_main_files/figure-latex/alscalgruijter-1.pdf>] [235 <./_main_files/fig
+ure-latex/alscalgruijter-2.pdf>] [236] [237]
+Overfull \hbox (12.29153pt too wide) in paragraph at lines 6471--6472
+[]\T1/lmr/m/n/12 We can use our gen-eral re-sults on un-weight-ing, as in sec-t
+ion @ref{minunweight},
+ []
+
+[238] [239] [240
+
+]
+Chapter 20.
+[241] [242]
+<_main_files/figure-latex/logappr-1.pdf, id=5171, 436.63126pt x 248.93pt>
+File: _main_files/figure-latex/logappr-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/logappr-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/logappr-1.pdf  used on input 
+line 6621.
+(pdftex.def)             Requested size: 389.99971pt x 222.34465pt.
+
+Underfull \vbox (badness 2529) has occurred while \output is active []
+
+[243] [244 <./_main_files/figure-latex/logappr-1.pdf>] [245] [246]
+Chapter 21.
+[247
+
+] [248]
+Chapter 22.
+[249
+
+] [250]
+
+LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 6794.
+
+
+
+Underfull \hbox (badness 1199) in paragraph at lines 6794--6795
+[][]\T1/lmr/bx/n/12 Corollary 22.1. []\T1/lmtt/b/sl/12 r corollary_nums("full_r
+esult", display = "f")
+ []
+
+[251] [252] [253] [254] [255]
+Underfull \vbox (badness 1448) has occurred while \output is active []
+
+[256] [257]
+Overfull \hbox (122.50424pt too wide) in paragraph at lines 7064--7064
+[]\T1/lmtt/m/n/12 ## [1]  460.00000  248.00000 1072.00000  460.00000  248.00000
+   36.44444  112.00000[] 
+ []
+
+[258]
+Overfull \hbox (97.79022pt too wide) in paragraph at lines 7087--7087
+[]\T1/lmtt/m/n/12 ##  [1] 24.00000 24.00000 24.00000 21.75000 12.00000 13.33333
+  6.66667 13.33333[] 
+ []
+
+
+Overfull \hbox (97.73419pt too wide) in paragraph at lines 7087--7087
+[]\T1/lmtt/m/n/12 ##  [9] 17.33333 17.33333 19.68000 13.33333  6.66667 17.33333
+  6.66667 21.75000[] 
+ []
+
+
+Overfull \hbox (97.76921pt too wide) in paragraph at lines 7087--7087
+[]\T1/lmtt/m/n/12 ## [17]  6.66667 60.00000 24.00000 21.75000 19.68000 17.33333
+ 21.75000 13.33333[] 
+ []
+
+
+Overfull \hbox (97.77621pt too wide) in paragraph at lines 7087--7087
+[]\T1/lmtt/m/n/12 ## [25] 19.68000 17.33333 17.33333 21.75000 17.33333 17.33333
+ 13.33333  6.66667[] 
+ []
+
+
+Overfull \hbox (97.78322pt too wide) in paragraph at lines 7087--7087
+[]\T1/lmtt/m/n/12 ## [33] 21.75000 17.33333 19.68000 13.33333 17.33333 19.68000
+ 19.68000 17.33333[] 
+ []
+
+[259] [260] [261]
+<_main_files/figure-latex/poldistconfplot-1.pdf, id=5382, 252.945pt x 251.94125
+pt>
+File: _main_files/figure-latex/poldistconfplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/poldistconfplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/poldistconfplot-1.pdf  used o
+n input line 7191.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+[262] [263pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.22.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7211 \end{verbatim}
+                      <./_main_files/figure-latex/poldistconfplot-1.pdf>] [264]
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ##  [1]   0.00000   0.00000   0.00000  -5.86238   0.00000  -2
+.96688   0.00000[] 
+ []
+
+
+Overfull \hbox (85.4192pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ##  [8]  -2.96688  -4.47894  -4.47894  -5.71312  -2.96688   0
+.00000  -5.00453[] 
+ []
+
+
+Overfull \hbox (85.46123pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ## [15]   0.00000  -5.86238   0.00000 -12.00000   0.00000  -5
+.86238  -5.71312[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ## [22]  -5.00453  -5.86238  -2.96688  -5.71312  -4.47894  -5
+.00453  -5.86238[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ## [29]  -5.00453  -5.00453  -2.96688   0.00000  -5.86238  -4
+.47894  -5.71312[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7256--7256
+[]\T1/lmtt/m/n/12 ## [36]  -2.96688  -5.00453  -5.71312  -5.71312  -4.47894   0
+.00000  -4.47894[] 
+ []
+
+[265]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+7276.
+(/Users/deleeuw/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 7276--7277
+[]\T1/lmtt/m/n/12 {theorem< label = "invfull"} $\Delta\in\Delta_F(W,X)$ if and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7276--7277
+\T1/lmtt/m/n/12 only if there is a positive semi-definite $S$ such that for all
+
+ []
+
+
+Overfull \hbox (97.82524pt too wide) in paragraph at lines 7276--7277
+\T1/lmtt/m/n/12 $i\not= j$  \begin{equation} \delta_{ij}=d_{ij}(X)(1-\frac{1}{w
+_{ij}}k_i\TS1/lmtt/m/n/12 '\T1/lmtt/m/n/12 Sk_j),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7276--7277
+\T1/lmtt/m/n/12 \end{equation} Thus $\Delta_F(W,X)$ is a non-polyhedral convex
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7276--7277
+\T1/lmtt/m/n/12 set, closed under linear combinations with coefficients that
+ []
+
+
+Overfull \hbox (97.81824pt too wide) in paragraph at lines 7293--7293
+[]\T1/lmtt/m/n/12 ##  [1]  8.0000 -0.0355  0.0000 -0.7911 -0.3834 -0.3834 -0.03
+55 -0.0853 -0.0853[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7301--7301
+[]\T1/lmtt/m/n/12 ##  [1]  8.000000 -0.000021  0.000000 -0.209852 -0.202322 -0.
+085642 -0.085642[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7301--7301
+[]\T1/lmtt/m/n/12 ##  [8] -0.000021 -0.106132 -0.018912 -0.008051 -0.023967 -0.
+008051 -0.023967[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7310--7310
+[]\T1/lmtt/m/n/12 ##  [1]  8.000000 -0.000021  0.000000 -0.056872 -0.053562 -0.
+045307 -0.062028[] 
+ []
+
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 7310--7310
+[]\T1/lmtt/m/n/12 ##  [8] -0.020853 -0.020853 -0.000021 -0.028793 -0.004490 -0.
+001925 -0.006410[] 
+ []
+
+[266]
+Overfull \hbox (85.44022pt too wide) in paragraph at lines 7310--7310
+[]\T1/lmtt/m/n/12 ## [15] -0.001925 -0.006410 -0.028793 -0.004490 -0.000005 -0.
+002104 -0.021934[] 
+ []
+
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 7310--7310
+[]\T1/lmtt/m/n/12 ## [22] -0.024355 -0.021934 -0.024355 -0.000005 -0.002104 -0.
+004975 -0.005596[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7310--7310
+[]\T1/lmtt/m/n/12 ## [29] -0.005596 -0.004975 -0.002318 -0.002318 -0.056872 -0.
+053562 -0.045307[] 
+ []
+
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ##  [1]  8.000000 -0.000021  0.000000 -0.015026 -0.013698 -0.
+010861 -0.017838[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ##  [8] -0.013830 -0.013426 -0.012084 -0.013998 -0.018140 -0.
+005180 -0.005180[] 
+ []
+
+
+Overfull \hbox (85.42621pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [15] -0.000021 -0.007568 -0.001096 -0.000471 -0.001662 -0.
+000471 -0.001662[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [22] -0.007568 -0.001096 -0.000005 -0.000001 -0.000538 -0.
+000488 -0.005588[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [29] -0.005886 -0.005588 -0.005886 -0.000005 -0.000001 -0.
+000538 -0.000488[] 
+ []
+
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [36] -0.001278 -0.001355 -0.001355 -0.001278 -0.000001 -0.
+000649 -0.000594[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [43] -0.005244 -0.005378 -0.005244 -0.005378 -0.000001 -0.
+000649 -0.000594[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [50] -0.006838 -0.006293 -0.001150 -0.001210 -0.000492 -0.
+000514 -0.000566[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [57] -0.001545 -0.001444 -0.000492 -0.000514 -0.000566 -0.
+001545 -0.001444[] 
+ []
+
+
+Overfull \hbox (85.44022pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [64] -0.006838 -0.006293 -0.001150 -0.001210 -0.000001 -0.
+000001 -0.015026[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 7325--7325
+[]\T1/lmtt/m/n/12 ## [71] -0.013698 -0.010861 -0.017838 -0.013830 -0.013426 -0.
+012084 -0.013998[] 
+ []
+
+[267] [268] [269]
+<_main_files/figure-latex/istressplot-1.pdf, id=5444, 440.64626pt x 204.765pt>
+File: _main_files/figure-latex/istressplot-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/istressplot-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/istressplot-1.pdf  used on in
+put line 7426.
+(pdftex.def)             Requested size: 390.01561pt x 181.2373pt.
+[270] [271pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.22.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7468 
+        <./_main_files/figure-latex/istressplot-1.pdf>]
+<_main_files/figure-latex/unnamed-chunk-11-1.pdf, id=5466, 248.93pt x 250.9375p
+t>
+File: _main_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/unnamed-chunk-11-1.pdf  used 
+on input line 7496.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+[272 <./_main_files/figure-latex/unnamed-chunk-11-1.pdf>]
+<_main_files/figure-latex/unnamed-chunk-11-2.pdf, id=5478, 248.93pt x 250.9375p
+t>
+File: _main_files/figure-latex/unnamed-chunk-11-2.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-11-2.pdf>
+Package pdftex.def Info: _main_files/figure-latex/unnamed-chunk-11-2.pdf  used 
+on input line 7504.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+<_main_files/figure-latex/unnamed-chunk-11-3.pdf, id=5479, 248.93pt x 250.9375p
+t>
+File: _main_files/figure-latex/unnamed-chunk-11-3.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-11-3.pdf>
+Package pdftex.def Info: _main_files/figure-latex/unnamed-chunk-11-3.pdf  used 
+on input line 7513.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[273 <./_main_files/figure-latex/unnamed-chunk-11-2.pdf>]
+<_main_files/figure-latex/unnamed-chunk-11-4.pdf, id=5492, 248.93pt x 250.9375p
+t>
+File: _main_files/figure-latex/unnamed-chunk-11-4.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-11-4.pdf>
+Package pdftex.def Info: _main_files/figure-latex/unnamed-chunk-11-4.pdf  used 
+on input line 7521.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+[274 <./_main_files/figure-latex/unnamed-chunk-11-3.pdf> <./_main_files/figure-
+latex/unnamed-chunk-11-4.pdf>] [275] [276
+
+]
+Chapter 23.
+[277] [278
+
+]
+Chapter 24.
+[279] [280]
+<_main_files/figure-latex/ekmanhistplot1-1.pdf, id=5553, 422.57875pt x 245.9187
+5pt>
+File: _main_files/figure-latex/ekmanhistplot1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmanhistplot1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmanhistplot1-1.pdf  used on
+ input line 7617.
+(pdftex.def)             Requested size: 390.00873pt x 226.96469pt.
+<_main_files/figure-latex/ekmanhistplot2-1.pdf, id=5554, 442.65375pt x 241.9037
+5pt>
+File: _main_files/figure-latex/ekmanhistplot2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmanhistplot2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmanhistplot2-1.pdf  used on
+ input line 7626.
+(pdftex.def)             Requested size: 390.0228pt x 213.14171pt.
+<_main_files/figure-latex/ekmanlmplot1-1.pdf, id=5557, 219.82124pt x 219.82124p
+t>
+File: _main_files/figure-latex/ekmanlmplot1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmanlmplot1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmanlmplot1-1.pdf  used on i
+nput line 7641.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+<_main_files/figure-latex/ekmanlmplot2-1.pdf, id=5558, 219.82124pt x 219.82124p
+t>
+File: _main_files/figure-latex/ekmanlmplot2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekmanlmplot2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekmanlmplot2-1.pdf  used on i
+nput line 7650.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+[281pdfTeX warning (ext4): destination with the same identifier (name{table.24.
+1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7661 
+       ] [282pdfTeX warning (ext4): destination with the same identifier (name{
+figure.24.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7661 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.24.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7661 
+        <./_main_files/figure-latex/ekmanhistplot1-1.pdf> <./_main_files/figure
+-latex/ekmanhistplot2-1.pdf>] [283pdfTeX warning (ext4): destination with the s
+ame identifier (name{figure.24.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7661 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.24.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7661 
+        <./_main_files/figure-latex/ekmanlmplot1-1.pdf> <./_main_files/figure-l
+atex/ekmanlmplot2-1.pdf>]
+Overfull \hbox (11.71046pt too wide) in paragraph at lines 7664--7665
+[]\T1/lmr/m/n/12 Our 1000 runs pro-duce 21 lo-cal min-ima, in ta-ble @ref{tab:g
+ruijterlocalminima},
+ []
+
+<_main_files/figure-latex/histgruijter1-1.pdf, id=5610, 422.57875pt x 241.90375
+pt>
+File: _main_files/figure-latex/histgruijter1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/histgruijter1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/histgruijter1-1.pdf  used on 
+input line 7713.
+(pdftex.def)             Requested size: 390.00873pt x 223.25916pt.
+<_main_files/figure-latex/histgruijter2-1.pdf, id=5611, 434.62375pt x 241.90375
+pt>
+File: _main_files/figure-latex/histgruijter2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/histgruijter2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/histgruijter2-1.pdf  used on 
+input line 7722.
+(pdftex.def)             Requested size: 390.02371pt x 217.08017pt.
+<_main_files/figure-latex/gruijterlmplot1-1.pdf, id=5612, 219.82124pt x 219.821
+24pt>
+File: _main_files/figure-latex/gruijterlmplot1-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/gruijterlmplot1-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/gruijterlmplot1-1.pdf  used o
+n input line 7738.
+(pdftex.def)             Requested size: 219.8274pt x 219.8274pt.
+<_main_files/figure-latex/gruijterlmplot2-1.pdf, id=5613, 407.5225pt x 219.8212
+4pt>
+File: _main_files/figure-latex/gruijterlmplot2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/gruijterlmplot2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/gruijterlmplot2-1.pdf  used o
+n input line 7747.
+(pdftex.def)             Requested size: 390.01701pt x 210.37862pt.
+
+Underfull \vbox (badness 6300) has occurred while \output is active []
+
+[284] [285pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.24.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7761 
+       ] [286pdfTeX warning (ext4): destination with the same identifier (name{
+figure.24.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7761 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.24.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7761 
+        <./_main_files/figure-latex/histgruijter1-1.pdf> <./_main_files/figure-
+latex/histgruijter2-1.pdf>] [287pdfTeX warning (ext4): destination with the sam
+e identifier (name{figure.24.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7761 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.24.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7761 
+        <./_main_files/figure-latex/gruijterlmplot1-1.pdf> <./_main_files/figur
+e-latex/gruijterlmplot2-1.pdf>] [288]
+<_main_files/figure-latex/circseg-1.pdf, id=5673, 248.93pt x 250.9375pt>
+File: _main_files/figure-latex/circseg-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/circseg-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/circseg-1.pdf  used on input 
+line 7783.
+(pdftex.def)             Requested size: 248.93317pt x 250.94069pt.
+[289pdfTeX warning (ext4): destination with the same identifier (name{figure.24
+.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7793 
+        <./_main_files/figure-latex/circseg-1.pdf>]
+<_main_files/figure-latex/globalcircleplotfirst-1.pdf, id=5688, 245.91875pt x 2
+48.93pt>
+File: _main_files/figure-latex/globalcircleplotfirst-1.pdf Graphic file (type p
+df)
+<use _main_files/figure-latex/globalcircleplotfirst-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/globalcircleplotfirst-1.pdf  
+used on input line 7796.
+(pdftex.def)             Requested size: 245.92188pt x 248.93317pt.
+<_main_files/figure-latex/globalcircleplotsecond-1.pdf, id=5689, 245.91875pt x 
+248.93pt>
+File: _main_files/figure-latex/globalcircleplotsecond-1.pdf Graphic file (type 
+pdf)
+<use _main_files/figure-latex/globalcircleplotsecond-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/globalcircleplotsecond-1.pdf 
+ used on input line 7805.
+(pdftex.def)             Requested size: 245.92188pt x 248.93317pt.
+<_main_files/figure-latex/globalcircleplotthird-1.pdf, id=5690, 245.91875pt x 2
+48.93pt>
+File: _main_files/figure-latex/globalcircleplotthird-1.pdf Graphic file (type p
+df)
+<use _main_files/figure-latex/globalcircleplotthird-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/globalcircleplotthird-1.pdf  
+used on input line 7814.
+(pdftex.def)             Requested size: 245.92188pt x 248.93317pt.
+[290pdfTeX warning (ext4): destination with the same identifier (name{figure.24
+.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7830 
+        <./_main_files/figure-latex/globalcircleplotfirst-1.pdf>] [291pdfTeX wa
+rning (ext4): destination with the same identifier (name{figure.24.11}) has bee
+n already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7830 
+        <./_main_files/figure-latex/globalcircleplotsecond-1.pdf>] [292pdfTeX w
+arning (ext4): destination with the same identifier (name{figure.24.12}) has be
+en already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.7830 
+        <./_main_files/figure-latex/globalcircleplotthird-1.pdf>]
+Overfull \hbox (128.67924pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       1 vertices      10 innermax       0.96683250 ou
+termax       1.01451883[] 
+ []
+
+
+Overfull \hbox (128.66524pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       2 vertices      20 innermax       0.96683250 ou
+termax       0.97744943[] 
+ []
+
+
+Overfull \hbox (128.67224pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       3 vertices      40 innermax       0.96683250 ou
+termax       0.97008052[] 
+ []
+
+
+Overfull \hbox (128.63722pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       4 vertices      80 innermax       0.96709009 ou
+termax       0.96794626[] 
+ []
+
+
+Overfull \hbox (128.65823pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       5 vertices     160 innermax       0.96720000 ou
+termax       0.96739328[] 
+ []
+
+
+Overfull \hbox (128.65123pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       6 vertices     320 innermax       0.96720681 ou
+termax       0.96726518[] 
+ []
+
+
+Overfull \hbox (128.65123pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       7 vertices     640 innermax       0.96721856 ou
+termax       0.96722816[] 
+ []
+
+
+Overfull \hbox (128.66524pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       8 vertices    1280 innermax       0.96721856 ou
+termax       0.96722140[] 
+ []
+
+
+Overfull \hbox (128.63722pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel       9 vertices    2560 innermax       0.96721856 ou
+termax       0.96721949[] 
+ []
+
+
+Overfull \hbox (128.65823pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel      10 vertices    5120 innermax       0.96721876 ou
+termax       0.96721890[] 
+ []
+
+
+Overfull \hbox (128.66524pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel      11 vertices   10240 innermax       0.96721876 ou
+termax       0.96721880[] 
+ []
+
+
+Overfull \hbox (128.66524pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel      12 vertices   20480 innermax       0.96721876 ou
+termax       0.96721877[] 
+ []
+
+
+Overfull \hbox (128.65123pt too wide) in paragraph at lines 7863--7863
+[]\T1/lmtt/m/n/12 ## itel      13 vertices   40960 innermax       0.96721876 ou
+termax       0.96721877[] 
+ []
+
+[293] [294] [295] [296] [297] [298]
+<_main_files/figure-latex/chi-1.pdf, id=5790, 252.945pt x 259.97125pt>
+File: _main_files/figure-latex/chi-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/chi-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/chi-1.pdf  used on input line
+ 8022.
+(pdftex.def)             Requested size: 252.94438pt x 259.97061pt.
+[299pdfTeX warning (ext4): destination with the same identifier (name{figure.24
+.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.8049 \end{verbatim}
+                      <./_main_files/figure-latex/chi-1.pdf>]
+<_main_files/figure-latex/simplex10a-1.pdf, id=5804, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/simplex10a-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/simplex10a-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/simplex10a-1.pdf  used on inp
+ut line 8051.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+[300 <./_main_files/figure-latex/simplex10a-1.pdf>]
+<_main_files/figure-latex/simplex4a-1.pdf, id=5816, 252.945pt x 253.94875pt>
+File: _main_files/figure-latex/simplex4a-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/simplex4a-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/simplex4a-1.pdf  used on inpu
+t line 8072.
+(pdftex.def)             Requested size: 252.94823pt x 253.95198pt.
+[301 <./_main_files/figure-latex/simplex4a-1.pdf>]
+<_main_files/figure-latex/simplex4b-1.pdf, id=5829, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/simplex4b-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/simplex4b-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/simplex4b-1.pdf  used on inpu
+t line 8085.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+[302 <./_main_files/figure-latex/simplex4b-1.pdf>]
+<_main_files/figure-latex/intelligence-1.pdf, id=5842, 252.945pt x 251.94125pt>
+
+File: _main_files/figure-latex/intelligence-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/intelligence-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/intelligence-1.pdf  used on i
+nput line 8115.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[303]
+Overfull \hbox (5.16518pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel 1381 lambda   0.000000 stress 4.290534 penalty 98.617
+909[] 
+ []
+
+
+Overfull \hbox (5.19319pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    4 lambda   0.010000 stress 4.301341 penalty 36.137
+074[] 
+ []
+
+
+Overfull \hbox (5.18619pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    3 lambda   0.020000 stress 4.336243 penalty 34.389
+851[] 
+ []
+
+
+Overfull \hbox (5.19319pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.100000 stress 5.187917 penalty 23.300
+775[] 
+ []
+
+
+Overfull \hbox (5.18619pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.200000 stress 7.539228 penalty 11.543
+635[] 
+ []
+
+
+Overfull \hbox (5.17918pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.400000 stress 11.523357 penalty 1.859
+569[] 
+ []
+
+
+Overfull \hbox (5.17218pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.500000 stress 12.391692 penalty 0.556
+411[] 
+ []
+
+
+Overfull \hbox (5.16518pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.590000 stress 12.696493 penalty 0.080
+144[] 
+ []
+
+
+Overfull \hbox (5.17918pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel    1 lambda   0.600000 stress 12.708627 penalty 0.060
+113[] 
+ []
+
+[304 <./_main_files/figure-latex/intelligence-1.pdf>]
+Overfull \hbox (5.19319pt too wide) in paragraph at lines 8136--8136
+[]\T1/lmtt/m/n/12 ## itel  100 lambda   0.610000 stress 12.738355 penalty 0.000
+000[] 
+ []
+
+<_main_files/figure-latex/countries-1.pdf, id=5860, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/countries-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/countries-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/countries-1.pdf  used on inpu
+t line 8138.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+
+Overfull \hbox (23.7112pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ##      KVP    PvdA   VVD    ARP    CHU    CPN    PSP    BP  
+   D66[] 
+ []
+
+
+Overfull \hbox (42.2152pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## KVP  +0.000 +0.209 +0.196 +0.171 +0.179 +0.281 +0.250 +0.2
+67 +0.230[] 
+ []
+
+
+Overfull \hbox (42.2222pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## PvdA +0.209 +0.000 +0.250 +0.210 +0.231 +0.190 +0.171 +0.2
+69 +0.204[] 
+ []
+
+
+Overfull \hbox (42.2362pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## VVD  +0.196 +0.250 +0.000 +0.203 +0.185 +0.302 +0.281 +0.2
+57 +0.174[] 
+ []
+
+
+Overfull \hbox (42.2362pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## ARP  +0.171 +0.210 +0.203 +0.000 +0.119 +0.292 +0.250 +0.2
+71 +0.228[] 
+ []
+
+[305 <./_main_files/figure-latex/countries-1.pdf>]
+Overfull \hbox (42.2152pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## CHU  +0.179 +0.231 +0.185 +0.119 +0.000 +0.290 +0.263 +0.2
+59 +0.225[] 
+ []
+
+
+Overfull \hbox (42.2152pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## CPN  +0.281 +0.190 +0.302 +0.292 +0.290 +0.000 +0.152 +0.2
+36 +0.276[] 
+ []
+
+
+Overfull \hbox (42.2362pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## PSP  +0.250 +0.171 +0.281 +0.250 +0.263 +0.152 +0.000 +0.2
+56 +0.237[] 
+ []
+
+
+Overfull \hbox (42.20819pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## BP   +0.267 +0.269 +0.257 +0.271 +0.259 +0.236 +0.256 +0.0
+00 +0.274[] 
+ []
+
+
+Overfull \hbox (42.2292pt too wide) in paragraph at lines 8158--8158
+[]\T1/lmtt/m/n/12 ## D66  +0.230 +0.204 +0.174 +0.228 +0.225 +0.276 +0.237 +0.2
+74 +0.000[] 
+ []
+
+<_main_files/figure-latex/poldist_run-1.pdf, id=5875, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/poldist_run-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/poldist_run-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/poldist_run-1.pdf  used on in
+put line 8176.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[306]
+<_main_files/figure-latex/poldist2-1.pdf, id=5880, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/poldist2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/poldist2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/poldist2-1.pdf  used on input
+ line 8189.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[307 <./_main_files/figure-latex/poldist_run-1.pdf>]
+<_main_files/figure-latex/poldist3-1.pdf, id=5893, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/poldist3-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/poldist3-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/poldist3-1.pdf  used on input
+ line 8202.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[308 <./_main_files/figure-latex/poldist2-1.pdf>] [309 <./_main_files/figure-la
+tex/poldist3-1.pdf>]
+<_main_files/figure-latex/ekman_global-1.pdf, id=5920, 261.97874pt x 251.94125p
+t>
+File: _main_files/figure-latex/ekman_global-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/ekman_global-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/ekman_global-1.pdf  used on i
+nput line 8226.
+(pdftex.def)             Requested size: 261.9781pt x 251.94063pt.
+<_main_files/figure-latex/okman-1.pdf, id=5923, 254.9525pt x 259.97125pt>
+File: _main_files/figure-latex/okman-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/okman-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/okman-1.pdf  used on input li
+ne 8240.
+(pdftex.def)             Requested size: 254.95186pt x 259.97061pt.
+[310 <./_main_files/figure-latex/ekman_global-1.pdf>] [311 <./_main_files/figur
+e-latex/okman-1.pdf>]
+<_main_files/figure-latex/morse-1.pdf, id=5954, 252.945pt x 251.94125pt>
+File: _main_files/figure-latex/morse-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/morse-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/morse-1.pdf  used on input li
+ne 8264.
+(pdftex.def)             Requested size: 252.94438pt x 251.94063pt.
+<_main_files/figure-latex/veg-1.pdf, id=5957, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/veg-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/veg-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/veg-1.pdf  used on input line
+ 8278.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+[312 <./_main_files/figure-latex/morse-1.pdf>]
+<_main_files/figure-latex/plato-1.pdf, id=5977, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/plato-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plato-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plato-1.pdf  used on input li
+ne 8295.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+[313 <./_main_files/figure-latex/veg-1.pdf>] [314 <./_main_files/figure-latex/p
+lato-1.pdf>]
+<_main_files/figure-latex/plato2-1.pdf, id=6004, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/plato2-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plato2-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plato2-1.pdf  used on input l
+ine 8331.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+[315 <./_main_files/figure-latex/plato2-1.pdf>]
+<_main_files/figure-latex/plato3-1.pdf, id=6016, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/plato3-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/plato3-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/plato3-1.pdf  used on input l
+ine 8367.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+[316 <./_main_files/figure-latex/plato3-1.pdf>]
+<graphics/morse.png, id=6030, 795.97375pt x 469.755pt>
+File: graphics/morse.png Graphic file (type png)
+<use graphics/morse.png>
+Package pdftex.def Info: graphics/morse.png  used on input line 8394.
+(pdftex.def)             Requested size: 331.50107pt x 195.63997pt.
+[317 <./graphics/morse.png>]
+<_main_files/figure-latex/iter-1.pdf, id=6039, 440.64626pt x 248.93pt>
+File: _main_files/figure-latex/iter-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/iter-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/iter-1.pdf  used on input lin
+e 8398.
+(pdftex.def)             Requested size: 390.01561pt x 220.32771pt.
+[318 <./_main_files/figure-latex/iter-1.pdf>] [319] [320
+
+]
+Chapter 25.
+[321] [322] [323] [324] [325] [326]
+Underfull \hbox (badness 2680) in paragraph at lines 8736--8737
+\T1/lmr/m/n/12 Next is the arith-metic mean/geometric mean in-equal-ity (from n
+ow
+ []
+
+[327] [328] [329] [330] [331]
+Overfull \hbox (34.35797pt too wide) detected at line 8954
+[]
+ []
+
+[332] [333]
+Overfull \hbox (145.8286pt too wide) detected at line 9008
+[][]\OT1/lmr/m/n/12 ([] + (\OML/lmm/m/it/12 ^^M \OMS/lmsy/m/n/12 ^^@ []\OT1/lmr
+/m/n/12 ))[]\OML/lmm/m/it/12 E\OT1/lmr/m/n/12 ([] + (\OML/lmm/m/it/12 ^^M \OMS/
+lmsy/m/n/12 ^^@ []\OT1/lmr/m/n/12 )) + \OML/lmm/m/it/12 ^^M[]\OT1/lmr/m/n/12 (\
+OML/lmm/m/it/12 Ry \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 e\OT1/lmr/m/n/12 ) = [
+]  = [](\OML/lmm/m/it/12 ^^M \OMS/lmsy/m/n/12 ^^@ []\OT1/lmr/m/n/12 )[]\OML/lmm
+/m/it/12 E\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^M \OMS/lmsy/m/n/12 ^^@ []\OT1/lmr
+/m/n/12 ) + (\OML/lmm/m/it/12 ^^M \OMS/lmsy/m/n/12 ^^@ []\OT1/lmr/m/n/12 )[]\OM
+L/lmm/m/it/12 E\OT1/lmr/m/n/12 ([] + (\OML/lmm/m/it/12 Ry \OMS/lmsy/m/n/12 ^^@ 
+\OML/lmm/m/it/12 e\OT1/lmr/m/n/12 )) + []  + [][]\OML/lmm/m/it/12 E[] \OT1/lmr/
+m/n/12 + [](\OML/lmm/m/it/12 Ry \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 e\OT1/lmr
+/m/n/12 )
+ []
+
+[334]
+Overfull \hbox (17.38211pt too wide) in paragraph at lines 9074--9074
+[]\T1/lmtt/m/n/12 ## [1] 0.0000000 0.5999999 0.1999999 1.7999999 2.3999999 0.00
+00000[] 
+ []
+
+
+Overfull \hbox (79.2302pt too wide) in paragraph at lines 9074--9074
+[]\T1/lmtt/m/n/12 ## [1]  4.000001e-01 -2.760349e-08 -4.466339e-08 -4.466339e-0
+8 -2.760349e-08[] 
+ []
+
+
+Overfull \hbox (36.07521pt too wide) in paragraph at lines 9101--9101
+[]\T1/lmtt/m/n/12 ## [1] 1.000000 1.400000 1.400000 1.777778 1.777778 1.777778 
+3.000000[] 
+ []
+
+[335]
+Overfull \hbox (79.27222pt too wide) in paragraph at lines 9101--9101
+[]\T1/lmtt/m/n/12 ## [1]  4.000000e-01  0.000000e+00  3.777778e-01 -3.451610e-0
+8 -2.391967e-08[] 
+ []
+
+<_main_files/figure-latex/hasse-1.pdf, id=6216, 377.41pt x 303.1325pt>
+File: _main_files/figure-latex/hasse-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/hasse-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/hasse-1.pdf  used on input li
+ne 9109.
+(pdftex.def)             Requested size: 377.40907pt x 303.13176pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[336] [337 <./_main_files/figure-latex/hasse-1.pdf>]
+Overfull \hbox (36.07521pt too wide) in paragraph at lines 9158--9158
+[]\T1/lmtt/m/n/12 ## [1] 1.000000 1.333333 1.000000 1.333333 2.000000 1.333333 
+3.000000[] 
+ []
+
+
+Overfull \hbox (54.53018pt too wide) in paragraph at lines 9158--9158
+[]\T1/lmtt/m/n/12 ##  [1] 0.000000e+00 2.069906e-15 0.000000e+00 0.000000e+00 6
+.666667e-01[] 
+ []
+
+
+Overfull \hbox (54.5582pt too wide) in paragraph at lines 9158--9158
+[]\T1/lmtt/m/n/12 ##  [6] 0.000000e+00 0.000000e+00 0.000000e+00 1.666667e+00 0
+.000000e+00[] 
+ []
+
+
+Overfull \hbox (85.42621pt too wide) in paragraph at lines 9158--9158
+[]\T1/lmtt/m/n/12 ##  [1]  3.333333e-01  4.107825e-15  3.333334e-01  6.666667e-
+01  8.182895e-08[] 
+ []
+
+
+Overfull \hbox (85.4122pt too wide) in paragraph at lines 9158--9158
+[]\T1/lmtt/m/n/12 ##  [6]  1.000000e+00  3.333333e-01  6.666666e-01 -8.182895e-
+08  1.000000e+00[] 
+ []
+
+[338] [339] [340]
+Overfull \hbox (54.5652pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [1]  0.737345533  0.917584527  0.215666042 -0.075684750  
+1.000000017[] 
+ []
+
+
+Overfull \hbox (54.5512pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [6] -1.000000039  1.000000023  0.061944776 -0.002332657 -
+0.754345762[] 
+ []
+
+
+Overfull \hbox (85.47523pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [1] 0.0000000 0.0000000 0.0000000 0.0000000 0.0722112 0.0
+000000 0.1554043[] 
+ []
+
+
+Overfull \hbox (85.47523pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [8] 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0
+000000 0.0000000[] 
+ []
+
+
+Overfull \hbox (23.7182pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ## [15] 0.0000000 2.8209838 0.0000000 0.0000000 0.0000000 0.0
+000000[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [1]  2.626545e-01  8.241547e-02  7.843340e-01  1.075685e+
+00 -1.735205e-08[] 
+ []
+
+
+Overfull \hbox (85.45422pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ##  [6]  2.000000e+00 -2.303727e-08  9.380552e-01  1.002333e+
+00  1.754346e+00[] 
+ []
+
+
+Overfull \hbox (85.43321pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ## [11]  1.737346e+00  1.917585e+00  1.215666e+00  9.243153e-
+01  2.000000e+00[] 
+ []
+
+
+Overfull \hbox (85.4052pt too wide) in paragraph at lines 9290--9290
+[]\T1/lmtt/m/n/12 ## [16] -3.922610e-08  2.000000e+00  1.061945e+00  9.976673e-
+01  2.456542e-01[] 
+ []
+
+[341]
+<_main_files/figure-latex/qpmaj7-1.pdf, id=6253, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/qpmaj7-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/qpmaj7-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/qpmaj7-1.pdf  used on input l
+ine 9310.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+
+Overfull \hbox (85.42621pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [1] -1.255287e-08  4.698305e-03  1.420869e-02  2.864490e-
+02  4.812065e-02[] 
+ []
+
+
+Overfull \hbox (85.42621pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [6]  7.274970e-02  1.026458e-01  1.379226e-01  1.786940e-
+01  2.250737e-01[] 
+ []
+
+
+Overfull \hbox (85.4122pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ## [11]  2.771753e-01  3.351127e-01  3.989996e-01  4.689497e-
+01  5.450767e-01[] 
+ []
+
+[342 <./_main_files/figure-latex/qpmaj7-1.pdf>]
+Overfull \hbox (85.4122pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ## [16]  6.274945e-01  7.163167e-01  8.116571e-01  9.136294e-
+01  1.022347e+00[] 
+ []
+
+
+Overfull \hbox (85.46823pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [1] 0.1587839 0.0000000 0.0000000 0.0000000 0.0000000 0.0
+000000 0.0000000[] 
+ []
+
+
+Overfull \hbox (85.47523pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [8] 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0
+000000 0.0000000[] 
+ []
+
+
+Overfull \hbox (23.7252pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ## [15] 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0
+000000[] 
+ []
+
+
+Overfull \hbox (85.42621pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [1] -1.255287e-08  4.698318e-03  9.510389e-03  1.443620e-
+02  1.947576e-02[] 
+ []
+
+
+Overfull \hbox (85.39119pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ##  [6]  2.462905e-02  2.989609e-02  3.527686e-02  4.077138e-
+02  4.637964e-02[] 
+ []
+
+
+Overfull \hbox (85.4052pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ## [11]  5.210164e-02  5.793738e-02  6.388687e-02  6.995009e-
+02  7.612706e-02[] 
+ []
+
+
+Overfull \hbox (85.44722pt too wide) in paragraph at lines 9346--9346
+[]\T1/lmtt/m/n/12 ## [16]  8.241776e-02  8.882221e-02  9.534040e-02  1.019723e-
+01  1.087180e-01[] 
+ []
+
+<_main_files/figure-latex/qpmaj8-1.pdf, id=6265, 434.62375pt x 248.93pt>
+File: _main_files/figure-latex/qpmaj8-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/qpmaj8-1.pdf>
+Package pdftex.def Info: _main_files/figure-latex/qpmaj8-1.pdf  used on input l
+ine 9361.
+(pdftex.def)             Requested size: 390.02371pt x 223.38539pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[343]
+Overfull \hbox (97.79022pt too wide) in paragraph at lines 9393--9393
+[]\T1/lmtt/m/n/12 ##  [1] 0.001976784 0.008031075 0.018348765 0.033115745 0.052
+517907 0.076741142[] 
+ []
+
+
+Overfull \hbox (97.7482pt too wide) in paragraph at lines 9393--9393
+[]\T1/lmtt/m/n/12 ##  [7] 0.105971343 0.140394402 0.180196208 0.225562656 0.276
+679635 0.333733038[] 
+ []
+
+
+Overfull \hbox (97.7482pt too wide) in paragraph at lines 9393--9393
+[]\T1/lmtt/m/n/12 ## [13] 0.396908757 0.466392682 0.542370707 0.625028722 0.714
+552619 0.811128290[] 
+ []
+
+[344 <./_main_files/figure-latex/qpmaj8-1.pdf>]
+Overfull \hbox (71.36577pt too wide) detected at line 9434
+\OML/lmm/m/it/12 h\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; ^^U[]\OT1/lmr/m/n/12 )
+ = \OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) + \
+OML/lmm/m/it/12 ^^U[]g\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) \O
+MS/lmsy/m/n/12 ^^U \OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]\OT1/
+lmr/m/n/12 ) + \OML/lmm/m/it/12 ^^U[]g\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]\OT1
+/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ^^U \OML/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/
+m/it/12 x[]\OT1/lmr/m/n/12 ) + \OML/lmm/m/it/12 ^^U[]g\OT1/lmr/m/n/12 (\OML/lmm
+/m/it/12 x[]\OT1/lmr/m/n/12 ) = \OML/lmm/m/it/12 h\OT1/lmr/m/n/12 (\OML/lmm/m/i
+t/12 x[]; ^^U[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 :
+ []
+
+[345] [346] [347] [348
+
+]
+Appendix A.
+[349]
+Overfull \vbox (2.66666pt too high) detected at line 9575
+ []
+
+[350] [351]
+Underfull \vbox (badness 10000) detected at line 9660
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 9660
+ []
+
+[352] [353]
+Underfull \vbox (badness 10000) detected at line 9729
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 9729
+ []
+
+[354] [355] [356]
+Overfull \vbox (1.668pt too high) detected at line 9918
+ []
+
+[357]
+Underfull \vbox (badness 10000) detected at line 9918
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 9918
+ []
+
+[358]
+Underfull \vbox (badness 10000) detected at line 9918
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 9918
+ []
+
+[359] [360]
+Underfull \vbox (badness 10000) detected at line 10012
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10012
+ []
+
+[361]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[362] [363]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[364]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[365]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[366]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[367]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[368]
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10288
+ []
+
+[369] [370]
+Underfull \vbox (badness 10000) detected at line 10426
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10426
+ []
+
+[371]
+Overfull \vbox (2.66666pt too high) detected at line 10426
+ []
+
+[372]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[373]
+Overfull \vbox (1.8191pt too high) detected at line 10566
+ []
+
+[374]
+Underfull \vbox (badness 10000) detected at line 10566
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10566
+ []
+
+[375]
+Underfull \vbox (badness 10000) detected at line 10566
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10566
+ []
+
+[376] [377]
+Overfull \vbox (1.668pt too high) detected at line 10708
+ []
+
+[378]
+Underfull \vbox (badness 10000) detected at line 10708
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10708
+ []
+
+[379]
+Overfull \vbox (2.66666pt too high) detected at line 10708
+ []
+
+[380] [381]
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+[382]
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+[383]
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+[384]
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+[385]
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 10938
+ []
+
+[386] [387]
+Underfull \vbox (badness 10000) detected at line 11007
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11007
+ []
+
+[388] [389]
+Underfull \vbox (badness 10000) detected at line 11122
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11122
+ []
+
+[390]
+Underfull \vbox (badness 10000) detected at line 11122
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11122
+ []
+
+[391] [392]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[393]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[394]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[395]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[396]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[397]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[398]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[399]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[400]
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 11518
+ []
+
+[401] [402] [403]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[404]
+Overfull \vbox (0.99998pt too high) detected at line 12020
+ []
+
+[405]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[406]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[407]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[408]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[409]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[410]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[411]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[412]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[413]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[414]
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12020
+ []
+
+[415] [416]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[417]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[418]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[419]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[420]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[421]
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12292
+ []
+
+[422] [423]
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+[424]
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+[425]
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+[426]
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12491
+ []
+
+[427]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[428] [429]
+Underfull \vbox (badness 10000) detected at line 12643
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12643
+ []
+
+[430]
+Underfull \vbox (badness 10000) detected at line 12643
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12643
+ []
+
+[431]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[432] [433]
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+[434]
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+[435]
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+[436]
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 12868
+ []
+
+[437]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[438] [439] [440] [441]
+Underfull \vbox (badness 10000) detected at line 13050
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 13050
+ []
+
+[442] [443] [444]
+Appendix B.
+
+Overfull \hbox (60.77522pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ##             KVP       PvdA        VVD        ARP        CH
+U        CPN[] 
+ []
+
+
+Overfull \hbox (60.7402pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## KVP  0.00000000 0.10473553 0.09803841 0.08557432 0.0892949
+5 0.14026748[] 
+ []
+
+
+Overfull \hbox (60.7402pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## PvdA 0.10473553 0.00000000 0.12501293 0.10492156 0.1157113
+7 0.09524794[] 
+ []
+
+
+Overfull \hbox (60.75421pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## VVD  0.09803841 0.12501293 0.00000000 0.10157300 0.0924574
+8 0.15124332[] 
+ []
+
+
+Overfull \hbox (60.7332pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## ARP  0.08557432 0.10492156 0.10157300 0.00000000 0.0595299
+6 0.14584841[] 
+ []
+
+
+Overfull \hbox (60.71219pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## CHU  0.08929495 0.11571137 0.09245748 0.05952996 0.0000000
+0 0.14510429[] 
+ []
+
+
+Overfull \hbox (60.74721pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## CPN  0.14026748 0.09524794 0.15124332 0.14584841 0.1451042
+9 0.00000000[] 
+ []
+
+
+Overfull \hbox (60.7192pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## PSP  0.12519896 0.08538829 0.14045351 0.12519896 0.1317100
+5 0.07590070[] 
+ []
+
+
+Overfull \hbox (60.7262pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## BP   0.13357036 0.13431448 0.12836149 0.13543067 0.1294776
+7 0.11794374[] 
+ []
+
+
+Overfull \hbox (60.7262pt too wide) in paragraph at lines 13143--13143
+[]\T1/lmtt/m/n/12 ## D66  0.11478121 0.10175903 0.08687654 0.11403709 0.1123628
+1 0.13803510[] 
+ []
+
+[445
+
+] [446]
+Appendix C.
+[447
+
+] [448
+
+]
+Underfull \hbox (badness 2261) in paragraph at lines 13199--13201
+\T1/lmr/m/n/12 Ge-om-e-try Lab at McGill. []$http : / / cgm . cs . mcgill . ca 
+/ ~avis / C / lrslib /
+ []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 13217--13219
+[][]\T1/lmr/m/n/12 Berkelaar, M. and oth-ers. 2015. []$%7Bhttps : / / CRAN . R 
+-[] project . org /
+ []
+
+[449] [450]
+Underfull \hbox (badness 10000) in paragraph at lines 13304--13306
+\T1/lmr/m/n/12 The-ory FSW/RUL. []$http : / / deleeuwpdx . net / janspubs / 196
+9 / reports /
+ []
+
+[451]
+Underfull \hbox (badness 1226) in paragraph at lines 13337--13339
+\T1/lmr/m/it/12 Psy-chome-trika \T1/lmr/m/n/12 49: 111--13. []$http : / / delee
+uwpdx . net / janspubs / 1984 /
+ []
+
+[452] [453]
+Underfull \hbox (badness 1546) in paragraph at lines 13370--13372
+\T1/lmr/m/n/12 Statis-tics. []$http : / / deleeuwpdx . net / janspubs / 2007 / 
+notes / deleeuw _ U _
+ []
+
+[454] [455] [456] [457] [458] [459] [460]
+Underfull \hbox (badness 1281) in paragraph at lines 13643--13645
+\T1/lmr/m/it/12 ware\T1/lmr/m/n/12 . []$http : / / deleeuwpdx . net / janspubs 
+/ 2019 / articles / mair _ groenen _
+ []
+
+[461] [462]
+Underfull \hbox (badness 1990) in paragraph at lines 13754--13756
+[][]\T1/lmr/m/n/12 Turlach, B. A., and A. Weinges-sel. 2013. \T1/lmr/m/it/12 qu
+ad-prog: Func-tions
+ []
+
+
+Underfull \hbox (badness 7168) in paragraph at lines 13754--13756
+\T1/lmr/m/it/12 to solve Quadratic Pro-gram-ming Prob-lems. []$\T1/lmr/m/n/12 h
+ttps : / / CRAN . R -[]
+ []
+
+[463] [464] (./_main.aux)
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `_main.out' has not changed.
+(rerunfilecheck)             Checksum: 85DF27B0B896809A585082DA131141DB;54941.
+ ) 
+Here is how much of TeX's memory you used:
+ 16275 strings out of 480445
+ 262831 string characters out of 5896848
+ 609319 words of memory out of 5000000
+ 31707 multiletter control sequences out of 15000+600000
+ 492745 words of font info for 88 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 60i,23n,66p,1531b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Use
+rs/deleeuw/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/del
+eeuw/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/deleeuw/Li
+brary/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/deleeuw/Libra
+ry/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/deleeuw/Library/
+TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/deleeuw/Library/Tin
+yTeX/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></Users/deleeuw/Li
+brary/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/deleeuw/Libra
+ry/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></Users/deleeuw/Library/T
+inyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/deleeuw/Library/Tiny
+TeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/deleeuw/Library/TinyTeX
+/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></Users/deleeuw/Library/TinyTeX/tex
+mf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/deleeuw/Library/TinyTeX/texmf-d
+ist/fonts/type1/public/lm/lmr12.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/
+fonts/type1/public/lm/lmr17.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/font
+s/type1/public/lm/lmr6.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/typ
+e1/public/lm/lmr8.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmri12.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/publi
+c/lm/lmro12.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
+msy6.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8
+.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pf
+b></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb>
+</Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></U
+sers/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Use
+rs/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam1
+0.pfb></Users/deleeuw/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb>
+Output written on _main.pdf (464 pages, 4527008 bytes).
+PDF statistics:
+ 7525 PDF objects out of 8907 (max. 8388607)
+ 6621 compressed objects within 67 object streams
+ 1912 named destinations out of 2073 (max. 500000)
+ 3649 words of extra memory for PDF output out of 10000 (max. 10000000)
+

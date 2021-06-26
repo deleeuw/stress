@@ -150,7 +150,7 @@
 
 \title{Least Squares Euclidean Multidimensional Scaling}
 \author{Jan de Leeuw}
-\date{Started October 02, 2020. Last update June 24, 2021}
+\date{Started October 02, 2020. Last update June 25, 2021}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -286,16 +286,17 @@ Rstudio, (R)Markdown, bookdown, and blogdown came along.
 \addcontentsline{toc}{chapter}{Preface}
 
 This book is definitely \emph{not} an impartial and balanced review of all of
-multidimensional scaling (MDS) theory and history. It emphasizes the
+multidimensional scaling (MDS) theory and history. It emphasizes
 computation, and the mathematics needed for computation. In addition, it
 is a summary of over 50 years of MDS work by me, either solo or together
 with my many excellent current or former co-workers and co-authors. It
-is heavily biased in favor of the \textbf{\(\textrm{smacof}\)} formulation of MDS
+is heavily biased in favor of the \(\textrm{smacof}\) formulation of MDS
 (\protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}), \protect\hyperlink{ref-deleeuw_heiser_C_77}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_77}{1977}), \protect\hyperlink{ref-deleeuw_mair_A_09c}{De Leeuw and Mair} (\protect\hyperlink{ref-deleeuw_mair_A_09c}{2009})), and the
 corresponding majorization (or MM) algorithm. And, moreover, I am
 shamelessly squeezing in as many references to my published and
 unpublished work as possible, with links to the corresponding pdf's if
-they are available.
+they are available. Thus this book is also a jumpstation into my
+bibliography.
 
 I have not organized the book along historical lines because most of the
 early techniques and results have been either drastically improved or
@@ -323,25 +324,25 @@ also emphasized that data were often non-metric, i.e.~ordinal or
 categorical, and that it was possible to analyze these ordinal or
 categorical relationships directly, without first constructing numerical
 scales to which classical techniques could be applied. One of the new
-techniques discussed in \protect\hyperlink{ref-coombs_64}{Coombs} (\protect\hyperlink{ref-coombs_64}{1964}) was a non-metric form of MDS, in
+techniques discussed in \protect\hyperlink{ref-coombs_64}{Coombs} (\protect\hyperlink{ref-coombs_64}{1964}) was a ordinal form of MDS, in
 which not only the data but also the representation of the data in
-Euclidean space was non-metric.
+Euclidean space were non-metric.
 
 John van de Geer had just published \protect\hyperlink{ref-vandegeer_67}{Van de Geer} (\protect\hyperlink{ref-vandegeer_67}{1967}). In that book, and in
 the subsequent book \protect\hyperlink{ref-vandegeer_71}{Van de Geer} (\protect\hyperlink{ref-vandegeer_71}{1971}), he developed his unique geometric
 approach to multivariate analysis. Relationship between variables, and
 between variables and individuals, were not just discussed using matrix
 algebra, but were also visualized in diagrams. This was related to the
-geometry in Coombs' Theory of Data, but it concentrated on numerical
-data in the form of rectangular matrices of objects by variables.
+geometric representations in Coombs' Theory of Data, but it concentrated
+on numerical data in the form of rectangular matrices of objects by variables.
 
 Looking back it is easy to see that both Van de Geer and Coombs
 influenced my approach to data analysis. I inherited the emphasis on
 non-metric data and on visualization. But, from the beginning, I
-interpreted ``Data Theory'' as ``Data Analysis,'' with the emphasis shifting
-almost completely to techniques, loss functions, implementations,
+interpreted ``Data Theory'' as ``Data Analysis,'' with my emphasis shifting
+to techniques, loss functions, implementations,
 algorithms, optimization, computing, and programming. This is of
-interest because in 2020 my old Department of Statistics at UCLA,
+interest because in 2020 my former Department of Statistics at UCLA,
 together with the Department of Mathematics, started a bachelor's
 program in Data Theory, in which ``Emphasis is placed on the development
 and theoretical support of a statistical model or algorithmic approach.
@@ -373,10 +374,9 @@ machine, with at its zenith \protect\hyperlink{ref-takane_young_deleeuw_A_77}{Ta
 
 In La Jolla I gave the first presentation of the majorization method for
 MDS, later known as \(\textrm{smacof}\), with the first formal convergence proof. The
-canonical account of \(\textrm{smacof}\) was published in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}). Again I did
-not bother to get the results into a journal or into some other
-effective form of publication. The basic theory for what became known as
-\(\textrm{smacof}\) was also presented around the same time in the book chapter
+canonical account of \(\textrm{smacof}\) was published in the conference paper \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}). Again I did not bother to get the results into a journal or into some other
+more effective form of publication. The basic theory for what became known as
+\(\textrm{smacof}\) was also presented around the same time in another book chapter
 \protect\hyperlink{ref-deleeuw_heiser_C_77}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_77}{1977}).
 
 In 1978 I was invited to the Fifth International Symposium on
@@ -394,13 +394,13 @@ actually my second attempt at a dissertation. I had to get a PhD, any
 PhD, before going to Bell Labs, because of the discrepancy in the Dutch
 and American academic title and reward systems. I started writing a
 dissertation on MDS, in the spirit of what later became
-\protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}). But halfway through I lost interest and became
+\protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}). But halfway through I lost interest and got
 impatient, and I decided to switch to nonlinear multivariate analysis.
 This second attempt did produced a finished dissertation, which
-blossomed, with the help of many, into \protect\hyperlink{ref-gifi_B_90}{Gifi} (\protect\hyperlink{ref-gifi_B_90}{1990}). But that again is a
+grew over time, with the help of many, into \protect\hyperlink{ref-gifi_B_90}{Gifi} (\protect\hyperlink{ref-gifi_B_90}{1990}). But that again is a
 different history, which I will tell some other time in yet another
 companion volume (\protect\hyperlink{ref-deleeuw_B_16a}{De Leeuw} (\protect\hyperlink{ref-deleeuw_B_16a}{2016d})). For a long time I did not do much
-work on MDS, until the arrival of the R language and Patrick Mair led to
+work on MDS, until the arrival of Patrick Mair and the R language led to
 a resurgence of my interest, and ultimately to \protect\hyperlink{ref-deleeuw_mair_A_09c}{De Leeuw and Mair} (\protect\hyperlink{ref-deleeuw_mair_A_09c}{2009}) and
 \protect\hyperlink{ref-mair_groenen_deleeuw_A_19}{Mair, Groenen, and De Leeuw} (\protect\hyperlink{ref-mair_groenen_deleeuw_A_19}{2019}).
 
@@ -409,10 +409,10 @@ papers \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-de
 \protect\hyperlink{ref-deleeuw_heiser_C_77}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_77}{1977}), \protect\hyperlink{ref-deleeuw_heiser_C_80}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_80}{1980}), \protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}), and
 \protect\hyperlink{ref-deleeuw_A_88b}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_88b}{1988}) (published version of \protect\hyperlink{ref-deleeuw_R_84c}{De Leeuw} (\protect\hyperlink{ref-deleeuw_R_84c}{1984b})), all written 30-40
 years ago. Footprints in the sands of time. It can also be seen as an
-elaboration of the more mathematical sections of the excellent and
+elaboration of the more mathematical and computational sections of the excellent and
 comprehensive textbook of \protect\hyperlink{ref-borg_groenen_05}{Borg and Groenen} (\protect\hyperlink{ref-borg_groenen_05}{2005}). That book has much more
 information about the origins, the data, and the applications of MDS, as
-well as on the interpretation of MDS solutions. In this book we
+well as on the interpretation of MDS solutions. In this book I
 concentrate almost exclusively on the mathematical, computational, and
 programming aspects of MDS.
 
@@ -434,14 +434,14 @@ Doug Carroll (died 2011), and Rod McDonald (died 2012).
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
 
-In this book we study the \(\textrm{smacof}\) family of \emph{Multidimensional Scaling} (\emph{MDS}) techniques. In MDS the data consist of some type of
+In this book we study the \(\textrm{smacof}\) family of \emph{Multidimensional Scaling (MDS)} techniques. In MDS the data consist of some type of
 information about the \emph{dissimilarities} between a number of \emph{objects}.
 The information we have about these dissimilarities can be numerical,
 ordinal, or categorical. Thus we may have the actual values of some or
 all of the dissimilarities, we may know their rank order, or we may have
 a classification of them into a small number of qualitative bins.
 
-MDS techniques map the objects into \emph{points} in a metric space in such a
+MDS techniques map the objects into \emph{points} in some metric space in such a
 way that the relation between the distances of the points mirrors
 or approximates the relation between dissimilarities of the objects. For
 numerical dissimilarities it is clear what ``approximation'' means,
@@ -502,10 +502,11 @@ implementations of these new techniques. Some of the early history of
 nonmetric MDS is in \protect\hyperlink{ref-deleeuw_E_17e}{De Leeuw} (\protect\hyperlink{ref-deleeuw_E_17e}{2017f}).
 
 Around the same time there were interesting theoretical contributions in
-\protect\hyperlink{ref-coombs_64}{Coombs} (\protect\hyperlink{ref-coombs_64}{1964}), which however did not really influence the practice of MDS.
+\protect\hyperlink{ref-coombs_64}{Coombs} (\protect\hyperlink{ref-coombs_64}{1964}), which however did not much influence the practice of MDS.
 And several relatively minor variations of the Bell Laboratories
 approach were proposed by \protect\hyperlink{ref-guttman_68}{Guttman} (\protect\hyperlink{ref-guttman_68}{1968}), but Guttman's influence on
-further MDS implementations turned out to be marginal.
+further MDS implementations turned out to be fairly localized and
+limited.
 
 The main development after the Bell Laboratories surge was probably
 \(\textrm{smacof}\). Initially, in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}), this stood for
@@ -515,17 +516,21 @@ Later it was also used to mean
 
 The first \(\textrm{smacof}\) programs were written in 1977 in FORTRAN at the Department of Data Theory in Leiden (\protect\hyperlink{ref-heiser_deleeuw_R_77}{Heiser and De Leeuw} (\protect\hyperlink{ref-heiser_deleeuw_R_77}{1977})). Eventually they migrated to SPSS (for example, \protect\hyperlink{ref-meulman_heiser_12}{Meulman and Heiser} (\protect\hyperlink{ref-meulman_heiser_12}{2012})) and to R (\protect\hyperlink{ref-deleeuw_mair_A_09c}{De Leeuw and Mair} (\protect\hyperlink{ref-deleeuw_mair_A_09c}{2009})). The SPSS branch and the R branch have diverged somewhat, and they continue to be developed independently.
 
-github new \(\textrm{smacof}\)
+Parallel to this book there is an attempt to rewrite the various \(\textrm{smacof}\)
+programs in C, with the necessary wrappers to call them from R (\protect\hyperlink{ref-deleeuw_E_17p}{De Leeuw} (\protect\hyperlink{ref-deleeuw_E_17p}{2017g})). The C code, with makefiles and test routines, is at
+\href{https://github.com/deleeuw/smacof}{github.com/deleeuw/smacof}
 
 \hypertarget{introbasic}{%
 \section{Basic MDS}\label{introbasic}}
 
 Following Kruskal and Shepard we measure the fit of distances to
-dissimilarities using an explicit real-valued \emph{loss function} (a.k.a.
+dissimilarities using an explicit real-valued \emph{loss function} (or
 \emph{badness-of-fit measure}), which is minimized over the possible maps of
 the objects into the metric space. This is a very general definition of MDS,
-covering all kinds of variations in the target metric space and in the
-way fit is measured. Obviously we will not discuss all possible forms and implementations, which also includes various techniques more properly discussed as cluster analysis, classification, or discrimination.
+covering all kinds of variations of the target metric space and of the
+way fit is measured. Obviously we will not discuss all possible forms and
+implementations, which also includes various techniques more properly
+discussed as cluster analysis, classification, or discrimination.
 
 To outline our scope we define \emph{basic MDS}, which is short for
 \emph{Least Squares Euclidean Metric MDS} (LSEM-MDS). It is defined as MDS
@@ -557,7 +562,9 @@ The \emph{loss function} we use is called \emph{stress}. It was first explicitly
 \label{eq:stressall}
 \end{equation}
 
-We use the notation \(\mathop{\sum\sum}_{1\leq i<j\leq n}\) for summation over the upper-diagonal elements of a matrix. Note also that we use \(:=\) for definitions, i.e.~for concepts and symbols that are not standard mathematical usage, when they occur for the first time in this book.
+We use the notation \(\mathop{\sum\sum}_{1\leq i<j\leq n}\) for summation over the upper-diagonal elements of a matrix. Note also that we use \(:=\) for definitions, i.e.~for concepts and symbols that are not standard mathematical usage, when they occur for the first time in this book. In case you were wondering: the mysterious factor \(\frac12\) is there to simplify some formulas
+we will encounter later in the book. It is, of course, irrelevant for the minimization
+problem at hand.
 
 In definition \eqref{eq:stressall} we use the following objects and symbols.
 
@@ -579,7 +586,11 @@ In definition \eqref{eq:stressall} we use the following objects and symbols.
   \(d_{ij}(X):=\sqrt{\sum_{s=1}^p(x_{is}-x_{js})^2}\).
 \end{enumerate}
 
-Observe that we distinguish the linear space \(\mathbb{R}^{n\times p}\) of \(n\times p\) matrices from the linear space \(\mathbb{R}^{np}\) of \(np\) element vectors. The two spaces are isomorphic, and connected by the \emph{vec operator} and its inverse. Some formulas in MDS are more easily expressed in \(\mathbb{R}^{np}\), but we prefer to work in the more natural space \(\mathbb{R}^{n\times p}\) of configurations.
+Note that symmetry and hollowness of the basic objects \(W\), \(\Delta\), and
+\(D\) allows us carry out the summation sum the weighted squared residuals in formula \eqref{eq:stressall} over the upper diagonal elements only.
+
+Observe that we distinguish the linear space \(\mathbb{R}^{n\times p}\) of \(n\times p\) matrices from the linear space \(\mathbb{R}^{np}\) of \(np\) element vectors. The two spaces are isomorphic, and connected by the \emph{vec operator} and its inverse. Some formulas in MDS are more easily expressed in \(\mathbb{R}^{np}\), but most of the time we prefer to work in the more intuitive space \(\mathbb{R}^{n\times p}\) of configurations (which is after all where our representations
+and pictures live).
 
 The function \(D\), which computes the distance matrix \(D(X)\) from a configuration \(X\), is matrix-valued. It maps the \(n\times p\)-dimensional
 linear space \(\mathbb{R}^{n\times p}\) of configuration matrices into the
@@ -594,95 +605,12 @@ which shows that we will map the points into \(p\)-dimensional space.
 
 Two boundary cases that will interest us are \emph{Unidimensional Scaling} or
 \emph{UDS}, where \(p=1\), and \emph{Full-dimensional Scaling} or \emph{FDS}, where
-\(p=n\). Thus UDS is 1MDS and FDS is nMDS. Most actual MDS applications in the sciences use 1MDS, 2MDS or 3MDS, because configurations in one, two, or three dimensions can easily be plotted with standard graphics tools. Thus MDS is not primarily a tool to tests hypotheses about dimensionality and the find meaningful dimensions. It is a mostly a mapping tool for data reduction, to graphically find interesting aspects of dissimilarity matrices. The projections on the dimensions are very much ignored, it is the configuration of points that is the interesting outcome. This distinguishes MDS from, for example, factor analysis. Exceptions are applications of MDS in the conformation of molecules, in genetic mapping along the chromosome, in archeological seriation, and in geographic applications. There the dimensionality and general structure of the configuration are given by prior knowledge, we just do not the precise location and distances of the points. For more discussion of the different uses of MDS we refer to \protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}).
+\(p=n\). Thus UDS is 1MDS and FDS is nMDS. Most actual MDS applications in the sciences use 1MDS, 2MDS or 3MDS, because configurations in one, two, or three dimensions can easily be plotted with standard graphics tools. Thus MDS is not primarily a tool to tests hypotheses about dimensionality and to find meaningful dimensions. It is a mostly a mapping tool for data reduction, to graphically find interesting aspects of dissimilarity matrices. The projections on the dimensions are usually ignored, it is the configuration of points that is the interesting outcome. This distinguishes MDS from, for example, factor analysis. Exceptions are applications of MDS in the conformation of molecules, in genetic mapping along the chromosome, in archeological seriation, in testing psychological theories of cognition and representation, and in geographic applications. There the dimensionality and general structure of the configuration are given by prior knowledge, we just do not the precise location and distances of the points. For more discussion of the different uses of MDS we refer to \protect\hyperlink{ref-deleeuw_heiser_C_82}{De Leeuw and Heiser} (\protect\hyperlink{ref-deleeuw_heiser_C_82}{1982}).
 
 \hypertarget{kruskals-stress}{%
 \subsection{Kruskal's stress}\label{kruskals-stress}}
 
 Definition \eqref{eq:stressall} differs from Kruskal's original stress in at least three ways: in Kruskal's use of the square root, in our use of weights, and in our different approach to normalization.
-
-Remember that Kruskal's definition was intended for ordinal multidimensional scaling only. He first defined \emph{raw stress} as
-
-\begin{equation}
-\sigma^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
-\label{eq:rawstress1}
-\end{equation}
-where the \(\hat d_{ij}\) is some set of numbers monotone with the dissimilarities.
-
-\begin{quote}
-To simplify the discussion, we delay the precise definition of
-\(\hat d\), for a little while. (\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~8)
-\end{quote}
-
-Kruskal then mentions that raw stress satisfies \(\sigma^\star_K(\alpha X)=\alpha^2\sigma^\star_K(X)\), which is clearly undesirable because
-the size of the configuration should not influence the quality of
-the fit.
-
-\begin{quote}
-An obvious way to cure this defect in the raw stress is to divide it by a
-scaling factor, that is, a quantity which has the same quadratic
-dependence on the scale of the configuration that raw stress does.
-(\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~8).
-\end{quote}
-
-By the way, although the precise definition of \(\hat D\)
-has been delayed, the uniform stretching/shrinking argument already assumes that
-if we multiply \(D\) by \(\alpha\) then \(\hat D\) also gets multiplied
-by \(\alpha\). Thus it sort of gives away that \(\hat D\) is also a
-function of \(X\), at least of the scale of \(X\).
-
-For the normalization of raw stress Kruskal chooses
-
-\begin{equation}
-\tau^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X),
-\label{eq:rawtau}
-\end{equation}
-
-\begin{quote}
-Finally, it is desirable to use the square root of this expression, which
-is analogous to choosing the standard deviation in place of the variance.
-(\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~9)
-\end{quote}
-
-Thus Kruskal's normalized loss function for ordinal MDS becomes
-
-\begin{equation}
-\sigma_K(X):=\sqrt{\frac{\sigma^\star_K(X)}{\tau^\star_K(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
-\label{eq:kruskalstress}
-\end{equation}
-
-At this point in \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}) the definition of \(\hat D\) still hangs in the
-air, although we know that the \(\hat D\) are monotone with \(\Delta\), and that multiplying \(X\) by a constant will multiply
-both \(D(X)\) and \(\hat D\) by the same constant. Matters are clarified
-right after the definition of stress.
-
-\begin{quote}
-Now it is easy to define the \(\hat d_{ij}\). They are the numbers which
-minimize \(\sigma\) (or equivalently, \(\sigma^\star\)) subject to the
-monotonicity constraints. (\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~9)
-\end{quote}
-
-Thus, actually, raw stress is the minimum over the pseudo-distance matrices
-\(\Omega\) in \(\mathfrak{D}\), the set of all monotone transformations of the dissimilarities.
-
-\begin{equation}
-\sigma^\star(X):=\min_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2,
-\label{eq:rawstressfinal}
-\end{equation}
-
-and \(\hat D\) is the minimizer, which is now clearly a function of \(X\),
-
-\begin{equation}
-\hat D(X):=\mathop{\text{argmin}}_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2.
-\label{eq:dhatdef}
-\end{equation}
-
-So, finally,
-
-\begin{equation}
-\sigma(X):=\min_{\Omega\in\mathfrak{D}}\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
-\label{eq:kruskalstressfinal}
-\end{equation}
 
 We have paid so much attention to Kruskal's original definition, because
 the choices made there will play a role in the normalization discussion
@@ -695,13 +623,13 @@ differences between Kruskal's stress \eqref{eq:kruskalstressfinal} and
 \subsubsection{Square root}\label{square-root}}
 
 Let's discuss the square root first. Using it or not using it
-does not make a difference for the minimization. Using the square root does give a more sensible root-mean-square scale, in which stress is homogeneous of degree one, insteda of two. But I do not want to compute
-all those unnecessary square roots in my algorithms, and I do not want to drag them along through my derivations. Moreover it potentially causes problems with differentiability at those \(X\) where \(\sigma(X)\) is zero. Thus, througout the book, we do not use the square root in our formulas and derivations. In fact, we do not even use it in our computer programs, except at the very last moment when we return the final stress after the algorithm has completed.
+does not make a difference for the minimization. Using the square root however does give a more sensible root-mean-square scale, in which stress is homogeneous of degree one, instead of degree two. But I do not want to compute
+all those unnecessary square roots in my algorithms, and I do not want to drag them along through my derivations. Moreover the square root potentially causes problems with differentiability at those \(X\) where \(\sigma(X)\) is zero. Thus, througout the book, we do not use the square root in our formulas and derivations. In fact, we do not even use it in our computer programs, except at the very last moment when we return the final stress after the algorithm has completed.
 
 \hypertarget{bweights}{%
 \subsubsection{Weights}\label{bweights}}
 
-There were no weights \(W=\{w_{ij}\}\) in the original definition of stress by \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), and neither are they there in most of the basic later contributions to MDS by Guttman, Lingoes, Roskam, Ramsay, or Young. We will use weights throughout the book, because they have various interesting applications within basic MDS, without unduly complicating the derivations and computations. In \protect\hyperlink{ref-groenen_vandevelden_16}{Groenen and Van de Velden} (\protect\hyperlink{ref-groenen_vandevelden_16}{2016}), section 6, the various uses of weights in the stress loss function are enumerated. They generously, but correctly, attribute the consistent use of weights in MDS to me. My turn. I quote from their paper:
+There were no weights \(W=\{w_{ij}\}\) in the original definition of stress by \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), and neither are they there in most of the basic later contributions to MDS by Guttman, Lingoes, Roskam, Ramsay, or Young. We will use weights throughout the book, because they have various interesting applications within basic MDS, without unduly complicating the derivations and computations. In \protect\hyperlink{ref-groenen_vandevelden_16}{Groenen and Van de Velden} (\protect\hyperlink{ref-groenen_vandevelden_16}{2016}), section 6, the various uses of weights in the stress loss function are enumerated. They generously, but correctly, attribute the consistent use of weights in MDS to me. I quote from their paper:
 
 \begin{quote}
 \begin{enumerate}
@@ -722,21 +650,19 @@ There were no weights \(W=\{w_{ij}\}\) in the original definition of stress by \
 \end{enumerate}
 \end{quote}
 
-In some situations, for example for huge data sets, it is computationally convenient, or even necessary, to minimize the influence of the weights on the computations. We can use \emph{majorization} to turn the problem from a weighted least squares problem to an iterative unweighted least squares problem. The technique is discussed in detail in chapter \ref{mathadd}, section \ref{minunweight}.
+In some situations, for example for huge data sets, it is computationally convenient, or even necessary, to minimize the influence of the weights on the computations. We can use \emph{majorization} to turn the problem from a weighted least squares problem to an iterative unweighted least squares problem. The technique, which we call \emph{unweighting}, is discussed in detail in chapter \ref{mathadd}, section \ref{minunweight}.
 
 \hypertarget{intronorm}{%
 \subsubsection{Normalization}\label{intronorm}}
 
 This section deals with a rather trivial problem, which has however caused problems in various stages of \(\textrm{smacof}\)'s 45-year development history. Because the problem is trivial, and the choices that must be made are to a large extent arbitrary, it has been overlooked and somewhat neglected.
 
-Multiplying all weights by a constant does not change the value of stress, and consequently the minimization problem remains exactly the same. No matter how we scale \(W\) the numerator of stress is the weighted mean square of the \emph{residuals} \(\delta_{ij}-d_{ij}(X)\) and the denominator is the weighted mean square of the dissimilarities. So there is no need to normalize the weights, and we leave them just as the user inputs them (or as they are chosen by default).
+In basic MDS we scale the weights and dissimilarities. It is clear that if we multiply the weights or dissimilarities by a constant, then the optimal approximating distances \(D(X)\) and the optimal configuration \(X\) will be multiplied by the same constant. That is exactly why Kruskal's raw stress had to be nornalized. Consequently we in basic MDS we always scale weights and dissimilarities by
 
-We do scale the dissimilarities, however. It is clear that if we multiply the dissimilarities by a constant, then the optimal approximating distances \(D(X)\) and the optimal configuration \(X\) will be multiplied by the same constant. Consequently we in basic MDS we always scale dissimilarities by
-
-\begin{equation}
-\frac12\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=1.
-\label{eq:scaldiss}
-\end{equation}
+\begin{align}
+\mathop{\sum\sum}_{1\leq i<j\leq n}\{w_{ij}\mid w_{ij}>0\}&=1,\label{eq:scaldiss1}\\
+\frac12\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2&=1.\label{eq:scaldiss2}
+\end{align}
 
 This simplifies our formulas and makes them look better. It presupposes, of course, that \(w_{ij}\delta_{ij}\not=0\) for at least one \(i\not= j\), which we will happily assume in the sequel. Using normalized dissimilarities amounts to the same as minimizing stress defined as
 
@@ -747,17 +673,9 @@ This simplifies our formulas and makes them look better. It presupposes, of cour
 
 This is useful to remember when we discuss the various normalizations for non-metric MDS in section \ref{nmdsnorm}.
 
-In actual computer output using the scaling in formula \eqref{eq:scaldiss} has some disadvantages. There are, say, \(M\) non-zero weights. The summation in the numerator and denominator of \#ref(eq:stressall) is really over \(M\) terms only. If \(n\) is at all large the scaled dissimilarities, and consequently the distances and the configuration, will become very small. Thus, in actual computation, we scale our dissimilarities as \(\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=M\). So, we scale our dissimilarities to one in formulas and to \(M\) in computations. Thus the computed stress will be
+In actual computer output using the scaling in formula \eqref{eq:scaldiss1} and \eqref{eq:scaldiss1} has some disadvantages. There are, say, \(M\) non-zero weights. The summation in \#ref(eq:stressall) is really over \(M\) terms only. If \(n\) is at all large the scaled dissimilarities, and consequently the distances and the configuration, will become very small. Thus, in actual computation, or at least in the computer output, we scale our dissimilarities as \(\frac12\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}^{\ }\delta_{ij}^2=M\). So, we scale our dissimilarities to one in formulas and to \(M\) in computations. Thus the computed stress will b
 
-\begin{align}
-\begin{split}
-\sigma(X)&=\frac{1}{M}\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}^2-d_{ij}(X))^2=\\
-&=1-2\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}d_{ij}(X)+\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}d_{ij}^2(X).
-\end{split}
-\label{eq:stressnrm}
-\end{align}
-
-\ldots{} we shall find ourselves doing arithmetic with dissimilarities. This we must not do, because we are committed to using only the rank ordering of the dissimilarities. (a, p 6-7)
+\ldots{} we shall find ourselves doing arithmetic with dissimilarities. This we must not do, because we are committed to using only the rank ordering of the dissimilarities. (\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p 6-7)
 
 \hypertarget{datasym}{%
 \subsection{Data Asymmetry}\label{datasym}}
@@ -817,23 +735,19 @@ The most important generalizations of basic MDS
 we will study in later chapters of this book are discussed briefly in the following sections.
 
 \hypertarget{gennonmetric}{%
-\subsection{Non-metric}\label{gennonmetric}}
+\subsection{Non-metric MDS}\label{gennonmetric}}
 
-Basic MDS studies \emph{Metric Multidimensional Scaling} or
-\emph{MMDS}, in which dissimilarities are either known or missing. In chapter \ref{nonmtrmds} we relax this assumption. Dissimilarities may be partly known, for example we may know they are in some interval, we may only know their order, or we may know them up to some smooth transformation. MDS with partly known dissimilarities is \emph{Non-metric Multidimensional Scaling} or \emph{NMDS}. Completely unknown (missing) is an exception, because we can just handle this in basic MDS by setting the corresponding weights equal to zero.
+Basic MDS is a form of \emph{Metric Multidimensional Scaling} or
+\emph{MMDS}, in which dissimilarities are either known or missing. In chapter \ref{nonmtrmds} we relax this assumption. Dissimilarities may be partly known, for example we may know they are in some interval, we may only know their order, or we may know them up to some smooth transformation. MDS with partly known dissimilarities is \emph{Non-metric Multidimensional Scaling} or \emph{NMDS}. Completely unknown (missing) dissimilarities are an exception, because we can just handle this in basic MDS by setting the corresponding weights equal to zero.
 
 In NMDS we minimize stress over all configurations, but also over the unknown dissimilarities. What we know about them (the interval they are in, the transformations that are allowed, the order they are in) defines a subset of the space of non-negative, hollow, and symmetric matrices. Any matrix in that subset is a matrix of what \protect\hyperlink{ref-takane_young_deleeuw_A_77}{Takane, Young, and De Leeuw} (\protect\hyperlink{ref-takane_young_deleeuw_A_77}{1977}) call \emph{disparities}, i.e.~imputed dissimilarities. The imputation provides the missing information and transforms the non-numerical information we have about the dissimilarities into a numerical matrix of disparities. Clearly this is an \emph{optimistic imputation}, in the sense that it chooses from the set of admissible disparities to minimize stress (for a given configuration).
 
-One more terminological point. Often \emph{non-metric} is reserved for ordinal MDS, in which only know the (partial or complete) order of the dissimilarities. Allowing linear or polynomial transformations of the dissimilarities, or estimating an additive constant, is not supposed to be non-metric. There is something to be said for that. Maybe it makes sense to distinguish non-metric \emph{in the wide sense} (in which stress must be minimized over both \(X\) and \(\Delta\)) and \emph{non-metric in the narrow sense} in which the set of admissible disparities is defined by linear inequalities. Nonmetric in the narrow sense will also be called \emph{ordinal MDS} or
+One more terminological point. Often \emph{non-metric} is reserved for ordinal MDS, in which we only know the (partial or complete) order of the dissimilarities. Allowing linear or polynomial transformations of the dissimilarities, or estimating an additive constant, is not supposed to be non-metric. There is something to be said for that. Maybe it makes sense to distinguish non-metric \emph{in the wide sense} (in which stress must be minimized over both \(X\) and \(\Delta\)) and \emph{non-metric in the narrow sense} in which the set of admissible disparities is defined by linear inequalities. Nonmetric in the narrow sense will also be called \emph{ordinal MDS} or
 \emph{OMDS}.
 
-It is perhaps useful to remember that \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}) introduced explicit loss functions in MDS to put the somewhat heuristic NMDS techniques of \protect\hyperlink{ref-shepard_62a}{Shepard} (\protect\hyperlink{ref-shepard_62a}{1962a}) onto a firm mathematical and computational foundation. Thus, more or less from the beginning of iterative least squares MDS, there was a focus on non-metric rather than metric MDS, and this actually contributed a great deal to the magic and success of the technique. In this book most of the results are derived for basic MDS, which is metric MDS, with non-metric MDS a relatively straightforward extension not discussed until chapter \ref{nonmtrmds}. So, at least initially, we take the numerical values of the dissimilarities seriously, as do \protect\hyperlink{ref-torgerson_58}{Torgerson} (\protect\hyperlink{ref-torgerson_58}{1958}) and \protect\hyperlink{ref-shepard_62a}{Shepard} (\protect\hyperlink{ref-shepard_62a}{1962a}), \protect\hyperlink{ref-shepard_62b}{Shepard} (\protect\hyperlink{ref-shepard_62b}{1962b}).
-It may be the case that in the social and behavioural sciences
-only the ordinal information in the dissimilarities is reliable and
-useful. But, since 1964, MDS has also been applied in moleculkar conformation, chemometrics, genetic sequencing, archelogical seriation, and in network design and location analysis. In these areas the numerical information in the dissimilarities is usually meaningful and should not be thrown out right away. Also, the use of the Shepard plot,
-with dissimilarities on the horizontal axis and fitted distances on the
-vertical axis, suggests there is more to dissimilarities than just their
-rank order.
+It is perhaps useful to remember that \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}) introduced explicit loss functions in MDS to put the somewhat heuristic NMDS techniques of \protect\hyperlink{ref-shepard_62a}{Shepard} (\protect\hyperlink{ref-shepard_62a}{1962a}) onto a firm mathematical and computational foundation. Thus, more or less from the beginning of iterative least squares MDS, there was a focus on non-metric rather than metric MDS, and this actually contributed a great deal to the magic and success of the technique. In this book most of the results are derived for basic MDS, which is metric MDS, with non-metric MDS as a relatively straightforward extension not discussed until chapter \ref{nonmtrmds}. So, at least initially, we take the numerical values of the dissimilarities seriously, as do \protect\hyperlink{ref-torgerson_58}{Torgerson} (\protect\hyperlink{ref-torgerson_58}{1958}) and \protect\hyperlink{ref-shepard_62a}{Shepard} (\protect\hyperlink{ref-shepard_62a}{1962a}), \protect\hyperlink{ref-shepard_62b}{Shepard} (\protect\hyperlink{ref-shepard_62b}{1962b}).
+It may be the case that in the social and behavioural sciences only the ordinal information in the dissimilarities is reliable and useful. But, since 1964, MDS has also been applied in moleculkar conformation, chemometrics, genetic sequencing, archelogical seriation, and in network design and location analysis. In these areas the numerical information in the dissimilarities is usually meaningful and should not be thrown out right away. Also, the use of the Shepard plot, with dissimilarities on the horizontal axis and fitted distances on the
+vertical axis, suggests there is more to dissimilarities than just their rank order.
 
 \hypertarget{genfstress}{%
 \subsection{fstress}\label{genfstress}}
@@ -1009,7 +923,7 @@ Stress only depends on the distances between the points in the configuration, an
 
 It follows directly that the minimizer of stress, if it exists, cannot possibly be unique. Whatever the value at a minimum, it is shared by all rigid transformations of the configuration.
 
-It also follows from translational invariance that we can minimize stress over the \(p(n-1)\) dimensional subspace of \(\mathbb{R}^{n\times p}\) of all \(n\times p\) matrices which are centered, i.e.~have \(e'X=0\). Rotational invariance implies we can also require without loss of generality that \(X\) is orthogonal, i.e.~that \(X^TX\) is diagonal. This studied in more detail in chapter \#ref(propspaces).
+It also follows from translational invariance that we can minimize stress over the \(p(n-1)\) dimensional subspace of \(\mathbb{R}^{n\times p}\) of all \(n\times p\) matrices which are centered, i.e.~have \(e^TX=0\). Rotational invariance implies we can also require without loss of generality that \(X\) is orthogonal, i.e.~that \(X^TX\) is diagonal. This studied in more detail in section \#ref(propconfspace).
 
 \hypertarget{propcontinuity}{%
 \subsection{Continuity}\label{propcontinuity}}
@@ -1028,6 +942,10 @@ To show that \(d_{ij}\) is Lipschitz we use the reverse triangle inequality
 To show the Lipschitz bound is sharp use \(Y=0\) and \(X=\begin{bmatrix}\hfill x\\-x\end{bmatrix}\) with \(\|x\|=1\). Then \(|d(X)-d(Y)|=2\) and \(\|X-Y\|=\sqrt{2}\).
 
 Because \(d_{ij}^2\) is continuously differentiable it is locally Lipschitz, and because its derivative is unbounded it is not globally Lipschitz.
+\end{proof}
+
+\begin{proof}
+This follows directly from theorem \ref{thm:proplip}.
 \end{proof}
 
 \hypertarget{propcoercive}{%
@@ -1049,111 +967,109 @@ It follows from coercivity that all level sets of stress \(\mathcal{L}_s:=\{X\mi
 The following theorem provides more bowl-shapedness.
 
 \begin{theorem}
-\protect\hypertarget{thm:rayquad}{}\label{thm:rayquad}If \(X\not=0\) then on the ray \(\{Y\mid Y=\alpha X \text{with} \alpha\geq 0\}\) stress is an unbounded convex quadratic in \(\alpha\). The minimum of this quadratic is at \(\alpha=\rho(X)/\eta^2(X)\) and it is equal to \(1-\frac12\rho^2(X)/\eta^2(X)\). There is a local maximum at the boundary \(\alpha=0\), equal to 1.
+\protect\hypertarget{thm:rayquad}{}\label{thm:rayquad}If \(X\not=0\) then on the ray \(\{Y\mid Y=\alpha X\text{ with }\alpha\geq 0\}\) stress is an unbounded convex quadratic in \(\alpha\). The minimum of this quadratic is at \(\alpha=\rho(X)/\eta^2(X)\) and it is equal to \(1-\frac12\rho^2(X)/\eta^2(X)\). There is a local maximum at the boundary \(\alpha=0\), equal to 1.
 \end{theorem}
 
 \begin{proof}
-We have \(\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)\). The staements in the theorem follow easily from this.
+We have \(\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)\). The statements in the theorem follow easily from this.
 \end{proof}
 
 \hypertarget{propdiff}{%
 \section{Differentiability}\label{propdiff}}
 
-The fact that \(d_{ij}\) can be zero for some configurations creates problems with its differentiability.
+The fact that \(d_{ij}\) can be zero for some configurations creates problems with the differentiability of stress.
 
 Because \(d_{ij}^2(X)=\text{tr}\ X'A_{ij}X\) is a
 quadratic it is everywhere infinitely many times differentiable. But \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) is not differentiable
 at points where \(d_{ij}(X)=0\), i.e.~where \(x_i=x_j\), because the square root is not differentiable at zero. For stress this means that \(\eta^2\) is differentiable but if \(d_{ij}(X)=0\) for one or more \(i\) and \(j\) with \(w_{ij}\delta_{ij}>0\) then \(\rho\) (and thus \(\sigma\)) is not differentiable at \(X\).
 
-These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \ref{proplocmin} of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused \(d_{ij}(X)=0\) were one of the reasons why I switched from differentiability to convexity in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}) and from derivatives to directional derivatives in \protect\hyperlink{ref-deleeuw_A_84f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_84f}{1984c}). It turned out that the important characteristics of the \(\textrm{smacof}\) algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
+These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great practical importance (see section \ref{proplocmin} of this chapter), at least not in basic MDS. But for reasons of completeness we discuss zero distances in some detail. Historically the complications caused by \(d_{ij}(X)=0\) were one of the reasons why I switched from differentiability to convexity in \protect\hyperlink{ref-deleeuw_C_77}{De Leeuw} (\protect\hyperlink{ref-deleeuw_C_77}{1977a}) and from derivatives to directional derivatives in \protect\hyperlink{ref-deleeuw_A_84f}{De Leeuw} (\protect\hyperlink{ref-deleeuw_A_84f}{1984c}). It turned out that the important characteristics of the \(\textrm{smacof}\) algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
 
 We start with ordinary (total) differentiation of stress and then discuss, in considerable detail, the case of zero distances.
 
 \hypertarget{notation-and-terminology}{%
 \subsection{Notation and Terminology}\label{notation-and-terminology}}
 
-A quick reminder of terminology and notation. The \emph{derivative} of stress at configuration \(X\) is \(\mathcal{D}\sigma(X)\). It is a linear transformation of configuration space \(\mathbb{R}^{n\times p}\) into
-\(\mathbb{R}\). The derivative at \(X\) at configuration \(Y\) is
-\(\mathcal{D}\sigma(X)(Y)\), which also defines the \emph{differential} \(\Delta\sigma(X;Y)\), a function of \(\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}\) into \(\mathbb{R}\).
+A quick reminder of terminology and notation. We follow \protect\hyperlink{ref-spivak_65}{Spivak} (\protect\hyperlink{ref-spivak_65}{1965}), \protect\hyperlink{ref-dieudonne_69}{Dieudonné} (\protect\hyperlink{ref-dieudonne_69}{1969}), and \protect\hyperlink{ref-flett_80}{Flett} (\protect\hyperlink{ref-flett_80}{1980}), except that we limit ourselves to inner product spaces of finite dimension.
 
-The \emph{partial derivatives} at \(X\) are \(\mathcal{D}\sigma(X)(E_s)=\Delta\sigma(X,E_s)\), where the \(E_s\) are a basis for configuration space. The matrix of partial derivatives is the \emph{gradient matrix} at \(X\).
-
-The \emph{second derivative} \(\mathcal{D}^2\sigma\) is the derivative of the first derivative. It defines a symmetric bilinear form on \(\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}\). The \emph{second differential} is \(\mathcal{D}^2\sigma(X)(Y,Z)=\Delta^2\sigma(X;Y,Z)\), and the \emph{Hessian} is the
-symmetric matrix with as elements the \emph{second partial derivatives} \(\Delta^2\sigma(X;E_s,E_t)\).
-
-\hypertarget{derivative}{%
-\subsubsection{Derivative}\label{derivative}}
-
-Suppose \(f\) maps an open set \(X\subseteq\mathbb{R}^n\) into \(\mathbb{R}^m\). Then \(f\) is (Fréchet, totally) differentiable at \(x\in X\) if there is a \emph{linear} map \(\mathcal{D}f\) of \(X\) into \(\mathbb{R}^m\) such that
+A \emph{Euclidean space} is a finite-dimensional vector space with an inner product (and an associated norm). Suppose \(X\) is an open subset of n-dimensional Euclidean space \(\mathcal{X}\), and \(f\) and \(g\) are continuous mappings of \(X\) into an m-dimensional Euclidean space \(\mathcal{Y}\). The mappings \(f\) and \(g\) are \emph{tangent} at \(x\in X\) if
 
 \begin{equation}
-\mathcal{D}f(x)=\lim_{\delta\rightarrow 0} \frac{f(x+\delta)-f(x)-\mathcal{D}f(x)\delta}{\|\delta\|}=0,
-\label{eq:apfrderdef1}
+\lim_{z\rightarrow x}\frac{\|f(z)-g(z)\|}{\|z-x\|}=0.
+\label{eq:proptangent}
 \end{equation}
 
-which we can also write as
+It is understood that we let \(z\rightarrow x\) in such a way that \(z\not=x\).
+
+There is at most one linear function \(g\) which is tangent to \(f\) at \(x\). This unique \(g\), if it exists, can be written as \(g(z)=f(x)+A(z-x)\), where \(A\) is a linear map from \(\mathcal{X}\) into \(\mathcal{Y}\). Thus \(A\) must satisfy
+\begin{equation}
+\lim_{z\rightarrow x}\frac{\|f(z)-f(x)+A(z-x)\|}{\|z-x\|}=0,
+\label{eq:proplintangent1}
+\end{equation}
+
+or
 
 \begin{equation}
-\mathcal{D}f(x+\delta)=f(x)+\mathcal{D}f(x)\delta+o(\|\delta\|).
-\label{eq:apfrderdef2}
+\lim_{z\rightarrow 0}\frac{\|f(x+z)-f(x)+A(z)\|}{\|z\|}=0,
+\label{eq:proptangent2}
 \end{equation}
 
-So, just to be clear about the notation, \(\mathcal{D}f(x)(y)\) means the value in \(\mathbb{R}^m\) of the linear map \(\mathcal{D}f(x)\) at \(y\in X\).
+or
 
-Second derivatives symmetric quadratic form
+\begin{equation}
+\|f(x+z)-f(x)+A(z)\|=o(\|z\|).
+\label{eq:proptangent3}
+\end{equation}
 
-\(\mathcal{D}^2f(x)=\mathcal{D}(\mathcal{D}f(x))\)
+If such an linear map \(A\) exists, it is called the derivative of \(f\) at \(x\), and we write it as \(\mathcal{D}f(x)\). This definition does not require any choice of coordinates, and it is invariant under choice of inner products or associated norms.
 
-\[\mathcal{D}^2f(x)(y,z)=\mathcal{D}^2f(x)(z,y)\]
+It is important to remember that for each \(x\) the derivative \(\mathcal{D}f(x)\) is a linear map, and that, assuming \(\mathcal{D}f(x)\) exists at all elements of \(X\), \(\mathcal{D}f\) maps \(X\) into \(\mathcal{L}(\mathcal{X},\mathcal{Y})\), the linear maps of \(\mathcal{X}\) into \(\mathcal{Y}\).
 
-\hypertarget{mathaddparder}{%
-\subsubsection{Partial Derivatives}\label{mathaddparder}}
+The value of the derivative at \(x\) for \(y\) is
+\(\mathcal{D}f(x)(y)\), which also defines the \emph{differential} \(\mathrm{d}f(x;y)\), The differential is a function of \(\mathcal{X}\otimes\mathcal{X}\) into \(\mathcal{Y}\).
 
-\[
-\mathcal{D}_f(x,y)=
-\]
-\[
-f_i(\epsilon)=f(x+\epsilon\ e_i)
-\]
+If we choose a basis for both \(\mathcal{X}\) and \(\mathcal{Y}\) we can represent \(\mathcal{D}f(x)\) as an \(m\times n\) matrix Jacobian.
 
-\[
-\mathcal{D}_if(x)=\mathcal{D}f_i(0)
-\]
+The \emph{partial derivatives} at \(X\) are \(\mathcal{D}f(x)(e_i)=\mathrm{d}f(x,e_i)\), where the \(e_i\) form the usual canonical basis of \(\mathcal{X}\). The matrix of partial derivatives \(\nabla f(x)\) is the \emph{gradient} at \(x\). Note that \(\mathfrak{d}f(x;y)=<y,\nabla\sigma(x)>\).
 
-\[
-\mathcal{D}f(x)(y)=\sum_{i=1}^n\mathcal{D}_if(x)(y_i)
-\]
+\(\mathcal{D}^2f(x)\), the \emph{second derivative} at \(x\), is the derivative of the first derivative. It defines a symmetric bilinear form on \(\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}\). The \emph{second differential} is \(\mathrm{d}^2\sigma(X;Y,Z):=\mathcal{D}^2\sigma(X)(Y,Z)\), and the \emph{Hessian} \(\mathcal{H}f(x)\) at \(x\) is the
+symmetric matrix with as elements the \emph{second partial derivatives} \(\mathrm{d}^2f(x;e_i,e_j)\).
 
-\hypertarget{jacobian}{%
-\subsubsection{Jacobian}\label{jacobian}}
+Two Eucliean spaces.
 
-\[
-\{\mathcal{J}F(x)\}_{ij}=\{\mathcal{D}_i^{\ }f_j(x)\}
-\]
+\(\mathbb{R}^n\) with inner product \(x^Ty\) and norm \(\sqrt{x^Tx}\), basis \(e_1,\cdots,e_n\)
 
-\hypertarget{gradient}{%
-\subsubsection{Gradient}\label{gradient}}
+\(\mathbb{R}^{n\times p}\) with inner product \(\text{tr}\ X^TY\) and norm \(\sqrt{\text{tr}\ X^TX}\), basis
+\(e_ie_s^T\) with \(i=1,\cdots,n\) and \(s=1,\cdots,p\).
 
-\[
-\{\nabla f(x)\}_i=\mathcal{D}f(x)(e_i)
-\]
+Brouhaha
 
-\hypertarget{hessian}{%
-\subsubsection{Hessian}\label{hessian}}
+matrix differential calculus Dwyer, Tracy, MacDonald, Swaminathan, Bentler, Lee, Pollack, Magnus, Neudecker
 
-\[
-\{\nabla^2 f(x)\}_{ij}=\mathcal{D}^2f(x)(e_i,e_j)
-\]
+\hypertarget{non-zero-distances}{%
+\subsection{Non-zero Distances}\label{non-zero-distances}}
 
-\hypertarget{differentials}{%
-\subsubsection{Differentials}\label{differentials}}
+A configuration \(X\) is \emph{simplicial} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). If \(X\) is simplicial then all \(d_{ij}\) are differentiable at \(X\), in fact infinitely many times differentiable. Remembering that \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) we see that
 
-If \(f\) is differentiable at \(x\) then the function
-\(\mathcal{D}f(x)(u)\) is called the differential
+\begin{theorem}
+\protect\hypertarget{thm:distdiff}{}\label{thm:distdiff}If \(d_{ij}X)>0\)
 
-\protect\hyperlink{ref-flett_80}{Flett} (\protect\hyperlink{ref-flett_80}{1980})
+\begin{align}
+\mathrm{d}d_{ij}(X;Y)&=\frac{1}{d_{ij}(X)}\text{tr}\ Y'A_{ij}X=\frac{(x_i-x_j)'(y_i-y_i)}{d_{ij}(X)},\\
+\mathrm{d}^2 d_{ij}(X)(Y,Z)&=\frac{1}{d_{ij}(X)}\left\{
+\text{tr}\ Y'A_{ij}Z-\frac{\text{tr}\ Y'A_{ij}X\ \text{tr}\ Z'A_{ij}X}{d_{ij}^2(X)}\right\}.
+\end{align}
+\end{theorem}
 
-\protect\hyperlink{ref-magnus_neudecker_99}{Magnus and Neudecker} (\protect\hyperlink{ref-magnus_neudecker_99}{1999})
+If we collect the partials in the \(n\times p\) gradient matrix \(\nabla d_{ij}(X)\), then row \(i\) of this matrix is \((x_i-x_j)/\|x_i-x_j\|\) and row \(j\) is \(-(x_i-x_j)/\|x_i-x_j\|\). The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of \(\nabla d_{ij}(X)\) is equal to two, and thus all partial derivatives are less than or equal to \(\sqrt{2}\).
+
+From the CS inequality we see that \(\mathrm{d}^2 d_{ij}(X)(Y,Y)\geq 0\), for all \(X\) and \(Y\), as we would expect from any decent twice-differentiable convex function.
+
+\begin{align}
+\Delta\rho(X;Y)&=\text{tr}\ Y'B(X)X,\\
+\Delta\eta^2(X;Y)&=2\text{tr}\ Y'VX,\\
+\Delta\sigma(X;Y)&=2\text{tr}\ Y'(V-B(X))X=2\text{tr}\ Y'V(X-\mathfrak{G}(X)),
+\end{align}
 
 \hypertarget{apdirder}{%
 \subsection{Directional Derivatives}\label{apdirder}}
@@ -1202,34 +1118,6 @@ If \(f\) is twice differentiable
 \frac12 \{\mathcal{D}^2 f(x)(y,y)+\mathcal{D}f(x)(z)
 \label{eq:apbtzsmooth}
 \end{equation}
-
-\hypertarget{non-zero-distances}{%
-\subsubsection{Non-zero Distances}\label{non-zero-distances}}
-
-A configuration \(X\) is \emph{separated} if \(d_{ij}(X)>0\) for all \(i\not= j\) with \(w_{ij}\delta_{ij}>0\). If \(X\) is separated then all \(d_{ij}\) are differentiable at \(X\), in fact infinitely many times differentiable. Remembering that \(d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}\) we see that
-
-\begin{equation}
-\mathcal{D}d_{ij}(X)=\frac{1}{d_{ij}(X)}A_{ij}X=(e_i-e_j) \frac{(x_i-x_j)'}{d_{ij}(X)}.
-\label{eq:distder1}
-\end{equation}
-
-If we collect the partials in the \(n\times p\) gradient matrix, then row \(i\) of this matrix is \((x_i-x_j)/\|x_i-x_j\|\) and row \(j\) is \(-(x_i-x_j)/\|x_i-x_j\|\). The rest of the matrix are zeroes, and thus the matrix is column-centered. Both non-zero rows have norm one. It also follows that the sum of squares of the elements of \(\mathcal{D}d_{ij}(X)\) is equal to two, and thus all partial derivatives are less than or equal to \(\sqrt{2}\).
-
-For the symmetric bilinear form defined by the second derivatives we find
-
-\begin{equation}
-\mathcal{D}^2 d_{ij}(X)(Y,Z)=\frac{1}{d_{ij}(X)}\left\{
-\text{tr}\ Y'A_{ij}Z-\frac{\text{tr}\ Y'A_{ij}X\ \text{tr}\ Z'A_{ij}X}{d_{ij}^2(X)}\right\}.
-\label{eq:distder2}
-\end{equation}
-
-From the CS inequality we see that \(\mathcal{D}^2d_{ij}(X)(Y,Y)\geq 0\), as we would expect from any decent twice-differentiable convex function.
-
-\begin{align}
-\Delta\rho(X;Y&=\text{tr}\ Y'B(X)X,\\
-\Delta\eta^2(X;Y)&=2\text{tr}\ Y'VX,\\
-\Delta\sigma(X;Y)&=2\text{tr}\ Y'(V-B(X))X=2\text{tr}\ Y'V(X-\mathfrak{G}(X)),
-\end{align}
 
 \hypertarget{squared-distances}{%
 \subsection{Squared Distances}\label{squared-distances}}
@@ -1942,6 +1830,12 @@ and thus
 \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij},
 \]
 and thus the Guttman transform is Lipschitz.
+
+\hypertarget{subdifferentials-1}{%
+\subsection{Subdifferentials}\label{subdifferentials-1}}
+
+\hypertarget{derivative}{%
+\subsection{Derivative}\label{derivative}}
 
 \hypertarget{propstationary}{%
 \section{Stationary Points}\label{propstationary}}
@@ -4807,6 +4701,94 @@ smacof: hard squeeze double phase
 
 \hypertarget{nmdskruskal}{%
 \section{Kruskal's Approach}\label{nmdskruskal}}
+
+\hypertarget{kruskals-stress-1}{%
+\subsection{Kruskal's Stress}\label{kruskals-stress-1}}
+
+Remember that Kruskal's definition was intended for ordinal multidimensional scaling only.
+Thus dissimilarities are not numbers, as in basic MDS, and only their rank order is known. He first defined \emph{raw stress} as
+
+\begin{equation}
+\sigma^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
+\label{eq:rawstress1}
+\end{equation}
+
+where the \(\hat d_{ij}\) is some set of numbers monotone with the dissimilarities.
+
+\begin{quote}
+To simplify the discussion, we delay the precise definition of
+\(\hat d\), for a little while. (\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~8)
+\end{quote}
+
+Kruskal then mentions that raw stress satisfies \(\sigma^\star_K(\alpha X)=\alpha^2\sigma^\star_K(X)\), which is clearly undesirable because
+the size of the configuration should not influence the quality of
+the fit.
+
+\begin{quote}
+An obvious way to cure this defect in the raw stress is to divide it by a
+scaling factor, that is, a quantity which has the same quadratic
+dependence on the scale of the configuration that raw stress does.
+(\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~8).
+\end{quote}
+
+By the way, although the precise definition of \(\hat D\)
+has been delayed, the uniform stretching/shrinking argument already assumes that
+if we multiply \(D\) by \(\alpha\) then \(\hat D\) also gets multiplied
+by \(\alpha\). Thus it sort of gives away that \(\hat D\) is also a
+function of \(X\), at least of the scale of \(X\).
+
+For the normalization of raw stress Kruskal chooses
+
+\begin{equation}
+\tau^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X),
+\label{eq:rawtau}
+\end{equation}
+
+\begin{quote}
+Finally, it is desirable to use the square root of this expression, which
+is analogous to choosing the standard deviation in place of the variance.
+(\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~9)
+\end{quote}
+
+Thus Kruskal's normalized loss function for ordinal MDS becomes
+
+\begin{equation}
+\sigma_K(X):=\sqrt{\frac{\sigma^\star_K(X)}{\tau^\star_K(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+\label{eq:kruskalstress}
+\end{equation}
+
+At this point in \protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}) the definition of \(\hat D\) still hangs in the
+air, although we know that the \(\hat D\) are monotone with \(\Delta\), and that multiplying \(X\) by a constant will multiply
+both \(D(X)\) and \(\hat D\) by the same constant. Matters are clarified
+right after the definition of stress.
+
+\begin{quote}
+Now it is easy to define the \(\hat d_{ij}\). They are the numbers which
+minimize \(\sigma\) (or equivalently, \(\sigma^\star\)) subject to the
+monotonicity constraints. (\protect\hyperlink{ref-kruskal_64a}{Kruskal} (\protect\hyperlink{ref-kruskal_64a}{1964a}), p.~9)
+\end{quote}
+
+Thus, actually, raw stress is the minimum over the pseudo-distance matrices
+\(\Omega\) in \(\mathfrak{D}\), the set of all monotone transformations of the dissimilarities.
+
+\begin{equation}
+\sigma^\star(X):=\min_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2,
+\label{eq:rawstressfinal}
+\end{equation}
+
+and \(\hat D\) is the minimizer, which is now clearly a function of \(X\),
+
+\begin{equation}
+\hat D(X):=\mathop{\text{argmin}}_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2.
+\label{eq:dhatdef}
+\end{equation}
+
+So, finally,
+
+\begin{equation}
+\sigma(X):=\min_{\Omega\in\mathfrak{D}}\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+\label{eq:kruskalstressfinal}
+\end{equation}
 
 In Guttman's terminology Kruskal's approach is hard squeeze single phase.
 Thus what is minimized is
@@ -13442,6 +13424,9 @@ De Leeuw, J. 1968a. {``Canonical Discriminant Analysis of Relational Data.''} Re
 \leavevmode\hypertarget{ref-deleeuw_E_17e}{}%
 ---------. 2017f. {``{Shepard Non-metric Multidimensional Scaling}.''} 2017. \url{http://deleeuwpdx.net/pubfolders/shepard/shepard.pdf}.
 
+\leavevmode\hypertarget{ref-deleeuw_E_17p}{}%
+---------. 2017g. {``{Tweaking the SMACOF Engine}.''} 2017. \url{http://deleeuwpdx.net/pubfolders/tweaking/tweaking.pdf}.
+
 \leavevmode\hypertarget{ref-deleeuw_E_18c}{}%
 ---------. 2018a. {``{Differentiability of Stress at Local Minima}.''} 2018. \url{http://deleeuwpdx.net/pubfolders/zero/zero.pdf}.
 
@@ -13510,6 +13495,9 @@ Dempster, A. P., N. M. Laird, and D. B. Rubin. 1977. {``{Maximum Likelihood for 
 
 \leavevmode\hypertarget{ref-demyanov_malozemov_90}{}%
 Demyanov, V. F., and V. N. Malozemov. 1990. \emph{Introduction to Minimax}. Dover.
+
+\leavevmode\hypertarget{ref-dieudonne_69}{}%
+Dieudonné, J. 1969. \emph{Foundations of Modern Analysis}. Academic Press.
 
 \leavevmode\hypertarget{ref-dinkelbach_67}{}%
 Dinkelbach, W. 1967. {``{On Nonlinear Fractional Programming}.''} \emph{Management Science} 13: 492--98.
@@ -13652,9 +13640,6 @@ Lyusternik, L., and L. Schnirelmann. 1934. \emph{M{é}thodes Topologiues Dans Le
 \leavevmode\hypertarget{ref-maehara_86}{}%
 Maehara, H. 1986. {``{Metric Transforms of Finite Spaces and Connected Graphs}.''} \emph{Discrete Mathematics} 61: 235--46.
 
-\leavevmode\hypertarget{ref-magnus_neudecker_99}{}%
-Magnus, J. R., and H. Neudecker. 1999. \emph{{Matrix Differential Calculus with Applcations in Statistics and Econometrics}}. Revised Edition. Wiley.
-
 \leavevmode\hypertarget{ref-mair_groenen_deleeuw_A_19}{}%
 Mair, P., P. J. F. Groenen, and J. De Leeuw. 2019. {``{More on Multidimensional Scaling in R: smacof Version 2}.''} \emph{Journal of Statistical Software}. \url{http://deleeuwpdx.net/janspubs/2019/articles/mair_groenen_deleeuw_A_19.pdf}.
 
@@ -13738,6 +13723,9 @@ Shepard, R. N. 1962a. {``{The Analysis of Proximities: Multidimensional Scaling 
 
 \leavevmode\hypertarget{ref-spang_62}{}%
 Spang, H. A. 1962. {``{A Review of Minimization Techniques for Nonlinear Functions}.''} \emph{SIAM Review} 4 (4): 343--65.
+
+\leavevmode\hypertarget{ref-spivak_65}{}%
+Spivak, M. 1965. \emph{Calculus on Manifolds}. Perseus Books.
 
 \leavevmode\hypertarget{ref-stephenson_53}{}%
 Stephenson, W. 1953. \emph{{The Study of Behavior: Q-technique and its Methodology}}. University of Chicago Press.
