@@ -1,0 +1,1386 @@
+# Properties of Stress {#propchapter}
+
+## Notation {#propnotation}
+
+The notation used in the $\textrm{smacof}$ approach to MDS first appeared in @deleeuw_C_77, and was subsequently used in several of the later key smacof references, such as @deleeuw_heiser_C_82, @deleeuw_A_88b, chapter 8 of @borg_groenen_05, and @deleeuw_mair_A_09c. We follow it in this book.
+
+### Expanding {#propexpand} 
+
+We expand stress by writing out the squares of the residuals and then summing. Define
+
+\begin{align}
+\eta_\delta^2&:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}^2,(\#eq:comps1)\\
+\rho(X)&:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}d_{ij}(X),(\#eq:comps2)\\
+\eta^2(X)&:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}d_{ij}^2(X).(\#eq:comps3)
+\end{align}
+
+More precisely, using conditional summation, 
+
+\begin{align}
+\rho(X)&:=\mathop{\sum\sum}_{1\leq i<j\leq n}\left\{w_{ij}\delta_{ij}d_{ij}(X)\mid w_{ij}\delta_{ij}>0\right\},(\#eq:compszero1)\\
+\eta^2(X)&:=\mathop{\sum\sum}_{1\leq i<j\leq n}\left\{w_{ij}d_{ij}^2(X)\mid w_{ij}>0\right\}(\#eq:compszero2).
+\end{align}
+
+Remember that we have normalized by $\eta_\delta^2=1$. With our newly defined functions $\rho$ and $\eta^2$ we can write stress as
+
+\begin{equation}
+\sigma(X)=\frac12(1+\eta^2(X))-\rho(X).
+(\#eq:expand)
+\end{equation}
+
+The CS inequality implies that for all $X$
+
+\begin{equation}
+\rho(X)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}d_{ij}(X)\leq\eta_\delta\eta(X)=\eta(X),
+(\#eq:propcsrhoeta)
+\end{equation}
+
+and thus, from \@ref(eq:expand),
+
+\begin{align}
+&\frac12(1-\eta(X))^2\leq\sigma(X)\leq\frac12(1+\eta^2(X)),(\#eq:propcssigeta1)\\
+&\frac12(1-\rho(X))^2\leq\sigma(X)\leq\frac12(1-2\rho(X)).(\#eq:propcssigeta2)
+\end{align}
+
+### Matrix Expressions {#propmatrix}
+
+Using matrix notation allows us to arrive at compact expressions, which suggest various mathematical and computational shortcuts. In order to use matrix notation for distances we mainly rely on the difference matrices $A_{ij}$, which we now define. 
+
+* A *unit vector* $e_i$ is a vector with element $i$ equal to $+1$ and all other elements equal to 0. A *unit matrix* $E_{ij}$ is a matrix of the form $e_i^{\ }e_j'$,
+
+* A *diff matrix* $A_{ij}$ is a matrix of the form $(e_i-e_j)(e_i-e_j)'$.
+
+The element in row $i$ and column $j$ of a matrix $X$ is normally referred to as $x_{ij}$. But in some cases, to prevent confusion, we use the notation $\{X\}_{ij}$. Thus, for example, $\{e_i\}_j=\delta^{ij}$, where $\delta^{ij}$ is *Kronecker's delta* (zero when $i=j$ and one otherwise). 
+
+The diff matrices $A_{ij}$ with $i\not= j$ have only four non-zero elements
+
+\begin{align}
+\begin{split}
+\{A_{ij}\}_{ii}&=\{A_{ij}\}_{jj}=+1,\\
+\{A_{ij}\}_{ij}&=\{A_{ij}\}_{ji}=-1,
+\end{split}
+(\#eq:apaele)
+\end{align}
+
+and all other elements of $A_{ij}$ are zero. Thus $A_{ij}=A_{ji}$ and $A_{ii}=0$.  Diff matrices are symmetric, and positive semidefinite. They are also *doubly-centered*, which means that their rows and columns add up to zero. If $i\not j$ they are of rank one and have one eigenvalue equal to two, which means
+$A_{ij}^s=2^{s-1}A_{ij}$. Also
+
+\begin{equation}
+\mathop{\sum\sum}_{1\leq i<j\leq n} A_{ij}=nI-ee'=nJ,
+(\#eq:asum)
+\end{equation}
+
+with $J$ the centering matrix.
+
+We begin our matrix expressions with $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X$. Define
+
+\begin{equation}
+V:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}A_{ij},
+(\#eq:vdef)
+\end{equation}
+
+so that
+
+\begin{equation}
+\eta^2(X)=\text{tr}\ X'VX.
+(\#eq:etav)
+\end{equation}
+
+The matrix $V$ has off-diagonal elements equal to $-w_{ij}$ and diagonal elements $v_{ii}=\sum_{j\not= i} w_{ij}$ It is symmetric, positive semi-definite, and doubly-centered. Thus it is singular, because $Ve=0$.
+
+To analyze the singularity of $V$ in more detail we observe that
+$z'Vz=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(z_i-z_j)^2$. This is
+zero if and only if all $w_{ij}(z_i-z_j)^2$ are zero. If we permute the
+elements of $z$ such that $z_1\leq\cdots\leq z_n$ then the matrix with
+elements $(z_i-z_j)^2$ can be partitioned such that the diagonal blocks,
+corresponding with tie-blocks in $z$, are zero and the off-diagonal
+blocks are strictly positive. Thus $z'Vz=0$ if and only if the
+corresponding off-diagonal blocks of $W$ are zero. In other words, we
+can find a $z$ such that $z'Vz=0$ if and only if $W$ is the direct sum
+of a number of smaller matrices. If this is not the case
+we call $W$ *irreducible*, and $z'Vz>0$ for all $z\not= e$, so that the
+rank of $V$ is $n-1$. 
+
+If $W$ is reducible the MDS problem separates into a number of smaller independent MDS problems. We will assume in the sequel, without any real loss of generality, that this does not occur, and that consequently $W$ is irreducible.
+
+Because of the singularity of the matrices involved we sometimes have to work with generalized inverses. We limit ourselves to the Moore-Penrose (MP) inverse, which can be defined in terms of the singular value decomposition. If the singular value decomposition is $X=K\Lambda L'$ with $K'K=L'L=I_r$ and $\Lambda$ a positive definite diagonal matrix of order $r=\text{rank}(X)$, then the  MP inverse of $X$ is $X^+=L\Lambda^{-1}K'$. 
+
+Because of irreducibility the MP inverse of $V$ is
+\begin{equation}
+V^+=(V+\frac{ee'}{n})^{-1}-\frac{ee'}{n}.
+(\#eq:mpv)
+\end{equation}
+If all weights are equal, say to $w$, then $V=nwJ$ and $V^+=\frac{1}{nw}J$, with $J$ the centering matrix $I-\frac{1}{n}ee'$.
+
+Finding an expression for $\rho(X)$ from \@ref(eq:comps2) in matrix form is a bit more complicated. Define
+\begin{equation}
+r_{ij}(X):=\begin{cases}0&\text{ if }d_{ij}(X)=0,\\
+\frac{\delta_{ij}}{d_{ij}(X)}&\text{ if }d_{ij}(X)>0,
+\end{cases}
+(\#eq:rdef)
+\end{equation}
+and
+\begin{equation}
+B(X):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}r_{ij}(X)A_{ij}.
+(\#eq:bdef)
+\end{equation}
+Then we have
+\begin{equation}
+\rho(X)=\text{tr}\ X'B(X)X.
+(\#eq:rhob)
+\end{equation}
+Just like $V$, the matrix-valued function $B$ is symmetric, positive-semidefinite, and doubly-centered. If all dissimilarities and distances are positive then irreducibility of $W$ implies that the rank of $B(X)$ is equal to $n-1$. Note that if $\delta_{ij}=d_{ij}(X)>0$ for all $i,j$ (perfect fit), then the $r_{ij}$ from \@ref(eq:rdef) are all equal to one, and $B(X)=V$.
+
+In \@ref(eq:rdef) we have set $r_{ij}(X)=0$ if $d_{ij}(X)=0$. This is arbitrary. Since $b_{ij}(X)=r_{ij}(X)$ if $d_{ij}(X)=0$ we get a different matrix $B(X)$ if we choose to set, say, $r_{ij}(X)=1$ or $r_{ij}(X)=\delta_{ij}$ whenever $d_{ij}(X)=0$. But
+\begin{equation}
+B(X)X=\mathop{\sum\sum}_{1 \leq i<j\leq n}w_{ij}r_{ij}(X)(e_i-e_j)(x_i-x_j)'
+(\#eq:propbinvar)
+\end{equation}
+remains the same, no matter how we choose $r_{ij}(X)$ for the $i<j$ with $d_{ij}(X)=0$. And, consequently, $\rho(X)=\text{tr}\ X'B(X)X$ remains the same as well.
+
+We now see, from equation \@ref(eq:expand), that
+\begin{equation}
+\sigma(X)=1-\ \text{tr}\ X'B(X)X+\frac12\text{tr}\ X'VX.
+(\#eq:propmatexp)
+\end{equation}
+
+
+### Coefficient Space {#propcoefspace}
+
+Observe that we distinguish configuration space, which is the linear space $\mathbb{R}^{n\times p}$ of $n\times p$ matrices, from the linear space $\mathbb{R}^{np}$ of $np$ element vectors. The two spaces are isomorphic, and connected by the *vec operator* and its inverse. 
+
+Some quick definitions. If $Y\in\mathbb{R}^{n\times p}$ is a configuration,
+then $\text{vec}(Y)$ is an $np$-element vector obtained by stacking the columns
+of $Y$ on top of each other. Thus element $(i,s)$ of $Y$ becomes element
+$i+(s-1)*n$ of $\text{vec}(Y)$. If $Z=X+Y$ in $\mathbb{R}^{n\times p}$
+then $\text{vec}(Z)=\text{vec}(X)+\text{vec}(Y)$ in $\mathbb{R}^{np}$, and if
+$Z=\alpha Y$ for some real number $\alpha$ then also $\text{vec}(Z)=\alpha\text{vec}(Y)$. Thus $\text{vec}$ is an isomorphism, and so
+is its inverse $\text{vec}*{-1}$, which transforms an $np$-element vector into an
+$n\times p$ matrix. In R we $\text{vec}$ a matrix by the as.vector function, which removes the dim attribute from the matrix, and we 
+$\text{vec}^{-1}$ a vector by the matrix function, which adds the dim attribute to the vector.
+
+But that is not all. Euclidean spaces are equipped with an inner product and a corresponding metric. The spaces $\mathbb{R}^{n\times p}$ and $\mathbb{R}^{np}$
+are also isometric inner product spaces. If $x$ and $y$ are in $\mathbb{R}^{np}$
+then their inner product is 
+$$
+\langle x, y\rangle_{np}:=x'y=\sum_{k=1}^{np}x_ky_k,
+$$
+If $X$ and $Y$ are in $\mathbb{R}^{n\times p}$ their inner product is
+$$
+\langle X,Y\rangle_{n\times p}:=\text{tr}\ X'Y=\sum_{i=1}^{n}\sum_{s=1}^px_{is}y_{is},
+$$
+their lengths are $\|X\|=\sqrt{\text{tr}\ X'X}$ and $\|Y\|=\sqrt{\text{tr}\ Y'Y}$, and their distance is $\|X-Y\|$. Now $\langle x,y\rangle=\langle\text{vec}(X),\text{vec}(Y)\rangle$ and $\|x-y\|=\|\text{vec}(X)-\text{vec}(Y)\|.
+
+Some formulas in MDS are more easily expressed in $\mathbb{R}^{np}$ (see, for example, section \@ref(propdiff)), but most of the time we prefer to work in the more intuitive space $\mathbb{R}^{n\times p}$ of configurations (which is after all where our representations and pictures live).
+
+Suppose $Y_1,\cdots,Y_r$ are $r$ linearly independent matrices 
+in configuration space $\mathbb{R}^{n\times p}$. We write $\mathcal{Y}$ for the $r$-dimensional subspace spanned by the basis $Y_1,\cdots,Y_r$. Of course if $r=np$ then $\mathcal{Y}=\mathbb{R}^{n\times p}$.
+
+If $X\in\mathcal{Y}$ then there is a $\theta$ in *coefficient space* $\mathbb{R}^r$ such that $X=\sum_{s=1}^r\theta_s Y_s$. We now parametrize basic MDS using the new variables $\theta$. Define
+
+\begin{equation}
+\tilde d_{ij}^2(\theta):=\text{tr}\ X'A_{ij}X=\theta'\tilde{A}_{ij}\theta,
+(\#eq:confpar)
+\end{equation}
+
+with 
+
+\begin{equation}
+\{\tilde A_{ij}\}_{st}:=\text{tr}\ Y_s'A_{ij}Y_t.
+(\#eq:conftildea)
+\end{equation}
+
+Now
+
+\begin{equation}
+\tilde B(\theta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{\tilde d_{ij}(\theta)}\tilde A_{ij},
+(\#eq:conftildeb)
+\end{equation}
+
+and
+
+\begin{equation}
+\tilde V:=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\tilde A_{ij},
+(\#eq:conftildev)
+\end{equation}
+
+and
+
+\begin{equation}
+\tilde\sigma(\theta):=1-2\tilde\rho(\theta)+\tilde\eta^2(\theta)=1-2\ \theta'\tilde B(\theta)\theta+\theta'\tilde V\theta.
+(\#eq:conftildesigma)
+\end{equation}
+
+For the elements of $\tilde B$ and $\tilde V$ we see
+
+\begin{align}
+\tilde b_{st}(\theta)&=\text{tr}\ Y_s'B(X)Y_t,\\
+\tilde v_{st}&=\text{tr}\ Y_s'VY_t.
+\end{align}
+
+Minimizing $\sigma$ over $X\in\mathcal{Y}$ is now equivalent to minimizing $\tilde\sigma$ over $\theta\in\mathbb{R}^r$. 
+
+If $\mathcal{Y}=\mathbb{R}^{n\times p}$ then, in a sense, this is just
+notational sleight of hand. Consider, for example, using the basis
+where the $Y_s$ are the $np$ matrices $e_i^{\ }e_q'$. Then
+
+\begin{equation}
+\{\tilde A_{ij}\}_{kq,lv}:=
+\delta^{qv}\{A_{ij\}_{kl}}
+(\#eq:conftildecanon)
+\end{equation}
+
+Using Kronecker products this can be written as $\tilde A_{ij}=I_p\otimes A_{ij}$, the direct sum of $p$ copies of $A_{ij}$. Obviously if $\theta=\text{vec}(Y)$ then $d_{ij}^2(Y)=\theta'\tilde A_{ij}\theta$. Also $\tilde B(\theta)=I_p\otimes B(Y)$
+and $\tilde V=I_p\otimes V$. The only thing that changes by moving from configuration
+space to coefficient space, using the canonical basis of $\mathbb{R}^{n\times p}$, is that the configuration gets strung out to a vector, and the matrices $A_{ij}$ get blown up to $p$ copies of themselves.
+
+But nevertheless it is clear that coefficient space allows us to use different bases as well, and allows us to use bases for proper subspaces of dimension $r<np$. This can be
+the $p(n-1)$-dimensional space of centered configurations, or the $np-\frac12p(p+1)$-
+dimensional subspace of lower diagonal centered configurations. These configurations
+can be used to eliminate translational and rotational indeterminacy from basic
+MDS.
+
+But the basis can also define a subspace of configurations with, for example, a rectangular lattice pattern, with the edges of the rectangle parallel to the horizontal and vertical axes (@borg_leutner_83) or, for that matter, configurations $X$ constrained to satisfy any number of (consistent) linear equality constraints.
+If $r<np-\frac12p(p+1)$ then these applications are properly discussed as
+constrained multidimensional scaling or CMDS. A discussion of various forms of CMDS is in chapter \@ref(cmds).
+
+### Our Friends CS and AM/GM
+
+Perhaps the most frequently used mathematical results in this book are two elementary inequalities: the Cauchy-Schwartz and the Aritmetic-Geometric Mean inequalities.
+They are so important that we give them their own section in the book, their own acronyms CS and AM/GM, and we include their statements and even proofs.
+
+::: { #csineq .theorem}
+If $x$ and $y$ are vectors in a Euclidean space $X$ then $\langle x,y\rangle\leq\|x\|\|y\|$, with equality if and only if there is a real $\alpha$ such that $x=\alpha y$.
+:::
+::: {.proof}
+If $x=0$ and/or $y=0$ then obviously the result is trivially true. If $x\not 0$ and $y\not= 0$ then consider $f(\alpha):=\|x-\alpha y\|^2=\|x\|^2+\alpha^2\|y\|^2-2\alpha\langle x,y\rangle$.
+Now
+\begin{equation}
+\min_\alpha f(\alpha)=\|x\|^2-\frac{\langle x,y\rangle^2}{\|y\|^2}\geq 0.
+(\#eq:csproof)
+\end{equation}
+It follows that $\langle x,y\rangle^2\leq\|x\|^2\|y\|^2$, which shows $-\|x\|\|y\|\langle x,y\rangle\leq\|x\|\|y\|$. We have $\min_\alpha f(\alpha)=0$ if and only if $x=\alpha y$ for some $\alpha$.
+:::
+
+::: {#amgm .theorem}
+If $x$ and $y$ are two non-negative numbers, then $\sqrt{xy}\leq\frac12(x+y)$ with equality if and only if $x=y$.
+:::
+::: {.proof}
+Follows directly from $(\sqrt(x)-\sqrt(y))^2=x+y-2\sqrt{xy}\geq 0$.
+:::
+
+This can also be written as
+
+::: {#amgm2 .corollary}
+If $x$ and $y$ are two non-negative numbers, then $xy\leq\frac12(x^2+y^2)$ with equality if and only if $x=y$.
+:::
+
+Combining CS and AM/GM gives
+
+::: {#amgmcs .corollary}
+If $x$ and $y$ are vectors in a Euclidean space $X$ then $\langle x,y\rangle\leq\frac12(\|x\|^2+\|y\|^2)$.
+:::
+
+
+
+## Global Properties {#propglobal}
+
+### Boundedness {#propbounded}
+
+::: {#stressbounded .theorem}
+$\sigma$ is bounded below by zero and unbounded above.
+:::
+
+::: {.proof}
+Stress is a sum of squares, and thus it is non-negative, i.e. bounded below by zero. Because $\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)$ we see that for each $X\not= 0$ and for each $K<+\infty$ there is an $\alpha$  such that $\sigma(\alpha X)>K$. 
+:::
+
+### Invariance {#propinvariance}
+
+::: {#propinvar .theorem} 
+We have the following invariances.
+
+* Rotational Invariance: $\sigma(XK)=\sigma(X)$ for all $K$ with $K'K=KK'=I$.
+* Translational Invariance: $\sigma(X+eu')=\sigma(X)$ for all $u\in\mathbb{R}^p$.
+* Reflectional Invariance: $\sigma(XK)=\sigma(X)$ for all diagonal $K$ with $k_{ss}=\pm 1$.
+* Evenness: $\sigma(-X)=\sigma(X)$.
+:::
+
+::: {.proof}
+Stress only depends on the distances between the points in the configuration, and thus it is invariant under rigid geometrical transformations (rotations, reflections, and translations).  Note that reflectional and evenness are actually special cases of rotational invariance.
+:::
+
+It follows directly that the minimizer of stress, if it exists, cannot possibly be unique. Whatever the value at a minimum, it is shared by all rigid transformations of the configuration.
+
+It also follows from translational invariance that we can minimize stress over the $p(n-1)$ dimensional subspace of $\mathbb{R}^{n\times p}$ of all $n\times p$ matrices which are centered, i.e. have $e'X=0$. Rotational invariance implies we can also require without loss of generality that $X$ is orthogonal, i.e. that $X'X$ is diagonal. This studied in more detail in section \#ref(propconfspace).
+
+### Continuity {#propcontinuity}
+
+A real-valued function $f$ on an open subset $X$ of a Euclidean space is *Lipschitz* or *Lipschitz continuous* if there is a $K\geq 0$ such that $|f(x)-f(y)|\leq K\|x-y\|$ for all $x$ and $y$ in $X$. The smallest $K$ for which this inequality holds is called the 
+*Lipschitz constant* of $f$. Lipschitz functions are uniformly continuous,
+and thus continuous. Lipschitz functions are almost everywhere differentiable, and where the derivative exists there is an $L\geq 0$ such that $\|df(x)\|\leq L$. Thus differentiable functions with an unbounded derivative are not Lipschitz.
+
+A function $f$ is *locally Lipschitz* on $X$ if for each $x\in X$ there is a open neighborhood $\mathcal{N}(x)$ such that $f$ is Lipschitz on $\mathcal{N}(x)$. A locally 
+Lipschitz function is continuous and almost everywhere differentiable. Continuously differentiable functions and convex functions are all locally Lipschitz.
+
+::: {#proplip .theorem}
+
+On $\mathbb{R}^{n\times p}$ 
+
+* $d_{ij}$ is Lipschitz continuous with Lipschitz constant $\sqrt{2}$.
+* $d_{ij}^2$ is locally Lipschitz, but not globally Lipschitz.
+:::
+
+::: {.proof}
+To show that $d_{ij}$ is Lipschitz we use the reverse triangle inequality
+$|\|x\|-\|y\||\leq\|x - y\|$. It gives
+
+\begin{equation}
+|d_{ij}(X)-d_{ij}(Y)|=
+|\|X'(e_i-e_j)\|-\|Y'(e_i-e_j)\||
+\leq\|(X-Y)'(e_i-e_j)\|\leq\sqrt{2}\ \|X-Y\|.
+(\#eq:revtrian)
+\end{equation}  
+
+To show this Lipschitz bound is sharp use $Y=0$ and $X=\begin{bmatrix}\hfill x\\-x\end{bmatrix}$ with $\|x\|=1$. Then $|d(X)-d(Y)|=2$ and $\|X-Y\|=\sqrt{2}$.
+
+Because $d_{ij}^2$ is continuously differentiable it is locally Lipschitz, and because its derivative is unbounded it is not globally Lipschitz. 
+:::
+
+::: {#proplosscont .corollary}
+On $\mathbb{R}^{n\times p}$ 
+
+* $\rho$ is Lipschitz continuous with  Lipschitz constant $\sqrt{2}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\delta_{ij}$.
+* $\eta^2$ and $\sigma$ are both locally Lipschitz, but not globally Lipschitz.
+:::
+
+::: {.proof}
+This follows directly from theorem \@ref(thm:proplip).
+:::
+
+### Coercivity {#propcoercive}
+
+Stress is not a quadratic function, and not even a convex function, of the configuration. But it is like a bowl shaped around the origin, with some bumps and creases, in a way we are going to make more precise. First a definition: A real-valued function $f$ is *coercive* if for every sequence $\{x_k\}$ with $\lim_{k\rightarrow\infty}\|x_k\|=\infty$ we also have $\lim_{k\rightarrow\infty}f(x_k)=+\infty$.
+
+::: {#propcoerc .theorem}
+$\sigma$ is coercive. 
+:::
+
+::: {.proof}
+From \@ref(eq:propcssigeta1) we have $\sigma(X)\geq\frac12(1-\eta(X))^2$.
+Now $\eta$ is clearly coercive, and thus $\sigma$ is coercive.
+:::
+
+It follows from coercivity that all level sets of stress $\mathcal{L}_s:=\{X\mid \sigma(X)=s\}$ are compact, and that there is at least one configuration for which the global minimum of stress is attained (@ortega_rheinboldt_70, section 4.3).
+
+The following theorem provides even more bowl-shapedness.
+
+::: {#rayquad .theorem}
+If $X\not=0$ then on the ray $\{Y\mid Y=\alpha X\text{ with }\alpha\geq 0\}$ stress is an unbounded convex quadratic in $\alpha$. The minimum of this quadratic is at $\alpha=\rho(X)/\eta^2(X)$ and it is equal to $1-\frac12\rho^2(X)/\eta^2(X)$. There is a local maximum at the boundary $\alpha=0$, equal to 1.
+:::
+::: {.proof}
+We  have $\sigma(\alpha X)=1-\alpha\rho(X)+\frac12\alpha^2\eta^2(X)$. The statements in the theorem follow easily from this.
+:::
+
+## Differentiability {#propdiff}
+
+The fact that $d_{ij}$ can be zero for some configurations creates problems with the differentiability of stress. These problems have been largely ignored in the MDS literature, and there are indeed reasons why they are not of great **practical** importance (see section \@ref(proplocmin) of this chapter), at least not in basic MDS. But for reasons of completeness, and for later generalizations of basic MDS,  we discuss zero distances and the resulting problems with differentiability in some detail. 
+
+Historically the complications caused by $d_{ij}(X)=0$ were one of the reasons why I switched from differentiability to convexity in @deleeuw_C_77 and from derivatives to directional derivatives in @deleeuw_A_84f. It turned out that at least some of the important characteristics of the smacof algorithm, and several important aspects of stress surfaces, were better described by inequalities than by equations.
+
+  ### Directional Derivatives
+
+Because we are dealing with minimization of stress, which is not everywhere differentiable, we use one-sided directional derivatives. Our notation largely follows @delfour_12. 
+
+The first three directional derivatives at $X$ in the direction $Y$ are defined recursively by
+\begin{align}
+d_+\sigma(X;Y)&:=\lim_{\epsilon\downarrow 0}\frac{\sigma(X+\epsilon Y)-\sigma(X)}{\epsilon},
+(\#eq:ddd1stress)\\
+d_+^{(2)}\sigma(X;Y,Y)&:=\lim_{\epsilon\downarrow 0}\frac{\sigma(X+\epsilon\ Y)-\sigma(X)-\epsilon\ d\sigma(X)(Y)}{\frac12\epsilon^2},
+(\#eq:ddd2stress)\\
+d_+^{(3)}\sigma(X;Y,Y,Y)&:=\lim_{\epsilon\downarrow 0}\frac{\sigma(X+\epsilon\ Y)-\sigma(X)-\epsilon\ d_+\sigma(X)(Y)-\frac12\epsilon^2\ d_+^{(2)}\sigma(X)(Y,Y)}{\frac16\epsilon^3},
+(\#eq:ddd3stress)
+\end{align}
+where $\epsilon\downarrow 0$ is understood as $\epsilon$ taking only strictly positive values in computing the limit, and where it is also understood that the one-sided limits exist. The directional derivatives used in optimization theory differ from the usual derivatives of analysis because the limits in functions that define them are over the one-dimensional positive real axis and are one-sided (from the right). You may wonder why we need to go as high as order three, but just you wait.
+
+Note that we write $d_+\sigma(X;Y)$ (with a semi-colon) instead of $d_+\sigma(X,Y)$ (with a comma) to emphasize the different roles of $X$ and $Y$. Also note that by "directional derivatives" we will always mean "one-sided directional derivatives", because the two-sided ones are of limited usefulness in optimization. This is especially true for the two-sided directional derivative defined by
+\begin{equation}
+d\sigma(X;Y):=\lim_{\epsilon\rightarrow 0}\frac{\sigma(X+\epsilon Y)-\sigma(X)}{\epsilon}.
+(\#eq:twosided)
+\end{equation}
+The two-sided derivative may not exist, while we can still make useful statements of the minima of non-differentiable functions using the one-sided version. Of course for totally differentiable functions in the classical sense the two directional derivatives are equal.
+
+For the higher directional derivatives we can also use alternative, and slightly more general, definitions that follow directly from the idea that the $k^{th}$ directional derivative is the directional derivative of the $(k-1)^{th}$ one. In each step of the recursion we now use a different direction, instead of using the fixed direction $Y$ in all steps. Thus
+\begin{align}
+d_+^{(2)}\sigma(X;Y,Z)&:=\lim_{\epsilon\downarrow 0}\frac{d_+\sigma(X+\epsilon Z;Y)-d_+\sigma(X;Y)}{\epsilon},(\#eq:altdd2)\\
+d_+^{(3)}\sigma(X;Y,Z,U)&:=\lim_{\epsilon\downarrow 0}\frac{d_+^2\sigma(X+\epsilon U;Y,Z)-d_+^2\sigma(X;Y,Z)}{\epsilon}.(\#eq:altdd3)
+\end{align}
+
+Note again that $d_+\sigma(X)$ is a function on $\mathbb{R}^{n\times p}$, $d_+^2\sigma(X)$ a is a function on $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$, and $d_+^3\sigma(X)$ is a function on $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$. 
+
+If $\sigma$ is differentiable at $X$ then $d_+\sigma(X), d_+^{(2)}\sigma(X),$ and $d_+^{(3)}\sigma(X)$ are the usual first, second, and third derivatives of $\sigma$ at $X$. In this differentiable case they are, respectively, a linear function, a symmetric bilinear function, and a super-symmetric trilinear function. 
+
+We can use the directional derivatives to expand $\sigma(X+\epsilon Y)$ in powers of $\epsilon$. This gives an expansion of the form
+\begin{align}
+\begin{split}
+\sigma(X+\epsilon Y)&=\sigma(X)+\epsilon d_+\sigma(X)(Y)+\frac12\epsilon^2d^{(2)}_+\sigma(X)(Y,Y)+\\&+\frac16\epsilon^2d_+{(3)}\sigma(X)(Y,Y,Y)+\text{o}(\epsilon^3),
+\end{split}(\#eq:desexp)
+\end{align}
+where $\text{o}(\epsilon^3)$ stand for any function of $\epsilon>0$ such that
+\begin{equation}
+\lim_{\substack{\epsilon\downarrow 0\\\epsilon\not= 0}}
+\frac{\text{o}(\epsilon^3)}{\epsilon^3}\rightarrow 0.
+(\#eq:littleo)
+\end{equation}
+
+#### Distances
+
+Let us look at the directional differentiability of the distances $d_{ij}$ themselves first. Since $\rho$ is a straightfoward weighted sum of distances and $\eta^2$ is a weighted sum of squared distances, the only directional derivatives we really need are those of the squared distances and the distances. 
+
+The problems with differentiability are clearly not caused by the
+squared distances, which form the $\eta^2$ component in equation \@ref(eq:expand). The squared distance $d_{ij}^2(X)=\text{tr}\ X'A_{ij}X$ is a
+quadratic function, and thus it is everywhere infinitely many times continuously differentiable. 
+
+On the other hand, $d_{ij}(X)=\sqrt{\text{tr}\ X'A_{ij}X}$ is not differentiable
+at points where $d_{ij}(X)=0$, i.e. where $x_i=x_j$, because the square root is not differentiable at zero. For MDS this means that if $d_{ij}(X)=0$ for one or more $(i,j)$ with $w_{ij}\delta_{ij}>0$ then both $\rho$ and $\sigma$ are not differentiable at $X$.
+
+For the avalanche of furmulas that will follow in this section it is convenient to define $c_{ij}(X,Y):=\text{tr}\ Y'A_{ij}X=(y_i-y_j)'(x_i-x_j)$. Note that $c_{ij}(X,X)=d_{ij}^2(X)$ and $c_{ij}(Y,Y)=d_{ij}^2(Y)$. Now
+\begin{align}
+d_+d_{ij}^2(X;Y)&=2c_{ij}(X,Y),(\#eq:ddddd1)\\
+d_+^2d_{ij}^2(X;Y,Z)&=2c{ij}(Y,Z),(\#eq:ddddd2)\\
+d_+^3d_{ij}^2(X;Y,Z,U)&=0.(\#eq:ddddd3)
+\end{align}
+
+More involved calculations are needed for the directional derivatives of $d_{ij}$. 
+First the "problematic" case $d_{ij}(X)=0$. We have
+\begin{align}
+d_+d_{ij}(X;Y)&=d_{ij}(Y),(\#eq:dddzero1)\\
+d_+^2d_{ij}(X;Y)&=0,(\#eq:dddzero2)\\
+d_+^3d_{ij}(X;Y)&=0.(\#eq:dddzero3)\\
+\end{align}
+
+Note that $d_+d_{ij}(X)$ is continuous but not linear in $Y$, which also implies $d_{ij}$ is not differentiable at
+$X$. Also note that if we define the two-sided directional derivative of $d_{ij}$ at $X$ in the direction $Y$ 
+\begin{equation}
+dd_{ij}(X;Y):=\lim_{\epsilon\rightarrow 0}\frac{d_{ij}(X+\epsilon Y)-d_{ij}(X)}{\epsilon},
+(\#eq:wronglim)
+\end{equation}
+then this limit only exists if also $d_{ij}(Y)=0$. The limit from the right is $d_{ij}(Y)$, but the limit from the left is $-d_{ij}(Y)$. This illustrates that the two-sided directional derivative does not give much useful information on the behavior of the distance at zero.
+
+If $d_{ij}(X)>0$ we have continuous differentiability of all orders at $X$. To expand
+\begin{equation}
+d_{ij}(X+\epsilon Y)=\sqrt{d_{ij}^2(X)+2\ \epsilon\ c_{ij}(X,Y)+\epsilon^2\ d_{ij}^2(Y)}
+(\#eq:ddd1exp)
+\end{equation}
+we use the truncated Maclaurin series for the square root
+\begin{equation}
+\sqrt{1+x}=1+\frac12x-\frac18x^2+\frac{1}{16}x^3+\text{o}(x^3).
+(\#eq:maclaurin)
+\end{equation}
+For the distance this gives the series
+\begin{align}
+\begin{split}
+d_{ij}(X+\epsilon Y)&=d_{ij}(X)+\epsilon\frac{1}{d_{ij}(X)}c_{ij}(X,Y)+\\
+&+\frac12\epsilon^2\frac{1}{d_{ij}(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}\right\}+\\
+&-\frac12\epsilon^3\frac{c_{ij}(X,Y)}{d_{ij}^3(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}
+\right\}+\text{o}(\epsilon^3),
+\end{split}(\#eq:sqdexp)
+\end{align}
+and consequently
+\begin{align}
+d_+d_{ij}(X;Y)&=\frac{1}{d_{ij}(X)}c_{ij}(X,Y),(\#eq:expdfinal1)\\
+d_+^{(2)}d_{ij}(X;Y,Y)&=\frac{1}{d_{ij}(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}
+{d_{ij}^2(X)}\right\},(\#eq:expdfinal2)\\
+d_+^{(3)}d_{ij}(X;Y,Y,Y)&=-3\frac{c_{ij}(X,Y)}{d_{ij}^3(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}\right\}.(\#eq:expdfinal3)
+\end{align}
+
+Formulas for the mixed directional derivatives from equations \@ref(eq:altdd2) and \@ref(eq:altdd3) are necessarily more complicated. Again assuming $d_{ij}(X)>0$ we find 
+\begin{equation}
+d_+^{(2)}d_{ij}(X;Y,Z)=\frac{1}{d_{ij}(X)}\left\{c_{ij}(Y,Z)-\frac{c_{ij}(X,Y)c_{ij}(X,Z)}{d_{ij}^2(X)}\right\},
+(\#eq:altddd2)
+\end{equation}
+which reduces to \@ref(eq:expdfinal2) if $Y=Z$. And, with $95\%$ certainty,
+\begin{align}
+\begin{split}
+d_+^{(3)}d_{ij}(X;Y,Z,U)&=3\frac{c_{ij}(X,Y)c_{ij}(X,Z)c_{ij}(X,U)}{d_{ij}^5(X)}+\\&-\frac{c_{ij}(X,Y)c_{ij}(U,Y)+
+c_{ij}(X,Z)c_{ij}(U,Z)+c_{ij}(X,U)c_{ij}(Y,Z)}{d_{ij}^3(X)}
+\end{split}
+(\#eq:ddmix3)
+\end{align}
+which is obviously symmetric in $Y, Z,$ and  $U$, and if $Y=Z=U$ it reduces to \@ref(eq:expdfinal3).
+
+Again, we have to be careful if $d_{ij}(X)=0$. In that case we know from equation \@ref(eq:dddzero1)
+that $d_+d_{ij}(X;Y)=d_{ij}(Y)$. Also
+\begin{equation}
+d_+d_{ij}(X+\epsilon Z;Y)=\begin{cases}d_{ij}(Y)&\text{ if }d_{ij}(Z)=0,\\
+\frac{1}{d_{ij}(Z)}c_{ij}(Y,Z)&\text{ if }d_{ij}(Z)>0,
+\end{cases}
+(\#eq:dmixedzero)
+\end{equation}
+and thus $d_+^{(2)}d_{ij}(X;Y,Z)=0$ when $d_{ij}(Z)=0$, but when $d_{ij}(Z)>0$
+the limit defining $d_+^{(2)}d_{ij}(X;Y,Z)$ does not exist unless $Z=Y$. If $Z=Y$ we have
+$d_+^{(2)}d_{ij}(X;Y,Y)=0$, in accordance with \@ref(eq:dddzero2).
+
+#### Rho and Stress {#secrhostress}
+
+We now use the results from the previous section to compute directional derivatives of $\rho$ and $\sigma$. They are general, in the sense that they cover cases in which some $d_{ij}(X)>0$ and some $d_{ij}(X)=0$. 
+To handle one or more zero distances we define
+\begin{equation}
+\xi(X;Y):=\mathop{\sum\sum}_{1\leq i<j\leq n}\{w_{ij}\delta_{ij}d_{ij}(Y)\mid w_{ij}\delta_{ij}>0\text{ and }d_{ij}(X)=0\}.
+(\#eq:xidef)
+\end{equation}
+
+The directional derivatives of $\rho$ at $X$ in direction $Y$ are
+\begin{align}
+d_+\rho(X;Y)&=\text{tr}\ Y'B(X)X+\xi(X,Y),(\#eq:rhoder1)\\
+d_+^{(2)}\rho(X;Y,Y)&=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}
+{d_{ij}^2(X)}\right\},(\#eq:rhoders2)\\
+d_+^{(3)}\rho(X;Y,Y,Y)&=-3\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}c_{ij}(X,Y)}{d_{ij}^3(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}\right\}.(\#eq:rhoders3)
+\end{align}
+
+Note that by the CS inequality
+\begin{equation}
+d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}\geq 0
+(\#eq:posterm)
+\end{equation}
+for all $Y$, and thus $d_+^{(2)}\rho(X)(Y,Y)\geq 0$.
+
+The directional derivatives for stress at $X$ in direction $Y$ are
+\begin{align}
+d_+\sigma(X;Y)&=\text{tr}\ Y'(V-B(X))X-\xi(X,Y),(\#eq:stressders1)\\
+d_+^{(2)}\sigma(X;Y,Y)&=\text{tr}\ Y'VY-\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}
+{d_{ij}^2(X)}\right\},(\#eq:stressders2)\\
+d_+^{(3)}\sigma(X;Y,Y,Y)&=3\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}c_{ij}(X,Y)}{d_{ij}^3(X)}\left\{d_{ij}^2(Y)-\frac{c_{ij}^2(X,Y)}{d_{ij}^2(X)}\right\}.(\#eq:stressders3)
+\end{align}
+
+Note that we can also write \@ref(eq:stressders2) as
+\begin{equation}
+d_+^{(2)}\sigma(X;Y,Y)=\text{tr}\ Y'(V-B(X))Y+\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}(X)}\frac{c_{ij}^2(X,Y)}
+{d_{ij}^2(X)}.
+(\#eq:stressders2alt)
+\end{equation}
+
+Combining \@ref(eq:stressders2) and \@ref(eq:stressders2alt) shows
+\begin{equation}
+\text{tr}\ Y'(V-B(X))Y\lesssim d_+^{(2)}\sigma(X;Y,Y)\lesssim\text{tr}\ Y'VY.
+(\#eq:stressdes2ineq)
+\end{equation}
+
+A convenient upper bound for $d_+^{(3)}\sigma(X;Y,Y,Y)$ is also useful. From \@ref(eq:stressders3)
+and the CS inequality
+\begin{equation}
+d_+^{(3)}\sigma(X;Y,Y,Y)\leq 3\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}|c_{ij}(X,Y)|}{d_{ij}^3(X)}d_{ij}^2(Y)\leq 3\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}d_{ij}^3(Y)}{d_{ij}^2(X)}.
+(\#eq:stressdes3ineq)
+\end{equation}
+
+Once more, in the differentiable case the subscript + in $d_+$ is not necessarily, but if one or more $d_{ij}(X)=0$ for which $w_{ij}d_{ij}>0$ then the subscript is needed.
+
+#### expandStress
+
+The R function {\textrm{expandStress}, with arguments w, delta, x, and y, gives the zeroeth, first, second, or third terms in the expansion \@ref(eq:desexp), using the formulas for directional derivatives in this section. We use an example with $n=4$ and $p=2$. All weights and dissimilarities are equal. Configuration $X$ are the four corners of a square, perturbation $Y$ is a $4\times 2$ matrix of random standard normals. 
+
+The function \textrm{expandTester} takes an interval around zero for $\epsilon$ and computes the value of  $\sigma(X+\epsilon Y)$ at 1000 points in that interval. It also computes the zero, first, second, or third order Maclaurin approximations to $\sigma(X+\epsilon Y)$. In this first example $X$ is
+a local minimum and thus $d_+\sigma(X;Y)=0$. The zero-order and first-order approximation are thus the same.
+
+
+```{r expandtestersetup, echo = FALSE}
+w <- delta <- wdef(4)
+x<-matrix(c(1,1,-1,-1,1,-1,1,-1),4,2)
+set.seed(12345)
+y <- matrix(rnorm(8), 4, 2)
+```
+
+If the interval for $\epsilon$ is $[-1,1]$ the sum of squares of the differences between $\sigma(X+\epsilon Y)$ and its approximations of different orders are
+
+```{r expandtester1, echo = FALSE}
+h0 <- expandTester(w,
+                   delta,
+                   x,
+                   y,
+                   left = -1,
+                   right = 1,
+                   order = 0)
+h1 <- expandTester(w,
+                   delta,
+                   x,
+                   y,
+                   left = -1,
+                   right = 1,
+                   order = 1)
+h2 <- expandTester(w,
+                   delta,
+                   x,
+                   y,
+                   left = -1,
+                   right = 1,
+                   order = 2)
+h3 <- expandTester(w,
+                   delta,
+                   x,
+                   y,
+                   left = -1,
+                   right = 1,
+                   order = 3)
+matrixPrint(matrix(c(sum((h0[, 1] - h0[, 2]) ^ 2),
+              sum((h1[, 1] - h1[, 2]) ^ 2),
+              sum((h2[, 1] - h2[, 2]) ^ 2),
+              sum((h3[, 1] - h3[, 2]) ^ 2)),4,1), digits = 15)
+```
+
+If the interval is $[-.1,.1]$ the errors of approximation are
+
+```{r expandtester2, echo = FALSE}
+h0<-expandTester(w,delta,x,y,left = -.1,right = .1, order=0)
+h1<-expandTester(w,delta,x,y,left = -.1,right = .1, order=1)
+h2<-expandTester(w,delta,x,y,left = -.1,right = .1, order=2)
+h3<-expandTester(w,delta,x,y,left = -.1,right = .1, order=3)
+matrixPrint(matrix(c(sum((h0[, 1] - h0[, 2]) ^ 2),
+              sum((h1[, 1] - h1[, 2]) ^ 2),
+              sum((h2[, 1] - h2[, 2]) ^ 2),
+              sum((h3[, 1] - h3[, 2]) ^ 2)),4,1), digits = 15)
+```
+
+And if the interval is $[-.01,.01]$ the errors of approximation are
+
+```{r expandtester3, echo = FALSE}
+h0<-expandTester(w,delta,x,y,left = -.01,right = .01, order = 0)
+h1<-expandTester(w,delta,x,y,left = -.01,right = .01, order = 1)
+h2<-expandTester(w,delta,x,y,left = -.01,right = .01, order = 2)
+h3<-expandTester(w,delta,x,y,left = -.01,right = .01, order = 3)
+matrixPrint(matrix(c(sum((h0[, 1] - h0[, 2]) ^ 2),
+              sum((h1[, 1] - h1[, 2]) ^ 2),
+              sum((h2[, 1] - h2[, 2]) ^ 2),
+              sum((h3[, 1] - h3[, 2]) ^ 2)),4,1), digits = 15)
+```
+
+On the smaller intervals the error of second-order approximation is already very small, which is not surprising because twice-differentiable functions are pretty much convex quadratics close to a local minimum.
+
+### Partial Derivatives
+
+In the differentiable case we now introduce *gradients* and *Hessians*. The gradient at $X$ is a vector with first-order partial derivatives at $X$, the Hessian is a matrix with second-order partial derivatives at $X$. Partial derivatives are the commonly used tool for actual computation of derivatives.
+
+We can obtain the partial derivatives from the directional derivatives in equations \@ref(eq:stressders1), \@ref(eq:stressders2), and \@ref(eq:stressders3) by using the base vectors $E_{is}=e_i^{\ }e_s'$ to expand the perturbations $Y, Z,$ and $U$. So the gradient of stress at $X$ is  
+\begin{equation}
+\{\nabla\sigma(X)\}_{is}:=d_+\sigma(X;E_{is})=\text{tr}\ e_ie_s'(V-B(X))X=\{(V-B(X))X\}_{is}.
+(\#eq:nabla1stress)
+\end{equation}
+The gradient $\nabla\sigma(X)$ is an $n\times p$ matrix, and 
+\begin{equation}
+d_+\sigma(X;Y)=\text{tr}\ Y'\nabla\sigma(X)=\text{tr}\ Y'(V-B(X))X.
+(\#eq:ipform)
+\end{equation}
+
+For the Hessian we use similar calculations, heavily relying on the Kronecker delta, and on cyclic permutations under the trace sign. First 
+\begin{equation}
+c_{ij}(X,E_{ks})=\text{tr}\ X'(e_i-e_j)(e_i-e_j)'e_ks_s'=(x_{is}-x_{js})(\delta^{ik}-\delta^{jk}),
+(\#eq:cxe1)
+\end{equation}
+and
+\begin{equation}
+c_{ij}(E_{ks},E_{lt})=\text{tr}\ e_te_l'(e_i-e_j)(e_i-e_j)'e_ke_s'=\delta^{st}(\delta^{ik}-\delta^{jk})(\delta^{il}-\delta^{jl}).
+(\#eq:ce1e2)
+\end{equation}
+
+Thus, from equation \@ref(eq:ddddd2), 
+\begin{equation}
+\{\nabla^{(2)}d_{ij}^2(X)\}_{ks,lt}=d_+^{(2)}d_{ij}^2(X;E_{ks},E_{lt})=2\delta^{st}(\delta^{ik}-\delta^{jk})(\delta^{il}-\delta^{jl}),(\#eq:nabdd)
+\end{equation}
+and from equation \@ref(eq:altddd2)
+\begin{align}
+\begin{split}
+\{\nabla^{(2)}d_{ij}(X)\}_{ks,lt}&=d_+^{(2)}d_{ij}(X;E_{ks},E_{lt})=\\&=\frac{(\delta^{il}-\delta^{jl})(\delta^{ik}-\delta^{jk})}{d_{ij}(X)}\left\{\delta^{st}-\frac{(x_{is}-x_{js})(x_{it}-x_{jt})}{d_{ij}^2(X)}\right\}.
+\end{split}(\#eq:nabd)
+\end{align}
+
+Now take the usual weighted sums of equations \@ref(eq:nabdd) and \@ref(eq:nabd) to find the Hessians of $\rho$ and $\sigma$. To get relatively compact expressions we define the symmetric doubly-centered matrices
+\begin{equation}
+H_{st}(X):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}^3(X)}(x_{is}-x_{js})(x_{it}-x_{jt})A_{ij}.
+(\#eq:defhmat)
+\end{equation}
+Then the Hessian of $\rho$ is
+\begin{equation}
+\{\nabla^{(2)}\rho(X)\}_{ks,lt}=\{\delta^{st}B(X)-H_{st}(X)\}_{kl},
+(\#eq:nabla2rho)
+\end{equation}
+and that of $\sigma$ is
+\begin{equation}
+\{\nabla^{(2)}\sigma(X)\}_{ks,lt}=\{\delta^{st}(V-B(X))+H_{st}(X)\}_{kl}.
+(\#eq:nabla2stress)
+\end{equation}
+
+This is all somewhat inconvenient because of the double indexing of rows and columns. $\nabla^{(2)}\sigma(X)$ is an element of $\mathbb{R}^{n\times p}\otimes\mathbb{R}^{n\times p}$ and we can represent it numerically either as a matrix or a four-dimensional array. 
+
+To cut the cord we use the $\text{vec}$ isomorphism from $\mathbb{R}^{n\times p}$ to $\mathbb{R}^{np}$, and its inverse $\text{vec}^{-1}$.
+
+For computational purposes you can think of $\nabla^2\sigma(X)$ as an $np\times np$ matrix $K(X)$, consisting of blocks of symmetric matrices of order $n$, indexed by points, with $p$ row-blocks and $p$ column-blocks, indexed by dimensions. For $s\not= t$ block $(s,t)$ is the matrix $H_{st}(X)$, the diagonal blocks for $s=t$ are $(V-B(X))+H_{ss}(X)$. In the same way we can collect the blocks $H_{st}(X)$ in the $np\times np$ matrix $H(X)$. 
+
+\begin{equation}
+\{\nabla^{(2)}\sigma(X;Y)\}_{ks}:=\sum_{l=1}^n\sum_{t=1}^p\{\nabla^{(2)}\sigma(X)\}_{ks,lt}y_{lt},
+(\#eq:linform),
+\end{equation}
+
+and 
+
+\begin{equation}
+\text{tr}\ Y'\nabla^2\sigma(X)Z:=d_+^2\sigma(X;Y,Z)=\sum_{k=1}^n\sum_{s=1}^p\sum_{l=1}^n\sum_{t=1}^p\{\nabla^2\sigma(X)\}_{ks,lt}y_{ks}z_{lt}.
+(\#eq:quadform)
+\end{equation}
+
+Thus 
+
+\begin{align}
+\underline{\nabla}^{(2)}\rho(X)&=I_p\otimes B(X)-\underline{H}(X),(\#eq:shorthess1)\\
+\underline{\nabla}^{(2)}\sigma(X)&=I_p\otimes(V-B(X))+\underline{H}(X).(\#eq:shorthess2)
+\end{align}
+
+I do not like to use vec and friends in formulas and derivations, so I try to avoid them. It is a different matter in computation, because in a computer $Y$ is the same as $\text{vec}(Y)$ anyway.
+
+```{r numderiv, echo = FALSE}
+w <- delta <- wdef(4)
+w <- w / sum(w)
+v <- smacofVmatR(w) 
+delta <- delta / sqrt(sum (w * (delta ^ 2)))
+x1 <- matrix(c(1,1,-1,-1,1,-1,1,-1),4,2)
+x1 <- apply(x1, 2, function(x) x - mean (x))
+d1 <- as.matrix(dist(x1))
+s <- sum (w * delta * d1) / sum (w * (d1 ^ 2))
+x1 <- s * x1
+d1 <- s * d1
+
+b1 <- smacofBmatR(d1, w, delta) 
+g1 <- smacofGradientR(x1, b1, v)
+f1 <- smacofHmatR(x1, b1, v, d1, w, delta)
+h1 <- smacofHessianR(x1, b1, v, d1, w, delta)
+
+hFunc <- function (x, w, delta) {
+  d <- as.matrix(dist(matrix(x, 4, 2)))
+  return (sum(w * (d - delta) ^ 2) / 4)
+}
+
+n1 <- grad (hFunc, as.vector(x1), w = w, delta = delta) 
+e1 <- hessian (hFunc, as.vector(x1), w = w, delta = delta)
+
+set.seed(12345)
+x2 <- matrix(rnorm(8),4,2)
+x2 <- apply(x2, 2, function(x) x - mean (x))
+d2 <- as.matrix(dist(x2))
+s <- sum (w * delta * d2) / sum (w * (d2 ^ 2))
+x2 <- s * x2
+d2 <- s * d2
+b2 <- smacofBmatR(d2, w, delta) 
+g2 <- smacofGradientR(x2, b2, v)
+f2 <- smacofHmatR(x2, b2, v, d2, w, delta)
+h2 <- smacofHessianR(x2, b2, v, d2, w, delta)
+
+n2 <- grad (hFunc, as.vector(x), w = w, delta = delta) 
+e2 <- hessian (hFunc, as.vector(x), w = w, delta = delta)
+
+```
+
+
+Because the Hessian is important throughout the book we want to make sure we have the correct formulas and code. One way to check this is to compare it to the numerical approximation of the Hessian from the package numDeriv (@gilbert_varadhan_19). Normally one checks if the code is correct by comparing it with the mathematics, but here we proceed the other way around. 
+
+Again we use the four corners of the square
+as an example, with weights and dissimilarities all equal. The largest absolute difference between the elements of the numerical and the analytical Hessian for ths example is `r max(abs(h1 - e1))`, which means that we basically have double-precision equality between the two. We repeat this for a random $X$, because at a local minimum the approximation may be more precise. For the random configuration we find a maximum deviation of `r max(abs(h2 - e2))`, a bit bigger, but still small.
+
+
+Here are some useful properties of the Hessians. 
+
+::: {#hessbounds .theorem}
+
+
+1. $0\lesssim H(X)\lesssim I_p\otimes B(X).$
+2. $I_p\otimes(V-B(X))\lesssim K(X)\lesssim I_p\otimes V.$
+
+:::
+
+::: {.proof}
+Let $y=\text{vec}(Y)$. Then
+$$
+y'H(X)y=\sum_{s=1}^p\sum_{t=1}^p y_s'H_{st}(X)y_t=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}}{d_{ij}^3(X)}c_{ij}^2(X,Y)\geq 0,
+$$
+and thus $H(X)\gtrsim 0$. From () $\nabla^2\rho(X)\gtrsim 0$, and thus $I_p\otimes B(X)\gtrsim H(X)$. This proves the first part. The second part is immediate from the first part and ().
+:::
+
+Another useful property. Let $y=\text{vec}(Y)$.
+
+::: {#hesseigen .theorem}
+ozo
+:::
+
+::: {.proof}
+\begin{equation}
+H(X)Y=\sum_{t=1}^p H_{st}(X)y_t=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}\frac{\delta_{ij}c_{ij}(X,Y)}{d_{ij}^3(X)}(x_{is}-x_{js})(e_i-e_j).
+(\#eq:eqhxy)
+\end{equation}
+
+If $Y=X$ then $H(X)X=B(X)X$ and thus $\nabla^2\rho(X)X=0$ and $\nabla^2\sigma(X)X=VX$. If $Y=XT$ with $T$ anti-symmetric then
+$c_{ij}(X,Y)=\text{tr}\ X'A_{ij}XT=0$ and thus $H(X)Y=0$. This implies
+$\nabla^2\rho(X)Y=B(X)XT$ and $\nabla^2\sigma(X)Y=(V-B(X))XT$.
+If $B(X)X=VX$ then $\nabla^2\rho(X)X=VX$
+and $\nabla^2\sigma(X)X=0$. If $Y=e\alpha'$ then 
+$\nabla^2\rho(X)Y=\nabla^2\sigma(X)Y=0$.
+
+:::
+
+In the example with the square the eigenvalues of $\underline{H}(X)$ are
+
+```{r hesseigenh, echo = FALSE}
+matrixPrint(eigen(f1)$values, digits = 8, format = "f")
+matrixPrint(eigen(f2)$values, digits = 8, format = "f")
+```
+while those of $\underline{\nabla}^2\sigma(X)$ are
+
+```{r hesseigens, echo = FALSE}
+matrixPrint(eigen(h1)$values, digits = 8, format = "f")
+matrixPrint(eigen(h2)$values, digits = 8, format = "f")
+```
+
+We can derive nicer expressions for the higher derivatives in coefficient space (see section \@ref(propcoefspace)). This was done, perhaps for the first time, in @deleeuw_R_93c, which was actually written around 1985. In @kearsley_tapia_trosset_95 Newton's method was used to minimize stress, so presumably they implemented some formula for the Hessian. In @deleeuw_A_88b the expression involving $H(X)$ from \@ref(eq:defhmat) was first given in configuration space. We could use similar computations to obtain the third-order partial derivatives, but for now we have no need for them in this book.
+
+### Special Expansions {#propspecexp}
+
+$c_{ij}(X,Y)=0$ for all $i<j$
+
+#### Infinitesimal Rotations
+
+Suppose $Y=XT$, with $T$ antisymmetric, so that $X+\epsilon Y=X(I+\epsilon T)$. Then
+$c_{ij}(X,Y)=0$ for all $i<j$, and thus from equations \@ref(eq:stressders1), \@ref(eq:stressders2), and \@ref(eq:stressders3)
+
+\begin{align}
+d_+\sigma(X;Y)&=0,(\#eq:stressdersa1)\\
+d_+^{(2)}\sigma(X;Y,Y)&=\text{tr}\ Y'(V-B(X))Y,(\#eq:stressdersa2)\\
+d_+^{(3)}\sigma(X;Y,Y,Y)&=0.(\#eq:stressdersa3)
+\end{align}
+
+#### Singularities
+
+Suppose $X=[\underline{X}\mid 0]$ and $Y=[0\mid\underline{Y}]$ so that $X+\epsilon Y=[\underline{X}\mid\epsilon\underline{Y}]$. Here $X$ and $Y$ are $n\times p$, $underline{X}$ is $n\times r$, with $r<p$, and $\underline{Y}$ is $n\times(p-r)$. Then
+again $c_{ij}(X,Y)=0$ for all $i<j$, and thus ()()() again.
+
+\begin{equation}
+\sigma(\underline{X}+\epsilon
+\underline{Y})=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
++\frac12\epsilon^2\text{tr}\ Y'(V-B(X))Y+o(\epsilon^2)
+(\#eq:exzeroes)
+\end{equation}
+
+#### Singularities
+
+Suppose $\underline{X}=[X\mid 0]$ and $\underline{Y}=[Z\mid Y]$ so that $\underline{X}+\epsilon\underline{Y}=[X+\epsilon Z\mid\epsilon Y]$. Here $\underline{X}$ and $\underline{Y}$ are $n\times p$, $X$ is $n\times r$, with $r<p$, and $Y$ is $n\times(p-r)$. Then
+
+\begin{equation}
+\sigma(\underline{X}+\epsilon
+\underline{Y})=\sigma(X)-\epsilon\sum_{d_{ij}(X)=0}w_{ij}\delta_{ij}d_{ij}(Y)
++\frac12\epsilon^2\text{tr}\ Y'(V-B(X))Y+o(\epsilon^2)
+(\#eq:exsingular)
+\end{equation}
+
+## Convexity {#propconvex}
+
+Remember that a function $f$ on an open subset $X$ of a Euclidean space is
+*convex* if for all $x$ and $y$ in $X$ and $0\leq\alpha\leq 1$ we have 
+$f(\alpha x+(1-\alpha)y)\leq\alpha f(x)+(1-\alpha)f(y)$. Thus on the line segment
+connecting $x$ and $y$ the function $f$ is never above the line segment connecting
+$f(x)$ and $f(y)$. Convex functions are a.e. differentiable, in fact a.e.
+twice-differentiable. If the derivative exists at $x$ then for all $y$ we have
+$f(y)\geq f(x)+df(x)(y-x)$, which says the function majorizes its
+tangent plane at $x$. If the second derivative exists at $x$ then $d^2f(x;y,y)\geq 0$ for all $y$, which says that the Hessian at $x$ is positive semidefinite.
+
+Stress is definitely not a convex function of the configuration. If it actually was convex, or even convex and differentiable, then this book would be much shorter. Nevertheless convexity still play an important part in our development of MDS, ever since @deleeuw_C_77.
+
+### Distances
+
+The convexity in the MDS problem comes from the convexity of the distance and the squared distance. Although these are elementary facts, they are important in our context, so we give a proof.
+
+::: {.theorem}
+On $\mathbb{R}^{n\times p}$ both $d{ij}$ and $d_{ij}^2$ are convex.
+:::
+
+::: {.proof}
+First, for $0\leq\lambda\leq 1$,
+\begin{equation}
+d_{ij}^2(\lambda X+(1-\lambda)Y)
+=\lambda^2d_{ij}^2(X) + (1-\lambda)^2d_{ij}^2(Y)+2\lambda(1-\lambda)(x_i-x_j)'(y_i-y_j)
+(\#eq:lbdcv1)
+\end{equation}
+By corollary \@ref(cor:amgmcs),
+\begin{equation}
+(x_i-x_j)'(y_i-y_j)\leq\sqrt{d_{ij}^2(X)d_{ij}^2(Y)}
+\leq\frac12(d_{ij}^2(X)+d_{ij}^2(Y)).
+(\#eq:lbdcv2)
+\end{equation}
+Combining \@ref(eq:lbdcv1) and \@ref(eq:lbdcv2) proves convexity of the squared distance.
+
+Now use equation \@ref(eq:lbdcv1) and the CS inequality in the form $(x_i-x_j)'(y_i-y_j)\leq d_{ij}(X)d_{ij}(Y)$. This gives
+\begin{equation}
+d_{ij}^2(\lambda X +(1-\lambda)Y)\leq (\lambda d_{ij}(X)+(1-\lambda)d_{ij}(Y))^2.
+(\#eq:lbdcv3)
+\end{equation}
+Taking square roots on both sides of equation \@ref(eq:lbdcv3) proves convexity of the distance.
+:::
+
+::: {.corrollary}
+Both $\rho$ and $\eta$ are norms on $\mathbb{R}^{n\times p}$.
+:::
+::: {.proof}
+homogeneous convex functions vanishing if and only if $X=0$, which means they are both norms on $\mathbb{R}^{n\times p}$.
+:::
+
+### Subdifferentials {#subdifdef}
+
+Suppose $f$ is a real-valued finite convex function on the finite-dimensional 
+inner-product space $\mathcal{E}$. A *subgradient* of $f$ at $x\in\mathcal{E}$ is a vector $z\in\mathcal{E}$ such that $f(y)\geq f(x)+\langle z,y-x\rangle$ for all $y\in\mathcal{E}$. The set of all subgradients at $x$ is the *subdifferential* at $x$, written as $\partial f(x)$. In general, the subdifferential is a non-empty, closed, and convex set (rock). If $f$ is differentiable at $x$ then the subdifferential is the singleton which has the gradient $\nabla f(x)$ as its sole element (rock).
+
+Apply this to $d_{ij}$ on $\mathbb{R}^{n\times p}$. 
+
+::: {#subdifd .theorem}
+The subdifferential of $d_{ij}$ at $X$ is
+
+* If $d_{ij}(X)>0$ then $\partial d_{ij}(X)=\left\{(e_i-e_j)\frac{(x_i-x_j)'}{d_{ij}(X)}\right\}$
+
+* If $d_{ij}(X)=0$ then $\partial d_{ij}(X)=\{Y\mid Y=(e_i-e_j)z' \text{ with } \|z\|\leq 1\}$  $$\partial d_{ij}(X)=\bigcup_{\|z\|\leq 1}\{(e_i-e_j)z'\}$$
+
+:::
+
+::: {.proof}
+If $d_{ij}(X)=0$ we must find the set of all $Z\in\mathbb{R}^{n\times p}$ such that 
+\begin{equation}
+d_{ij}(Y)\geq\text{tr}\ Z'(Y-X)
+(\#eq:subdifdefd)
+\end{equation} 
+for all $Y\in\mathbb{R}^{n\times p}$.
+
+First of all \@ref(eq:subdifdefd) must be true for all $Y=\alpha X$ with $\alpha\geq 0$. Thus  $(\alpha-1)\text{tr}\ Z'X\leq 0$ for all $\alpha\geq 0$, which implies $\text{tr}\ Z'X=0$. We can use this to simplify \@ref(eq:subdifdefd) to $d_{ij}(Y)\geq\text{tr}\ Z'Y$ for all $Y$. 
+Next, it follows that $z_k=0$ for $k\not= i,j$. If $z_k\not= 0$
+choose $Y=e_kz_k'$. Then $d_{ij}(Y)=0$ and $\text{tr} Z'Y=z_k'z_k>0$. Now
+\@ref(eq:subdifdefd) simplifies to $d_{ij}(Y)\geq z_i'y_i+z_j'y_j$
+If $y_i=z_i$ and $y_j=0$ then we must have $\|z_i\|\geq\|z_i\|^2$ or 
+$\|z_i\|\leq 1$. In the same way $\|z_j\|\leq 1$. Choose $y_i=y_j=y$ and
+some $y\not= 0$. Then we must have  $(z_i+z_j)'y\leq 0$
+for all $y$ and thus $z_i=-z_j$. This proves the second part. 
+:::
+
+By the sum rule for convex subdifferentials (rock)
+\begin{equation}
+\partial\rho(X)=B(X)X+
+\{Y\mid Y=\mathop{\sum\sum}_{1\leq i<j\leq n}\{w_{ij}\delta_{ij}(e_i-e_j)z_{ij}'\mid d_{ij}(X)=0\}\},
+(\#eq:propsubdiffrho)
+\end{equation}
+where the $z_{ij}$ are arbitrary vectors satisfying $\|z_{ij}\|\leq 1\|$.
+
+Of course $\partial d_{ij}^2(X)=\{2A_{ij}X\}$ and thus $\partial\eta^2(X)=\{2VX\}$. 
+
+But $\sigma$ is not convex, and we do not have a definition yet for the
+subdifferential of non-convex functions. We use the generalization introduced by Clarke. Suppose $f$ is locally Lipschitz, and thus differentiable almost everywhere. Let $x^{(k)}$ be a sequence of 
+points converging to $x_\infty$, with  
+$f$ differentiable at all $x^{(k)}$. 
+
+Then $y$ is in the Clarke subdifferential $\partial_C^{\ }f(x)$ if and only if $y=\lim_{k\rightarrow\infty}\nabla f(x^{(k)})$.
+
+Clarke $\partial_C^{\ }\sigma(X)=\{VX\}-\partial\rho(X)$
+
+Combining this with \#ref(eq:propsubdiffrho) gives
+
+\begin{equation}
+\partial\sigma(X)=(V-B(X))X-
+\{Y\mid Y=\mathop{\sum\sum}_{1\leq i<j\leq n}\{w_{ij}\delta_{ij}(e_i-e_j)z_{ij}'\mid d_{ij}(X)=0\}\},
+(\#eq:propsubdiffstress)
+\end{equation}
+
+### DC Functions {#propdc}
+
+In basic MDS 
+
+1. $\rho$ is a non-negative convex function, homogeneous of degree one. 
+2. $\eta^2$ is a non-negative convex quadratic form, homogeneous of degree two. 
+3. $\sigma$ is a non-negative difference of two convex functions.
+
+This follows because $\eta^2$ is a weighted sum of squared distances and $\rho$ is a weighted sum of distances, both with non-negative coefficients, and thus they are both convex.
+
+Real-valued functions that are differences of two convex functions are also known as a *DC functions* or *delta-convex functions*. DC functions are important in optimization, especially in non-convex and global optimization. For excellent reviews of the various properties of DC functions, see @hiriart-urruty_88 or @bacak_borwein_11. Interesting for our purposes is that DC functions are almost everywhere twice
+differentiable, and that all two times continuously differentiable
+functions are DC.
+
+It follows from the general properties of convex and DC functions that $\sigma$ is both uniformly continuous and locally Lipschitz, in fact Lipschitz on each compact subset of $\mathbb{R}^{n\times p}$ (@rockafellar_70, theorem 10.4). The fact that $\sigma$ is only locally Lipshitz is due entirely to the quadratic part $\eta^2$, because $\rho$ is globally Lipschitz.  
+
+
+### Negative Dissimilarities  {#propnegdis}
+
+There are perverse situations in which some weights and/or dissimilarities are negative (@heiser_91). Define $w_{ij}^+:=\max(w_{ij},0)$ and $w_{ij}^-:=-\min(w_{ij},0)$. Thus both $w_{ij}^+$ and $w_{ij}^-$ are non-negative, and $w_{ij}=w_{ij}^+-w_{ij}^-$. Make the same decomposition of the $\delta_{ij}$.
+
+Then
+\begin{equation}
+\rho(X)=\sum (w_{ij}^+\delta_{ij}^++w_{ij}^-\delta_{ij}^-)d_{ij}(X)-\sum(w_{ij}^+\delta_{ij}^-+w_{ij}^-\delta_{ij}^+)d_{ij}(X),
+(\#eq:proprhoneg)
+\end{equation}
+and
+\begin{equation}
+\eta^2(X)=\sum w_{ij}^+d_{ij}^2(X)-\sum w_{ij}^-d_{ij}^2(X).
+(\#eq:propetaneg)
+\end{equation}
+Note that both $\rho$ and $\eta^2$ are no longer convex, but both are DC, and consequently so is $\sigma$.
+
+A bit more
+
+
+## Stationary Points {#propstationary}
+
+* A function $f$ has a *global minimum* on $X$ at $\hat x$ if $f(\hat x)\leq f(x)$ for all  $x\in X$.
+
+* A function $f$ has a *local minimum* on $X$ at $\hat x$ if there is a neighborhood $\mathcal{N}$ of $\hat x$ such that $f(\hat x)\leq f(x)$  for all $x\in\mathcal{N}\cap X$.
+
+
+* A function $f$ has a *singular point* at $x$ if it is not differentiable at $x$.
+
+* A function $f$ has a *stationary point* at $x$ if it is differentiable at $x$ and $df(x)=0$.
+
+* A function $f$ has a *saddle point* at a stationary point $x$ if it is neither a local maximum nor a local minimum.
+
+* Global and local maxima of $f$ are global and local minima of $-f$.
+
+::: {#statpointsbound .theorem}
+At a stationary point of stress we have $\eta(X)\leq 1$.
+:::
+
+::: {.proof}
+If $X$ is stationary we have $VX=B(X)X$ and thus $\rho(X)=\eta^2(X)$. Consequently $\sigma(X)=1-2\rho(X)+\eta^2(X)=1-\eta^2(X)$ and because $\sigma(X)\geq 0$ we see that $X$ must be in the ellipse $\{Z\in\mathbb{R}^{n\times p}\mid\eta^2(Z)\leq 1\}$.
+::: 
+
+Theorem \@ref(thm:statpointsbound) is important, because it means that we can require without loss of generality that $X$ is in the ellipsoidal disk $\eta(X)\leq 1$, which is a compact convex set.
+
+### Local Maxima
+
+::: {#locmax .theorem}
+stress has a single local maximum at $X=0$ with value 1.
+:::
+
+::: {.proof}
+At $X=0$ we have for the one-sided directional derivative 
+\begin{equation}
+\mathbb{D}_+\sigma(0,Y)=\lim_{\alpha\downarrow 0}\frac{\sigma(0+\alpha Y)-\sigma(0)}{\alpha}=-2\rho(Y)\leq 0,
+(\#eq:datzero)
+\end{equation} 
+which implies that stress has a local maximum at zero.
+
+To show that the local maximum is unique suppose that there is a local maximum at $X\not= 0$. Then on the line through zero and $X$ there should be a local maximum at $X$ as well. But  
+\begin{equation}
+\sigma(\alpha X)=1-2\alpha\rho(X)+\alpha^2\eta^2(X),
+(\#eq:propnomax)
+\end{equation}
+is a convex quadratic, which consequently cannot have a local maximum at $X$.
+:::
+
+### Local Minima {#proplocmin}
+
+The main result on local minima of stress is due to @deleeuw_A_84f. We
+give a slight strengthening of the result, along the lines of 
+@deleeuw_E_18c, with a slightly simplified proof. Theorem \@ref(thm:locmin)
+proves that a necessary condition for a local minimum at $X$ is that
+for $i$ and $j$ with $w_{ij}\delta_{ij}>0$ we have $d_{ij}(X)>0$, i.e.
+objects $i$ and $j$ are mapped to different points.
+
+::: {#locmin .theorem}
+If stress has a local minimum at $X$ then
+* $B(X)X=VX$.
+* $d_{ij}(X)>0$ whenever $w_{ij}\delta_{ij}>0$.
+:::
+
+::: {.proof}
+If stress has a local minimum at $X$ then $d_+\sigma(X;Y)\geq 0$ for all
+$Y$. Equation \@ref(eq:stressders1) tell us that
+\begin{equation}
+d_+\sigma(X;Y)=\text{tr}\ Y'(V-B(X))X-\mathop{\sum\sum}_{1\
+\leq i<j\leq n}\{w_{ij}\delta_{ij}d_{ij}(Y)\mid d_{ij}(X)=0\text{ and } w_{ij}\delta_{ij}>0\}.
+(\#eq:dirderagain)
+\end{equation}
+Consider a direction $Y$ with all $d_{ij}(Y)>0$ and such that
+then $d_+\sigma(X;Y)\leq 0$. This is always possible, because if
+we have and $Y$ with $d_+\sigma(X;Y)>0$ we simply switch to $-Y$.
+Now $d_+\sigma(X;Y)$ in \@ref(eq:dirderagain) is the 
+sum of two terms which are both non-positive, and they  satisfy
+$d_+\sigma(X;Y)\geq 0$ if and only if they are both zero.
+For the second term this means that at a local minimum the summation is
+empty and there is no $d_{ij}(X)=0$ whenever $w_{ij}\delta_{ij}=0$.
+For the first term it means that $(V-B(X))X=0$.
+:::
+
+@deleeuw_A_84f concluded that if $w_{ij}\delta_{ij}>0$ for all $i<j$ then
+stress is differentiable at a local minimum. But more is true, because 
+it s not necessary to require $w_{ij}\delta_{ij}>0$ for this result.
+
+::: {#locmindif .corollary}
+If stress has a local minimum at $X$ then it is differentiable at $X$ and has $\nabla\sigma(X)=0$.
+:::
+::: {.proof}
+At a local minimum we can indeed have $d_{ij}(X)=0$ if $w_{ij}\delta_{ij}=0$. But if
+$w_{ij}=0$ then stress does not depend on $d_{ij}(X)$ at all, so $d_{ij}(X)=0$
+does not influence differentiability. If $w_{ij}>0$ and $\delta_{ij}=0$
+then stress depends on $d_{ij}(X)$ only through the term $w_{ij}d_{ij}^2(X)$, which is differentiable even if $d_{ij}(X)=0$.
+:::
+
+Theorem \@ref(thm:locmin) and its corollary \@ref(cor:locmindif) are the main reason why,
+at least in basic scaling, we can largely ignore the problems with differentiability.
+These results have been extended to least squares MDS with Minkovski distances by 
+@groenen_mathar_heiser_95. In a neighborhood of each local minimum the loss function is differentiable, so eventually convergent descent algorithms do not have problems with non-differentiable ridges. This result is of major importance for both practical and theoretical reasons, as emphasized for example by @pliner_96.
+
+Second order necessary conditions (since differentiable at local minimum)
+
+### Saddle Points {#propsaddle}
+
+At a saddle point $X$ stress is differentiable and $d\sigma(X)=0$. But there are directions of decrease and increase from $X$, and thus stress does not have a local minimum there.
+
+If $VX=B(X)X$ and $d_{ij}(X)=0$ for some $w_{ij}\delta_{ij}>0$ then there is an $Y$
+such that $\mathbb{D}_+\sigma(X,Y)<0$.
+
+Theo Suppose $VX=B(X)X$ then $V(X\mid 0)=B(X|0)(X|0)$
+
+Corr Suppose $VX=B(X)X$ and $X$ is of rank $r<p$. Then $XL=(Z|0)$ and thus $VZ=B(Z)Z$.
+
+If $VX=B(X)X$ and $X$ is singular then $X$ is a saddle point.
+
+### An Example
+
+Let's look at a small example, already analyzed in many different places (e.g. @deleeuw_A_88b, @trosset_mathar_97). It has four points, all dissimilarities to one and all weights are equal to $\frac16$.
+
+#### Regular Tetrahedron
+
+In three dimensions the global minimum is equal to zero, with the points mapped into the vertices of a regular tetrahedron. Points can be assigned to the vertices in $4! = 24$
+ways, and each such assignment defines a global minimum. In fact each assigment defines
+a continuum of global minimizers, because all rotations of any of the regular tetrahedra also give global minimizers. It seems as if there are 24 rotation manifolds with global minimizers.
+But some of the 24 assigments of points to vertices are equivalent in the sense that they are rotations of each other (which includes reflections). It turns out there are three equivalence classes of eight assignments each. Thus there are three different disjoint rotation manifolds of global minimizers, not 24.
+
+```{r fourpointthree, echo = FALSE}
+w <- delta <- wdef(4)
+xr <- qr.Q(qr(apply(diag(4), 2, function(x) x - mean(x))))[,-4]
+hr <- smacofR(w, delta, 2, xold = xr, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+```
+
+The stress value for any regular tetrahedron is zero, and the eigenvalues of the Hessian are
+
+```{r echo=FALSE}
+matrixPrint(eigen(hr$h)$values)
+```
+
+For four points in three dimensions we have $np-\frac12p(p+1)=6$ non-trivial eigenvalues. Since the six largest values are all positive our regular tetrahedra are isolated, in the sense that if we move away from the each of the corresponding rotation manifolds the stress increases.
+
+#### Singularity
+
+```{r fourpointsingular, echo = FALSE}
+set.seed(12345)
+w <- delta <- wdef(4)
+xu <- cbind(1:4,0,0)
+a <- qr.Q(qr(matrix(rnorm(9),3,3)))
+xu <- xu %*% a
+hu <- smacofR(w, delta, 2, xold = xu, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+```
+
+The next stationary point is somewhat deviously constructed. We take four points equally spaced on a line (a stationary point in one dimension) and add two zero dimensions. Then we do a random rotation of configuration to somwhat hide its singularity. We already know this configuration defines a saddle point in three-dimensional configuration space. For the resulting configuration the stress is `r formatC(hu$s, width = 10, digits = 6, format =  "f")`, and the eigenvalues of the Hessian are
+
+```{r echo = FALSE}
+matrixPrint(eigen(hu$h)$values)
+```
+There are four negative eigenvalues, and thus we confirm we have a saddlepoint.
+
+#### Equilateral Triangle with Centroid
+
+```{r fourpointtriangle, echo = FALSE}
+w <- delta <- wdef(4)
+xe <- matrix(c(0, 0, 1, 0, .5, sqrt(3) / 2), 3, 2, byrow = TRUE)
+xe <- rbind(xe, apply(xe, 2, mean))
+he <- smacofR(w, delta, 2, xold = xe, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+```
+
+The next configuration is an interesting one. It is in two-dimensions, with three points in the corners of an equilateral triangle, and a fourth point in the centroid of the first three.
+The 24 assigments of the four points to the four positions in thus case give four rotational equivalence classes of six assignments each. This particular arrangements has four disjoint rotational manifolds. The stress is `r formatC(he$s, width = 10, digits = 6, format =  "f")`, and the eigenvalues of the Hessian are
+
+```{r echo = FALSE}
+matrixPrint(eigen(he$h)$values)
+```
+
+Note that the Hessian is positive semi-definite, with three positive eigenvalues. This made @deleeuw_A_88b think that this arrangement of points defined a non-isolated local minimum.
+Bad mistake. Since $3 < np - \frac12p(p+1) = 5$ the singular Hessian does not guarantee that we have a local minimum. @trosset_mathar_97 showed, using symbolic computations, that the configuration and its permutations and rotations defines a family of saddle points. Further on in this section we will look in more detail what happens in this case.
+
+#### Square
+
+```{r fourpointsquare, echo = FALSE}
+w <- delta <- wdef(4)
+xs <- matrix(c(0, 1, 1, 0, 0, 0, 1, 1), 4, 2)
+hs <- smacofR(w, delta, 2, xold = xs, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+```
+
+Four points in the corners of a square give the global minimum in two dimensions (@deleeuw_stoop_A_84). There are three isolated rotational manifolds for such squares, all with stress `r formatC(hs$s, width = 10, digits = 6, format =  "f")`, and with eigenvalues of the Hessian
+
+```{r echo = FALSE}
+matrixPrint(eigen(hs$h)$values)
+```
+
+In one dimension the global minimum is attained for four points equally
+spaced on a line. Thus there are $n!$ different global minimizers but by reflection only $\frac12(n!)$ give different distances.
+
+#### Non-global Local Minima
+
+
+```{r randomsquare, echo = FALSE, cache = TRUE}
+set.seed(12345)
+w <- delta <- wdef(4)
+rsz <- c(0, 0)
+for (i in 1:100000) {
+    x <- matrix(rnorm(8), 4, 2)
+    h <- smacofR(w, delta, 2, xold = x, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+    if ((0.01 < h$s) && (h$s < 0.02)) rsz[1] <- rsz[1] + 1
+    if (h$s > 0.02) rsz[2] <- rsz[2] + 1
+}
+```
+It turns out be be difficult in our example to find non-global local minima. In an heroic effort we looked at 100,000 smacof runs with a random start to find other local minima. In
+`r rsz[1]` cases smacof converges to the square, in `r rsz[2]` it stops at the equilateral triangle with center, but only because the limit on the number of iterations (1000) is
+reached. This confirms the computational results reported by @deleeuw_A_88b and @trosset_mathar_97. It also confirms the theoretical  
+result that gradient descent algorithms with random starts
+almost surely avoid saddle points and converge to local minima (@lee_simchowitz_jordan_recht_16), although avoiding the saddle points may take exponential time (@du_jin_lee_jordan_poczos_singh_17). In any case, it seems safe to conjecture that for
+our small and maximally symmetric example all local minima are global.
+
+```{r randomtrosset, echo = FALSE, cache = TRUE}
+set.seed(12345)
+w <- wdef(4)
+b <- (3 + sqrt(3)) / 6
+a <- sqrt(2)
+c <- a * b
+w <- wdef(4)
+delta <- matrix(c(0, 1, a, 1, 1, 0, 1, a, a, 1, 0, 1, 1, a, 1, 0), 4, 4)
+tmz <- rep(0, 5)
+for (i in 1:1000) {
+    x <- matrix(rnorm(8), 4, 2)
+    h <- smacofR(w, delta, 2, xold = x, xstop = TRUE, eps = 1e-15, itmax = 10000, verbose = FALSE)
+    if (0.01 > h$s) {tmz[1] <- tmz[1] + 1; s1 <- h$s}
+    if ((0.02 < h$s) && (h$s < 0.03)) tmz[2] <- tmz[2] + 1
+    if ((0.03 < h$s) && (h$s < 0.04)) {tmz[3] <- tmz[3] + 1; s3 <- h$s; x3 <- h$x}
+    if ((0.04 < h$s) && (h$s < 0.05)) tmz[4] <- tmz[4] + 1
+    if (0.05 < h$s) tmz[5] <- tmz[5] + 1
+}
+```
+@trosset_mathar_97, in their search for non-global local minima, consequently are forced to use another example. They used equal weights, but choose the dissimilarities as the Euclidean
+distances between the four corners of a square, ordered counterclockwise from the origin. Thus the global minimum of stress is zero. In 1000 smacof runs with random start we find a this zero local minimum `r tmz[1]` times, while we converge `r tmz[3]` times to another stationary point with stress `r s3`. 
+
+```{r tmzplot, fig.align = "center", fig.cap = "Trosset/Mathar Configurations", echo = FALSE}
+w <- wdef(4)
+w <- w / sum(w)
+xs <- matrix(c(0, 1, 1, 0, 0, 0, 1, 1), 4, 2)
+xs <- apply(xs, 2, function (x) x - mean(x))
+delta <- ds <- as.matrix(dist(xs))
+delta <- delta / sqrt(sum(w * delta ^2))
+s <- sum (w * delta * ds) / sum (w * ds ^ 2)
+xs <- s * xs
+s <- svd(crossprod(x3, xs))
+x3 <- x3 %*% tcrossprod(s$u, s$v)
+par(pty="s")
+plot(rbind(xs,x3), type = "n", xlab = "dimension 1", ylab = "dimension 2")
+text(xs, as.character(1:4), col = "RED", cex = 2)
+text(x3, as.character(1:4), col = "BLUE", cex = 2)
+```
+
+```{r fourpointtrosset, echo = FALSE}
+b <- (3 + sqrt(3)) / 6
+a <- sqrt(2)
+c <- a * b
+xtm <- matrix(c(0, b ,0, b, 0, 0, c, c), 4, 2)
+w <- wdef(4)
+delta <- matrix(c(0, 1, a, 1, 1, 0, 1, a, a, 1, 0, 1, 1, a, 1, 0), 4, 4)
+htm <- smacofR(w, delta, 2, xold = xtm, xstop = TRUE, eps = 1e-15, itmax = 1000, verbose = FALSE)
+```
+
+The two configurations are plotted in figure \@ref(fig:tmzplot), with the global minimizer in red. The non-global configuration (in blue) is rotated to best least squares fit with the first one, using simple Procrustus (@gower_dijksterhuis_04). Note that it is a rectangle, but not a square. The eigenvalues of the Hessian at the non-global minimum configuration are
+
+```{r tmzeigen, echo = FALSE}
+matrixPrint(eigen(htm$h)$values)
+```
+
+verifying that we indeed have an isolated local minimum. @trosset_mathar_97 verify this using a mix of symbolic and floating point calculation.
+
+We can generate an additional example using the function equalDelta() in equaldelta.R. Its
+arguments are $n, p, m$, where $n$ is the order of the dissimilarity and weight matrices,
+which have all their non-diagonal elements equal. Argument $n$ and $p$ define the space of
+configuration matrices, and $m$ is the number of smacof runs with a random start.
+
+```{r equaldelta, echo = FALSE, cache = TRUE}
+h <- equalDelta(6, 2, 1000)
+print(length(which(h[[1]][,2]<.036)))
+print(length(which(h[[1]][,2]>.037)))
+n<-6
+w <- delta <- wdef(n)
+w <- w / sum(w)
+delta <- delta / sqrt(sum(w * delta ^ 2))
+h1 <- smacofR(w, delta, 2, xold = h[[2]][[1]], eps = 1e-15, itmax = 10000, xstop = TRUE)
+h6 <- smacofR(w, delta, 2, xold = h[[2]][[6]], eps = 1e-15, itmax = 10000, xstop = TRUE)
+matrixPrint(eigen(h1$h)$values)
+matrixPrint(eigen(h6$h)$values)
+```
+
+#### Directions of Descent
+
+We now go back to the stationary
+equilateral triangle with center. We have seen that the gradient at this configuration is
+zero and the Hessian is positive semi-definite but rank-deficient. 
+A *descent direction* at $X$ is any configuration $Y$ such that $\sigma(X+\epsilon Y)<\sigma(X)$ if $\epsilon$ is small enough. In our example, with $X$ the triangle with center, we must choose $Y$ in the null space of the Hessian, because otherwise $Y$ is a direction of accent. The null space has two trivial dimensions, $X$ and $XA$ with $A$ anti-symmetric. The non-trivial null space has dimension three, and we choose a basis of three orthonormal directions. Then
+
+$$
+\sigma(X+\epsilon Y)=\sigma(X)+0+0+\frac16\epsilon^3d^3\sigma(X)(Y,Y,Y)+o(\epsilon^3),
+$$
+and we can find a descent direction if $d^3\sigma(X)(Y,Y,Y)\not= 0$.
+
+
+```{r threeincdirs, echo = FALSE, cache = TRUE}
+w <- delta <- wdef(4)
+w <- w / sum(w)
+delta <- delta / sqrt(sum(w * delta ^2))
+x <- he$x
+d <- he$d
+x1 <- x
+x1[, 1] <- xe[, 2]
+x1[, 2] <- -xe[, 1]
+tg <- cbind (1, as.vector(x1))
+hg <- eigen(he$h)$vectors[, 4:8]
+b <- lsfit(hg, tg, intercept = FALSE)
+bg <- cbind(b$coefficients, matrix(rnorm(15), 5, 3))
+hd <- qr.Q(qr(hg %*% bg))[, 3:5]
+x1 <- matrix(hd[, 1], 4, 2)
+x1 <- apply(x1, 2, function(x)
+  x - mean(x))
+x2 <- matrix(hd[, 2], 4, 2)
+x2 <- apply(x2, 2, function(x)
+  x - mean(x))
+x3 <- matrix(hd[, 3], 4, 2)
+x3 <- apply(x3, 2, function(x)
+  x - mean(x))
+d1 <- as.matrix(dist(x1))
+s1 <- sum (w * delta * d1) / sum (w * d1 * d1)
+d2 <- as.matrix(dist(x2))
+s2 <- sum (w * delta * d2) / sum (w * d2 * d2)
+d3 <- as.matrix(dist(x3))
+s3 <- sum (w * delta * d3) / sum (w * d3 * d3)
+x1 <- x1 * s1
+x2 <- x2 * s2
+x3 <- x3 * s3
+d1 <- d1 * s1
+d2 <- d2 * s2
+d3 <- d3 * s3
+SEQ <- seq(-0.0001, 0.0001, length = 1001)
+str1 <- rep(0, 1001)
+str2 <- rep(0, 1001)
+str3 <- rep(0, 1001)
+for (i in 1:1001) {
+  dd1 <- as.matrix(dist(x + SEQ[i] * x1))
+  str1[i] <- smacofLossR(dd1, w, delta)
+  dd2 <- as.matrix(dist(x + SEQ[i] * x2))
+  str2[i] <- smacofLossR(dd2, w, delta)
+  dd3 <- as.matrix(dist(x + SEQ[i] * x3))
+  str3[i] <- smacofLossR(dd3, w, delta)
+}
+```
+
+```{r expandstress, echo = FALSE}
+matrixPrint(expandStress(delta, w, x, x1))
+matrixPrint(expandStress(delta, w, x, x2))
+matrixPrint(expandStress(delta, w, x, x3))
+```
+
+

@@ -1,0 +1,59 @@
+# Nonmonotonic MDS {#nonmonotonic}
+
+## Filler 
+
+This chapter will discuss techniques in which the relation between dissimilarities and distances is not necessarily monotone (in as far as these techniques fit into the smacof framework). I have in mind the mapping of high-dimensional manifolds into low-dimensional Euclidean ones, in the
+spirit of @shepard_carroll_66. The prime examples are still cutting and unrolling the circle, the sphere, or the torus.
+
+The dissimilarities define the high-dimensional space, the distances the low-dimensional space. The relation between distances and dissimilarities may not be functional, i.e. we can have $F(D(X),\Delta)=0$
+or $\Delta$ could be a function of $D(X)$. 
+
+In general, small distances in low-dimensional space are small distances in high-dimensional space, but large distances in low-dimensional space can be small distances in high-dimensional space. This suggests an inverse Shepard plot,
+with dissimilarity as a function of distance.
+Or
+$$
+\sigma(X)=\sum\sum(delta_{ij}-f(d_{ij}(X)))^2
+$$
+
+
+Euclidean
+
+$$
+\sqrt{2-2\ \cos |i-j|\theta}
+$$
+
+Circular
+
+$$
+|i-j|\frac{2\pi}{n}
+$$
+Linear 
+$$
+|i-j|
+$$
+```{r breakcircle1, echo = FALSE, fig.align = "center"}
+par(pty="s")
+xx <- 0:9 * ((2 * pi) / 10)
+xs <- sin(xx)
+xc <- cos(xx)
+delta <- as.vector(dist(cbind(xs, xc)))
+d <- as.vector(dist(xx))
+m <- matrix(as.double(unique(format(cbind(delta, d)))), 9, 2)
+plot(m, col= "RED", cex = 1.5, xlab = "delta", ylab = "dist")
+for (i in 1:8) {
+  lines(list(x = c(m[i, 1],m[i + 1, 1]),
+             y = c(m[i, 2],m[i + 1, 2])), col = "RED", lwd = 2)
+}
+```
+
+Quadratic
+
+$F(\Delta,D(X))=0$
+
+$$
+a_1\delta_{ij}^2+a_2\delta_{ij} d_{ij}(X)+a_3d_{ij}^2(X)+a_4\delta_{ij}+a_5 d_{ij}(X)+a_6=0
+$$
+$$
+pd_{ij}^2(X)+2qd_{ij}(X)+r=p(d_{ij}(X)-q/p)^2+r-(q/p)^2
+$$
+$f(\Delta)=g(D(X))$

@@ -1,0 +1,197 @@
+# Full-dimensional Scaling {#fullchapter}
+
+## Convexity {#fullconvex}
+
+## Optimality {#fulloptimal}
+
+## Iteration {#fulliteration}
+
+## Cross Product Space {#fullcpspace}
+
+So far we have formulated the MDS problem in *configuration space*. Stress is a function of $X$, the $n\times p$ configuration matrix. We now consider an alternative formulation, where stress is a function of a positive semi-definite $C$ or order $n$. The relevant definitions are
+\begin{equation}
+\sigma(C):=1-2\rho(C)+\eta(C),
+\end{equation}
+where
+\begin{align*}
+\rho(C)&:=\mathbf{tr}\ B(C)C,\\
+\eta(C)&:=\mathbf{tr}\ VC,
+\end{align*}
+with
+\begin{equation*}
+B(C):=\mathop{\sum\sum}_{1\leq i<j\leq n} \begin{cases}w_{ij}\frac{\delta_{ij}}{d_{ij}(C)}A_{ij}&\text{ if }d_{ij}(C)>0,\\
+0&\text{ if }d_{ij}(C)=0.\end{cases}
+\end{equation*}
+and $d_{ij}^2(C):=\mathbf{tr}\ A_{ij}C$.
+
+We call the space of all positive semi-definite $n\times n$ matrices *cross product space*. The problem of minimizing $\sigma$ over $n\times p$-dimensional configuration space is equivalent to the problem of minimizing $\sigma$ over the set of matrices $C$ in $n\times n$-dimensional cross product space that have rank less than or equal to $p$. The corresponding solutions are related by the simple relationship $C=XX'$.
+
+```{theorem}
+Stress is convex on cross product space.
+```
+
+::: {.proof}
+First, $\eta$ is linear in $C$. Second, 
+$$
+\rho(C)=\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}\delta_{ij}\sqrt{\mathbf{tr}\ A_{ij}C}.
+$$
+This is the weighted sum of square roots of non-negative functions that are linear in $C$, and it is consequently concave. Thus $\sigma$ is convex. 
+:::
+
+Unfortunately the subset of cross product space of all matrices with rank less than or equal to $p$ is far from simple (see @datorro_15), so computational approaches to MDS prefer to work in configuration space.
+
+## Full-dimensional Scaling
+
+Cross product space, the set of all positive semi-definite matrices, is a closed convex cone $\mathcal{K}$ in the linear space of all $n\times n$ symmetric matrices. This has an interesting consequence.
+
+```{theorem}
+Full-dimensional scaling, i.e. minimizing $\sigma$ over $\mathcal{K}$, is a convex programming problem. Thus in FDS all local minima are global. If $w_{ij}\delta_{ij}>0$ for all $i,j$ then the minimum is unique.
+```
+
+This result has been around since about 1985. @deleeuw_R_93c gives a proof, but the report it appeared in remained unpublished. A published proof is in @deleeuw_groenen_A_97. Another treatment of FDS, with a somewhat different emphasis, is in @deleeuw_U_14b.
+
+Now, by a familiar theorem (Theorem 31.4 in @rockafellar_70), a matrix $C$ minimizes $\sigma$ over $\mathcal{K}$ if and only if
+\begin{align}
+C&\in\mathcal{K},\\
+V-B(C)&\in\mathcal{K},\\
+\mathbf{tr}\ C(V-B(C))&=0.
+\end{align}
+We give a computational proof of this result for FDS that actually yields a bit more.
+
+```{theorem, label="ozo"}
+For $\Delta\in\mathcal{K}$ we have
+\begin{equation}
+\sigma(C+\epsilon\Delta)=\sigma(C)-2\epsilon^{\frac12}\sum_{\mathbf{tr}\ A_iC = 0}w_i\delta_i\sqrt{\mathbf{tr}\ A_i\Delta}+\epsilon\ \mathbf{tr}\ (V-B(C))\Delta
++o(\epsilon).\label{E:expand}
+\end{equation}
+```
+::: {.proof}
+Simple expansion.
+:::
+
+***
+```{theorem, label = "rockafellar"}
+Suppose $C$ is a solution to the problem of minimizing $\sigma$ over $\mathcal{K}$. Then
+
+* $\mathbf{tr}\ A_{ij}C > 0$ for all $i,j$ for which $w_{ij}\delta_{ij}>0$.
+* $V-B(C)$ is positive semi-definite.
+* $\mathbf{tr}\ C(V-B(C))=0$.
+* If $C$ is positive definite then $V=B(C)$ and $\sigma(C)=0$.
+
+```
+***
+::: {.proof}
+The $\epsilon^\frac12$ term in $\eqref{E:expand}$ needs to vanish at a local minimum. This proves the first part. It follows that at a local minimum 
+
+\begin{equation*}
+\sigma(C+\epsilon\Delta)=\sigma(C)+
+\epsilon\ \mathbf{tr}\ (V-B(C))\Delta+o(\epsilon).
+\end{equation*}
+
+If $V-B(C)$ is not positive semi-definite, then there is a $\Delta\in\mathcal{K}$ such that
+$\mathbf{tr}\ (V-B(C))\Delta < 0$. Thus $C$ cannot be the minimum, which proves the second part.
+If we choose $\Delta=C$ we find
+
+\begin{equation*}
+\sigma((1+\epsilon)C)=\sigma(C)+
+\epsilon\ \mathbf{tr}\ (V-B(C))C+o(\epsilon).
+\end{equation*}
+
+and choosing $\epsilon$ small and negative shows we must have $\mathbf{tr}\ (V-B(C))C=0$ for
+$C$ to be a minimum. This proves the third part. Finally, if $\sigma$ has a minimum at $C$,
+and $C$ is positive definite, then from parts 2 and 3 we have $V=B(C)$. Comparing off-diagonal
+elements shows $\Delta=D(C)$, and thus $\sigma(C)=0$.
+:::
+
+If $C$ is the solution of the FDS problem, then $\mathbf{rank}(C)$ defines the *Gower rank* of the dissimilarities. The number of positive eigenvalues of the negative of the doubly-centered matrix of squared dissimilarities, the matrix factored in classical MDS, defines the *Torgerson rank* of the dissimilarities. The *Gower conjecture* is that the
+Gower rank is less than or equal to the Torgerson rank. No proof and no counter examples have been found.
+
+We compute the FDS solution using the smacof algorithm 
+\begin{equation}
+X^{(k+1)}=V^+B(X^{(k)})
+\end{equation}
+in the space of all $n\times n$ configurations, using the identity matrix as a default starting point. Since we work in configuration space, not in crossproduct space, this does not guarantee convergence to the unique FDS solution, but after convergence we can easily check the necessary and sufficient conditions of theorem \@ref(thm:rockafellar).
+
+As a small example, consider four points with all dissimilarities equal to one, except $\delta_{14}$ which is equal to three. Clearly the triangle inequality is violated, and thus there certainly is no perfect fit mapping into Euclidean space.
+
+```{r little_gower, echo = FALSE}
+delta <- dist (diag(4))
+delta[4] <- 3
+delta <- delta / sqrt (sum(delta ^ 2))
+h <- fullMDS (delta, xini = diag(4), a = makeA(4), eps = 1e-15, itmax = 10000, verbose = FALSE)
+```
+The FDS solution turns out to have rank two, thus the Gower rank is two. The singular values of the 
+FDS solution are
+```{r little_gower_svd, echo = FALSE}
+print(formatC(svd (h$x)$d[1:3], format = "f", digits = 10), quote = FALSE)
+```
+Gower rank two also follows from the eigenvalues of the matrix $B(C)$, which are
+```{r little_gower_eigen, echo = FALSE}
+print(formatC(eigen (h$b)$values[1:3] / 4, format = "f", digits = 10), quote = FALSE)
+```
+
+## Ekman example
+
+The @ekman_54 color data give similarities between 14 colors.
+```{r ekman_data, echo = FALSE}
+data(ekman, package="smacof")
+ekman
+```
+We use three different transformations of the similarities to dissimilarities. The first is $1-x$, the second $(1-x)^3$ and the third $\sqrt[3]{1-x}$. We need the following iterations to find the FDS solution (up to a change in loss of 1e-15).
+```{r ekman_computation, echo = FALSE, cache = TRUE}
+hekman<-1-ekman
+hekman <- hekman / sqrt(sum(hekman^2))
+tekman<-(1-ekman)^3
+tekman <- tekman / sqrt (sum(tekman ^2))
+sekman <- (1-ekman)^(1/3)
+sekman <- sekman / sqrt (sum(sekman^2))
+
+hh <- fullMDS (hekman, xini = diag(14), a = makeA(14), eps = 1e-15, itmax = 10000, verbose = FALSE)
+ht <- fullMDS (tekman, xini = diag(14), a = makeA(14), eps = 1e-15, itmax = 10000, verbose = FALSE)
+hs <- fullMDS (sekman, xini = diag(14), a = makeA(14), eps = 1e-15, itmax = 10000, verbose = FALSE)
+```
+```{r ekman_fit, echo = FALSE}
+hl <- list (hh, ht, hs)
+pw <- c(1, 3, 1/3)
+for (i in 1:3)
+cat("power = ", formatC(pw[i], format = "f", digits = 2), " itel = ", formatC(hl[[i]]$itel, format = "d", digits = 5), " stress = ", formatC(hl[[i]]$s, format = "f", digits = 10), "\n")
+```
+For the same three solutions we compute singular values of the thirteen-dimensional FDS solution.
+```{r ekman_svd, echo = FALSE}
+for (i in 1:3) {
+print(formatC(svd(hl[[i]]$x)$d[1:13], format = "f", digits = 10), quote = FALSE)
+cat ("\n")
+}
+```
+Thus the Gower ranks of the transformed dissimilarities are, repectively, nine (or ten), two, and thirteen.
+Note that for the second set of dissimilarities, with Gower rank two, the first two principal components of the thirteen-dimensional solution are the global minimizer in two dimensions. To illustrate the Gower rank in yet another way we give the thirteen non-zero eigenvalues of $V^+B(X)$, so that the Gower rank is the number of eigenvalues equal to one. All three solutions satisfy the necessary and sufficient conditions for a global FDS solution.
+```{r ekman_beigen, echo = FALSE}
+for (i in 1:3) {
+print(formatC(eigen(hl[[i]]$b)$values[1:13]/14, format = "f", digits = 10), quote = FALSE)
+cat("\n")
+}
+```
+We also plot the first two principal components of the thirteen-dimensional FDS solution. Not surprisingly, they look most circular and regular for the solution with power three, because this actually is the global minimum over two-dimensional solutions. The other configurations still have quite a lot of variation in the remaining dimensions.
+
+```{r ekmanconfs, echo = FALSE, fig.align = "center", fig.cap = "Ekman data, configurations for three powers"}
+par(mfrow=c(1,3), pty = "s")
+pw <- c("1.00", "3.00", "0.33")
+for (i in 1:3) {
+  hx <- svd(hl[[i]]$x)
+  hy <- hx$u[,1:2] %*% diag(hx$d[1:2])
+  lb <- paste("power =", pw[i])
+  plot (hy, xlab = "dimension 1", ylab = "dimension 2", col = "RED", main = lb)
+}
+```
+
+Figure \@ref{fig:ekmantrans} illustrates that the FDS solution with power 3 is quite different from power 1 and power one $1/3$ Basically the transformations with lower powers result in dissimilarity measures that are very similar to Euclidean distances in a high-dimensional configuration, while power equal to 3 makes the dissimilarties less Euclidean. This follows from metric transform theory, where concave increasing transforms of finite metric spaces tend to be Euclidean. In particular the square root transformation of a finite metric space has the Euclidean four-point property, and there is a $c>0$
+such that the metric transform $f(t)=ct/(1+ct)$ makes a finite metric space Euclidean (@maehara_86).
+
+```{r ekmantrans, echo = FALSE, fig.align = "center", fig.cap="Ekman data, fit plots for three powers"}
+par(mfrow=c(1,3), pty = "s")
+pw <- c("1.00", "3.00", "0.33")
+for (i in 1:3) {
+   lb <- paste("power =", pw[i])
+  plot (hl[[i]]$delta, hl[[i]]$d, xlab = "delta", ylab = "d", col = "RED", main = lb)
+}
+```

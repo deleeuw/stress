@@ -1,0 +1,399 @@
+# Constrained Multidimensional Scaling {#cmds}
+
+As we have seen in section \@ref(introgeneralize) Constrained Multidimensional Scaling or CMDS is defined as the generalization of basic MDS in which we want to solve
+$$
+\min_{X\in\Omega}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2,
+$$
+where $\Omega$ is a subset of $\mathbb{R}^{n\times p}$. Of course there are also versions of CMDS in which the dissimilarities are nonmetric and must be quantified or transformed accordingly. But in this chapter we concentrate on the ways in which we constrain the configuration and on the ways to incorporate this into the smacof framework.
+
+Constraints on $X$ can be defined in many different ways. They can be 
+in *parametric form*, using a map $F:\Theta\Rightarrow\mathbb{R}^{n\times p}$. Thus the constraints are $X=F(\theta)$ and $\theta$ varies in some subset $\Theta$ of real parameter space. Alternatively we can haveconstraints in *dual form*, i.e, have a maps\ $F$ on $\mathbb{R}^{n\times p}$ and define $\Omega$ by $F(X)=0$ (or $F_1(X)=0$ and $F_2(X)\geq 0$). If $F$ is smooth both parametric and dual forms define manifolds in $\mathbb{R}^{n\times p}$, and often constraints can be equivalently expressed in both forms. Requiring the points in the configuration to be on the unit circle, for example, has the parametric form $x_i=(\sin\theta_i,\cos\theta_i)$ and the dual form $\|x_i\|^2=1$.
+
+
+Bentler-Weeks 
+
+$$
+\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-(\alpha\  d_{ij}(X)+\beta))^2.
+$$
+with $x_{is}=K$ or $x_{is}=wy_{is}$ for some set of $(i,s)$.
+
+Configuration-Distances $F(D(X))\geq 0$ and $G(D(X))=0$
+Borg-Lingoes
+
+$$
+\min_{D\in\mathcal{D}}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij})^2,
+$$
+
+De Leeuw-Heiser
+
+## Primal-Dual (note: the base partitioning has dual aspects)
+
+Least squares
+
+$$
+\sigma_\lambda(X):=\sigma(X)+\lambda\min_{Y\in\Omega}\eta^2(X-Y)
+$$
+$$
+\sigma_\lambda(X):=\sigma(X)+\lambda\min_{\Delta\in\mathcal{D}}\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X)^2
+$$
+
+## Basic Partitioning {#baspar}
+
+A comprehensive smacof approach to constrained MDS was developed in @deleeuw_heiser_C_80. It is a primal method that does not involve penalty parameters, and it defines the constraints directly on the configuration.
+
+The starting point is the *majorization partitioning*
+\begin{equation}
+\sigma(X)\leq 1+\eta^2(X-\gamma(Y))-\eta^2(\gamma(Y)),
+(\#eq:smacmdsis)
+\end{equation}
+with equality, of course, if $X=Y$.
+
+Note similarity with dual approach
+
+The smacof algorithm for constrained MDS has consequently two steps. In the first we compute the Guttman transform of the current configuration, and in the second we find the metric projection of this Guttman transform on the constraint set (in the metric defined by $V$). Thus, in shorthand,
+
+\begin{equation}
+X^{(k+1)}\in\mathop{\text{Argmin}}_{Y\in\Omega}\ \eta^2 (Y-\Gamma(X^{(k)})).
+(\#eq:smacmds)
+\end{equation}
+
+To emphasize we look for a fixed point of the composition of two maps, the Guttman transform and the projection operator $\Pi_\Omega$, we can write in even shorter hand
+
+$$
+X^{(k+1)}\in\Pi_\Omega(\Gamma(X^{(k)}))
+$$
+
+The smacof formulation of the CMDS problem is elegant, if I say so myself, but it is not always simple from the computational point of view. The Guttman transform is easy enough to compute, but projecting on $\Omega$ in the $V$ metric may be complicated, depending on how $\Omega$ is defined. In this chapter we will discuss a number of examples with varying degrees of difficulty in computing the *smacof projection*.
+
+## Unweigthing {#majawa}
+
+For some types of constraints, for example the circular and elliptical MDS discussed in section \@ref(circmds), unweighted least squares is computationally simpler than weighted least squares. In those cases it generally pays to use majorization to go from a weighted to an unweighted problem (see also @groenen_giaquinto_kiers_03). This will tend to increase the number of iterations of smacof, but the computation within each iteration will be considerably faster.
+
+From equation \@ref(eq:smacmds), the projection problem in constrained MDS is to minimize the weighted least squares loss function $\phi(X):=\text{tr}\ (Z-X)'V(Z-X)$ over $X\in\Omega$. Now suppose $\theta$ is the largest eigenvalue of $V$, so that
+$V\lesssim\theta I$, and suppose $Y\in\Omega$. Then
+
+\begin{multline}
+\phi(X)=\text{tr}\ ((Z-Y)-(X-Y))'V((Z-Y)-(X-Y))\leq\\\phi(Y)-2\ \text{tr}\ (Z-Y)'V(X-Y)+\theta\ \text{tr}\ (X-Y)'(X-Y).
+(\#eq:majproj)
+\end{multline}
+
+Completing the square gives the majorization
+
+\begin{equation}
+\phi(X)\leq\phi(Y)+\theta\ \text{tr}\ (X-\overline{Y})'(X-\overline{Y})-\theta\ \text{tr}\ \overline{Y}'\overline{Y},
+(\#eq:compsqproj)
+\end{equation}
+
+with $\overline{Y}$ the matrix-convex combination
+
+\begin{equation}
+\overline{Y}:=(I-\frac{1}{\theta}V)Y+\frac{1}{\theta}VZ.
+(\#eq:projtarget)
+\end{equation}
+
+The weighted projection problem from equation \@ref(eq:smacmds) is replaced by one or more inner iterations of an unweighted projection problem. Set $X^{(k,1)}=X^{(k)}$ and
+
+\begin{equation}
+X^{(k,l+1)}\in\mathop{\text{Argmin}}_{Y\in\Omega}\ \text{tr}\ (Y-\overline{X}^{k,l})'(Y-\overline{X}^{(k,l)}).
+(\#eq:smaprojinner)
+\end{equation}
+
+After stopping the inner iterations at $X^{(k,l+s)}$ we set $X^{(k+1)}=X^{(k,l+s)}$.
+All $X^{(k,l)}$ remain feasible, loss decreases in each inner iteration, and as long at the metric projections are continuous the map from $X^{(k)}$ to $X^{(k+1)}$ is continuous as well.
+
+## Constraints on the Distances
+
+
+
+### Rectangles
+
+
+
+## Linear Constraints {#lincons}
+
+### Uniqueness
+
+$X=(Z\mid D)$
+
+$X=(Z\mid \alpha I)$
+
+Distance smoothing
+
+### Combinations
+
+$X=\sum\alpha_r Z_r$
+
+### Step Size {#stepsize}
+
+$X=Z+\alpha G$
+
+### Single Design Matrix {#singdesign}
+
+$X=ZU$  
+
+### Multiple Design Matrices {#multdesign}
+
+$x_s=G_su_s$ 
+
+$$
+d_{ij}^2(X)=\sum_{s=1}^p x_s'A_{ij}x_s=
+\sum_{s=1}^p u_s'G_s'A_{ij}G_su_s
+$$ 
+
+
+## Circular MDS {#circmds}
+
+@deleeuw_U_07h, @deleeuw_R_07a, @deleeuw_U_05j
+
+There are situations in which it is desirable to have a configuration with points that are restricted to lie on some surface or manifold in $\mathbb{R}^p$. Simple examples are the circle in $\mathbb{R}^2$ or the sphere in $\mathbb{R}^3$. Some applications are discussed in @cox_cox_91 (also see @cox_cox_01, section 4.6), in @borg_lingoes_80, in @papazoglou_mylonas_17, and in @deleeuw_mair_A_09c, section 5. The most prominent actual examples are probably the color circle and the spherical surface of the earth, but there are many other cases in which MDS solutions show some sort of "horseshoe" (@deleeuw_R_07a).
+
+### Some History {#circhist}
+
+```{r vdgeerpic, echo = FALSE, fig.align = "center", out.width="60%", fig.cap = "John van de Geer"}
+include_graphics("graphics/johnvdg.jpeg")
+```
+
+Permit me to insert some personal history here. Around 1965 I got to work at the Psychological Institute. At the time Experimental Psychology and Methodology were in the same department, with John van de Geer as its chair. John had a long-running project with Pim Levelt and Reinier Plomp at the Institute for Perception RVO/TNO on perceptual and cognitive aspects of musical intervals. In @vandegeer_levelt_plomp_62, for example, they used various cutting-edge techniques at the time, the semantic differential for data collection, the centroid method for factor analysis, and oblique simple structure rotation. A couple of years later the cutting edge had moved to triadic comparisons
+for data collection and nonmetric multidimensional scaling (@levelt_vandegeer_plomp_66).
+The analysis in @levelt_vandegeer_plomp_66 revealed a parabolic horseshoe structure of the musical intervals. 
+
+This inspired John to find a technique to fit quadratic (and higher order, if necessary) structures to scatterplots. If $X$ is a two-dimensional configuration of $n$ points, then form the $n\times 6$ matrix $Z$ with columns $1,x_1,x_2,x_i^2,x_2^2,x_1x_2$. Now find $\alpha$ with $\alpha'\alpha=1$ such that $\alpha'Z'Z\alpha$ is as small as possible. This gives the normalized eigenvector corresponding with the smallest eigenvalue of $Z'Z$, or, equivalently, the right singular vector corresponding with the smallest singular value of $Z$. It is easy to see how this approach generalizes to more dimensions and higher order algebraic surfaces. I remember with how much awe this technique was received by the staff of the Psychological Institute. It probably motivated me in 1966 to develop similar techniques and get my portion of awe.
+
+@levelt_vandegeer_plomp_66 used the curve fitting technique to draw the best fitting parabola in the two-dimensional scatterplot of musical intervals. In their discussion they suggested that a similar quadratic structure could be found if similarities between political parties were analyzed, because for people in the middle of the left-right scale extreme-left and extreme-right parties would tend to be similar. If the effect of extremity was strong enough, the two extreme might even bend towards each other, leading to an ellipse rather than a parabola. In 1966 John asked student-researcher Dato de Gruijter to figure out if this curving back actually happened, which lead to @degruijter_67. Dato collected triadic comparisons between nine Dutch political parties, cumulated over 100 psychology students. The curve fitting technique indeed found best fitting ellipses.
+
+### Primal Methods {#circprimal}
+
+We follow @deleeuw_mair_A_09c in distinguishing *primal* and *dual* methods. In a primal
+method the surface we fit is specified in parametric form. The points on the circle, for
+example, have $(x_{i1},x_{i2})=(sin(\xi_i),cos(\xi_i))$. Rotational invariance of MDS 
+means we can assume the center of the circle is in the origin. This is the approach of @cox_cox_91. They substitute the parametrix expression for the circle in the formula for stress and minimize over the sperical coordinates $\xi_i$ using gradient methods. They develop a similar method for the sphere in $\mathbb{R}^3$. For those who want to go to higher dimensions we illustrate a parametric representation for $\mathbb{R}^4$.
+$$
+(x_{i1},x_{i2},x_{i3},x_{i4})=\\(\sin(\xi_i)\cos(\theta_i)\sin(\mu_i),\
+\sin(\xi_i)\cos(\theta_i)\cos(\mu_i),\ \sin(\xi_i)\sin(\theta_i),\ \cos(\xi_i)).
+$$
+Spherical coordinates soon get tedious, and @deleeuw_mair_A_09c simply require the
+distances of all points to the origin to be the same constant. Note that this puts the center of the fitted sphere in the origin, which means that in general the center of the
+point cloud cannot be taken to be in the origin as well. In smacof we use the
+
+$$
+\phi(X,\lambda):=\text{tr}\ (Z-\lambda X)'V(Z-\lambda X)
+$$ 
+over the radius $\lambda$ and the configuration $X$, which is constrained to have $\text{diag}\ XX'=I$. @deleeuw_mair_A_09c project out $\lambda$ and minimize $\phi(X,\star):=\min_\lambda\phi(X,\lambda)$ over $X$, using Dinkelbach majorization (@dinkelbach_67), a block relaxation that cycles over rows of $X$. Solving for each 
+$p$ vector of coordinates requires solving a secular equation. 
+
+Here we proceed slightly differently. Our first step is to get rid of $V$ using the formulas in \@ref(majawa). 
+
+```{r ekcircpnts, fig.align = "center", fig.dim = c(6,6), echo = FALSE, cache = TRUE}
+source("data/ekman.R")
+ekman <- as.matrix(1 - ekman)
+ekman <- ekman / sqrt (sum (ekman ^ 2))
+aa<-pcircsmacof(ekman, verbose = FALSE)
+par(pty="s")
+plot(aa$x, type="n", xlim = c(-.075,.075), ylim = c(-.075,.075), xlab = "x1", ylab = "x2")
+text(aa$x, row.names(ekman), col = "RED", cex = 1.5)
+xx <- seq (0, 2 * pi, length = 100)
+xy <- cbind (sin(xx), cos (xx))
+xy <- aa$radius * xy
+lines (xy, lwd = 2, col = "BLUE")
+```
+
+After `r aa$itel` iterations the primal method converges to a stress value of
+`r aa$stress`. The circle has radius `r aa$radius`.
+
+### Dual Methods {#circdual}
+
+In a dual method we use unrestricted smacof, but we add a penalty to the loss if the configurations do not satisfy the constraints. We use a quadratic penalty, mainly because that fits seamlessly into the smacof approach.
+
+We add one point, the center of the circle, with coordinates $x_0$ to the configuration, and we require that all $n$ other points have an equal distance
+from the center. The $n$ dissimilarities $\delta_{0,i}$ are unknown, so we
+use alternating least squares and estimate the missing dissimilarities by minimizing 
+stress over them, requiring them to be all equal. All weights $w_{0,i}$ are chosen equal to the penalty parameter $\omega$. The solution for the common $\delta_{0,i}$
+is obviously the average of the $n$ distances $d_{0,i}$. In this case it is not necessary to use majorization to transform to unweighted least squares.
+
+```{r grcirc, echo = FALSE, cache = TRUE}
+ind <- 2:15
+a0<-dcircsmacof(ekman, pen = 0, verbose = FALSE)
+a1<-dcircsmacof(ekman, x = a0$x[ind, ], pen = 1, verbose = FALSE)
+a2<-dcircsmacof(ekman, x = a1$x[ind, ], pen = 2, verbose = FALSE)
+a4<-dcircsmacof(ekman, x = a2$x[ind, ], pen = 4, verbose = FALSE)
+a8<-dcircsmacof(ekman, x = a4$x[ind, ], pen = 8, verbose = FALSE)
+```
+
+```{r plcircpnts, fig.align = "center", fig.dim = c(6,6), echo = FALSE}
+par(pty="s")
+plot(a0$x[ind, ], type="n", xlim = c(-.075,.075), ylim = c(-.075,.075), xlab = "x1", ylab = "x2")
+text(a0$x[ind, ], row.names(ekman), col = "RED")
+points(a1$x[ind, ])
+points(a2$x[ind, ])
+points(a4$x[ind, ])
+points(a8$x[ind, ])
+for (i in ind) {
+lines(rbind(a0$x[i, ],a1$x[i, ]))
+lines(rbind(a1$x[i, ],a2$x[i, ]))
+lines(rbind(a2$x[i, ],a4$x[i, ]))
+lines(rbind(a4$x[i, ],a8$x[i, ]))
+}
+```
+```{r plcirc, fig.align = "center", fig.dim = c(6,6), eval = FALSE, echo = FALSE}
+plot(r$x[ind, ], type = "n", xlim = c(-6,6), ylim = c(-6,6), xlab = "x1", ylab = "x2")
+text(r$x[ind, ], attr(ekman,"Labels"), col = "RED")
+abline(h=0)
+abline(v=0)
+points(rbind(c(0,0), r$x[1, ], r$x[2, ]))
+f <- seq (0, 2 * pi, length = 100)
+e <- cbind(sin(f), cos (f))
+lines(e, type = "l", col = "BLUE")
+```
+
+
+## Elliptical MDS {#ellimcds}
+
+### Primal {#elliprimal}
+
+The smacof projection problem for a $p$-axial ellipsoid minimizes
+$$
+\phi(Y,\Lambda):=\text{tr}\ (Z-Y\Lambda)'V(Z-Y\Lambda)
+$$
+with $\text{diag}\ YY'=I$ and with $\Lambda$ diagonal and PSD. 
+
+ALS
+
+Minimizing $\phi$ over $\Lambda$ for fixed $Y$ is easy. For dimension $s$ we have
+
+ $$
+\lambda_s=\frac{y_s'Vz_s}{y_s'Vy_s}.
+$$
+
+To minimize $\phi$ over $Y$ for fixed $\Lambda$ we use $Z-Y\Lambda=(Z\Lambda^{-1}-Y)\Lambda$ so that
+
+$$
+\phi(Y,\Lambda)=\text{tr}\ \Lambda^2(\tilde Z-Y)'V(\tilde Z-Y)
+$$
+with $\tilde Z=Z\Lambda^{-1}$. We now use a slight modification of the majorization technique in section \@ref(majawa). Set $Y=Y_{\text{old}}+(Y-Y_{\text{old}})$. Then
+$$
+\phi(Y,\Lambda)=\text{tr}\ \Lambda^2((\tilde Z-Y_{\text{old}})-(Y-Y_{\text{old}}))'V((\tilde Z-Y_{\text{old}})-(Y-Y_{\text{old}}))=\\
+\phi(Y_{\text{old}},\Lambda)-2\ \text{tr}\ \Lambda^2(\tilde Z-Y_{\text{old}})'V(Y-Y_{\text{old}})+\text{tr}\ \Lambda^2(Y-Y_{\text{old}})'V(Y-Y_{\text{old}})
+$$
+
+$$
+\text{tr}\ \Lambda^2(Y-Y_{\text{old}})'V(Y-Y_{\text{old}})\leq
+\theta\lambda_{\text{max}}^2\ \text{tr}\ (Y-Y_{\text{old}})'(Y-Y_{\text{old}})
+$$
+
+where, as before, $\theta$ is the largest eigenvalue of $V$.
+
+$$
+\theta\lambda_{\text{max}}^2\ (Y-Y_{\text{old}})=V(\tilde Z - Y_{\text{old}})\Lambda^2
+$$
+(abadir_magnus_05, p 283)
+
+Normalize the rows of 
+
+$$
+Y_{\text{old}}+\frac{1}{\theta\lambda_{\text{max}}^2}V(Z\Lambda^{-1}-Y_{\text{old}})\Lambda^2
+$$
+
+```{r ekellikpnts, fig.align = "center", fig.dim = c(6,6), echo = FALSE, cache = TRUE}
+source("data/gruijter.R")
+delta <- as.matrix (gruijter)
+delta <- delta / sqrt (sum (delta ^ 2))
+aa <- pellipsmacof(delta, itmax= 10000, verbose = FALSE)
+#par(pty="s")
+plot(aa$x, type="n", xlim = c(-.075,.075), ylim = c(-.075,.075), xlab = "x1", ylab = "x2")
+text(aa$x, attr(gruijter, "Labels"), col = "RED", cex = 1.5)
+xx <- seq (0, 2 * pi, length = 100)
+xy <- cbind (sin(xx), cos (xx))
+xy <- xy %*% diag (aa$axes)
+lines (xy, lwd = 2, col = "BLUE")
+```
+
+`r aa$axes`
+
+`r aa$itel`
+
+`r aa$stress`
+
+### Dual {#ellidual}
+
+We will only develop a dual method for ellipses in two dimensions, because there is no easy characterization in terms of distances in higher dimensions (that I know of). But in two dimensions the famous pin-and-string construction uses the fact that for all points on the ellipse the sum of the distances to two focal points is constant. Thus our dual method now adds two points to the $n$ points in the configuration, chooses the weights for the $2n$ components of stress to be the penalty parameter w, and finds the $2n$ unknown dissimilarities between the two focal points and the $n$ points on the ellipse to add up to a constant.
+
+This means we have to minimize $\text{tr}\ (\Delta-D)'(\Delta-D)$ over $\Delta$
+satisfying $\Delta e=\gamma e$, where for the time being $\Delta$ and $D$ are
+$n\times 2$ submatrices. The Lagrangian is
+$\text{tr}\ (\Delta-D)'(\Delta-D)-2\mu'(\Delta e-\gamma e)$, and thus we must have
+$\Delta=D+\mu e'$. Taking row sums gives 
+$\gamma e = De+p\mu$ and thus $\mu = \frac12(\gamma e-De)$. This implies
+$\Delta-D=\mu e'=\frac{1}{2}(\gamma E_{np}-DE_{pp}),$
+and to minimize loss over $\gamma$ we choose $\gamma=\frac{1}{n}e_n'De_p$. This gives
+$$
+\Delta=DJ+\frac{e'De}{2n}ee'.
+$$
+Thus we take $D$, transform its $n$ rows to deviations from the mean, and then add the overall mean to all elements.
+
+```{r grellip, echo = FALSE, cache = TRUE}
+ind <- 2 + (1:9)
+a0<-dellipsmacof(as.matrix(gruijter), pen = 0, verbose = FALSE)
+a1<-dellipsmacof(as.matrix(gruijter), x = a0$x[ind, ], pen = 1, verbose = FALSE)
+a2<-dellipsmacof(as.matrix(gruijter), x = a1$x[ind, ], pen = 2, verbose = FALSE)
+a4<-dellipsmacof(as.matrix(gruijter), x = a2$x[ind, ], pen = 4, verbose = FALSE)
+a8<-dellipsmacof(as.matrix(gruijter), x = a4$x[ind, ], pen = 8, verbose = FALSE)
+```
+
+```{r plpnts, fig.align = "center", fig.dim = c(6,6), echo = FALSE}
+par(pty="s")
+plot(a0$x[ind, ], type="n", xlim = c(-6,6), ylim = c(-6,6), xlab = "x1", ylab = "x2")
+text(a0$x[ind, ], attr(gruijter,"Labels"), col = "RED")
+points(a1$x[ind, ])
+points(a2$x[ind, ])
+points(a4$x[ind, ])
+points(a8$x[ind, ])
+for (i in 3:11) {
+lines(rbind(a0$x[i, ],a1$x[i, ]))
+lines(rbind(a1$x[i, ],a2$x[i, ]))
+lines(rbind(a2$x[i, ],a4$x[i, ]))
+lines(rbind(a4$x[i, ],a8$x[i, ]))
+}
+```
+```{r plellip, fig.align = "center", fig.dim = c(6,6), echo = FALSE}
+r <- rotateEllipse(a8$x)
+plot(r$x[ind, ], type = "n", xlim = c(-6,6), ylim = c(-6,6), xlab = "x1", ylab = "x2")
+text(r$x[ind, ], attr(gruijter,"Labels"), col = "RED")
+abline(h=0)
+abline(v=0)
+points(rbind(c(0,0), r$x[1, ], r$x[2, ]))
+f <- seq (0, 2 * pi, length = 100)
+e <- cbind(sin(f), cos (f))
+e[, 1] <- e[, 1] * r$a
+e[, 2] <- e[, 2] * r$b
+lines(e, type = "l", col = "BLUE")
+```
+
+hyperbola: difference of distances constant
+$|d((x_i,x_2),(f_1,0))-d((x_i,x_2),(g_1,0))|=c$
+
+parabola: equal distance from the focus point and the directrix (horizontal axis)
+$d((x_i,x_2),(f_1,f_2))=d((x_1,x_2),d(x_1,0))$
+
+
+## Distance Bounds
+
+@deleeuw_E_17b
+@deleeuw_E_17c
+@deleeuw_E_17d
+
+## Localized MDS
+
+## MDS as MVA
+
+Q methodology
+
+http://qmethod.org
+
+@stephenson_53
+
+@deleeuw_meulman_C_86
+@meulman_86
+@meulman_92
+
+## Horseshoes {#conshorseshoes}
+

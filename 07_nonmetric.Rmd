@@ -1,0 +1,284 @@
+# Nonmetric MDS {#nonmtrmds}
+
+## Generalities
+
+In non-metric MDS the dissimilarities are not a vector of known non-negative numbers, but they are only known up to a transformation or quantification. Ever since @kruskal_64a the approach for dealing with this aspect of the MDS problem is to define stress as a function of both $X$ and $\Delta$, and to minimize
+\begin{equation}
+\sigma(X,\Delta):=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2
+(\#eq:nmstress)
+\end{equation}
+over both configurations $X$ and feasible *disparities* (i.e. transformed
+dissimilarities). The name *disparities* was coined, as
+far as I know, by Forrest Young and used in our joint ALS work from the seventies (@takane_young_deleeuw_A_77). Kruskal's name for the transformed or
+quantified dissimilarities is *pseudo-distances*.
+
+To work with a general notion of the feasability of a matrix of disparities we use the notation $\Delta\in\mathfrak{D}$. Typically, although not necessarily,
+$\mathfrak{D}$ is a convex set in disparity space. In interval, polynomial,
+splinical, and ordinal MDS it usually is a convex cone with apex at the origin. This implies that $0\in\mathfrak{D}$, and consequently that
+\begin{equation}
+\min_{X\in\mathbb{R}^{n\times p}}\min_{\Delta\in\mathfrak{D}}=0,
+(\#eq:nmtrivial)
+\end{equation}
+with the minimum attained at $X=0$ and $\Delta=0$. Of course this is a *trivial solution*, which is completely independent of the data. Thus we cannot formulate the NMDS problem as the minimization of stress from equation \@ref(eq:nmstress) over unconstrained $X$ and over $\Delta$ in its cone. We need some way to exclude either $X=0$ or $\Delta=0$, or both, from the feasible solutions. This we can do either by normalization of the loss function, or by using constraints that explicitly
+exclude one or both zero solutions. The commonly used options will be discussed in section \@ref(nmdsnorm) of this chapter.
+
+### Kruskal's Stress
+
+... we shall find ourselves doing arithmetic with dissimilarities. This we must not do, because we are committed to using only the rank ordering of the dissimilarities. (@kruskal_64a, p 6-7)
+
+section \@ref(nmdsnorm)
+
+## Single and Double Phase {#nmssingledouble}
+
+The distinction between *single phase* and *double phase* NMDS algorithms, introduced by @guttman_68, has caused a great deal of confusion in the early stages of non-metric MDS (say between 1960 and 1970). 
+
+> This beguiling complex distinction has given rise to an almost 
+> endless debate (among > Guttman, Kruskal, Lingoes, Roskam, and 
+> Shepard -- for all permutations of five 
+> things taken two at a time) and has caused anguish and despair (accompanied by
+> an imprecation or two by at least four of the five) extending over a three year
+> period -- only occasionally alleviated by evanescent flashes of partial insight
+> (@lingoes_roskam_73)
+
+I was an active, although late-arriving, participant in discussing, and perhaps perpetuating, this confusion (@deleeuw_R_73g). For raking up this debate
+at this late stage I was sternly spoken to by Jim Lingoes, who pointed me to the
+discussion in @lingoes_roskam_73.
+
+> I would hate to believe that after this heroic attempt on our part that "we all"
+> would once more be engaged in a "correspondence musical chairs" on these issues.
+> (Lingoes in @deleeuw_R_73g).
+
+Nevertheless, even in later discussions of the distinction between single-phase and double-phase (such as @roskam_79) I still get the feeling that there are some unresolved misunderstandings. Thus I will pay some more attention to the musical chairs here.
+
+By the very definition of the minimum of a function we have the mathematical truism
+\begin{equation}
+\min_{(X,\Delta)\in\mathfrak{X}\otimes\mathfrak{D}}\sigma(X,\Delta)=
+\min_{X\in\mathfrak{X}}\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=\min_{X\in\mathfrak{X}}\left\{\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)\right\}=\min_{\Delta\in\mathfrak{D}}\left\{\min_{X\in\mathfrak{X}}\sigma(X,\Delta)\right\},
+(\#eq:nmsminmin)
+\end{equation}
+provided all minima exist. This is true no matter what the subsets $\mathfrak{X}$ of configuration space and $\mathfrak{D}$ of disparity space are.
+
+### Double Phase
+
+In a *double phase algorithm* we alternate the minimization of stress over $X$ and $\Delta$. Thus
+\begin{align}
+X^{(k+1)}&=\mathop{\text{argmin}}_{X\in\mathfrak{X}}\sigma(X,\Delta^{(k)}),(\#eq:nmsals1)\\
+\Delta^{(k+1)}&=\mathop{\text{argmin}}_{\Delta\in\mathfrak{D}}\sigma(X^{(k+1)},\Delta).(\#eq:nmsals2).
+\end{align}
+Thus double phase algorithms are *alternating least squares* or ALS algorithms.
+The designation "alternating least squares" was first used, AFAIK, by @deleeuw_R_68d, and of course it was widely disseminated by the series of ALS algorithms of Young, Takane, and De Leeuw in the seventies (see @young_81 for a retrospective summary).
+
+There are some possible variations in the ALS scheme. In equation \@ref(eq:nmsals1)
+we update $X$ first, and then in equation \@ref(eq:nmsals1) we update $\Delta$. That order can be reversed without any essential changes. More importantly, we have to realize that minimizing over $X$ in equation \@ref(eq:nmsals1) is a basic metric MDS problem, which will generally take an infinite number of iterations for an exact solution. This means we have to truncate the minimization, and stop at some point. And, in addition, equation \@ref(eq:nmsals1) implies we have to find the global minimum over $X$, which is generally infeasible as well.Thus the ALS scheme as defined cannot really be implemented. 
+
+We remedy this situations by switching from minimization in each substep to 
+a decrease, or, notationwise, from $\text{argmin}$ to $\text{arglower}$. The resulting
+update sequence
+\begin{align}
+X^{(k+1)}&=\mathop{\text{arglower}}_{X\in\mathfrak{X}}\sigma(X,\Delta^{(k)}),(\#eq:nmslte1)\\
+\Delta^{(k+1)}&=\mathop{\text{arglower}}_{\Delta\in\mathfrak{D}}\sigma(X^{(k+1)},\Delta).(\#eq:nmslte2).
+\end{align}
+is much more loosely defined than the previous one, because arglower can be implemented in many different ways. More about that later. But at least the new scheme can actually be implemented.
+
+Algorithm \#ref(eq:nmslte1) and \#ref(eq:nmslte2) is still considered to be ALS, but it is also firmly in the class of *block relaxation* algorithms. General block relaxation, which has alternating least squares, coordinate relaxation, augmentation, EM, and majorization as special cases, was used to describe many different data analysis algorithms in @deleeuw_C_94c. As with ALS, special cases of block relaxation have been around for a long time.
+
+### Single Phase {#nmssinglephase}
+
+From equation \@ref(eq:nmsminmin)
+\begin{equation}
+\min_{X\in\mathfrak{X}}\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=\min_{X\in\mathfrak{X}}\left\{\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)\right\}.
+(\#eq:nmsminsin)
+\end{equation}
+So if we define
+\begin{equation}
+\sigma_\star(X):=\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta),
+(\#eq:nmssingle)
+\end{equation}
+the NMDS problem is to minimize $\sigma_\star$ from \@ref(eq:nmssingle) over $X$.
+Note there is a $\sigma$ defined by equation \@ref(eq:nmstress)
+on $\mathfrak{X}\otimes\mathfrak{D}$, and a $\sigma_\star$, defined by equation \@ref(eq:nmssingle), which is a function only of $X$. It is sometimes said that that $\Delta$ is *projected* when going from \@ref(eq:nmstress) to \@ref(eq:nmssingle), or that $\sigma_\star$ is a *marginal* function.
+
+Once more with feeling. The two-phase $\sigma$ is a function of two matrix variables
+$X$ and $\Delta$, the one-phase $\sigma_\star$is a function of the single matrix variable $X$. To make this even more clear we can write $\sigma_\star(X)=\sigma(X,\Delta(X))$, where 
+\begin{equation}
+\Delta(X):=\mathop{\text{argmin}}_{\Delta\in\mathfrak{D}}\sigma(X,\Delta).
+(\#eq:nmsdeltasingle)
+\end{equation}
+
+Of course by projecting out $X$ instead of $\Delta$ we could also have defined a loss function which is a function of $\Delta$ only, but typically we do not use the alternative projection because it is complicated and heavily nonlinear. Projecting out $X$ is, in fact, solving a standard basic MDS problem. Projecting out $\Delta$ is usually much simpler. In most applications $\mathfrak{D}$ is convex, so computing $\Delta(X)$ is computing the projection on a convex set, and projections on convex sets always exist and are unique and continuous.
+
+As an aside, projection creates a function of one variable out of a function of
+two variables. The inverse of projection is called *augmentation*, which starts with a function $f$ of one variable on $\mathfrak{X}$ and tries to find a function of two variables $g$ on $\mathfrak{X}\otimes\mathfrak{Y}$ such that
+$f(x)=\min_{y\in\mathfrak{Y}} g(x,y)$. If we have found such a $g$ then we can
+minimize $f$ over $\mathfrak{X}$ by minimizing $g$ over $\mathfrak{X}\otimes\mathfrak{Y}$, for example by block relaxation (@deleeuw_C_94c).
+
+One reason there was some confusion, and some disagreement between Kruskal and Guttman,
+was a result on differentiation of the minimum function, which was not known in the
+psychometric community at the time. Guttman thought that $\sigma_\star$ was not differentiable at $X$, because $\Delta$ from \@ref(eq:nmsdeltasingle) is a step function. Kruskal proved in @kruskal_71 that $\sigma_\star$ is differentiable, and saw that the result is basically one in convex analysis, not in classical linear analysis.
+The result follows easily from directional differentiability in Danskin's theorem (@danskin_67) or from the minimax theorems of, for example, @demyanov_malozemov_90, using the fact that the projection is unique. More directly, deleeuw_R_73g refers to discussion on page 255 of @rockafellar_70, following his corollary 26.3.2.
+We will go into more detail about differentiability, and the differences between Kruskal's and Guttman's loss functions, in the next chapter \@ref(chapordinal).
+For now it suffices to note that
+\begin{equation}
+\mathcal{D}\sigma_\star(X)=\mathcal{D}_1\sigma(X,\Delta(X)),
+(\#eq:nmsdanskin)
+\end{equation}
+or, in words, that the derivative of $\sigma_\star$ at $X$ is the partial derivative of $\sigma$ at $(X,\Delta(X))$.
+
+## Affine NMDS
+
+Basic MDS can now be interpreted as the special case of NMDS in which
+$\mathfrak{D}=\{\Delta\}$ is a singleton, a set with only one element. Thus $0\not\in\mathfrak{D}$ and we do not have to worry about trivial zero solutions for $X$.
+
+This extends to basic MDS with missing data. We have so far dealt with missing data by setting the corresponding $w_{ij}$ equal to zero. But for the non-missing part we still have fixed numbers in $\Delta$, and thus again $0\not\in\mathfrak{D}$ (unless all dissimilarities are missing). In a sense missing data are our first example of non-metric MDS, because $\mathfrak{D}$ can also be defined as the set 
+\begin{equation}
+\mathfrak{D}=
+\left\{\Delta\mid\Delta_0+\mathop{\sum\sum}_{1\leq i<j\leq n}\{\alpha_{ij}(E_{ij}+E_{ji})\mid \delta_{ij}\text{ is missing}\}\right\},
+(\#eq:nmsmissing)
+\end{equation}
+where the $E_{ij}$ are the unit matrices defined in section \@ref(#propmatrix) and $\Delta_0$ is the non-missing part (which has zeroes for the missing elements).
+
+Single/double phase
+
+Another example in which $0\not\in\mathfrak{D}$ is the additive constant problem, which we will discuss in detail in section \@ref(intadditive). Here $\mathfrak{D}$ is
+the set of all hollow and symmetric matrices of the form
+$\Delta+\alpha(E-I)$, where the dissimilarities in $\Delta_0$ are known real numbers and where $\alpha$ is the unknown additive constant.
+
+Affine MDS problems also have single phase and double phase algorithms. For missing data single phase stress is
+\begin{equation}
+\sigma_\star(X)=\min_{\Delta\in\mathfrak{D}}\ \mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-d_{ij}(X))^2=\mathop{\sum\sum}_{1\leq i<j\leq n}\tilde w_{ij}(\delta_{ij}-d_{ij}(X))^2,
+(\#eq:nmssinglemis)
+\end{equation}
+where $\tilde w_{ij}=0$ if $\delta_{ij}$ is missing, and $\tilde w_{ij}=w_{ij}$
+otherwise. In this case $\sigma_\star(X)=\sigma(X)$, the sigma of basic MDS with zero weights for missing data.
+
+For the additive constant problem single phase stress is
+\begin{equation}
+\sigma_\star(X)=\min_{\alpha}\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2=\mathop{\sum\sum}_{1\leq i<j\leq n} w_{ij}(\delta_{ij}-d_{ij}(X))^2-(\overline\delta-\overline d(X))^2\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij},
+(\#eq:nmssingleadd)
+\end{equation}
+where $\overline\delta$ and $\overline d(X)$ are the weighted means of the dissimilarities and distances.
+
+## Conic NMDS {#nmdsconic}
+
+### Normalization {#nmdsnorm}
+
+In "wide-sense" non-metric MDS $\mathfrak{D}$ can be any set of hollow, non-negative and symmetric matrices. In "narrow-sense" non-metric MDS
+$\mathfrak{D}$ is defined by homogeneous linear inequality constraints
+of the form $\delta_{ij}\leq\delta_{kl}$ (in addition to hollow,
+non-negative, and symmetric). These constraints, taken together, define
+a polyhedral convex cone in disparity space. This just means that if
+$\Delta_1$ and $\Delta_2$ are in $\mathfrak{D}$ then so is
+$\alpha\Delta_1+\beta\Delta_2$ for all non-negative $\alpha$ and
+$\beta$.
+
+The disparities define a cone, and thus $0\in\mathfrak{D}$. This implies
+that always $\min_X\min_{\Delta\in\mathfrak{D}}\sigma(X,\Delta)=0,$
+independently of the data. This is our first example of a *trivial solution*, which have plagued non-metric scaling from the start. Note that $\mathfrak{D}$ for missing data and for the additive constant are not convex cones, and do not contain the zero matrix.
+
+In our versions of *non-metric* MDS we actually require that the
+transformed dissimilarities satisfy $\eta_\delta=1$, so that formula
+\@ref(eq:expand) is still valid. We call this **explicit normalization of the dissimilarities**.
+
+To explain the different forms of normalization of stress that are
+needed whenever $\mathfrak{D}$ is a cone we look at some general
+properties of least squares loss functions. More details are in
+@kruskal_carroll_69 and in @deleeuw_U_75a, @deleeuw_E_19d.
+
+Suppose $K$ and $L$ are cones in $\mathbb{R}^n$, nor necessarily convex.
+Our problem is to minimize $\|x-y\|^2$ over both $x\in K$ and
+$y\in L$. Here $\|x\|^2=x'Wx$ for some positive definite $W$. In the MDS context, for $x$ think disparities, for $y$ think distances.
+
+Of course minimizing $\|x-y\|^2$ is too easy, because $x=y=0$ is the (trivial, and useless) solution. So we need some form of normalization. We distinguish six different ones.
+
+1. implicit x-normalization
+$$
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|x\|^2}
+$$
+
+2. implicit y-normalization
+$$
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|y\|^2}
+$$
+
+2. implicit xy-normalization
+$$
+\min_{x\in K}\min_{y\in L}\frac{\|x-y\|^2}{\|x\|^2\|y\|^2}
+$$
+4. explicit x-normalization
+$$
+\min_{x\in K\cap S}\min_{y\in L}\|x-y\|^2
+$$
+
+5. explicit y-normalization
+$$
+\min_{x\in K}\min_{y\in L\cap S}\|x-y\|^2
+$$
+6. explicit xy-normalization
+$$
+\min_{x\in K\cap S}\min_{y\in L\cap S}\|x-y\|^2
+$$
+If we use a positive definite $W$ to define our inner products and norms, then
+implicit normalization of $x$ means 
+$$
+\min_{x\in X}\min_{y\in Y}\frac{(x-y)'W(x-y)}{x'Wx}.
+$$ 
+Let $\mathcal{S}_x$ and $\mathcal{S}_y$ be the ellipsoids of all $x$
+with $x'Wx=1$ and of all $y$ with $y'Wy=1$. Then our implicit
+normalization problem is equivalent to 
+$$
+\min_{\alpha\geq 0}\min_{\beta\geq 0}\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\frac{(\alpha x-\beta y)'W(\alpha x-\beta y)}{\alpha^2 x'Wx}=\\\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\min_{\alpha\geq 0}\min_{\beta\geq 0}\frac{\alpha^2+\beta^2-2\alpha\beta x'Wy}{\alpha^2}=\\
+\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\ \{1-(x'Wy)^2\}.
+$$ 
+Thus implicit normalization of $x$ means maximizing $(x'Wy)^2$ over
+$x\in X\cap\mathcal{S}_x$ and $y\in Y\cap\mathcal{S}_y.$
+
+In the same way implicit normalization of $y$ minimizes $$
+\min_{x\in X}\min_{y\in Y}\frac{(x-y)'W(x-y)}{y'Wy},
+$$ and in the same way it also leads to maximization of $(x'Wy)^2$ over
+$x\in X\cap\mathcal{S}_x$ and $y\in Y\cap\mathcal{S}_y.$ In terms of
+normalized stress it does not matter if we use the distances or the
+dissimilarities in the denominator for implicit normalization.
+
+In explicit normalization of $x$ we solve 
+$$
+\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y}\ \{1+y'Wy-2y'Wx\}=\\
+\min_{\beta\geq 0}\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\{1+\beta^2-2\beta x'Wy\}
+=\\\min_{x\in X\cap\mathcal{S}_x}\min_{y\in Y\cap\mathcal{S}_y}\ \{1-(x'Wy)^2\},
+$$ 
+and the same thing is true for explicit normalization of $y$, which is 
+$$
+\min_{x\in X}\min_{y\in Y\cap\mathcal{S}_y}\ \{1+x'Wx-2y'Wx\}
+$$ 
+So, again, it does not matter which one of the four normalizations we
+use, explicit/implicit on disparities/distances, the solutions will all
+be proportional to each other, i.e. the same except for scale factors.
+
+### Normalized Cone Regression
+
+### Hard Squeeze and Soft Squeeze
+
+### Inner Iterations
+
+
+### Stress-1 and Stress-2
+
+In his original papers @kruskal_64a and @kruskal_64b defined two
+versions of normalized stress for nonmetric MDS. The first was 
+$$
+\sigma_{JBK1}(X):=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}(\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}d_{ij}^2(X)}}
+$$ 
+$$
+\sigma_{JBK2}(X):=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}(\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}(d_{ij}(X)-\overline{d}(X))^2}}
+$$ 
+where the $hat d_{ij}$ (the d-hats) are the pseudo-distances obtained
+by projecting the $d_{ij}(X)$ on the isocone defined by the order of the
+dissimilarities, i.e. by monotone regression (see section
+\@ref(mathsimpiso)). The $\overline{d}(X)$ in the denominator of
+$\sigma_{JBK2}$ is the average of the distances.
+
+There are some differences with the definition of stress in this book.
+
+1.  We do not use the square root.
+2.  We use explicit and not implicit normalization.
+3.  In NMDS we think of stress as a function of both $X$ and $\Delta$,
+    not of $X$ only (see section \@ref(nmdskruskal)).

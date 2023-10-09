@@ -1,0 +1,315 @@
+# Mathematical Addenda {#mathadd}
+
+This huge chapter has several purposes. It reviews some well known mathematical
+results, defines notation and terminology, serves as a reminder, and provides a reference. We do not give proofs of these results, and not many references, because the proofs be found in most textbooks. But some sections (for instance the ones on
+majorization, quadratic programming, splines, and quadratic penalties) we offer more than that. These sections are taken mostly from my unpublished papers and they go into much more detail. The results I present are also well known, but somewhat harder to find, and I will try to emphasize the aspects relevant for MDS.
+
+## Notation {#apnotation}
+
+### Symbols
+
+$\mathbb{R}^n$
+
+$\mathbb{R}^{n\times p}$
+
+$\mathbb{S}^{n}$: unit sphere in 
+
+$\mathbb{B}^{n}$: unit ball
+
+$\sigma$: generic MDS loss function
+
+$\mathcal{D}f$: derivative
+
+$\mathcal{D}_if$: partial derivative
+
+$\min_{x\in X} f(x)$
+
+$\mathop{\text{argmin}}_{x\in X} f(x)$
+
+directional derivative
+gradient
+Hessian
+
+$\partial f$: subdifferential
+
+$f:X\Rightarrow Y$: function
+
+$f:X_1\times...\times X_n\Rightarrow Y$
+
+$\otimes$: Kronecker product of matrices
+
+$\text{vec}$
+
+$\oplus$: direct sum of matrices
+
+$1:n$
+
+$\Pi$: permutation
+
+$[a,b]$: closed interval
+
+
+
+### Summation
+
+$$\mathop{\sum\sum}_{1\leq i<j\leq n} x_{ij}$$
+
+$$\sum_{i=1}^n\{x_iy_i\mid x_i > 0\}$$
+
+
+## Matrices {#apmatrices}
+
+### Matrix Spaces {#apmspaces}
+
+The linear space of all $n\times p$ matrices is $\mathbb{R}^{n\times p}$. The subspace of $\mathbb{R}^{n\times n}$ of all symmetric matrices is $\mathbb{S}^{n\times n}$.
+
+### Constants {#apconstants}
+
+All vectors are column vectors. In this section we define some matrix and vector constants. We assume that the order of the matrices, or the length of the vectors, is clear from the context, as it will be a.e. in the body of the book.
+
+* $I$ is the identity matrix,
+* $e$ is a vector with all elements +1,
+* $\iota$ is a vector with elements $1,2,\cdots,n$,
+* $E$ is a  matrix with all elements +1,
+* $\emptyset$ is a  matrix with all elements 0,
+* $J$ is the centering matrix $J=I-\frac{1}{e'e}E$.
+
+### Diff Matrices {#difmat}
+
+* A *unit vector* $e_i$ is a vector with element $i$ equal to $+1$ and all other elements equal to 0. A *unit matrix* $E_{ij}$ is a matrix of the form $e_i^{\ }e_j'$,
+
+* A *diff matrix* $A_{ij}$ is a matrix of the form $(e_i-e_j)(e_i-e_j)'$.
+
+The element in row $i$ and column $j$ of a matrix $X$ is normally referred to as $x_{ij}$. But in some cases, to prevent confusion, we use the notation $\{X\}_{ij}$. Thus, for example, $\{e_i\}_j=\delta^{ij}$, where $\delta^{ij}$ is *Kronecker's delta* (zero when $i=j$ and one otherwise). 
+
+The diff matrices $A_{ij}$ with $i\not= j$ have only four non-zero elements
+
+\begin{align}
+\begin{split}
+\{A_{ij}\}_{ii}&=\{A_{ij}\}_{jj}=+1,\\
+\{A_{ij}\}_{ij}&=\{A_{ij}\}_{ji}=-1,
+\end{split}
+(\#eq:apaele)
+\end{align}
+
+and all other elements of $A_{ij}$ are zero. Thus $A_{ij}=A_{ji}$ and $A_{ii}=0$.  Diff matrices are symmetric, and positive semidefinite. They are also *doubly-centered*, which means that their rows and columns add up to zero. If $i\not j$ they are of rank one and have one eigenvalue equal to two, which means
+$A_{ij}^s=2^{s-1}A_{ij}$. Also
+
+\begin{equation}
+\mathop{\sum\sum}_{1\leq i<j\leq n} A_{ij}=nI-ee'=nJ,
+(\#eq:asum)
+\end{equation}
+
+with $J$ the centering matrix*.
+
+
+### Sums and Products {#apcombo}
+
+If $A$ and $B$ are matrices with the same number of rows and columns
+then the *Hadamard product* $C:=A\times B$ is defined as $c_{ij}=a_{ij}b_{ij}$.
+The *Hadamard square* $A^{(2)}$ is defined as $A\times A$, and similar definitions apply to higher Hadamard powers.
+
+If $A$ and $B$ are matrices then their *direct sum* $A\oplus B$ is the matrix
+\begin{equation}
+C:=\begin{bmatrix}A&\emptyset\\\emptyset&B\end{bmatrix}.
+(\#eq:dirsum)
+\end{equation} 
+Direct sums of more than two matrices are defined recursively as 
+$D=C\oplus(A\oplus B)$, and so on.
+
+If $A$ and $B$ are matrices then their *direct product* or *Kronecker product* $C=A\otimes B$ is the matrix with blocks $a_{ij}B$. Thus, for example, if $A$ is $2\times 3$ and $B$ is $n\times m$ then $C$ is $(2n)\times (3m)$ and
+\begin{equation}
+C=\begin{bmatrix}a_{11}B&a_{12}B&a_{13}B\\a_{21}B&a_{22}B&a_{23}B\end{bmatrix}.
+(\#eq:dirprod)
+\end{equation}
+If $A$ and $B$ are arrays ... then their *outer product* $C=A\triangle B$ is the four-dimensional array with $c_{ijkl}=a_{ij}b_{kl}$. Thus for two vectors $a$ and $b$ we have $ab'=a\triangle b$. The *outer sum* $C=A\square B$ is defined in the same way: $c_{ijkl}=a_{ij}+b_{kl}$.
+That's pretty atrocious notation, but I only use it once or twice in the whole book.
+
+### Inverse {#apinverse}
+
+Throughout the book we use $X^{-1}$ for the Moore-Penrose Inverse (MPI) of $X$ (see section \@ref(apmpi)).  If $X$ is square and non-singular the MPI is simply equal to the inverse of $X$, i.e $XX^{-1}=X^{-1}X=I$.       
+
+### The Loewner order {#aploewner}
+
+If $A$ and $B$ are square symmetric matrices then
+
+* $A\precsim B$ means $B-A$ is positive semi-definite (PSD).
+* $A\succsim B$ means $B-A$ is negative semi-definite (NSD).
+* $A\prec B$ means $B-A$ is positive definite (PD).
+* $A\succ B$ means $B-A$ is negative definite (ND).
+
+### Eigen Decomposition {#apeigen}
+
+If $A$ is square symmetric of order $n$ then there exists 
+
+* a matrix $K$ of order $n$ with $K'K=KK'=I$, 
+* a diagonal matrix $\Lambda$ of order $n$,
+
+such that $A=K\Lambda K'$. If $A$ is PSD, then so is $\Lambda$. The number of non-zero diagonal elements in $\Lambda$ is the rank of $A$.
+
+### Singular Value Decomposition {#apsvd}
+
+If $X$ is an $n\times m$ matrix then there exist
+
+* a matrix $K$ of order $n$ with $K'K=KK'=I$,
+* a matrix $L$ of order $m$ with $L'L=LL'=I$,
+* a non-negative diagonal $n\times m$ matrix $\Lambda$,
+
+such that $X=K\Lambda L'$. The number of non-zero diagonal elements in $\Lambda$ is the rank of $X$. 
+
+If $X$ has rank $r$ we can partition the matrices in the SVD accordingly as
+\begin{align}
+\begin{split}
+K&=\begin{bmatrix}K_+&K_0\end{bmatrix},\\
+\Lambda&=\begin{bmatrix}\Lambda_{++}&\emptyset\\\emptyset&\emptyset\end{bmatrix},\\
+L&=\begin{bmatrix}L_+&L_0\end{bmatrix},
+\end{split}
+(\#eq:svdfull)
+\end{align}
+where $\Lambda_{++}$ is of order $r$ and pd and both $K_+$ and $L_+$ in \@ref(eq:svdfull) have $r$ columns. Thus also $X=K_+^{\ }\Lambda_{++}^{\ }L_+'$.
+
+
+
+### Full-rank Decomposition {#apfullrank}
+
+If $X=FG'$ is a full rank decomposition, then
+the Moore-Penrose inverse is $X^+=G(F'G)^{-1}F'$.
+
+### SDC matrices {#apsdc}
+
+Diagonally dominant
+Aij is basis
+
+@taussky_49
+
+## Inequalities {#apineq}
+
+There are some elementary inequalities that play a large role throughout the book.
+
+### Cauchy-Schwartz {#apcs}
+
+We start with the Cauchy-Schwarz inequality (CS, from now on).
+
+```{theorem, label="mathaddcs"}
+If $A$ is positive semi-definite then $(x'Ay)^2\leq (x'Ax)(y'Ay)$. There is equality if and only if there is an $(\alpha,\beta)\not=(0,0)$ such that $A(\alpha x+\beta y)=0$.
+```
+
+### Arithmetic/Geometric Mean {#apamgm}
+
+Next is the arithmetic mean/geometric mean inequality (from now on AM/GM). We only need the simplest case, proved by expanding $\frac12(\sqrt{x}-\sqrt{y})^2\geq 0$,
+
+```{theorem, label = "mathaddamgm"}
+If $x\geq 0$ and $y\geq 0$ then $\frac12(x+y)\geq\sqrt{xy}$. There is equality if and only if $x=y$.
+```
+
+
+Finally, from $\frac12(x-y)'A(x-y)\geq 0$, 
+
+
+```{corollary, label = "mathaddamcor"}
+If $A$ is positive semi-definite then $x'Ay\leq\frac12(x'Ax+y'Ay)$.
+```
+
+## Calculus/Analysis {#apanal}
+
+### Functions {#appfunctions}
+
+A function $f$ from $X$ to $Y$ is a subset of the Cartesian product $X\otimes Y$,
+for which $(x,y)\in f$ and $(x,z)\in f$ implies $y=z$. Thus there is a unique
+$y$ associated with each $x$. We usually write $f:X\Rightarrow Y$, and we try 
+distinguish the function $f$ from its value at $x\in X$, which is $f(x)$.
+
+$$
+f_j(x)
+$$
+If $f$ on $X\otimes Y$ then $f(\bullet,y)$ is on $X$ $g(x)=f(x,y)$. Projection
+
+### Differentiation {#appdiffer}
+
+
+
+
+
+### Local Minima, Critical Points
+
+
+
+### Necessary Conditions {#necessary}
+
+First order
+
+Ben-Tal and Zowe
+
+
+### l'Hôpital's Rule {#hopital}
+
+
+### Implicit Functions {#mathimplcit}
+
+## Convexity {#mathconvexfuncs}
+
+### Existence of Minima {#mathextminima}
+
+Projection on a convex set
+
+### Duality {#mathduality}
+
+### Subdifferentials {#mathsubdif}
+
+Almost everywhere twice differentiable,
+
+
+### DC Functions {#mathextdcfunc}
+
+Extremes, critical points
+
+Toland Duality
+
+### Danskin-Berge Theorem {#mathdanskin}
+
+During my visit to Bell Labs in Murray Hill, somewhere around the time that Watergate was raging, there was some major excitement in our group because one of us had discovered that if
+$g(x)=\min_y f(x,y)$ then $\mathcal{D}g(x)=\mathcal{D}_1f(x,y(x))$, where $y(x)$ is such that
+$g(x)=f(x,y(x))$. This result simplified calculation of partial derivatives in MDS and related techniques, and of course psychometrics at the time was all about partial derivatives.
+
+@danskin_66
+@berge_63
+
+## Fixed-Point Iterations {#apiterate}
+
+In fixed point iteration we generate a sequence of points by the rule
+
+$$
+x^{(k+1)}=F(x^{(k)})
+$$
+In this book $F$ is always a continuous self-map on $\mathbb{R}^n$, i.e.
+$F:\mathbb{R}^n\Rightarrow\mathbb{R}^n$.
+
+If the sequence $\{x_k\}$ converges to, say, $x_\infty$ then, by the continuity of $F$,
+we have $x_\infty=F(x_\infty)$, and we say that $x_\infty$ is a *fixed point* of $F$. Many iterative algorithms, and all iterative algorithms in this book, generate sequences by fixed point
+iterations that hopefully converge to fixed points.
+
+It should be noted that iterations of the form
+$$
+x^{(k+1)}=F(x^{(k)},x^{(k-1)},\cdots,x^{(k-l)}),
+$$
+which do look more general, can be written as special cases of .... Define
+$$
+y^{(k)}:=\begin{bmatrix}x^{(k)}\\x^{(k-1)}\\\vdots\\x^{(k-l)}\end{bmatrix}
+$$
+and, using $F$ from ...
+
+$$
+y^{(k+1)}=G(y^{(k)}):=\begin{bmatrix}x^{(k+1)}=F(y^{k})\\x^{(k)}\\\vdots\\x^{(k-l-1)}\end{bmatrix}
+$$
+
+
+
+
+### Point-to-set Maps
+
+### Zangwill's Theorem {#zangwill}
+
+### Ostrowski's Theorem {#ostrowski}
+
+## Least Squares {#mathls}
+

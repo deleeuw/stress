@@ -1,0 +1,83 @@
+# Individual Differences {#chindif}
+
+This chapter deals with the situation in which we observe more than one set of dissimilarities. We need an extra index $k=1,\cdots,m$ for $\Delta_k, W_k$, and for $X_k$. The definition of stress becomes
+\begin{equation}
+\sigma(X_1,\cdots,X_m):=\frac12\sum_{k=1}^m\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ijk}(\delta_{ijk}-d_{ij}(X_k))^2
+(\#eq:inddiffstress)
+\end{equation}
+
+In order make it interesting we have to constrain the $X_k$ in some way or other, preferable one in which the different $X_k$ are linked, so they have 
+something in common and something in which they differ.
+
+MDS with linking constraints on the configurations is known in the psychometric literature as MDS with individual differences. This does not imply that index $k$ necessarily refers to individuals, it can refer to replications, points in time, points of view, experimental conditions, and so on. The essential component is that we have
+$m$ sets of dissimilarities between the same $n$ objects. In order not to prejudge where the $m$ different sets of dissimilarities come from, we shall refer to them with the neutral term *slices*, just as the dissimilarities are defined on pairs of neutral *objects*. But to honor the tradition of differential psychology we will continue to use the chapter title "individual differences".
+
+## Stress Majorization
+
+The CS majorizaton in this case is the same as our treatment in chapter
+\@ref(cmds). For all $(X_1,\cdots,X_m)$ and $(Y_1,\cdots,Y_m)$ we ahve
+\begin{equation}
+\sigma_k(X_k)\leq\frac12\sum_{k=1}^m\eta_k^2(X_k-\Gamma(Y_k))-\frac12\sum_{k=1}^m\eta^2_k(\Gamma(Y_k)),
+(\#eq:inddiffmaj)
+\end{equation}
+and thus the smacof approach tells us to minimize, or at least decrease,
+the first term on the right of \@ref(eq:inddiffmaj) over the $X_k$.
+
+As in CMDS, within an iteration we have to (approximately) solve a
+projection problem on some linear or nonlinear manifold, in the
+metric defined by the weights.
+Minimize over X, project $X$, conforming with chapter \@ref(cmds).
+
+## Types of Constraints
+
+### Unconstrained {#indifunc}
+
+If there are no constraints on the configurations of stress the minimization over $X_1,\cdots,X_m$ simply means solving $m$ separate MDS problems, one for each $k$. Thus it does not bring anything new. 
+
+### Replications {#indifrepl}
+
+The first constraint that comes to mind is $X_k=X$ for all $k=1,\cdots,m$. Thus the configuration is the same for all slices, and there really are no individual differences in this case. The computational aspects are discussed in sufficient detail in section \@ref(minrepl). 
+
+
+### INDSCAL/PARAFAC {#indifindscal}
+
+$$
+x_{ijk}=\sum_{s=1}^Sa_{is}b_{js}\lambda_{ks}
+$$
+
+$$X_k=A\Lambda_kB'$$
+
+### IDIOSCAL/TUCKALS {#indifidioscal}
+
+$$
+x_{ijk}=\sum_{s=1}^S\sum_{t=1}^T\sum_{u=1}^Ua_{is}b_{jt}c_{ku}d_{stu}
+$$
+$$
+X_k=AV_kB'
+$$
+$$
+V_k=\sum_{u=1}^Uc_{ku}D_u
+$$
+
+
+### PARAFAC2 {#inddifparafac2}
+
+$$
+x_{ijk}=\sum_{s=1}^Sa_{is}b_{kjs}\lambda_{ks}
+$$
+
+$$X_k=K\Lambda_k^{\ }L_k'$$
+
+### Factor Models {#inddiffa}
+
+Q and R techniques
+
+$$X_k=\begin{bmatrix}X&\mid&Y_k\end{bmatrix}$$
+
+$$X_k=\begin{bmatrix}K&\mid&L\end{bmatrix}\begin{bmatrix}A_k\\--\\Y_k\end{bmatrix},$$
+
+$$X_k'=\begin{bmatrix}K&\mid&L\end{bmatrix}\begin{bmatrix}A_k\\--\\Y_k\end{bmatrix}$$
+
+## Nonmetric Individual Differences
+
+### Conditionality

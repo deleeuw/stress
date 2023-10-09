@@ -1,0 +1,216 @@
+# (APPENDIX) Appendices {.unnumbered}
+
+# Code {#apcode}
+
+## R Code {#rapcode}
+
+The MDS functions in R throughout work with square matrices of
+weights, dissimilarities, and distances. More efficient versions, 
+that have their computations done in C, will be added along 
+the way.
+
+### utilities.R {#aputilitiescode}
+
+```{r file_auxilary, code = readLines("rcode/utilities.R"), eval = FALSE}
+```
+
+### common/indexing.r {#apindexingcode}
+
+```{r file_auxilary, code = readLines("rcode/common/indexing.R"), eval = FALSE}
+```
+
+### common/io.r {#apiocode}
+
+```{r file_auxilary, code = readLines("rcode/common/io.R"), eval = FALSE}
+```
+
+### common/linear.r {#aplinearcode}
+
+```{r file_auxilary, code = readLines("rcode/common/linear.R"), eval = FALSE}
+```
+
+### common/nextPC.r {#appermcode}
+
+```{r file_auxilary, code = readLines("rcode/common/nextPC.R"), eval = FALSE}
+```
+
+### common/smacof.r {#apsmacofcode}
+
+```{r file_auxilary, code = readLines("rcode/common/smacof.R"), eval = FALSE}
+```
+
+### properties.R {#apcodeprop}
+
+```{r file_auxilary, code = readLines("rcode/properties.R"), eval = FALSE}
+```
+
+### expandOneDim.R {#apcodeexpand}
+
+```{r file_auxilary, code = readLines("rcode/expandOneDim.R"), eval = FALSE}
+```
+
+### pictures.R {#apcodepic}
+
+```{r file_auxilary, code = readLines("rcode/pictures.R"), eval = FALSE}
+```
+
+### classical.R {#apcodeclass}
+
+```{r file_auxilary, code = readLines("rcode/classical.R"), eval = FALSE}
+```
+
+### minimization.R {#apcodeminim}
+
+```{r file_auxilary, code = readLines("rcode/minimization.R"), eval = FALSE}
+```
+
+### full.R {#apcodefull}
+
+```{r file_auxilary, code = readLines("rcode/full.R"), eval = FALSE}
+```
+
+### unfolding.R {#apcodeunfold}
+
+```{r file_auxilary, code = readLines("rcode/unfolding.R"), eval = FALSE}
+```
+
+### constrained.R {#apcodencons}
+
+```{r file_auxilary, code = readLines("rcode/constrained.R"), eval = FALSE}
+```
+
+### nominal.R {#apcodenominal}
+
+```{r file_auxilary, code = readLines("rcode/nominal.R"), eval = FALSE}
+```
+
+### sstress.R {#apcodesstress}
+
+```{r file_auxilary, code = readLines("rcode/sstress.R"), eval = FALSE}
+```
+
+### inverse.R {#apcodeinverse}
+
+```{r file_auxilary, code = readLines("rcode/inverse.R"), eval = FALSE}
+```
+
+### global.R {#apcodeglobal}
+
+```{r file_auxilary, code = readLines("rcode/global.R"), eval = FALSE}
+```
+
+### mathadd.R {#apcodemathadd}
+
+```{r file_auxilary, code = readLines("rcode/mathadd.R"), eval = FALSE}
+```
+
+## C code
+
+### deboor.c
+
+```{c file_auxilary, code = readLines("ccode/deboor.c"), eval = FALSE}
+```
+
+### cleanup.c
+
+```{c file_auxilary, code = readLines("ccode/cleanup.c"), eval = FALSE}
+```
+
+### jacobi.c
+
+```{c file_auxilary, code = readLines("ccode/jacobi.c"), eval = FALSE}
+```
+
+### jbkTies.c
+
+```{c file_auxilary, code = readLines("ccode/jbkTies.c"), eval = FALSE}
+```
+
+### matrix.c
+
+```{c file_auxilary, code = readLines("ccode/matrix.c"), eval = FALSE}
+```
+
+### jeffrey.c
+
+```{c file_auxilary, code = readLines("ccode/jeffrey.c"), eval = FALSE}
+```
+
+### smacofBlockSort.c
+
+```{c file_auxilary, code = readLines("ccode/smacofBlockSort.c"), eval = FALSE}
+```
+
+### smacofConvert.c
+
+```{c file_auxilary, code = readLines("ccode/smacofConvert.c"), eval = FALSE}
+```
+
+### nextPC.c
+
+```{c file_auxilary, code = readLines("ccode/nextPC.c"), eval = FALSE}
+```
+
+# Data {#apdatasets}
+
+## Small {#apdatadsmall}
+
+```{r dsmall, echo = FALSE}
+dsmall
+```
+
+## De Gruijter {#apdatagruijter}
+
+```{r gruijter, echo = FALSE}
+gruijter
+```
+
+## Ekman {#apdataekman}
+
+```{r ekman_back, echo = FALSE}
+#ekman
+```
+
+## Vegetables {#apdataveg}
+
+```{r}
+veg <- abs (qnorm (matrix (c(.500,.818,.770,.811,.878,.892,.899,.892,.926,
+.182,.500,.601,.723,.743,.736,.811,.845,.858,
+.230,.399,.500,.561,.736,.676,.845,.797,.818,
+.189,.277,.439,.500,.561,.588,.676,.601,.730,
+.122,.257,.264,.439,.500,.493,.574,.709,.764,
+.108,.264,.324,.412,.507,.500,.628,.682,.628,
+.101,.189,.155,.324,.426,.372,.500,.527,.642,
+.108,.155,.203,.399,.291,.318,.473,.500,.628,
+.074,.142,.182,.270,.236,.372,.358,.372,.500), 9, 9)))
+```
+
+# Unlicense {#apunlicense}
+
+This book is free and unencumbered text and software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this book, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author 
+of this book dedicates any and all copyright interest in the
+software to the public domain. I make this dedication for the benefit
+of the public at large and to the detriment of my heirs and
+successors. I intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+book under copyright law.
+
+THE BOOK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE BOOK OR THE USE OR
+OTHER DEALINGS IN THE BOOK.
+
+For more information, please refer to <http://unlicense.org/>
+
+# References {.unnumbered}
+

@@ -1,0 +1,16 @@
+# Asymmetry in MDS {#asymmds}
+
+## Conditional Rankings
+
+Two sets (= unfolding), one set (much tighter) solution
+Young_75
+
+## Confusion Matrices
+
+Choice theory
+
+## The Slide Vector
+
+## DEDICOM
+
+## Constantine-Gower

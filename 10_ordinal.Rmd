@@ -1,0 +1,299 @@
+
+# Ordinal MDS {#chapordinal}
+
+## Monotone Regression {#mathmonreg}
+
+Is it really what we want
+
+
+### Simple Monotone Regression {#mathsimpiso}
+
+Ever since @kruskal_64a and @kruskal_64b monotone regression has played an important part in non-metric MDS. Too important, perhaps. Initially there was some competition with the rank images of @guttman_68, but that competition has largely faded over time.
+
+We only give the barest outline in this section. More details are
+in @deleeuw_hornik_mair_A_09. In (simple least squares) monotone (or isotone) regression we minimize $(x-y)'W(x-y)$, where $W\gtrsim 0$ is diagonal, over $x$ satisfying $x_1\leq\cdots\leq x_n$. The vector $y$ is the *target* or the *data*.
+
+The algorithm, which is extremely fast and of order $n$, is based on the simple rule that if elements are out of order, then you compute their weighted average, forming blocks, keeping track of the block sizes and block weights. This reduces the MR problem to a smaller MR problem, and following the rule systematically leads to a finite algorithm. A particularly efficient implementation is in @busing_21.
+
+A simple illustration. The first column are the value that we compute the best monotone fit for, the second columns are the size of the blocks after merging. In this case there are no weights, in fact the block sizes serve as weights.
+
+\begin{align}
+&(1,2,1,3,2,-1,3) \qquad &(1,1,1,1,1,1,1)\\
+&(1,\frac32,3,2,-1,3) \qquad &(1,2,1,1,1,1)\\
+&(1,\frac32,\frac52,-1,3) \qquad &(1,2,2,1,1)\\
+&(1,\frac32,\frac43,3) \qquad &(1,2,3,1)\\
+&(1,\frac75,3) \qquad &(1,5,1)
+\end{align}
+
+Expanding using the block size gives the solution $(1,\frac75,\frac75,\frac75,\frac75,\frac75,3)$.
+
+In the second example we do have weights, in the second column, and we use a third
+column for blocks size.
+
+\begin{align}
+&(1,2,1,3,2,-1,3) \qquad &(1,2,3,4,3,2,1) \qquad &(1,1,1,1,1,1,1)\\
+&(1,\frac75,3,2,-1,3) \qquad &(1,5,4,3,2,1) \qquad &(1,2,1,1,1,1)\\
+&(1,\frac75,\frac{18}{7},-1,3) \qquad &(1,5,7,2,1) \qquad &(1,2,2,1,1)\\
+&(1,\frac75,\frac{16}{9},3) \qquad &(1,5,9,1) \qquad &(1,2,3,1)
+\end{align}
+
+Expansion gives the solution $(1,\frac75,\frac75,\frac{16}{9},\frac{16}{9},\frac{16}{9},3)$.
+
+The usual monotone regression algorithms used in MDS
+allow for slightly more complicated orders to handle
+ties in the data . There are basically three 
+approaches to ties implemented. In what Kruskal calls the *primary approach*, 
+only order relations between tie blocks are maintained. Within blocks no
+order s mposed. In the *secondary approach* we require equality in tie
+blocks. Ties in the data means we impose ties in the isotone regression.
+Both approaches can be incorporated in simple monotone regresson by
+preprocessing. The secondary approach starts with the weighted
+averages of the tie blocks, the primary approach orders the data within 
+tie blocks so they are non-decreasing. @deleeuw_A_77 showed that this preprocessing
+does indeed give the least squares solution for both approaches. In the same paper he also
+introduces a less restrictive *tertiary approach*, which merely requires that the averages of the tie blocks are in the required order.
+
+### Weighted Monotone Regression {#mathweigmr}
+
+$$
+(x-y)'V(x-y)
+$$
+$$V(x-y)=A'\lambda$$
+$$Ax\geq 0$$ $$\lambda\geq 0$$ $$\lambda'Ax=0$$ $$x=y+V^{-1}A'\lambda$$
+go to the dual if $\lambda_i>0$ then $a_i'x=0$
+
+unweighting actually proves weighted is unweighted for something else
+
+$MR(x+\epsilon y)=MR(x)+\epsilon B(y)$ if $MR(x)=Bx$
+
+### Normalized Cone Regression {#mathnorcone}
+
+@deleeuw_U_75a
+
+@bauschke_bui_wang_18
+
+### Iterative MR
+
+primal-dual: MR is dual
+Dykstra
+vertices of cone plus CCA
+one iteration only
+
+## Alternating Least Squares {#nmdsals}
+
+smacof: hard squeeze double phase
+
+## Kruskal's Approach {#nmdskruskal}
+
+### Kruskal's Stress
+
+Remember that Kruskal's definition of stress was intended for ordinal multidimensional scaling only. Thus dissimilarities are not necessarily numerical, as in basic MDS, only their rank order is known. He first defined *raw stress* as
+
+\begin{equation}
+\sigma^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2,
+(\#eq:rawstress1)
+\end{equation}
+
+where the $\hat d_{ij}$ is some set of numbers monotone with the dissimilarities. 
+
+> To simplify the discussion, we delay the precise definition of 
+> $\hat d$, for a little while. (@kruskal_64a, p. 8)
+
+Kruskal then mentions that raw stress satisfies $\sigma^\star_K(\alpha X)=\alpha^2\sigma^\star_K(X)$, which is clearly undesirable because 
+the size of the configuration should not influence the quality of 
+the fit. 
+
+> An obvious way to cure this defect in the raw stress is to divide it by a 
+> scaling factor, that is, a quantity which has the same quadratic
+> dependence on the scale of the configuration that raw stress does.
+> (@kruskal_64a, p. 8).
+
+By the way, although the precise definition of $\hat D$
+has been delayed, the uniform stretching/shrinking argument already assumes that
+if we multiply $D$ by $\alpha$ then $\hat D$ also gets multiplied
+by $\alpha$. Thus it sort of gives away that $\hat D$ is also a
+function of $X$, at least of the scale of $X$. 
+
+For the normalization of raw stress Kruskal chooses
+
+\begin{equation}
+\tau^\star_K(X):=\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X),
+(\#eq:rawtau)
+\end{equation}
+
+> Finally, it is desirable to use the square root of this expression, which
+> is analogous to choosing the standard deviation in place of the variance. 
+> (@kruskal_64a, p. 9)
+
+Thus Kruskal's normalized loss function for ordinal MDS becomes
+
+\begin{equation}
+\sigma_K(X):=\sqrt{\frac{\sigma^\star_K(X)}{\tau^\star_K(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\hat d_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstress)
+\end{equation}
+
+At this point in @kruskal_64a the definition of $\hat D$ still hangs in the
+air, although we know that the $\hat D$ are monotone with $\Delta$, and that multiplying $X$ by a constant will multiply
+both $D(X)$ and $\hat D$ by the same constant. Matters are clarified 
+right after the definition of stress.
+
+> Now it is easy to define the $\hat d_{ij}$. They are the numbers which 
+> minimize $\sigma$ (or equivalently, $\sigma^\star$) subject to the 
+> monotonicity constraints. (@kruskal_64a, p. 9)
+
+Thus, actually, raw stress is the minimum over the pseudo-distance matrices
+$\Omega$ in $\mathfrak{D}$, the set of all monotone transformations of the dissimilarities. 
+
+\begin{equation}
+\sigma^\star(X):=\min_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2,
+(\#eq:rawstressfinal)
+\end{equation}
+
+and $\hat D$ is the minimizer, which is now clearly a function of $X$,
+
+\begin{equation}
+\hat D(X):=\mathop{\text{argmin}}_{\Omega\in\mathfrak{D}}\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2.
+(\#eq:dhatdef)
+\end{equation}
+
+So, finally,
+
+\begin{equation}
+\sigma(X):=\min_{\Omega\in\mathfrak{D}}\sqrt{\frac{\sigma^\star(X)}{\tau^\star(X)}}=\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n} (\omega_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n} d_{ij}^2(X)}}.
+(\#eq:kruskalstressfinal)
+\end{equation}
+
+In Guttman's terminology Kruskal's approach is hard squeeze single phase.
+Thus what is minimized is
+
+$$
+\sigma_{JBK}^{\ }(X):=\min_{ \Delta\in\mathfrak{D}}\sqrt{\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}(\delta_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}d_{ij}^2(X)}}
+$$ 
+
+### Stress1 and Stress2
+
+## Guttman's Approach {#nmdsguttman}
+
+The main alternative to the Kruskal approach to MDS, besides smacof, is
+the Smallest Space Analysis (SSA) of Guttman and Lingoes. I have mixed feelings about the fundamental SSA paper of @guttman_68. It is, no doubt, a milestone MDS paper, and some of the distinctions it makes (which we will discuss later in this section) are clearly important. Its use of matrix algebra, wherever possible, is an improvement over @kruskal_64a, and the correction matrix algorithm for SSA is an immediate predecessor of smacof. But it seems to me the derivation of the correction matrix algorithm is incomplete and could even be called incorrect. The rank images used by Guttman and Lingoes in SSA seem an ad-hoc solution invented by someone who did not yet know about monotone regression. And, above all, the paper exudes a personality cult-like atmosphere that is somewhat repellent to me. There are no gurus in science. Or at least there should not be. It is true that between 1930 and 1960 Guttman invented and elucidated about 75% of the psychometrics of his time, but 75% is still less than 100%. This book you are reading now may set a record in self-citation, but that makes sense because it is supposed to document my work in MDS and to give access to the pdf's of my unpublished work. I try to be careful not to take credit for results that did not originate with me, and to give appropriate attributions in all cases. 
+
+#### Rank Images
+
+The rank image transformation, which replaces the monotone regression in Kruskal's approach, has a rather complicated definition. It is simple enough when both $\Delta$ and $D(X)$ have no ties. In that case
+the rank image $D^\star$ is just the unique permutation of $D(X)$ that is monotone with $\Delta$. Thus
+
+\begin{equation}
+\delta_{ij}<\delta_{kl}\Leftrightarrow d_{ij}^\star<d_{kl}^\star.
+(\#eq:nmrankimage0)
+\end{equation}
+
+If there are ties in $\Delta$ and/or $D(X)$ then some of the uniqueness and simplicity will get lost. @guttman_68 introduces an elaborate notation for rank images with ties, but that notation does neither him nor the reader any favors.
+
+If there are ties in $D(X)$ you use the rank order of the corresponding
+elements of $\Delta$ to order $D(X)$ within tie blocks. If two elements are tied both in $D(X)$ and $\Delta$, then their order in the tie block is arbitrary.
+
+Suppose the $\Delta$ have $R$ tie-blocks, in increasing order, with $m_1,\cdots,m_R$ elements. The smallest $m_1$ elements of the vector of distances become the first $m_1$ elements of $D^\star$, the next $m_2$ elements of $D^\star$ are the next smallest $m^2$ elements of distance vector, and so on for all tie blocks. Thus tied elements in $\Delta$ can become untied in $D^\star$ and untied elements in $\Delta$ can becomes tied in
+$D^\star$. We require
+
+\begin{equation}
+\delta_{ij}<\delta_{kl}\Rightarrow d_{ij}^\star\leq d_{kl}^\star
+(\#eq:nmrankimage1)
+\end{equation}
+
+This corresponds with Kruskal's primary approach to ties. Guttman calls it *semi-strong monotonicity*. There is a small numerical example in table \@ref(tab:nmriexample1).
+
+```{r nmriexample1, echo = FALSE}
+m <- matrix(c(1,2,2,3,3,4,5,
+              1,3,1,3,4,3,4,
+              1,1,3,3,3,4,4,
+              1,1,3,3,3,4,4),4, 7, byrow=TRUE)
+row.names(m) <- c("$\\Delta$", "$D(X)$", "$D(X)\\ \\text{ordered}$","$D^\\star$")
+kable(m, digits = 1, row.names = TRUE, col.names = as.character(1:7), caption ="Semi-strong Rank Images")
+```
+The sum of the squared differences between $D(X)$ and $D^\star$ is
+6.
+
+Alternatively, we can require that tied elements in $\Delta$ correspond
+with tied elements in $D^\star$. Guttman calls this *strong monotonicity*, and requires in addition that $D^\star$ has the same number of blocks, with the same block sizes, as $\Delta$. Instead of copying ordered blocks from the sorted distances, we compute averages of blocks, and copy those into
+$D^star$. This corresponds with Kruskal's secondary approach to ties. Thus the elements of $D^\star$ are no longer a permutation of those in $D(X)$. We have \@eq:nmrankimage1, and also
+
+\begin{equation}
+\delta_{ij}=\delta_{kl}\Rightarrow d_{ij}^\star=d_{kl}^\star
+(\#eq:nmrankimage2)
+\end{equation}
+
+Our numerical example is now in table \@ref(tab:nmriexample2).
+
+```{r nmriexample2, echo = FALSE}
+m <- matrix(c(1,2,2,3,3,4,5,
+              1,3,1,3,4,3,4,
+              1,1,3,3,3,4,4,
+              1,2,2,3,3,4,4),4, 7, byrow=TRUE)
+row.names(m) <- c("$\\Delta$", "$D(X)$", "$D(X)\\ \\text{ordered}$","$D^\\star$")
+kable(m, digits = 1, row.names = TRUE, col.names = as.character(1:7), caption ="Strong Rank Images")
+```
+
+Now the sum of squared differences between $D(X)$ and $D^\star$ is 4, which 
+means, surprisingly, that strong monotonicity gives a better fit than semi-strong monotonicity. This cannot happen with monotone regression, where the primary approch to ties always has a better fit than the secondary approach.
+
+#### Single and Double Phase
+
+Note: suppose $\|D_1^\star-D(X_2)\|^2<\|D_1^\star-D(X_1)\|^2$ but
+$\|D_2^\star-D(X_2)\|^2>\|D_1^\star-D(X_2)\|^2$
+
+
+$$
+\sigma_G(X)=\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(d^\star_{ij}(X)-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}d_{ij}^2(X)}.
+$$
+
+$$
+\sigma_G(X,D^\star)=\frac{\mathop{\sum\sum}_{1\leq i<j\leq n}(d^\star_{ij}-d_{ij}(X))^2}{\mathop{\sum\sum}_{1\leq i<j\leq n}d_{ij}^2(X)}.
+$$
+
+#### Hard and Soft Squeeze
+
+$$
+\sigma(X):=\min_{\delta\in\mathbb{K}\cap\mathbb{S}}\sum_{k\in\mathcal{K}}w_k(\delta_k-d_k(X))^2
+$$
+
+question: in double phase do rank images decrease stress ? My guess is yes.
+Are they continuous ?
+
+$$\rho_G(X)=\max_{P\in\Pi} \delta'Pd(X)$$ is a continuous function of $X$. Also (Shepard)
+$$
+D_+\rho_G(X)=\max_{P\in\Pi(X)}\delta'P\mathcal{D}d(X)
+$$
+
+rank-images $Pd$ are not continuous
+
+### Smoothness of Ordinal Loss Functions
+
+Kruskal
+
+$$
+\min_{\hat D\in\mathfrak{D}}\sum\sum w_{ij}(\hat d_{ij}-d_{ij}(X))^2
+$$
+is a differentiable function of $X$
+
+Double phase rank image
+
+$$
+\sigma_{LG}(X)=\min_P\|Pd(X)-d(X)\|^2
+$$
+$P$ in the Birkhoff polytope and satisfying inequalities, equalities.
+
+$P$ given by $\max_P d(X)'Pd(X)$
+
+@deleeuw_R_73g
+
+## Scaling with Distance Bounds
+
+$$
+\alpha_{ij}\leq d_{ij}(X)\leq\beta_{ij}
+$$
+
+## Bounds on Stress
+
+@deleeuw_stoop_A_84
+
+Stress1 and Stress2

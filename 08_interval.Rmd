@@ -1,0 +1,451 @@
+
+# Interval MDS {#intinterval}
+
+intro: additive vs interval
+basic vs ratio
+
+## The Additive Constant {#intadditive}
+
+### Early
+
+In the early history of MDS dissimilarities were computed from comparative judgments in the Thurstonian tradition. 
+
+triads paired comparisons etc positive orthant
+
+These early techniques only gave numbers on an interval scale, i.e. dissimilarities known only up to a linear transformation. In order to get positive dissimilarities a rational origin needed to be found in some way. This is the *additive constant problem*. It can be seen as the first example of nonmetric MDS, in which we have only partially known dissimilarities (up to an additive constant). 
+
+\begin{align}
+\begin{split}
+(\delta_{ij}+\alpha)&\approx d_{ij}(X),\\
+\delta_{ij}&\approx d_{ij}(X)+\alpha.
+\end{split}
+(\#eq:twoadd)
+\end{align}
+
+The additive constant techniques were more important in the fifties and sixties than they are these days, because they have largely been replaced by iterative nonmetric MDS techniques.
+
+An early algorithm to fit the additive constant based on Schoenberg's
+theorem was given by @messick_abelson_56. Ii was Torgerson based, i.e. it used the eigenvalues of $\tau(\Delta^{(2)})$. It was a somewhat hopeful iterative technique, without a convergence proof, designed to make the sum of the $n-p$ smallest eigenvalues equal to zero. This is of course only a necessary condition for best approximation, not a sufficient one.
+
+In addition, the Messick-Abelson algorithm sometimes yielded solutionsin which the Torgerson transform of the squared dissimilarities had negative eigenvalues, which could even be quite large. That is also somewhat of a problem. 
+
+### Cooper
+
+Consequently @cooper_72 proposed an
+alternative additive constant algorithm, taking his clue from the work of Kruskal.
+
+The solution was to redefine stress as a function of both the
+configuration and the additive constant. Thus 
+
+\begin{equation}
+\sigma(X,\alpha):=\mathop{\sum\sum}_{1\leq j<i\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2,
+(\#eq:nmcooper1)
+\end{equation}
+
+and we minimize this stress over both $X$ and $\alpha$.
+
+Double phase (ALS)
+
+$\delta_{ij}+\alpha\geq 0$
+
+Single Phase (Cooper)
+
+\begin{equation}
+\sigma(X):=\min_\alpha\mathop{\sum\sum}_{1\leq j<i\leq n}w_{ij}(\delta_{ij}+\alpha-d_{ij}(X))^2,
+(\#eq:nmcooper2)
+\end{equation}
+
+## Algebra {#exactad}
+
+The additive constant problem is to find
+$X\in\mathbb{R}^{n\times p}$ and $\alpha$ such that
+$\Delta+\alpha(E-I)\approx D(X)$. In this section we look for 
+all $\alpha$ such that $\Delta+\alpha(E-I)$ is Euclidean, i.e.
+such that there is a configuration $X$ with $\Delta+\alpha(E-I)=D(X)$.
+This is a one-parameter generalization of Schoenberg's theorem.
+
+It makes sense to require $\alpha\geq 0$, because a negative
+$\alpha$ would more appropriately be called a subtractive constant.
+Also, we may want to make sure that the off-diagonal elements of $\Delta+\alpha(E-I)$ are non-negative, i.e. that $\alpha\geq-\delta_{ij}$ for all $i>j$. Note that if we allow a negative $\alpha$ then if all off-diagonal $\delta_{ij}$ are equal, say to $\delta>0$, we have the trivial solution $\alpha=-\delta$ and $X=0$.
+
+### Existence
+
+We start with a simple construction.
+
+```{theorem, label = "nmn1"}
+For all $\Delta$ there is an $\alpha_0\geq 0$ such that for all $\alpha\geq\alpha_0$ we have $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-1$.
+```
+
+::: {.proof}
+We have, using $\Delta\times(E-I)=\Delta$ and $(E-I)\times(E-I)=E-I$,
+
+\begin{equation}
+  \tau((\Delta+\alpha(E-I))\times(\Delta+\alpha(E-I)))=
+  \tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J.
+(\#eq:tau1)
+\end{equation}
+
+Thus each off-diagonal element is a concave quadratic in $\alpha$, which
+is negative for $\alpha$ big enough. Choose $\alpha_0\geq 0$ to make all
+off-diagonal elements negative (and all dissimilarities non-negative). A doubly-centered matrix with all off-diagonal elements negative is positive semi-definite of rank $n-1$ (@taussky_49).
+:::
+
+Note that by the same argument we can also find a negative $\alpha_0$ that makes all off-diagonal elements negative and thus $\Delta+\alpha(E-I))$ is again Euclidean of dimension $r\leq n-1$. But this $\alpha_0$ will usually result in negative dissimilarities.
+
+Theorem \@ref(thm:nmn1) can be sharpened for non-Euclidean $\Delta$.
+Define the following function of $\alpha$: 
+
+\begin{equation}
+\lambda_\star(\alpha):=\min_{x'x=1, x'e=0}x'\{\tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J\}x.
+(\#eq:lambdas)
+\end{equation}
+
+This is the smallest non-trivial eigenvalue of the Torgerson transform in
+\@ref(eq:tau1). The matrix $\Delta+\alpha(E-I)$ is Euclidean if and only if $\lambda_\star(\alpha)\geq 0$. Note that $\lambda_\star$ is continuous, by a simple special case of the Maximum Theorem (@berge_63, Chapter VI, section 3), and coercive, i.e. $\lambda_\star(\alpha)\rightarrow +\infty$ if $|\alpha|\rightarrow +\infty$.
+
+```{theorem, label = "nmn2"}
+For all non-Euclidean $\Delta$ there is an $\alpha_1>0$ such that for all $\alpha\geq\alpha_1$ we have that $\Delta+\alpha(E-I))$ Euclidean of dimension $r\leq n-2$.
+```
+
+::: {.proof}
+Because $\Delta$ is non-Euclidean we have $\lambda_\star(0)<0$. By the construction in theorem \@ref(thm:nmn1) there is an $\alpha_0$ such that
+$\lambda_\star(\alpha)>0$ for all $\alpha>\alpha_0$. By the Maximum Theorem
+the function $\lambda_\star$ is continuous, and thus, by Bolzano's theorem, there is an $\alpha_1$ between $0$ and $\alpha_0$ such that $\lambda_\star(\alpha_1)=0$. If there is more than one zero between
+$0$ and $\alpha_0$ we take the largest one as $\alpha_1$.
+:::
+
+
+The problem with extending theorem \@ref(thm:nmn2) to Euclidean $\Delta$ is that the equation $\lambda_\star(\alpha)=0$ may have only negative roots, or, even more seriously, no roots at all. This may not be too important from the practical point of view, because observed dissimilarities will usually not be exactly Euclidean. Nevertheless I feel compelled to address it.
+
+```{theorem, label = "nmn3"}
+If $\Delta$ is Euclidean then $\lambda_\star(\alpha)$ is non-negative and non-decreasing on $[0,+\infty)$.
+```
+
+::: {.proof}
+If $\Delta$ is Euclidean, then $\sqrt{\Delta}$, which is short for the matrix with the square roots of the dissimilarities, is Euclidean as well. This follows because the square root is a Schoenberg transform (@schoenberg_37, @bavaud_11), and it implies that $\tau(\Delta)=\tau(\sqrt{\Delta}\times\sqrt{\Delta})$ is positive semi-definite. Thus the matrix \@ref(eq:tau1) is positive semi-definite for all $\alpha\geq 0$. By Danskin's Theorem the one-sided directional derivative of $\lambda_\star$ at $\alpha$ is $2x(\alpha)'\tau(\Delta)x(\alpha)+\alpha$, where $x(\alpha)$ is one of the minimizing eigenvectors. Because the one-sided derivative is non-negative, the function is non-decreasing (in fact increasing if $\alpha>0$).
+:::
+
+Of course $\lambda_\star(\alpha)=0$ can still have negative solutions, and in particular it will have at least one negative solution if $\lambda_\star(\alpha)\leq 0$ for any $\alpha$. There can even be negative solutions with $\Delta+\alpha(E-I)$ non-negative. 
+
+### Solution
+
+The solutions of $\lambda_\star(\alpha)=0$ can be computed and studied in more detail, using results first presented in the psychometric literature by @cailliez_83. We reproduce his analysis here, with a somewhat different discussion that relies more on existing mathematical results.
+
+In order to find the smallest $\alpha$ we solve the quadratic eigenvalue problem (@tisseur_meerbergen_01).                                                                                        WHY ??
+
+\begin{equation}
+\{\tau(\Delta\times\Delta)+2\alpha\tau(\Delta)+\frac12\alpha^2J\}y=0.
+(\#eq:qep1)
+\end{equation}
+
+
+A solution $(y,\alpha)$ of \#ref(eq:qep1) is an eigen pair, in which $y$ is an eigenvector, and $\alpha$ the corresponding eigenvalue. The trivial solution $y=e$ satisfies \#ref(eq:qep1) for any $\alpha$. We are not really interested in the non-trivial eigenvectors here, but we will look at the relationship between the eigenvalues and the solutions of $\lambda_\star(\alpha)=0$.
+
+The eigenvalues can be complex, in which case they do not interest us. 
+If $\alpha$ is a non-trivial real eigenvalue, then the rank of the Torgerson transform of the matrix in \#ref(eq:qep1) is $n-2$, but 
+
+To get rid of the annoying trivial solution $y=e$ we use a square
+orthonormal matrix whose first column is proportional to $e$. Suppose
+$L$ contains the remaining $n-1$ columns. Now solve
+
+\begin{equation}
+\{L'\tau(\Delta\times\Delta)L+2\alpha L'\tau(\Delta)L+\frac12\alpha^2I\}y=0.
+(\#eq:qep2)
+\end{equation}
+
+Note that the determinant of the polynomial matrix in \@ref(eq:qep2) is
+a polynomial of degree $2(n-1)$ in $\alpha$, which has $2(n-1)$ real or
+complex roots.
+
+The next step is linearization (@gohberg_lancaster_rodman_09, chapter
+1), which means finding a linear or generalized linear eigen problem with the 
+same roots as \@ref(eq:qep2). In our case this is the eigenvalue problem for the matrix 
+
+\begin{equation}
+\begin{bmatrix}
+\hfill 0&\hfill I\\
+-2L'\tau(\Delta\times\Delta)L&-4L'\tau(\Delta)L
+\end{bmatrix}
+(\#eq:qep3)
+\end{equation}
+
+
+### Examples
+
+#### Small Example
+
+Here is a small artificial dissimilarity matrix.
+
+```{r smallex, echo = FALSE}
+matrixPrint(d<-as.matrix(dsmall), digits = 0, width = 2)
+```
+
+It is constructed such that $\delta_{14}>\delta_{12}+\delta_{24}$ and
+that $\delta_{23}>\delta_{21}+\delta_{13}$. Because the triangle
+inequality is violated the dissimilarities are not distances in any
+metric space, and certainly not in a Euclidean one. Because the minimum
+dissimilarity is $+1$, we require that the additive constant $\alpha$ is
+at least $-1$.
+
+The R function treq() in appendix \@ref(apcodeclass) finds the smallest
+additive constant such that all triangle inequalities are satisfied. For
+this example it is $\alpha=`r treq (d)`$.
+
+The Torgerson transform of $\Delta\times\Delta$ is
+
+```{r tsmall, echo = FALSE}
+matrixPrint(s<- tau(d * d), digits = 3, width = 5, flag = "+")
+```
+
+with eigenvalues
+
+```{r esmall, echo = FALSE}
+matrixPrint(e<-eigen(s)$values, digits = 3, width = 5, flag = "+")
+```
+
+The smallest eigenvalue `r min(e)` is appropriately negative, and
+theorem \@ref(thm:nmn2) shows that $\Delta\times\Delta+`r -min(e)`(E-I)$
+are squared distances between four points in the plane.
+
+The upper bound for the smallest $\alpha$ from theorem \@ref(thm:nmn1),
+computed by the R function acbound(), is `r acbound(d)$ma`.
+
+It is useful to look at a graphical representation of the minimum
+non-trivial eigenvalue of
+$\tau((\Delta+\alpha(E-I))\times(\Delta+\alpha(E-I)))$ as a function of
+$\alpha$. The R function aceval() generates the data for the plot.
+
+```{r acplot, echo = FALSE, cache = TRUE}
+g <- aceval (d)
+plot(g$a,g$b,xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+```
+
+We see that the minimum non-trivial eigenvalue is a continuous function of $\alpha$,but one which certainly is not convex or concave or differentiable. The graph crosses the horizontal axes near -8, -3, and +6.
+
+To make this precise we apply the theory of section xxx. The R function
+acqep() finds the six non-trivial eigenvalues
+
+```{r aceqp, echo = FALSE}
+ace<-acqep(d)$me
+ace
+```
+
+Two of the eigenvalues are complex conjugates, four are real. Of the
+real eigenvalues three are negative, and only one is positive, equal to
+`r formatC(Re(ace[2]), digits = 3, width = 7, format = "f", flag = "+")`.
+The table above gives the eigenvalues of the Torgerson transform, using
+all four real eigenvalues for $\alpha$. The three negative ones do result in a positive semi-definite matrix with rank equal to $n-2$, but they also
+create negative dissimilarities.
+
+```{r szero, echo = FALSE, cache = TRUE}
+for (i in c(1, 2, 5, 6)) {
+a <- Re(ace[i])
+t <- d+a*(1-diag(4))
+b <- eigen(tau(t * t))$values
+cat(formatC(a, digits = 3, width = 7, format = "f", flag = "+")," ****** ",
+    formatC(b, digits = 3, width = 7, format = "f", flag = "+"), "\n")
+}
+```
+
+#### De Gruijter Example
+
+```{r gruadd, echo = FALSE, cache = TRUE}
+g <- as.matrix(gruijter)
+h <- aceval (g, c(-25,5))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+#### Ekman Example
+
+```{r ekkadd, echo = FALSE, cache = TRUE}
+g <- as.matrix(1 - ekman)
+h <- aceval (g, c(-1,1))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+```{r ekk3add, echo = FALSE, cache = TRUE}
+g <- as.matrix((1 - ekman)^3)
+h <- aceval (g, c(-1,1))
+plot(h$a, h$b, xlab="alpha",ylab="min eval",col="RED")
+abline(h = 0, col = "BLUE", lwd = 2)
+g <- acqep(g)
+g$me
+```
+
+### A Variation {#variation}
+
+Alternatively, we could define our approximation problem as finding
+$X\in\mathbb{R}^{n\times p}$ and $\alpha$ such that
+$\sqrt{\delta_{ij}^2+\alpha}\approx d_{ij}(X)$, or, equivalently,
+$\Delta\times\Delta+\alpha(E-I)\approx D(X)\times D(X)$.
+
+```{theorem, label = "nmn4"}
+For any $X\in\mathbb{R}^{n\times p}$ with $p=n-2$ there is an $\alpha$
+such that $\sqrt{\delta_{ij}^2+\alpha}= d_{ij}(X)$.
+```
+
+::: {.proof}
+Now we have 
+
+\begin{equation}
+\tau(\Delta\times\Delta+\alpha(E-I)))=
+  \tau(\Delta\times\Delta)+\frac12\alpha J.
+(\#eq:tau2)
+\end{equation} 
+  
+The eigenvalues of
+$\tau(\Delta\times\Delta)+\frac12\alpha J$ are zero and
+$\lambda_s+\frac12\alpha$, where the $\lambda_s$ are the $n-1$
+non-trivial eigenvalues of $\tau(\Delta\times\Delta)$. If
+$\underline{\lambda}$ is smallest eigenvalue we choose
+$\alpha=-2\underline{\lambda}$, and
+$\tau(\Delta\times\Delta)+\frac12\alpha J$ is positive semi-definite of
+rank $r\leq n-2$.
+:::
+
+Note that theorem \@ref(thm:nmn2) implies that for any $\Delta$ there is
+a strictly increasing differentiable transformation to the space of
+Euclidean distance matrices in $n-2$ dimensions. This is a version of
+what is sometimes described as *Guttman's n-2 theorem* (@lingoes_71).
+The proof we have given is that from @deleeuw_R_70b, Appendix B.
+
+
+## Interval smacof
+
+In this section we introduce a double-phase alternating least squares algorithm that fits better into the smacof framework than the single-phase method proposed by @cooper_72. We also restrict our linear transformations to be to be increasing and non-negative on the positive real axes.
+
+To avoid various kinds of trivialities, assume not all $d_{ij}(X)$ are zero.
+
+In the optimal scaling phase we must minimize
+
+\begin{equation}
+\sigma(X,\alpha,\beta)=\mathop{\sum\sum}_{1\leq i<j\leq  n}w_{ij}(\alpha\delta_{ij}+\beta-d_{ij}(X))^2
+(\#eq:intloss)
+\end{equation}
+
+The constraints are $\alpha\delta_{ij}+\beta\geq 0$ and
+$\alpha\delta_{ij}+\beta\geq\alpha\delta_{kl}+\beta$
+if $\delta_{ij}\geq\delta_{kl}$. These define pointed convex cone in the space of disparities. We need to project $D(X)$ on that cone, in the metric defined by $W$. But it is easy to see that
+and equivalent set of constraints in $\mathbb{R}^2$ is
+$\alpha\geq 0$ and $\alpha\delta_\text{min}+\beta\geq 0$. Again these two constraints define a pointed cone in two-dimensional $(\alpha,\beta)$ space, where proje ction is much easier to handle thanin the generally much larger disparity space. Of course the projection metric in $(\alpha,\beta)$ is different from the one in disparity space.
+
+In addition to the inequality constraints we have the normalization constraint
+\begin{equation}
+\mathop{\sum\sum}_{1\leq i<j\leq  n}w_{ij}(\alpha\delta_{ij}+\beta)^2=1,
+(\#eq:intnorm)
+\end{equation}
+but as we have seen in chapter \@ref(nonmtrmds) we can initially ignore that constraint, project on the cone, and then normalize the projection.
+
+In order to simplify the notation we collect the $d_{ij}(X)$ in a vector $d$, the $\delta_{ij}$ in a vector $\delta$ and the $w_{ij}$ in a diagonal matrix $W$.
+
+Let's first get the trivial case where all $\delta_{ij}$ are equal out of the way. In that case the linear regression is singular, and we simply choose all $\alpha\delta+\beta$ equal to the constant $e'Wd$, for example by setting $\alpha=0$ and $\beta=e'Wd$. Applying the normalization condition \@ref(eq:intnorm) then sets $\beta=1$. From now on we assume in this section that not all $\delta_{ij}$ are equal.
+
+Projecting on the cone gives us four possibilities. We can have $\alpha=0$ or $\alpha\delta_\text{min}+\beta=0$, or both, or neither. We first analyze the case in which the unconstrained minimum of \@ref(eq:intloss) is in the cone, which will be the most common case, especially in later smacof iterations. Using the fact that $\delta'W\delta=e'We=1$ we find that
+\begin{equation}
+\begin{bmatrix}\tilde\alpha\\\tilde\beta\end{bmatrix}=
+\frac{1}{1-(e'W\delta)^2}\begin{bmatrix}\delta'(W-We e'W)d\\e'(W-W\delta\delta'W)d\end{bmatrix}.
+(\#eq:intunc)
+\end{equation}
+If $\tilde\alpha\geq 0$ and $\tilde\beta\geq-\alpha\delta_\text{min}$
+we are done. If not, we know the projection is on the line $\alpha=0$
+or on the line $\tilde\beta=-\alpha\delta_\text{min}$, or on their intersection, which is the origin. 
+
+First suppose the projection is on $\alpha=0$. We find the minimizing $\beta$ equal to $\overline{\beta}:=e'Wd$, which strictly satisfies the second constraint because $\overline\beta>-\alpha\delta_\text{min}=0$, and thus $(0,e'Wd)$ is on the boundary of the cone. This also show that the origin, which has $\sigma(X,0,0)=d'Wd$, can never be the projection. The minimum at $(0,e'Wd)$ is 
+\begin{equation}
+\sigma(X,0,e'Wd)=d'Wd-(d'We)^2
+(\#eq:intvertexloss1)
+\end{equation}
+Or, alternatively, we can assume that the projection is on the vertex $\beta=-\alpha\delta_\text{min}$, in which case the minimizing $\alpha$ is 
+\begin{equation}
+\overline{\alpha}:=\frac{(\delta-\delta_\text{min})'Wd}{(\delta-\delta_\text{min})'W(\delta-\delta_\text{min})},
+(\#eq:intalpha)
+\end{equation}
+which is always positive, and thus $(\overline{\alpha},-\overline{\alpha}\delta_\text{min})$ is on the boundary of the cone. The minimum is
+\begin{equation}
+\sigma(X,\overline{\alpha},-\overline{\alpha}\delta_\text{min})=d'Wd-\frac{((\delta-\delta_\text{min})'Wd)^2}{(\delta-\delta_\text{min})'W(\delta-\delta_\text{min})}
+(\#eq:intvertexloss2)
+\end{equation}
+If the unconstrained solution is not in the cone, then we choose the projection as the solution corresponding with the smallest of \@ref(eq:intvertexloss1) and (\@ref(eq:intvertexloss2).
+
+### Example
+
+We illustrate finding the optimal linear transformation with a small example. We choose some arbitrary $w$, $\delta$, and $d$ and normalize them in the usual way.
+
+```{r intexample, echo = "FALSE"}
+w <- c(rep(1,5),rep(2,5))
+w <- w / sum(w)
+delta <- 1:10
+s <- sum(w * delta ^ 2)
+delta <- delta / sqrt (s)
+d <- c(1, 2, 3, 4, 4, 3, 3, 3, 1, 1)
+s <- sum (w * d ^ 2)
+t <- sum (w * d * delta)
+d <- d * (t / s)
+```
+```{r intcomps, echo = FALSE}
+abstress <- function (a, b) {
+  return (sum (w * (d - (a * delta + b))^2))
+}
+dewdd <- sum (w * delta * d)
+ddwdd <- sum (w * d * d)
+ddwee <- sum (w * d)
+dewee <- sum (w * delta)
+demin <- min(delta)
+dedev <- delta - demin
+h <- 1 - dewee ^ 2
+a <- (dewdd - dewee * ddwee) / h
+b <- (ddwee - dewee * dewdd) / h
+u <- a * demin + b
+a1 <- 0
+b1 <- ddwee
+u1 <- a1 * demin + b1
+a2 <- sum(w * dedev * d) / sum(w * dedev ^ 2)
+b2 <- -a2 * demin
+u2 <- a2 * demin + b2
+```
+After normalization the $\delta_{\text{min}}$ is
+`r demin`. The pink region in figure \@ref(fig:intconex) is the
+cone formed by the intersection of the half-spaces $\alpha\geq 0$ and $\alpha\delta_{\text{min}}+\beta\geq 0$. 
+
+```{r intconex, fig.align= "center", fig.cap = "Cone Projection", fig.width = 10, fig.height = 10, echo = FALSE, cache = TRUE}
+par(pty="s")
+plot(c(-1.2,1.2),c(-1.2,1.2),type="n",xlab = "alpha", ylab = "beta")
+vertices <- matrix(c(0,0,1.4,1.4,0,1.4,1.4,-1.4*demin),4,2)
+polygon(vertices, fillOddEven=TRUE, col = "PINK")
+abline(h=0)
+abline(v=0)
+abline(0,-demin)
+points(a,b, col = "RED", pch = 19, cex = 2)
+points(a1,b1, col = "BLUE", pch = 19, cex = 2)
+points(a2,b2, col = "GREEN", pch = 19, cex = 2)
+```
+
+The unconstrained
+minimum is attained at `r c(a,b)`, the red point in figure
+\@ref(fig:intconex), with stress equal to `r abstress(a,b)`. 
+That is clearly outside the cone, so we now consider projection
+on the two one-dimensional boundary rays. The blue point is
+`r c(a1,b1)`, the projection on $\alpha\geq 0$. It is fairly
+close to the unconstrained minimum, with stress 
+`r abstress(a1,b1)`. The green point `r c(a2,b2)`is the projection on $\beta=-\alpha\delta_{\text{min}}$, which has stress `r abstress(a2,b2)`. Thus the blue point `r c(a1,b1)`is the actual projection on the cone in $(\alpha,\beta)$ space, and the best fitting line has slope zero (which, in smacof, would make all disparities equal for the next iteration).
+
+This is illustrated in a different way (with Shepard plots) in figure \@ref(fig:intlineex), where we see the red, blue, and green lines corresponding with the red, blue, and green points in
+figure \@ref(fig:intconex). Note that the green line goes through the point $(\delta_{\text{min}},0)$. The horizontal blue line is the best fitting one under the constraints. 
+
+```{r intlineex, fig.align= "center", fig.cap = "Fitted Lines", fig.width = 10, fig.height = 10, echo = FALSE, cache = TRUE}
+plot(delta, d, ylim = c(0, max(d)), xlim = c(0, max(delta)))
+abline(b, a, col = "RED", lwd = 2)
+abline(b1, a1, col = "BLUE", lwd = 2)
+abline(b2, a2, col = "GREEN", lwd = 2)
+abline(h=0)
+abline(v=demin)
+```
+
+

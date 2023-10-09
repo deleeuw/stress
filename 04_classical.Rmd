@@ -1,0 +1,133 @@
+# Classical Multidimensional Scaling
+
+In the early days, exemplified by @messick_abelson_56, the key
+mathematical result used in MDS was Schoenberg's theorem
+(@schoenberg_35), which was made available to psychometricians by
+@young_householder_38. Statisticians came to the scene much later,
+not until @gower_66.
+
+Schoenberg's theorem gives necessary and sufficient conditions for a symmetric, hollow, 
+and non-negative matrix of dissimilarities to be the distance matrix of $n$ points in
+$\mathbb{R}^p$. Several variations of this basic theorem are possible
+(see @blumenthal_53, chapter 43). We give the result in the form
+popularized by @torgerson_58, with a simplified proof, using notation
+and terminology due to @critchley_88.
+
+Classical scaling can be thought of as an independent MDS method, in fact as the only MDS method available until the early 1960's. More commonly these days it is a method to provide a generally excellent starting point for iterative procedures to minimize stress.
+
+## Algebra
+
+### Torgerson Transform
+
+The *Torgerson transform* of a matrix is a linear function from the
+space of real symmetric hollow matrices to the space of doubly-centered
+real symmetric matrices defined as
+
+\begin{equation}
+\tau(S):=-\frac12 JSJ,
+(\#eq:torgerson)
+\end{equation}
+
+with $J$ the centering matrix $I-\frac{1}{n}ee'$. For historical reasons
+\@(eq:torgerson) may be more familiar in elementwise notation. Spelled
+out it is
+
+\begin{equation}
+\tau_{ij}(S)=-\frac12\{s_{ij}-s_{i\bullet}-s_{\bullet j}+s_{\bullet\bullet}\},
+(\#eq:torgelem)
+\end{equation}
+
+where bullets are indices over which we average. The symbol $\tau$ was chosen by @critchley_88 to honor Torgerson.
+
+Some simple calculation with \@ref(eq:torgelem), using the hollowness of
+$S$, gives
+
+\begin{equation}
+\tau_{ii}(S)+\tau_{jj}(S)-2\tau_{ij}(S)=s_{ij}.
+(\#eq:torginv)
+\end{equation}
+
+Accordingly, @critchley_88 defines a linear operator $\kappa$ on the
+space of real symmetric matrices by $\kappa(S):=s_{ii}+s_{jj}-2s_{ij}$.
+From \@ref(eq:torginv) we see that $\kappa(\tau(S))=S$. Also for all
+double-centered $S$ we have $\tau(\kappa(S))=S$. Thus $\tau$ and
+$\kappa$ are mutually inverse (@critchley_88, theorem 2.2).
+
+### Schoenberg's Theorem
+
+::: {#schoenberg .theorem}
+There is an $X\in\mathbb{R}^{n\times p}$ such that $\Delta=D(X)$ if and
+only if $\tau(\Delta^{(2)})$ is positive semi-definite of rank
+$r\leq p$.
+:::
+
+::: {.proof}
+If $\Delta$ are the distances of a column-centered $p$-dimensional
+configuration $X$, then the squared dissimilarities $\Delta^{(2)}$
+are of the form $ue'+eu'-2XX'$, where $u_i=x_i'x_i^{\ }$ are the squared
+row lengths. This implies $\tau(\Delta^{(2)})=XX'$, which is
+positive semi-definite of rank $r=\text{rank}(X)\leq p$.
+
+Conversely, suppose $\tau(\Delta^{(2)})=XX'$. Applying $\kappa$ to both sides and using $\kappa(XX')=D^{(2)}(X)$ gives $\Delta^{(2)}=D^{(2)}(X)$.
+:::
+
+Accordingly, we call a dissimilarity matrix $\Delta$ *Euclidean* if it is symmetric, hollow, and non-negative and has $\tau(\Delta^{(2)})\gtrsim 0$. The *dimension* of a Euclidean dissimilarity matrix is the rank of $\tau(\Delta^{(2)})$, which is always less than or equal to $n-1$.
+
+## Approximation
+
+### Low Rank Approximation of the Torgersen Transform
+
+In classical MDS we minimize
+\begin{equation}
+\sigma(X)=\text{tr}\ \left\{W(\tau(\Delta^{(2)})-XX')W\right\}^2
+(\#eq:spapp)
+\end{equation}
+over $X\in\mathbb{R}^{n\times p}$, where $W$ is a square non-singular matrix of weights. 
+The minimizer $X$ for the loss function in \@ref(eq:spapp) is given by a slight variation of @eckart_young_36, discussed first by @keller_62. See also @deleeuw_R_74c and the generalizations to rectangular and singular weight matrices in @deleeuw_A_84b. The solution is $X=W^{-1}K\Lambda$, where $K$ are the normalized eigenvectors corresponding with the $p$ largest eigenvalues of the positive part of  $W(\tau(\Delta^{(2)})W$ (i.e. the matrix that results by replacing the negative eigenvalues with zeroes). Thus the rank of the solution $X$ is equal to the minimum of $p$ and the number of positive eigenvalues of $\tau(\Delta^{(2)}$. 
+
+In the original versions of classical scaling (@torgerson_52, @torgerson_58) there are no weights and the problem that the Torgerson transform may be indefinite is ignored. In fact, going from $\tau(\Delta^{(2)}$ to $X$ is done by "any method of factoring", including the centroid method, so no specific loss function is minimized.
+
+The loss function \@ref(eq:spapp) has been called, somewhat jokingly, *strain* by @takane_young_deleeuw_A_77, mainly because *stress* and *sstress* had already been taken. Stress is a weighted least squares loss function defined on the distances,
+sstress on the squared distances, and strain on the inner products.
+
+### Minimization of Strain                                 
+
+It may be considered a disadvantage of the classical approach, even if it is described as the minimization of strain, that the MDS equations are $\Delta^{(2)}= D^{(2)(X)}$ while loss is measured on the scalar products and not the distances or the squared distances.
+
+It was first pointed out by @deleeuw_heiser_C_82 that strain can also be written as a loss function defined on the squared distances. In fact strain is equal to
+\begin{equation}
+\sigma(X)=\frac14\text{tr}\ \left\{WJ(\Delta^{(2)}-D^{(2)}(X))JW\right\}^2,
+(\#eq:strainer)
+\end{equation}
+i.e. to an appropriately weighted version of sstress.
+
+An advantage of the classical scaling approach via minimizing strain is that there is no local minimum problem. Finding the optimal configuration is an eigenvalue problem, which allows us to find the global minimum. This has not been emphasized enough, so I'll emphasize it here once again. If iterative basic MDS algorithms use the classical minimum strain solution as their starting point, then they start at the global minimum of a related loss function. Since they are descent algorithms they will improve their own loss functions, but having such an excellent starting point means they avoid many local minima.
+
+Another advantage of the loss function formulation in \@ref{eq:strainer} is that it is immediately obvious how to generalize classical scaling when there are missing data or when there is only rank order information. As with stress and sstress we minimize strain over both the configuration $X$ and the missing information.
+
+
+### Approximation from Below
+
+Suppose the Torgerson transform $\tau(\Delta^{(2)}$ is PSD of rank $r$, with eigen decomposition $K\Lambda^2 K'$, and, using the largest $p$ eigenvalues with corresponding eigenvectors, define $C_p:=K_p\Lambda_p^2 K_p'$. Then, in the Loewner order,
+$$
+C_1\lesssim C_2\lesssim\cdots\lesssim C_r=\tau(\Delta^{(2)}).
+$$
+Define $X_p=K_p\Lambda_p$. Then applying Critchley's inverse Torgerson transform $\kappa$ it follows from ... that elementwise
+$$
+D^{(2)}(X_1)\leq D^{(2)}(X_2)\leq\cdots\leq D^{(2)}(X_r)=\Delta^{(2)},
+$$
+and thus also
+$$
+D(X_1)\leq D(X_2)\leq\cdots\leq D(X_r)=\Delta.
+$$
+Thus in the PSD case classical scaling we approximate the dissimilarities *from below*. This result is implicit in @gower_66 and explicit in @deleeuw_meulman_C_86 and @meulman_86.
+
+If $\tau(\Delta^{(2)}$ is not psd then 
+
+$$
+D(X_1)\leq D(X_2)\leq\cdots\leq D(X_p)=\cdots=D(X_{n-1})\geq\Delta.
+$$
+
+Benzecri plot
+
+

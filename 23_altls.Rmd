@@ -1,0 +1,29 @@
+# Alternative Least Squares Loss
+
+Kruskal/Carroll in Krishnaiah
+
+## Sammon's MDS
+
+## Kamade-Kawai Spring
+
+## McGee's Work
+
+## Shepard's Nonmetric MDS
+
+## Guttman's Nonmetric MDS
+
+## Positive Orthant Nonmetric MDS
+
+!! Richard Johnson 1973 
+
+!! Guttman Absolute Value
+
+!! Hartmann
+
+## Role Reversal {#interrole}
+
+Kruskal, arithmetic with dissimilarities
+
+$$
+\sigma(X)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-P_r(d_{ij}(X)))^2
+$$

@@ -1,0 +1,10 @@
+# Software {#chsoftware}
+
+In actual computer output using the scaling in formula \@ref(eq:scaldiss1) and \@ref(eq:scaldiss1) has some disadvantages. There are, say, $M$ non-zero weights. The summation in \#ref(eq:stressall) is really over $M$ terms only. If $n$ is at all large the scaled dissimilarities, and consequently the distances and the configuration, will become very small. Thus, in actual computation, or at least in the computer output, we scale our dissimilarities as $\frac12\mathop{\sum\sum}_{1\leq j<i\leq n} w_{ij}^{\ }\delta_{ij}^2=M$. So, we scale our dissimilarities to one in formulas and to $M$ in computations. Thus the computed stress will b
+
+
+[rcode](https://github.com/deleeuw/stress/tree/main/rcode/)
+
+[ccode](https://github.com/deleeuw/stress/tree/main/ccode/)
+
+[lib](https://github.com/deleeuw/stress/tree/main/lib/)

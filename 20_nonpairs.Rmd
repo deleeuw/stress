@@ -1,0 +1,7 @@
+# Compound Objects {#compound}
+
+## Filler
+
+A compound object is a set of $m>1$ objects. This chapter treats the
+analysis of dissimilarities between compound objects, again as far as they fit into the smacof framework. Thus we do not, for example, look at the
+pairwise dissimilarities within a triad of objects, but at the dissimilarities of the triads themselves.

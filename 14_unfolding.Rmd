@@ -1,0 +1,195 @@
+# Unfolding {#chunfolding}
+
+In unfolding the objects are partitioned into two sets of, say, $n$ and $m$ objects and only the $nm$ between-set dissimilarities are observed. The within-set weights are zero. Thus we minimize
+\begin{equation}
+\sigma(X,Y)=\sum_{i=1}^n\sum_{j=1}^m w_{ij}(\delta_{ij}-d(x_i,y_j))^2
+(\#eq:unfstress)
+\end{equation}
+over $X\in\mathbb{R}^{n\times p}$ and $Y\in\mathbb{R}^{m\times p}$. 
+
+$\frac12\{(n+m)(n+m-1)-2nm\}$ are missing
+
+note that we can have $d_{ij}(X)=0$ at a local minimum.
+
+## Algebra
+
+The missing data in unfolding complicate the MDS problem, in the same way as the singular value decomposition of a rectangular matrix is more complicated than 
+the eigen decomposition of a symmetric matrix.
+
+The problem we want to solve in this section is recovering $X$ and $Y$ (up to a translation and rotation) from $D(X,Y)$. 
+
+The first matrix algebra results in metric unfolding were due to @ross_cliff_64. An actual algorithm for the "ignore-errors" case was proposed by @schoenemann_70. Schönemann's technique was studied in more detail by @gold_73 and 
+@heiser_deleeuw_A_79. 
+
+This sectiom discusses a slightly modified version of @schoenemann_70.
+
+First, we compute the Torgerson transform $E(X,Y)=-\frac12 JD^{(2)}(X,Y)J$ It was observed for the first time by @ross_cliff_64 that $E(X,Y)=JXY'J$. 
+
+Assume that $E(X,Y)=JXY'J$ is a full-rank decomposition, and that the rank of $E(X,Y)$ is $r$. Note that there are cases in which the rank of $JX$ or $JY$ is strictly smaller than the rank of $X$ or $Y$. If $X$, for example, has columns
+$x$ and $e-x$, with $x$ and $e$ linearly independent, then its rank is two, while $JX$ with columns $Jx$ and $-Jx$ has rank one.
+
+Suppose $E(X,Y)=GH'$ is another full-rank decomposition. Then there exist vectors $u$ and $v$ with $r$ elements and a non-singular $T$ of order $r$ such that
+\begin{align}
+\begin{split}
+X&=GT+eu',\\
+Y&=HT^{-t}+ev'.
+\end{split}
+(\#eq:unfundet)
+\end{align}
+We can assume without loss of generality that the centroid of the 
+$X$ configuration is in the origin, so that $JX=X$, and $u=0$ in the first equation
+of \@ref(eq:unfundet).
+
+We use the QR decomposition to compute the rank $r$ of $E(X,Y)$, and the factors $G$ and $H$.
+
+We now use \@ref(eq:unfundet) to show that $F=D^{(2)}(X,Y)+2GH'$ is of the 
+form $F=\gamma+\alpha e'+e\beta'$, with $\gamma=v'v$  and $M=TT'$.
+
+\begin{align}
+\begin{split}
+\alpha_i&=g_i'Mg_i-2g_i'Tv,\\
+\beta_j&=h_j'M^{-1}h_j+2h_j'T^{-t}v.
+\end{split}
+(\#eq:unfadditive)
+\end{align}
+
+It follows that $JF=J\alpha e'$ and $FJ=e\beta' J$. Thus $J\alpha$ is any column of $JF$ and $J\beta$ is any row of $FJ$.
+
+Consider the first equation of \@ref(eq:unfadditive). For the time being, we ignore the second one. Suppose $M_k$ is a basis for the space of real symmetric matrices of order $p$ with the $\frac12 p(p+1)$ elements $e_se_t'+e_te_s'$ for $s\not= t$ and $e_se_s'$ for the diagonal. Define $q_{ik}:=g_i'M_kg_i$. Then 
+
+\begin{equation}
+J\alpha=J\begin{bmatrix}Q&-2G\end{bmatrix}\begin{bmatrix}\mu\\Tv\end{bmatrix},
+(\#eq:unflinear)
+\end{equation}
+
+with $\mu$ the coordinates of $M$ for the basis $M_k$.
+
+Equations \@ref(eq:unflinear) are $n$ linear equations in the $\frac12 p(p+1)+p=\frac12 p(p+3)$ unknowns $\mu$ and $Tv$. Assume they have a unique solution.
+Then $M=\sum\mu_kM_k$ is PSD, and can be eigen-decomposed as $M=K\Lambda^2 K'$.
+Set $T=K\Lambda$
+
+```{r unf_example}
+set.seed(12345)
+x <- matrix (rnorm(16), 8, 2)
+x <- apply (x, 2, function (x) x - mean (x))
+y <- matrix (rnorm(10), 5, 2)
+a <- rowSums (x ^ 2)
+b <- rowSums (y ^ 2)
+d <- sqrt (outer(a, b, "+") - 2 * tcrossprod (x, y))
+```
+
+### One-dimensional
+
+The one-dimensional case is of special interest, because it allows us to construct an
+single joint metric scale for row objects and column objects from metric dissimilarities. We have to find a solution to $\delta_{ij}=|x_i-y_j|$, without making assumptions about the order of the projections on the dimension. Compute any solution for $Jg$ and $Jh$ from $\tau(\Delta^{(2)})=Jgh'J$. For data with errors we would probably use the SVD.
+Assume without loss of generality that $Jg=g$. Then the general solution is $x=\tau g$ and $y=\tau^{-1}h+\nu e$ for some real $\tau$ and $\nu$.
+
+Now
+
+\begin{equation}
+\Delta^2=\tau^2 g^{(2)}e'+\tau^{-2}e(h_j')^{(2)}+\nu^2E-2gh'-2\tau\nu g_ie'
+(\#eq:schone)
+\end{equation}
+
+are $nm$ equations in the two unknowns $(\tau,\nu)$. They can be solved by many methods, but we go the Schönemann way. Column-centering gives
+
+\begin{equation}
+J(\Delta^{(2)}+2g_jh_j)=\tau^2 Jg^{(2)}-2\tau\nu g,
+(\#eq:schonecol)
+\end{equation}
+
+while row-centering gives
+
+\begin{equation}
+(\Delta^{(2)}+2g_jh_j)J=\tau^{-2}e(h^{(2)})'J.
+(\#eq:schonerow)
+\end{equation}
+
+## Classical Unfolding
+
+Multidimensional unfolding as a data analysis technique was introduced by @coombs_64.
+
+ bennett-hays
+ hays-bennett
+ bennett
+ 
+SMACOF - @heiser_deleeuw_A_79
+
+Form of V
+
+What happens to nonzero theorem ? within-set distances can be zero
+
+$\Delta=\begin{bmatrix}1&2&3\\1&2&3\end{bmatrix}$
+
+$x_1=x_2=0$ $y_1=1,y_2=2,y_3=3$
+
+## Nonmetric Unfolding
+
+row-conditional
+busing
+van deun
+deleeuw_R_06a
+
+Stress3 -- Roskam
+
+### Degenerate Solutions {#unfdegenerate}
+
+What are they
+
+#### Which Stress
+
+$$
+\sigma(X)=\sum_{i=1}^n\sum_{j=1}^n w_{ij}(\delta_{ij}-d_{ij}(X))^2
+$$
+Weak order, plus normalization. Two-point solution.
+
+#### l'Hôpital's Rule {#hopital}
+
+We all know that $0/0$ is not defined and should be avoided at all cost.
+But then again we have
+$$
+\lim_{x\rightarrow 0}\frac{\sin(x)}{x}=\cos(0)=1,
+$$
+and in fact $\sup_x \frac{sin(x)}{x}=1$. Or, for that matter, if $f$ is differentiable at $x$ then
+
+$$
+\lim_{\epsilon\rightarrow 0}\frac{f(x+\epsilon)-f(x)}{\epsilon}=f'(x)
+$$
+If $f:\mathbb{R}\Rightarrow\mathbb{R}$ and $g:\mathbb{R}\Rightarrow\mathbb{R}$ are two functions
+
+* differentiable in an interval $\mathcal{I}$, except possibly at $c\in\mathcal{I}$,
+* $g'(x)\not=0$ for all $x\in\mathcal{I}$,
+* $\lim_{x\rightarrow c}f(x)=\lim_{x\rightarrow c}g(x)=0$ or
+                   $\lim_{x\rightarrow c}f(x)=\lim_{x\rightarrow c}g(x)=\pm\infty$,
+then
+$$
+\lim_{x\rightarrow c}\frac{f(x)}{g(x)}=\lim_{x\rightarrow c}\frac{f'(x)}{g'(x)}
+$$
+
+We use l'Hôpital's rule in chapter \@ref(chunfolding), section \@ref(unfdegenerate) on degeneracies in nonmetric unfolding. We have not explored the multivariate versions of l'Hôpitals rule, discussed for example by @lawlor_20.
+
+Illustration. 
+
+$\delta_{12}>\delta_{13}=\delta_{23}$.
+
+
+$d_{12}(X_\epsilon)=1$
+
+$d_{13}(X_\epsilon)=d_{23}(X_\epsilon)=1+\frac12\epsilon$.
+
+Then 
+
+$\lim_{\epsilon\rightarrow 0}D(X_\epsilon)=\Delta$.
+
+euclidean for $\epsilon\geq-1$
+
+#### Penalizing
+
+#### Restricting Regression
+
+Busing
+
+Van Deun
+
+
+

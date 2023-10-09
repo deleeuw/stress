@@ -1,0 +1,346 @@
+# Polynomial MDS
+
+## Introduction
+
+## Fitting Polynomials
+
+$$
+\sigma(X)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(P_r(\delta_{ij})-d_{ij}(X))^2
+$$
+
+$$
+P_r(\delta_{ij}):=\sum_{s=0}^r\alpha_s^{\ }\delta_{ij}^s.
+$$
+
+The polynomial $P_r$ is *tied down* if $\alpha_0=0$, and thus $P_r(0)=0$.
+
+Vandermonde matrix
+
+
+## Positive and Convex, Monotone Polynomials
+
+### Introduction
+
+Constraints on values, constraints on coefficients
+
+```{r}
+f <- function(x) return(x * (x - 1) * (x - 2))
+x <- seq(0, 3, length = 100)
+y <- f(x)
+plot(x, y, type="l", lwd = 3, col = "RED")
+x <- c(.10, .45, 2.25, 2.75)
+y <- f(x)
+abline(h = y[1])
+abline(h = y[2])
+abline(h = y[3])
+abline(h = y[4])
+abline(v = x[1])
+abline(v = x[2])
+abline(v = x[3])
+abline(v = x[4])
+```
+
+Tied-down increasing non-negative cubic.
+
+Write the tied-down cubic in the form $f(x)=ax(x^2+2bx+c)$. Since we must have $f(x)\rightarrow+\infty$ of $x\rightarrow+\infty$ we have $a>0$. Since $f$ must be increasing at zero, we must have 
+$f'(0)=c>0$.
+No real roots on the positive reals.
+Case 1: no real roots at all $b^2-c<0$.
+Case 2: two real roots, both negative $b^2-c\geq 0$ and $b\geq 0$.
+Since $c>0$ the product of roots is positive. If the sum is
+negative, i.e. if $b>0$ both roots are negative. Since
+$f''(x)=6x+b$ we see that $f$ is convex on the positive real
+axis if $b\geq 0$.
+
+### A QP Algorithm
+
+In this section we construct an algorithm for
+a general weighted linear least squares projection problem with equality and/or inequality constraints. It uses duality and unweighting majorization. The section takes the form of a small diversion, with examples. This may seem somewhat excessive, but it provides an easy reference for both you and me and it serves as a manual for the corresponding R code.
+
+We start with the *primal problem*, say problem $\mathcal{P}$, which is minimizing
+
+\begin{equation}
+f(x)=\frac12(Hx-z)'V(Hx-z)
+(\#eq:qpbase)
+\end{equation}
+
+over all $x$ satisfying equalities $Ax\geq b$ and equations $Cx=d$. We suppose the *Slater condition* is satisfied, i.e. there is an $x$ such that $Ax>b$. And, in addition, we suppose the system of inequalities and equations is *consistent*, i.e. has at least one solution.
+
+We first reduce the primal problem to a simpler, and usually smaller, one by partitioning the loss function. Define 
+
+\begin{align}
+\begin{split}
+W&:=H'VH,\\
+y&:=W^{-1}H'Vz,\\
+Q&:=(I-H(H'VH)^{-1}H'V).\\
+\end{split}
+(\#eq:qpfirstpart)
+\end{align}
+
+Then
+
+\begin{equation}
+(Hx-y)'V(Hx-y)=(x-y)'W(x-y)+y'Q'VQy,
+(\#eq:qpsimple)
+\end{equation}
+
+The simplified primal problem $\mathcal{P}'$ is to minimize $(x-y)'W(x-y)$ over $Ax\geq b$ and $Cx=d$, where $W$ is assumed to be positive definite. Obviously
+the solutions to $\mathcal{P}$ and $\mathcal{P}'$ are the same. The two loss function values only differ by the constant term $y'Q'VQy$.
+
+We do not solve $\mathcal{P}'$ drectly, but we use Lagrangian duality and solve the dual quadratic programmng problem. The Lagrangian for $\mathcal{P}'$ is
+
+\begin{equation}
+\mathcal{L}(x,\lambda,\mu)=\frac12(x-y)'W(x-y)-
+\lambda'(Ax - b)-\mu'(Cx-d),
+(\#eq:qplagrange)
+\end{equation}
+
+where $\lambda\geq 0$ and $\mu$ are the Lagrange multipliers. 
+
+Now 
+
+\begin{align}
+\begin{split}
+\max_{\lambda\geq 0}\max_\mu\mathcal{L}(x,\lambda,\mu)&=\\
+&=\begin{cases}\frac12(x-y)'W(x-y)-\lambda'(Ax - b)-\mu'(Cx-d)&\text{ if }Ax\geq b,\\
++\infty&\text{ otherwise},
+\end{cases}
+\end{split}
+(\#eq:qpxcalc1)
+\end{align}
+
+and thus 
+
+\begin{equation}
+\min_x\max_{\lambda\geq 0}\max_\mu\mathcal{L}(x,\lambda,\mu)=\min_{Ax\geq b}\min_{Cx=d}\frac12(x-y)'W(x-y),
+(\#eq:qpxcalc2)
+\end{equation}
+
+which is our original simplified primal problem $\mathcal{P}'$.
+
+We now look at the *dual problem* $\mathcal{D}'$ (of $\mathcal{P}'$), which means solving 
+
+\begin{equation}
+\max_{\lambda\geq 0}\max_\mu\min_x\mathcal{L}(x,\lambda,\mu).
+(\#eq:qpdual)
+\end{equation}
+
+The inner minimum over $x$ for given $\lambda$ and $\mu$ is attained at 
+
+\begin{equation}
+x=y+W^{-1}(A'\mid C')\begin{bmatrix}\lambda\\\mu\end{bmatrix},
+(\#eq:qpxsolve)
+\end{equation}
+
+and is equal to $-g(\lambda,\mu)$, where
+
+\begin{equation}
+\frac12\begin{bmatrix}\lambda&\mu\end{bmatrix}
+\begin{bmatrix}AW^{-1}A'&AW^{-1}C'\\CW^{-1}A'&CW^{-1}C'\end{bmatrix}\begin{bmatrix}\lambda\\\mu\end{bmatrix}+\\
++\lambda'(Ay-b)\\
++\mu'(Cy-d)
+(\#eq:qpdualf)
+\end{equation}
+
+Our strategy is to solve $\mathcal{D'}$ for $\lambda\geq 0$ and/or $\mu$. Because of our biases we do not maximize $-g$, we minimize $g$. Then
+compute the solution of both $\mathcal{P}'$ and $\mathcal{P}$ from
+\@ref(eq:qpxsolve). The duality theorem for quadratic programming tells us the
+values of $f$ at the optimum of $\mathcal{P}'$ and $-g$ at the  optimum of $\mathcal{D}'$ are equal, and of course the value at the optimum of $\mathcal{P}$
+is that of $\mathcal{P}'$ plus the constant $y'QVQy$.
+
+From here on we can proceed with unweighting in various ways. We could, for instance, minimize out $\mu$ and then unweight the resulting quadratic form. Instead, we go the easy way. Majorize the partitioned matrix $K$ in the quadratic part of \@ref(eq:qpdualf) by a similarly partitioned diagonal positive matrix $E$.
+
+\begin{equation}
+E:=\begin{bmatrix}F&\emptyset\\\emptyset&G\end{bmatrix}\gtrsim K:=\begin{bmatrix}AW^{-1}A'&AW^{-1}C'\\CW^{-1}A'&CW^{-1}C'\end{bmatrix}
+(\#eq:qpdumaj)
+\end{equation}
+
+Suppose $\tilde\lambda\geq 0$ and $\tilde\mu$ are the current best solutions of the dual problem. Put them on top of each other to define $\tilde\gamma$, and do the same with $\lambda$ and $\mu$ to get $\gamma$. Then $g(\lambda,\mu)$ becomes 
+
+\begin{equation}
+\frac12 (\tilde\gamma+(\gamma-\tilde\gamma))'E(\tilde\gamma+(\gamma-\tilde\gamma))+\gamma'(Ry-e)=\\
+=\frac12(\gamma-\tilde\gamma)'E(\gamma-\tilde\gamma)+ (\gamma-\tilde\gamma)'E(\tilde\gamma+(Ry-e))+\\+\frac12\tilde\gamma'E\tilde\gamma+\tilde\gamma'(Ry-e)
+(\#eq:qpdualcomp)
+\end{equation}
+
+The last two terms do not depend on $\gamma$, so for the majorization algorithm is suffices to minimize
+
+\begin{equation}
+\frac12(\gamma-\tilde\gamma)'F(\gamma-\tilde\gamma)+ (\gamma-\tilde\gamma)'E(\tilde\gamma+(Ry-e))
+(\#eq:qpdualproj)
+\end{equation}
+
+Let
+
+\begin{equation}
+\xi:=\tilde\gamma-F^{-1}E(\tilde\gamma+(Ry-e))
+(\#eq:qpdefxi)
+\end{equation}
+
+then \@ref(eq:qpdualproj) becomes
+
+\begin{equation}
+\frac12(\gamma-\xi)'F(\gamma-\xi)-\frac12\xi'F\xi
+(\#eq:qpdualsimp)
+\end{equation}
+
+Because $F$ is diagonal $\lambda_i=\max(0,\xi_i)$ for $i=1,\cdots m_1$ and 
+and $\mu_i=\xi_{i+m_1}$ for $i=1,\cdots m_2$.
+
+Section \@ref(apcodemathadd) has the R code for qpmaj(). The defaults are set to do a simple isotone regression, but of course the function has a much larger scope. It can handle equality constraints, linear convexity constraints, partial orders, and much more general linear inequalities. It can fit polynomials, monotone polynomials, splnes, and monotone splines of various sorts. It is possible to have only inequality constraints, only equality constraints, or both. The matrix $H$ of predictors in \@ref(eq:qpbase) can either be there or not be there.
+
+The function qpmaj() returns both $x$ and $\lambda$, and the values of $\mathcal{P}$, $\mathcal{P}'$, and $\mathcal{D}'$. 
+And also the *predicted values* $Hx$, and the *constraint values* $Ax-b$ and $Cx-d$, if applicable. It's always nice to check *complimentary slackness*
+$\lambda'(Ax-b)=0$, and another check is provided because the values of
+$\mathcal{P}'$ and $\mathcal{D}'$ must be equal. Finally qpmaj() returns the number of iterations for the dual problem.
+
+The function qpmaqj() does not have the pretense to compete in efficiency with the sophisticated pivoting and active set strategies for quadratic programming discussed for example by @best_17. But it seems to do a reliable job on our small examples, and it is an interesting example of majorization and unweighting.
+
+#### Example 1: Simple Monotone Regression
+
+Here are the two simple monotone regression examples from section \@ref(mathsimpiso), the first one without weights and the second one with a diagonal matrix of weights.
+
+```{r qpmaj1}
+y<-c(1,2,1,3,2,-1,3)
+qpmaj(y)
+```
+
+```{r qpmaj2}
+qpmaj(y, v = diag(c(1,2,3,4,3,2,1)))
+```
+
+#### Example 2: Monotone Regression with Ties
+
+Now suppose the data have tie-blocks, which we indicate with
+$\{1\}\leq\{2,3,4\}\leq\{5,6\}\leq\{7\}$. The Hasse diagram of the partial order (courtesy of @ciomek_17) is
+
+```{r hasse, fig.align = "center", echo = FALSE}
+b<-matrix(0, 7, 7)
+b[1,]<-c(0,1,1,1,0,0,0)
+b[2,]<-c(0,0,0,0,1,1,0)
+b[3,]<-c(0,0,0,0,1,1,0)
+b[4,]<-c(0,0,0,0,1,1,0)
+b[5,]<-c(0,0,0,0,0,0,1)
+b[6,]<-c(0,0,0,0,0,0,1)
+b[7,]<-c(0,0,0,0,0,0,0)
+hasse(b == 1, labels = as.character (1:7))
+```
+
+In the primary approach to ties the inequality constraints $Ax\geq 0$ are coded with $A$ equal to
+
+```{r qpmaj3, echo = FALSE} 
+a <- matrix(0, 11, 7)
+a[1,] <- c(-1, 1, 0, 0, 0, 0, 0)
+a[2,] <- c(-1,0,1,0,0,0,0)
+a[3,] <- c(-1,0,0,1,0,0,0)
+a[4,] <- c(0,-1,0,0,1,0,0)
+a[5,] <- c(0,-1,0,0,0,1,0)
+a[6,] <- c(0,0,-1,0,1,0,0)
+a[7,] <- c(0,0,-1,0,0,1,0)
+a[8,] <- c(0,0,0,-1,1,0,0)
+a[9,] <- c(0,0,0,-1,0,1,0)
+a[10,] <- c(0,0,0,0,-1,0,1)
+a[11,] <- c(0,0,0,0,0,-1,1)
+matrixPrint (a, d = 0, w = 4)
+```
+
+Applying our algorithm gives
+
+```{r qpmaj3a}
+qpmaj(y, a = a)
+```
+
+In the secondary approach we require $Cx=0$, with $C$ equal to
+
+```{r  qpmaj4, echo = FALSE}
+a <- matrix (c(-1, 1, 0, 0, 0, 0, 0,
+               0, -1, 0, 0, 1, 0, 0,
+               0, 0, 0, 0, -1, 0, 1),
+               3, 7, byrow = TRUE)
+c <- matrix (c(0, 1, -1, 0, 0, 0, 0,
+               0, 1, 0, -1, 0, 0, 0,
+               0, 0, 0, 0, 1, -1, 0),
+               3, 7, byrow =TRUE)
+matrixPrint(c, d = 0, w = 4)
+```
+
+In addition we construct $A$ to require $x_1\leq x_2\leq x_5\leq x_7$. This gives
+
+```{r qpmaj4a}
+qpmaj(y, a = a, c = c)
+```
+
+In the tertiary approach, without weights, we require
+$x_1\leq\frac{x_2+x_3+x_4}{3}\leq\frac{x_5+x_6}{2}\leq x_7$
+which means
+
+```{r qpmaj5}
+a <- matrix(c(-1,1/3,1/3,1/3,0,0,0,
+              0,-1/3,-1/3,-1/3,1/2,1/2,0,
+              0,0,0,0,-1/2,-1/2,1),
+              3,7,byrow = TRUE)
+matrixPrint(a, d = 2, w = 5)
+```
+
+This gives
+
+```{r qpmaj5a}
+qpmaj(y, a = a)
+```
+
+#### Example 3: Weighted Rounding
+
+```{r qpmaj6, echo = FALSE}
+set.seed(12345)
+y<-rnorm(10)
+```
+
+This is a silly example in which a vector $y=$ `r y` is "rounded" so that its elements are between $-1$ and $+1$. The weights $V=W$ are a banded positive definite matrix.
+
+```{r qpmaj6a}
+a<-rbind(-diag(10),diag(10))
+b<-rep(-1, 20)
+w<-ifelse(outer(1:10,1:10,function(x,y) abs(x-y) < 4), -1, 0)+7*diag(10)
+qpmaj(y, v = w, a = a, b = b)
+```
+
+#### Example 4: Monotone Polynomials
+
+This example has a matrix $H$ with the monomials of degree $1,2,3$ on the 20 points
+$1,\cdots 20$. We want to fit a third-degree polynomial which is monotone, non-negative, and anchored at zero (which is why we do not have a monomial of degree zero, i.e. an intercept). Monotonicity is imposed by $(h_{i+1}-h_{i})'x\geq 0$ and non-negativity by $h_1'x\geq 0$. Thus there are $19+1$ inequality restrictions. For $y$ we choose points on the quadratic curve $y=x^2$, perturbed with random error.
+
+```{r qpmaj7}
+set.seed(12345)
+h <- cbind(1:20,(1:20)^2,(1:20)^3)
+a <- rbind (h[1,],diff(diag(20)) %*% h)
+y<-seq(0,1,length=20)^2+rnorm(20)/20
+plot(1:20, y)
+out<-qpmaj(y,a=a,h=h,verbose=FALSE,itmax=1000, eps = 1e-15)
+lines(1:20,out$pred,type="l",lwd=3,col="RED")
+```
+
+The plot above and the output below shows what qpmaj() does in this case.
+
+```{r qpmaj7a, echo = FALSE}
+out
+```
+
+We now want to accomplish more or less the same thing, but using a cubic of the form $f(x)=x(c+bx+ax^2)$. Choosing $a, b$ and $c$ to be nonnegative guarantees monotonicity (and convexity) on the
+positive axis, with a root at zero. If $b^2\geq 4ac$ then the cubic has two additional real roots, and by AM/GM we can guarantee this by $b\geq a + c$. So $a\geq 0$, $c\geq 0$, and $b\geq a+c$ are our three inequalities.
+
+```{r qpmaj8}
+h <- cbind(1:20,(1:20)^2,(1:20)^3)
+a <- matrix(c(1,0,0,0,0,1,-1,1,-1), 3, 3, byrow = TRUE)
+plot(1:20, y)
+out<-qpmaj(y,a=a,h=h,verbose=FALSE,itmax=10000, eps = 1e-15)
+lines(1:20,out$pred,type="l",lwd=3,col="RED")
+```
+
+The results of this alternative way of fitting the cubic are more or less indistinguishable from the earlier results, although this second approach is quite a bit faster (having only three inequalities instead of 21).
+
+```{r qpmaj8a, echo = FALSE}
+out
+```
+
+
+### Examples

@@ -1,0 +1,221 @@
+# Nominal MDS {#chnominal}
+
+So far we have assumed there was some direct information about dissimilarities between objects. The information could be either numerical or ordinal, but we have not talked about nominal or categorical information yet. By nominal information we mean that the $n$ objects are partitioned in $K$ categories, where we usually assume that $K$ is much smaller than $n$. Categories are not necessarily ordered.
+
+Where does MDS come in ? Our starting point is that objects in the same category are more similar than objects in different categories. But this requirement can be formalized in different ways. 
+
+We discuss some of the ways in which we can express the nominal information in terms of distances and apply techniques in the smacof family to computed optimal least squares configurations.
+
+For historical and other reasons this topic is of great interest to me. Some of my first rambling red reports (@deleeuw_R_68e, @deleeuw_R_69d) were on the analysis of relational or categorical data. The first one discussed mainly the quantification methods of @guttman_41, the second one explored using the topological notion of separation. My dissertation (@deleeuw_B_73) systematized that early research. Making it available to a wider audience, and as software, was the main motivation for starting the Gifi project (@gifi_B_90, @deleeuw_B_20).
+
+
+## Binary Dissimilarities
+
+Suppose we have and equivalence relation $\simeq$ on $n$ objects $\mathcal{O}$. Let $d_{ij}=0$ if $i\simeq j$ and $d_{ij}=1$ if $i\not\simeq j$. Suppose the quotient set $\mathcal{O}/\mathord{\simeq}$ has $K$ equivalence classes. Thus the objects can be ordered in such a way that $\Delta$ has
+$K$ zero matrices with size $n_1\cdots, n_K$ in the diagonal blocks and ones everywhere else. The $n_k$ are the sizes of the equivalence classes, and they add up on $n$.
+
+
+
+$[x]$ canonical projection
+
+
+
+
+## Indicator matrix
+
+Q technique
+
+
+```{r catexampledata, echo = FALSE}
+set.seed(12345)
+x <- matrix(rnorm(20), 10, 2)
+y <- matrix(rnorm(10), 5, 2)
+z <- matrix(rnorm(10), 5, 2)
+x[, 1] <- x[, 1] + 1
+y[, 1] <- y[, 1] - 1
+z[, 2] <- z[, 2] - 1.5
+```
+
+```{r catexampleindicator, echo = FALSE}
+g <- matrix(0,20,3)
+g[1:10,1] <- 1
+g[11:15,2] <- 1
+g[16:20,3] <- 1
+row.names(g) <- as.character(1:20)
+kable(g, digits = 1, col.names = c("A", "B", "C"), row.names = TRUE, caption ="Example Indicator Matrix")
+matrixPrint(as.matrix(dist(g)), digits = 1, width = 2, format = "d", flag = "")
+```
+
+```{r catexampleplot, echo = FALSE, fig.align = "center", fig.cap = "Example Object Scores"}
+par(pty="s")
+plot(
+  x,
+  xlim = c(-3, 3),
+  ylim = c(-3, 3),
+  xlab = "",
+  ylab = "",
+  col = "RED",
+  pch = 19, 
+  cex = 1.5
+)
+points(y, col = "BLUE", pch = 19, cex = 1.5)
+points(z, col = "GREEN", pch = 19, cex = 1.5)
+```
+
+
+## Unfolding Indicator Matrices
+
+
+all within category distances smaller than all between category distances
+(for each variable separately)
+as in MCA: joint persons and categories, primary approach to ties
+
+These order constraints are rather strict. They do not only imply that the category clouds are separated, they also mean the clouds must be small and rather far apart.
+
+Think of the situation where the two categories are balls in
+$\mathbb{R}^p$ with centers $x$ and $y$ and $radius $r$. The
+largest within-category distance is $2r$. The smallest
+between-category distance is $\max(0,d(x,y)-2r)$. Thus
+all within-category distances are all smaller than all 
+between-category distances if and only if $d(x,y)\geq 4r$.
+
+```{r dbmcafigtot, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
+baseplot(x, y, z)
+```
+
+
+```{r bwdistance, echo = FALSE, fig.align = "center", fig.cap = "Within and Between Distances"}
+d <- as.matrix(dist(rbind(x, y, z)))
+d1 <- d[1:10, 1:10]
+d1 <- d1[outer(1:10, 1:10, ">")]
+d2 <- d[11:15, 11:15]
+d2 <- d2[outer(1:5, 1:5, ">")]
+d3 <- d[16:20, 16:20]
+d3 <- d3[outer(1:5, 1:5, ">")]
+d4 <- as.vector(d[1:10, 11:15])
+d5 <- as.vector(d[1:10, 16:20])
+d6 <- as.vector(d[11:15, 16:20])
+names(d1) <- rep("w", 45)
+names(d2) <- rep("w", 10)
+names(d3) <- rep("w", 10)
+names(d4) <- rep("b", 50)
+names(d5) <- rep("b", 50)
+names(d6) <- rep("b", 25)
+dd <- sort(c(d1, d2, d3, d4, d5, d6))
+plot(1:190, dd, type = "n")
+for (i in 1:190) {
+  if (names(dd[i]) == "b") {
+    cc = "RED"
+  } else {
+    cc = "BLUE"
+  }
+  points(matrix(c(i, dd[i]), 1, 2), col = cc, pch = 19)
+}
+```
+
+```{r bwdots, echo = FALSE, fig.align = "center", fig.cap = "Within and Between Distances"}
+plot(c(0,0), xlim=c(0,6), ylim = c(0,1), type = "n", xlab = "distances", ylab = "", yaxt = "n")
+for (i in which(names(dd)=="w")) {
+  points(matrix(c(dd[i],0), 1, 2), col = "BLUE", pch = 19)
+}
+for (i in which(names(dd)=="b")) {
+  points(matrix(c(dd[i],1), 1, 2), col = "RED", pch = 19)
+}
+```
+
+```{r bwhist, echo = FALSE, fig.align = "center", fig.cap = "Within and Between Distances"}
+W <- dd[which(names(dd)=="w")]
+B <- dd[which(names(dd)=="b")]
+c1 <- rgb(173,216,230,max = 255, alpha = 80, names = "lt.blue")
+c2 <- rgb(255,192,203, max = 255, alpha = 80, names = "lt.pink")
+b <- min(c(W,B)) - .75
+e <- max(c(W,B)) + .75
+ax <- pretty(b:e, n = 12)
+hgW <- hist(W, breaks = ax, plot = FALSE)
+hgB <- hist(B, breaks = ax, plot = FALSE)
+plot(hgW, col = c1)
+plot(hgB, col = c2, add = TRUE)
+```
+
+We can make the requirements less strict by 
+
+For all $k$ 
+$$
+\max_{i\in I_k\ j\in I_k}d(x_i,x_j)\leq\min_{i\in I_k\ j\in I\backslash I_k}d(x_i,x_j).
+$$ 
+$$
+\max(kk)\leq\min(k\overline{k})
+$$
+$$
+\max_k\max(kk)\leq\min_{i\not= j}\min(ij)
+$$
+the within category distances of category 1 are less than the
+smallest between-category distance 
+
+## Linear Separation
+
+line perpendicular to line connecting category points separates categories
+
+all closer to their star center than to other star centers:
+primary monotone regression over all rows of g
+
+suppose the star centers are $y$ and $z$. The plane is
+$(x-\frac12(y+z))'(y-z)=0$
+If $u$ is in the $y$ category we must have $(u-\frac12(y+z))'(y-z)\geq 0$
+
+Just in terms of distances
+
+
+```{r dbmcafigparxy, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
+baseplot(x, y, z, wz = FALSE)
+mx <- apply(x, 2, mean)
+my <- apply(y, 2, mean)
+mz <- apply(z, 2, mean)
+mm <- (mx + my) / 2
+cxy <- (my[1] - mx[1]) / (mx[2] - my[2])
+dxy <- mm[2] - cxy * mm[1]
+abline(dxy, cxy)
+```
+
+```{r dbmcafigparxz, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
+baseplot(x, y, z, wy = FALSE)
+mm <- (mx + mz) / 2
+cxz <- (mz[1] - mx[1]) / (mx[2] - mz[2])
+dxz <- mm[2] - cxz * mm[1]
+abline(dxz, cxz)
+```
+
+```{r dbmcafigparyz, echo = FALSE, fig.align = "center", fig.cap = "Distance Based MCA"}
+baseplot(x, y, z, wx = FALSE)
+mm <- (my + mz) / 2
+cyz <- (mz[1] - my[1]) / (my[2] - mz[2])
+dyz <- mm[2] - cyz * mm[1]
+abline(dyz, cyz)
+```
+
+What if the star centers are on a straight line
+
+## Circular Separation
+
+monotone regression on each column of g
+
+k within balls must be disjoint => they can be separated by straight
+lines
+
+## Convex Hull Scaling
+
+## Voronoi Scaling
+
+## Multidimensional Scalogram Analysis
+
+Guttman's MSA: Inner points, outer points
+
+Suitably mysterious
+
+@lingoes_68a
+@lingoes_68b
+@guttman_67
+
+
+
+

@@ -1,0 +1,414 @@
+---
+title: "Least  Squares Euclidean Multidimensional Scaling"
+author: "Jan de Leeuw"
+date: '`r paste("Started October 02, 2020. Last update", format(Sys.Date(),"%B %d, %Y"))`'
+output:
+  bookdown::gitbook:
+    config:
+     keep_md: yes
+     toolbar:
+       position: fixed
+     toc: 
+      collapse: none
+     toc_depth: 5
+  bookdown::pdf_book:
+    keep_tex: yes
+    latex_engine: pdflatex
+    number_sections: yes  
+    toc: yes
+    toc_depth: 5
+description: null
+documentclass: book
+fontsize: 12pt
+graphics: yes
+link-citations: yes
+delete_merged_file: TRUE
+mainfont: Times New Roman
+coverpage: graphics/cover.png
+site: bookdown::bookdown_site
+clean_envir: TRUE
+bibliography:
+- mypubs.bib
+- total.bib
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{=html}
+<style type="text/css">
+
+body{ /* Normal  */
+   font-size: 18px;
+}
+td {  /* Table  */
+   font-size: 18px;
+}
+h1 { /* Header 1 */
+ font-size: 28px;
+ color: DarkBlue;
+}
+h2 { /* Header 2 */
+ font-size: 22px;
+ color: DarkBlue;
+}
+h3 { /* Header 3 */
+ font-size: 18px;
+ color: DarkBlue;
+}
+code.r{ /* Code block */
+  font-size: 18px;
+}
+pre { /* Code block */
+  font-size: 18px
+}
+</style>
+```
+```{r function_code, echo = FALSE}
+source ("rcode/common/indexing.R")
+source ("rcode/common/io.R")
+source ("rcode/common/linear.R")
+source ("rcode/common/nextPC.R")
+source ("rcode/common/decode.R")
+source ("rcode/common/smacof.R")
+source("rcode/properties.R")
+source("rcode/pictures.R")
+source("rcode/classical.R")
+source("rcode/accelerate.R")
+source("rcode/full.R")
+source("rcode/unfolding.R")
+source("rcode/constrained.R")
+source("rcode/nominal.R")
+source("rcode/sstress.R")
+source("rcode/inverse.R")
+source("rcode/global.R")
+source("rcode/smacofEps.R")
+source("rcode/mathadd.R")
+source("rcode/expandOneDim.R")
+source("rcode/equalDelta.R")
+```
+
+```{r shlibs, echo = FALSE}
+dyn.load("lib/deboor.so")
+dyn.load("lib/nextPC.so")
+dyn.load("lib/cleanup.so")
+dyn.load("lib/jeffrey.so")
+dyn.load("lib/jacobi.so")
+dyn.load("lib/jbkTies.so")
+dyn.load("lib/matrix.so")
+#dyn.load("lib/mySort.so")
+```
+
+```{r packages, echo = FALSE}
+suppressPackageStartupMessages (library (knitr, quietly = TRUE))
+suppressPackageStartupMessages (library (kableExtra, quietly = TRUE))
+suppressPackageStartupMessages (library (microbenchmark, quietly = TRUE))
+suppressPackageStartupMessages (library (polynom, quietly = TRUE))
+suppressPackageStartupMessages (library (hasseDiagram, quietly = TRUE))
+suppressPackageStartupMessages (library (rlist, quietly = TRUE))
+suppressPackageStartupMessages (library (MASS, quietly = TRUE))
+suppressPackageStartupMessages (library (lsei, quietly = TRUE))
+suppressPackageStartupMessages (library (rcdd, quietly = TRUE))
+suppressPackageStartupMessages (library (numDeriv, quietly = TRUE))
+suppressPackageStartupMessages (library (vertexenum, quietly = TRUE))
+suppressPackageStartupMessages (library (lpSolve, quietly = TRUE))
+suppressPackageStartupMessages (library (quadprog, quietly = TRUE))
+suppressPackageStartupMessages (library (combinat, quietly = TRUE))
+```
+
+```{r data, echo = FALSE}
+source("data/dsmall.R")
+source("data/ekman.R")
+source("data/gruijter.R")
+source("data/veggies.R")
+source("data/births.R")
+```
+
+# Note {.unnumbered}
+
+This book will be expanded/updated frequently. The directory
+[github.com/deleeuw/stress](https://github.com/deleeuw/stress)
+has a pdf version, a html version, the bib file,  the complete Rmd 
+file with the codechunks, and the R and C source code. All suggestions for improvement
+of text or code are welcome, and some would be really beneficial. For
+example, I only use base R graphics, nothing more fancy, because base
+graphics is all I know.
+
+All text and code are in the public domain and can be copied, modified,
+and used by anybody in any way they see fit. Attribution will be
+appreciated, but is not required. For completeness we include a slighty
+modified version of the Unlicense as appendix \@ref(apunlicense).
+
+I number and label *all* displayed equations. Equations are displayed,
+instead of inlined, if and only if one of the following is true.
+
+-   They are important.
+-   They are referred to elsewhere in the text.
+-   Not displaying them messes up the line spacing.
+
+All code chunks in the text are named. Theorems, lemmas, chapters,
+sections, subsections and so on are also named and numbered, using
+bookdown/Rmarkdown.
+
+I have been somewhat hesitant to use lemmas, theorems, and corollaries
+in this book. But ultimately they enforce precision and provide an excellent organizational tool. If there is a proof of a lemma, theorem, or corollary, it
+ends with a $\square$.
+
+Another idiosyncracy: if a line in multiline displayed equation ends
+with "=", then the next line begins with "=". If it ends with "+", then
+the next line begin with "+", and if it ends with "-" the next line
+begins with "+" as well. I'll try to avoid ending a line with "+" or
+"-", especially with "-", but if it happens you are warned. A silly
+example is
+
+```{=tex}
+\begin{align}
+&(x+y)^2-\\
+&+4x=\\
+&=x^2+y^2-2x=\\
+&=(x-y)^2\geq\\
+&\geq 0.
+\end{align}
+```
+Just as an aside: if I refer to something that has been mentioned
+"above" I mean something that comes earlier in the book and "below"
+refers to anything that comes later. This always confuses me, so I had
+to write it down.
+
+The dilemma of whether to use "we" or "I" throughout the book is solved
+in the usual way. If I feel that a result is the work of a group (me, my
+co-workers, and the giants on whose shoulders we stand) then I use "we".
+If it's an individual decision, or something personal, then I use "I".
+The default is "we", as it always should be in scientific writing.
+
+Most of the individual chapters also have some of the necessary mathematical background material, both notation and results, sometimes with specific eleborations that seem useful for the book. Sometimes this background material is quite extensive. Examples are splines, majorization, unweighting, monotone
+regression, and the basic Zangwill and Ostrowski fixed point theorems we need for convergence analysis of our algorithms.
+
+There is an appendix \@ref(apcode) with code, and an appendix
+\@ref(apdatasets) with data sets. These contain brief descriptions and links to the supplementary materials directories, which contain the actual code and data.
+
+Something about code and R/C
+
+I will use this note to thank Rstudio, in particular J.J. Allaire and
+Yihui Xi, for their contributions to the R universe, and for their
+promotion of open source software and open access publications. Not too
+long ago I was an ardent LaTeX user, firmly convinced I would never use
+anything else again in my lifetime. In the same way thatI was convinced before I would never use anything besides, in that order,
+FORTRAN, PL/I, APL, and (X)Lisp. And PHP/Apache/MySQL. But I lived too long. And then, in my dotage, lo and behold, R, Rstudio, (R)Markdown, bookdown, blogdown, Git, Github, Netlify came along.
+
+```{r lajollapic, echo = FALSE, fig.align = "center", out.width="60%", fig.cap = "Forrest Young, Bepi Pinner, Jean-Marie Bouroche, Yoshio Takane, Jan de Leeuw \n at La Jolla, August 1975"}
+include_graphics("graphics/lajolla_08_75.png")
+```
+
+# Preface {.unnumbered}
+
+This book is definitely *not* an impartial and balanced review of all of
+multidimensional scaling (MDS) theory and history. It emphasizes 
+computation, and the mathematics needed for computation. In addition, it
+is a summary of over 50 years of MDS work by me, either solo or together
+with my many excellent current or former co-workers and co-authors. It
+is heavily biased in favor of the smacof formulation of MDS
+(@deleeuw_C_77, @deleeuw_heiser_C_77, @deleeuw_mair_A_09c), and the
+corresponding majorization (or MM) algorithms. And, moreover, I am
+shamelessly squeezing in as many references to my published and
+unpublished work as possible, with links to the corresponding pdf's if
+they are available. Thus this book is also a jumpstation into my 
+bibliography.
+
+I have not organized the book along historical lines because most of the
+early techniques and results have been either drastically improved or
+completely abandoned. Nevertheless, some personal historical perspective
+may be useful. I will put most of it in this preface, so uninterested
+readers can easily skip it.
+
+I got involved in MDS in 1968 when John van de Geer returned from a
+visit to Clyde Coombs in Michigan and started the Department of Data
+Theory in the Division of Social Sciences at Leiden University. I was
+John's first hire, although I was still a graduate student at the time.
+
+Remember that Clyde Coombs was running the Michigan Mathematical
+Psychology Program, and he had just published his remarkable book "A
+Theory of Data" (@coombs_64). The name of the new department in Leiden
+was taken from the title of that book, and Coombs was one of the first
+visitors to give a guest lecture there.
+
+This is maybe the place to clear up some possible misunderstandings
+about the name "Data Theory". Coombs was mainly interested in a taxonomy
+of data types, and in pointing out that "data" were not limited to a
+table or data-frame of objects by variables. In addition, there were
+also similarity ratings, paired comparisons, and unfolding data. Coombs
+also emphasized that data were often non-metric, i.e. ordinal or
+categorical, and that it was possible to analyze these ordinal or
+categorical relationships directly, without first constructing numerical
+scales to which classical techniques could be applied. One of the new
+techniques discussed in @coombs_64 was a ordinal form of MDS, in
+which not only the data but also the representation of the data in
+Euclidean space were non-metric.
+
+John van de Geer had just published @vandegeer_67. In that book, and in
+the subsequent book @vandegeer_71, he developed his unique geometric
+approach to multivariate analysis. Relationship between variables, and
+between variables and individuals, were not just discussed using matrix
+algebra, but were also visualized in diagrams. This was related to the
+geometric representations in Coombs' Theory of Data, but it concentrated 
+on numerical data in the form of rectangular matrices of objects by variables.
+
+Looking back it is easy to see that both Van de Geer and Coombs
+influenced my approach to data analysis. I inherited the emphasis on
+non-metric data and on visualization. But, from the beginning, I
+interpreted "Data Theory" as "Data Analysis", with my emphasis shifting
+to techniques, loss functions, implementations,
+algorithms, optimization, computing, and programming. This is of
+interest because in 2020 my former Department of Statistics at UCLA,
+together with the Department of Mathematics, started a bachelor's
+program in Data Theory, in which "Emphasis is placed on the development
+and theoretical support of a statistical model or algorithmic approach.
+Alternatively, students may undertake research on the foundations of
+data science, studying advanced topics and writing a senior thesis."
+This sounds like a nice hybrid of Data Theory and Data Analysis, with a
+dash of computer science mixed in.
+
+Computing and optimization were in the air in 1968, not so much because
+of Coombs, but mainly because of Roger Shepard, Joe Kruskal, and Doug
+Carroll at Bell Labs in Murray Hill. John's other student Eddie Roskam
+and I were fascinated by getting numerical representations from ordinal
+data by minimizing explicit least squares loss functions. Eddie wrote
+his dissertation in 1968 (@roskam_68). In 1973 I went to Bell Labs for a
+year, and Eddie went to Michigan around the same time to work with Jim
+Lingoes, resulting in @lingoes_roskam_73.
+
+My first semi-publication was @deleeuw_R_68g, quickly followed by a long
+sequence of other, admittedly rambling, internal reports. Despite this very
+informal form of publication the sheer volume of them got the attention
+of Joe Kruskal and Doug Carroll, and I was invited to spend the academic
+year 1973-1974 at Bell Laboratories. That visit somewhat modified my
+cavalier approach to publication, but I did not become half-serious in
+that respect until meeting with Forrest Young and Yoshio Takane at the
+August 1975 US-Japan seminar on MDS in La Jolla. Together we used the
+alternating least squares approach to algorithm construction that I had
+developed since 1968 into a quite formidable five-year publication
+machine, with at its zenith @takane_young_deleeuw_A_77.
+
+In La Jolla I gave the first presentation of the majorization method for
+MDS, later known as smacof, with the first formal convergence proof. The
+canonical account of smacof was published in a conference paper (@deleeuw_C_77). Again I did not bother to get the results into a journal or into some other more effective form of publication. The basic theory for what became known as
+smacof was also presented around the same time in another book chapter
+@deleeuw_heiser_C_77.
+
+In 1978 I was invited to the Fifth International Symposium on
+Multivariate Analysis in Pittsburgh to present what became
+@deleeuw_heiser_C_80. There I met Nan Laird, one of the authors of the
+basic paper on the EM algorithm (@dempster_laird_rubin_77). I remember
+enthusiastically telling her on the conference bus that EM and smacof
+were both special case of the general majorization approach to algorithm
+construction, which was consequently born around the same time. But that
+is a story for a companion volume, which currently only exists in a very
+preliminary stage (https://github.com/deleeuw/bras).
+
+My 1973 PhD thesis (@deleeuw_B_73, reprinted as @deleeuw_B_84) was
+actually my second attempt at a dissertation. I had to get a PhD, any
+PhD, before going to Bell Labs, because of the difference between the Dutch
+and American academic title and reward systems. I started writing a
+dissertation on MDS, in the spirit of what later became
+@deleeuw_heiser_C_82. But halfway through I lost interest and got
+impatient, and I decided to switch to nonlinear multivariate analysis.
+This second attempt did produced a finished dissertation (@deleeuw_B_73), which
+grew over time, with the help of multitudes, into @gifi_B_90. But that again is a
+different history, which I will tell some other time in yet another
+companion volume (https://github.com/deleeuw/gifi). For a long time I did not do much work on MDS, until the arrival of Patrick Mair and the R language led to
+a resurgence of my interest, and ultimately to @deleeuw_mair_A_09c and
+@mair_groenen_deleeuw_A_19.
+
+I consider this MDS book to be a summary and extension of the basic papers @deleeuw_C_77,
+@deleeuw_heiser_C_77, @deleeuw_heiser_C_80, @deleeuw_heiser_C_82, and
+@deleeuw_A_88b (published version of @deleeuw_R_84c), all written 30-40
+years ago. Footprints in the sands of time. It can also be seen as an
+elaboration of the more mathematical and computational sections of the excellent and comprehensive textbook of @borg_groenen_05. That book has much more
+information about the origins, the data, and the applications of MDS, as
+well as on the interpretation of MDS solutions. In this book I
+concentrate almost exclusively on the mathematical, computational, and
+programming aspects of MDS.
+
+For those who cannot get enough of me, there is a data base of my
+published and unpublished reports and papers since 1965, with links to pdf's, at
+<https://jansweb.netlify.app/publication/>. 
+
+There are many, many people I have to thank for my scientific education.
+Sixty years is a long time, and consequently many excellent teachers and
+researchers have crossed my path. I will gratefully mention the academics who had a
+major influence on my work and who are not with us any more, since I will join them in the not too distant future: Louis
+Guttman (died 1987), Clyde Coombs (died 1988), Warren Torgerson (died 1999),
+Forrest Young (died 2006), John van de Geer (died 2008), Joe Kruskal (died 2010), Doug Carroll (died 2011), and Rod McDonald (died 2012).
+
+# Notation and Reserved Symbols {-}
+
+intro
+
+## Spaces
+
+* $\mathbb{R}^n$ is the space of all real vectors, i.e. all $n$-element tuples of real numbers. Typical elements of $\mathbb{R}^n$
+are $x,y,z$. The element of $x$ in position 
+$i$ is
+$x_i$. Defining a vector by its elements is done with $x=\{x_i\}$. 
+
+* $\mathbb{R}^n$ is equipped with the inner product $\langle x,y\rangle=x'y=\sum_{i=1}^nx_iy_i$ and the norm $\|x\|=\sqrt{x'x}$.
+
+* The canonical basis for $\mathbb{R}^n$ is the $n-$tuple $(e_1,cdots,e_n)$, where $e_i$ has element $i$ equal to $+1$
+and all other elements equal to zero. Thus $\|e_i\|=1$ and
+$\langle e_i,e_j\rangle=\delta^{ij}$, with $\delta^{ij}$ the 
+Kronecker delta (equal to one if $i=j$ and zero otherwise).
+Note that $x_i=\langle e_i,x\rangle$.
+
+* $\mathbb{R}$ is the real line and $\mathbb{R}_+$ is the half line of
+non-negative numbers.
+
+* $\mathbb{R}^{n\times m}$ is the space of all $n\times m$ real matrices. Typical elements of $\mathbb{R}^{n\times m}$ are $A,B,C$. The element of $A$ in row $i$ and column $j$ is $a_{ij}$. Defining a matrix by its elements is done with $A=\{a_{ij}\}$. 
+
+* $\mathbb{R}^{n\times m}$ is equipped with the inner product $\langle A,B\rangle=\text{tr} A'B=\sum_{i=1}^n\sum_{j=1}^ma_{ij}b_{ij}$ and the norm $\|A\|=\sqrt{\text{tr}\ A'A}$.
+
+* The canonical basis for $\mathbb{R}^{n\times m}$ is the $nm-$tuple $(E_{11},cdots,E_{nm})$, where $E_{ij}$ has element $(i,j)$ equal to $+1$
+and all other elements equal to zero. Thus $\|E_{ij}\|=1$ and
+$\langle E_{ij},E_{kl}\rangle=\delta^{ik}\delta^{jl}$.
+
+$\text{vec}$ and $\text{vec}^{-1}$
+
+## Matrices
+
+* $a_{i\bullet}$ is row $i$ of matrix $A$, $a_{\bullet j}$ is column $j$.
+
+* $a_{i\star}$ is the sum of row $i$ of matrix $A$, $a_{\star j}$ is the sum of column $j$.
+
+* $A'$ is the transpose of $A$, and $\text{diag}(A)$ is the diagonal
+matrix with the diagonal elements of $A$. The inverse of a square
+matrix $A$ is $A^{-1}$, the Moore-Penrose generalized inverse of any matrix $A$ 
+is $A^+$.
+
+* If $A$ and $B$ are two $n\times m$ matrices then their Hadamard (or elementwise) product
+$C=A\times B$ has elements $c_{ij}=a_{ij}b_{ij}$. The Hadamard quotient is $C=A/B$, with elements
+$c_{ij}=a_{ij}/b_{ij}$. The Hadamard power is $A^{(k)}=A^{(p-1)}\times A$.
+
+* DC matrices. Centering matrix.
+$J_n=I_n-n^{-1}E_n$. We do not use gthe
+subscripts if the order is obvious from the context.
+
+## Functions
+
+* $f,g,h,\cdots$ are used for functions or mappings. $f:X\rightarrow Y$ says that $f$ maps $X$ into $Y$.
+
+* $\sigma$ is used for all real-valued least squares loss functions.
+
+## MDS
+
+* $\Delta=\{\delta_{ij\cdots}\}$ is a matrix or array of dissimilarities.
+
+* $\langle \mathbb{X},d\rangle$ is a metric space, with $d:\mathcal{X}\otimes\mathcal{X}\rightarrow\mathbb{R}_+$ the distance function. If $X$ is  is an ordered n-tuple $(x_1,\cdots,x_n)$ of elements of $\mathcal{X}$ then $D(X)$ is $\{d(x_i,x_j)\}$, the elements of which we also write as $d_{ij}(X)$.
+
+* Summation over the elements of vector $x\in\mathbb{R}^n$ is $\sum_{i=1}^n x_i$. Summation over the elements of matrix $A\in\mathbb{R}^{n\times m}$ is $\sum_{i=1}^n\sum_{j=1}^m a_{ij}$.
+Summation over the elements above the diagonal of $A$ is
+$\mathop{\sum\sum}_{1\leq i<j\leq n}a_{ij}$.
+
+* Conditional summation is, for example, $\sum_{i=1}^n \{x_i\mid x_i>0\}$.
+
+Iteration
+
+
