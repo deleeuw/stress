@@ -1,0 +1,1381 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Least Squares Euclidean Multidimensional Scaling},
+  pdfauthor={Jan de Leeuw},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Least Squares Euclidean Multidimensional Scaling}
+\author{Jan de Leeuw}
+\date{Started October 02, 2020. Last update January 30, 2024}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+\chapter*{Note}\label{note}
+\addcontentsline{toc}{chapter}{Note}
+
+This book will be expanded/updated frequently. The directory
+\href{https://github.com/deleeuw/stress}{github.com/deleeuw/stress}
+has a pdf version, a html version, the bib file, the complete Rmd
+file with the codechunks, and the R and C source code. All suggestions for improvement
+of text or code are welcome, and some would be really beneficial. For
+example, I only use base R graphics, nothing more fancy, because base
+graphics is all I know.
+
+All text and code are in the public domain and can be copied, modified,
+and used by anybody in any way they see fit. Attribution will be
+appreciated, but is not required. For completeness we include a slighty
+modified version of the Unlicense as appendix \ref{apunlicense}.
+
+I number and label \emph{all} displayed equations. Equations are displayed,
+instead of inlined, if and only if one of the following is true.
+
+\begin{itemize}
+\tightlist
+\item
+  They are important.
+\item
+  They are referred to elsewhere in the text.
+\item
+  Not displaying them messes up the line spacing.
+\end{itemize}
+
+All code chunks in the text are named. Theorems, lemmas, chapters,
+sections, subsections and so on are also named and numbered, using
+bookdown/Rmarkdown.
+
+I have been somewhat hesitant to use lemmas, theorems, and corollaries
+in this book. But ultimately they enforce precision and provide an excellent organizational tool. If there is a proof of a lemma, theorem, or corollary, it
+ends with a \(\square\).
+
+Another idiosyncracy: if a line in multiline displayed equation ends
+with ``='', then the next line begins with ``=''. If it ends with ``+'', then
+the next line begin with ``+'', and if it ends with ``-'' the next line
+begins with ``+'' as well. I'll try to avoid ending a line with ``+'' or
+``-'', especially with ``-'', but if it happens you are warned. A silly
+example is
+
+\begin{align}
+&(x+y)^2-\\
+&+4x=\\
+&=x^2+y^2-2x=\\
+&=(x-y)^2\geq\\
+&\geq 0.
+\end{align}
+
+Just as an aside: if I refer to something that has been mentioned
+``above'' I mean something that comes earlier in the book and ``below''
+refers to anything that comes later. This always confuses me, so I had
+to write it down.
+
+The dilemma of whether to use ``we'' or ``I'' throughout the book is solved
+in the usual way. If I feel that a result is the work of a group (me, my
+co-workers, and the giants on whose shoulders we stand) then I use ``we''.
+If it's an individual decision, or something personal, then I use ``I''.
+The default is ``we'', as it always should be in scientific writing.
+
+Most of the individual chapters also have some of the necessary mathematical background material, both notation and results, sometimes with specific eleborations that seem useful for the book. Sometimes this background material is quite extensive. Examples are splines, majorization, unweighting, monotone
+regression, and the basic Zangwill and Ostrowski fixed point theorems we need for convergence analysis of our algorithms.
+
+There is an appendix \ref{apcode} with code, and an appendix
+\ref{apdatasets} with data sets. These contain brief descriptions and links to the supplementary materials directories, which contain the actual code and data.
+
+Something about code and R/C
+
+I will use this note to thank Rstudio, in particular J.J. Allaire and
+Yihui Xi, for their contributions to the R universe, and for their
+promotion of open source software and open access publications. Not too
+long ago I was an ardent LaTeX user, firmly convinced I would never use
+anything else again in my lifetime. In the same way thatI was convinced before I would never use anything besides, in that order,
+FORTRAN, PL/I, APL, and (X)Lisp. And PHP/Apache/MySQL. But I lived too long. And then, in my dotage, lo and behold, R, Rstudio, (R)Markdown, bookdown, blogdown, Git, Github, Netlify came along.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{graphics/lajolla_08_75} 
+
+}
+
+\caption{Forrest Young, Bepi Pinner, Jean-Marie Bouroche, Yoshio Takane, Jan de Leeuw 
+ at La Jolla, August 1975}\label{fig:lajollapic}
+\end{figure}
+
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+This book is definitely \emph{not} an impartial and balanced review of all of
+multidimensional scaling (MDS) theory and history. It emphasizes
+computation, and the mathematics needed for computation. In addition, it
+is a summary of over 50 years of MDS work by me, either solo or together
+with my many excellent current or former co-workers and co-authors. It
+is heavily biased in favor of the smacof formulation of MDS
+(De Leeuw (\citeproc{ref-deleeuw_C_77}{1977}), De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_77}{1977}), De Leeuw and Mair (\citeproc{ref-deleeuw_mair_A_09c}{2009})), and the
+corresponding majorization (or MM) algorithms. And, moreover, I am
+shamelessly squeezing in as many references to my published and
+unpublished work as possible, with links to the corresponding pdf's if
+they are available. Thus this book is also a jumpstation into my
+bibliography.
+
+I have not organized the book along historical lines because most of the
+early techniques and results have been either drastically improved or
+completely abandoned. Nevertheless, some personal historical perspective
+may be useful. I will put most of it in this preface, so uninterested
+readers can easily skip it.
+
+I got involved in MDS in 1968 when John van de Geer returned from a
+visit to Clyde Coombs in Michigan and started the Department of Data
+Theory in the Division of Social Sciences at Leiden University. I was
+John's first hire, although I was still a graduate student at the time.
+
+Remember that Clyde Coombs was running the Michigan Mathematical
+Psychology Program, and he had just published his remarkable book ``A
+Theory of Data'' (Coombs (\citeproc{ref-coombs_64}{1964})). The name of the new department in Leiden
+was taken from the title of that book, and Coombs was one of the first
+visitors to give a guest lecture there.
+
+This is maybe the place to clear up some possible misunderstandings
+about the name ``Data Theory''. Coombs was mainly interested in a taxonomy
+of data types, and in pointing out that ``data'' were not limited to a
+table or data-frame of objects by variables. In addition, there were
+also similarity ratings, paired comparisons, and unfolding data. Coombs
+also emphasized that data were often non-metric, i.e.~ordinal or
+categorical, and that it was possible to analyze these ordinal or
+categorical relationships directly, without first constructing numerical
+scales to which classical techniques could be applied. One of the new
+techniques discussed in Coombs (\citeproc{ref-coombs_64}{1964}) was a ordinal form of MDS, in
+which not only the data but also the representation of the data in
+Euclidean space were non-metric.
+
+John van de Geer had just published Van de Geer (\citeproc{ref-vandegeer_67}{1967}). In that book, and in
+the subsequent book Van de Geer (\citeproc{ref-vandegeer_71}{1971}), he developed his unique geometric
+approach to multivariate analysis. Relationship between variables, and
+between variables and individuals, were not just discussed using matrix
+algebra, but were also visualized in diagrams. This was related to the
+geometric representations in Coombs' Theory of Data, but it concentrated
+on numerical data in the form of rectangular matrices of objects by variables.
+
+Looking back it is easy to see that both Van de Geer and Coombs
+influenced my approach to data analysis. I inherited the emphasis on
+non-metric data and on visualization. But, from the beginning, I
+interpreted ``Data Theory'' as ``Data Analysis'', with my emphasis shifting
+to techniques, loss functions, implementations,
+algorithms, optimization, computing, and programming. This is of
+interest because in 2020 my former Department of Statistics at UCLA,
+together with the Department of Mathematics, started a bachelor's
+program in Data Theory, in which ``Emphasis is placed on the development
+and theoretical support of a statistical model or algorithmic approach.
+Alternatively, students may undertake research on the foundations of
+data science, studying advanced topics and writing a senior thesis.''
+This sounds like a nice hybrid of Data Theory and Data Analysis, with a
+dash of computer science mixed in.
+
+Computing and optimization were in the air in 1968, not so much because
+of Coombs, but mainly because of Roger Shepard, Joe Kruskal, and Doug
+Carroll at Bell Labs in Murray Hill. John's other student Eddie Roskam
+and I were fascinated by getting numerical representations from ordinal
+data by minimizing explicit least squares loss functions. Eddie wrote
+his dissertation in 1968 (Roskam (\citeproc{ref-roskam_68}{1968})). In 1973 I went to Bell Labs for a
+year, and Eddie went to Michigan around the same time to work with Jim
+Lingoes, resulting in Lingoes and Roskam (\citeproc{ref-lingoes_roskam_73}{1973}).
+
+My first semi-publication was De Leeuw (\citeproc{ref-deleeuw_R_68g}{1968}), quickly followed by a long
+sequence of other, admittedly rambling, internal reports. Despite this very
+informal form of publication the sheer volume of them got the attention
+of Joe Kruskal and Doug Carroll, and I was invited to spend the academic
+year 1973-1974 at Bell Laboratories. That visit somewhat modified my
+cavalier approach to publication, but I did not become half-serious in
+that respect until meeting with Forrest Young and Yoshio Takane at the
+August 1975 US-Japan seminar on MDS in La Jolla. Together we used the
+alternating least squares approach to algorithm construction that I had
+developed since 1968 into a quite formidable five-year publication
+machine, with at its zenith Takane, Young, and De Leeuw (\citeproc{ref-takane_young_deleeuw_A_77}{1977}).
+
+In La Jolla I gave the first presentation of the majorization method for
+MDS, later known as smacof, with the first formal convergence proof. The
+canonical account of smacof was published in a conference paper (De Leeuw (\citeproc{ref-deleeuw_C_77}{1977})). Again I did not bother to get the results into a journal or into some other more effective form of publication. The basic theory for what became known as
+smacof was also presented around the same time in another book chapter
+De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_77}{1977}).
+
+In 1978 I was invited to the Fifth International Symposium on
+Multivariate Analysis in Pittsburgh to present what became
+De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_80}{1980}). There I met Nan Laird, one of the authors of the
+basic paper on the EM algorithm (Dempster, Laird, and Rubin (\citeproc{ref-dempster_laird_rubin_77}{1977})). I remember
+enthusiastically telling her on the conference bus that EM and smacof
+were both special case of the general majorization approach to algorithm
+construction, which was consequently born around the same time. But that
+is a story for a companion volume, which currently only exists in a very
+preliminary stage (\url{https://github.com/deleeuw/bras}).
+
+My 1973 PhD thesis (De Leeuw (\citeproc{ref-deleeuw_B_73}{1973}), reprinted as De Leeuw (\citeproc{ref-deleeuw_B_84}{1984})) was
+actually my second attempt at a dissertation. I had to get a PhD, any
+PhD, before going to Bell Labs, because of the difference between the Dutch
+and American academic title and reward systems. I started writing a
+dissertation on MDS, in the spirit of what later became
+De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_82}{1982}). But halfway through I lost interest and got
+impatient, and I decided to switch to nonlinear multivariate analysis.
+This second attempt did produced a finished dissertation (De Leeuw (\citeproc{ref-deleeuw_B_73}{1973})), which
+grew over time, with the help of multitudes, into Gifi (\citeproc{ref-gifi_B_90}{1990}). But that again is a
+different history, which I will tell some other time in yet another
+companion volume (\url{https://github.com/deleeuw/gifi}). For a long time I did not do much work on MDS, until the arrival of Patrick Mair and the R language led to
+a resurgence of my interest, and ultimately to De Leeuw and Mair (\citeproc{ref-deleeuw_mair_A_09c}{2009}) and
+(\citeproc{ref-mair_groenen_deleeuw_A_19}{\textbf{mair\_groenen\_deleeuw\_A\_19?}}).
+
+I consider this MDS book to be a summary and extension of the basic papers De Leeuw (\citeproc{ref-deleeuw_C_77}{1977}),
+De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_77}{1977}), De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_80}{1980}), De Leeuw and Heiser (\citeproc{ref-deleeuw_heiser_C_82}{1982}), and
+De Leeuw (\citeproc{ref-deleeuw_A_88b}{1988}) (published version of (\citeproc{ref-deleeuw_R_84c}{\textbf{deleeuw\_R\_84c?}})), all written 30-40
+years ago. Footprints in the sands of time. It can also be seen as an
+elaboration of the more mathematical and computational sections of the excellent and comprehensive textbook of Borg and Groenen (\citeproc{ref-borg_groenen_05}{2005}). That book has much more
+information about the origins, the data, and the applications of MDS, as
+well as on the interpretation of MDS solutions. In this book I
+concentrate almost exclusively on the mathematical, computational, and
+programming aspects of MDS.
+
+For those who cannot get enough of me, there is a data base of my
+published and unpublished reports and papers since 1965, with links to pdf's, at
+\url{https://jansweb.netlify.app/publication/}.
+
+There are many, many people I have to thank for my scientific education.
+Sixty years is a long time, and consequently many excellent teachers and
+researchers have crossed my path. I will gratefully mention the academics who had a
+major influence on my work and who are not with us any more, since I will join them in the not too distant future: Louis
+Guttman (died 1987), Clyde Coombs (died 1988), Warren Torgerson (died 1999),
+Forrest Young (died 2006), John van de Geer (died 2008), Joe Kruskal (died 2010), Doug Carroll (died 2011), and Rod McDonald (died 2012).
+
+\chapter*{Notation and Reserved Symbols}\label{notation-and-reserved-symbols}
+\addcontentsline{toc}{chapter}{Notation and Reserved Symbols}
+
+intro
+
+\section{Spaces}\label{spaces}
+
+\begin{itemize}
+\item
+  \(\mathbb{R}^n\) is the space of all real vectors, i.e.~all \(n\)-element tuples of real numbers. Typical elements of \(\mathbb{R}^n\)
+  are \(x,y,z\). The element of \(x\) in position
+  \(i\) is
+  \(x_i\). Defining a vector by its elements is done with \(x=\{x_i\}\).
+\item
+  \(\mathbb{R}^n\) is equipped with the inner product \(\langle x,y\rangle=x'y=\sum_{i=1}^nx_iy_i\) and the norm \(\|x\|=\sqrt{x'x}\).
+\item
+  The canonical basis for \(\mathbb{R}^n\) is the \(n-\)tuple \((e_1,cdots,e_n)\), where \(e_i\) has element \(i\) equal to \(+1\)
+  and all other elements equal to zero. Thus \(\|e_i\|=1\) and
+  \(\langle e_i,e_j\rangle=\delta^{ij}\), with \(\delta^{ij}\) the
+  Kronecker delta (equal to one if \(i=j\) and zero otherwise).
+  Note that \(x_i=\langle e_i,x\rangle\).
+\item
+  \(\mathbb{R}\) is the real line and \(\mathbb{R}_+\) is the half line of
+  non-negative numbers.
+\item
+  \(\mathbb{R}^{n\times m}\) is the space of all \(n\times m\) real matrices. Typical elements of \(\mathbb{R}^{n\times m}\) are \(A,B,C\). The element of \(A\) in row \(i\) and column \(j\) is \(a_{ij}\). Defining a matrix by its elements is done with \(A=\{a_{ij}\}\).
+\item
+  \(\mathbb{R}^{n\times m}\) is equipped with the inner product \(\langle A,B\rangle=\text{tr} A'B=\sum_{i=1}^n\sum_{j=1}^ma_{ij}b_{ij}\) and the norm \(\|A\|=\sqrt{\text{tr}\ A'A}\).
+\item
+  The canonical basis for \(\mathbb{R}^{n\times m}\) is the \(nm-\)tuple \((E_{11},cdots,E_{nm})\), where \(E_{ij}\) has element \((i,j)\) equal to \(+1\)
+  and all other elements equal to zero. Thus \(\|E_{ij}\|=1\) and
+  \(\langle E_{ij},E_{kl}\rangle=\delta^{ik}\delta^{jl}\).
+\end{itemize}
+
+\(\text{vec}\) and \(\text{vec}^{-1}\)
+
+\section{Matrices}\label{matrices}
+
+\begin{itemize}
+\item
+  \(a_{i\bullet}\) is row \(i\) of matrix \(A\), \(a_{\bullet j}\) is column \(j\).
+\item
+  \(a_{i\star}\) is the sum of row \(i\) of matrix \(A\), \(a_{\star j}\) is the sum of column \(j\).
+\item
+  \(A'\) is the transpose of \(A\), and \(\text{diag}(A)\) is the diagonal
+  matrix with the diagonal elements of \(A\). The inverse of a square
+  matrix \(A\) is \(A^{-1}\), the Moore-Penrose generalized inverse of any matrix \(A\)
+  is \(A^+\).
+\item
+  If \(A\) and \(B\) are two \(n\times m\) matrices then their Hadamard (or elementwise) product
+  \(C=A\times B\) has elements \(c_{ij}=a_{ij}b_{ij}\). The Hadamard quotient is \(C=A/B\), with elements
+  \(c_{ij}=a_{ij}/b_{ij}\). The Hadamard power is \(A^{(k)}=A^{(p-1)}\times A\).
+\item
+  DC matrices. Centering matrix.
+  \(J_n=I_n-n^{-1}E_n\). We do not use gthe
+  subscripts if the order is obvious from the context.
+\end{itemize}
+
+\section{Functions}\label{functions}
+
+\begin{itemize}
+\item
+  \(f,g,h,\cdots\) are used for functions or mappings. \(f:X\rightarrow Y\) says that \(f\) maps \(X\) into \(Y\).
+\item
+  \(\sigma\) is used for all real-valued least squares loss functions.
+\end{itemize}
+
+\section{MDS}\label{mds}
+
+\begin{itemize}
+\item
+  \(\Delta=\{\delta_{ij\cdots}\}\) is a matrix or array of dissimilarities.
+\item
+  \(\langle \mathbb{X},d\rangle\) is a metric space, with \(d:\mathcal{X}\otimes\mathcal{X}\rightarrow\mathbb{R}_+\) the distance function. If \(X\) is is an ordered n-tuple \((x_1,\cdots,x_n)\) of elements of \(\mathcal{X}\) then \(D(X)\) is \(\{d(x_i,x_j)\}\), the elements of which we also write as \(d_{ij}(X)\).
+\item
+  Summation over the elements of vector \(x\in\mathbb{R}^n\) is \(\sum_{i=1}^n x_i\). Summation over the elements of matrix \(A\in\mathbb{R}^{n\times m}\) is \(\sum_{i=1}^n\sum_{j=1}^m a_{ij}\).
+  Summation over the elements above the diagonal of \(A\) is
+  \(\mathop{\sum\sum}_{1\leq i<j\leq n}a_{ij}\).
+\item
+  Conditional summation is, for example, \(\sum_{i=1}^n \{x_i\mid x_i>0\}\).
+\end{itemize}
+
+Iteration
+
+\chapter{Introduction}\label{intro}
+
+Placeholder
+
+\section{Brief History}\label{introhist}
+
+\subsection{Milestones}\label{milestones}
+
+\section{Basic MDS}\label{introbasic}
+
+\subsection{Kruskal's stress}\label{kruskals-stress}
+
+\subsubsection{Square root}\label{square-root}
+
+\subsubsection{Weights}\label{bweights}
+
+\subsubsection{Normalization}\label{intronorm}
+
+\section{Local and Global}\label{seclocglob}
+
+\section{Generalizations}\label{introgeneralize}
+
+\subsection{Non-metric MDS}\label{gennonmetric}
+
+\subsection{fstress}\label{genfstress}
+
+\subsection{Constraints}\label{gencons}
+
+\subsection{Individual Differences}\label{inreplic}
+
+\subsection{Distance Asymmetry}\label{genasym}
+
+\section{Models and Techniques}\label{models-and-techniques}
+
+\chapter{Properties of Stress}\label{propchapter}
+
+Placeholder
+
+\section{Notation}\label{propnotation}
+
+\subsection{Expanding}\label{propexpand}
+
+\subsection{Matrix Expressions}\label{propmatrix}
+
+\subsection{Coefficient Space}\label{propcoefspace}
+
+\subsection{Our Friends CS and AM/GM}\label{our-friends-cs-and-amgm}
+
+\section{Global Properties}\label{propglobal}
+
+\subsection{Boundedness}\label{propbounded}
+
+\subsection{Invariance}\label{propinvariance}
+
+\subsection{Continuity}\label{propcontinuity}
+
+\subsection{Coercivity}\label{propcoercive}
+
+\section{Differentiability}\label{propdiff}
+
+\subsubsection{Distances}\label{distances}
+
+\subsubsection{Rho and Stress}\label{secrhostress}
+
+\subsubsection{expandStress}\label{expandstress}
+
+\subsection{Partial Derivatives}\label{partial-derivatives}
+
+\subsection{Special Expansions}\label{propspecexp}
+
+\subsubsection{Infinitesimal Rotations}\label{infinitesimal-rotations}
+
+\subsubsection{Singularities}\label{singularities}
+
+\subsubsection{Singularities}\label{singularities-1}
+
+\section{Convexity}\label{propconvex}
+
+\subsection{Distances}\label{distances-1}
+
+\subsection{Subdifferentials}\label{subdifdef}
+
+\subsection{DC Functions}\label{propdc}
+
+\subsection{Negative Dissimilarities}\label{propnegdis}
+
+\section{Stationary Points}\label{propstationary}
+
+\subsection{Local Maxima}\label{local-maxima}
+
+\subsection{Local Minima}\label{proplocmin}
+
+\subsection{Saddle Points}\label{propsaddle}
+
+\subsection{An Example}\label{an-example}
+
+\subsubsection{Regular Tetrahedron}\label{regular-tetrahedron}
+
+\subsubsection{Singularity}\label{singularity}
+
+\subsubsection{Equilateral Triangle with Centroid}\label{equilateral-triangle-with-centroid}
+
+\subsubsection{Square}\label{square}
+
+\subsubsection{Non-global Local Minima}\label{non-global-local-minima}
+
+\subsubsection{Directions of Descent}\label{directions-of-descent}
+
+\chapter{Stress Spaces}\label{propspaces}
+
+Placeholder
+
+\section{Configuration Space}\label{propconfspace}
+
+\subsection{Zero Distance Subspaces}\label{propzerodist}
+
+\section{Spherical Space}\label{propspherespace}
+
+\section{Distance Space}\label{distance-space}
+
+\section{Squared Distance Space}\label{squared-distance-space}
+
+\section{Gramian Space}\label{gramian-space}
+
+\section{Pictures of Stress}\label{picsstress}
+
+\subsection{Coefficient Space}\label{coefficient-space}
+
+\subsection{Global Perspective}\label{global-perspective}
+
+\subsection{Global Contour}\label{global-contour}
+
+\subsection{Stationary Points}\label{stationary-points}
+
+\subsubsection{First Minimum}\label{first-minimum}
+
+\subsection{Second Minimum}\label{second-minimum}
+
+\subsection{Third Minimum}\label{third-minimum}
+
+\subsection{First Saddle Point}\label{first-saddle-point}
+
+\subsection{Second Saddle Point}\label{second-saddle-point}
+
+\section{Another Look}\label{picsphere}
+
+\section{A Final Look}\label{picline}
+
+\section{Discussion}\label{discussion}
+
+\section{Coordinates}\label{coordinates}
+
+\chapter{Classical Multidimensional Scaling}\label{classical-multidimensional-scaling}
+
+Placeholder
+
+\section{Algebra}\label{algebra}
+
+\subsection{Torgerson Transform}\label{torgerson-transform}
+
+\subsection{Schoenberg's Theorem}\label{schoenbergs-theorem}
+
+\section{Approximation}\label{approximation}
+
+\subsection{Low Rank Approximation of the Torgersen Transform}\label{low-rank-approximation-of-the-torgersen-transform}
+
+\subsection{Minimization of Strain}\label{minimization-of-strain}
+
+\subsection{Approximation from Below}\label{approximation-from-below}
+
+\chapter{Minimization of Basic Stress}\label{minstr}
+
+Placeholder
+
+\section{Gradient Methods}\label{gradient-methods}
+
+\subsection{Step Size}\label{step-size}
+
+\subsubsection{Kruskal Step Size}\label{kruskal-step-size}
+
+\subsubsection{Guttman Step Size}\label{guttman-step-size}
+
+\subsubsection{Cauchy Step Size}\label{cauchy-step-size}
+
+\subsubsection{Majorization Step Size}\label{majorization-step-size}
+
+\section{Initial Configurations}\label{initial-configurations}
+
+\section{On MM Algorithms}\label{apmajmin}
+
+\section{Smacof Algorithm}\label{smacof-algorithm}
+
+\subsection{Guttman Transform}\label{propguttman}
+
+\subsection{Subdifferentials}\label{subdifferentials}
+
+\subsection{Derivative}\label{derivative}
+
+\subsection{Global Convergence}\label{global-convergence}
+
+\subsubsection{From the CS Inequality}\label{from-the-cs-inequality}
+
+\subsubsection{From Majorization}\label{from-majorization}
+
+\subsubsection{From Ratio of Norms}\label{from-ratio-of-norms}
+
+\subsection{Component Rotated Smacof}\label{mincomprot}
+
+\subsection{Local Convergence}\label{minlocconv}
+
+\subsubsection{Cross Product Iterations}\label{cross-product-iterations}
+
+\subsubsection{Rotation to PC}\label{rotation-to-pc}
+
+\subsection{Data Asymmetry}\label{datasym}
+
+\subsection{Replications}\label{minrepl}
+
+\subsection{Negative Dissimilarities}\label{negative-dissimilarities}
+
+\subsection{Normalization}\label{normalization}
+
+\subsection{Unweighting}\label{minunweight}
+
+\subsubsection{Symmetric non-negative matrix factorization}\label{symnmf}
+
+\section{Stress Envelopes}\label{propenvelopes}
+
+\subsection{CS Majorization}\label{propcsmaj}
+
+\subsection{AM/GM Minorization}\label{propamgmmin}
+
+\subsection{Dualities}\label{dualities}
+
+\section{Smacof in Coefficient Space}\label{smacofcoef}
+
+\section{Newton in MDS}\label{smacofnewton}
+
+\subsection{Regions of Attraction}\label{attraction}
+
+\subsubsection{Smacof}\label{attractsmacof}
+
+\subsubsection{Newton}\label{attractnewton}
+
+\section{Distance Smoothing}\label{propdistsmo}
+
+\chapter{Acceleration of Convergence}\label{chacceleration}
+
+Placeholder
+
+\section{Simple Acceleration}\label{accelsimple}
+
+\section{One-Parameter Methods}\label{one-parameter-methods}
+
+\section{SQUAREM}\label{squarem}
+
+\section{Vector Extrapolation Methods}\label{vector-extrapolation-methods}
+
+\chapter{Nonmetric MDS}\label{nonmtrmds}
+
+Placeholder
+
+\section{Generalities}\label{generalities}
+
+\subsection{Kruskal's Stress}\label{kruskals-stress-1}
+
+\section{Single and Double Phase}\label{nmssingledouble}
+
+\subsection{Double Phase}\label{double-phase}
+
+\subsection{Single Phase}\label{nmssinglephase}
+
+\section{Affine NMDS}\label{affine-nmds}
+
+\section{Conic NMDS}\label{nmdsconic}
+
+\subsection{Normalization}\label{nmdsnorm}
+
+\subsection{Normalized Cone Regression}\label{normalized-cone-regression}
+
+\subsection{Hard Squeeze and Soft Squeeze}\label{hard-squeeze-and-soft-squeeze}
+
+\subsection{Inner Iterations}\label{inner-iterations}
+
+\subsection{Stress-1 and Stress-2}\label{stress-1-and-stress-2}
+
+\chapter{Interval MDS}\label{intinterval}
+
+Placeholder
+
+\section{The Additive Constant}\label{intadditive}
+
+\subsection{Early}\label{early}
+
+\subsection{Cooper}\label{cooper}
+
+\section{Algebra}\label{exactad}
+
+\subsection{Existence}\label{existence}
+
+\subsection{Solution}\label{solution}
+
+\subsection{Examples}\label{examples}
+
+\subsubsection{Small Example}\label{small-example}
+
+\subsubsection{De Gruijter Example}\label{de-gruijter-example}
+
+\subsubsection{Ekman Example}\label{ekman-example}
+
+\subsection{A Variation}\label{variation}
+
+\section{Interval smacof}\label{interval-smacof}
+
+\subsection{Example}\label{example}
+
+\chapter{Polynomial MDS}\label{polynomial-mds}
+
+Placeholder
+
+\section{Introduction}\label{introduction}
+
+\section{Fitting Polynomials}\label{fitting-polynomials}
+
+\section{Positive and Convex, Monotone Polynomials}\label{positive-and-convex-monotone-polynomials}
+
+\subsection{Introduction}\label{introduction-1}
+
+\subsection{A QP Algorithm}\label{a-qp-algorithm}
+
+\subsubsection{Example 1: Simple Monotone Regression}\label{example-1-simple-monotone-regression}
+
+\subsubsection{Example 2: Monotone Regression with Ties}\label{example-2-monotone-regression-with-ties}
+
+\subsubsection{Example 3: Weighted Rounding}\label{example-3-weighted-rounding}
+
+\subsubsection{Example 4: Monotone Polynomials}\label{example-4-monotone-polynomials}
+
+\subsection{Examples}\label{examples-1}
+
+\chapter{Ordinal MDS}\label{chapordinal}
+
+Placeholder
+
+\section{Monotone Regression}\label{mathmonreg}
+
+\subsection{Simple Monotone Regression}\label{mathsimpiso}
+
+\subsection{Weighted Monotone Regression}\label{mathweigmr}
+
+\subsection{Normalized Cone Regression}\label{mathnorcone}
+
+\subsection{Iterative MR}\label{iterative-mr}
+
+\section{Alternating Least Squares}\label{nmdsals}
+
+\section{Kruskal's Approach}\label{nmdskruskal}
+
+\subsection{Kruskal's Stress}\label{kruskals-stress-2}
+
+\subsection{Stress1 and Stress2}\label{stress1-and-stress2}
+
+\section{Guttman's Approach}\label{nmdsguttman}
+
+\subsubsection{Rank Images}\label{rank-images}
+
+\subsubsection{Single and Double Phase}\label{single-and-double-phase}
+
+\subsubsection{Hard and Soft Squeeze}\label{hard-and-soft-squeeze}
+
+\subsection{Smoothness of Ordinal Loss Functions}\label{smoothness-of-ordinal-loss-functions}
+
+\section{Scaling with Distance Bounds}\label{scaling-with-distance-bounds}
+
+\section{Bounds on Stress}\label{bounds-on-stress}
+
+\chapter{Splinical MDS}\label{chsplinical}
+
+Placeholder
+
+\section{Splines}\label{mathsplines}
+
+\subsection{B-splines}\label{mathbsplines}
+
+\subsubsection{Boundaries}\label{mathbboundaries}
+
+\subsubsection{Normalization}\label{mathbnormalize}
+
+\subsubsection{Recursion}\label{mathbrecursion}
+
+\subsubsection{Illustrations}\label{illustrations}
+
+\subsection{I-splines}\label{mathisplines}
+
+\subsubsection{Increasing Coefficients}\label{increasing-coefficients}
+
+\subsubsection{Increasing Values}\label{increasing-values}
+
+\subsection{Time Series Example}\label{time-series-example}
+
+\subsubsection{B-splines}\label{b-splines}
+
+\subsubsection{I-splines}\label{i-splines}
+
+\subsubsection{B-Splines with monotone weights}\label{b-splines-with-monotone-weights}
+
+\subsubsection{B-Splines with monotone values}\label{b-splines-with-monotone-values}
+
+\subsection{Local positivity, monotonicity, convexity}\label{local-positivity-monotonicity-convexity}
+
+\chapter{Unidimensional Scaling}\label{unidimensional}
+
+Placeholder
+
+\section{An example}\label{an-example-1}
+
+\subsection{Perspective}\label{perspective}
+
+\subsection{Contour}\label{contour}
+
+\section{Order Formulation}\label{order-formulation}
+
+\section{Permutation Formulation}\label{permutation-formulation}
+
+\section{Sign Matrix Formulation}\label{sign-matrix-formulation}
+
+\section{Algorithms for UMDS}\label{unialgorithms}
+
+\subsection{SMACOF}\label{unismacof}
+
+\subsection{SMACOF (smoothed)}\label{unismoothed}
+
+\subsection{Branch-and-Bound}\label{unibranchbound}
+
+\subsection{Dynamic Programming}\label{unidynamic}
+
+\subsection{Simulated Annealing}\label{uniannealing}
+
+\subsection{Penalty Methods}\label{unipenalty}
+
+\chapter{Full-dimensional Scaling}\label{fullchapter}
+
+Placeholder
+
+\section{Convexity}\label{fullconvex}
+
+\section{Optimality}\label{fulloptimal}
+
+\section{Iteration}\label{fulliteration}
+
+\section{Cross Product Space}\label{fullcpspace}
+
+\section{Full-dimensional Scaling}\label{full-dimensional-scaling}
+
+\section{Ekman example}\label{ekman-example-1}
+
+\chapter{Unfolding}\label{chunfolding}
+
+Placeholder
+
+\section{Algebra}\label{algebra-1}
+
+\subsection{One-dimensional}\label{one-dimensional}
+
+\section{Classical Unfolding}\label{classical-unfolding}
+
+\section{Nonmetric Unfolding}\label{nonmetric-unfolding}
+
+\subsection{Degenerate Solutions}\label{unfdegenerate}
+
+\subsubsection{Which Stress}\label{which-stress}
+
+\subsubsection{l'Hôpital's Rule}\label{hopital}
+
+\subsubsection{Penalizing}\label{penalizing}
+
+\subsubsection{Restricting Regression}\label{restricting-regression}
+
+\chapter{Constrained Multidimensional Scaling}\label{cmds}
+
+Placeholder
+
+\section{Primal-Dual (note: the base partitioning has dual aspects)}\label{primal-dual-note-the-base-partitioning-has-dual-aspects}
+
+\section{Basic Partitioning}\label{baspar}
+
+\section{Unweigthing}\label{majawa}
+
+\section{Constraints on the Distances}\label{constraints-on-the-distances}
+
+\subsection{Rectangles}\label{rectangles}
+
+\section{Linear Constraints}\label{lincons}
+
+\subsection{Uniqueness}\label{uniqueness}
+
+\subsection{Combinations}\label{combinations}
+
+\subsection{Step Size}\label{stepsize}
+
+\subsection{Single Design Matrix}\label{singdesign}
+
+\subsection{Multiple Design Matrices}\label{multdesign}
+
+\section{Circular MDS}\label{circmds}
+
+\subsection{Some History}\label{circhist}
+
+\subsection{Primal Methods}\label{circprimal}
+
+\subsection{Dual Methods}\label{circdual}
+
+\section{Elliptical MDS}\label{ellimcds}
+
+\subsection{Primal}\label{elliprimal}
+
+\subsection{Dual}\label{ellidual}
+
+\section{Distance Bounds}\label{distance-bounds}
+
+\section{Localized MDS}\label{localized-mds}
+
+\section{MDS as MVA}\label{mds-as-mva}
+
+\section{Horseshoes}\label{conshorseshoes}
+
+\chapter{Individual Differences}\label{chindif}
+
+Placeholder
+
+\section{Stress Majorization}\label{stress-majorization}
+
+\section{Types of Constraints}\label{types-of-constraints}
+
+\subsection{Unconstrained}\label{indifunc}
+
+\subsection{Replications}\label{indifrepl}
+
+\subsection{INDSCAL/PARAFAC}\label{indifindscal}
+
+\subsection{IDIOSCAL/TUCKALS}\label{indifidioscal}
+
+\subsection{PARAFAC2}\label{inddifparafac2}
+
+\subsection{Factor Models}\label{inddiffa}
+
+\section{Nonmetric Individual Differences}\label{nonmetric-individual-differences}
+
+\subsection{Conditionality}\label{conditionality}
+
+\chapter{Asymmetry in MDS}\label{asymmds}
+
+\section{Conditional Rankings}\label{conditional-rankings}
+
+Two sets (= unfolding), one set (much tighter) solution
+Young\_75
+
+\section{Confusion Matrices}\label{confusion-matrices}
+
+Choice theory
+
+\section{The Slide Vector}\label{the-slide-vector}
+
+\section{DEDICOM}\label{dedicom}
+
+\section{Constantine-Gower}\label{constantine-gower}
+
+\chapter{Nominal MDS}\label{chnominal}
+
+Placeholder
+
+\section{Binary Dissimilarities}\label{binary-dissimilarities}
+
+\section{Indicator matrix}\label{indicator-matrix}
+
+\section{Unfolding Indicator Matrices}\label{unfolding-indicator-matrices}
+
+\section{Linear Separation}\label{linear-separation}
+
+\section{Circular Separation}\label{circular-separation}
+
+\section{Convex Hull Scaling}\label{convex-hull-scaling}
+
+\section{Voronoi Scaling}\label{voronoi-scaling}
+
+\section{Multidimensional Scalogram Analysis}\label{multidimensional-scalogram-analysis}
+
+\chapter{Nonmonotonic MDS}\label{nonmonotonic}
+
+Placeholder
+
+\section{Filler}\label{filler}
+
+\chapter{Compound Objects}\label{compound}
+
+\section{Filler}\label{filler-1}
+
+A compound object is a set of \(m>1\) objects. This chapter treats the
+analysis of dissimilarities between compound objects, again as far as they fit into the smacof framework. Thus we do not, for example, look at the
+pairwise dissimilarities within a triad of objects, but at the dissimilarities of the triads themselves.
+
+\chapter{Sstress and strain}\label{chsstressstrain}
+
+Placeholder
+
+\section{sstress}\label{sstress}
+
+\subsection{sstress and stress}\label{sstress-and-stress}
+
+\subsection{Decomposition}\label{decomposition}
+
+\subsection{Full-dimensional sstress}\label{full-dimensional-sstress}
+
+\subsection{Minimizing sstress}\label{minimizing-sstress}
+
+\subsubsection{ALSCAL}\label{alscal}
+
+\subsubsection{Majorization}\label{majorization}
+
+\subsubsection{SOS}\label{sos}
+
+\subsubsection{Duality}\label{duality}
+
+\subsubsection{ALS Unfolding}\label{alsunfold}
+
+\subsection{Bounds for sstress}\label{bounds-for-sstress}
+
+\section{strain}\label{strain}
+
+\subsection{Unweighted}\label{unweighted}
+
+\subsection{Bailey-Gower}\label{bailey-gower}
+
+\subsection{Using Additivity}\label{using-additivity}
+
+\chapter{fstress and rstress}\label{chrstress}
+
+Placeholder
+
+\section{fstress}\label{fstress}
+
+\subsection{Use of Weights}\label{use-of-weights}
+
+\subsection{Convexity}\label{convexity}
+
+\section{rStress}\label{rstress}
+
+\subsection{Using Weights}\label{using-weights}
+
+\subsection{Minimizing rstress}\label{minimizing-rstress}
+
+\section{mstress}\label{mstress}
+
+\section{astress}\label{astress}
+
+\section{pstress}\label{pstress}
+
+\chapter{Alternative Least Squares Loss}\label{alternative-least-squares-loss}
+
+Kruskal/Carroll in Krishnaiah
+
+\section{Sammon's MDS}\label{sammons-mds}
+
+\section{Kamade-Kawai Spring}\label{kamade-kawai-spring}
+
+\section{McGee's Work}\label{mcgees-work}
+
+\section{Shepard's Nonmetric MDS}\label{shepards-nonmetric-mds}
+
+\section{Guttman's Nonmetric MDS}\label{guttmans-nonmetric-mds}
+
+\section{Positive Orthant Nonmetric MDS}\label{positive-orthant-nonmetric-mds}
+
+!! Richard Johnson 1973
+
+!! Guttman Absolute Value
+
+!! Hartmann
+
+\section{Role Reversal}\label{interrole}
+
+Kruskal, arithmetic with dissimilarities
+
+\[
+\sigma(X)=\mathop{\sum\sum}_{1\leq i<j\leq n}w_{ij}(\delta_{ij}-P_r(d_{ij}(X)))^2
+\]
+
+\chapter{Inverse Multidimensional Scaling}\label{chinverse}
+
+Placeholder
+
+\section{Basic IMDS}\label{basic-imds}
+
+\section{Non-negative Dissimilarities}\label{non-negative-dissimilarities}
+
+\section{Zero Weights and/or Distances}\label{zero-weights-andor-distances}
+
+\section{Examples}\label{examples-2}
+
+\subsection{First Example}\label{first-example}
+
+\subsection{Second Example}\label{second-example}
+
+\subsection{Third Example}\label{third-example}
+
+\subsection{Fourth Example}\label{fourth-example}
+
+\section{MDS Sensitivity}\label{mds-sensitivity}
+
+\section{Second Order Inverse MDS}\label{second-order-inverse-mds}
+
+\section{Inverse FDS}\label{inverse-fds}
+
+\section{Multiple Solutions}\label{multiple-solutions}
+
+\section{Minimizing iStress}\label{minimizing-istress}
+
+\section{Order three}\label{order-three}
+
+\section{Order Four}\label{order-four}
+
+\section{Sensitivity}\label{sensitivity}
+
+\chapter{Stability of MDS Solutions}\label{stability}
+
+Placeholder
+
+\section{Null Distribution}\label{null-distribution}
+
+\section{Pseudo-confidence Ellipsoids}\label{pseudo-confidence-ellipsoids}
+
+\section{A Pseudo-Bootstrap}\label{a-pseudo-bootstrap}
+
+\section{How Large is My Stress ?}\label{how-large-is-my-stress}
+
+\chapter{In Search of Global Minima}\label{global}
+
+Placeholder
+
+\section{Random Starts}\label{random-starts}
+
+\subsection{Examples}\label{examples-3}
+
+\subsubsection{Ekman}\label{ekman}
+
+\subsubsection{De Gruijter}\label{de-gruijter}
+
+\section{Tunneling, Filling, Annealing, etc.}\label{tunneling-filling-annealing-etc.}
+
+\section{Cutting Planes}\label{globcutplanes}
+
+\subsection{On the Circle}\label{globalcircle}
+
+\subsection{Cauchy Step Size}\label{cauchy-step-size-1}
+
+\subsection{Balls}\label{balls}
+
+\subsubsection{Outer Approximation}\label{outer-approximation}
+
+\section{Distance Smoothing}\label{distance-smoothing}
+
+\section{Penalizing Dimensions}\label{penalizing-dimensions}
+
+\subsection{Local Minima}\label{local-minima}
+
+\subsection{Algorithm}\label{algorithm}
+
+\subsection{Examples}\label{examples-4}
+
+\subsubsection{Chi Squares}\label{chi-squares}
+
+\subsubsection{Regular Simplex}\label{regular-simplex}
+
+\subsubsection{Intelligence}\label{intelligence}
+
+\subsubsection{Countries}\label{countries}
+
+\subsubsection{Dutch Political Parties}\label{dutch-political-parties}
+
+\subsubsection{Ekman}\label{ekman-1}
+
+\subsubsection{Morse in Two}\label{morse-in-two}
+
+\subsubsection{Vegetables}\label{vegetables}
+
+\subsubsection{Plato}\label{plato}
+
+\subsubsection{Morse in One}\label{morse-in-one}
+
+\chapter{Software}\label{chsoftware}
+
+In actual computer output using the scaling in formula \eqref{eq:scaldiss1} and \eqref{eq:scaldiss1} has some disadvantages. There are, say, \(M\) non-zero weights. The summation in \#ref(eq:stressall) is really over \(M\) terms only. If \(n\) is at all large the scaled dissimilarities, and consequently the distances and the configuration, will become very small. Thus, in actual computation, or at least in the computer output, we scale our dissimilarities as \(\frac12\mathop{\sum\sum}_{1\leq j<i\leq n} w_{ij}^{\ }\delta_{ij}^2=M\). So, we scale our dissimilarities to one in formulas and to \(M\) in computations. Thus the computed stress will b
+
+\href{https://github.com/deleeuw/stress/tree/main/rcode/}{rcode}
+
+\href{https://github.com/deleeuw/stress/tree/main/ccode/}{ccode}
+
+\href{https://github.com/deleeuw/stress/tree/main/lib/}{lib}
+
+\appendix
+
+
+Placeholder
+
+\section{R Code}\label{rapcode}
+
+\subsection{utilities.R}\label{aputilitiescode}
+
+\subsection{common/indexing.r}\label{apindexingcode}
+
+\subsection{common/io.r}\label{apiocode}
+
+\subsection{common/linear.r}\label{aplinearcode}
+
+\subsection{common/nextPC.r}\label{appermcode}
+
+\subsection{common/smacof.r}\label{apsmacofcode}
+
+\subsection{properties.R}\label{apcodeprop}
+
+\subsection{expandOneDim.R}\label{apcodeexpand}
+
+\subsection{pictures.R}\label{apcodepic}
+
+\subsection{classical.R}\label{apcodeclass}
+
+\subsection{minimization.R}\label{apcodeminim}
+
+\subsection{full.R}\label{apcodefull}
+
+\subsection{unfolding.R}\label{apcodeunfold}
+
+\subsection{constrained.R}\label{apcodencons}
+
+\subsection{nominal.R}\label{apcodenominal}
+
+\subsection{sstress.R}\label{apcodesstress}
+
+\subsection{inverse.R}\label{apcodeinverse}
+
+\subsection{global.R}\label{apcodeglobal}
+
+\subsection{mathadd.R}\label{apcodemathadd}
+
+\section{C code}\label{c-code}
+
+\subsection{deboor.c}\label{deboor.c}
+
+\subsection{cleanup.c}\label{cleanup.c}
+
+\subsection{jacobi.c}\label{jacobi.c}
+
+\subsection{jbkTies.c}\label{jbkties.c}
+
+\subsection{matrix.c}\label{matrix.c}
+
+\subsection{jeffrey.c}\label{jeffrey.c}
+
+\subsection{smacofBlockSort.c}\label{smacofblocksort.c}
+
+\subsection{smacofConvert.c}\label{smacofconvert.c}
+
+\subsection{nextPC.c}\label{nextpc.c}
+
+\section{Small}\label{apdatadsmall}
+
+\section{De Gruijter}\label{apdatagruijter}
+
+\section{Ekman}\label{apdataekman}
+
+\section{Vegetables}\label{apdataveg}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-borg_groenen_05}
+Borg, I., and P. J. F. Groenen. 2005. \emph{Modern Multidimensional Scaling}. Second Edition. Springer.
+
+\bibitem[\citeproctext]{ref-coombs_64}
+Coombs, C. H. 1964. \emph{{A Theory of Data}}. Wiley.
+
+\bibitem[\citeproctext]{ref-deleeuw_R_68g}
+De Leeuw, J. 1968. {``Nonmetric Multidimensional Scaling.''} Research Note 010-68. Department of Data Theory FSW/RUL.
+
+\bibitem[\citeproctext]{ref-deleeuw_B_73}
+---------. 1973. {``Canonical Analysis of Categorical Data.''} PhD thesis, University of Leiden, The Netherlands.
+
+\bibitem[\citeproctext]{ref-deleeuw_C_77}
+---------. 1977. {``Applications of Convex Analysis to Multidimensional Scaling.''} In \emph{Recent Developments in Statistics}, edited by J. R. Barra, F. Brodeau, G. Romier, and B. Van Cutsem, 133--45. Amsterdam, The Netherlands: North Holland Publishing Company.
+
+\bibitem[\citeproctext]{ref-deleeuw_B_84}
+---------. 1984. \emph{Canonical Analysis of Categorical Data}. Leiden, The Netherlands: DSWO Press.
+
+\bibitem[\citeproctext]{ref-deleeuw_A_88b}
+---------. 1988. {``Convergence of the Majorization Method for Multidimensional Scaling.''} \emph{Journal of Classification} 5: 163--80.
+
+\bibitem[\citeproctext]{ref-deleeuw_heiser_C_77}
+De Leeuw, J., and W. J. Heiser. 1977. {``Convergence of Correction Matrix Algorithms for Multidimensional Scaling.''} In \emph{Geometric Representations of Relational Data}, edited by J. C. Lingoes, 735--53. Ann Arbor, Michigan: Mathesis Press.
+
+\bibitem[\citeproctext]{ref-deleeuw_heiser_C_80}
+---------. 1980. {``Multidimensional Scaling with Restrictions on the Configuration.''} In \emph{Multivariate Analysis, Volume {V}}, edited by P. R. Krishnaiah, 501--22. Amsterdam, The Netherlands: North Holland Publishing Company.
+
+\bibitem[\citeproctext]{ref-deleeuw_heiser_C_82}
+---------. 1982. {``Theory of Multidimensional Scaling.''} In \emph{Handbook of Statistics, Volume {II}}, edited by P. R. Krishnaiah and L. Kanal. Amsterdam, The Netherlands: North Holland Publishing Company.
+
+\bibitem[\citeproctext]{ref-deleeuw_mair_A_09c}
+De Leeuw, J., and P. Mair. 2009. {``{Multidimensional Scaling Using Majorization: SMACOF in R}.''} \emph{Journal of Statistical Software} 31 (3): 1--30. \url{https://www.jstatsoft.org/article/view/v031i03}.
+
+\bibitem[\citeproctext]{ref-dempster_laird_rubin_77}
+Dempster, A. P., N. M. Laird, and D. B. Rubin. 1977. {``{Maximum Likelihood for Incomplete Data via the EM Algorithm}.''} \emph{Journal of the Royal Statistical Society} B39: 1--38.
+
+\bibitem[\citeproctext]{ref-gifi_B_90}
+Gifi, A. 1990. \emph{Nonlinear Multivariate Analysis}. New York, N.Y.: Wiley.
+
+\bibitem[\citeproctext]{ref-lingoes_roskam_73}
+Lingoes, J. C., and E. E. Roskam. 1973. {``{A Mathematical and Empirical Analysis of Two Multidimensional Scaling Algorithms}.''} \emph{Psychometrika} 38: Monograph Supplement.
+
+\bibitem[\citeproctext]{ref-roskam_68}
+Roskam, E. E. 1968. {``{Metric Analysis of Ordinal Data in Psychology}.''} PhD thesis, University of Leiden.
+
+\bibitem[\citeproctext]{ref-takane_young_deleeuw_A_77}
+Takane, Y., F. W. Young, and J. De Leeuw. 1977. {``Nonmetric Individual Differences in Multidimensional Scaling: An Alternating Least Squares Method with Optimal Scaling Features.''} \emph{Psychometrika} 42: 7--67.
+
+\bibitem[\citeproctext]{ref-vandegeer_67}
+Van de Geer, J. P. 1967. \emph{{Inleiding in de Multivariate Analyse}}. Van Loghum Slaterus.
+
+\bibitem[\citeproctext]{ref-vandegeer_71}
+---------. 1971. \emph{{Introduction to Multivariate Analysis for the Social Sciences}}. San Francisco, CA: Freeman.
+
+\end{CSLReferences}
+
+\end{document}
